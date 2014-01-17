@@ -1,0 +1,11 @@
+var module = angular.module(<%-: moduleName | q %>, ['ngResource']);
+module
+  .factory('Customer', ['$resource', function($resource) {
+    return $resource(
+      <%-: resolveUrl('/customers/:id') | q %>,
+      { 'id': '@id' },
+      {
+        // no custom actions for now
+      }
+    );
+  }]);

@@ -1,5 +1,6 @@
 {
 "node": true,
+"browser": true,
 "camelcase" : true,
 "eqnull" : true,
 "indent": 2,
@@ -15,6 +16,8 @@
   "before": true,
   "beforeEach": true,
   "after": true,
-  "afterEach": true
+  "afterEach": true,
+  "define": true,
+  "expect": true
 }
 }

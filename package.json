@@ -1,0 +1,44 @@
+{
+  "name": "loopback-angular",
+  "version": "0.1.0",
+  "description": "Tool for auto-generating Angular $resource services for LoopBack",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/strongloop/loopback-angular.git"
+  },
+  "keywords": [
+    "loopback",
+    "angular"
+  ],
+  "author": "Miroslav Bajtos <miroslav@strongloop.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/strongloop/loopback-angular/issues"
+  },
+  "dependencies": {
+    "ejs": "~0.8.5"
+  },
+  "devDependencies": {
+    "chai": "*",
+    "mocha": "*",
+    "express": "~3.4.8",
+    "loopback-datasource-juggler": "~1.2.13",
+    "loopback": "~1.6.0",
+    "cors": "~2.1.1",
+    "karma-script-launcher": "~0.1.0",
+    "karma-chrome-launcher": "~0.1.2",
+    "karma-html2js-preprocessor": "~0.1.0",
+    "karma-firefox-launcher": "~0.1.2",
+    "karma-jasmine": "~0.1.5",
+    "karma-coffee-preprocessor": "~0.1.1",
+    "requirejs": "~2.1.9",
+    "karma-requirejs": "~0.2.1",
+    "karma-phantomjs-launcher": "~0.1.1",
+    "karma": "~0.10.8",
+    "karma-mocha": "~0.1.1"
+  }
+}
