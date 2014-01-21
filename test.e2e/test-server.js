@@ -62,7 +62,12 @@ masterApp.post('/setup', function(req, res, next) {
   lbApp.set('restApiRoot', '/');
   lbApp.installMiddleware();
 
-  servicesScript = generator.services(lbApp, name, apiUrl);
+  try {
+    servicesScript = generator.services(lbApp, name, apiUrl);
+  } catch (err) {
+    console.error('Cannot generate services script:', err.stack);
+    servicesScript = 'throw new Error("Error generating services script.");';
+  }
 
   res.send(200, { servicesUrl: baseUrl + 'services?' + name });
 });

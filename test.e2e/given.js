@@ -62,7 +62,10 @@ define(['angular', 'angularMocks', 'angularResource'], function(angular) {
         var injector = angular.injector(['ng', 'ngMockE2E', options.name]);
         // Setup the mocked http provider to pass all $http requests
         // to our LoopBack server
-        injector.get('$httpBackend').whenGET(/.*/).passThrough();
+        var $httpBackend = injector.get('$httpBackend');
+        ['GET', 'POST', 'PUT', 'DELETE', 'HEAD'].forEach(function(method) {
+          $httpBackend.when(method).passThrough();
+        });
         return injector;
       });
 
@@ -87,7 +90,10 @@ define(['angular', 'angularMocks', 'angularResource'], function(angular) {
 
   function getFullSpecName() {
     var names = [];
-    var spec = currentSpec.currentTest || currentSpec.test;
+
+    var spec = currentSpec ?
+      currentSpec.currentTest || currentSpec.test :
+      window.mocha.suite.ctx.test;
 
     if (spec.ctx && spec.ctx.currentTest) {
       names.unshift(spec.ctx.currentTest.title);

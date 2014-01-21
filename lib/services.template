@@ -1,11 +1,54 @@
+'use strict';
+
+var urlBase = <%-: urlBase | q %>;
+
 var module = angular.module(<%-: moduleName | q %>, ['ngResource']);
+
+<% for (var modelName in models) {
+     var meta = models[modelName];
+-%>
 module
-  .factory('Customer', ['$resource', function($resource) {
-    return $resource(
-      <%-: resolveUrl('/customers/:id') | q %>,
+  .factory(<%-: modelName | q %>, ['LoopBackResource', function(Resource) {
+    return Resource(
+      urlBase + <%-: meta.ctor.getFullPath() | q %>,
+<% /*
+        Constructor arguments are hardcoded for now.
+        We should generate it from sharedCtor.accepts instead.
+*/ -%>
       { 'id': '@id' },
       {
-        // no custom actions for now
+<% meta.methods.forEach(function(action) {
+     var methodName = action.name;
+-%>
+        <%- methodName.split('.').join('$') %>: {
+          url: urlBase + <%-: action.getFullPath() | q %>,
+          method: <%-: action.getHttpMethod() | q %>,
+<% if (action.isReturningArray()) { -%>
+          isArray: true
+<% } -%>
+        },
+<% }); // meta.methods.foreach -%>
       }
     );
+  }]);
+
+<% } // for modelName in models -%>
+
+module
+  .factory('LoopBackResource', [ '$resource', function($resource) {
+    return function(url, params, actions) {
+      var resource = $resource(url, params, actions);
+
+      // Angular always calls POST on $save()
+      // This hack is based on
+      // http://kirkbushell.me/angular-js-using-ng-resource-in-a-more-restful-manner/
+      resource.prototype.$save = function(success, error) {
+        // Fortunately, LoopBack provides a convenient `upsert` method
+        // that exactly fits our needs.
+        var result = resource.upsert.call(this, {}, this, success, error);
+        return result.$promise || result;
+      }
+
+      return resource;
+    };
   }]);

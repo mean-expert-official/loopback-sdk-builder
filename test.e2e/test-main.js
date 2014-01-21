@@ -18,7 +18,8 @@ requirejs.config({
     angularResource: 'bower_components/angular-resource/angular-resource',
     angularMocks: 'bower_components/angular-mocks/angular-mocks',
     mochaAsPromised: 'node_modules/mocha-as-promised/mocha-as-promised',
-    given: 'test.e2e/given'
+    given: 'test.e2e/given',
+    util: 'test.e2e/util'
   },
 
   shim: {
@@ -43,12 +44,5 @@ requirejs.config({
 
 require(['chai', 'mochaAsPromised'], function(chai, mochaAsPromised) {
   mochaAsPromised(window.Mocha);
-  before(function() {
-    window.expect = chai.expect;
-    window.invoke = function(fn) {
-      return function($injector) {
-        return $injector.invoke(fn);
-      };
-    };
-  });
+  window.expect = chai.expect;
 });
