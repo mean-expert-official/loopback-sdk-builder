@@ -17,6 +17,7 @@ requirejs.config({
     angular: 'bower_components/angular/angular',
     angularResource: 'bower_components/angular-resource/angular-resource',
     angularMocks: 'bower_components/angular-mocks/angular-mocks',
+    mochaAsPromised: 'node_modules/mocha-as-promised/mocha-as-promised',
     given: 'test.e2e/given'
   },
 
@@ -40,8 +41,14 @@ requirejs.config({
   callback: window.__karma__.start
 });
 
-require(['chai'], function(chai) {
+require(['chai', 'mochaAsPromised'], function(chai, mochaAsPromised) {
+  mochaAsPromised(window.Mocha);
   before(function() {
     window.expect = chai.expect;
+    window.invoke = function(fn) {
+      return function($injector) {
+        return $injector.invoke(fn);
+      };
+    };
   });
 });

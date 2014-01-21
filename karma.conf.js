@@ -15,6 +15,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'test.e2e/test-main.js',
+      { pattern: 'node_modules/mocha-as-promised/**/*.js', included: false },
       { pattern: 'bower_components/**/*.js', included: false },
       { pattern: 'test.e2e/**/*.js', included: false },
 

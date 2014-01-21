@@ -39,6 +39,7 @@
     "karma-requirejs": "~0.2.1",
     "karma-phantomjs-launcher": "~0.1.1",
     "karma": "~0.10.8",
-    "karma-mocha": "~0.1.1"
+    "karma-mocha": "~0.1.1",
+    "mocha-as-promised": "~2.0.0"
   }
 }

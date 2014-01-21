@@ -11,6 +11,8 @@ define(['angular', 'angularMocks', 'angularResource'], function(angular) {
     currentSpec = this;
   });
 
+  var $q = angular.injector(['ng']).get('$q');
+
   /**
    * Configures a loopback application with models defined by options,
    * generates the lb-services file and loads the services into the context
@@ -24,10 +26,10 @@ define(['angular', 'angularMocks', 'angularResource'], function(angular) {
    *   - `models` - JSON structure defining models, it has the same format
    *      as models.json used by `app.boot()`.
    *
-   * @param {function.<Object, $injector>} cb
-   *   Continuation. The second parameter is an initialized angular injector
-   *   that can be used to resolve $resource objects provided by the loopback
-   *   service.
+   * @param {function(Object=, Object=)} cb
+   *   Optional continuation. The second parameter is an initialized angular
+   *   injector that can be used to resolve $resource objects provided
+   *   by the loopback service.
    *
    *   Example:
    *
@@ -36,33 +38,38 @@ define(['angular', 'angularMocks', 'angularResource'], function(angular) {
    *     Customer.get({ id: 10 }, // etc.
    *   });
    *   ```
+   *
+   * @return $q Promise that is resolved with the $injector.
+   *
+   * Example:
+   * ```js
+   * given.servicesForLoopBackApp({
+   *   models: // etc.
+   * }).then(function($injector) {
+   *   $injector.invoke(function(Customer) {
+   *     // etc.
+   *   });
+   * });
+   * ```
    */
   given.servicesForLoopBackApp = function(options, cb) {
     options.name = generateUniqueServiceName(options.name);
 
+    var promise = callSetup(options)
+      .then(function(config) { return config.servicesUrl; })
+      .then(injectScriptAtUrl)
+      .then(function() {
+        var injector = angular.injector(['ng', 'ngMockE2E', options.name]);
+        // Setup the mocked http provider to pass all $http requests
+        // to our LoopBack server
+        injector.get('$httpBackend').whenGET(/.*/).passThrough();
+        return injector;
+      });
+
     if (cb)
-      return setupAndLoadServices(cb);
-    else
-      return setupAndLoadServices;
+      promise.then(function($injector) { cb(null, $injector); }, cb);
 
-    function setupAndLoadServices(cb) {
-      callSetup(options, function(err, config) {
-        if (err) return cb(err);
-        return loadServices(config);
-      });
-    }
-
-    function loadServices(config) {
-      return injectScriptAtUrl(config.servicesUrl, function(err) {
-        if (err) return cb(err);
-
-        var $injector = angular.injector(['ng', 'ngMockE2E', options.name]);
-        return $injector.invoke(function($httpBackend) {
-          $httpBackend.whenGET(/.*/).passThrough();
-          cb(null, $injector);
-        }, this);
-      });
-    }
+    return promise;
   };
 
   var namesUsed = {};
@@ -96,7 +103,8 @@ define(['angular', 'angularMocks', 'angularResource'], function(angular) {
     return names.join('::');
   }
 
-  function callSetup(options, cb) {
+  function callSetup(options) {
+    var deferred = $q.defer();
     var xhr = new XMLHttpRequest();
     xhr.open('post', backendUrl + '/setup');
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -104,26 +112,29 @@ define(['angular', 'angularMocks', 'angularResource'], function(angular) {
     xhr.onreadystatechange = function() {
       if (xhr.readyState != 4) return;
       if (xhr.status != 200) {
-        return cb(new Error('Cannot build LB App: ' + xhr.status));
+        deferred.reject(new Error('Cannot build LB App: ' + xhr.status));
       }
-      cb(null, JSON.parse(xhr.responseText));
+      deferred.resolve(JSON.parse(xhr.responseText));
     };
+    return deferred.promise;
   }
 
-  function injectScriptAtUrl(url, cb) {
+  function injectScriptAtUrl(url) {
     // we can't use requirejs to load lb-services.js file
     // because Karma is redirecting all requirejs URLs
+    var deferred = $q.defer();
     var script = document.createElement('script');
     script.type = 'text/javascript';
     script.async = true;
     script.src = url;
     script.onload = function() {
-      cb();
+      deferred.resolve();
     };
     script.onerror = function() {
-      cb(new Error('Cannot load script ' + url));
+      deferred.reject(new Error('Cannot load script ' + url));
     };
     document.getElementsByTagName('head')[0].appendChild(script);
+    return deferred.promise;
   }
 
   return given;

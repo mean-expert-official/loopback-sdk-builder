@@ -2,8 +2,8 @@ define(['angular', 'given'], function(angular, given) {
   'use strict';
 
   describe('Customer service', function() {
-    it('works', function(done) {
-      given.servicesForLoopBackApp(
+    it('works', function() {
+      return given.servicesForLoopBackApp(
         {
           models: {
             Customer: {
@@ -15,21 +15,13 @@ define(['angular', 'given'], function(angular, given) {
               }
             }
           }
-        },
-
-        function(err, $injector) {
-          if (err) return done(err);
-
-          $injector.invoke(function(Customer) {
-            var list = Customer.query({},
-              function() {
-                expect(list).to.have.property('length', 0);
-                done();
-              });
-            list.$promise.catch(done);
+        })
+        .then(invoke(function(Customer) {
+          var list = Customer.query({}, function() {
+            expect(list).to.have.property('length', 0);
           });
-        }
-      );
+          return list.$promise;
+        }));
     });
   });
 });
