@@ -7,8 +7,9 @@ var module = angular.module(<%-: moduleName | q %>, ['ngResource']);
 <% for (var modelName in models) {
      var meta = models[modelName];
 -%>
-module
-  .factory(<%-: modelName | q %>, ['LoopBackResource', function(Resource) {
+module.factory(
+  <%-: modelName | capitalize | q %>,
+  ['LoopBackResource', function(Resource) {
     return Resource(
       urlBase + <%-: meta.ctor.getFullPath() | q %>,
 <% /*

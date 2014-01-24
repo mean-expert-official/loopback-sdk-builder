@@ -13,13 +13,8 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
           })
           .then(function(injector) {
             $injector = injector;
-            if ($injector.has('MyModel'))
-              MyModel = $injector.get('MyModel');
+            MyModel = $injector.get('MyModel');
           });
-      });
-
-      it('is registered as a factory', function() {
-        expect($injector.has('MyModel')).to.equal(true);
       });
 
       it('calls server handler', function() {
@@ -101,6 +96,25 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
             );
             return found.$promise;
           });
+      });
+    });
+
+    describe('$resource for model with funky name', function() {
+      var $injector;
+      before(function() {
+        return given.servicesForLoopBackApp(
+          {
+            models: {
+              'lower-case-not-an-identifier': {}
+            }
+          })
+          .then(function(injector) {
+            $injector = injector;
+          });
+      });
+
+      it('has a factory name that starts with upper-case', function() {
+        expect($injector.has('Lower-case-not-an-identifier')).to.equal(true);
       });
     });
   });
