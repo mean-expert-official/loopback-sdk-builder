@@ -4,7 +4,8 @@
   "description": "Tool for auto-generating Angular $resource services for LoopBack",
   "main": "index.js",
   "bin": {
-    "lb-ng": "bin/lb-ng"
+    "lb-ng": "bin/lb-ng",
+    "lb-ng-doc": "bin/lb-ng-doc"
   },
   "scripts": {
     "test": "mocha"
@@ -25,7 +26,8 @@
   "dependencies": {
     "ejs": "~0.8.5",
     "semver": "~2.2.1",
-    "optimist": "~0.6.0"
+    "optimist": "~0.6.0",
+    "docular": "~0.6.3"
   },
   "devDependencies": {
     "chai": "*",
