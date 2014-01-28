@@ -16,6 +16,10 @@ var masterApp = express();
 var lbApp;
 var servicesScript;
 
+// Speed up the password hashing algorithm
+// for tests using the built-in User model
+loopback.User.settings.saltWorkFactor = 4;
+
 // Enable all domains to access our server via AJAX
 // This way the script running in Karma page can
 // talk to our service running on a different host/port.
