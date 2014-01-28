@@ -117,5 +117,81 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
         expect($injector.has('Lower-case-not-an-identifier')).to.equal(true);
       });
     });
+
+    describe('with authentication', function() {
+      var $injector, User;
+      before(function() {
+        return given.servicesForLoopBackApp(
+          {
+            models: {
+              user: {
+                options: {
+                  base: 'User',
+                  relations: {
+                    accessTokens: {
+                      model: 'AccessToken',
+                      type: 'hasMany',
+                      foreignKey: 'userId'
+                    }
+                  }
+                }
+              }
+            },
+            enableAuth: true
+          })
+          .then(function(injector) {
+            $injector = injector;
+            User = $injector.get('User');
+          });
+      });
+
+      it('returns error for an unauthorized request', function() {
+        return User.query().$promise
+          .then(function() {
+            throw new Error('User.query was supposed to fail.');
+          }, function(res) {
+            expect(res.status).to.equal(401);
+          });
+      });
+
+      it('sends the authentication token when a user is logged in', function() {
+        return givenLoggedInUser('user@example.com')
+          .then(function(accessToken) {
+            return User.get({ id: accessToken.userId }).$promise;
+          })
+          .then(function(user) {
+            expect(user.email).to.equal('user@example.com');
+          })
+          .catch(util.throwHttpError);
+      });
+
+      it('clears authentication token on logout', function() {
+        return givenLoggedInUser()
+          .then(function() {
+            return User.logout().$promise;
+          })
+          .then(function() {
+            // NOTE(bajtos) This test is checking the LoopBackAuth.accessToken
+            // property, because any HTTP request will fail regardless of the
+            // Authorization header value, since the token was invalidated on
+            // the server sido too.
+            expect($injector.get('LoopBackAuth').accessTokenId).to.equal(null);
+          })
+          .catch(util.throwHttpError);
+      });
+
+      var idCounter = 0;
+      function givenLoggedInUser(email) {
+        var credentials = {
+          email: email || 'user-' + (++idCounter) + '@example.com',
+          password: 'a-password'
+        };
+
+        return User.create(credentials).$promise
+          .then(function() {
+            return User.login(credentials).$promise;
+          });
+      }
+    });
   });
 });

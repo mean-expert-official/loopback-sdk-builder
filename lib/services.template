@@ -42,7 +42,7 @@ var module = angular.module(<%-: moduleName | q %>, ['ngResource']);
  */
 module.factory(
   <%-: modelName | q %>,
-  ['LoopBackResource', function(Resource) {
+  ['LoopBackResource', 'LoopBackAuth', function(Resource, LoopBackAuth) {
     return Resource(
       urlBase + <%-: meta.ctor.getFullPath() | q %>,
 <% /*
@@ -115,8 +115,25 @@ action.description =  '<em>\n' +
           url: urlBase + <%-: action.getFullPath() | q %>,
           method: <%-: action.getHttpMethod() | q %>,
 <% if (action.isReturningArray()) { -%>
-          isArray: true
+          isArray: true,
 <% } -%>
+<% if (modelName === 'User' && methodName === 'login') { -%>
+          interceptor: {
+            response: function(response) {
+              var accessToken = response.data;
+              LoopBackAuth.accessTokenId = accessToken.id;
+              return response.resource;
+            }
+          }
+<% } else if (modelName === 'User' && methodName === 'logout') { -%>
+          interceptor: {
+            response: function(response) {
+              LoopBackAuth.accessTokenId = null;
+              return response.resource;
+            }
+          }
+<% } -%>
+
         },
 <% }); // meta.methods.foreach -%>
       }
@@ -126,6 +143,25 @@ action.description =  '<em>\n' +
 <% } // for modelName in models -%>
 
 module
+  .factory('LoopBackAuth', function() {
+    return {
+      accessTokenId: null
+    };
+  })
+  .config(function($httpProvider) {
+    $httpProvider.interceptors.push('LoopBackAuthRequestInterceptor');
+  })
+  .factory('LoopBackAuthRequestInterceptor', [ '$q', 'LoopBackAuth',
+    function($q, LoopBackAuth) {
+      return {
+        'request': function(config) {
+          if (LoopBackAuth.accessTokenId) {
+            config.headers.authorization = LoopBackAuth.accessTokenId;
+          }
+          return config || $q.when(config);
+        }
+      }
+    }])
   .factory('LoopBackResource', [ '$resource', function($resource) {
     return function(url, params, actions) {
       var resource = $resource(url, params, actions);

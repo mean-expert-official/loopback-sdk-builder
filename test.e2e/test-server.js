@@ -41,8 +41,10 @@ Sample request
   }
  */
 masterApp.post('/setup', function(req, res, next) {
-  var name = req.body.name;
-  var models = req.body.models;
+  var opts = req.body;
+  var name = opts.name;
+  var models = opts.models;
+  var enableAuth = opts.enableAuth;
 
   if (!name)
     return next(new Error('"name" is a required parameter'));
@@ -52,12 +54,18 @@ masterApp.post('/setup', function(req, res, next) {
 
   lbApp = loopback();
 
-  lbApp.dataSource('db', { connector: 'memory' });
+  lbApp.dataSource('db', { connector: 'memory', defaultForType: 'db' });
+  lbApp.dataSource('mail', { connector: 'mail', defaultForType: 'mail' });
 
   for (var m in models) {
     models[m].dataSource = 'db';
     lbApp.model(m, models[m]);
   }
+
+  loopback.autoAttach();
+
+  if (enableAuth)
+    lbApp.enableAuth();
 
   lbApp.set('restApiRoot', '/');
   lbApp.installMiddleware();
