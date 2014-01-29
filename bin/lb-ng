@@ -24,8 +24,8 @@ console.error('Loading LoopBack app %j', appFile);
 var app = require(appFile);
 assertLoopBackVersion();
 
-var ngModuleName = argv.ngModuleName || 'lbServices';
-var apiUrl = argv.apiUrl || app.get('restApiUrl') || '/api';
+var ngModuleName = argv['module-name'] || 'lbServices';
+var apiUrl = argv['url'] || app.get('restApiRoot') || '/api';
 
 console.error('Generating %j for the API endpoint %j', ngModuleName, apiUrl);
 var result = generator.services(app, ngModuleName, apiUrl);

@@ -10,6 +10,7 @@
 "trailing": true,
 "newcap": true,
 "nonew": true,
+"sub": true,
 "globals": {
   "describe": true,
   "it": true,
