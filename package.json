@@ -8,7 +8,7 @@
     "lb-ng-doc": "bin/lb-ng-doc"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha && node test.e2e/test-server.js karma start --single-run --browsers PhantomJS"
   },
   "repository": {
     "type": "git",

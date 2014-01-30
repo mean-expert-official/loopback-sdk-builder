@@ -101,4 +101,18 @@ masterApp.listen(port, function() {
   baseUrl = 'http://localhost:' + port + '/';
   console.log('Test server is listening on %s', baseUrl);
   apiUrl = baseUrl + 'api';
+
+  if (process.argv.length > 2)
+    runAndExit(process.argv[2], process.argv.slice(3));
 });
+
+function runAndExit(cmd, args) {
+  console.log('Running %s %s', cmd, args.join(' '));
+  var child = require('child_process').spawn(cmd, args, { stdio: 'inherit' });
+  child.on('error', function(err) {
+    console.log(err);
+  });
+  child.on('exit', function() {
+    process.exit();
+  });
+}
