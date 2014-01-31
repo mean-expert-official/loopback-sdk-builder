@@ -1,0 +1,39 @@
+#!/usr/bin/env node
+
+var path = require('path');
+var docular = require('docular');
+var optimist = require('optimist');
+
+var argv = optimist
+  .usage('Display @ngdoc documentation in an Angular source file.' +
+    'Usage\n' +
+    '    $0 [options] client/js/lb-services.js')
+  .describe('p', 'The port for the web server to listen at')
+  .default('p', 3030)
+  .alias({ p: 'port' })
+  .demand(1)
+  .argv;
+
+var services = path.resolve(argv._[0]);
+var port = argv.port;
+
+console.error('Using lb-ng file %j', services);
+
+docular.genDocs({
+  groups: [
+    {
+      groupTitle: 'LoopBack',
+      groupId: 'loopback',
+      sections: [
+        {
+          id: 'lbServices',
+          title: 'LoopBack Services',
+          scripts: [ services ]
+        }
+      ]
+    }
+  ]
+}, function() {
+  docular.server({ port: port });
+  console.log('Browse the documentation at http://localhost:%d/', port);
+});
