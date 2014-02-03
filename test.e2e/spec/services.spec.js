@@ -180,6 +180,32 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
           .catch(util.throwHttpError);
       });
 
+      it('returns stub 401 for User.getCurrent when not logged in', function() {
+        return User.getCurrent().$promise
+          .then(function() {
+            throw new Error('User.getCurrent() was supposed to fail.');
+          }, function(res) {
+            if (res instanceof Error) throw res;
+            expect(res.status).to.equal(401);
+            // check the response is a stub not coming from the server
+            if (res.headers('content-type') != null) {
+              throw new Error('Expected a stub response, got a real one');
+            }
+          });
+      });
+
+      it('persists accessToken and currentUserId', function() {
+        return givenLoggedInUser('persisted@example.com')
+          .then(function() {
+            var FreshUser = $injector.get('User');
+            return FreshUser.getCurrent().$promise;
+          })
+          .then(function(user) {
+            expect(user.email).to.equal('persisted@example.com');
+          })
+          .catch(util.throwHttpError);
+      });
+
       var idCounter = 0;
       function givenLoggedInUser(email) {
         var credentials = {
