@@ -90,6 +90,12 @@ if (action.getHttpMethod() == 'POST' || action.getHttpMethod() == 'PUT') {
          *  - `<%- arg.arg %>` – `{<%- getJsDocType(arg)  %>}` - <%-
 (arg.description || '').replace(/\n/g, '\n         *   ') %>
 <%   }); } -%>
+<% if (modelName === 'User' && methodName === 'login') { -%>
+         *
+         *  - `rememberMe` - `boolean` - Whether the authentication credentials
+         *     should be remembered in localStorage across app/browser restarts.
+         *     Default: `true`.
+<% } -%>
 <% if (postData) { -%>
          *
          * @param {Object} postData Request data.
@@ -154,6 +160,8 @@ postData.forEach(function(arg) { -%>
               var accessToken = response.data;
               LoopBackAuth.currentUserId = accessToken.userId;
               LoopBackAuth.accessTokenId = accessToken.id;
+              LoopBackAuth.rememberMe = response.config.params.rememberMe !== false;
+              LoopBackAuth.save();
               return response.resource;
             }
           }
@@ -162,6 +170,7 @@ postData.forEach(function(arg) { -%>
             response: function(response) {
               LoopBackAuth.currentUserId = null;
               LoopBackAuth.accessTokenId = null;
+              LoopBackAuth.save();
               return response.resource;
             }
           }
@@ -209,22 +218,35 @@ postData.forEach(function(arg) { -%>
 
 module
   .factory('LoopBackAuth', function() {
-    var instance = {};
-    definePersistedProperty(instance, 'accessTokenId');
-    definePersistedProperty(instance, 'currentUserId');
-    return instance;
+    var props = ['accessTokenId', 'currentUserId'];
 
-    function definePersistedProperty(obj, propName) {
-      var key = '$LoopBack$' + propName;
-      Object.defineProperty(obj, propName, {
-        // Note: LocalStorage converts the value to string
-        // We are using empty string as a marker for null/undefined values.
-        get: function() { return localStorage[key] || null; },
-        set: function(value) {
-          if (value == null) value = '';
-          localStorage[key] = value;
-        }
-      });
+    function LoopBackAuth() {
+      props.forEach(function(name) {
+        this[name] = load(name);
+      }.bind(this));
+      this.rememberMe = undefined;
+    }
+
+    LoopBackAuth.prototype.save = function() {
+      var storage = this.rememberMe ? localStorage : sessionStorage;
+      props.forEach(function(name) {
+        save(storage, name, this[name]);
+      }.bind(this));
+    };
+
+    return new LoopBackAuth();
+
+    // Note: LocalStorage converts the value to string
+    // We are using empty string as a marker for null/undefined values.
+    function save(storage, name, value) {
+      var key = '$LoopBack$' + name;
+      if (value == null) value = '';
+      storage[key] = value;
+    }
+
+    function load(name) {
+      var key = '$LoopBack$' + name;
+      return localStorage[key] || sessionStorage[key] || null;
     }
   })
   .config(function($httpProvider) {
