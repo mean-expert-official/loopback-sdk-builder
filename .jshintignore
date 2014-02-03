@@ -1,0 +1,5 @@
+test/sandbox/
+bower_components/
+node_modules/
+coverage/
+karma.conf.js
