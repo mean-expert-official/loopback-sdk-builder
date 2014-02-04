@@ -8,7 +8,7 @@
     "lb-ng-doc": "bin/lb-ng-doc"
   },
   "scripts": {
-    "test": "mocha && node test.e2e/test-server.js karma start --single-run --browsers PhantomJS"
+    "test": "node test.e2e/test-server.js karma start --single-run --browsers PhantomJS"
   },
   "repository": {
     "type": "git",
@@ -24,10 +24,7 @@
     "url": "https://github.com/strongloop/loopback-angular/issues"
   },
   "dependencies": {
-    "ejs": "~0.8.5",
-    "semver": "~2.2.1",
-    "optimist": "~0.6.0",
-    "docular": "~0.6.3"
+    "ejs": "~0.8.5"
   },
   "devDependencies": {
     "chai": "*",

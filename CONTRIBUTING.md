@@ -13,10 +13,6 @@ the conformance by running the following command:
 
 ## Automated tests
 
-loopback-angular comes with two kinds of tests:
-
-### End-to-end test in Karma
-
 We are using [karma](http://karma-runner.github.io/) to test the generated
 Angular services. See
 [test.e2e/](https://github.com/strongloop/loopback-angular/tree/master/test.e2e)
@@ -40,11 +36,4 @@ Use the following setup while working on a new feature:
 
   Karma will continually monitor project files and re-run tests every time
   you make a change.
-
-### Tests for CLI tools in Mocha
-
-CLI tools like `bin/lb-ng` are tested using plain Mocha tests. See
-[test/](https://github.com/strongloop/loopback-angular/tree/master/test)
-and
-[test/lb-ng.test.js](https://github.com/strongloop/loopback-angular/blob/master/test/lb-ng.test.js).
 
