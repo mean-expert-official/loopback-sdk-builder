@@ -8,6 +8,7 @@
     "lb-ng-doc": "bin/lb-ng-doc"
   },
   "scripts": {
+    "pretest": "jshint .",
     "test": "node test.e2e/test-server.js karma start --single-run --browsers PhantomJS"
   },
   "repository": {
