@@ -136,6 +136,11 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
                     }
                   }
                 }
+              },
+              product: {
+                properties: {
+                  model: String
+                }
               }
             },
             enableAuth: true
@@ -233,6 +238,11 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
             expect(true); // no-op, test passed
           })
           .catch(util.throwHttpError);
+      });
+
+      it('adds getCurrent() to User model only', function() {
+        var Product = $injector.get('Product');
+        expect(Product.getCurrent).to.equal(undefined);
       });
 
       var idCounter = 0;

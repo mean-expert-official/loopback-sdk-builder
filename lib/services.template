@@ -177,6 +177,7 @@ postData.forEach(function(arg) { -%>
 <% } -%>
         },
 <% }); // meta.methods.foreach -%>
+<% if (modelName === 'User') { -%>
 
         /**
          * @ngdoc method
@@ -210,6 +211,7 @@ postData.forEach(function(arg) { -%>
           },
           __isGetCurrentUser__ : true
         }
+<% } -%>
       }
     );
   }]);
