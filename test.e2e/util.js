@@ -12,7 +12,7 @@ define(function() {
       msg += ' ' + res.data.error.message;
     msg += ' [' + res.config.method + ' ' +res.config.url + ']';
 
-    var details = res.data.error.details;
+    var details = res.data && res.data.error && res.data.error.details;
     if (details)
       msg += '\nDetails: ' + JSON.stringify(details, null, 2);
 
