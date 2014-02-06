@@ -1,0 +1,10 @@
+{
+  "title": "LoopBack AngularJS API",
+  "content": [
+    { "title": "Generator API", "depth": 2 },
+    "lib/services.js",
+    { "title": "Angular Client API", "depth": 2 },
+    "apidocs/loopback-core.js"
+  ],
+  "init": "node ./apidocs/describe-builtin-models.js"
+}
