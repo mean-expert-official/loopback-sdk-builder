@@ -223,17 +223,19 @@ module
     var props = ['accessTokenId', 'currentUserId'];
 
     function LoopBackAuth() {
+      var self = this;
       props.forEach(function(name) {
-        this[name] = load(name);
-      }.bind(this));
+        self[name] = load(name);
+      });
       this.rememberMe = undefined;
     }
 
     LoopBackAuth.prototype.save = function() {
+      var self = this;
       var storage = this.rememberMe ? localStorage : sessionStorage;
       props.forEach(function(name) {
-        save(storage, name, this[name]);
-      }.bind(this));
+        save(storage, name, self[name]);
+      });
     };
 
     return new LoopBackAuth();
