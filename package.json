@@ -8,7 +8,7 @@
     "lb-ng-doc": "bin/lb-ng-doc"
   },
   "scripts": {
-    "pretest": "jshint .",
+    "pretest": "jshint . ; bower install",
     "test": "node test.e2e/test-server.js karma start --single-run --browsers PhantomJS"
   },
   "repository": {
@@ -48,6 +48,7 @@
     "mocha-as-promised": "~2.0.0",
     "bluebird": "~1.0.1",
     "debug": "~0.7.4",
-    "fs.extra": "~1.2.1"
+    "fs.extra": "~1.2.1",
+    "bower": "~1.2.8"
   }
 }
