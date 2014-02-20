@@ -31,7 +31,12 @@ module.exports = function(config) {
 
     // test results reporter to use
     // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-    reporters: ['progress'],
+    reporters: ['progress', 'junit'],
+
+    // CI friendly test output
+    junitReporter: {
+      outputFile: 'karma-xunit.xml'
+    },
 
 
     // web server port
