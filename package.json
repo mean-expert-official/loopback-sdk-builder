@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "Tool for auto-generating Angular $resource services for LoopBack",
   "main": "index.js",
-  "bin": {
-    "lb-ng": "bin/lb-ng",
-    "lb-ng-doc": "bin/lb-ng-doc"
-  },
   "scripts": {
     "pretest": "jshint . ; bower install",
     "test": "node test.e2e/test-server.js karma start --single-run --browsers PhantomJS"
