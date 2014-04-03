@@ -7,6 +7,7 @@ a custom LoopBack instance and generate & access lb-services.js
 var express = require('express');
 var loopback = require('loopback');
 var generator = require('..');
+var extend = require('util')._extend;
 
 var port = process.env.PORT || 3838;
 var baseUrl;
@@ -19,6 +20,10 @@ var servicesScript;
 // Speed up the password hashing algorithm
 // for tests using the built-in User model
 loopback.User.settings.saltWorkFactor = 4;
+
+// Save the pre-build models so that we can restore them before every test
+var initialModels = loopback.Model.modelBuilder.models;
+var initialDefinitions = loopback.Model.modelBuilder.definitions;
 
 // Enable all domains to access our server via AJAX
 // This way the script running in Karma page can
@@ -65,6 +70,10 @@ masterApp.post('/setup', function(req, res, next) {
 
   if (!models || typeof models !== 'object')
     return next(new Error('"models" must be a valid object'));
+
+  // hack: clear the static model registry populated by previous test apps
+  loopback.Model.modelBuilder.models = extend({}, initialModels);
+  loopback.Model.modelBuilder.definitions = extend({}, initialDefinitions);
 
   lbApp = loopback();
 
