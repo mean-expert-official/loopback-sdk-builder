@@ -210,11 +210,20 @@ function getJsDocType(arg) {
 }
 
 function ngdocForMethod(modelName, methodName, action) {
+  if (action.internal) {
+-%>
+        // INTERNAL. <%- action.internal %>
+<%
+    return;
+  }
 -%>
         /**
          * @ngdoc method
          * @name lbServices.<%- modelName %>#<%- methodName %>
          * @methodOf lbServices.<%- modelName %>
+<% if (action.deprecated) { -%>
+         * @deprecated <%- action.deprecated %>
+<% } -%>
          *
          * @description
          *
