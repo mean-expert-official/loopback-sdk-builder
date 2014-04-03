@@ -42,8 +42,8 @@ var module = angular.module(<%-: moduleName | q %>, ['ngResource']);
  */
 module.factory(
   <%-: modelName | q %>,
-  ['LoopBackResource', 'LoopBackAuth', function(Resource, LoopBackAuth) {
-    return Resource(
+  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
+    var R = Resource(
       urlBase + <%-: meta.ctor.getFullPath() | q %>,
 <% /*
         Constructor arguments are hardcoded for now.
@@ -54,7 +54,6 @@ module.factory(
 <% meta.methods.forEach(function(action) {
      var methodName = action.name.split('.').join('$');
 -%>
-
 <%   ngdocForMethod(modelName, methodName, action); -%>
         <%-: methodName | q %>: {
           url: urlBase + <%-: action.getFullPath() | q %>,
@@ -122,6 +121,29 @@ module.factory(
 <% } -%>
       }
     );
+
+<% for (var scopeName in meta.scopes) {
+      var scope = meta.scopes[scopeName];
+      if (!scope) continue;
+      var scopeMethods = scope.methods;
+      // Angular names always start with a capital letter
+      var targetClass = scope.targetClass[0].toUpperCase() + scope.targetClass.slice(1);
+
+      // sort the names to make sure the get method creating the scope
+      // is emitted first (R.categories before R.categories.create)
+      Object.keys(scopeMethods).sort().forEach(function(methodName) {
+        var action = scopeMethods[methodName];
+        ngdocForMethod(modelName, methodName, action, targetClass);
+-%>
+        R.<%- methodName %> = function() {
+          var TargetResource = $injector.get(<%-: targetClass | q %>);
+          var action = TargetResource[<%-: action.name | q %>];
+          return action.apply(R, arguments);
+        };
+<%    }); // forEach methods name -%>
+<% } // for each scope -%>
+
+    return R;
   }]);
 
 <% } // for modelName in models -%>
@@ -209,7 +231,11 @@ function getJsDocType(arg) {
   return type;
 }
 
-function ngdocForMethod(modelName, methodName, action) {
+function ngdocForMethod(modelName, methodName, action, responseModelName) {
+   // always add an empty line before the ngdoc comment:
+-%>
+
+<%
   if (action.internal) {
 -%>
         // INTERNAL. <%- action.internal %>
@@ -301,7 +327,7 @@ postData.forEach(function(arg) { -%>
 <%   } else { -%>
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `<%- modelName %>` object.)
+         * This usually means the response is a `<%- responseModelName || modelName %>` object.)
          * </em>
 <%   } -%>
 <% } else { -%>
