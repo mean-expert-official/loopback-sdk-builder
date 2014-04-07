@@ -110,7 +110,8 @@ function runAndExit(cmd, args) {
   console.log('Running %s %s', cmd, args.join(' '));
   var child = require('child_process').spawn(cmd, args, { stdio: 'inherit' });
   child.on('error', function(err) {
-    console.log(err);
+    console.log('child_process.spawn failed', err);
+    process.exit(1);
   });
   child.on('exit', function() {
     process.exit();
