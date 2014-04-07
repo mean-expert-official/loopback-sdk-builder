@@ -42,8 +42,8 @@ var module = angular.module(<%-: moduleName | q %>, ['ngResource']);
  */
 module.factory(
   <%-: modelName | q %>,
-  ['LoopBackResource', 'LoopBackAuth', function(Resource, LoopBackAuth) {
-    return Resource(
+  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
+    var R = Resource(
       urlBase + <%-: meta.ctor.getFullPath() | q %>,
 <% /*
         Constructor arguments are hardcoded for now.
@@ -54,100 +54,7 @@ module.factory(
 <% meta.methods.forEach(function(action) {
      var methodName = action.name.split('.').join('$');
 -%>
-        /**
-         * @ngdoc method
-         * @name lbServices.<%- modelName %>#<%- methodName %>
-         * @methodOf lbServices.<%- modelName %>
-         *
-         * @description
-         *
-<% if (!action.description) {
-action.description =  '<em>\n' +
-  '(The remote method definition does not provide any description.)\n' +
-  '</em>';
-} -%>
-         * <%-: action.description | replace:/\n/g, '\n         * ' %>
-         *
-<%
-var params = action.accepts;
-var postData;
-if (action.getHttpMethod() == 'POST' || action.getHttpMethod() == 'PUT') {
-  params = params.filter(function(arg) {
-    return arg.http && (arg.http.source == 'query' || arg.http.source == 'path');
-  });
-  postData = action.accepts.filter(function(arg) {
-    return params.indexOf(arg) == -1;
-  });
-}
--%>
-         * @param {Object=} parameters Request parameters.
-<% if (params.length == 0) { -%>
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-<% } else { params.forEach(function(arg) { -%>
-         *
-         *  - `<%- arg.arg %>` – `{<%- getJsDocType(arg)  %>}` - <%-
-(arg.description || '').replace(/\n/g, '\n         *   ') %>
-<%   }); } -%>
-<% if (modelName === 'User' && methodName === 'login') { -%>
-         *
-         *  - `rememberMe` - `boolean` - Whether the authentication credentials
-         *     should be remembered in localStorage across app/browser restarts.
-         *     Default: `true`.
-<% } -%>
-<% if (postData) { -%>
-         *
-         * @param {Object} postData Request data.
-<% if (postData.length == 0) { -%>
-         *
-         * This method does not accept any data. Supply an empty object.
-<% } else if (postData.length == 1 && postData[0].http &&
-      postData[0].http.source == 'body') { -%>
-         *
-         * This method expects a subset of model properties as request parameters.
-<% } else {
-postData.forEach(function(arg) { -%>
-         *
-         *  - `<%- arg.arg %>` – `{<%- getJsDocType(arg)  %>}` - <%-
-(arg.description || '').replace(/\n/g, '\n         *   ') %>
-<%   });
-  }
-} -%>
-         *
-<% var returnType = action.isReturningArray() ? 'Array.<Object>': 'Object'; -%>
-         * @param {Function(<%- returnType %>, Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {Function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @return {<%- returnType %>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-<% if (!action.returns || action.returns.length == 0) { -%>
-         * This method returns no data.
-<% } else if (action.returns[0].root) { -%>
-<%   if (action.returns[0].description) { -%>
-         * <%- action.returns[0].description
-.replace(/\n/g, '\n         * ').trimRight() %>
-<%   } else { -%>
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `<%- modelName %>` object.)
-         * </em>
-<%   } -%>
-<% } else { -%>
-         * Data properties:
-<%   action.returns.forEach(function(arg) { -%>
-         *
-         *  - `<%- arg.arg %>` – `{<%- getJsDocType(arg)  %>}` - <%-
-(arg.description || '').replace(/\n/g, '\n         *   ') %>
-<%   });
-   }
--%>
-         */
+<%   ngdocForMethod(modelName, methodName, action); -%>
         <%-: methodName | q %>: {
           url: urlBase + <%-: action.getFullPath() | q %>,
           method: <%-: action.getHttpMethod() | q %>,
@@ -214,6 +121,29 @@ postData.forEach(function(arg) { -%>
 <% } -%>
       }
     );
+
+<% for (var scopeName in meta.scopes) {
+      var scope = meta.scopes[scopeName];
+      if (!scope) continue;
+      var scopeMethods = scope.methods;
+      // Angular names always start with a capital letter
+      var targetClass = scope.targetClass[0].toUpperCase() + scope.targetClass.slice(1);
+
+      // sort the names to make sure the get method creating the scope
+      // is emitted first (R.categories before R.categories.create)
+      Object.keys(scopeMethods).sort().forEach(function(methodName) {
+        var action = scopeMethods[methodName];
+        ngdocForMethod(modelName, methodName, action, targetClass);
+-%>
+        R.<%- methodName %> = function() {
+          var TargetResource = $injector.get(<%-: targetClass | q %>);
+          var action = TargetResource[<%-: action.name | q %>];
+          return action.apply(R, arguments);
+        };
+<%    }); // forEach methods name -%>
+<% } // for each scope -%>
+
+    return R;
   }]);
 
 <% } // for modelName in models -%>
@@ -300,4 +230,114 @@ function getJsDocType(arg) {
   if (!arg.required) type += '=';
   return type;
 }
+
+function ngdocForMethod(modelName, methodName, action, responseModelName) {
+   // always add an empty line before the ngdoc comment:
 -%>
+
+<%
+  if (action.internal) {
+-%>
+        // INTERNAL. <%- action.internal %>
+<%
+    return;
+  }
+-%>
+        /**
+         * @ngdoc method
+         * @name lbServices.<%- modelName %>#<%- methodName %>
+         * @methodOf lbServices.<%- modelName %>
+<% if (action.deprecated) { -%>
+         * @deprecated <%- action.deprecated %>
+<% } -%>
+         *
+         * @description
+         *
+<% if (!action.description) {
+action.description =  '<em>\n' +
+  '(The remote method definition does not provide any description.)\n' +
+  '</em>';
+} -%>
+         * <%-: action.description | replace:/\n/g, '\n         * ' %>
+         *
+<%
+var params = action.accepts;
+var postData;
+if (action.getHttpMethod() == 'POST' || action.getHttpMethod() == 'PUT') {
+  params = params.filter(function(arg) {
+    return arg.http && (arg.http.source == 'query' || arg.http.source == 'path');
+  });
+  postData = action.accepts.filter(function(arg) {
+    return params.indexOf(arg) == -1;
+  });
+}
+-%>
+         * @param {Object=} parameters Request parameters.
+<% if (params.length == 0) { -%>
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+<% } else { params.forEach(function(arg) { -%>
+         *
+         *  - `<%- arg.arg %>` – `{<%- getJsDocType(arg)  %>}` - <%-
+(arg.description || '').replace(/\n/g, '\n         *   ') %>
+<%   }); } -%>
+<% if (modelName === 'User' && methodName === 'login') { -%>
+         *
+         *  - `rememberMe` - `boolean` - Whether the authentication credentials
+         *     should be remembered in localStorage across app/browser restarts.
+         *     Default: `true`.
+<% } -%>
+<% if (postData) { -%>
+         *
+         * @param {Object} postData Request data.
+<% if (postData.length == 0) { -%>
+         *
+         * This method does not accept any data. Supply an empty object.
+<% } else if (postData.length == 1 && postData[0].http &&
+      postData[0].http.source == 'body') { -%>
+         *
+         * This method expects a subset of model properties as request parameters.
+<% } else {
+postData.forEach(function(arg) { -%>
+         *
+         *  - `<%- arg.arg %>` – `{<%- getJsDocType(arg)  %>}` - <%-
+(arg.description || '').replace(/\n/g, '\n         *   ') %>
+<%   });
+  }
+} -%>
+         *
+<% var returnType = action.isReturningArray() ? 'Array.<Object>': 'Object'; -%>
+         * @param {Function(<%- returnType %>, Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {Function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @return {<%- returnType %>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+<% if (!action.returns || action.returns.length == 0) { -%>
+         * This method returns no data.
+<% } else if (action.returns[0].root) { -%>
+<%   if (action.returns[0].description) { -%>
+         * <%- action.returns[0].description
+.replace(/\n/g, '\n         * ').trimRight() %>
+<%   } else { -%>
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `<%- responseModelName || modelName %>` object.)
+         * </em>
+<%   } -%>
+<% } else { -%>
+         * Data properties:
+<%   action.returns.forEach(function(arg) { -%>
+         *
+         *  - `<%- arg.arg %>` – `{<%- getJsDocType(arg)  %>}` - <%-
+(arg.description || '').replace(/\n/g, '\n         *   ') %>
+<%   });
+   }
+-%>
+         */
+<% } // end of ngdocForMethod -%>

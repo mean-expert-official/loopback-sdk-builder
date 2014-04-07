@@ -258,5 +258,122 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
           });
       }
     });
+
+    describe('for models with hasAndBelongsToMany relations', function() {
+      var $injector, Product, Category, testData;
+      before(function() {
+        return given.servicesForLoopBackApp(
+          {
+            models: {
+              Product: {
+                properties: { name: 'string' },
+                options: {
+                  relations: {
+                    categories: {
+                      model: 'Category',
+                      type: 'hasAndBelongsToMany'
+                    }
+                  }
+                }
+              },
+              Category: {
+                properties: { name: 'string' },
+                options: {
+                  relations: {
+                    products: {
+                      model: 'Product',
+                      type: 'hasAndBelongsToMany'
+                    }
+                  }
+                }
+              }
+            },
+            setupFn: (function(app, cb) {
+              /*globals debug:true */
+              app.models.Product.create({ name: 'p1' }, function(err, prod) {
+                if (err) return cb(err);
+                debug('Created product', prod);
+
+                prod.categories.create({ name: 'c1' }, function(err, cat) {
+                  if (err) return cb(err);
+                  debug('Created category', cat);
+
+                  prod.categories(true, function(err, list) {
+                    if (err) return cb(err);
+                    debug('Categories of product', list);
+
+                    cb(null, {
+                      product: prod,
+                      category: cat
+                    });
+                  });
+                });
+              });
+            }).toString()
+          })
+          .then(function(createInjector) {
+            $injector = createInjector();
+            Product = $injector.get('Product');
+            Category = $injector.get('Category');
+            testData = $injector.get('testData');
+          });
+      });
+
+      it('provides scope methods', function() {
+        expect(Object.keys(Product), 'Product properties')
+          .to.contain('categories');
+        expect(Object.keys(Product.categories), 'Product.categories properties')
+          .to.have.members([
+            'create',
+            'destroyAll'
+          ]);
+      });
+
+      it('gets related models with correct prototype', function() {
+        var list = Product.categories({ id: testData.product.id });
+        return list.$promise.then(function() {
+          // eql does not work for arrays with objects correctly :(
+          expect(list).to.have.length(1);
+          expect(list[0]).to.eql(new Category(testData.category));
+        });
+      });
+
+      it('creates a related model', function() {
+        var cat = Product.categories.create(
+          { id: testData.product.id },
+          { name: 'another-cat' });
+        return cat.$promise
+          .then(function() {
+            expect(cat).to.be.an.instanceof(Category);
+            expect(cat).to.have.property('name', 'another-cat');
+          })
+          .then(function() {
+            var list = Product.categories({ id: testData.product.id });
+            return list.$promise.then(function() {
+              var names = list.map(function(c) { return c.name; });
+              expect(names).to.eql([testData.category.name, cat.name]);
+            });
+          });
+      });
+
+      // Skipped due to strongloop/loopback-datasource-juggler#95
+      it.skip('removes all related models', function() {
+        return Product.categories.destroyAll({ id: testData.product.id })
+          .$promise
+          .then(function() {
+            var list = Product.categories({ id: testData.product.id });
+            return list.$promise.then(function() {
+              expect(list, 'product categories').to.have.length(0);
+            });
+          })
+          .then(function() {
+            var all = Product.find({ filter: true });
+            return all.$promise
+              .then(function() {
+                expect(all, 'all categories').to.have.length(0);
+              });
+          });
+      });
+    });
   });
 });

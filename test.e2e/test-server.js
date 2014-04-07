@@ -7,6 +7,7 @@ a custom LoopBack instance and generate & access lb-services.js
 var express = require('express');
 var loopback = require('loopback');
 var generator = require('..');
+var extend = require('util')._extend;
 
 var port = process.env.PORT || 3838;
 var baseUrl;
@@ -19,6 +20,10 @@ var servicesScript;
 // Speed up the password hashing algorithm
 // for tests using the built-in User model
 loopback.User.settings.saltWorkFactor = 4;
+
+// Save the pre-build models so that we can restore them before every test
+var initialModels = loopback.Model.modelBuilder.models;
+var initialDefinitions = loopback.Model.modelBuilder.definitions;
 
 // Enable all domains to access our server via AJAX
 // This way the script running in Karma page can
@@ -42,19 +47,33 @@ Sample request
       }
     }
     // other model objects
-  }
- */
+  },
+  setupFn: (function(app, cb) {
+    Customer.create(
+      { name: 'a-customer' },
+      function(err, customer) {
+        if (err) return cb(err);
+        cb(null, { customer: customer });
+      });
+  }).toString()
+}
+*/
 masterApp.post('/setup', function(req, res, next) {
   var opts = req.body;
   var name = opts.name;
   var models = opts.models;
   var enableAuth = opts.enableAuth;
+  var setupFn = compileSetupFn(name, opts.setupFn);
 
   if (!name)
     return next(new Error('"name" is a required parameter'));
 
   if (!models || typeof models !== 'object')
     return next(new Error('"models" must be a valid object'));
+
+  // hack: clear the static model registry populated by previous test apps
+  loopback.Model.modelBuilder.models = extend({}, initialModels);
+  loopback.Model.modelBuilder.definitions = extend({}, initialDefinitions);
 
   lbApp = loopback();
 
@@ -74,15 +93,36 @@ masterApp.post('/setup', function(req, res, next) {
   lbApp.set('restApiRoot', '/');
   lbApp.installMiddleware();
 
-  try {
-    servicesScript = generator.services(lbApp, name, apiUrl);
-  } catch (err) {
-    console.error('Cannot generate services script:', err.stack);
-    servicesScript = 'throw new Error("Error generating services script.");';
-  }
+  setupFn(lbApp, function(err, data) {
+    if (err) {
+      console.error('app setup function failed', err);
+      res.send(500, err);
+      return;
+    }
 
-  res.send(200, { servicesUrl: baseUrl + 'services?' + name });
+    try {
+      servicesScript = generator.services(lbApp, name, apiUrl);
+    } catch (err) {
+      console.error('Cannot generate services script:', err.stack);
+      servicesScript = 'throw new Error("Error generating services script.");';
+    }
+
+    servicesScript += '\nmodule.value("testData", ' +
+      JSON.stringify(data, null, 2) + ');\n';
+
+    res.send(200, { servicesUrl: baseUrl + 'services?' + name });
+  }.bind(this));
+
 });
+
+function compileSetupFn(name, source) {
+  if (!source)
+    return function(app, cb) { cb(); };
+
+  var debug = require('debug')('test:' + name);
+  /*jshint evil:true */
+  return eval('(' + source + ')');
+}
 
 masterApp.get('/services', function(req, res, next) {
   res.set('Content-Type', 'application/javascript');
