@@ -375,5 +375,86 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
           });
       });
     });
+
+    describe('for models with belongsTo relation', function() {
+      var $injector, Town, Country, testData;
+      before(function() {
+        return given.servicesForLoopBackApp(
+          {
+            models: {
+              Town: {
+                properties: { name: 'string' },
+                options: {
+                  relations: {
+                    country: {
+                      model: 'Country',
+                      type: 'belongsTo'
+                    }
+                  }
+                }
+              },
+              Country: {
+                properties: { name: 'string' },
+                options: {
+                  relations: {
+                    towns: {
+                      model: 'Town',
+                      type: 'hasMany'
+                    }
+                  }
+                }
+              }
+            },
+            setupFn: (function(app, cb) {
+              /*globals debug:true */
+              app.models.Country.create(
+                { name: 'a-country' },
+                function(err, country) {
+                  if (err) return cb(err);
+                  debug('Created country', country);
+
+                  country.towns.create({ name: 'a-town' },
+                    function(err, town) {
+                      if (err) return cb(err);
+                      debug('Created town', town);
+
+                      town.country(true, function(err, res) {
+                        if (err) return cb(err);
+                        debug('Country of the town', res);
+
+                        cb(null, {
+                          country: country,
+                          town: town
+                        });
+                      });
+                    }
+                  );
+                }
+              );
+            }).toString()
+          })
+          .then(function(createInjector) {
+            $injector = createInjector();
+            Town = $injector.get('Town');
+            Country = $injector.get('Country');
+            testData = $injector.get('testData');
+          });
+      });
+
+      it('provides scope methods', function() {
+        expect(Object.keys(Town), 'Town properties')
+          .to.contain('country');
+      });
+
+      it('gets the related model with the correct prototype', function() {
+        var country = Town.country({ id: testData.town.id });
+        return country.$promise.then(function() {
+          expect(country).to.be.instanceof(Country);
+          for (var k in testData.country) {
+            expect(country[k], 'country.' + k).to.equal(testData.country[k]);
+          }
+        });
+      });
+    });
   });
 });
