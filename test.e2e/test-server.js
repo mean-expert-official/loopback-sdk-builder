@@ -107,8 +107,8 @@ masterApp.post('/setup', function(req, res, next) {
       servicesScript = 'throw new Error("Error generating services script.");';
     }
 
-    servicesScript += '\nmodule.value("testData", ' +
-      JSON.stringify(data, null, 2) + ');\n';
+    servicesScript += '\nangular.module(' + JSON.stringify(name) + ')' +
+      '.value("testData", ' + JSON.stringify(data, null, 2) + ');\n';
 
     res.send(200, { servicesUrl: baseUrl + 'services?' + name });
   }.bind(this));

@@ -1,4 +1,4 @@
-'use strict';
+(function(window, angular, undefined) {'use strict';
 
 var urlBase = <%-: urlBase | q %>;
 
@@ -183,9 +183,9 @@ module
       return localStorage[key] || sessionStorage[key] || null;
     }
   })
-  .config(function($httpProvider) {
+  .config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('LoopBackAuthRequestInterceptor');
-  })
+  }])
   .factory('LoopBackAuthRequestInterceptor', [ '$q', 'LoopBackAuth',
     function($q, LoopBackAuth) {
       return {
@@ -341,3 +341,5 @@ postData.forEach(function(arg) { -%>
 -%>
          */
 <% } // end of ngdocForMethod -%>
+
+})(window, window.angular);
