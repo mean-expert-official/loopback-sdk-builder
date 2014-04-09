@@ -15,7 +15,6 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'test.e2e/test-main.js',
-      { pattern: 'node_modules/mocha-as-promised/**/*.js', included: false },
       { pattern: 'bower_components/**/*.js', included: false },
       { pattern: 'test.e2e/**/*.js', included: false },
 
@@ -31,7 +30,12 @@ module.exports = function(config) {
 
     // test results reporter to use
     // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-    reporters: ['progress'],
+    reporters: ['progress', 'junit'],
+
+    // CI friendly test output
+    junitReporter: {
+      outputFile: 'karma-xunit.xml'
+    },
 
 
     // web server port
