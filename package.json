@@ -4,7 +4,7 @@
   "description": "Tool for auto-generating Angular $resource services for LoopBack",
   "main": "index.js",
   "scripts": {
-    "pretest": "jshint . ; bower install",
+    "pretest": "jshint . && bower install",
     "test": "node ./test.e2e/test-server.js node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
   },
   "repository": {
