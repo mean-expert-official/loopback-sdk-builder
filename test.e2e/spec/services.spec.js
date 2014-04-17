@@ -245,6 +245,20 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
         expect(Product.getCurrent).to.equal(undefined);
       });
 
+      it('sends User.login with include=user to by default', function() {
+        return givenLoggedInUser()
+          .then(function(token) {
+            expect(token.user).to.be.an('object');
+          });
+      });
+
+      it('can request User.login without including user data', function() {
+        return givenLoggedInUser(null, { include: null })
+          .then(function(token) {
+            expect(token.user).to.equal(undefined);
+          });
+      });
+
       var idCounter = 0;
       function givenLoggedInUser(email, loginParams) {
         var credentials = {

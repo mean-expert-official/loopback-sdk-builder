@@ -62,6 +62,9 @@ module.factory(
           isArray: true,
 <% } -%>
 <% if (modelName === 'User' && methodName === 'login') { -%>
+          params: {
+            include: "user"
+          },
           interceptor: {
             response: function(response) {
               var accessToken = response.data;
@@ -281,7 +284,10 @@ if (action.getHttpMethod() == 'POST' || action.getHttpMethod() == 'PUT') {
          *
          *  - `<%- arg.arg %>` – `{<%- getJsDocType(arg)  %>}` - <%-
 (arg.description || '').replace(/\n/g, '\n         *   ') %>
-<%   }); } -%>
+<%   if (modelName === 'User' && methodName === 'login' && arg.arg === 'include') { -%>
+         *   Default value: `user`.
+<%   } -%>
+<% }); } -%>
 <% if (modelName === 'User' && methodName === 'login') { -%>
          *
          *  - `rememberMe` - `boolean` - Whether the authentication credentials
