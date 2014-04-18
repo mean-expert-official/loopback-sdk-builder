@@ -298,6 +298,20 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
           });
       });
 
+      it('provides User.isAuthenticated method', function() {
+        return givenLoggedInUser()
+          .then(function() {
+            expect(User.isAuthenticated()).to.equal(true);
+          });
+      });
+
+      it('provides User.getCurrentId method', function () {
+        return givenLoggedInUser()
+          .then(function(token) {
+            expect(User.getCurrentId()).to.equal(token.userId);
+          });
+      });
+
       var idCounter = 0;
       function givenLoggedInUser(email, loginParams) {
         var credentials = {

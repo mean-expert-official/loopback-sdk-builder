@@ -151,6 +151,28 @@ module.factory(
           var data = LoopBackAuth.currentUserData;
           return data ? new R(data) : null;
         };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.<%- modelName %>#isAuthenticated
+         * @methodOf lbServices.<%- modelName %>
+         *
+         * @return {boolean} True if the current user is authenticated (logged in).
+         */
+        R.isAuthenticated = function() {
+          return this.getCurrentId() != null;
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.<%- modelName %>#getCurrentId
+         * @methodOf lbServices.<%- modelName %>
+         *
+         * @return {Object} Id of the currently logged-in user or null.
+         */
+        R.getCurrentId = function() {
+          return LoopBackAuth.currentUserId;
+        };
 <% } -%>
 
 <% for (var scopeName in meta.scopes) {
