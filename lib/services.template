@@ -68,8 +68,7 @@ module.factory(
           interceptor: {
             response: function(response) {
               var accessToken = response.data;
-              LoopBackAuth.currentUserId = accessToken.userId;
-              LoopBackAuth.accessTokenId = accessToken.id;
+              LoopBackAuth.setUser(accessToken.id, accessToken.userId, accessToken.user);
               LoopBackAuth.rememberMe = response.config.params.rememberMe !== false;
               LoopBackAuth.save();
               return response.resource;
@@ -78,8 +77,7 @@ module.factory(
 <% } else if (modelName === 'User' && methodName === 'logout') { -%>
           interceptor: {
             response: function(response) {
-              LoopBackAuth.currentUserId = null;
-              LoopBackAuth.accessTokenId = null;
+              LoopBackAuth.clearUser();
               LoopBackAuth.save();
               return response.resource;
             }
@@ -110,20 +108,50 @@ module.factory(
          *   from the server.
          */
         "getCurrent": {
-          url: urlBase + "/users/:id",
-          method: "GET",
-          params: {
-            id: function() {
-             var id = LoopBackAuth.currentUserId;
-             if (id == null) id = '__anonymous__';
-             return id;
-           }
+           url: urlBase + "/users/:id",
+           method: "GET",
+           params: {
+             id: function() {
+              var id = LoopBackAuth.currentUserId;
+              if (id == null) id = '__anonymous__';
+              return id;
+            },
+          },
+          interceptor: {
+            response: function(response) {
+              LoopBackAuth.currentUserData = response.data;
+              return response.resource;
+            }
           },
           __isGetCurrentUser__ : true
         }
 <% } -%>
       }
     );
+
+
+
+<% if (modelName === 'User') { -%>
+        /**
+         * @ngdoc method
+         * @name lbServices.<%- modelName %>#getCachedCurrent
+         * @methodOf lbServices.<%- modelName %>
+         *
+         * @description
+         *
+         * Get data of the currently logged user that was returned by the last
+         * call to {@link lbServices.<%- modelName %>#login} or
+         * {@link lbServices.<%- modelName %>#getCurrent}. Return null when there
+         * is no user logged in or the data of the current user were not fetched
+         * yet.
+         *
+         * @return {Object} A <%- modelName %> instance.
+         */
+        R.getCachedCurrent = function() {
+          var data = LoopBackAuth.currentUserData;
+          return data ? new R(data) : null;
+        };
+<% } -%>
 
 <% for (var scopeName in meta.scopes) {
       var scope = meta.scopes[scopeName];
@@ -161,6 +189,7 @@ module
         self[name] = load(name);
       });
       this.rememberMe = undefined;
+      this.currentUserData = null;
     }
 
     LoopBackAuth.prototype.save = function() {
@@ -170,6 +199,18 @@ module
         save(storage, name, self[name]);
       });
     };
+
+    LoopBackAuth.prototype.setUser = function(accessTokenId, userId, userData) {
+      this.accessTokenId = accessTokenId;
+      this.currentUserId = userId;
+      this.currentUserData = userData;
+    }
+
+    LoopBackAuth.prototype.clearUser = function() {
+      this.accessTokenId = null;
+      this.currentUserId = null;
+      this.currentUserData = null;
+    }
 
     return new LoopBackAuth();
 

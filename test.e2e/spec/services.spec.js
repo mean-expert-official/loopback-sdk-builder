@@ -189,7 +189,7 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
             // NOTE(bajtos) This test is checking the LoopBackAuth.accessToken
             // property, because any HTTP request will fail regardless of the
             // Authorization header value, since the token was invalidated on
-            // the server sido too.
+            // the server side too.
             var auth = $injector.get('LoopBackAuth');
             expect(auth.accessTokenId, 'accessTokenId').to.equal(null);
             expect(auth.currentUserId, 'currentUserId').to.equal(null);
@@ -256,6 +256,45 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
         return givenLoggedInUser(null, { include: null })
           .then(function(token) {
             expect(token.user).to.equal(undefined);
+          });
+      });
+
+      it('returns null as initial cached user', function() {
+        var value = User.getCachedCurrent();
+        expect(value).to.equal(null);
+      });
+
+      it('caches user data from User.login response', function() {
+        return givenLoggedInUser()
+          .then(function(token) {
+            var value = User.getCachedCurrent();
+            expect(value).to.be.instanceof(User);
+            expect(value).to.have.property('email', token.user.email);
+          });
+      });
+
+      it('caches data from User.getCurrent response', function() {
+        return givenLoggedInUser()
+          .then(function() {
+            // clear the data stored by login
+            $injector.get('LoopBackAuth').currentUserData = null;
+            return User.getCurrent().$promise;
+          })
+          .then(function(user) {
+            var value = User.getCachedCurrent();
+            expect(value).to.be.instanceof(User);
+            expect(value).to.have.property('email', user.email);
+          });
+      });
+
+      it('clears cached user on logout', function() {
+        return givenLoggedInUser()
+          .then(function() {
+            return User.logout().$promise;
+          })
+          .then(function() {
+            var value = User.getCachedCurrent();
+            expect(value).to.equal(null);
           });
       });
 
