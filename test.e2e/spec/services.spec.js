@@ -189,7 +189,7 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
             // NOTE(bajtos) This test is checking the LoopBackAuth.accessToken
             // property, because any HTTP request will fail regardless of the
             // Authorization header value, since the token was invalidated on
-            // the server sido too.
+            // the server side too.
             var auth = $injector.get('LoopBackAuth');
             expect(auth.accessTokenId, 'accessTokenId').to.equal(null);
             expect(auth.currentUserId, 'currentUserId').to.equal(null);
@@ -243,6 +243,73 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
       it('adds getCurrent() to User model only', function() {
         var Product = $injector.get('Product');
         expect(Product.getCurrent).to.equal(undefined);
+      });
+
+      it('sends User.login with include=user to by default', function() {
+        return givenLoggedInUser()
+          .then(function(token) {
+            expect(token.user).to.be.an('object');
+          });
+      });
+
+      it('can request User.login without including user data', function() {
+        return givenLoggedInUser(null, { include: null })
+          .then(function(token) {
+            expect(token.user).to.equal(undefined);
+          });
+      });
+
+      it('returns null as initial cached user', function() {
+        var value = User.getCachedCurrent();
+        expect(value).to.equal(null);
+      });
+
+      it('caches user data from User.login response', function() {
+        return givenLoggedInUser()
+          .then(function(token) {
+            var value = User.getCachedCurrent();
+            expect(value).to.be.instanceof(User);
+            expect(value).to.have.property('email', token.user.email);
+          });
+      });
+
+      it('caches data from User.getCurrent response', function() {
+        return givenLoggedInUser()
+          .then(function() {
+            // clear the data stored by login
+            $injector.get('LoopBackAuth').currentUserData = null;
+            return User.getCurrent().$promise;
+          })
+          .then(function(user) {
+            var value = User.getCachedCurrent();
+            expect(value).to.be.instanceof(User);
+            expect(value).to.have.property('email', user.email);
+          });
+      });
+
+      it('clears cached user on logout', function() {
+        return givenLoggedInUser()
+          .then(function() {
+            return User.logout().$promise;
+          })
+          .then(function() {
+            var value = User.getCachedCurrent();
+            expect(value).to.equal(null);
+          });
+      });
+
+      it('provides User.isAuthenticated method', function() {
+        return givenLoggedInUser()
+          .then(function() {
+            expect(User.isAuthenticated()).to.equal(true);
+          });
+      });
+
+      it('provides User.getCurrentId method', function () {
+        return givenLoggedInUser()
+          .then(function(token) {
+            expect(User.getCurrentId()).to.equal(token.userId);
+          });
       });
 
       var idCounter = 0;
