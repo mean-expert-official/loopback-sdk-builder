@@ -10,7 +10,7 @@ LoopBack models and methods you've defined on your server.
 You don't have to manually write any static code.
 
 See the official [LoopBack AngularJS SDK
-documentation](http://docs.strongloop.com/display/DOC/AngularJS+JavaScript+SDK)
+documentation](http://docs.strongloop.com/display/LB/AngularJS+JavaScript+SDK)
 for more information.
 
 ## Mailing List
