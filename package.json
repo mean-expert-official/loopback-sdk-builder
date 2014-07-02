@@ -1,6 +1,6 @@
 {
-  "name": "loopback-angular",
-  "version": "1.1.0",
+  "name": "loopback-sdk-angular",
+  "version": "1.1.1",
   "description": "Tool for auto-generating Angular $resource services for LoopBack",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/strongloop/loopback-angular.git"
+    "url": "git://github.com/strongloop/loopback-sdk-angular.git"
   },
   "keywords": [
     "loopback",
@@ -18,10 +18,10 @@
   "author": "Miroslav Bajtos <miroslav@strongloop.com>",
   "license": {
     "name": "Dual MIT/StrongLoop",
-    "url": "https://github.com/strongloop/loopback-angular/blob/master/LICENSE"
+    "url": "https://github.com/strongloop/loopback-sdk-angular/blob/master/LICENSE"
   },
   "bugs": {
-    "url": "https://github.com/strongloop/loopback-angular/issues"
+    "url": "https://github.com/strongloop/loopback-sdk-angular/issues"
   },
   "dependencies": {
     "ejs": "^1.0"
