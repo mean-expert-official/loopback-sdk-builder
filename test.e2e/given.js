@@ -97,7 +97,7 @@ define(['angular', 'angularMocks', 'angularResource'], function(angular) {
       currentSpec.currentTest || currentSpec.test :
       window.mocha.suite.ctx.test;
 
-    if (spec.ctx && spec.ctx.currentTest) {
+    if (spec && spec.ctx && spec.ctx.currentTest) {
       names.unshift(spec.ctx.currentTest.title);
       spec = spec.parent;
     }
