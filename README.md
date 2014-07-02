@@ -1,5 +1,7 @@
 # LoopBack AngularJS SDK
 
+**NOTE: The loopback-sdk-angular module supersedes [loopback-angular](https://www.npmjs.org/loopback-angular). Please update your package.json accordingly.**
+
 The JavaScript AngularJS SDK provides an API based on
 [ngResource.$resource](http://docs.angularjs.org/api/ngResource.$resource)
 that enable your AngularJS app to access a

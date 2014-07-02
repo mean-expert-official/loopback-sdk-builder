@@ -15,4 +15,4 @@ bower_components
 karma-xunit.xml
 checkstyle.xml
 .loopbackrc
-loopback-angular-*.tgz
+loopback-sdk-angular-*.tgz
