@@ -15,9 +15,9 @@ the conformance by running the following command:
 
 We are using [karma](http://karma-runner.github.io/) to test the generated
 Angular services. See
-[test.e2e/](https://github.com/strongloop/loopback-angular/tree/master/test.e2e)
+[test.e2e/](https://github.com/strongloop/loopback-sdk-angular/tree/master/test.e2e)
 and
-[test.e2e/spec/services.spec.js](https://github.com/strongloop/loopback-angular/blob/master/test.e2e/spec/services.spec.js).
+[test.e2e/spec/services.spec.js](https://github.com/strongloop/loopback-sdk-angular/blob/master/test.e2e/spec/services.spec.js).
 
 Use the following setup while working on a new feature:
 

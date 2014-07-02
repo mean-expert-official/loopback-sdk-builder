@@ -1,6 +1,7 @@
 /*!
  * Parsers for extracting data from the generated lb-service.js code.
- * Used by unit-tests in grunt-loopback-angular and loopback-angular-cli.
+ * Used by unit-tests in grunt-loopback-sdk-angular and
+ * loopback-sdk-angular-cli.
  */
 
 var expect = require('chai').expect;
