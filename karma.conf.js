@@ -30,7 +30,7 @@ module.exports = function(config) {
 
     // test results reporter to use
     // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-    reporters: ['progress', 'junit'],
+    reporters: ['mocha', 'junit'],
 
     // CI friendly test output
     junitReporter: {
