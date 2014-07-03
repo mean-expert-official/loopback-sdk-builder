@@ -130,6 +130,16 @@ module.factory(
     );
 
 
+<% meta.methods.forEach(function(action) {
+    var methodName = action.name.split('.').join('$');
+    (action.sharedMethod.aliases || []).forEach(function(alias) {
+      var aliasMethod = alias.split('.').join('$');
+
+      ngdocForMethod(modelName, aliasMethod, action); -%>
+        R[<%-: aliasMethod | q %>] = R[<%-: methodName | q %>];
+<%  }); // aliases.foreach
+  }); // meta.methods.foreach
+-%>
 
 <% if (modelName === 'User') { -%>
         /**

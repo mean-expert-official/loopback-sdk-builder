@@ -97,6 +97,25 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
             return found.$promise;
           });
       });
+
+      it('has all methods including aliases', function() {
+        var methodNames = Object.keys(MyModel);
+        console.log('methods', methodNames);
+        expect(methodNames).to.include.members([
+          'create',
+          'updateOrCreate',
+          'upsert',
+          'exists',
+          'findById',
+          'find',
+          'findOne',
+          'destroyById',
+          'deleteById',
+          'removeById',
+          'count',
+          'prototype$updateAttributes'
+        ]);
+      });
     });
 
     describe('$resource for model with funky name', function() {
