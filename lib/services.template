@@ -61,7 +61,7 @@ module.factory(
 <% if (action.isReturningArray()) { -%>
           isArray: true,
 <% } -%>
-<% if (modelName === 'User' && methodName === 'login') { -%>
+<% if (meta.isUser && methodName === 'login') { -%>
           params: {
             include: "user"
           },
@@ -74,7 +74,7 @@ module.factory(
               return response.resource;
             }
           }
-<% } else if (modelName === 'User' && methodName === 'logout') { -%>
+<% } else if (meta.isUser && methodName === 'logout') { -%>
           interceptor: {
             response: function(response) {
               LoopBackAuth.clearUser();
@@ -85,7 +85,7 @@ module.factory(
 <% } -%>
         },
 <% }); // meta.methods.foreach -%>
-<% if (modelName === 'User') { -%>
+<% if (meta.isUser) { -%>
 
         /**
          * @ngdoc method
@@ -108,7 +108,7 @@ module.factory(
          *   from the server.
          */
         "getCurrent": {
-           url: urlBase + "/users/:id",
+           url: urlBase + "/" + <%-: meta.getPath() | q %> + "/:id",
            method: "GET",
            params: {
              id: function() {
@@ -141,7 +141,7 @@ module.factory(
   }); // meta.methods.foreach
 -%>
 
-<% if (modelName === 'User') { -%>
+<% if (meta.isUser) { -%>
         /**
          * @ngdoc method
          * @name lbServices.<%- modelName %>#getCachedCurrent
@@ -383,11 +383,11 @@ if (action.getHttpMethod() == 'POST' || action.getHttpMethod() == 'PUT') {
          *
          *  - `<%- arg.arg %>` – `{<%- getJsDocType(arg)  %>}` - <%-
 (arg.description || '').replace(/\n/g, '\n         *   ') %>
-<%   if (modelName === 'User' && methodName === 'login' && arg.arg === 'include') { -%>
+<%   if (meta.isUser && methodName === 'login' && arg.arg === 'include') { -%>
          *   Default value: `user`.
 <%   } -%>
 <% }); } -%>
-<% if (modelName === 'User' && methodName === 'login') { -%>
+<% if (meta.isUser && methodName === 'login') { -%>
          *
          *  - `rememberMe` - `boolean` - Whether the authentication credentials
          *     should be remembered in localStorage across app/browser restarts.

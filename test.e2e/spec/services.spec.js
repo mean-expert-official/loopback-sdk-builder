@@ -138,13 +138,13 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
     });
 
     describe('with authentication', function() {
-      var getNew, createInjector, $injector, User;
-      before(function() {
+      var getNew, createInjector, $injector, Customer;
+      before(function setupLoopBackService() {
         return given.servicesForLoopBackApp(
           {
             name: 'with authentication',
             models: {
-              user: {
+              Customer: {
                 options: {
                   base: 'User',
                   relations: {
@@ -172,15 +172,15 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
           });
       });
 
-      beforeEach(function() {
+      beforeEach(function setupTestEnv() {
         localStorage.clear();
         sessionStorage.clear();
         $injector = createInjector();
-        User = $injector.get('User');
+        Customer = $injector.get('Customer');
       });
 
       it('returns error for an unauthorized request', function() {
-        return User.query().$promise
+        return Customer.query().$promise
           .then(function() {
             throw new Error('User.query was supposed to fail.');
           }, function(res) {
@@ -191,7 +191,7 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
       it('sends the authentication token when a user is logged in', function() {
         return givenLoggedInUser('user@example.com')
           .then(function(accessToken) {
-            return User.get({ id: accessToken.userId }).$promise;
+            return Customer.get({ id: accessToken.userId }).$promise;
           })
           .then(function(user) {
             expect(user.email).to.equal('user@example.com');
@@ -202,7 +202,7 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
       it('clears authentication data on logout', function() {
         return givenLoggedInUser()
           .then(function() {
-            return User.logout().$promise;
+            return Customer.logout().$promise;
           })
           .then(function() {
             // NOTE(bajtos) This test is checking the LoopBackAuth.accessToken
@@ -222,7 +222,7 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
       });
 
       it('returns stub 401 for User.getCurrent when not logged in', function() {
-        return User.getCurrent().$promise
+        return Customer.getCurrent().$promise
           .then(function() {
             throw new Error('User.getCurrent() was supposed to fail.');
           }, function(res) {
@@ -239,7 +239,7 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
         return givenLoggedInUser('persisted@example.com')
           .then(function() {
             sessionStorage.clear(); // simulate browser restart
-            return getNew('User').getCurrent().$promise;
+            return getNew('Customer').getCurrent().$promise;
           })
           .then(function(user) {
             expect(user.email).to.equal('persisted@example.com');
@@ -251,7 +251,7 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
         return givenLoggedInUser(null, { rememberMe: false })
           .then(function() {
             localStorage.clear(); // ensure data is not stored in localStorage
-            return getNew('User').getCurrent().$promise;
+            return getNew('Customer').getCurrent().$promise;
           })
           .then(function() {
             expect(true); // no-op, test passed
@@ -279,15 +279,15 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
       });
 
       it('returns null as initial cached user', function() {
-        var value = User.getCachedCurrent();
+        var value = Customer.getCachedCurrent();
         expect(value).to.equal(null);
       });
 
       it('caches user data from User.login response', function() {
         return givenLoggedInUser()
           .then(function(token) {
-            var value = User.getCachedCurrent();
-            expect(value).to.be.instanceof(User);
+            var value = Customer.getCachedCurrent();
+            expect(value).to.be.instanceof(Customer);
             expect(value).to.have.property('email', token.user.email);
           });
       });
@@ -297,11 +297,11 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
           .then(function() {
             // clear the data stored by login
             $injector.get('LoopBackAuth').currentUserData = null;
-            return User.getCurrent().$promise;
+            return Customer.getCurrent().$promise;
           })
           .then(function(user) {
-            var value = User.getCachedCurrent();
-            expect(value).to.be.instanceof(User);
+            var value = Customer.getCachedCurrent();
+            expect(value).to.be.instanceof(Customer);
             expect(value).to.have.property('email', user.email);
           });
       });
@@ -309,10 +309,10 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
       it('clears cached user on logout', function() {
         return givenLoggedInUser()
           .then(function() {
-            return User.logout().$promise;
+            return Customer.logout().$promise;
           })
           .then(function() {
-            var value = User.getCachedCurrent();
+            var value = Customer.getCachedCurrent();
             expect(value).to.equal(null);
           });
       });
@@ -320,14 +320,14 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
       it('provides User.isAuthenticated method', function() {
         return givenLoggedInUser()
           .then(function() {
-            expect(User.isAuthenticated()).to.equal(true);
+            expect(Customer.isAuthenticated()).to.equal(true);
           });
       });
 
       it('provides User.getCurrentId method', function () {
         return givenLoggedInUser()
           .then(function(token) {
-            expect(User.getCurrentId()).to.equal(token.userId);
+            expect(Customer.getCurrentId()).to.equal(token.userId);
           });
       });
 
@@ -338,9 +338,9 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
           password: 'a-password'
         };
 
-        return User.create(credentials).$promise
+        return Customer.create(credentials).$promise
           .then(function() {
-            return User.login(loginParams || {}, credentials).$promise;
+            return Customer.login(loginParams || {}, credentials).$promise;
           });
       }
     });
