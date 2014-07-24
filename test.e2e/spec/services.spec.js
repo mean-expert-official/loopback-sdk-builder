@@ -411,7 +411,13 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
         expect(Object.keys(Product.categories), 'Product.categories properties')
           .to.have.members([
             'create',
-            'destroyAll'
+            'destroyAll',
+            // new in loopback 2.0
+            'destroyById',
+            'findById',
+            'link',
+            'unlink',
+            'updateById'
           ]);
       });
 
