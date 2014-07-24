@@ -192,11 +192,37 @@ module.factory(
       // Angular names always start with a capital letter
       var targetClass = scope.targetClass[0].toUpperCase() + scope.targetClass.slice(1);
 
+      if (Object.keys(scopeMethods).length > 1) {
+-%>
+    /**
+     * @ngdoc object
+     * @name lbServices.<%- modelName %>.<%- scopeName %>
+     * @object
+     * @description
+     *
+     * The object `<%- modelName %>.<%- scopeName %>` groups methods
+     * manipulating `<%- targetClass %>` instances related to `<%- modelName %>`.
+     *
+     * Use {@link lbServices.<%- modelName %>#<%- scopeName %>} to query
+     * all related instances.
+     */
+
+<%
+      }
+
       // sort the names to make sure the get method creating the scope
       // is emitted first (R.categories before R.categories.create)
       Object.keys(scopeMethods).sort().forEach(function(methodName) {
         var action = scopeMethods[methodName];
-        ngdocForMethod(modelName, methodName, action, targetClass);
+
+        // modelName is e.g. 'User'
+        // methodName is e.g. 'accessTokens.create'
+        // we need to convert it to 'User.accessTokens' and 'create'
+        var names = methodName.split('.');
+        var ngClass = [modelName].concat(names).join('.');
+        var ngMethod = names.pop();
+
+        ngdocForMethod(ngClass, ngMethod, action, targetClass);
 -%>
         R.<%- methodName %> = function() {
           var TargetResource = $injector.get(<%-: targetClass | q %>);
