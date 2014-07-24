@@ -219,8 +219,8 @@ module.factory(
         // methodName is e.g. 'accessTokens.create'
         // we need to convert it to 'User.accessTokens' and 'create'
         var names = methodName.split('.');
-        var ngClass = [modelName].concat(names).join('.');
         var ngMethod = names.pop();
+        var ngClass = [modelName].concat(names).join('.');
 
         ngdocForMethod(ngClass, ngMethod, action, targetClass);
 -%>
