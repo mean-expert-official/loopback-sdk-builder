@@ -46,7 +46,7 @@
     "karma-requirejs": "^0.2.1",
     "loopback": "^1.7",
     "loopback-datasource-juggler": "^1.3",
-    "mocha": "^1.21.0",
+    "mocha": "~1.18.0",
     "morgan": "^1.2",
     "requirejs": "^2.1.9"
   }
