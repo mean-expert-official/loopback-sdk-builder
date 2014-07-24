@@ -8,6 +8,9 @@ var express = require('express');
 var loopback = require('loopback');
 var generator = require('..');
 var extend = require('util')._extend;
+var bodyParser = require('body-parser');
+var morgan = require('morgan');
+var errorHandler = require('errorhandler');
 
 var port = process.env.PORT || 3838;
 var baseUrl;
@@ -29,9 +32,9 @@ var initialDefinitions = loopback.Model.modelBuilder.definitions;
 // This way the script running in Karma page can
 // talk to our service running on a different host/port.
 masterApp.use(require('cors')());
-masterApp.use(express.json());
+masterApp.use(bodyParser.json());
 
-masterApp.use(express.logger('dev'));
+masterApp.use(morgan('dev'));
 
 /*!
 Sample request
@@ -134,7 +137,7 @@ masterApp.use('/api', function(res, req, next) {
   lbApp(res, req, next);
 });
 
-masterApp.use(express.errorHandler());
+masterApp.use(errorHandler());
 
 masterApp.listen(port, function() {
   port = this.address().port;
