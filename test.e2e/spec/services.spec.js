@@ -409,7 +409,7 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
         expect(Object.keys(Product), 'Product properties')
           .to.contain('categories');
         expect(Object.keys(Product.categories), 'Product.categories properties')
-          .to.have.members([
+          .to.include.members([
             'create',
             'destroyAll',
             // new in loopback 2.0

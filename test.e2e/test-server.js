@@ -94,7 +94,7 @@ masterApp.post('/setup', function(req, res, next) {
     lbApp.enableAuth();
 
   lbApp.set('restApiRoot', '/');
-  lbApp.installMiddleware();
+  lbApp.use(lbApp.get('restApiRoot'), loopback.rest());
 
   setupFn(lbApp, function(err, data) {
     if (err) {
