@@ -137,7 +137,7 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
       });
     });
 
-    describe('with authentication', function() {
+    describe('with authentication using custom User model', function() {
       var getNew, createInjector, $injector, Customer;
       before(function setupLoopBackService() {
         return given.servicesForLoopBackApp(
@@ -343,6 +343,36 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
             return Customer.login(loginParams || {}, credentials).$promise;
           });
       }
+    });
+
+    describe('with authentication using built-in User model', function() {
+      var $injector, User;
+      before(function setupLoopBackService() {
+        return given.servicesForLoopBackApp(
+          {
+            name: 'with authentication',
+            models: {
+              User: {
+                // use the built-in User model
+              },
+            },
+            enableAuth: true
+          })
+          .then(function(createInjector) {
+            $injector = createInjector();
+            User = $injector.get('User');
+          });
+      });
+
+      it('adds auth-related methods to the User model', function() {
+        var methodNames = Object.keys(User);
+        console.log('User methods', methodNames);
+        expect(methodNames).to.include.members([
+          'getCachedCurrent',
+          'isAuthenticated',
+          'getCurrentId',
+        ]);
+      });
     });
 
     describe('for models with hasAndBelongsToMany relations', function() {

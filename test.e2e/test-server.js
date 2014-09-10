@@ -85,7 +85,8 @@ masterApp.post('/setup', function(req, res, next) {
 
   for (var m in models) {
     models[m].dataSource = 'db';
-    lbApp.model(m, models[m]);
+    var model = initialModels[m];
+    lbApp.model(model || m, models[m]);
   }
 
   loopback.autoAttach();
