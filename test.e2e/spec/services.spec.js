@@ -116,6 +116,10 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
           'prototype$updateAttributes'
         ]);
       });
+
+      it('has `modelName` property', function() {
+        expect(MyModel).to.have.property('modelName', 'MyModel');
+      });
     });
 
     describe('$resource for model with funky name', function() {
