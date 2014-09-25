@@ -2,6 +2,94 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
   'use strict';
 
   describe('services', function() {
+
+    describe('authentication header customization', function() {
+      var createInjector,
+          $injector,
+          httpProvider,
+          loopBackResourceProvider,
+          moduleName = 'urlBaseAndAuthHeaderCustomization',
+          // set angular configuration
+          // 1. Add special HttpTestRequestInterceptor
+          // 2. Expose providers to parent scope to easily access
+          // them from the tests
+          setTestAngularModuleConfig = function() {
+            angular.module(moduleName)
+              .config(function(LoopBackResourceProvider, $httpProvider) {
+                loopBackResourceProvider = LoopBackResourceProvider;
+                httpProvider = $httpProvider;
+                httpProvider.interceptors.push('HttpTestRequestInterceptor');
+              })
+              .factory('HttpTestRequestInterceptor', function($q) {
+                return {
+                  'request': function(config) {
+                    var deferred = $q.defer();
+                    // once the promise is resolved the request will be
+                    // aborted and throws an error and propagates required
+                    // config data to do the assertions.
+                    config.timeout = deferred.promise;
+                    // resolve the promise immediately
+                    deferred.resolve();
+                    return config;
+                  }
+                };
+              });
+          };
+
+      before(function() {
+        return given.servicesForLoopBackApp(
+          {
+            name: moduleName,
+            models: {
+              MyModel: { name: { type: String, required: true } }
+            }
+          })
+          .then(function(_createInjector) {
+            setTestAngularModuleConfig();
+            createInjector = _createInjector;
+          });
+      });
+
+      beforeEach(function() {
+        localStorage.clear();
+        sessionStorage.clear();
+        // create injector, it will run angular module configuration
+        // to setup all the needed providers
+        // (loopBackResourceProvider, httpProvider)
+        $injector = createInjector();
+      });
+
+      describe('LoopBackResourceProvider', function() {
+        it('has setAuthHeader method', function() {
+          expect(loopBackResourceProvider).to.have.property('setAuthHeader');
+        });
+
+        it('can configure authorization header', function() {
+          var authHeader = 'X-Awesome-Token',
+              accessTokenId = '123456';
+
+          loopBackResourceProvider.setAuthHeader(authHeader);
+          var $injector = createInjector();
+
+          // accessTokenId is needed, otherwise
+          // no authHeader will be set.
+          var auth = $injector.get('LoopBackAuth');
+          auth.accessTokenId = accessTokenId;
+
+          var MyModel = $injector.get('MyModel');
+
+          return MyModel.count().$promise.then(
+            function () {
+              throw new Error('MyModel.count was supposed to fail.');
+            },
+            function(req) {
+              expect(req.config.headers).to.have.property(authHeader);
+            }
+          );
+        });
+      });
+    });
+
     describe('MyModel $resource', function() {
       var $injector, MyModel;
       before(function() {
