@@ -3,7 +3,7 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
 
   describe('services', function() {
 
-    describe('authentication header customization', function() {
+    describe('url base and authentication header customization', function() {
       var createInjector,
           $injector,
           httpProvider,
@@ -24,10 +24,17 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
                 return {
                   'request': function(config) {
                     var deferred = $q.defer();
-                    // once the promise is resolved the request will be
-                    // aborted and throws an error and propagates required
-                    // config data to do the assertions.
+                    // set a promise as timeout to avoid
+                    // unnecessary request, as soon as the promise
+                    // is resolved the "resource" promise that is
+                    // responsable for making the real request will be
+                    // canceled and it will throw an error that also
+                    // propagates the config data needed to do the assertions.
                     config.timeout = deferred.promise;
+                    // set httpTestRequestInterceptor variable to
+                    // be able to handle cancelled requests coming from
+                    // this interceptor.
+                    config.httpTestRequestInterceptor = true;
                     // resolve the promise immediately
                     deferred.resolve();
                     return config;
@@ -83,11 +90,57 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
               throw new Error('MyModel.count was supposed to fail.');
             },
             function(req) {
-              expect(req.config.headers).to.have.property(authHeader);
+              var config = req.config;
+              if (config.httpTestRequestInterceptor) {
+                expect(req.config.headers).to.have.property(authHeader);
+              } else {
+                throw new Error('httpTestRequestInterceptor is not working');
+              }
             }
           );
         });
+
+        it('has setUrlBase method', function() {
+          expect(loopBackResourceProvider).to.have.property('setUrlBase');
+        });
+
+        it('can configure urlBase', function() {
+          // setup angular configuration (requires to recreate the injector, so
+          // it can get the new required config)
+          // 1. set a new urlBase to loopBackResourceProvider
+          // 2. recreate the injector
+          var urlBase = 'http://test.urlbase';
+          loopBackResourceProvider.setUrlBase(urlBase);
+          var $injector = createInjector();
+
+          var MyModel = $injector.get('MyModel');
+          // make a call to MyModel to check if url is properly configured
+          // it will be intercepted by HttpTestRequestInterceptor
+          return MyModel.count().$promise.then(
+            // success handler
+            // NOTE: interceptor should always fail due the request is
+            // being cancelled so if it succeed it means that
+            // something is wrong and the test should fail.
+            function () {
+              throw new Error('MyModel.count was supposed to fail.');
+            },
+            // error handler
+            function(req) {
+              var config = req.config;
+              // when request has been cancelled by HttpTestRequestInterceptor
+              // then do the assertion otherwise just fail
+              if (config.httpTestRequestInterceptor) {
+                expect(config.url.substr(0, urlBase.length)).to.equal(urlBase);
+              } else {
+                throw new Error('httpTestRequestInterceptor is not working');
+              }
+            }
+          );
+        });
+
       });
+
+
     });
 
     describe('MyModel $resource', function() {
