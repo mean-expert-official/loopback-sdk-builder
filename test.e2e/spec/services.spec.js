@@ -2,6 +2,147 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
   'use strict';
 
   describe('services', function() {
+
+    describe('url base and authentication header customization', function() {
+      var createInjector,
+          $injector,
+          httpProvider,
+          loopBackResourceProvider,
+          moduleName = 'urlBaseAndAuthHeaderCustomization',
+          // set angular configuration
+          // 1. Add special HttpTestRequestInterceptor
+          // 2. Expose providers to parent scope to easily access
+          // them from the tests
+          setTestAngularModuleConfig = function() {
+            angular.module(moduleName)
+              .config(function(LoopBackResourceProvider, $httpProvider) {
+                loopBackResourceProvider = LoopBackResourceProvider;
+                httpProvider = $httpProvider;
+                httpProvider.interceptors.push('HttpTestRequestInterceptor');
+              })
+              .factory('HttpTestRequestInterceptor', function($q) {
+                return {
+                  'request': function(config) {
+                    var deferred = $q.defer();
+                    // set a promise as timeout to avoid
+                    // unnecessary request, as soon as the promise
+                    // is resolved the "resource" promise that is
+                    // responsable for making the real request will be
+                    // canceled and it will throw an error that also
+                    // propagates the config data needed to do the assertions.
+                    config.timeout = deferred.promise;
+                    // set httpTestRequestInterceptor variable to
+                    // be able to handle cancelled requests coming from
+                    // this interceptor.
+                    config.httpTestRequestInterceptor = true;
+                    // resolve the promise immediately
+                    deferred.resolve();
+                    return config;
+                  }
+                };
+              });
+          };
+
+      before(function() {
+        return given.servicesForLoopBackApp(
+          {
+            name: moduleName,
+            models: {
+              MyModel: { name: { type: String, required: true } }
+            }
+          })
+          .then(function(_createInjector) {
+            setTestAngularModuleConfig();
+            createInjector = _createInjector;
+          });
+      });
+
+      beforeEach(function() {
+        localStorage.clear();
+        sessionStorage.clear();
+        // create injector, it will run angular module configuration
+        // to setup all the needed providers
+        // (loopBackResourceProvider, httpProvider)
+        $injector = createInjector();
+      });
+
+      describe('LoopBackResourceProvider', function() {
+        it('has setAuthHeader method', function() {
+          expect(loopBackResourceProvider).to.have.property('setAuthHeader');
+        });
+
+        it('can configure authorization header', function() {
+          var authHeader = 'X-Awesome-Token',
+              accessTokenId = '123456';
+
+          loopBackResourceProvider.setAuthHeader(authHeader);
+          var $injector = createInjector();
+
+          // accessTokenId is needed, otherwise
+          // no authHeader will be set.
+          var auth = $injector.get('LoopBackAuth');
+          auth.accessTokenId = accessTokenId;
+
+          var MyModel = $injector.get('MyModel');
+
+          return MyModel.count().$promise.then(
+            function () {
+              throw new Error('MyModel.count was supposed to fail.');
+            },
+            function(req) {
+              var config = req.config;
+              if (config.httpTestRequestInterceptor) {
+                expect(req.config.headers).to.have.property(authHeader);
+              } else {
+                throw new Error('httpTestRequestInterceptor is not working');
+              }
+            }
+          );
+        });
+
+        it('has setUrlBase method', function() {
+          expect(loopBackResourceProvider).to.have.property('setUrlBase');
+        });
+
+        it('can configure urlBase', function() {
+          // setup angular configuration (requires to recreate the injector, so
+          // it can get the new required config)
+          // 1. set a new urlBase to loopBackResourceProvider
+          // 2. recreate the injector
+          var urlBase = 'http://test.urlbase';
+          loopBackResourceProvider.setUrlBase(urlBase);
+          var $injector = createInjector();
+
+          var MyModel = $injector.get('MyModel');
+          // make a call to MyModel to check if url is properly configured
+          // it will be intercepted by HttpTestRequestInterceptor
+          return MyModel.count().$promise.then(
+            // success handler
+            // NOTE: interceptor should always fail due the request is
+            // being cancelled so if it succeed it means that
+            // something is wrong and the test should fail.
+            function () {
+              throw new Error('MyModel.count was supposed to fail.');
+            },
+            // error handler
+            function(req) {
+              var config = req.config;
+              // when request has been cancelled by HttpTestRequestInterceptor
+              // then do the assertion otherwise just fail
+              if (config.httpTestRequestInterceptor) {
+                expect(config.url.substr(0, urlBase.length)).to.equal(urlBase);
+              } else {
+                throw new Error('httpTestRequestInterceptor is not working');
+              }
+            }
+          );
+        });
+
+      });
+
+
+    });
+
     describe('MyModel $resource', function() {
       var $injector, MyModel;
       before(function() {
@@ -115,6 +256,10 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
           'count',
           'prototype$updateAttributes'
         ]);
+      });
+
+      it('has `modelName` property', function() {
+        expect(MyModel).to.have.property('modelName', 'MyModel');
       });
     });
 
