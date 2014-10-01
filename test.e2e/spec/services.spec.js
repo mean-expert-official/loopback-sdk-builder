@@ -2,7 +2,6 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
   'use strict';
 
   describe('services', function() {
-
     describe('url base and authentication header customization', function() {
       var createInjector,
           $injector,
@@ -41,6 +40,28 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
                   }
                 };
               });
+          },
+          expectMockedRequestPromise = function(promise) {
+            return promise.then(
+              // success handler
+              // NOTE: interceptor should always fail due the request is
+              // being cancelled so if it succeed it means that
+              // something is wrong and the test should fail.
+              function() {
+                throw new Error('The request was supposed to fail.');
+              },
+              // error handler
+              function(req) {
+                var config = req.config;
+                // when request has been cancelled by HttpTestRequestInterceptor
+                // then do the assertion otherwise just fail
+                if (config.httpTestRequestInterceptor) {
+                  return req;
+                } else {
+                  throw new Error('httpTestRequestInterceptor is not working');
+                }
+              }
+            );
           };
 
       before(function() {
@@ -82,20 +103,11 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
           // no authHeader will be set.
           var auth = $injector.get('LoopBackAuth');
           auth.accessTokenId = accessTokenId;
-
           var MyModel = $injector.get('MyModel');
 
-          return MyModel.count().$promise.then(
-            function () {
-              throw new Error('MyModel.count was supposed to fail.');
-            },
+          return expectMockedRequestPromise(MyModel.count().$promise).then(
             function(req) {
-              var config = req.config;
-              if (config.httpTestRequestInterceptor) {
-                expect(req.config.headers).to.have.property(authHeader);
-              } else {
-                throw new Error('httpTestRequestInterceptor is not working');
-              }
+              expect(req.config.headers).to.have.property(authHeader);
             }
           );
         });
@@ -112,35 +124,52 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
           var urlBase = 'http://test.urlbase';
           loopBackResourceProvider.setUrlBase(urlBase);
           var $injector = createInjector();
-
           var MyModel = $injector.get('MyModel');
-          // make a call to MyModel to check if url is properly configured
-          // it will be intercepted by HttpTestRequestInterceptor
-          return MyModel.count().$promise.then(
-            // success handler
-            // NOTE: interceptor should always fail due the request is
-            // being cancelled so if it succeed it means that
-            // something is wrong and the test should fail.
-            function () {
-              throw new Error('MyModel.count was supposed to fail.');
-            },
-            // error handler
+
+          return expectMockedRequestPromise(MyModel.count().$promise).then(
             function(req) {
-              var config = req.config;
-              // when request has been cancelled by HttpTestRequestInterceptor
-              // then do the assertion otherwise just fail
-              if (config.httpTestRequestInterceptor) {
-                expect(config.url.substr(0, urlBase.length)).to.equal(urlBase);
-              } else {
-                throw new Error('httpTestRequestInterceptor is not working');
-              }
+              expect(req.config.url.substr(0, urlBase.length))
+                .to.equal(urlBase);
             }
           );
         });
-
       });
 
+      describe('LoopBackAuthRequestInterceptor', function() {
+        it('should be configured as an $httpProvider\'s interceptor',
+          function() {
+            expect(httpProvider.interceptors)
+              .to.contain('LoopBackAuthRequestInterceptor');
+          }
+        );
 
+        it('intercepts only configured urlBase requests', function() {
+          var urlBase = 'http://test.urlbase',
+              nonUrlBase = 'http://test.nonurlbase',
+              authHeader = 'X-Test-Token',
+              accessTokenId = '12345';
+
+          loopBackResourceProvider.setUrlBase(urlBase);
+          loopBackResourceProvider.setAuthHeader(authHeader);
+
+          var $injector = createInjector();
+
+          // set custom accessTokenId
+          var auth = $injector.get('LoopBackAuth');
+          auth.accessTokenId = accessTokenId;
+
+          var $http = $injector.get('$http');
+
+          // request with $http service to a nonUrlBase
+          return expectMockedRequestPromise($http.get(nonUrlBase)).then(
+            function(req) {
+              // when the request points to a non urlBase
+              // domain it should not have authHeader
+              expect(req.config.headers[authHeader]).to.equal(undefined);
+            }
+          );
+        });
+      });
     });
 
     describe('MyModel $resource', function() {
