@@ -53,7 +53,8 @@ script = script
   // Change `Model#method` to `Model.method` in @name
   .replace(/^(\s+\* @name) ([^# \n]+)#([^# \n]+) *$/mg, '$1 $2.$3')
   // Change `Model#method` to `Model.method` in @link
-  .replace(/({@link [^# }\n]+)#([^# }\n]+)/g, '$1.$2');
+  // Do not modify URLs with anchors, e.g. `http://foo/bar#anchor`
+  .replace(/({@link [^\/# }\n]+)#([^# }\n]+)/g, '$1.$2');
 
 fs.writeFileSync(loopbackCoreJs, script);
 
