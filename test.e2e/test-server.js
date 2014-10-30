@@ -157,7 +157,7 @@ function runAndExit(cmd, args) {
     console.log('child_process.spawn failed', err);
     process.exit(1);
   });
-  child.on('exit', function() {
-    process.exit();
+  child.on('exit', function(code) {
+    process.exit(code);
   });
 }
