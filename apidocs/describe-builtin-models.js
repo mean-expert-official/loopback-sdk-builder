@@ -21,10 +21,24 @@ var app = loopback();
 
 app.dataSource('db', { connector: 'memory', defaultForType: 'db' });
 
+var modelNames = [];
 for (var key in loopback) {
   var model = loopback[key];
   if (!model) continue;
-  if (model === loopback.Model || model === loopback.PersistedModel) continue;
+  if (model === loopback.Model) continue;
+  if (model.prototype instanceof loopback.Model)
+    modelNames.push(key);
+}
+
+modelNames.sort(function(l, r) {
+  if (l === r) return 0;
+  if (l === 'PersistedModel') return -1;
+  if (r === 'PersistedModel') return 1;
+  return l < r ? -1 : 1;
+});
+
+modelNames.forEach(function(key) {
+  var model = loopback[key];
   if (model.prototype instanceof loopback.PersistedModel) {
     app.model(model, { dataSource: 'db' });
     console.log('  added persisted model %s', key);
@@ -32,7 +46,7 @@ for (var key in loopback) {
     app.model(model);
     console.log('  added model %s', key);
   }
-}
+});
 
 var script = generator.services(app, 'lbServices', '/api');
 
