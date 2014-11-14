@@ -1,3 +1,11 @@
+2014-11-14, Version 1.3.6
+=========================
+
+ * Fix the URL requested by `User.getCurrent` (Loïc Payol)
+
+ * Clear keys from both local and session storage on logout (Ilia Nazarov)
+
+
 2014-11-11, Version 1.3.5
 =========================
 
@@ -61,17 +69,6 @@
 
  * Add extension to template file name (Aleksandr Tsertkov)
 
- * Fix ngdoc comment for related method (Miroslav Bajtoš)
-
- * Support custom User-based models (Miroslav Bajtoš)
-
- * Revert mocha back to 1.18 (Miroslav Bajtoš)
-
-
-2014-07-24, Version 1.1.4
-=========================
-
-
 
 2014-07-24, Version 1.2.0
 =========================
@@ -81,6 +78,10 @@
  * Support custom User-based models (Miroslav Bajtoš)
 
  * Revert mocha back to 1.18 (Miroslav Bajtoš)
+
+
+2014-07-24, Version 1.1.4
+=========================
 
  * Update dependencies (Miroslav Bajtoš)
 
