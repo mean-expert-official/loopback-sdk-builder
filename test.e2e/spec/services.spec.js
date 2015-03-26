@@ -223,6 +223,27 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
         });
       });
 
+      it('can create multiple new resources', function() {
+        var arr = MyModel.createMany([
+         { name: 'one', multi: true },
+         { name: 'two', multi: true },
+         { name: 'three', multi: true }
+        ], 
+        function() {
+          expect(arr).to.have.property('length', 3);
+        });
+
+      return arr.$promise.then(function() {
+        var found = MyModel.find({ 
+          filter: { where: { multi: true } } },
+          function() {
+            var namesFound = found.map(function(it) { return it.name; });
+            expect(namesFound).to.eql(['one', 'two', 'three']);
+          });
+          return found.$promise;
+        });
+      });
+
       it('can save a new resource', function() {
         var obj = new MyModel();
         obj.name = 'new-saved';
@@ -273,6 +294,7 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
         console.log('methods', methodNames);
         expect(methodNames).to.include.members([
           'create',
+          'createMany',
           'updateOrCreate',
           'upsert',
           'exists',
@@ -643,6 +665,7 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
         expect(Object.keys(Product.categories), 'Product.categories properties')
           .to.include.members([
             'create',
+            'createMany',
             'destroyAll',
             // new in loopback 2.0
             'destroyById',
@@ -719,6 +742,25 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
           })
           .then(function(list) {
             expect(list.map(propGetter('name'))).to.include('cat-link');
+          });
+      });
+      
+      it('creates multiple related models', function() {
+        var cats = Product.categories.createMany(
+          { id: testData.product.id },
+          [
+            { name: 'another-cat' },
+            { name: 'yet-another-cat' },
+            { name: 'last-cat' }
+          ], 
+          function() {
+            expect(cats).to.have.property('length', 3);
+          });
+        return cats.$promise
+          .then(function() {
+            cats.forEach(function(cat){
+              expect(cat).to.be.an.instanceof(Category);
+            });
           });
       });
 
