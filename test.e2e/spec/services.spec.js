@@ -680,6 +680,48 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
           });
       });
 
+      it('unlinks a model', function() {
+        return Product.categories.create(
+          { id: testData.product.id },
+          { name: 'cat-unlink' }
+        ).$promise
+          .then(function(cat) {
+            return Product.categories.unlink({
+              id: testData.product.id,
+              fk: cat.id
+            }).$promise;
+          })
+          .then(function() {
+            return Product.categories({ id: testData.product.id }).$promise;
+          })
+          .then(function(list) {
+            expect(list.map(propGetter('name'))).to.not.include('linked-cat');
+          });
+      });
+
+      it('links a model', function() {
+        return Category.create({ name: 'cat-link' })
+          .$promise
+          .then(function(cat) {
+            return Product.categories.link(
+              {
+                id: testData.product.id,
+                fk: cat.id
+              },
+              // IMPORTANT: we must pass an empty postData arg, otherwise
+              // both id and fk are sent in the request body and the "id" value
+              // is interpreted as the id of the record in the "trough" table
+              {}
+            ).$promise;
+          })
+          .then(function(link) {
+            return Product.categories({ id: testData.product.id }).$promise;
+          })
+          .then(function(list) {
+            expect(list.map(propGetter('name'))).to.include('cat-link');
+          });
+      });
+
       // Skipped due to strongloop/loopback-datasource-juggler#95
       it.skip('removes all related models', function() {
         return Product.categories.destroyAll({ id: testData.product.id })
@@ -781,4 +823,10 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
       });
     });
   });
+
+  function propGetter(name) {
+    return function(obj) {
+      return obj[name];
+    };
+  }
 });
