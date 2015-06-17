@@ -1,3 +1,13 @@
+2015-06-17, Version 1.4.0
+=========================
+
+ * Add createMany functionallity (Jonathan Casarrubias)
+
+ * Support "accepts" arguments mapped to URL params (Matt McCabe)
+
+ * Fix bad CLA URL in CONTRIBUTING.md (Ryan Graham)
+
+
 2014-11-19, Version 1.3.7
 =========================
 
