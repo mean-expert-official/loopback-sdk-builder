@@ -228,13 +228,13 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
          { name: 'one', multi: true },
          { name: 'two', multi: true },
          { name: 'three', multi: true }
-        ], 
+        ],
         function() {
           expect(arr).to.have.property('length', 3);
         });
 
       return arr.$promise.then(function() {
-        var found = MyModel.find({ 
+        var found = MyModel.find({
           filter: { where: { multi: true } } },
           function() {
             var namesFound = found.map(function(it) { return it.name; });
@@ -330,6 +330,43 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
 
       it('has a factory name that starts with upper-case', function() {
         expect($injector.has('Lower-case-not-an-identifier')).to.equal(true);
+      });
+    });
+
+    describe('$resource for model with custom scope-like methods', function() {
+      var $injector;
+      before(function() {
+        return given.servicesForLoopBackApp(
+          {
+            models: {
+              'pretender': {},
+            },
+            setupFn: (function(app, cb) {
+              var Pretender = app.models.Pretender;
+              Pretender.prototype['__get__spaces'] = function(cb) {
+                cb(null, [1,2,3]);
+              };
+              Pretender.remoteMethod(
+                '__get__spaces',
+                {
+                  isStatic: false,
+                  http: { path: '/spaces', verb: 'get' },
+                  returns: { arg: 'spaces', type: 'array', root: true }
+                }
+              );
+              cb();
+            }).toString(),
+          })
+          .then(function(createInjector) {
+            $injector = createInjector();
+          });
+      });
+
+      it('has a client method generated', function() {
+        var Pretender = $injector.get('Pretender');
+        var methodNames = Object.keys(Pretender);
+        console.log('methods', methodNames);
+        expect(methodNames).to.include.members(['prototype$__get__spaces']);
       });
     });
 
@@ -744,7 +781,7 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
             expect(list.map(propGetter('name'))).to.include('cat-link');
           });
       });
-      
+
       it('creates multiple related models', function() {
         var cats = Product.categories.createMany(
           { id: testData.product.id },
@@ -752,7 +789,7 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
             { name: 'another-cat' },
             { name: 'yet-another-cat' },
             { name: 'last-cat' }
-          ], 
+          ],
           function() {
             expect(cats).to.have.property('length', 3);
           });
