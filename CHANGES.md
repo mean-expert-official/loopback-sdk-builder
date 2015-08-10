@@ -1,3 +1,9 @@
+2015-08-10, Version 1.4.1
+=========================
+
+ * Support remote methods named like scope methods (kennethlynne)
+
+
 2015-06-17, Version 1.4.0
 =========================
 
