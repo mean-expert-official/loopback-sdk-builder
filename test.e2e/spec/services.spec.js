@@ -112,6 +112,18 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
           );
         });
 
+        it('has getUrlBase method', function() {
+          expect(loopBackResourceProvider).to.have.property('getUrlBase');
+        });
+
+        it('can get urlBase', function() {
+          var urlBase = 'http://test.urlbase';
+          loopBackResourceProvider.setUrlBase(urlBase);
+          var base = loopBackResourceProvider.getUrlBase();
+
+          return expect(base).to.equal(urlBase);
+        });
+
         it('has setUrlBase method', function() {
           expect(loopBackResourceProvider).to.have.property('setUrlBase');
         });
