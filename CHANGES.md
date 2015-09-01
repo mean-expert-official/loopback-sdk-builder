@@ -1,3 +1,11 @@
+2015-09-01, Version 1.5.0
+=========================
+
+ * Add loopBackResourceProvider.getUrlBase() (Jonathan Sheely)
+
+ * fixed the hard coded 'lbServices' in the documentation (Roi Ezra)
+
+
 2015-08-10, Version 1.4.1
 =========================
 
