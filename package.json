@@ -17,10 +17,7 @@
     "angular"
   ],
   "author": "Miroslav Bajtos <miroslav@strongloop.com>",
-  "license": {
-    "name": "Dual MIT/StrongLoop",
-    "url": "https://github.com/strongloop/loopback-sdk-angular/blob/master/LICENSE"
-  },
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/strongloop/loopback-sdk-angular/issues"
   },
