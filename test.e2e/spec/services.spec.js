@@ -515,7 +515,32 @@ define(['angular', 'given', 'util'], function(angular, given, util) {
             return getNew('Customer').getCurrent().$promise;
           })
           .then(function(user) {
+            var LoopBackAuth = $injector.get('LoopBackAuth');
             expect(user.email).to.equal('persisted@example.com');
+            expect(LoopBackAuth.rememberMe).to.equal(true);
+          })
+          .catch(util.throwHttpError);
+      });
+
+      it('resolves `undefined` rememberMe to true', function() {
+        var loginParams = { rememberMe : undefined };
+        return givenLoggedInUser('rememberMe@example.com',loginParams)
+          .then(function( user ) {
+            var LoopBackAuth = $injector.get('LoopBackAuth');
+            expect(LoopBackAuth.rememberMe).to.equal(true);
+          })
+          .catch(util.throwHttpError);
+      });
+
+      it('`rememberMe` false should be correct for Storages', function() {
+        var loginParams = { rememberMe : false };
+        return givenLoggedInUser('dontremember@example.com',loginParams)
+          .then(function( user ) {
+            var LoopBackAuth = $injector.get('LoopBackAuth');
+            var rememberMeKey = LoopBackAuth.propsPrefix+'rememberMe';
+            expect(LoopBackAuth.rememberMe).to.equal(false);
+            expect(localStorage[rememberMeKey]).to.not.equal(true);
+            expect(sessionStorage[rememberMeKey]).to.not.equal(true);
           })
           .catch(util.throwHttpError);
       });
