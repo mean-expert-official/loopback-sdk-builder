@@ -1,3 +1,17 @@
+2015-12-08, Version 1.6.0
+=========================
+
+ * Send auth header to all URLs on the same host (Partap Davis)
+
+ * Add `rememberMe` to `props` in LoopBackAuth (David Cheung)
+
+ * Add model description for docular (David Cheung)
+
+ * Refer to licenses with a link (Sam Roberts)
+
+ * Use strongloop conventions for licensing (Sam Roberts)
+
+
 2015-09-01, Version 1.5.0
 =========================
 
