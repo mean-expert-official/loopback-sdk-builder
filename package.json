@@ -6,7 +6,7 @@
   "scripts": {
     "prepublish": "node ./apidocs/describe-builtin-models.js",
     "pretest": "jshint . && bower install",
-    "test": "node ./test.e2e/test-server.js node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
+    "test": "node ./test.e2e/test-server.js node node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
   },
   "repository": {
     "type": "git",
