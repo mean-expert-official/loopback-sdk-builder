@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prepublish": "node ./apidocs/describe-builtin-models.js",
-    "pretest": "jshint . && bower install",
+    "pretest": "jshint .",
     "test": "node ./test.e2e/test-server.js node node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
   },
   "repository": {
@@ -25,9 +25,11 @@
     "ejs": "^1.0"
   },
   "devDependencies": {
+    "angular": "~1.2.10",
+    "angular-resource": "~1.2.10",
+    "angular-mocks": "~1.2.10",
     "bluebird": "^2.2",
     "body-parser": "^1.5",
-    "bower": "^1.3",
     "chai": "^1.9",
     "cors": "^2.2",
     "debug": "^1.0",
