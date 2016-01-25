@@ -13,19 +13,19 @@ requirejs.config({
   baseUrl: '/base',
 
   paths: {
-    chai: 'bower_components/chai/chai',
-    angular: 'bower_components/angular/angular',
-    angularResource: 'bower_components/angular-resource/angular-resource',
-    angularMocks: 'bower_components/angular-mocks/angular-mocks',
+    chai: 'node_modules/chai/chai',
+    angular: 'node_modules/angular/angular',
+    angularResource: 'node_modules/angular-resource/angular-resource',
+    angularMocks: 'node_modules/angular-mocks/angular-mocks',
     given: 'test.e2e/given',
     util: 'test.e2e/util'
   },
 
   shim: {
-    'angular': { exports : 'angular' },
+    'angular': { exports: 'angular' },
     'angularResource': {
       deps: ['angular'],
-      exports : 'ngResource'
+      exports: 'ngResource'
     },
     'angularMocks': {
       deps: ['angular'],

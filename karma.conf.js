@@ -15,7 +15,8 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'test.e2e/test-main.js',
-      { pattern: 'bower_components/**/*.js', included: false },
+      { pattern: 'node_modules/chai/**/*.js', included: false },
+      { pattern: 'node_modules/angular*/**/*.js', included: false },
       { pattern: 'test.e2e/**/*.js', included: false },
 
       // Include lib/ files to let Karma watch for changes there
