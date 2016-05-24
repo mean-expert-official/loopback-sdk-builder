@@ -1,7 +1,7 @@
 {
-  "name": "loopback-sdk-angular2",
+  "name": "loopback-sdk-angular",
   "version": "1.6.0",
-  "description": "Tool for auto-generating Angular 1 and 2 services for LoopBack from the community",
+  "description": "Tool for auto-generating Angular $resource services for LoopBack",
   "main": "index.js",
   "scripts": {
     "prepublish": "node ./apidocs/describe-builtin-models.js",
