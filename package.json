@@ -1,7 +1,7 @@
 {
-  "name": "loopback-sdk-angular",
-  "version": "1.6.0",
-  "description": "Tool for auto-generating Angular $resource services for LoopBack",
+  "name": "loopback-sdk-builder",
+  "version": "1.6.1",
+  "description": "Tool for auto-generating Software Development Kits (SDKs) for LoopBack",
   "main": "index.js",
   "scripts": {
     "prepublish": "node ./apidocs/describe-builtin-models.js",
@@ -10,16 +10,25 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/strongloop/loopback-sdk-angular.git"
+    "url": "git://github.com/jonathan-casarrubias/loopback-sdk-builder.git"
   },
   "keywords": [
     "loopback",
-    "angular"
+    "angular",
+    "angular2",
+    "nativescript"
   ],
   "author": "Miroslav Bajtos <miroslav@strongloop.com>",
+  "contributors": [
+    {
+      "name": "Jonathan Casarrubias",
+      "email": "jcasarrubias@mean.expert",
+      "url": "http://mean.expert"
+    }
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/strongloop/loopback-sdk-angular/issues"
+    "url": "https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues"
   },
   "dependencies": {
     "ejs": "^1.0"
