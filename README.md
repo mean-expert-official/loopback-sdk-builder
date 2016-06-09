@@ -4,6 +4,8 @@
 
 The LoopBack SDK Builder is a fork of the official `loopback-sdk-angular` extended by the community and maintained by [Jonathan Casarrubias](http://twitter.com/johncasarrubias).
 
+**IMPORTANT** This is in active development, currently nativescript is the most mature version of the generator.
+
 # Fork Reasons
 
 Since the launch of [Angular 2 - Beta (now RC)](http://angular.io) the community has been requesting support for this version of the framework with a really slow response from the `StrongLoop Team` with many doubts if they will continue supporting the generator.
@@ -31,13 +33,56 @@ for more information.
 With the `loopback-sdk-builder` you can create Software Development Kits for the different environments you can run Angular.
 #### Angular 2 (TypeScript)
 
-- Angular 2 for Web: $ lb-ng server/server.js path/to/app/sdk/intex.ts -l angular2
+- Angular 2 for Web: $ lb-ng server/server.js path/to/app/sdk/intex.ts -l angular2 (Working but not optimal and not web sockets)
 - Angular Universal: $lb-ng server/server.js path/to/app/sdk/intex.ts -l universal (TODO)
-- NativeScript 2: $ lb-ng server/server.js path/to/app/sdk/intex.ts -l nativescript2
+- NativeScript 2: $ lb-ng server/server.js path/to/app/sdk/intex.ts -l nativescript2 (In Active Development)
   
 In the other hand, currently the `LoopBack SDK for Nativescript2` natively implements Socket communication when implementing the [loopback-component-pubsub](https://www.npmjs.com/package/loopback-component-pubsub) module.
 
 In the near future I will be adding native support for socket communication over web platforms.
+
+# Installation
+
+```sh
+$ cd to/api/project
+$ npm install --save-dev loopback-sdk-builder-cli loopback-sdk-builder
+```
+
+# Use
+
+```sh
+$ cd to/api/project
+$ ./node_modules/.bin/lb-ng server/server path/to/client/sdk/folder/index.ts -l [nativescript2 | angular2]
+```
+
+# Optional Use
+
+Add a script within package.json
+
+```json
+{
+  "scripts": {
+    "build:sdk": "./node_modules/.bin/lb-ng server/server path/to/client/sdk/folder/index.ts -l [nativescript2 | angular2]"
+  }
+}
+```
+
+#### then:
+
+```sh
+$ cd to/api/project
+$ npm run build:sdk
+```
+
+Awesome you now can build SDK for different platforms!!! 
+
+# TODO
+
+- Finish NativeScript Generator (Most Active development)
+- Implement equivalent functionality from NativeScript2 to Angular2 for web (WebSockets and LoopBackConfig).
+- Start working in version valid for Angular Universal
+- Redux and ngrx support
+- React Support
 
 ## Tutorials
 
