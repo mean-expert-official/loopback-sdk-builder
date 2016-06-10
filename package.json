@@ -1,6 +1,6 @@
 {
   "name": "loopback-sdk-builder",
-  "version": "1.6.5",
+  "version": "1.6.6",
   "description": "Tool for auto-generating Software Development Kits (SDKs) for LoopBack",
   "main": "index.js",
   "scripts": {
