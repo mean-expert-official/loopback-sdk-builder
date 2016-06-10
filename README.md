@@ -6,7 +6,7 @@ LoopBack SDK Builder
 
 **NOTE: The loopback-sdk-builder module supersedes [loopback-sdk-angular](https://www.npmjs.org/loopback-sdk-angular). Please update your package.json accordingly.**
 
-The LoopBack SDK Builder is a fork of the official `loopback-sdk-angular` extended by the community and maintained by [Jonathan Casarrubias](http://twitter.com/johncasarrubias).
+The LoopBack SDK Builder is a fork of the official `loopback-sdk-angular` extended by the community and maintained by [@johncasarrubias](http://twitter.com/johncasarrubias).
 
 **IMPORTANT** This is in active development, currently nativescript is the most mature version of the generator.
 
@@ -22,6 +22,14 @@ Since Angular 2 does not rely on a browser DOM, the SDK implementations may be d
 
 [Read about the New Angular 2 Ecosystem](https://t.co/DrV18TztdR)
 
+# Disclaimer
+
+I really don't have any plan to support Angular 1, I'm not trying to compete with the official module.
+
+If you want to build a SDK for Angular 1 please use the official.
+
+[loopback-sdk-angular](https://www.npmjs.org/loopback-sdk-angular)
+
 # Coincidences
 
 The client is dynamic, in other words it automatically includes all the
@@ -35,6 +43,7 @@ for more information.
 # Differences
 
 With the `loopback-sdk-builder` you can create Software Development Kits for the different environments you can run Angular.
+
 #### Angular 2 (TypeScript)
 
 - NativeScript 2: $ lb-ng server/server.js path/to/app/sdk/intex.ts -l nativescript2 (Stable)
@@ -90,8 +99,8 @@ Awesome you now can build SDK for different platforms!!!
 
 ## Tutorials
 
-[The Ultimate Guide for Building Real Time Applications](http://mean.expert/2016/06/09/angular-2-ultimate-real-time/)
-[StrongLoop - NativeScript 2 Todo Tutorial](https://t.co/7YobnH5Iil) [@johncasarrubias](http://twitter.com/johncasarrubias)
+- [The Ultimate Guide for Building Real Time Applications](http://mean.expert/2016/06/09/angular-2-ultimate-real-time/)
+- [StrongLoop - NativeScript 2 Todo Tutorial](https://t.co/7YobnH5Iil)
 
 ## Mailing List
 
