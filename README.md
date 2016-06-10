@@ -37,9 +37,9 @@ for more information.
 With the `loopback-sdk-builder` you can create Software Development Kits for the different environments you can run Angular.
 #### Angular 2 (TypeScript)
 
-- Angular 2 for Web: $ lb-ng server/server.js path/to/app/sdk/intex.ts -l angular2 (Working but not optimal and not web sockets)
+- NativeScript 2: $ lb-ng server/server.js path/to/app/sdk/intex.ts -l nativescript2 (Stable)
+- Angular 2 for Web: $ lb-ng server/server.js path/to/app/sdk/intex.ts -l angular2 (Stable but no web sockets yet)
 - Angular Universal: $lb-ng server/server.js path/to/app/sdk/intex.ts -l universal (TODO)
-- NativeScript 2: $ lb-ng server/server.js path/to/app/sdk/intex.ts -l nativescript2 (In Active Development)
   
 In the other hand, currently the `LoopBack SDK for Nativescript2` natively implements Socket communication when implementing the [loopback-component-pubsub](https://www.npmjs.com/package/loopback-component-pubsub) module.
 
