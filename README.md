@@ -1,4 +1,8 @@
-# LoopBack SDK Builder
+[![NPM](https://nodei.co/npm/loopback-sdk-builder.png?stars&downloads)](https://nodei.co/npm/loopback-sdk-builder/) [![NPM](https://nodei.co/npm-dl/loopback-sdk-builder.png)](https://nodei.co/npm/loopback-sdk-builder/)
+
+
+LoopBack SDK Builder
+==================
 
 **NOTE: The loopback-sdk-builder module supersedes [loopback-sdk-angular](https://www.npmjs.org/loopback-sdk-angular). Please update your package.json accordingly.**
 
@@ -86,6 +90,7 @@ Awesome you now can build SDK for different platforms!!!
 
 ## Tutorials
 
+[The Ultimate Guide for Building Real Time Applications](http://mean.expert/2016/06/09/angular-2-ultimate-real-time/)
 [StrongLoop - NativeScript 2 Todo Tutorial](https://t.co/7YobnH5Iil) [@johncasarrubias](http://twitter.com/johncasarrubias)
 
 ## Mailing List
