@@ -34,7 +34,7 @@ if (app.booting) {
 function runGenerator() {
   var ngModuleName = argv['module-name'] || 'lbServices';
   var apiUrl = argv['url'] || app.get('restApiRoot') || '/api';
-  var framework = argv['l'] || 'angular';
+  var framework = argv['l'] || 'angularjs';
 
   console.error('Generating %j for the API endpoint %j', ngModuleName, apiUrl);
   generator[framework](app, ngModuleName, apiUrl, outputFolder);
