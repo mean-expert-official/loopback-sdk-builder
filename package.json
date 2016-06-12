@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "ejs": "^1.0",
+    "mkdirp": "^0.5.1",
     "optimist": "^0.6.1",
     "semver": "^2.2.1"
   },
