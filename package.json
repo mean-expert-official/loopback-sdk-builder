@@ -1,6 +1,6 @@
 {
   "name": "loopback-sdk-builder",
-  "version": "1.6.10",
+  "version": "1.6.11",
   "description": "Tool for auto-generating Software Development Kits (SDKs) for LoopBack",
   "bin": {
     "lb-ng": "bin/lb-ng"
