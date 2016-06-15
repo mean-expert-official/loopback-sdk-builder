@@ -12,8 +12,10 @@ var argv = optimist
   .describe('m', 'The name for generated Angular module.')
   .default('m', 'lbServices')
   .describe('u', 'URL of the REST API end-point')
-  .describe('l', 'Client`s library (angular, angular2)')
+  .describe('l', 'Client`s library (angular2, nativescript2)')
+  .describe('io', 'Enable PubSub functionality for loopback-component-pubsub')
   .default('l', 'angular2')
+  .default('io', 'disabled')
   .alias({ u : 'url', m: 'module-name', l: 'library' })
   .demand(1)
   .argv;
@@ -35,11 +37,12 @@ function runGenerator() {
   var ngModuleName = argv['module-name'] || 'lbServices';
   var apiUrl = argv['url'] || app.get('restApiRoot') || '/api';
   var framework = argv['l'] || 'angular2';
+  var isIo = argv['io'] || 'disabled';
 
   console.info('Loading Framework %s', framework);
 
   console.error('Generating %j for the API endpoint %j', ngModuleName, apiUrl);
-  generator[framework](app, ngModuleName, apiUrl, outputFolder);
+  generator[framework](app, ngModuleName, apiUrl, outputFolder, isIo);
 
   // The app.js scaffolded by `slc lb project` loads strong-agent module that
   // used to have a bug where it prevented the application from exiting.
