@@ -2,6 +2,9 @@
   "name": "loopback-sdk-builder",
   "version": "1.6.10",
   "description": "Tool for auto-generating Software Development Kits (SDKs) for LoopBack",
+  "bin": {
+    "lb-ng": "bin/lb-ng"
+  },
   "main": "index.js",
   "scripts": {
     "prepublish": "node ./apidocs/describe-builtin-models.js",
@@ -14,6 +17,7 @@
   },
   "keywords": [
     "loopback",
+    "cli",
     "angular",
     "angular2",
     "nativescript"
@@ -24,6 +28,11 @@
       "name": "Jonathan Casarrubias",
       "email": "jcasarrubias@mean.expert",
       "url": "http://mean.expert"
+    },
+    {
+      "name": "João Ribeiro",
+      "email": "jonnybgod@gmail.com",
+      "url": "http://jonnybgod.ghost.io"
     }
   ],
   "license": "MIT",
@@ -31,7 +40,10 @@
     "url": "https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues"
   },
   "dependencies": {
-    "ejs": "^1.0"
+    "ejs": "^1.0",
+    "mkdirp": "^0.5.1",
+    "optimist": "^0.6.1",
+    "semver": "^2.2.1"
   },
   "devDependencies": {
     "angular": "^1.4.9",
