@@ -42,30 +42,63 @@ for more information.
 
 # Differences
 
-With the `loopback-sdk-builder` you can create Software Development Kits for the different environments you can run Angular.
+With the `loopback-sdk-builder` you can create Software Development Kits for the different environments you can run Angular 2.
 
-#### Angular 2 (TypeScript)
-
-- NativeScript 2: $ lb-ng server/server.js path/to/app/sdk/intex.ts -l nativescript2 (Stable)
-- Angular 2 for Web: $ lb-ng server/server.js path/to/app/sdk/intex.ts -l angular2 (Stable but no web sockets yet)
-- Angular Universal: $lb-ng server/server.js path/to/app/sdk/intex.ts -l universal (TODO)
-  
-In the other hand, currently the `LoopBack SDK for Nativescript2` natively implements Socket communication when implementing the [loopback-component-pubsub](https://www.npmjs.com/package/loopback-component-pubsub) module.
-
-In the near future I will be adding native support for socket communication over web platforms.
+Also the `loopback-sdk-builder` split the sdk into multiple files for models, services and sockets.
 
 # Installation
 
 ```sh
 $ cd to/api/project
-$ npm install --save-dev loopback-sdk-builder-cli loopback-sdk-builder
+$ npm install --save-dev loopback-sdk-builder
 ```
 
-# Use
+#### Angular 2 SDK Status
+
+- NativeScript 2 (Stable)
+- Angular 2 for Web (Stable)
+- NGRX (In Progress)
+- Angular Universal: $lb-ng server/server.js path/to/app/sdk/intex.ts -l universal (TODO)
+  
+#### Client Requirements
+The following package need to be installed in your client application.
+
+- [@angular/http](npmjs.com/package/@angular/http)
+ 
+#### Generate Angular 2 SDK for Web 
 
 ```sh
-$ cd to/api/project
-$ ./node_modules/.bin/lb-ng server/server path/to/client/sdk/folder/index.ts -l [nativescript2 | angular2]
+$ ./node_modules/.bin/lb-ng server/server.js /path/to/client/sdk -l angular2
+```
+
+#### Generate NativeScript 2 SDK
+
+```sh
+$ ./node_modules/.bin/lb-ng server/server.js /path/to/client/sdk -l nativescript2
+```
+
+## Enable Real Time Communication
+
+The Angular2 and NativeScript generators currently implement socket connectivity when using [loopback-component-pubsub](https://www.npmjs.com/package/loopback-component-pubsub).
+
+#### Requirements
+The following package need to be installed in your client application.
+
+- [nativescript-socket.io](npmjs.com/package/nativescript-socket.io) when using the NativeScript2 version
+- [socket.io-client](https://www.npmjs.com/package/socket.io-client) when using the Angular 2 for Web version
+
+To enable you will need to add the `--io enabled` flag.
+
+#### Angular 2 for Web 
+
+```sh
+$ ./node_modules/.bin/lb-ng server/server.js /path/to/client/sdk -l angular2 --io enabled
+```
+
+#### NativeScript 2
+
+```sh
+$ ./node_modules/.bin/lb-ng server/server.js /path/to/client/sdk -l nativescript2 --io enabled
 ```
 
 # Optional Use
@@ -91,8 +124,6 @@ Awesome you now can build SDK for different platforms!!!
 
 # TODO
 
-- Finish NativeScript Generator (Most Active development)
-- Implement equivalent functionality from NativeScript2 to Angular2 for web (WebSockets and LoopBackConfig).
 - Start working in version valid for Angular Universal
 - Redux and ngrx support
 - React Support
