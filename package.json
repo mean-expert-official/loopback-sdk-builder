@@ -1,6 +1,6 @@
 {
   "name": "loopback-sdk-builder",
-  "version": "2.0.0-beta3",
+  "version": "2.0.0-beta4",
   "description": "Tool for auto-generating Software Development Kits (SDKs) for LoopBack",
   "bin": {
     "lb-ng": "bin/lb-ng"
@@ -20,10 +20,21 @@
     "cli",
     "angular",
     "angular2",
-    "nativescript"
+    "nativescript",
+    "{N}"
   ],
   "author": "Miroslav Bajtos <miroslav@strongloop.com>",
   "contributors": [
+    {
+      "name": "Nikolay Matiushenkov",
+      "email": "mnvxxx@gmail.com",
+      "url": "https://github.com/mnvx"
+    },
+    {
+      "name": "Sylvain Dumont",
+      "email": "sylvain.dumont35@gmail.com",
+      "url": "https://www.weboaks.com"
+    },
     {
       "name": "Jonathan Casarrubias",
       "email": "jcasarrubias@mean.expert",

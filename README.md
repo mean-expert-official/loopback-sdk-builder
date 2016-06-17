@@ -50,7 +50,7 @@ Also the `loopback-sdk-builder` split the sdk into multiple files for models, se
 
 ```sh
 $ cd to/api/project
-$ npm install --save-dev loopback-sdk-builder
+$ npm install --save-dev loopback-sdk-builder@2.0.0-beta4 
 ```
 
 #### Angular 2 SDK Status
