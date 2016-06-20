@@ -1,13 +1,14 @@
 {
   "name": "loopback-sdk-builder",
-  "version": "2.0.0-beta8",
+  "version": "2.0.0-beta9",
   "description": "Tool for auto-generating Software Development Kits (SDKs) for LoopBack",
   "bin": {
-    "lb-ng": "bin/lb-ng"
+    "lb-ng": "bin/lb-ng",
+    "lb-sdk": "bin/lb-sdk"
   },
   "main": "index.js",
   "scripts": {
-    "prepublish": "node ./apidocs/describe-builtin-models.js",
+    "prepublish": "",
     "pretest": "jshint .",
     "test": "node ./test.e2e/test-server.js node node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
   },
