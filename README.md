@@ -4,11 +4,7 @@
 LoopBack SDK Builder
 ==================
 
-**NOTE: The loopback-sdk-builder module supersedes [loopback-sdk-angular](https://www.npmjs.org/loopback-sdk-angular). Please update your package.json accordingly.**
-
-The LoopBack SDK Builder is a fork of the official `loopback-sdk-angular` extended by the community and maintained by [@johncasarrubias](http://twitter.com/johncasarrubias).
-
-**IMPORTANT** This is in active development, currently nativescript is the most mature version of the generator.
+The LoopBack SDK Builder is a community driven module forked from the official `loopback-sdk-angular` and maintained by [@johncasarrubias](http://twitter.com/johncasarrubias).
 
 # Fork Reasons
 
@@ -40,26 +36,32 @@ See the official [LoopBack AngularJS SDK
 documentation](http://docs.strongloop.com/display/LB/AngularJS+JavaScript+SDK)
 for more information.
 
-# Differences
+# Features
 
-With the `loopback-sdk-builder` you can create Software Development Kits for the different environments you can run Angular 2.
-
-Also the `loopback-sdk-builder` split the sdk into multiple files for models, services and sockets.
+- Built in LoopBack Authentication
+- Built in Interfaces and Models
+- Built in API Calls
+- Built in PubSub support for the [loopback-component-pubsub](https://www.npmjs.com/package/loopback-component-pubsub)
+- Environment Specific Drivers (Angular2 for web, NativeScript2, Angular Universal)
+- Fully Typed (TypeScript)
+- Built in CLI Tool for builder.
 
 # Installation
 
 ```sh
 $ cd to/api/project
-$ npm install --save-dev loopback-sdk-builder@2.0.0-beta8
+$ npm install --save-dev loopback-sdk-builder@2.0.0-beta9
 ```
 
-#### Angular 2 SDK Status
+# LoopBack SDK CLI Options
 
-- NativeScript 2 (Stable)
-- Angular 2 for Web (Stable)
-- NGRX (In Progress)
-- Angular Universal: $lb-ng server/server.js path/to/app/sdk/intex.ts -l universal (TODO)
-  
+```sh
+Options:
+  -l, --library  Client`s library (angular2, react <todo>, ...)                             [default: "angular2"]
+  -d, --driver   Environment specific drivers (ng4web, nativescript2, ng2universal <todo>)  [default: "ng4web"]
+  -i, --io       Enable PubSub functionality for loopback-component-pubsub                  [default: "disabled"]
+```
+
 #### Client Requirements
 The following package need to be installed in your client application.
 
@@ -67,15 +69,30 @@ The following package need to be installed in your client application.
  
 #### Generate Angular 2 SDK for Web 
 
+The default options will create an Angular 2 SDK for Web.
+
 ```sh
-$ ./node_modules/.bin/lb-ng server/server.js /path/to/client/sdk -l angular2
+$ ./node_modules/.bin/lb-sdk server/server.js /path/to/client/sdk
+```
+
+Is equivalent to
+
+```sh
+$ ./node_modules/.bin/lb-sdk server/server.js /path/to/client/sdk -l angular2 -d ng4web -i disabled
 ```
 
 #### Generate NativeScript 2 SDK
 
 ```sh
-$ ./node_modules/.bin/lb-ng server/server.js /path/to/client/sdk -l nativescript2
+$ ./node_modules/.bin/lb-sdk server/server.js /path/to/client/sdk -d nativescript2
 ```
+
+Is equivalent to
+
+```sh
+$ ./node_modules/.bin/lb-sdk server/server.js /path/to/client/sdk -l angular2 -d nativescript2 -i disabled
+```
+
 
 ## Enable Real Time Communication
 
@@ -87,18 +104,18 @@ The following package need to be installed in your client application.
 - [nativescript-socket.io](npmjs.com/package/nativescript-socket.io) when using the NativeScript2 version
 - [socket.io-client](https://www.npmjs.com/package/socket.io-client) when using the Angular 2 for Web version
 
-To enable you will need to add the `--io enabled` flag.
+To enable you will need to add the `--io enabled` or `-i enabled` flag.
 
 #### Angular 2 for Web 
 
 ```sh
-$ ./node_modules/.bin/lb-ng server/server.js /path/to/client/sdk -l angular2 --io enabled
+$ ./node_modules/.bin/lb-sdk server/server.js /path/to/client/sdk -d ng4web -i enabled
 ```
 
 #### NativeScript 2
 
 ```sh
-$ ./node_modules/.bin/lb-ng server/server.js /path/to/client/sdk -l nativescript2 --io enabled
+$ ./node_modules/.bin/lb-sdk server/server.js /path/to/client/sdk -d nativescript2 -i enabled
 ```
 
 # Optional Use
@@ -108,7 +125,7 @@ Add a script within package.json
 ```json
 {
   "scripts": {
-    "build:sdk": "./node_modules/.bin/lb-ng server/server path/to/client/sdk/folder/index.ts -l [nativescript2 | angular2]"
+    "build:sdk": "./node_modules/.bin/lb-sdk server/server path/to/ng2-app/src/shared/sdk -d [ng4web | nativescript2] -i [enabled | disabled]"
   }
 }
 ```
