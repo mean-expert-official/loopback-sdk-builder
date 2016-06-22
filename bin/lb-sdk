@@ -21,8 +21,8 @@ var argv = optimist
     '\nGenerate Client SDK for your LoopBack Application.' +
     '\nUsage:' +
     '\n    $0 [options] server/app.js [client/js/lb-services.js]')
-  .describe('l', 'Client`s library (angular2, react <todo>, ...)')
-  .describe('d', 'Environment specific drivers (ng4web, nativescript2, ng2universal <todo>)')
+  .describe('l', 'Client\'s library (angular2, react <todo>, ...)')
+  .describe('d', 'Platform specific drivers (ng4web, nativescript2, ng2universal <todo>)')
   .describe('i', 'Enable PubSub functionality for loopback-component-pubsub')
   .default('l', 'angular2')
   .default('d', 'ng4web')

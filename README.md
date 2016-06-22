@@ -38,32 +38,34 @@ for more information.
 
 # Features
 
-- Built in LoopBack Authentication
-- Built in Interfaces and Models
-- Built in API Calls
-- Built in PubSub support for the [loopback-component-pubsub](https://www.npmjs.com/package/loopback-component-pubsub)
-- Environment Specific Drivers (Angular2 for web, NativeScript2, Angular Universal)
-- Fully Typed (TypeScript)
+- Built in LoopBack Authentication.
+- Built in Interfaces and Models.
+- Built in API Calls.
+- Built in PubSub support for the [loopback-component-pubsub](https://www.npmjs.com/package/loopback-component-pubsub).
+- Built in Platform Specific Drivers (Angular2 for web, NativeScript2, Angular Universal).
 - Built in CLI Tool for builder.
+- Built in Logger Service.
+- Fully Typed (TypeScript).
+- As small as 100k per generated SDK (Will increase depending on number of models).
 
 # Installation
 
 ```sh
 $ cd to/api/project
-$ npm install --save-dev loopback-sdk-builder@2.0.0-beta9
+$ npm install --save-dev loopback-sdk-builder@2.0.0-beta10
 ```
 
 # LoopBack SDK CLI Options
 
 ```sh
 Options:
-  -l, --library  Client`s library (angular2, react <todo>, ...)                             [default: "angular2"]
-  -d, --driver   Environment specific drivers (ng4web, nativescript2, ng2universal <todo>)  [default: "ng4web"]
-  -i, --io       Enable PubSub functionality for loopback-component-pubsub                  [default: "disabled"]
+  -l, --library  Client's library (angular2, react <todo>, ...)                          [default: "angular2"]
+  -d, --driver   Platform specific drivers (ng4web, nativescript2, ng2universal <todo>)  [default: "ng4web"]
+  -i, --io       Enable PubSub functionality for loopback-component-pubsub               [default: "disabled"]
 ```
 
 #### Client Requirements
-The following package need to be installed in your client application.
+The following package needs to be installed in your client application.
 
 - [@angular/http](npmjs.com/package/@angular/http)
  
@@ -99,7 +101,7 @@ $ ./node_modules/.bin/lb-sdk server/server.js /path/to/client/sdk -l angular2 -d
 The Angular2 and NativeScript generators currently implement socket connectivity when using [loopback-component-pubsub](https://www.npmjs.com/package/loopback-component-pubsub).
 
 #### Requirements
-The following package need to be installed in your client application.
+The following package needs to be installed in your client application.
 
 - [nativescript-socket.io](npmjs.com/package/nativescript-socket.io) when using the NativeScript2 version
 - [socket.io-client](https://www.npmjs.com/package/socket.io-client) when using the Angular 2 for Web version
