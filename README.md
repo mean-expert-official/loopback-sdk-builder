@@ -52,7 +52,7 @@ for more information.
 
 ```sh
 $ cd to/api/project
-$ npm install --save-dev loopback-sdk-builder@2.0.0-beta10
+$ npm install --save-dev loopback-sdk-builder@2.0.0-beta11
 ```
 
 # LoopBack SDK CLI Options
