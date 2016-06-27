@@ -45,14 +45,16 @@ for more information.
 - Built in Platform Specific Drivers (Angular2 for web, NativeScript2, Angular Universal).
 - Built in CLI Tool for builder.
 - Built in Logger Service.
+- Ability to select which models or methods to generate.
+- IO Heartbeating to avoid disconnections.
 - Fully Typed (TypeScript).
-- As small as 100k per generated SDK (Will increase depending on number of models).
+- Small foot print 100k per generated SDK (Will increase depending on number of models).
 
 # Installation
 
 ```sh
 $ cd to/api/project
-$ npm install --save-dev loopback-sdk-builder@2.0.0-beta11
+$ npm install --save-dev loopback-sdk-builder@2.0.0-beta12
 ```
 
 # LoopBack SDK CLI Options
@@ -140,6 +142,40 @@ $ npm run build:sdk
 ```
 
 Awesome you now can build SDK for different platforms!!! 
+
+
+# Disable Models or Methods
+
+In order to disable a full model add the following configuration
+
+````js
+{
+  "name": "Message",
+  "plural": "messages",
+  "base": "PersistedModel",
+  "sdk": {
+    "enabled": false // default is true
+  }
+}
+````
+
+If you want to disable specific methods only
+
+````js
+{
+  "name": "Message",
+  "plural": "messages",
+  "base": "PersistedModel",
+  "sdk": {
+    "enabled": true,
+    "blacklist": {
+      "findOne": true // won't generate the findOne method
+    }
+  }
+}
+````
+
+
 
 # TODO
 
