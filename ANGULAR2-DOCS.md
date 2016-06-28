@@ -201,10 +201,6 @@ export class RoomComponent {
       this.roomApi.findById(id, {
         include: [
           {
-            relation: 'accounts',
-            scope: { order: 'id DESC' }
-          },
-          {
             relation: 'messages',
             scope: { order: 'id DESC' }
           }
@@ -212,7 +208,7 @@ export class RoomComponent {
       }).subscribe((room: Room) => {
         this.room = room;
         this.roomApi.onCreateMessages(this.room.id)
-                    .subscribe((message: Message) => this.messages.unshift(message))
+                    .subscribe((message: Message) => this.room['messages'].push(message))
       });
   }
 
