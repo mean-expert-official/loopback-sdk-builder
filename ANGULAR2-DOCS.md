@@ -149,7 +149,7 @@ export class SignComponent {
     
     // Start making API calls right away
     private signup(): void {
-        this.accountApi.create(this.account).subscribe((acount: Account) => this.signin());
+        this.accountApi.create(this.account).subscribe((account: Account) => this.signin());
     }
 
     // Built-in LoopBack Authentication and Typings like Account and TokenInterface
