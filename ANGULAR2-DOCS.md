@@ -1,4 +1,4 @@
-LoopBack SDK Buider 2.0.0 (Angular 2 Documentation)
+LoopBack SDK Buider 2.0.0 (Angular 2 Docs)
 ==================
 
 The LoopBack SDK Builder provides you with a set of tools, services and declaration files; making beyond easy to integrate our LoopBack API with any Angular 2 Application (web or mobile).
