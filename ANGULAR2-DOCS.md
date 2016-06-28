@@ -185,7 +185,6 @@ export class RoomComponent {
   // All the types you need already there
   private room    : RoomInterface = new Room();
   private message : MessageInterface = new Message();
-  private messages: Array<Message>;
   // All the services you need already there
   constructor(
     private accountApi: AccountApi,
