@@ -12,8 +12,6 @@
 *.swo
 node_modules
 bower_components
-karma-xunit.xml
 checkstyle.xml
 .loopbackrc
-loopback-sdk-angular-*.tgz
 temp
