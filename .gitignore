@@ -11,7 +11,33 @@
 *.swp
 *.swo
 node_modules
-bower_components
+bower_component
 checkstyle.xml
 .loopbackrc
 temp
+
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+dist
+tmp
+
+# dependencies
+node_modules
+bower_components
+
+# IDEs and editors
+.idea
+
+# misc
+.sass-cache
+connect.lock
+coverage/*
+libpeerconnection.log
+npm-debug.log
+testem.log
+typings
+
+
+#System Files
+.DS_Store
