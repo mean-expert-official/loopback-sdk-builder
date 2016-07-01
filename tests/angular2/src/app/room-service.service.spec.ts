@@ -7,7 +7,7 @@ import {
   injectAsync
 } from '@angular/core/testing';
 
-import { 
+import {
   Room,
   RoomApi,
   RoomInterface,
@@ -36,20 +36,42 @@ describe('UserService Service', () => {
     })
   );
 
-  let room: RoomInterface = new Room();
-      room.name           = Date.now().toString();
-
   it('should create a new room instance',
     injectAsync([RoomApi], (roomApi: RoomApi) => {
+
+      let room: RoomInterface = new Room();
+      room.name = Date.now().toString();
+
       return roomApi.create(room)
-                    .subscribe((room: RoomInterface) => expect(room.id).toBeTruthy());
+        .subscribe((room: RoomInterface) => expect(room.id).toBeTruthy());
     })
   );
 
-  it('should find room instance',
+  it('should find room instance by id',
     injectAsync([RoomApi], (roomApi: RoomApi) => {
-      return roomApi.findOne({ where: room })
-                    .subscribe((room: RoomInterface) => expect(room.id).toBeTruthy());
+      let room: RoomInterface = new Room();
+      room.name = Date.now().toString();
+      return roomApi.create(room)
+        .subscribe((createdRoom: RoomInterface) => {
+          expect(createdRoom.id).toBeTruthy();
+          roomApi.findById(createdRoom.id)
+            .subscribe((foundRoom: RoomInterface) => expect(foundRoom.id).toBe(createdRoom.id))
+        });
+    })
+  );
+
+  it('should create a room message',
+    injectAsync([RoomApi], (roomApi: RoomApi) => {
+      let room: RoomInterface = new Room();
+      room.name = Date.now().toString();
+      let message: MessageInterface = new Message();
+      message.text = 'Hello Room';
+      return roomApi.create(room)
+        .subscribe((room: RoomInterface) => roomApi.createMessages(room.id, message)
+          .subscribe((message: MessageInterface) => {
+            expect(message.id).toBeTruthy();
+            expect(message.roomId).toBe(room.id)
+          }));
     })
   );
 
