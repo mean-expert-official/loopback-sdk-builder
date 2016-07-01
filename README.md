@@ -52,7 +52,7 @@ You don't have to manually write any static code.
 
 ````sh
 $ cd to/api/project
-$ npm install --save-dev loopback-sdk-builder@2.0.0-beta14
+$ npm install --save-dev loopback-sdk-builder@2.0.0-beta15
 ````
 
 # LoopBack SDK CLI Options
@@ -181,9 +181,13 @@ Now that you have built your SDK, you need to understand how to use it within yo
 
 [Angular 2 SDK Documentation](https://github.com/jonathan-casarrubias/loopback-sdk-builder/blob/master/ANGULAR2-DOCS.md)
 
+# Known Issues
+
+- The [nativescript-socket.io](npmjs.com/package/nativescript-socket.io) package may create issues on IOS when enabling IO for NativeScript.
 
 # TODO
 
+- Fix IOS Issue when enabling IO and installing [nativescript-socket.io](npmjs.com/package/nativescript-socket.io)
 - Start working in version valid for Angular Universal
 - Redux and ngrx support
 - React Support
