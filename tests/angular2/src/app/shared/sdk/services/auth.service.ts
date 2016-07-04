@@ -59,12 +59,9 @@ export class LoopBackAuth {
   }
 
   public clearStorage() {
-    this.saveThis("accessTokenId", null);
-    this.saveThis("accessTokenId", null);
-    this.saveThis("currentUserId", null);
-    this.saveThis("currentUserId", null);
-    this.saveThis("rememberMe", null);
-    this.saveThis("rememberMe", null);
+    StorageDriver.remove(this.propsPrefix + 'accessTokenId');
+    StorageDriver.remove(this.propsPrefix + 'currentUserId');
+    StorageDriver.remove(this.propsPrefix + 'rememberMe');
   };
 
   // Note: LocalStorage converts the value to string

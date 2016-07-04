@@ -33,13 +33,11 @@ describe('UserService Service', () => {
     })
   );
 
-  let user: UserInterface = new User();
-  user.email = Date.now() + '@test.com';
-  user.password = 'test';
-
-
   it('should create a new instance',
     injectAsync([UserApi], (userApi: UserApi) => {
+      let user: UserInterface = new User();
+      user.email = Date.now() + '@test.com';
+      user.password = 'test';
       return userApi.create(user)
         .subscribe((user: UserInterface) => expect(user.id).toBeTruthy());
     })
@@ -47,8 +45,32 @@ describe('UserService Service', () => {
 
   it('should login the user',
     injectAsync([UserApi], (userApi: UserApi) => {
-      return userApi.login(user)
-        .subscribe((token: TokenInterface) => expect(token.userId).toBeTruthy());
+      let user: UserInterface = new User();
+      user.email = Date.now() + '@test.com';
+      user.password = 'test';
+      return userApi.create(user)
+        .subscribe((instance: UserInterface)   => userApi.login(user)
+        .subscribe((token: TokenInterface) => {
+          expect(token.id).toBeTruthy();
+          expect(token.userId).toBe(instance.id);
+        }));
+    })
+  );
+
+  it('should logout the user',
+    injectAsync([UserApi], (userApi: UserApi) => {
+      let user: UserInterface = new User();
+      user.email = Date.now() + '@test.com';
+      user.password = 'test';
+      return userApi.create(user)
+        .subscribe((instance: UserInterface) => userApi.login(user)
+        .subscribe((token: TokenInterface)   => {
+          expect(token.id).toBeTruthy();
+          expect(token.userId).toBe(instance.id);
+          userApi.logout().subscribe((res: boolean) => {
+            expect(res).toBe(true);
+          });
+        }));
     })
   );
 
@@ -61,9 +83,13 @@ describe('UserService Service', () => {
 
   it('should get current user',
     injectAsync([UserApi], (userApi: UserApi) => {
-      return userApi.getCurrent()
-        .subscribe((user: UserInterface) => expect(user.id).toBeTruthy());
-    })
-  );
-
+      let user: UserInterface = new User();
+      user.email = Date.now() + '@test.com';
+      user.password = 'test';
+      return userApi.create(user)
+        .subscribe((instance: UserInterface) => userApi.login(user)
+        .subscribe((token: TokenInterface)   => userApi.getCurrent()
+        .subscribe((user: UserInterface)     => expect(user.id).toBe(instance.id)
+      )));
+  }));
 });

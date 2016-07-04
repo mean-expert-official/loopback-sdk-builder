@@ -5,4 +5,7 @@ export class StorageDriver {
   static get(key: string): string {
     return localStorage[key];
   }
+  static remove(key: string): any {
+    localStorage[key] = null;
+  }
 }
