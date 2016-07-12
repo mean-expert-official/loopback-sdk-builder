@@ -40,7 +40,7 @@ console.info('Loading LoopBack app %j', appFile);
  * Load and Boot LoopBack Application
  */
 var app = require(appFile);
-assertLoopBackVersion();
+//assertLoopBackVersion();
 if (app.booting) {
   app.on('booted', runGenerator);
 } else {
