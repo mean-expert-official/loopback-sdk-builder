@@ -52,7 +52,7 @@ You don't have to manually write any static code.
 
 ````sh
 $ cd to/api/project
-$ npm install --save-dev loopback-sdk-builder@2.0.0-beta17
+$ npm install --save-dev loopback-sdk-builder@2.0.0-beta18
 ````
 
 # LoopBack SDK CLI Options
