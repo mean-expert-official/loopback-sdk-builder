@@ -14,10 +14,11 @@ This file is created to keep history of the LoopBack SDK Builder, it does not co
 - Implemented NativeScript Support
 - Implemented LoopBack Query Support
 - Implemented Models
+- Implemented Extendable Models
 - Implemented Interfaces
 - Implemented Directory Barrel
 - Implemented LoopBack Authentication
 - Implemented Api Services
-- Implemented TypeScript Support
+- Implemented TypeScript Full Support
 - Implemented Angular 2 Support
 - Change License

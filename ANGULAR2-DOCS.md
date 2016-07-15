@@ -108,7 +108,7 @@ Services are regular Angular 2 `@Injectable()` Services that allows you to inter
 Will declare all of the model properties defined in your LoopBack Application, it will even set these as optional or required according your model configuration.
 
 #### Models
-Models are regular classes that will implement only the required properties from the implemented Interface.
+Models are regular classes that will implement the model Interface and a constructor that allows to extend models to provide custom functionality.
 
 Models and Interfaces are a set of [TypeScript Declaration Files](https://www.typescriptlang.org/docs/handbook/writing-declaration-files.html).
 
@@ -170,10 +170,8 @@ import { RouteParams } from '@angular/router-deprecated';
 import {
   Room,
   RoomApi,
-  RoomInterface,
   AccountApi,
   Message,
-  MessageInterface,
   BASE_URL,
   API_VERSION,
   LoopBackConfig,
@@ -183,8 +181,8 @@ import {
 
 export class RoomComponent {
   // All the types you need already there
-  private room    : RoomInterface = new Room();
-  private message : MessageInterface = new Message();
+  private room    : Room = new Room();
+  private message : Message = new Message();
   // All the services you need already there
   constructor(
     private accountApi: AccountApi,
@@ -220,6 +218,48 @@ export class RoomComponent {
   }
 }
 ````
+
+## Extending Models
+
+One of the new great features of the LoopBack SDK Builder it that allows you to extend models in order to add new functionality within models.
+
+In order to avoid working directly on models and lose information when re-generating the sdk, you will need to created a new `extended` folder within `shared` at the same level of  `sdk` and create a model.extended.ts file:
+
+````js
+import { Model } from '../../';
+
+export class ModelExtended extends Model {
+
+  constructor(json: Model) { super(json); }
+
+  customFunction() {
+    return `${this.name}: ${this.description}`;
+  }
+}
+````
+
+And then I implemented in the component as follows:
+
+````js
+import { Model, ModelApi, ModelExtended , LoopBackConfig } from './shared';
+
+...
+
+  constructor(private modelApi: ModelApi) {
+    LoopBackConfig.setBaseURL('http://localhost:3000');
+    LoopBackConfig.setApiVersion('api');
+    modelApi
+      .create({ 
+        name: 'My Model',
+        description: 'This is my super description'
+      })
+      .map((model: Model) => new ModelExtended(model))
+      .subscribe((model: ModelExtended) => {
+        console.log(modelExtended.customFunction());
+      });
+  }
+````
+
 
 ## Logger Service
 
