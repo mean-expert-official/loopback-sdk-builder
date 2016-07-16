@@ -1,12 +1,17 @@
 /* tslint:disable */
 import { Injectable, Inject, Optional } from '@angular/core';
-import { Http } from '@angular/http';
-import { BaseLoopBackApi } from '../baseApi.service';
-import { LoopBackConfig } from '../config.service';
-import { LoopBackAuth } from '../auth.service';
-import { ErrorHandler } from '../errorHandler.service';
-import { JSONSearchParams } from '../search.params';
-import { LoopBackFilterInterface } from '../api.d';
+import { Http, Response } from '@angular/http';
+import {
+  LoopBackAuth,
+  ErrorHandler,
+  JSONSearchParams,
+  BaseLoopBackApi,
+} from '../core/index';
+import {
+  LoopBackFilter,
+  User
+} from '../../models/index';
+import { LoopBackConfig } from '../../lb.config';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
@@ -52,8 +57,10 @@ export class UserApi extends BaseLoopBackApi {
       fk: fk
     };
     let params: any = {};
-    let result = this.request(method, url, urlParams, params);
-    return result; 
+    let result = this.request(method, url, urlParams, params)
+    return result.map((result: User | Array<User>) => Array.isArray(result)
+                             ? result.map((instance: User)=> new User(instance))
+                             : new User(result));
   }
 
   /**
@@ -78,7 +85,7 @@ export class UserApi extends BaseLoopBackApi {
     };
     let params: any = {};
     let result = this.request(method, url, urlParams, params);
-    return result; 
+    return result;
   }
 
   /**
@@ -109,8 +116,9 @@ export class UserApi extends BaseLoopBackApi {
       fk: fk
     };
     let params: any = {};
+    if (data) params.data = data;
     let result = this.request(method, url, urlParams, params, data);
-    return result; 
+    return result;
   }
 
   /**
@@ -129,7 +137,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public getAccessTokens(id: any, filter: LoopBackFilterInterface = undefined) {
+  public getAccessTokens(id: any, filter: LoopBackFilter = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/Users/:id/accessTokens";
     let urlParams: any = {
@@ -138,7 +146,7 @@ export class UserApi extends BaseLoopBackApi {
     let params: any = {};
     if (filter) params.filter = filter;
     let result = this.request(method, url, urlParams, params);
-    return result; 
+    return result;
   }
 
   /**
@@ -166,8 +174,9 @@ export class UserApi extends BaseLoopBackApi {
       id: id
     };
     let params: any = {};
+    if (data) params.data = data;
     let result = this.request(method, url, urlParams, params, data);
-    return result; 
+    return result;
   }
 
   /**
@@ -189,7 +198,7 @@ export class UserApi extends BaseLoopBackApi {
     };
     let params: any = {};
     let result = this.request(method, url, urlParams, params);
-    return result; 
+    return result;
   }
 
   /**
@@ -216,7 +225,7 @@ export class UserApi extends BaseLoopBackApi {
     let params: any = {};
     if (where) params.where = where;
     let result = this.request(method, url, urlParams, params);
-    return result; 
+    return result;
   }
 
   /**
@@ -241,8 +250,11 @@ export class UserApi extends BaseLoopBackApi {
     let urlParams: any = {
     };
     let params: any = {};
-    let result = this.request(method, url, urlParams, params, data);
-    return result; 
+    if (data) params.data = data;
+    let result = this.request(method, url, urlParams, params, data)
+    return result.map((result: User | Array<User>) => Array.isArray(result)
+                             ? result.map((instance: User)=> new User(instance))
+                             : new User(result));
   }
 
   /**
@@ -267,8 +279,11 @@ export class UserApi extends BaseLoopBackApi {
     let urlParams: any = {
     };
     let params: any = {};
-    let result = this.request(method, url, urlParams, params, data);
-    return result; 
+    if (data) params.data = data;
+    let result = this.request(method, url, urlParams, params, data)
+    return result.map((result: User | Array<User>) => Array.isArray(result)
+                             ? result.map((instance: User)=> new User(instance))
+                             : new User(result));
   }
 
   /**
@@ -292,7 +307,7 @@ export class UserApi extends BaseLoopBackApi {
     };
     let params: any = {};
     let result = this.request(method, url, urlParams, params);
-    return result; 
+    return result;
   }
 
   /**
@@ -311,7 +326,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public findById(id: any, filter: LoopBackFilterInterface = undefined) {
+  public findById(id: any, filter: LoopBackFilter = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/Users/:id";
     let urlParams: any = {
@@ -319,8 +334,10 @@ export class UserApi extends BaseLoopBackApi {
     };
     let params: any = {};
     if (filter) params.filter = filter;
-    let result = this.request(method, url, urlParams, params);
-    return result; 
+    let result = this.request(method, url, urlParams, params)
+    return result.map((result: User | Array<User>) => Array.isArray(result)
+                             ? result.map((instance: User)=> new User(instance))
+                             : new User(result));
   }
 
   /**
@@ -337,15 +354,17 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public find(filter: LoopBackFilterInterface = undefined) {
+  public find(filter: LoopBackFilter = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/Users";
     let urlParams: any = {
     };
     let params: any = {};
     if (filter) params.filter = filter;
-    let result = this.request(method, url, urlParams, params);
-    return result; 
+    let result = this.request(method, url, urlParams, params)
+    return result.map((result: User | Array<User>) => Array.isArray(result)
+                             ? result.map((instance: User)=> new User(instance))
+                             : new User(result));
   }
 
   /**
@@ -362,15 +381,17 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public findOne(filter: LoopBackFilterInterface = undefined) {
+  public findOne(filter: LoopBackFilter = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/Users/findOne";
     let urlParams: any = {
     };
     let params: any = {};
     if (filter) params.filter = filter;
-    let result = this.request(method, url, urlParams, params);
-    return result; 
+    let result = this.request(method, url, urlParams, params)
+    return result.map((result: User | Array<User>) => Array.isArray(result)
+                             ? result.map((instance: User)=> new User(instance))
+                             : new User(result));
   }
 
   /**
@@ -395,8 +416,11 @@ export class UserApi extends BaseLoopBackApi {
     };
     let params: any = {};
     if (where) params.where = where;
-    let result = this.request(method, url, urlParams, params, data);
-    return result; 
+    if (data) params.data = data;
+    let result = this.request(method, url, urlParams, params, data)
+    return result.map((result: User | Array<User>) => Array.isArray(result)
+                             ? result.map((instance: User)=> new User(instance))
+                             : new User(result));
   }
 
   /**
@@ -421,7 +445,7 @@ export class UserApi extends BaseLoopBackApi {
     };
     let params: any = {};
     let result = this.request(method, url, urlParams, params);
-    return result; 
+    return result;
   }
 
   /**
@@ -445,7 +469,7 @@ export class UserApi extends BaseLoopBackApi {
     let params: any = {};
     if (where) params.where = where;
     let result = this.request(method, url, urlParams, params);
-    return result; 
+    return result;
   }
 
   /**
@@ -473,8 +497,9 @@ export class UserApi extends BaseLoopBackApi {
       id: id
     };
     let params: any = {};
+    if (data) params.data = data;
     let result = this.request(method, url, urlParams, params, data);
-    return result; 
+    return result;
   }
 
   /**
@@ -500,7 +525,7 @@ export class UserApi extends BaseLoopBackApi {
     let params: any = {};
     if (options) params.options = options;
     let result = this.request(method, url, urlParams, params, options);
-    return result; 
+    return result;
   }
 
   /**
@@ -603,7 +628,7 @@ export class UserApi extends BaseLoopBackApi {
     if (token) params.token = token;
     if (redirect) params.redirect = redirect;
     let result = this.request(method, url, urlParams, params);
-    return result; 
+    return result;
   }
 
   /**
@@ -627,7 +652,7 @@ export class UserApi extends BaseLoopBackApi {
     let params: any = {};
     if (options) params.options = options;
     let result = this.request(method, url, urlParams, params, options);
-    return result; 
+    return result;
   }
   /**
    * @ngdoc method
@@ -686,7 +711,7 @@ export class UserApi extends BaseLoopBackApi {
    * @returns {boolean} True if the current user is authenticated (logged in).
    */
   public isAuthenticated() {
-    return this.getCurrentId() != null;
+    return !(this.getCurrentId() === '' || this.getCurrentId() == null || this.getCurrentId() == 'null');
   }
 
   /**
@@ -706,4 +731,3 @@ export class UserApi extends BaseLoopBackApi {
     return "User";
   }
 }
-

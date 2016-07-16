@@ -20,9 +20,10 @@
 * }
 **/
 export class LoopBackConfig {
-  private static path: string;
-  private static version: string | number;
+  private static path: string = 'http://localhost:3000';
+  private static version: string | number = 'api';
   private static authPrefix: string = '';
+  private static debug: boolean = true;
 
   public static setApiVersion(version: string = 'api'): void {
     LoopBackConfig.version = version;
@@ -46,5 +47,13 @@ export class LoopBackConfig {
 
   public static getAuthPrefix(): string {
     return LoopBackConfig.authPrefix;
+  }
+
+  public static setDebugMode(isEnabled: boolean): void {
+    LoopBackConfig.debug = isEnabled;
+  }
+
+  public static debuggable(): boolean {
+    return LoopBackConfig.debug;
   }
 }

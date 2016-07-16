@@ -1,6 +1,6 @@
 {
   "name": "loopback-sdk-builder",
-  "version": "2.0.0-rc.1",
+  "version": "2.0.0-rc.2",
   "description": "Tool for auto-generating Software Development Kits (SDKs) for LoopBack",
   "bin": {
     "lb-ng": "bin/lb-ng",
@@ -54,9 +54,8 @@
     "ejs": "^1.0",
     "mkdirp": "^0.5.1",
     "optimist": "^0.6.1",
+    "rimraf": "^2.5.3",
     "semver": "^2.2.1"
   },
-  "devDependencies": {
-
-  }
+  "devDependencies": {}
 }

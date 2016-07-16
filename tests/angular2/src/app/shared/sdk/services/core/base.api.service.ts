@@ -1,15 +1,16 @@
 /* tslint:disable */
 import { Injectable, Inject, Optional } from '@angular/core';
 import { Http, Headers, Request } from '@angular/http';
-<% if ( isIo === 'enabled' ){ -%>import { Subject } from 'rxjs/Subject';
-<% } -%>
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import { LoopBackAuth } from './auth.service';
-import { LoopBackConfig } from './config.service';
-import { ErrorHandler } from './errorHandler.service';
-import { JSONSearchParams } from './search.params';
-<% if ( isIo === 'enabled' ){ -%>import { SocketConnections } from '../sockets/socket.connections';<% } -%>
+import {
+  LoopBackAuth,
+  LoopBackConfig,
+  ErrorHandler,
+  
+  JSONSearchParams
+} from '../../index';
+
 
 @Injectable()
 export abstract class BaseLoopBackApi {
@@ -40,8 +41,7 @@ export abstract class BaseLoopBackApi {
    * @param boolean isio      Request socket connection
    */
   public request(method: string, url: string, urlParams: any = {},
-    params: any = {}, data: any = null<% if ( isIo === 'enabled' ){ -%>, isio: boolean = false<% } -%>) {
-    let headers = new Headers();
+    params: any = {}, data: any = null) {    let headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
     if (this.auth.getAccessTokenId()) {
@@ -54,21 +54,6 @@ export abstract class BaseLoopBackApi {
       requestUrl = requestUrl.replace(new RegExp(":" + key + "(\/|$)", "g"), urlParams[key] + "$1");
     }
 
-<% if ( isIo === 'enabled' ){ -%>
-    if (isio) {
-      if (requestUrl.match(/fk/)) {
-        let arr = requestUrl.split('/'); arr.pop();
-        requestUrl = arr.join('/');
-      }
-      let event = (`[${method}]${requestUrl}`).replace(/\?/, '');
-      let subject = new Subject();
-      let socket = SocketConnections.getHandler(LoopBackConfig.getPath(), {
-        id: this.auth.getAccessTokenId(),
-        userId: this.auth.getCurrentUserId()
-      });
-      socket.on(event, res => subject.next(res));
-      return subject.asObservable();
-    } else {<% } -%>
     
       this.searchParams.setJSON(params);
       let request = new Request({
@@ -81,6 +66,5 @@ export abstract class BaseLoopBackApi {
       return this.http.request(request)
         .map(res => (res.text() != "" ? res.json() : {}))
         .catch(this.errorHandler.handleError);
-<% if ( isIo === 'enabled' ){ -%>   }<% } -%>
   }
 }

@@ -3,14 +3,12 @@ import {
   it,
   describe,
   expect,
-  inject,
-  injectAsync
+  inject
 } from '@angular/core/testing';
 
 import {
   Room,
   RoomApi,
-  RoomInterface,
   Message,
   MessageInterface,
   API_PROVIDERS,
@@ -37,37 +35,37 @@ describe('UserService Service', () => {
   );
 
   it('should create a new room instance',
-    injectAsync([RoomApi], (roomApi: RoomApi) => {
+    inject([RoomApi], (roomApi: RoomApi) => {
 
-      let room: RoomInterface = new Room();
+      let room: Room = new Room();
       room.name = Date.now().toString();
 
       return roomApi.create(room)
-        .subscribe((room: RoomInterface) => expect(room.id).toBeTruthy());
+        .subscribe((room: Room) => expect(room.id).toBeTruthy());
     })
   );
 
   it('should find room instance by id',
-    injectAsync([RoomApi], (roomApi: RoomApi) => {
-      let room: RoomInterface = new Room();
+    inject([RoomApi], (roomApi: RoomApi) => {
+      let room: Room = new Room();
       room.name = Date.now().toString();
       return roomApi.create(room)
-        .subscribe((createdRoom: RoomInterface) => {
+        .subscribe((createdRoom: Room) => {
           expect(createdRoom.id).toBeTruthy();
           roomApi.findById(createdRoom.id)
-            .subscribe((foundRoom: RoomInterface) => expect(foundRoom.id).toBe(createdRoom.id))
+            .subscribe((foundRoom: Room) => expect(foundRoom.id).toBe(createdRoom.id))
         });
     })
   );
 
   it('should create a room message',
-    injectAsync([RoomApi], (roomApi: RoomApi) => {
-      let room: RoomInterface = new Room();
+    inject([RoomApi], (roomApi: RoomApi) => {
+      let room: Room = new Room();
       room.name = Date.now().toString();
       let message: MessageInterface = new Message();
       message.text = 'Hello Room';
       return roomApi.create(room)
-        .subscribe((room: RoomInterface) => roomApi.createMessages(room.id, message)
+        .subscribe((room: Room) => roomApi.createMessages(room.id, message)
           .subscribe((message: MessageInterface) => {
             expect(message.id).toBeTruthy();
             expect(message.roomId).toBe(room.id)

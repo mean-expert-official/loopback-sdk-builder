@@ -39,20 +39,21 @@ You don't have to manually write any static code.
 - Built in Interfaces and Models.
 - Built in API Calls.
 - Built in PubSub support for the [loopback-component-pubsub](https://www.npmjs.com/package/loopback-component-pubsub).
-- Built in Platform Specific Drivers (Angular2 for web, NativeScript2, Angular Universal).
+- Built in Platform Specific Drivers (Angular2 for web, NativeScript2, ~~Angular Universal~~).
 - Built in CLI Tool for builder.
 - Built in Logger Service.
 - Ability to select which models or methods to generate.
 - Ability to point models to different url domains (not global baseUrl)
 - IO Heartbeating to avoid disconnections.
 - Fully Typed (TypeScript).
+- Extendable Models for custom logic.
 - Small foot print 100k per generated SDK (Will increase depending on number of models).
 
 # Installation
 
 ````sh
 $ cd to/api/project
-$ npm install --save-dev loopback-sdk-builder@2.0.0-rc.1
+$ npm install --save-dev loopback-sdk-builder@2.0.0-rc.2
 ````
 
 # LoopBack SDK CLI Options
