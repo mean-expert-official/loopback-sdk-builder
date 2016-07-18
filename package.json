@@ -1,6 +1,6 @@
 {
-  "name": "loopback-sdk-builder",
-  "version": "2.0.0-rc.2",
+  "name": "@mean-expert/loopback-sdk-builder",
+  "version": "2.0.0-rc.3",
   "description": "Tool for auto-generating Software Development Kits (SDKs) for LoopBack",
   "bin": {
     "lb-ng": "bin/lb-ng",
@@ -9,7 +9,8 @@
   "main": "index.js",
   "scripts": {
     "prepublish": "",
-    "test:angular2": "cd tests/angular2 && npm run test"
+    "postinstall": "cd tests/angular2 && npm install",
+    "test:angular2": "cd tests/angular2 && npm install ../../ && npm run test"
   },
   "repository": {
     "type": "git",
@@ -23,8 +24,17 @@
     "nativescript",
     "{N}"
   ],
-  "author": "Miroslav Bajtos <miroslav@strongloop.com>",
+  "author": {
+    "name": "Jonathan Casarrubias",
+    "email": "jcasarrubias@mean.expert",
+    "url": "http://mean.expert"
+  },
   "contributors": [
+    {
+      "name": "João Ribeiro",
+      "email": "jonnybgod@gmail.com",
+      "url": "http://jonnybgod.ghost.io"
+    },
     {
       "name": "Nikolay Matiushenkov",
       "email": "mnvxxx@gmail.com",
@@ -34,16 +44,6 @@
       "name": "Sylvain Dumont",
       "email": "sylvain.dumont35@gmail.com",
       "url": "https://www.weboaks.com"
-    },
-    {
-      "name": "Jonathan Casarrubias",
-      "email": "jcasarrubias@mean.expert",
-      "url": "http://mean.expert"
-    },
-    {
-      "name": "João Ribeiro",
-      "email": "jonnybgod@gmail.com",
-      "url": "http://jonnybgod.ghost.io"
     }
   ],
   "license": "MIT",

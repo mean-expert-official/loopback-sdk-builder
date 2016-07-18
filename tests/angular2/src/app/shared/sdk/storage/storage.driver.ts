@@ -1,12 +1,12 @@
 /* tslint:disable */
 export class StorageDriver {
   static set(key: string, value: string) {
-    localStorage[key] = value;
+    localStorage.setItem(key, value);
   }
   static get(key: string): string {
-    return localStorage[key];
+    return localStorage.getItem(key);
   }
   static remove(key: string): any {
-    localStorage[key] = null;
+    localStorage.removeItem(key);
   }
 }
