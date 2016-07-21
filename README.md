@@ -53,7 +53,7 @@ You don't have to manually write any static code.
 
 ````sh
 $ cd to/api/project
-$ npm install --save-dev @mean-expert/loopback-sdk-builder
+$ npm install --save-dev @mean-expert/loopback-sdk-builder@2.0.0-rc.3
 ````
 
 # LoopBack SDK CLI Options
