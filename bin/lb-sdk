@@ -12,7 +12,7 @@
 var path      = require('path');
 var semver    = require('semver');
 var optimist  = require('optimist');
-var generator = require('@mean-expert/loopback-sdk-builder');
+var generator = require('../index');
 /**
  * CLI Options Description
  */
