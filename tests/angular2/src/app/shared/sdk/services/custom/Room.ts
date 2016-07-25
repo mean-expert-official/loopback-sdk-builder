@@ -19,7 +19,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/share';
 
 /**
- * Api for the `Room` model.
+ * Api services for the `Room` model.
  */
 @Injectable()
 export class RoomApi extends BaseLoopBackApi {
@@ -525,34 +525,6 @@ export class RoomApi extends BaseLoopBackApi {
     let params: any = {};
     if (options) params.options = options;
     let result = this.request(method, url, urlParams, params, options);
-    return result;
-  }
-
-  /**
-   * Fetches belongsTo relation room.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param boolean refresh 
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Room` object.)
-   * </em>
-   */
-  public getMessageRoom(id: any, refresh: boolean = undefined) {
-    let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/room";
-    let urlParams: any = {
-      id: id
-    };
-    let params: any = {};
-    if (refresh) params.refresh = refresh;
-    let result = this.request(method, url, urlParams, params);
     return result;
   }
 

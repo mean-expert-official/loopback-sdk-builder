@@ -11,7 +11,7 @@ import {
   UserApi,
   API_PROVIDERS,
   LoopBackConfig,
-  TokenInterface
+  AccessTokenInterface
 } from './shared';
 
 LoopBackConfig.setBaseURL('http://127.0.0.1:3000');
@@ -48,7 +48,7 @@ describe('UserService Service', () => {
       user.password = 'test';
       return userApi.create(user)
         .subscribe((instance: User)   => userApi.login(user)
-        .subscribe((token: TokenInterface) => {
+        .subscribe((token: AccessTokenInterface) => {
           expect(token.id).toBeTruthy();
           expect(token.userId).toBe(instance.id);
         }));
@@ -62,7 +62,7 @@ describe('UserService Service', () => {
       user.password = 'test';
       return userApi.create(user)
         .subscribe((instance: User) => userApi.login(user)
-        .subscribe((token: TokenInterface)   => {
+        .subscribe((token: AccessTokenInterface)   => {
           expect(token.id).toBeTruthy();
           expect(token.userId).toBe(instance.id);
           userApi.logout().subscribe((res: boolean) => {
@@ -86,7 +86,7 @@ describe('UserService Service', () => {
       user.password = 'test';
       return userApi.create(user)
         .subscribe((instance: User) => userApi.login(user)
-        .subscribe((token: TokenInterface)   => userApi.getCurrent()
+        .subscribe((token: AccessTokenInterface)   => userApi.getCurrent()
         .subscribe((user: User)     => expect(user.id).toBe(instance.id)
       )));
   }));

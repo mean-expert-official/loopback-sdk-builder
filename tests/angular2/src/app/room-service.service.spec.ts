@@ -12,8 +12,7 @@ import {
   Message,
   MessageInterface,
   API_PROVIDERS,
-  LoopBackConfig,
-  TokenInterface
+  LoopBackConfig
 } from './shared';
 
 LoopBackConfig.setBaseURL('http://127.0.0.1:3000');

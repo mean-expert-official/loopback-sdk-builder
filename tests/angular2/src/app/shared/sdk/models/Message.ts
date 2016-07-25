@@ -1,6 +1,5 @@
 /* tslint:disable */
 import {
-  Room
 } from '../index';
 
 export interface MessageInterface {
@@ -8,8 +7,7 @@ export interface MessageInterface {
   text: string;    
   id?: number;    
   roomId?: number;  
-  room?:Room;
-  
+  room?:any;
 }
 
 export class Message implements MessageInterface {
@@ -17,8 +15,7 @@ export class Message implements MessageInterface {
   text: string;  
   id: number;  
   roomId: number;  
-  room:Room;
-  
+  room:any;
   constructor(instance?: Message) {
     Object.assign(this, instance);
   }

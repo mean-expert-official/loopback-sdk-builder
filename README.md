@@ -53,7 +53,7 @@ You don't have to manually write any static code.
 
 ````sh
 $ cd to/api/project
-$ npm install --save-dev @mean-expert/loopback-sdk-builder@2.0.0-rc.3.2
+$ npm install --save-dev loopback-sdk-builder@2.0.0-rc.2
 ````
 
 # LoopBack SDK CLI Options
@@ -199,3 +199,13 @@ Now that you have built your SDK, you need to understand how to use it within yo
 # Contact
 
 Discuss features and ask questions on [Twitter](https://twitter.com/johncasarrubias).
+
+# Donations
+I haven't asked for donations before, but amazingly -and I'm thankful for it- some of you directly contacted me to provide a way to donate thanks to the value the set of modules that I publish and maintain are creating within your own projects.
+
+So, If you feel this project is super awesome and you want to support and make it grow and live longer; you are always free to donate any amount of you wish.
+
+**Of course this project will always remain open source and free of charge according the MTI License.**
+
+
+[![DONATIONS](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZPQVKZJTUJ3KW)

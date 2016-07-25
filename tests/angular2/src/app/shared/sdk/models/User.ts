@@ -1,6 +1,5 @@
 /* tslint:disable */
 import {
-  AccessToken
 } from '../index';
 
 export interface UserInterface {
@@ -17,8 +16,7 @@ export interface UserInterface {
   created?: any;    
   lastUpdated?: any;    
   id?: number;  
-  accessTokens?: Array<AccessToken>;
-  
+  accessTokens?: Array<any>;
 }
 
 export class User implements UserInterface {
@@ -35,8 +33,7 @@ export class User implements UserInterface {
   created: any;  
   lastUpdated: any;  
   id: number;  
-  accessTokens: Array<AccessToken>;
-  
+  accessTokens: Array<any>;
   constructor(instance?: User) {
     Object.assign(this, instance);
   }

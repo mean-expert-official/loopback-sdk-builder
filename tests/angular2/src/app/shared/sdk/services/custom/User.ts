@@ -19,7 +19,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/share';
 
 /**
- * Api for the `User` model.
+ * Api services for the `User` model.
  */
 @Injectable()
 export class UserApi extends BaseLoopBackApi {
