@@ -1,15 +1,16 @@
 {
-  "name": "Message",
-  "plural": "messages",
+  "name": "like",
+  "plural": "likes",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "text": {
-      "type": "string",
-      "required": true
+    "set": {
+      "type": "boolean",
+      "required": true,
+      "default": true
     }
   },
   "validations": [],
@@ -19,9 +20,9 @@
       "model": "Room",
       "foreignKey": ""
     },
-    "likes": {
-      "type": "hasMany",
-      "model": "like",
+    "message": {
+      "type": "belongsTo",
+      "model": "Message",
       "foreignKey": ""
     }
   },

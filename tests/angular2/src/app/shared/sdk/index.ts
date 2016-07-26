@@ -7,7 +7,8 @@ import {
   JSONSearchParams,
   UserApi,
   RoomApi,
-  MessageApi
+  MessageApi,
+  LikeApi
 } from './services/index'
 export const API_PROVIDERS: any[] = [
 	HTTP_PROVIDERS,
@@ -17,7 +18,8 @@ export const API_PROVIDERS: any[] = [
   JSONSearchParams,
   UserApi,
   RoomApi,
-  MessageApi
+  MessageApi,
+  LikeApi
 ];
 export * from './models/index';
 export * from './services/index';

@@ -2,6 +2,15 @@
 
 This file is created to keep history of the LoopBack SDK Builder, it does not consider or keeps any history of its parent module `loopback-sdk-angular`.
 
+## Release 2.0.0-rc.5
+
+- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/50
+- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/52
+- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/53
+- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/54
+- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/55
+- Added new unit tests for custom get and post remote methods
+
 ## Release 2.0.0-rc.4
 
 - Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/49

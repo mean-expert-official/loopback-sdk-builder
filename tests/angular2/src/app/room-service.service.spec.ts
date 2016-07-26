@@ -72,4 +72,24 @@ describe('UserService Service', () => {
     })
   );
 
+  it('should fetch greetings from get method',
+    inject([RoomApi], (roomApi: RoomApi) => {
+      let params = ['Hi', 'My Name Is', 'What?'];
+      return roomApi.greetGet(params[0], params[1], params[2])
+        .subscribe((result: string) => {
+            expect(result).toBe(params.join(':'))
+        });
+    })
+  );
+
+  it('should fetch greetings from post method',
+    inject([RoomApi], (roomApi: RoomApi) => {
+      let params = ['Hi', 'My Name Is', 'What?'];
+      return roomApi.greetPost(params[0], params[1], params[2])
+        .subscribe((result: string) => {
+            expect(result).toBe(params.join(':'))
+        });
+    })
+  );
+
 });

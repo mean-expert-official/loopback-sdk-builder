@@ -1,5 +1,7 @@
 /* tslint:disable */
 import {
+  Room,
+  Like
 } from '../index';
 
 export interface MessageInterface {
@@ -7,7 +9,9 @@ export interface MessageInterface {
   text: string;    
   id?: number;    
   roomId?: number;  
-  room?:any;
+  room?: Room;
+  likes?: Array<Like>;
+  
 }
 
 export class Message implements MessageInterface {
@@ -15,7 +19,9 @@ export class Message implements MessageInterface {
   text: string;  
   id: number;  
   roomId: number;  
-  room:any;
+  room: Room;
+  likes: Array<Like>;
+  
   constructor(instance?: Message) {
     Object.assign(this, instance);
   }

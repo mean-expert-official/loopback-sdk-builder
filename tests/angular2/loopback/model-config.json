@@ -39,5 +39,9 @@
   "Message": {
     "dataSource": "db",
     "public": true
+  },
+  "like": {
+    "dataSource": "db",
+    "public": true
   }
 }

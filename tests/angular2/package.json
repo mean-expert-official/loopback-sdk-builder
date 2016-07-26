@@ -9,8 +9,8 @@
     "lint": "tslint \"src/**/*.ts\"",
     "format": "clang-format -i -style=file --glob=src/**/*.ts",
     "pree2e": "webdriver-manager update",
-    "test": "npm install ../../ && npm run build:sdk && node loopback/server.js & ng test",
-    "build:sdk": "./node_modules/.bin/lb-sdk loopback/server.js src/app/shared/sdk"
+    "test": "npm run build:sdk && node loopback/server.js & ng test",
+    "build:sdk": "npm install ../../ && ./node_modules/.bin/lb-sdk loopback/server.js src/app/shared/sdk"
   },
   "private": true,
   "dependencies": {

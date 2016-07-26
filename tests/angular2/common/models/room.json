@@ -18,6 +18,11 @@
       "type": "hasMany",
       "model": "Message",
       "foreignKey": ""
+    },
+    "likes": {
+      "type": "hasMany",
+      "model": "like",
+      "foreignKey": ""
     }
   },
   "acls": [],

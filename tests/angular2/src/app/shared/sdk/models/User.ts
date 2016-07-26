@@ -1,6 +1,5 @@
 /* tslint:disable */
-import {
-} from '../index';
+
 
 export interface UserInterface {
   
@@ -17,6 +16,7 @@ export interface UserInterface {
   lastUpdated?: any;    
   id?: number;  
   accessTokens?: Array<any>;
+  
 }
 
 export class User implements UserInterface {
@@ -34,6 +34,7 @@ export class User implements UserInterface {
   lastUpdated: any;  
   id: number;  
   accessTokens: Array<any>;
+  
   constructor(instance?: User) {
     Object.assign(this, instance);
   }

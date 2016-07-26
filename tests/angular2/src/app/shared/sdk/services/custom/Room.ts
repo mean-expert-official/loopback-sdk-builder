@@ -52,12 +52,13 @@ export class RoomApi extends BaseLoopBackApi {
   public findByIdMessages(id: any, fk: any) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/:id/messages/:fk";
-    let urlParams: any = {
+    let routeParams: any = {
       id: id,
       fk: fk
     };
-    let params: any = {};
-    let result = this.request(method, url, urlParams, params)
+    let urlParams : any = {};
+    let postBody  : any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: Room | Array<Room>) => Array.isArray(result)
                              ? result.map((instance: Room)=> new Room(instance))
                              : new Room(result));
@@ -79,12 +80,13 @@ export class RoomApi extends BaseLoopBackApi {
   public destroyByIdMessages(id: any, fk: any) {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/:id/messages/:fk";
-    let urlParams: any = {
+    let routeParams: any = {
       id: id,
       fk: fk
     };
-    let params: any = {};
-    let result = this.request(method, url, urlParams, params);
+    let urlParams : any = {};
+    let postBody  : any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
 
@@ -111,13 +113,107 @@ export class RoomApi extends BaseLoopBackApi {
   public updateByIdMessages(id: any, fk: any, data: any = undefined) {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/:id/messages/:fk";
-    let urlParams: any = {
+    let routeParams: any = {
       id: id,
       fk: fk
     };
-    let params: any = {};
-    if (data) params.data = data;
-    let result = this.request(method, url, urlParams, params, data);
+    let urlParams : any = {};
+    let postBody  : any = {
+      data: data
+    };
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Find a related item by id for likes.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param any fk Foreign key for likes
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Room` object.)
+   * </em>
+   */
+  public findByIdLikes(id: any, fk: any) {
+    let method: string = "GET";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/:id/likes/:fk";
+    let routeParams: any = {
+      id: id,
+      fk: fk
+    };
+    let urlParams : any = {};
+    let postBody  : any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody)
+    return result.map((result: Room | Array<Room>) => Array.isArray(result)
+                             ? result.map((instance: Room)=> new Room(instance))
+                             : new Room(result));
+  }
+
+  /**
+   * Delete a related item by id for likes.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param any fk Foreign key for likes
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * This method returns no data.
+   */
+  public destroyByIdLikes(id: any, fk: any) {
+    let method: string = "DELETE";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/:id/likes/:fk";
+    let routeParams: any = {
+      id: id,
+      fk: fk
+    };
+    let urlParams : any = {};
+    let postBody  : any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Update a related item by id for likes.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param any fk Foreign key for likes
+   *
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Room` object.)
+   * </em>
+   */
+  public updateByIdLikes(id: any, fk: any, data: any = undefined) {
+    let method: string = "PUT";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/:id/likes/:fk";
+    let routeParams: any = {
+      id: id,
+      fk: fk
+    };
+    let urlParams : any = {};
+    let postBody  : any = {
+      data: data
+    };
+    let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
 
@@ -140,12 +236,14 @@ export class RoomApi extends BaseLoopBackApi {
   public getMessages(id: any, filter: LoopBackFilter = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/:id/messages";
-    let urlParams: any = {
+    let routeParams: any = {
       id: id
     };
-    let params: any = {};
-    if (filter) params.filter = filter;
-    let result = this.request(method, url, urlParams, params);
+    let urlParams : any = {
+      filter: filter
+    };
+    let postBody  : any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
 
@@ -170,12 +268,14 @@ export class RoomApi extends BaseLoopBackApi {
   public createMessages(id: any, data: any = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/:id/messages";
-    let urlParams: any = {
+    let routeParams: any = {
       id: id
     };
-    let params: any = {};
-    if (data) params.data = data;
-    let result = this.request(method, url, urlParams, params, data);
+    let urlParams : any = {};
+    let postBody  : any = {
+      data: data
+    };
+    let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
 
@@ -193,11 +293,12 @@ export class RoomApi extends BaseLoopBackApi {
   public deleteMessages(id: any) {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/:id/messages";
-    let urlParams: any = {
+    let routeParams: any = {
       id: id
     };
-    let params: any = {};
-    let result = this.request(method, url, urlParams, params);
+    let urlParams : any = {};
+    let postBody  : any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
 
@@ -219,12 +320,128 @@ export class RoomApi extends BaseLoopBackApi {
   public countMessages(id: any, where: any = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/:id/messages/count";
-    let urlParams: any = {
+    let routeParams: any = {
       id: id
     };
-    let params: any = {};
-    if (where) params.where = where;
-    let result = this.request(method, url, urlParams, params);
+    let urlParams : any = {
+      where: where
+    };
+    let postBody  : any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Queries likes of Room.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param object filter 
+   *
+   * @returns object[] An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Room` object.)
+   * </em>
+   */
+  public getLikes(id: any, filter: LoopBackFilter = undefined) {
+    let method: string = "GET";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/:id/likes";
+    let routeParams: any = {
+      id: id
+    };
+    let urlParams : any = {
+      filter: filter
+    };
+    let postBody  : any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Creates a new instance in likes of this model.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Room` object.)
+   * </em>
+   */
+  public createLikes(id: any, data: any = undefined) {
+    let method: string = "POST";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/:id/likes";
+    let routeParams: any = {
+      id: id
+    };
+    let urlParams : any = {};
+    let postBody  : any = {
+      data: data
+    };
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Deletes all likes of this model.
+   *
+   * @param any id PersistedModel id
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * This method returns no data.
+   */
+  public deleteLikes(id: any) {
+    let method: string = "DELETE";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/:id/likes";
+    let routeParams: any = {
+      id: id
+    };
+    let urlParams : any = {};
+    let postBody  : any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Counts likes of Room.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param object where Criteria to match model instances
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * Data properties:
+   *
+   *  - `count` – `{number}` - 
+   */
+  public countLikes(id: any, where: any = undefined) {
+    let method: string = "GET";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/:id/likes/count";
+    let routeParams: any = {
+      id: id
+    };
+    let urlParams : any = {
+      where: where
+    };
+    let postBody  : any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
 
@@ -247,11 +464,13 @@ export class RoomApi extends BaseLoopBackApi {
   public create(data: any = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms";
-    let urlParams: any = {
+    let routeParams: any = {
     };
-    let params: any = {};
-    if (data) params.data = data;
-    let result = this.request(method, url, urlParams, params, data)
+    let urlParams : any = {};
+    let postBody  : any = {
+      data: data
+    };
+    let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: Room | Array<Room>) => Array.isArray(result)
                              ? result.map((instance: Room)=> new Room(instance))
                              : new Room(result));
@@ -276,11 +495,13 @@ export class RoomApi extends BaseLoopBackApi {
   public upsert(data: any = undefined) {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms";
-    let urlParams: any = {
+    let routeParams: any = {
     };
-    let params: any = {};
-    if (data) params.data = data;
-    let result = this.request(method, url, urlParams, params, data)
+    let urlParams : any = {};
+    let postBody  : any = {
+      data: data
+    };
+    let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: Room | Array<Room>) => Array.isArray(result)
                              ? result.map((instance: Room)=> new Room(instance))
                              : new Room(result));
@@ -302,11 +523,12 @@ export class RoomApi extends BaseLoopBackApi {
   public exists(id: any) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/:id/exists";
-    let urlParams: any = {
+    let routeParams: any = {
       id: id
     };
-    let params: any = {};
-    let result = this.request(method, url, urlParams, params);
+    let urlParams : any = {};
+    let postBody  : any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
 
@@ -329,12 +551,14 @@ export class RoomApi extends BaseLoopBackApi {
   public findById(id: any, filter: LoopBackFilter = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/:id";
-    let urlParams: any = {
+    let routeParams: any = {
       id: id
     };
-    let params: any = {};
-    if (filter) params.filter = filter;
-    let result = this.request(method, url, urlParams, params)
+    let urlParams : any = {
+      filter: filter
+    };
+    let postBody  : any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: Room | Array<Room>) => Array.isArray(result)
                              ? result.map((instance: Room)=> new Room(instance))
                              : new Room(result));
@@ -357,11 +581,13 @@ export class RoomApi extends BaseLoopBackApi {
   public find(filter: LoopBackFilter = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms";
-    let urlParams: any = {
+    let routeParams: any = {
     };
-    let params: any = {};
-    if (filter) params.filter = filter;
-    let result = this.request(method, url, urlParams, params)
+    let urlParams : any = {
+      filter: filter
+    };
+    let postBody  : any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: Room | Array<Room>) => Array.isArray(result)
                              ? result.map((instance: Room)=> new Room(instance))
                              : new Room(result));
@@ -384,11 +610,13 @@ export class RoomApi extends BaseLoopBackApi {
   public findOne(filter: LoopBackFilter = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/findOne";
-    let urlParams: any = {
+    let routeParams: any = {
     };
-    let params: any = {};
-    if (filter) params.filter = filter;
-    let result = this.request(method, url, urlParams, params)
+    let urlParams : any = {
+      filter: filter
+    };
+    let postBody  : any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: Room | Array<Room>) => Array.isArray(result)
                              ? result.map((instance: Room)=> new Room(instance))
                              : new Room(result));
@@ -412,12 +640,15 @@ export class RoomApi extends BaseLoopBackApi {
   public updateAll(where: any = undefined, data: any = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/update";
-    let urlParams: any = {
+    let routeParams: any = {
     };
-    let params: any = {};
-    if (where) params.where = where;
-    if (data) params.data = data;
-    let result = this.request(method, url, urlParams, params, data)
+    let urlParams : any = {
+      where: where
+    };
+    let postBody  : any = {
+      data: data
+    };
+    let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: Room | Array<Room>) => Array.isArray(result)
                              ? result.map((instance: Room)=> new Room(instance))
                              : new Room(result));
@@ -440,11 +671,12 @@ export class RoomApi extends BaseLoopBackApi {
   public deleteById(id: any) {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/:id";
-    let urlParams: any = {
+    let routeParams: any = {
       id: id
     };
-    let params: any = {};
-    let result = this.request(method, url, urlParams, params);
+    let urlParams : any = {};
+    let postBody  : any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
 
@@ -464,11 +696,13 @@ export class RoomApi extends BaseLoopBackApi {
   public count(where: any = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/count";
-    let urlParams: any = {
+    let routeParams: any = {
     };
-    let params: any = {};
-    if (where) params.where = where;
-    let result = this.request(method, url, urlParams, params);
+    let urlParams : any = {
+      where: where
+    };
+    let postBody  : any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
 
@@ -493,12 +727,14 @@ export class RoomApi extends BaseLoopBackApi {
   public updateAttributes(id: any, data: any = undefined) {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/:id";
-    let urlParams: any = {
+    let routeParams: any = {
       id: id
     };
-    let params: any = {};
-    if (data) params.data = data;
-    let result = this.request(method, url, urlParams, params, data);
+    let urlParams : any = {};
+    let postBody  : any = {
+      data: data
+    };
+    let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
 
@@ -520,11 +756,147 @@ export class RoomApi extends BaseLoopBackApi {
   public createChangeStream(options: any = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/change-stream";
-    let urlParams: any = {
+    let routeParams: any = {
     };
-    let params: any = {};
-    if (options) params.options = options;
-    let result = this.request(method, url, urlParams, params, options);
+    let urlParams : any = {};
+    let postBody  : any = {
+      options: options
+    };
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+   *
+   * @param object data Request data.
+   *
+   *  - `a` – `{string}` - 
+   *
+   *  - `b` – `{string}` - 
+   *
+   *  - `c` – `{string}` - 
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * Data properties:
+   *
+   *  - `greeting` – `{string}` - 
+   */
+  public greetPost(a: any = undefined, b: any = undefined, c: any = undefined) {
+    let method: string = "POST";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/sayhi";
+    let routeParams: any = {
+    };
+    let urlParams : any = {
+      a: a,
+      b: b,
+      c: c
+    };
+    let postBody  : any = {
+      a: a,
+      b: b,
+      c: c
+    };
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+   *
+   * @param string a 
+   *
+   * @param string b 
+   *
+   * @param string c 
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * Data properties:
+   *
+   *  - `greeting` – `{string}` - 
+   */
+  public greetGet(a: string = undefined, b: string = undefined, c: string = undefined) {
+    let method: string = "GET";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/sayhi";
+    let routeParams: any = {
+    };
+    let urlParams : any = {
+      a: a,
+      b: b,
+      c: c
+    };
+    let postBody  : any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Fetches belongsTo relation room.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param boolean refresh 
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Room` object.)
+   * </em>
+   */
+  public getMessageRoom(id: any, refresh: boolean = undefined) {
+    let method: string = "GET";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/room";
+    let routeParams: any = {
+      id: id
+    };
+    let urlParams : any = {
+      refresh: refresh
+    };
+    let postBody  : any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Fetches belongsTo relation room.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param boolean refresh 
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Room` object.)
+   * </em>
+   */
+  public getLikeRoom(id: any, refresh: boolean = undefined) {
+    let method: string = "GET";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/likes/:id/room";
+    let routeParams: any = {
+      id: id
+    };
+    let urlParams : any = {
+      refresh: refresh
+    };
+    let postBody  : any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
 
