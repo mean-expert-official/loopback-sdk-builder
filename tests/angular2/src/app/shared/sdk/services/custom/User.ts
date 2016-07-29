@@ -594,9 +594,7 @@ export class UserApi extends BaseLoopBackApi {
       credentials: credentials,
       include: include
     };
-    let postBody  : any = {
-      credentials: credentials
-    };
+    let postBody  : any = credentials;
     let result = this.request(method, url, routeParams, urlParams, postBody)
       .share();
       result.subscribe(
