@@ -56,12 +56,11 @@ export class UserApi extends BaseLoopBackApi {
       id: id,
       fk: fk
     };
-    let urlParams : any = {};
-    let postBody  : any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody)
-    return result.map((result: User | Array<User>) => Array.isArray(result)
-                             ? result.map((instance: User)=> new User(instance))
-                             : new User(result));
+    return result.map((result: User) => new User(result));
   }
 
   /**
@@ -84,8 +83,9 @@ export class UserApi extends BaseLoopBackApi {
       id: id,
       fk: fk
     };
-    let urlParams : any = {};
-    let postBody  : any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -117,10 +117,11 @@ export class UserApi extends BaseLoopBackApi {
       id: id,
       fk: fk
     };
-    let urlParams : any = {};
-    let postBody  : any = {
+    let postBody: any = {
       data: data
     };
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -147,10 +148,10 @@ export class UserApi extends BaseLoopBackApi {
     let routeParams: any = {
       id: id
     };
-    let urlParams : any = {
-      filter: filter
-    };
-    let postBody  : any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -179,10 +180,11 @@ export class UserApi extends BaseLoopBackApi {
     let routeParams: any = {
       id: id
     };
-    let urlParams : any = {};
-    let postBody  : any = {
+    let postBody: any = {
       data: data
     };
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -204,8 +206,9 @@ export class UserApi extends BaseLoopBackApi {
     let routeParams: any = {
       id: id
     };
-    let urlParams : any = {};
-    let postBody  : any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -231,10 +234,10 @@ export class UserApi extends BaseLoopBackApi {
     let routeParams: any = {
       id: id
     };
-    let urlParams : any = {
-      where: where
-    };
-    let postBody  : any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    if (where) urlParams.where = where;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -258,12 +261,12 @@ export class UserApi extends BaseLoopBackApi {
   public create(data: any = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/Users";
-    let routeParams: any = {
-    };
-    let urlParams : any = {};
-    let postBody  : any = {
+    let routeParams: any = {};
+    let postBody: any = {
       data: data
     };
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: User | Array<User>) => Array.isArray(result)
                              ? result.map((instance: User)=> new User(instance))
@@ -289,16 +292,14 @@ export class UserApi extends BaseLoopBackApi {
   public upsert(data: any = undefined) {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/Users";
-    let routeParams: any = {
-    };
-    let urlParams : any = {};
-    let postBody  : any = {
+    let routeParams: any = {};
+    let postBody: any = {
       data: data
     };
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody)
-    return result.map((result: User | Array<User>) => Array.isArray(result)
-                             ? result.map((instance: User)=> new User(instance))
-                             : new User(result));
+    return result.map((result: User) => new User(result));
   }
 
   /**
@@ -320,8 +321,9 @@ export class UserApi extends BaseLoopBackApi {
     let routeParams: any = {
       id: id
     };
-    let urlParams : any = {};
-    let postBody  : any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -348,14 +350,12 @@ export class UserApi extends BaseLoopBackApi {
     let routeParams: any = {
       id: id
     };
-    let urlParams : any = {
-      filter: filter
-    };
-    let postBody  : any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody)
-    return result.map((result: User | Array<User>) => Array.isArray(result)
-                             ? result.map((instance: User)=> new User(instance))
-                             : new User(result));
+    return result.map((result: User) => new User(result));
   }
 
   /**
@@ -375,16 +375,15 @@ export class UserApi extends BaseLoopBackApi {
   public find(filter: LoopBackFilter = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/Users";
-    let routeParams: any = {
-    };
-    let urlParams : any = {
-      filter: filter
-    };
-    let postBody  : any = {};
+    let routeParams: any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody)
-    return result.map((result: User | Array<User>) => Array.isArray(result)
-                             ? result.map((instance: User)=> new User(instance))
-                             : new User(result));
+    return result.map(
+      (result: Array<User>) => result.map((instance: User) => new User(instance))
+    );
   }
 
   /**
@@ -404,16 +403,13 @@ export class UserApi extends BaseLoopBackApi {
   public findOne(filter: LoopBackFilter = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/Users/findOne";
-    let routeParams: any = {
-    };
-    let urlParams : any = {
-      filter: filter
-    };
-    let postBody  : any = {};
+    let routeParams: any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody)
-    return result.map((result: User | Array<User>) => Array.isArray(result)
-                             ? result.map((instance: User)=> new User(instance))
-                             : new User(result));
+    return result.map((result: User) => new User(result));
   }
 
   /**
@@ -434,18 +430,15 @@ export class UserApi extends BaseLoopBackApi {
   public updateAll(where: any = undefined, data: any = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/Users/update";
-    let routeParams: any = {
-    };
-    let urlParams : any = {
-      where: where
-    };
-    let postBody  : any = {
+    let routeParams: any = {};
+    let postBody: any = {
       data: data
     };
-    let result = this.request(method, url, routeParams, urlParams, postBody)
-    return result.map((result: User | Array<User>) => Array.isArray(result)
-                             ? result.map((instance: User)=> new User(instance))
-                             : new User(result));
+    let urlParams: any = {};
+    
+    if (where) urlParams.where = where;
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
   }
 
   /**
@@ -468,8 +461,9 @@ export class UserApi extends BaseLoopBackApi {
     let routeParams: any = {
       id: id
     };
-    let urlParams : any = {};
-    let postBody  : any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -490,12 +484,11 @@ export class UserApi extends BaseLoopBackApi {
   public count(where: any = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/Users/count";
-    let routeParams: any = {
-    };
-    let urlParams : any = {
-      where: where
-    };
-    let postBody  : any = {};
+    let routeParams: any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    if (where) urlParams.where = where;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -524,10 +517,11 @@ export class UserApi extends BaseLoopBackApi {
     let routeParams: any = {
       id: id
     };
-    let urlParams : any = {};
-    let postBody  : any = {
+    let postBody: any = {
       data: data
     };
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -550,12 +544,12 @@ export class UserApi extends BaseLoopBackApi {
   public createChangeStream(options: any = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/Users/change-stream";
-    let routeParams: any = {
-    };
-    let urlParams : any = {};
-    let postBody  : any = {
+    let routeParams: any = {};
+    let postBody: any = {
       options: options
     };
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -588,15 +582,13 @@ export class UserApi extends BaseLoopBackApi {
   public login(credentials: any, include: any = "user") {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/Users/login";
-    let routeParams: any = {
-    };
-    let urlParams : any = {
-      credentials: credentials,
-      include: include
-    };
-    let postBody  : any = {
+    let routeParams: any = {};
+    let postBody: any = {
       credentials: credentials
     };
+    let urlParams: any = {};
+    
+    if (include) urlParams.include = include;
     let result = this.request(method, url, routeParams, urlParams, postBody)
       .share();
       result.subscribe(
@@ -627,17 +619,15 @@ export class UserApi extends BaseLoopBackApi {
   public logout() {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/Users/logout";
-    let routeParams: any = {
-    };
-    let urlParams : any = {
-      access_token: this.auth.getAccessTokenId(),};
-    let postBody  : any = {};
+    let routeParams: any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+       urlParams.access_token = this.auth.getAccessTokenId();
     this.auth.clearStorage();
     this.auth.clearUser(); 
-    let result = this.request(method, url, routeParams, urlParams, postBody)
-    let logout: Subject<boolean> = new Subject<boolean>();
-    result.subscribe(() => {}, () => logout.next(true));
-    return logout.asObservable();
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
   }
 
   /**
@@ -658,13 +648,12 @@ export class UserApi extends BaseLoopBackApi {
   public confirm(uid: string, token: string, redirect: string = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/Users/confirm";
-    let routeParams: any = {
-    };
-    let urlParams : any = {
-      token: token,
-      redirect: redirect
-    };
-    let postBody  : any = {};
+    let routeParams: any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    if (token) urlParams.token = token;
+    if (redirect) urlParams.redirect = redirect;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -685,12 +674,12 @@ export class UserApi extends BaseLoopBackApi {
   public resetPassword(options: any) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/Users/reset";
-    let routeParams: any = {
-    };
-    let urlParams : any = {};
-    let postBody  : any = {
+    let routeParams: any = {};
+    let postBody: any = {
       options: options
     };
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -710,26 +699,14 @@ export class UserApi extends BaseLoopBackApi {
    */
   public getCurrent(): any {
     let method: string = "GET";
-
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/Users" + "/:id";
     let id: any = this.auth.getCurrentUserId();
-    if (id == null) {
-      id = '__anonymous__';
-    }
-    let urlParams: any = {
-      id: id
-    };
-
-    let result = this.request(method, url, urlParams)
-      .share();
-    result.subscribe(
-      (response: { resource: any }) => {
-        this.auth.setCurrentUserData(response);
-        return response.resource;
-      },
-      () => null
-    );
-    return result;
+    if (id == null)
+    id = '__anonymous__';
+    let routeParams: any = { id: id };
+    let urlParams: any = {};
+    let postBody: any = {};
+    return this.request(method, url, routeParams, urlParams, postBody);
   }
 
   /**

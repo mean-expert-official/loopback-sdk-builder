@@ -23,6 +23,16 @@
       "type": "hasMany",
       "model": "like",
       "foreignKey": ""
+    },
+    "replies": {
+      "type": "hasMany",
+      "model": "Message",
+      "foreignKey": "parentId"
+    },
+    "parent": {
+      "type": "belongsTo",
+      "model": "Message",
+      "foreignKey": "parentId"
     }
   },
   "acls": [],

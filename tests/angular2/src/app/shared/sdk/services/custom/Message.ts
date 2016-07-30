@@ -55,10 +55,133 @@ export class MessageApi extends BaseLoopBackApi {
     let routeParams: any = {
       id: id
     };
-    let urlParams : any = {
-      refresh: refresh
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    if (refresh) urlParams.refresh = refresh;
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Find a related item by id for replies.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param any fk Foreign key for replies
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Message` object.)
+   * </em>
+   */
+  public findByIdReplies(id: any, fk: any) {
+    let method: string = "GET";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/replies/:fk";
+    let routeParams: any = {
+      id: id,
+      fk: fk
     };
-    let postBody  : any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    let result = this.request(method, url, routeParams, urlParams, postBody)
+    return result.map((result: Message) => new Message(result));
+  }
+
+  /**
+   * Delete a related item by id for replies.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param any fk Foreign key for replies
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * This method returns no data.
+   */
+  public destroyByIdReplies(id: any, fk: any) {
+    let method: string = "DELETE";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/replies/:fk";
+    let routeParams: any = {
+      id: id,
+      fk: fk
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Update a related item by id for replies.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param any fk Foreign key for replies
+   *
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Message` object.)
+   * </em>
+   */
+  public updateByIdReplies(id: any, fk: any, data: any = undefined) {
+    let method: string = "PUT";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/replies/:fk";
+    let routeParams: any = {
+      id: id,
+      fk: fk
+    };
+    let postBody: any = {
+      data: data
+    };
+    let urlParams: any = {};
+    
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Fetches belongsTo relation parent.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param boolean refresh 
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Message` object.)
+   * </em>
+   */
+  public getParent(id: any, refresh: boolean = undefined) {
+    let method: string = "GET";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/parent";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    if (refresh) urlParams.refresh = refresh;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -86,12 +209,11 @@ export class MessageApi extends BaseLoopBackApi {
       id: id,
       fk: fk
     };
-    let urlParams : any = {};
-    let postBody  : any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody)
-    return result.map((result: Message | Array<Message>) => Array.isArray(result)
-                             ? result.map((instance: Message)=> new Message(instance))
-                             : new Message(result));
+    return result.map((result: Message) => new Message(result));
   }
 
   /**
@@ -114,8 +236,9 @@ export class MessageApi extends BaseLoopBackApi {
       id: id,
       fk: fk
     };
-    let urlParams : any = {};
-    let postBody  : any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -147,10 +270,127 @@ export class MessageApi extends BaseLoopBackApi {
       id: id,
       fk: fk
     };
-    let urlParams : any = {};
-    let postBody  : any = {
+    let postBody: any = {
       data: data
     };
+    let urlParams: any = {};
+    
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Queries replies of Message.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param object filter 
+   *
+   * @returns object[] An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Message` object.)
+   * </em>
+   */
+  public getReplies(id: any, filter: LoopBackFilter = undefined) {
+    let method: string = "GET";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/replies";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    if (filter) urlParams.filter = filter;
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Creates a new instance in replies of this model.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Message` object.)
+   * </em>
+   */
+  public createReplies(id: any, data: any = undefined) {
+    let method: string = "POST";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/replies";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {
+      data: data
+    };
+    let urlParams: any = {};
+    
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Deletes all replies of this model.
+   *
+   * @param any id PersistedModel id
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * This method returns no data.
+   */
+  public deleteReplies(id: any) {
+    let method: string = "DELETE";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/replies";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Counts replies of Message.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param object where Criteria to match model instances
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * Data properties:
+   *
+   *  - `count` – `{number}` - 
+   */
+  public countReplies(id: any, where: any = undefined) {
+    let method: string = "GET";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/replies/count";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    if (where) urlParams.where = where;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -177,10 +417,10 @@ export class MessageApi extends BaseLoopBackApi {
     let routeParams: any = {
       id: id
     };
-    let urlParams : any = {
-      filter: filter
-    };
-    let postBody  : any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -209,10 +449,11 @@ export class MessageApi extends BaseLoopBackApi {
     let routeParams: any = {
       id: id
     };
-    let urlParams : any = {};
-    let postBody  : any = {
+    let postBody: any = {
       data: data
     };
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -234,8 +475,9 @@ export class MessageApi extends BaseLoopBackApi {
     let routeParams: any = {
       id: id
     };
-    let urlParams : any = {};
-    let postBody  : any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -261,10 +503,10 @@ export class MessageApi extends BaseLoopBackApi {
     let routeParams: any = {
       id: id
     };
-    let urlParams : any = {
-      where: where
-    };
-    let postBody  : any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    if (where) urlParams.where = where;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -288,12 +530,12 @@ export class MessageApi extends BaseLoopBackApi {
   public create(data: any = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages";
-    let routeParams: any = {
-    };
-    let urlParams : any = {};
-    let postBody  : any = {
+    let routeParams: any = {};
+    let postBody: any = {
       data: data
     };
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: Message | Array<Message>) => Array.isArray(result)
                              ? result.map((instance: Message)=> new Message(instance))
@@ -319,16 +561,14 @@ export class MessageApi extends BaseLoopBackApi {
   public upsert(data: any = undefined) {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages";
-    let routeParams: any = {
-    };
-    let urlParams : any = {};
-    let postBody  : any = {
+    let routeParams: any = {};
+    let postBody: any = {
       data: data
     };
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody)
-    return result.map((result: Message | Array<Message>) => Array.isArray(result)
-                             ? result.map((instance: Message)=> new Message(instance))
-                             : new Message(result));
+    return result.map((result: Message) => new Message(result));
   }
 
   /**
@@ -350,8 +590,9 @@ export class MessageApi extends BaseLoopBackApi {
     let routeParams: any = {
       id: id
     };
-    let urlParams : any = {};
-    let postBody  : any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -378,14 +619,12 @@ export class MessageApi extends BaseLoopBackApi {
     let routeParams: any = {
       id: id
     };
-    let urlParams : any = {
-      filter: filter
-    };
-    let postBody  : any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody)
-    return result.map((result: Message | Array<Message>) => Array.isArray(result)
-                             ? result.map((instance: Message)=> new Message(instance))
-                             : new Message(result));
+    return result.map((result: Message) => new Message(result));
   }
 
   /**
@@ -405,16 +644,15 @@ export class MessageApi extends BaseLoopBackApi {
   public find(filter: LoopBackFilter = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages";
-    let routeParams: any = {
-    };
-    let urlParams : any = {
-      filter: filter
-    };
-    let postBody  : any = {};
+    let routeParams: any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody)
-    return result.map((result: Message | Array<Message>) => Array.isArray(result)
-                             ? result.map((instance: Message)=> new Message(instance))
-                             : new Message(result));
+    return result.map(
+      (result: Array<Message>) => result.map((instance: Message) => new Message(instance))
+    );
   }
 
   /**
@@ -434,16 +672,13 @@ export class MessageApi extends BaseLoopBackApi {
   public findOne(filter: LoopBackFilter = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/findOne";
-    let routeParams: any = {
-    };
-    let urlParams : any = {
-      filter: filter
-    };
-    let postBody  : any = {};
+    let routeParams: any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody)
-    return result.map((result: Message | Array<Message>) => Array.isArray(result)
-                             ? result.map((instance: Message)=> new Message(instance))
-                             : new Message(result));
+    return result.map((result: Message) => new Message(result));
   }
 
   /**
@@ -464,18 +699,15 @@ export class MessageApi extends BaseLoopBackApi {
   public updateAll(where: any = undefined, data: any = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/update";
-    let routeParams: any = {
-    };
-    let urlParams : any = {
-      where: where
-    };
-    let postBody  : any = {
+    let routeParams: any = {};
+    let postBody: any = {
       data: data
     };
-    let result = this.request(method, url, routeParams, urlParams, postBody)
-    return result.map((result: Message | Array<Message>) => Array.isArray(result)
-                             ? result.map((instance: Message)=> new Message(instance))
-                             : new Message(result));
+    let urlParams: any = {};
+    
+    if (where) urlParams.where = where;
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
   }
 
   /**
@@ -498,8 +730,9 @@ export class MessageApi extends BaseLoopBackApi {
     let routeParams: any = {
       id: id
     };
-    let urlParams : any = {};
-    let postBody  : any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -520,12 +753,11 @@ export class MessageApi extends BaseLoopBackApi {
   public count(where: any = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/count";
-    let routeParams: any = {
-    };
-    let urlParams : any = {
-      where: where
-    };
-    let postBody  : any = {};
+    let routeParams: any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    if (where) urlParams.where = where;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -554,10 +786,11 @@ export class MessageApi extends BaseLoopBackApi {
     let routeParams: any = {
       id: id
     };
-    let urlParams : any = {};
-    let postBody  : any = {
+    let postBody: any = {
       data: data
     };
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -580,12 +813,12 @@ export class MessageApi extends BaseLoopBackApi {
   public createChangeStream(options: any = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/change-stream";
-    let routeParams: any = {
-    };
-    let urlParams : any = {};
-    let postBody  : any = {
+    let routeParams: any = {};
+    let postBody: any = {
       options: options
     };
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -613,12 +846,11 @@ export class MessageApi extends BaseLoopBackApi {
       id: id,
       fk: fk
     };
-    let urlParams : any = {};
-    let postBody  : any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody)
-    return result.map((result: Message | Array<Message>) => Array.isArray(result)
-                             ? result.map((instance: Message)=> new Message(instance))
-                             : new Message(result));
+    return result.map((result: Message) => new Message(result));
   }
 
   /**
@@ -641,8 +873,9 @@ export class MessageApi extends BaseLoopBackApi {
       id: id,
       fk: fk
     };
-    let urlParams : any = {};
-    let postBody  : any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -674,10 +907,11 @@ export class MessageApi extends BaseLoopBackApi {
       id: id,
       fk: fk
     };
-    let urlParams : any = {};
-    let postBody  : any = {
+    let postBody: any = {
       data: data
     };
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -704,10 +938,10 @@ export class MessageApi extends BaseLoopBackApi {
     let routeParams: any = {
       id: id
     };
-    let urlParams : any = {
-      filter: filter
-    };
-    let postBody  : any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -736,10 +970,11 @@ export class MessageApi extends BaseLoopBackApi {
     let routeParams: any = {
       id: id
     };
-    let urlParams : any = {};
-    let postBody  : any = {
+    let postBody: any = {
       data: data
     };
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -761,8 +996,9 @@ export class MessageApi extends BaseLoopBackApi {
     let routeParams: any = {
       id: id
     };
-    let urlParams : any = {};
-    let postBody  : any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -788,10 +1024,249 @@ export class MessageApi extends BaseLoopBackApi {
     let routeParams: any = {
       id: id
     };
-    let urlParams : any = {
-      where: where
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    if (where) urlParams.where = where;
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Find a related item by id for replies.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param any fk Foreign key for replies
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Message` object.)
+   * </em>
+   */
+  public findByIdMessageReplies(id: any, fk: any) {
+    let method: string = "GET";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/replies/:fk";
+    let routeParams: any = {
+      id: id,
+      fk: fk
     };
-    let postBody  : any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    let result = this.request(method, url, routeParams, urlParams, postBody)
+    return result.map((result: Message) => new Message(result));
+  }
+
+  /**
+   * Delete a related item by id for replies.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param any fk Foreign key for replies
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * This method returns no data.
+   */
+  public destroyByIdMessageReplies(id: any, fk: any) {
+    let method: string = "DELETE";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/replies/:fk";
+    let routeParams: any = {
+      id: id,
+      fk: fk
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Update a related item by id for replies.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param any fk Foreign key for replies
+   *
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Message` object.)
+   * </em>
+   */
+  public updateByIdMessageReplies(id: any, fk: any, data: any = undefined) {
+    let method: string = "PUT";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/replies/:fk";
+    let routeParams: any = {
+      id: id,
+      fk: fk
+    };
+    let postBody: any = {
+      data: data
+    };
+    let urlParams: any = {};
+    
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Fetches belongsTo relation parent.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param boolean refresh 
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Message` object.)
+   * </em>
+   */
+  public getMessageParent(id: any, refresh: boolean = undefined) {
+    let method: string = "GET";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/parent";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    if (refresh) urlParams.refresh = refresh;
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Queries replies of Message.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param object filter 
+   *
+   * @returns object[] An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Message` object.)
+   * </em>
+   */
+  public getMessageReplies(id: any, filter: LoopBackFilter = undefined) {
+    let method: string = "GET";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/replies";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    if (filter) urlParams.filter = filter;
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Creates a new instance in replies of this model.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Message` object.)
+   * </em>
+   */
+  public createMessageReplies(id: any, data: any = undefined) {
+    let method: string = "POST";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/replies";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {
+      data: data
+    };
+    let urlParams: any = {};
+    
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Deletes all replies of this model.
+   *
+   * @param any id PersistedModel id
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * This method returns no data.
+   */
+  public deleteMessageReplies(id: any) {
+    let method: string = "DELETE";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/replies";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Counts replies of Message.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param object where Criteria to match model instances
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * Data properties:
+   *
+   *  - `count` – `{number}` - 
+   */
+  public countMessageReplies(id: any, where: any = undefined) {
+    let method: string = "GET";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/replies/count";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    if (where) urlParams.where = where;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -818,10 +1293,10 @@ export class MessageApi extends BaseLoopBackApi {
     let routeParams: any = {
       id: id
     };
-    let urlParams : any = {
-      refresh: refresh
-    };
-    let postBody  : any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    
+    if (refresh) urlParams.refresh = refresh;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }

@@ -1,8 +1,6 @@
 module.exports = function (Room) {
 
-  Room.greetPost = function greet(a, b, c, next) {
-    next(null, `${a}:${b}:${c}`);
-  };
+  Room.greetPost = greet;
 
   Room.remoteMethod(
     'greetPost',
@@ -17,9 +15,7 @@ module.exports = function (Room) {
     }
   );
 
-  Room.greetGet = function greet(a, b, c, next) {
-    next(null, `${a}:${b}:${c}`);
-  };
+  Room.greetGet = greet;
 
   Room.remoteMethod(
     'greetGet',
@@ -34,3 +30,5 @@ module.exports = function (Room) {
     }
   );
 };
+
+function greet(a, b, c, next) { next(null, `${a}:${b}:${c}`); }

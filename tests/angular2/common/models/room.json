@@ -6,6 +6,9 @@
   "options": {
     "validateUpsert": true
   },
+  "mixins": {
+    "PubSub": true
+  },
   "properties": {
     "name": {
       "type": "string",
