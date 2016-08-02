@@ -1,5 +1,20 @@
 module.exports = function (Room) {
 
+  Room.greetRoute = greet;
+
+  Room.remoteMethod(
+    'greetRoute',
+    {
+      accepts: [
+        { arg: 'a', type: 'string', http: { source: 'path' }},
+        { arg: 'b', type: 'string', http: { source: 'path' }},
+        { arg: 'c', type: 'string', http: { source: 'path' }}
+      ],
+      returns: { arg: 'greeting', type: 'string' },
+      http: { path: '/what/:a/:b/:c', verb: 'get' }
+    }
+  );
+
   Room.greetPost = greet;
 
   Room.remoteMethod(
@@ -11,7 +26,7 @@ module.exports = function (Room) {
         { arg: 'c', type: 'string' }
       ],
       returns: { arg: 'greeting', type: 'string' },
-      http: { path: '/sayhi', verb: 'post' }
+      http: { path: '/who', verb: 'post' }
     }
   );
 
@@ -26,7 +41,7 @@ module.exports = function (Room) {
         { arg: 'c', type: 'string' }
       ],
       returns: { arg: 'greeting', type: 'string' },
-      http: { path: '/sayhi', verb: 'get' }
+      http: { path: '/slimshady', verb: 'get' }
     }
   );
 };

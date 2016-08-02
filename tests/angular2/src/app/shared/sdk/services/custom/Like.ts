@@ -8,8 +8,8 @@ import {
   BaseLoopBackApi,
 } from '../core/index';
 import {
-  LoopBackFilter,
-  Like
+  Like,
+  LoopBackFilter
 } from '../../models/index';
 import { LoopBackConfig } from '../../lb.config';
 import { Subject } from 'rxjs/Subject';
@@ -49,7 +49,7 @@ export class LikeApi extends BaseLoopBackApi {
    * This usually means the response is a `Like` object.)
    * </em>
    */
-  public getRoom(id: any, refresh: boolean = undefined) {
+  public getRoom(id: any, refresh: Boolean = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/likes/:id/room";
     let routeParams: any = {
@@ -57,7 +57,6 @@ export class LikeApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (refresh) urlParams.refresh = refresh;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -79,7 +78,7 @@ export class LikeApi extends BaseLoopBackApi {
    * This usually means the response is a `Like` object.)
    * </em>
    */
-  public getMessage(id: any, refresh: boolean = undefined) {
+  public getMessage(id: any, refresh: Boolean = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/likes/:id/message";
     let routeParams: any = {
@@ -87,7 +86,6 @@ export class LikeApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (refresh) urlParams.refresh = refresh;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -117,7 +115,6 @@ export class LikeApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: Like | Array<Like>) => Array.isArray(result)
                              ? result.map((instance: Like)=> new Like(instance))
@@ -148,7 +145,6 @@ export class LikeApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: Like) => new Like(result));
   }
@@ -174,7 +170,6 @@ export class LikeApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -203,7 +198,6 @@ export class LikeApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: Like) => new Like(result));
@@ -229,7 +223,6 @@ export class LikeApi extends BaseLoopBackApi {
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map(
@@ -257,7 +250,6 @@ export class LikeApi extends BaseLoopBackApi {
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: Like) => new Like(result));
@@ -286,7 +278,6 @@ export class LikeApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     if (where) urlParams.where = where;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -314,7 +305,6 @@ export class LikeApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -338,7 +328,6 @@ export class LikeApi extends BaseLoopBackApi {
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (where) urlParams.where = where;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -372,7 +361,6 @@ export class LikeApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -400,7 +388,6 @@ export class LikeApi extends BaseLoopBackApi {
       options: options
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -430,7 +417,6 @@ export class LikeApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: Like) => new Like(result));
   }
@@ -457,7 +443,6 @@ export class LikeApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -482,7 +467,7 @@ export class LikeApi extends BaseLoopBackApi {
    * This usually means the response is a `Like` object.)
    * </em>
    */
-  public updateByIdRoomLikes(id: any, fk: any, data: any = undefined) {
+  public updateByIdRoomLikes(id: any, fk: any, data: Like = undefined) {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/:id/likes/:fk";
     let routeParams: any = {
@@ -493,7 +478,6 @@ export class LikeApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -522,7 +506,6 @@ export class LikeApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -546,7 +529,7 @@ export class LikeApi extends BaseLoopBackApi {
    * This usually means the response is a `Like` object.)
    * </em>
    */
-  public createRoomLikes(id: any, data: any = undefined) {
+  public createRoomLikes(id: any, data: Like = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/:id/likes";
     let routeParams: any = {
@@ -556,7 +539,6 @@ export class LikeApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -580,7 +562,6 @@ export class LikeApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -608,7 +589,6 @@ export class LikeApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (where) urlParams.where = where;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -639,7 +619,6 @@ export class LikeApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: Like) => new Like(result));
   }
@@ -666,7 +645,6 @@ export class LikeApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -691,7 +669,7 @@ export class LikeApi extends BaseLoopBackApi {
    * This usually means the response is a `Like` object.)
    * </em>
    */
-  public updateByIdMessageLikes(id: any, fk: any, data: any = undefined) {
+  public updateByIdMessageLikes(id: any, fk: any, data: Like = undefined) {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/likes/:fk";
     let routeParams: any = {
@@ -702,7 +680,6 @@ export class LikeApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -731,7 +708,6 @@ export class LikeApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -755,7 +731,7 @@ export class LikeApi extends BaseLoopBackApi {
    * This usually means the response is a `Like` object.)
    * </em>
    */
-  public createMessageLikes(id: any, data: any = undefined) {
+  public createMessageLikes(id: any, data: Like = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/likes";
     let routeParams: any = {
@@ -765,7 +741,6 @@ export class LikeApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -789,7 +764,6 @@ export class LikeApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -817,7 +791,6 @@ export class LikeApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (where) urlParams.where = where;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;

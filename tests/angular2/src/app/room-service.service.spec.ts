@@ -11,7 +11,6 @@ import {
   Room,
   RoomApi,
   Message,
-  MessageInterface,
   API_PROVIDERS,
   LoopBackConfig
 } from './shared';
@@ -62,11 +61,11 @@ describe('UserService Service', () => {
     async(inject([RoomApi], (roomApi: RoomApi) => {
       let room: Room = new Room();
       room.name = Date.now().toString();
-      let message: MessageInterface = new Message();
+      let message: Message = new Message();
       message.text = 'Hello Room';
       return roomApi.create(room)
         .subscribe((room: Room) => roomApi.createMessages(room.id, message)
-          .subscribe((message: MessageInterface) => {
+          .subscribe((message: Message) => {
             expect(message.id).toBeTruthy();
             expect(message.roomId).toBe(room.id)
           }));
@@ -77,11 +76,11 @@ describe('UserService Service', () => {
     async(inject([RoomApi], (roomApi: RoomApi) => {
       let room: Room = new Room();
       room.name = Date.now().toString();
-      let message: MessageInterface = new Message();
+      let message: Message = new Message();
       message.text = 'Hello Room with Query';
       return roomApi.create(room)
         .subscribe((room: Room) => roomApi.createMessages(room.id, message)
-        .subscribe((message: MessageInterface) => roomApi.getMessages(room.id, { where: { text: message.text }})
+        .subscribe((message: Message) => roomApi.getMessages(room.id, { where: { text: message.text }})
         .subscribe((messages: Array<Message>) => {
             expect(messages.length).toBe(1);
             let msg = messages.pop();
@@ -90,9 +89,19 @@ describe('UserService Service', () => {
     })
   ));
 
+  it('should fetch greetings from route params',
+    async(inject([RoomApi], (roomApi: RoomApi) => {
+      let params = ['Hi', 'My Name Is', 'What'];
+      return roomApi.greetRoute(params[0], params[1], params[2])
+        .subscribe((result: {greeting: string}) => {
+            expect(result.greeting).toBe(params.join(':'))
+        });
+    })
+  ));
+
   it('should fetch greetings from get method',
     async(inject([RoomApi], (roomApi: RoomApi) => {
-      let params = ['Hi', 'My Name Is', 'What?'];
+      let params = ['Hi', 'My Name Is', 'Who'];
       return roomApi.greetGet(params[0], params[1], params[2])
         .subscribe((result: {greeting: string}) => {
             expect(result.greeting).toBe(params.join(':'))
@@ -102,7 +111,7 @@ describe('UserService Service', () => {
 
   it('should fetch greetings from post method',
     async(inject([RoomApi], (roomApi: RoomApi) => {
-      let params = ['Hi', 'My Name Is', 'What?'];
+      let params = ['Hi', 'My Name Is', 'Slim Shady!!'];
       return roomApi.greetPost(params[0], params[1], params[2])
         .subscribe((result: {greeting: string}) => {
             expect(result.greeting).toBe(params.join(':'))

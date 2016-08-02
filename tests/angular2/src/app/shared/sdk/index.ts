@@ -8,7 +8,10 @@ import {
   UserApi,
   RoomApi,
   MessageApi,
-  LikeApi
+  LikeApi,
+  ApplicationCredentialApi,
+  UserCredentialApi,
+  UserIdentityApi
 } from './services/index'
 export const API_PROVIDERS: any[] = [
 	HTTP_PROVIDERS,
@@ -19,7 +22,10 @@ export const API_PROVIDERS: any[] = [
   UserApi,
   RoomApi,
   MessageApi,
-  LikeApi
+  LikeApi,
+  ApplicationCredentialApi,
+  UserCredentialApi,
+  UserIdentityApi
 ];
 export * from './models/index';
 export * from './services/index';

@@ -7,7 +7,6 @@ import {
   LoopBackAuth,
   LoopBackConfig,
   ErrorHandler,
-  
   JSONSearchParams
 } from '../../index';
 
@@ -55,14 +54,14 @@ export abstract class BaseLoopBackApi {
 
       // Body fix for built in remote methods using "data" or "credentials" that are the actual body
       // Custom remote method properties are different and need to be wrapped into a body object
-      let body;
+      let body: any;
       if (typeof postBody === 'object' && (postBody.data || postBody.credentials) && Object.keys(postBody).length === 1) {
         body = (postBody.data) ? postBody.data : postBody.credentials;
       } else {
         body = postBody;
       }
       this.searchParams.setJSON(urlParams);
-      let request = new Request({
+      let request: Request = new Request({
         headers : headers,
         method  : method,
         url     : requestUrl,

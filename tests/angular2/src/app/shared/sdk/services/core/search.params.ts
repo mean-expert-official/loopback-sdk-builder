@@ -2,8 +2,13 @@
 import { Injectable } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 /**
-* Filter Params
-* JSON Wrapper of URLSearchParams
+* @author Jonathan Casarrubias <twitter:@johncasarrubias> <github:@johncasarrubias>
+* @module JSONSearchParams
+* @license MTI
+* @description
+* JSON Parser and Wrapper for the Angular2 URLSearchParams
+* This module correctly encodes a json object into a query string and then creates
+* an instance of the URLSearchParams component for later use in HTTP Calls
 **/
 @Injectable()
 export class JSONSearchParams {

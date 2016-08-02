@@ -9,7 +9,6 @@ export interface LoopBackFilter {
   where?: any;
 }
 
-
 export interface AccessTokenInterface {
     id?: string;
     ttl?: number;
@@ -28,4 +27,3 @@ export class AccessToken implements AccessTokenInterface {
         Object.assign(this, instance);
     }
 }
-

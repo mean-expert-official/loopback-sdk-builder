@@ -1,7 +1,13 @@
 /* tslint:disable */
 import { Injectable } from '@angular/core';
 import { LoopBackConfig } from '../../index';
-
+/**
+* @author Jonathan Casarrubias <twitter:@johncasarrubias> <github:@johncasarrubias>
+* @module LoggerService
+* @license MTI
+* @description
+* Console Log wrapper that can be disabled in production mode
+**/
 @Injectable()
 export class LoggerService {
 

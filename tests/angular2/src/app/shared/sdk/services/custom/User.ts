@@ -8,8 +8,8 @@ import {
   BaseLoopBackApi,
 } from '../core/index';
 import {
-  LoopBackFilter,
-  User
+  User,
+  LoopBackFilter
 } from '../../models/index';
 import { LoopBackConfig } from '../../lb.config';
 import { Subject } from 'rxjs/Subject';
@@ -58,7 +58,6 @@ export class UserApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: User) => new User(result));
   }
@@ -85,7 +84,6 @@ export class UserApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -121,7 +119,6 @@ export class UserApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -150,7 +147,6 @@ export class UserApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -184,7 +180,6 @@ export class UserApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -208,7 +203,6 @@ export class UserApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -236,7 +230,6 @@ export class UserApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (where) urlParams.where = where;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -266,7 +259,6 @@ export class UserApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: User | Array<User>) => Array.isArray(result)
                              ? result.map((instance: User)=> new User(instance))
@@ -297,7 +289,6 @@ export class UserApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: User) => new User(result));
   }
@@ -323,7 +314,6 @@ export class UserApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -352,7 +342,6 @@ export class UserApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: User) => new User(result));
@@ -378,7 +367,6 @@ export class UserApi extends BaseLoopBackApi {
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map(
@@ -406,7 +394,6 @@ export class UserApi extends BaseLoopBackApi {
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: User) => new User(result));
@@ -435,7 +422,6 @@ export class UserApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     if (where) urlParams.where = where;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -463,7 +449,6 @@ export class UserApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -487,7 +472,6 @@ export class UserApi extends BaseLoopBackApi {
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (where) urlParams.where = where;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -521,7 +505,6 @@ export class UserApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -549,7 +532,6 @@ export class UserApi extends BaseLoopBackApi {
       options: options
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -579,7 +561,7 @@ export class UserApi extends BaseLoopBackApi {
    * 
    *
    */
-  public login(credentials: any, include: any = "user") {
+  public login(credentials: any, include: any = 'user') {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/Users/login";
     let routeParams: any = {};
@@ -587,7 +569,6 @@ export class UserApi extends BaseLoopBackApi {
       credentials: credentials
     };
     let urlParams: any = {};
-    
     if (include) urlParams.include = include;
     let result = this.request(method, url, routeParams, urlParams, postBody)
       .share();
@@ -622,7 +603,6 @@ export class UserApi extends BaseLoopBackApi {
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
-    
        urlParams.access_token = this.auth.getAccessTokenId();
     this.auth.clearStorage();
     this.auth.clearUser(); 
@@ -645,13 +625,12 @@ export class UserApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public confirm(uid: string, token: string, redirect: string = undefined) {
+  public confirm(uid: String, token: String, redirect: String = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/Users/confirm";
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (token) urlParams.token = token;
     if (redirect) urlParams.redirect = redirect;
     let result = this.request(method, url, routeParams, urlParams, postBody);
@@ -679,7 +658,35 @@ export class UserApi extends BaseLoopBackApi {
       options: options
     };
     let urlParams: any = {};
-    
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Fetches belongsTo relation user.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param boolean refresh 
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `User` object.)
+   * </em>
+   */
+  public getUserIdentityUser(id: any, refresh: Boolean = undefined) {
+    let method: string = "GET";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/UserIdentities/:id/user";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    if (refresh) urlParams.refresh = refresh;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }

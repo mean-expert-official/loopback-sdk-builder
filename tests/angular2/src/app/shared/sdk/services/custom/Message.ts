@@ -8,8 +8,9 @@ import {
   BaseLoopBackApi,
 } from '../core/index';
 import {
-  LoopBackFilter,
-  Message
+  Message,
+  Like,
+  LoopBackFilter
 } from '../../models/index';
 import { LoopBackConfig } from '../../lb.config';
 import { Subject } from 'rxjs/Subject';
@@ -49,7 +50,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public getRoom(id: any, refresh: boolean = undefined) {
+  public getRoom(id: any, refresh: Boolean = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/room";
     let routeParams: any = {
@@ -57,7 +58,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (refresh) urlParams.refresh = refresh;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -88,7 +88,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: Message) => new Message(result));
   }
@@ -115,7 +114,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -140,7 +138,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public updateByIdReplies(id: any, fk: any, data: any = undefined) {
+  public updateByIdReplies(id: any, fk: any, data: Message = undefined) {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/replies/:fk";
     let routeParams: any = {
@@ -151,7 +149,6 @@ export class MessageApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -172,7 +169,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public getParent(id: any, refresh: boolean = undefined) {
+  public getParent(id: any, refresh: Boolean = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/parent";
     let routeParams: any = {
@@ -180,7 +177,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (refresh) urlParams.refresh = refresh;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -211,7 +207,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: Message) => new Message(result));
   }
@@ -238,7 +233,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -263,7 +257,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public updateByIdLikes(id: any, fk: any, data: any = undefined) {
+  public updateByIdLikes(id: any, fk: any, data: Like = undefined) {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/likes/:fk";
     let routeParams: any = {
@@ -274,7 +268,6 @@ export class MessageApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -303,7 +296,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -327,7 +319,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public createReplies(id: any, data: any = undefined) {
+  public createReplies(id: any, data: Message = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/replies";
     let routeParams: any = {
@@ -337,7 +329,6 @@ export class MessageApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -361,7 +352,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -389,7 +379,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (where) urlParams.where = where;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -419,7 +408,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -443,7 +431,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public createLikes(id: any, data: any = undefined) {
+  public createLikes(id: any, data: Like = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/likes";
     let routeParams: any = {
@@ -453,7 +441,6 @@ export class MessageApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -477,7 +464,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -505,7 +491,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (where) urlParams.where = where;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -535,7 +520,6 @@ export class MessageApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: Message | Array<Message>) => Array.isArray(result)
                              ? result.map((instance: Message)=> new Message(instance))
@@ -566,7 +550,6 @@ export class MessageApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: Message) => new Message(result));
   }
@@ -592,7 +575,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -621,7 +603,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: Message) => new Message(result));
@@ -647,7 +628,6 @@ export class MessageApi extends BaseLoopBackApi {
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map(
@@ -675,7 +655,6 @@ export class MessageApi extends BaseLoopBackApi {
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: Message) => new Message(result));
@@ -704,7 +683,6 @@ export class MessageApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     if (where) urlParams.where = where;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -732,7 +710,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -756,7 +733,6 @@ export class MessageApi extends BaseLoopBackApi {
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (where) urlParams.where = where;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -790,7 +766,6 @@ export class MessageApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -818,7 +793,6 @@ export class MessageApi extends BaseLoopBackApi {
       options: options
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -848,7 +822,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: Message) => new Message(result));
   }
@@ -875,7 +848,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -900,7 +872,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public updateByIdRoomMessages(id: any, fk: any, data: any = undefined) {
+  public updateByIdRoomMessages(id: any, fk: any, data: Message = undefined) {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/:id/messages/:fk";
     let routeParams: any = {
@@ -911,7 +883,6 @@ export class MessageApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -940,7 +911,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -964,7 +934,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public createRoomMessages(id: any, data: any = undefined) {
+  public createRoomMessages(id: any, data: Message = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/rooms/:id/messages";
     let routeParams: any = {
@@ -974,7 +944,6 @@ export class MessageApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -998,7 +967,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -1026,7 +994,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (where) urlParams.where = where;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -1057,7 +1024,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody)
     return result.map((result: Message) => new Message(result));
   }
@@ -1084,7 +1050,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -1109,7 +1074,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public updateByIdMessageReplies(id: any, fk: any, data: any = undefined) {
+  public updateByIdMessageReplies(id: any, fk: any, data: Message = undefined) {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/replies/:fk";
     let routeParams: any = {
@@ -1120,7 +1085,6 @@ export class MessageApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -1141,7 +1105,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public getMessageParent(id: any, refresh: boolean = undefined) {
+  public getMessageParent(id: any, refresh: Boolean = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/parent";
     let routeParams: any = {
@@ -1149,7 +1113,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (refresh) urlParams.refresh = refresh;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -1179,7 +1142,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -1203,7 +1165,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public createMessageReplies(id: any, data: any = undefined) {
+  public createMessageReplies(id: any, data: Message = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/messages/:id/replies";
     let routeParams: any = {
@@ -1213,7 +1175,6 @@ export class MessageApi extends BaseLoopBackApi {
       data: data
     };
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -1237,7 +1198,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -1265,7 +1225,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (where) urlParams.where = where;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -1287,7 +1246,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public getLikeMessage(id: any, refresh: boolean = undefined) {
+  public getLikeMessage(id: any, refresh: Boolean = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/likes/:id/message";
     let routeParams: any = {
@@ -1295,7 +1254,6 @@ export class MessageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    
     if (refresh) urlParams.refresh = refresh;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
