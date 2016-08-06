@@ -2,6 +2,15 @@
 
 This file is created to keep history of the LoopBack SDK Builder, it does not consider or keeps any history of its parent module `loopback-sdk-angular`.
 
+## Release 2.0.0-rc.8
+
+- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/81
+- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/80
+- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/79
+- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/78
+- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/77
+- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/76
+
 ## Release 2.0.0-rc.7.2
 
 - Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/74

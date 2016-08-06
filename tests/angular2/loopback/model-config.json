@@ -39,7 +39,7 @@
   },
   "Message": {
     "dataSource": "db",
-    "public": true
+    "public": false
   },
   "like": {
     "dataSource": "db",
@@ -54,6 +54,10 @@
     "public": true
   },
   "UserIdentity": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Category": {
     "dataSource": "db",
     "public": true
   }

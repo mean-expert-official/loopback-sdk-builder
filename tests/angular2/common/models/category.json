@@ -1,0 +1,23 @@
+{
+  "name": "Category",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "rooms": {
+      "type": "hasAndBelongsToMany",
+      "model": "Room",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

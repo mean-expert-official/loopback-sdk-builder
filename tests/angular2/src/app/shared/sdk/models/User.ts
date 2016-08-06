@@ -1,17 +1,17 @@
 /* tslint:disable */
 
 export interface UserInterface {
-  realm: string;
-  username: string;
-  password?: string;
-  challenges: any;
-  email?: string;
-  emailVerified: boolean;
-  verificationToken: string;
-  status: string;
-  created: any;
-  lastUpdated: any;
-  id: number;
+  realm?: string;
+  username?: string;
+  password: string;
+  challenges?: any;
+  email: string;
+  emailVerified?: boolean;
+  verificationToken?: string;
+  status?: string;
+  created?: any;
+  lastUpdated?: any;
+  id?: number;
   accessTokens?: Array<any>;
 }
 

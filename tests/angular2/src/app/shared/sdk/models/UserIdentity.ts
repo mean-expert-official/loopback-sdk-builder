@@ -4,15 +4,15 @@ import {
 } from '../index';
 
 export interface UserIdentityInterface {
-  provider: string;
-  authScheme: string;
-  externalId: string;
-  profile: any;
-  credentials: string;
-  created: any;
-  modified: any;
-  userId: number;
-  id: number;
+  provider?: string;
+  authScheme?: string;
+  externalId?: string;
+  profile?: any;
+  credentials?: string;
+  created?: any;
+  modified?: any;
+  userId?: number;
+  id?: number;
   user?: User;
 }
 

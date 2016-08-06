@@ -7,11 +7,11 @@ import {
   JSONSearchParams,
   UserApi,
   RoomApi,
-  MessageApi,
   LikeApi,
   ApplicationCredentialApi,
   UserCredentialApi,
-  UserIdentityApi
+  UserIdentityApi,
+  CategoryApi
 } from './services/index'
 export const API_PROVIDERS: any[] = [
 	HTTP_PROVIDERS,
@@ -21,11 +21,11 @@ export const API_PROVIDERS: any[] = [
   JSONSearchParams,
   UserApi,
   RoomApi,
-  MessageApi,
   LikeApi,
   ApplicationCredentialApi,
   UserCredentialApi,
-  UserIdentityApi
+  UserIdentityApi,
+  CategoryApi
 ];
 export * from './models/index';
 export * from './services/index';

@@ -26,6 +26,11 @@
       "type": "hasMany",
       "model": "like",
       "foreignKey": ""
+    },
+    "categories": {
+      "type": "hasAndBelongsToMany",
+      "model": "Category",
+      "foreignKey": ""
     }
   },
   "acls": [],

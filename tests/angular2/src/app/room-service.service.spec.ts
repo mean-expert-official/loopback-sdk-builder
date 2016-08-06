@@ -10,7 +10,6 @@ import {
 import {
   Room,
   RoomApi,
-  Message,
   API_PROVIDERS,
   LoopBackConfig
 } from './shared';
@@ -61,14 +60,14 @@ describe('UserService Service', () => {
     async(inject([RoomApi], (roomApi: RoomApi) => {
       let room: Room = new Room();
       room.name = Date.now().toString();
-      let message: Message = new Message();
-      message.text = 'Hello Room';
-      return roomApi.create(room)
-        .subscribe((room: Room) => roomApi.createMessages(room.id, message)
-          .subscribe((message: Message) => {
+      return roomApi.create(room).subscribe((room: Room) =>
+        roomApi.createMessages(room.id, {
+            text: 'HelloRoom'
+        }).subscribe(message => {
             expect(message.id).toBeTruthy();
-            expect(message.roomId).toBe(room.id)
-          }));
+            expect(message.roomId).toBe(room.id);
+          })
+        );
     })
   ));
 
@@ -76,12 +75,11 @@ describe('UserService Service', () => {
     async(inject([RoomApi], (roomApi: RoomApi) => {
       let room: Room = new Room();
       room.name = Date.now().toString();
-      let message: Message = new Message();
-      message.text = 'Hello Room with Query';
+      let message = { text: 'Hello Room with Query' };
       return roomApi.create(room)
         .subscribe((room: Room) => roomApi.createMessages(room.id, message)
-        .subscribe((message: Message) => roomApi.getMessages(room.id, { where: { text: message.text }})
-        .subscribe((messages: Array<Message>) => {
+        .subscribe(message => roomApi.getMessages(room.id, { where: message })
+        .subscribe(messages => {
             expect(messages.length).toBe(1);
             let msg = messages.pop();
             expect(msg.text).toBe(message.text);
