@@ -17,7 +17,7 @@ import {
 LoopBackConfig.setBaseURL('http://127.0.0.1:3000');
 LoopBackConfig.setApiVersion('api');
 
-describe('UserService Service', () => {
+describe('RoomService Tests', () => {
   beforeEachProviders(() => [API_PROVIDERS]);
 
   it('should contain persisted model methods',
@@ -39,7 +39,7 @@ describe('UserService Service', () => {
       room.name = Date.now().toString();
 
       return roomApi.create(room)
-        .subscribe((room: Room) => expect(room.id).toBeTruthy());
+        .subscribe((instance: Room) => expect(instance.id).toBeTruthy());
     })
   ));
 
@@ -51,7 +51,7 @@ describe('UserService Service', () => {
         .subscribe((createdRoom: Room) => {
           expect(createdRoom.id).toBeTruthy();
           roomApi.findById(createdRoom.id)
-            .subscribe((foundRoom: Room) => expect(foundRoom.id).toBe(createdRoom.id))
+            .subscribe((foundRoom: Room) => expect(foundRoom.id).toBe(createdRoom.id));
         });
     })
   ));
@@ -60,12 +60,12 @@ describe('UserService Service', () => {
     async(inject([RoomApi], (roomApi: RoomApi) => {
       let room: Room = new Room();
       room.name = Date.now().toString();
-      return roomApi.create(room).subscribe((room: Room) =>
-        roomApi.createMessages(room.id, {
+      return roomApi.create(room).subscribe((instance: Room) =>
+        roomApi.createMessages(instance.id, {
             text: 'HelloRoom'
         }).subscribe(message => {
             expect(message.id).toBeTruthy();
-            expect(message.roomId).toBe(room.id);
+            expect(message.roomId).toBe(instance.id);
           })
         );
     })
@@ -77,12 +77,12 @@ describe('UserService Service', () => {
       room.name = Date.now().toString();
       let message = { text: 'Hello Room with Query' };
       return roomApi.create(room)
-        .subscribe((room: Room) => roomApi.createMessages(room.id, message)
-        .subscribe(message => roomApi.getMessages(room.id, { where: message })
+        .subscribe((instance: Room) => roomApi.createMessages(instance.id, message)
+        .subscribe(messageInstance => roomApi.getMessages(instance.id, { where: message })
         .subscribe(messages => {
             expect(messages.length).toBe(1);
             let msg = messages.pop();
-            expect(msg.text).toBe(message.text);
+            expect(msg.text).toBe(messageInstance.text);
         })));
     })
   ));
@@ -92,7 +92,7 @@ describe('UserService Service', () => {
       let params = ['Hi', 'My Name Is', 'What'];
       return roomApi.greetRoute(params[0], params[1], params[2])
         .subscribe((result: {greeting: string}) => {
-            expect(result.greeting).toBe(params.join(':'))
+            expect(result.greeting).toBe(params.join(':'));
         });
     })
   ));
@@ -102,7 +102,7 @@ describe('UserService Service', () => {
       let params = ['Hi', 'My Name Is', 'Who'];
       return roomApi.greetGet(params[0], params[1], params[2])
         .subscribe((result: {greeting: string}) => {
-            expect(result.greeting).toBe(params.join(':'))
+            expect(result.greeting).toBe(params.join(':'));
         });
     })
   ));
@@ -112,9 +112,8 @@ describe('UserService Service', () => {
       let params = ['Hi', 'My Name Is', 'Slim Shady!!'];
       return roomApi.greetPost(params[0], params[1], params[2])
         .subscribe((result: {greeting: string}) => {
-            expect(result.greeting).toBe(params.join(':'))
+            expect(result.greeting).toBe(params.join(':'));
         });
     })
   ));
-
 });

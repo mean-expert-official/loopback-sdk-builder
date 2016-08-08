@@ -37,26 +37,47 @@ export abstract class BaseLoopBackApi {
    * @param any     routeParams Values of url parameters
    * @param any     urlParams   Parameters for building url (filter and other)
    * @param any     postBody    Request postBody
-   * @param boolean isio        Request socket connection
+   * @param boolean isio        Request socket connection (When IO is enabled)
    */
-  public request(method: string, url: string, routeParams: any = {}, urlParams: any = {}, postBody: any = null) {    let headers = new Headers();
+  public request(
+    method      : string,
+    url         : string,
+    routeParams : any = {},
+    urlParams   : any = {},
+    postBody    : any = null  
+  ) {
+
+    let headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
     if (this.auth.getAccessTokenId()) {
-      headers.append('Authorization', LoopBackConfig.getAuthPrefix() + this.auth.getAccessTokenId());
+      headers.append(
+        'Authorization',
+        LoopBackConfig.getAuthPrefix() + this.auth.getAccessTokenId()
+      );
     }
 
     let requestUrl = url;
     let key: string;
     for (key in routeParams) {
-      requestUrl = requestUrl.replace(new RegExp(":" + key + "(\/|$)", "g"), routeParams[key] + "$1");
+      requestUrl = requestUrl.replace(
+        new RegExp(":" + key + "(\/|$)", "g"),
+        routeParams[key] + "$1"
+      );
     }
 
-      // Body fix for built in remote methods using "data" or "credentials" that are the actual body
-      // Custom remote method properties are different and need to be wrapped into a body object
+      // Body fix for built in remote methods using "data", "options" or "credentials
+      // that are the actual body, Custom remote method properties are different and need
+      // to be wrapped into a body object
       let body: any;
-      if (typeof postBody === 'object' && (postBody.data || postBody.credentials) && Object.keys(postBody).length === 1) {
-        body = (postBody.data) ? postBody.data : postBody.credentials;
+      if (
+        typeof postBody === 'object' &&
+        (postBody.data || postBody.credentials || postBody.options) &&
+        Object.keys(postBody).length === 1
+      ) {
+        body = postBody.data    ? postBody.data :
+               postBody.options ? postBody.options :
+               postBody.credentials;
       } else {
         body = postBody;
       }

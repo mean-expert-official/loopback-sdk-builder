@@ -18,7 +18,7 @@ import {
 LoopBackConfig.setBaseURL('http://127.0.0.1:3000');
 LoopBackConfig.setApiVersion('api');
 
-describe('UserService Service', () => {
+describe('UserService Tests', () => {
   beforeEachProviders(() => [API_PROVIDERS]);
 
   it('should contain authentication methods',
@@ -38,7 +38,7 @@ describe('UserService Service', () => {
       user.email = Date.now() + '@test.com';
       user.password = 'test';
       return userApi.create(user)
-        .subscribe((user: User) => expect(user.id).toBeTruthy());
+        .subscribe((instance: User) => expect(instance.id).toBeTruthy());
     })
   ));
 
@@ -87,9 +87,9 @@ describe('UserService Service', () => {
       user.password = 'test';
       return userApi.create(user)
         .subscribe((instance: User) => userApi.login(user)
-        .subscribe((token: AccessTokenInterface) => 
-          userApi.getCurrent().subscribe((user: User) => {
-          expect(user.id).toBe(instance.id);
+        .subscribe((token: AccessTokenInterface) =>
+          userApi.getCurrent().subscribe((current: User) => {
+          expect(current.id).toBe(instance.id);
         }))
       );
   })));
