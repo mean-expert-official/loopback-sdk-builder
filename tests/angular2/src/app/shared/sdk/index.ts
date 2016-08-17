@@ -11,7 +11,10 @@ import {
   ApplicationCredentialApi,
   UserCredentialApi,
   UserIdentityApi,
-  CategoryApi
+  CategoryApi,
+  AccountApi,
+  RoomAccountApi,
+  StorageApi
 } from './services/index'
 export const API_PROVIDERS: any[] = [
 	HTTP_PROVIDERS,
@@ -25,7 +28,10 @@ export const API_PROVIDERS: any[] = [
   ApplicationCredentialApi,
   UserCredentialApi,
   UserIdentityApi,
-  CategoryApi
+  CategoryApi,
+  AccountApi,
+  RoomAccountApi,
+  StorageApi
 ];
 export * from './models/index';
 export * from './services/index';

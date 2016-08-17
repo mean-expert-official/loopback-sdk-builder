@@ -1,7 +1,8 @@
 /* tslint:disable */
 import {
   Like,
-  Category
+  Category,
+  Account
 } from '../index';
 
 export interface RoomInterface {
@@ -10,6 +11,7 @@ export interface RoomInterface {
   messages?: Array<any>;
   likes?: Array<Like>;
   categories?: Array<Category>;
+  accounts?: Array<Account>;
 }
 
 export class Room implements RoomInterface {
@@ -18,6 +20,7 @@ export class Room implements RoomInterface {
   messages: Array<any>;
   likes: Array<Like>;
   categories: Array<Category>;
+  accounts: Array<Account>;
   constructor(instance?: Room) {
     Object.assign(this, instance);
   }

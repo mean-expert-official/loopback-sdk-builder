@@ -1,0 +1,23 @@
+{
+  "name": "Account",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "PubSub": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "rooms": {
+      "type": "hasMany",
+      "model": "Room",
+      "foreignKey": "",
+      "through": "RoomAccount"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

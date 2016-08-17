@@ -1,0 +1,25 @@
+{
+  "name": "RoomAccount",
+  "plural": "room-accounts",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "account": {
+      "type": "belongsTo",
+      "model": "Account",
+      "foreignKey": ""
+    },
+    "room": {
+      "type": "belongsTo",
+      "model": "Room",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -190,6 +190,39 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
+   * Creates a new instance in accessTokens of this model.
+   *
+   * @param any id User id
+   *
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object[] An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `User` object.)
+   * </em>
+   */
+  public createManyAccessTokens(id: any, data: any = undefined) {
+    let method: string = "POST";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Users/:id/accessTokens";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {
+      data: data
+    };
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
    * Deletes all accessTokens of this model.
    *
    * @param any id User id
@@ -678,7 +711,9 @@ export class UserApi extends BaseLoopBackApi {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Users/confirm";
-    let routeParams: any = {};
+    let routeParams: any = {
+      uid: uid
+    };
     let postBody: any = {};
     let urlParams: any = {};
     if (token) urlParams.token = token;
@@ -709,36 +744,6 @@ export class UserApi extends BaseLoopBackApi {
       options: options
     };
     let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result;
-  }
-
-  /**
-   * Fetches belongsTo relation user.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param boolean refresh 
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `User` object.)
-   * </em>
-   */
-  public getUserIdentityUser(id: any, refresh: any = undefined) {
-    let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/UserIdentities/:id/user";
-    let routeParams: any = {
-      id: id
-    };
-    let postBody: any = {};
-    let urlParams: any = {};
-    if (refresh) urlParams.refresh = refresh;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }

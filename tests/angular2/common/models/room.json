@@ -31,6 +31,12 @@
       "type": "hasAndBelongsToMany",
       "model": "Category",
       "foreignKey": ""
+    },
+    "accounts": {
+      "type": "hasMany",
+      "model": "Account",
+      "foreignKey": "",
+      "through": "RoomAccount"
     }
   },
   "acls": [],

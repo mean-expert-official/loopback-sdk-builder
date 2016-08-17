@@ -60,5 +60,17 @@
   "Category": {
     "dataSource": "db",
     "public": true
+  },
+  "Account": {
+    "dataSource": "db",
+    "public": true
+  },
+  "RoomAccount": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Storage": {
+    "dataSource": "storage",
+    "public": true
   }
 }
