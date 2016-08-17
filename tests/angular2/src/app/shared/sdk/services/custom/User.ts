@@ -190,39 +190,6 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in accessTokens of this model.
-   *
-   * @param any id User id
-   *
-   * @param object data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns object[] An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `User` object.)
-   * </em>
-   */
-  public createManyAccessTokens(id: any, data: any = undefined) {
-    let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Users/:id/accessTokens";
-    let routeParams: any = {
-      id: id
-    };
-    let postBody: any = {
-      data: data
-    };
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result;
-  }
-
-  /**
    * Deletes all accessTokens of this model.
    *
    * @param any id User id
@@ -305,38 +272,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Create a new instance of the model and persist it into the data source.
-   *
-   * @param object data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns object[] An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `User` object.)
-   * </em>
-   */
-  public createMany(data: any = undefined) {
-    let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Users";
-    let routeParams: any = {};
-    let postBody: any = {
-      data: data
-    };
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instances: Array<User>) =>
-        instances.map((instance: User) => new User(instance))
-    );
-  }
-
-  /**
-   * Update an existing model instance or insert a new one into the data source.
+   * Patch an existing model instance or insert a new one into the data source.
    *
    * @param object data Request data.
    *
@@ -352,7 +288,7 @@ export class UserApi extends BaseLoopBackApi {
    * </em>
    */
   public upsert(data: any = undefined) {
-    let method: string = "PUT";
+    let method: string = "PATCH";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Users";
     let routeParams: any = {};
@@ -362,6 +298,35 @@ export class UserApi extends BaseLoopBackApi {
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result.map((instance: User) => new User(instance));
+  }
+
+  /**
+   * Replace an existing model instance or insert a new one into the data source.
+   *
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `User` object.)
+   * </em>
+   */
+  public replaceOrCreate(data: any = undefined) {
+    let method: string = "POST";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Users/replaceOrCreate";
+    let routeParams: any = {};
+    let postBody: any = {
+      data: data
+    };
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
   }
 
   /**
@@ -391,7 +356,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Find a model instance by id from the data source.
+   * Find a model instance by {{id}} from the data source.
    *
    * @param any id Model id
    *
@@ -418,6 +383,39 @@ export class UserApi extends BaseLoopBackApi {
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result.map((instance: User) => new User(instance));
+  }
+
+  /**
+   * Replace attributes for a model instance and persist it into the data source.
+   *
+   * @param any id Model id
+   *
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `User` object.)
+   * </em>
+   */
+  public replaceById(id: any, data: any = undefined) {
+    let method: string = "POST";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Users/:id/replace";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {
+      data: data
+    };
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
   }
 
   /**
@@ -475,7 +473,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Update instances of the model matched by where from the data source.
+   * Update instances of the model matched by {{where}} from the data source.
    *
    * @param object where Criteria to match model instances
    *
@@ -504,7 +502,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Delete a model instance by id from the data source.
+   * Delete a model instance by {{id}} from the data source.
    *
    * @param any id Model id
    *
@@ -556,7 +554,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Update attributes for a model instance and persist it into the data source.
+   * Patch attributes for a model instance and persist it into the data source.
    *
    * @param any id User id
    *
@@ -574,7 +572,7 @@ export class UserApi extends BaseLoopBackApi {
    * </em>
    */
   public updateAttributes(id: any, data: any = undefined) {
-    let method: string = "PUT";
+    let method: string = "PATCH";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Users/:id";
     let routeParams: any = {
@@ -637,7 +635,7 @@ export class UserApi extends BaseLoopBackApi {
    * The response body contains properties of the AccessToken created on login.
    * Depending on the value of `include` parameter, the body may contain additional properties:
    * 
-   *   - `user` - `{User}` - Data of the currently logged in user. (`include=user`)
+   *   - `user` - `U+007BUserU+007D` - Data of the currently logged in user. (`include=user`)
    * 
    *
    */
@@ -746,6 +744,70 @@ export class UserApi extends BaseLoopBackApi {
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
+  }
+
+  /**
+   * Creates a new instance in accessTokens of this model.
+   *
+   * @param any id User id
+   *
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object[] An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `User` object.)
+   * </em>
+   */
+  public createManyAccessTokens(id: any, data: any = undefined) {
+    let method: string = "POST";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Users/:id/accessTokens";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {
+      data: data
+    };
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Create a new instance of the model and persist it into the data source.
+   *
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object[] An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `User` object.)
+   * </em>
+   */
+  public createMany(data: any = undefined) {
+    let method: string = "POST";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Users";
+    let routeParams: any = {};
+    let postBody: any = {
+      data: data
+    };
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result.map((instances: Array<User>) =>
+        instances.map((instance: User) => new User(instance))
+    );
   }
   /**
    * @ngdoc method

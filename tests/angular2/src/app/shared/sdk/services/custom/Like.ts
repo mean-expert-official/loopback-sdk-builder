@@ -124,38 +124,7 @@ export class LikeApi extends BaseLoopBackApi {
   }
 
   /**
-   * Create a new instance of the model and persist it into the data source.
-   *
-   * @param object data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns object[] An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Like` object.)
-   * </em>
-   */
-  public createMany(data: any = undefined) {
-    let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/likes";
-    let routeParams: any = {};
-    let postBody: any = {
-      data: data
-    };
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instances: Array<Like>) =>
-        instances.map((instance: Like) => new Like(instance))
-    );
-  }
-
-  /**
-   * Update an existing model instance or insert a new one into the data source.
+   * Patch an existing model instance or insert a new one into the data source.
    *
    * @param object data Request data.
    *
@@ -171,7 +140,7 @@ export class LikeApi extends BaseLoopBackApi {
    * </em>
    */
   public upsert(data: any = undefined) {
-    let method: string = "PUT";
+    let method: string = "PATCH";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/likes";
     let routeParams: any = {};
@@ -181,6 +150,35 @@ export class LikeApi extends BaseLoopBackApi {
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result.map((instance: Like) => new Like(instance));
+  }
+
+  /**
+   * Replace an existing model instance or insert a new one into the data source.
+   *
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Like` object.)
+   * </em>
+   */
+  public replaceOrCreate(data: any = undefined) {
+    let method: string = "POST";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/likes/replaceOrCreate";
+    let routeParams: any = {};
+    let postBody: any = {
+      data: data
+    };
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
   }
 
   /**
@@ -210,7 +208,7 @@ export class LikeApi extends BaseLoopBackApi {
   }
 
   /**
-   * Find a model instance by id from the data source.
+   * Find a model instance by {{id}} from the data source.
    *
    * @param any id Model id
    *
@@ -237,6 +235,39 @@ export class LikeApi extends BaseLoopBackApi {
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result.map((instance: Like) => new Like(instance));
+  }
+
+  /**
+   * Replace attributes for a model instance and persist it into the data source.
+   *
+   * @param any id Model id
+   *
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Like` object.)
+   * </em>
+   */
+  public replaceById(id: any, data: any = undefined) {
+    let method: string = "POST";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/likes/:id/replace";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {
+      data: data
+    };
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
   }
 
   /**
@@ -294,7 +325,7 @@ export class LikeApi extends BaseLoopBackApi {
   }
 
   /**
-   * Update instances of the model matched by where from the data source.
+   * Update instances of the model matched by {{where}} from the data source.
    *
    * @param object where Criteria to match model instances
    *
@@ -323,7 +354,7 @@ export class LikeApi extends BaseLoopBackApi {
   }
 
   /**
-   * Delete a model instance by id from the data source.
+   * Delete a model instance by {{id}} from the data source.
    *
    * @param any id Model id
    *
@@ -375,7 +406,7 @@ export class LikeApi extends BaseLoopBackApi {
   }
 
   /**
-   * Update attributes for a model instance and persist it into the data source.
+   * Patch attributes for a model instance and persist it into the data source.
    *
    * @param any id PersistedModel id
    *
@@ -393,7 +424,7 @@ export class LikeApi extends BaseLoopBackApi {
    * </em>
    */
   public updateAttributes(id: any, data: any = undefined) {
-    let method: string = "PUT";
+    let method: string = "PATCH";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/likes/:id";
     let routeParams: any = {
@@ -433,6 +464,37 @@ export class LikeApi extends BaseLoopBackApi {
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
+  }
+
+  /**
+   * Create a new instance of the model and persist it into the data source.
+   *
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object[] An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Like` object.)
+   * </em>
+   */
+  public createMany(data: any = undefined) {
+    let method: string = "POST";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/likes";
+    let routeParams: any = {};
+    let postBody: any = {
+      data: data
+    };
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result.map((instances: Array<Like>) =>
+        instances.map((instance: Like) => new Like(instance))
+    );
   }
 
 

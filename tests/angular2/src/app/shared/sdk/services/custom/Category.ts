@@ -284,39 +284,6 @@ export class CategoryApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in rooms of this model.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param object data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns object[] An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Category` object.)
-   * </em>
-   */
-  public createManyRooms(id: any, data: Room = undefined) {
-    let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Categories/:id/rooms";
-    let routeParams: any = {
-      id: id
-    };
-    let postBody: any = {
-      data: data
-    };
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result;
-  }
-
-  /**
    * Deletes all rooms of this model.
    *
    * @param any id PersistedModel id
@@ -399,38 +366,7 @@ export class CategoryApi extends BaseLoopBackApi {
   }
 
   /**
-   * Create a new instance of the model and persist it into the data source.
-   *
-   * @param object data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns object[] An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Category` object.)
-   * </em>
-   */
-  public createMany(data: any = undefined) {
-    let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Categories";
-    let routeParams: any = {};
-    let postBody: any = {
-      data: data
-    };
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instances: Array<Category>) =>
-        instances.map((instance: Category) => new Category(instance))
-    );
-  }
-
-  /**
-   * Update an existing model instance or insert a new one into the data source.
+   * Patch an existing model instance or insert a new one into the data source.
    *
    * @param object data Request data.
    *
@@ -446,7 +382,7 @@ export class CategoryApi extends BaseLoopBackApi {
    * </em>
    */
   public upsert(data: any = undefined) {
-    let method: string = "PUT";
+    let method: string = "PATCH";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Categories";
     let routeParams: any = {};
@@ -456,6 +392,35 @@ export class CategoryApi extends BaseLoopBackApi {
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result.map((instance: Category) => new Category(instance));
+  }
+
+  /**
+   * Replace an existing model instance or insert a new one into the data source.
+   *
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Category` object.)
+   * </em>
+   */
+  public replaceOrCreate(data: any = undefined) {
+    let method: string = "POST";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Categories/replaceOrCreate";
+    let routeParams: any = {};
+    let postBody: any = {
+      data: data
+    };
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
   }
 
   /**
@@ -485,7 +450,7 @@ export class CategoryApi extends BaseLoopBackApi {
   }
 
   /**
-   * Find a model instance by id from the data source.
+   * Find a model instance by {{id}} from the data source.
    *
    * @param any id Model id
    *
@@ -512,6 +477,39 @@ export class CategoryApi extends BaseLoopBackApi {
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result.map((instance: Category) => new Category(instance));
+  }
+
+  /**
+   * Replace attributes for a model instance and persist it into the data source.
+   *
+   * @param any id Model id
+   *
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Category` object.)
+   * </em>
+   */
+  public replaceById(id: any, data: any = undefined) {
+    let method: string = "POST";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Categories/:id/replace";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {
+      data: data
+    };
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
   }
 
   /**
@@ -569,7 +567,7 @@ export class CategoryApi extends BaseLoopBackApi {
   }
 
   /**
-   * Update instances of the model matched by where from the data source.
+   * Update instances of the model matched by {{where}} from the data source.
    *
    * @param object where Criteria to match model instances
    *
@@ -598,7 +596,7 @@ export class CategoryApi extends BaseLoopBackApi {
   }
 
   /**
-   * Delete a model instance by id from the data source.
+   * Delete a model instance by {{id}} from the data source.
    *
    * @param any id Model id
    *
@@ -650,7 +648,9 @@ export class CategoryApi extends BaseLoopBackApi {
   }
 
   /**
-   * Update attributes for a model instance and persist it into the data source.
+   * Patch attributes for a model instance and persist it into the data source.
+   *
+   * @param any id PersistedModel id
    *
    * @param object data Request data.
    *
@@ -665,11 +665,13 @@ export class CategoryApi extends BaseLoopBackApi {
    * This usually means the response is a `Category` object.)
    * </em>
    */
-  public updateAttributes(data: any = undefined) {
-    let method: string = "PUT";
+  public updateAttributes(id: any, data: any = undefined) {
+    let method: string = "PATCH";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Categories/:id";
-    let routeParams: any = {};
+    let routeParams: any = {
+      id: id
+    };
     let postBody: any = {
       data: data
     };
@@ -704,6 +706,70 @@ export class CategoryApi extends BaseLoopBackApi {
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
+  }
+
+  /**
+   * Creates a new instance in rooms of this model.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object[] An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Category` object.)
+   * </em>
+   */
+  public createManyRooms(id: any, data: Room = undefined) {
+    let method: string = "POST";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Categories/:id/rooms";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {
+      data: data
+    };
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Create a new instance of the model and persist it into the data source.
+   *
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object[] An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Category` object.)
+   * </em>
+   */
+  public createMany(data: any = undefined) {
+    let method: string = "POST";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Categories";
+    let routeParams: any = {};
+    let postBody: any = {
+      data: data
+    };
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result.map((instances: Array<Category>) =>
+        instances.map((instance: Category) => new Category(instance))
+    );
   }
 
 
