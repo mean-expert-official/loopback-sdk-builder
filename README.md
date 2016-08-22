@@ -1,4 +1,4 @@
-[![NPM](https://nodei.co/npm/loopback-sdk-builder.png?stars&downloads)](https://nodei.co/npm/loopback-sdk-builder/)
+[![NPM](https://nodei.co/npm/@mean-expert/loopback-sdk-builder.png?stars&downloads)](https://nodei.co/npm/@mean-expert/loopback-sdk-builder/)
 
 LoopBack SDK Builder
 ==================
@@ -40,4 +40,4 @@ $ npm install --save-dev @mean-expert/loopback-sdk-builder
 
 Discuss features and ask questions on [@johncasarrubias at Twitter](https://twitter.com/johncasarrubias).
 
-[![NPM](https://nodei.co/npm-dl/loopback-sdk-builder.png)](https://nodei.co/npm/loopback-sdk-builder/)
+[![NPM](https://nodei.co/npm-dl/@mean-expert/loopback-sdk-builder.png)](https://nodei.co/npm/@mean-expert/loopback-sdk-builder/)
