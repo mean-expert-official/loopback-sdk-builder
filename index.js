@@ -1,3 +1,1 @@
-exports.angular2 = require('./lib/angular2');
-exports.ngrx     = require('./lib/ngrx');
-exports.react    = require('./lib/react');
+console.log('This module has been deprecated, use @mean-expert/loopback-sdk-builder instead');
