@@ -1,26 +1,20 @@
-import {
-  beforeEachProviders,
-  it,
-  describe,
-  expect,
-  inject,
-  async
-} from '@angular/core/testing';
-
+import { addProviders, async, inject } from '@angular/core/testing';
 import {
   User,
-  UserApi,
-  API_PROVIDERS,
   LoopBackConfig,
-  AccessTokenInterface
-} from './shared';
+  AccessTokenInterface,
+  API_PROVIDERS
+} from './shared/sdk';
+
+import { UserApi } from './shared/sdk/services';
 
 LoopBackConfig.setBaseURL('http://127.0.0.1:3000');
 LoopBackConfig.setApiVersion('api');
 
 describe('UserService Tests', () => {
-  beforeEachProviders(() => [API_PROVIDERS]);
-
+  beforeEach(() => {
+    addProviders([ API_PROVIDERS ]);
+  });
   it('should contain authentication methods',
     async(inject([UserApi], (service: UserApi) => {
       expect(service).toBeTruthy();
