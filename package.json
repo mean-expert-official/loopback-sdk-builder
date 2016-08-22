@@ -1,9 +1,8 @@
 {
-  "name": "loopback-sdk-builder",
-  "version": "2.0.0-rc.9.1",
+  "name": "@mean-expert/loopback-sdk-builder",
+  "version": "2.0.0",
   "description": "Tool for auto-generating Software Development Kits (SDKs) for LoopBack",
   "bin": {
-    "lb-ng": "bin/lb-ng",
     "lb-sdk": "bin/lb-sdk"
   },
   "main": "index.js",
@@ -15,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/jonathan-casarrubias/loopback-sdk-builder.git"
+    "url": "git://github.com/mean-expert-official/loopback-sdk-builder.git"
   },
   "keywords": [
     "loopback",
@@ -49,7 +48,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues"
+    "url": "https://github.com/mean-expert-official/loopback-sdk-builder/issues"
   },
   "dependencies": {
     "ejs": "^1.0",

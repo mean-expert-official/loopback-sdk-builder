@@ -21,14 +21,7 @@ export abstract class BaseLoopBackApi {
     @Inject(LoopBackAuth) protected auth: LoopBackAuth, 
     @Inject(JSONSearchParams) protected searchParams: JSONSearchParams, 
     @Optional() @Inject(ErrorHandler) protected errorHandler: ErrorHandler
-  ) {
-    if (!auth) {
-      this.auth = new LoopBackAuth();
-    }
-    if (!errorHandler) {
-      this.errorHandler = new ErrorHandler();
-    }
-  }
+  ) {}
 
   /**
    * Process request

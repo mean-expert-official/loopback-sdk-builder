@@ -69,6 +69,10 @@
     "dataSource": "db",
     "public": true
   },
+  "RoomAdmin": {
+    "dataSource": "db",
+    "public": false
+  },
   "Storage": {
     "dataSource": "storage",
     "public": true
