@@ -1,11 +1,11 @@
-[![NPM](https://nodei.co/npm/loopback-sdk-builder.png?stars&downloads)](https://nodei.co/npm/loopback-sdk-builder/)
+![LoopBack SDK Builder](https://storage.googleapis.com/mean-expert-images/sdk-builder.jpg)
 
 LoopBack SDK Builder
 ==================
 
-The [loopback-sdk-builder](https://www.npmjs.com/package/loopback-sdk-builder) is a community driven module forked from the official `loopback-sdk-angular` and refactored to support [Angular 2](http://angular.io).
+The [@mean-expert/loopback-sdk-builder](https://www.npmjs.com/package/@mean-expert/loopback-sdk-builder) is a community driven module forked from the official `loopback-sdk-angular` and refactored to support [Angular 2](http://angular.io).
 
-The [LoopBack SDK Builder](https://www.npmjs.com/package/loopback-sdk-builder) will explore your [LoopBack Application](http://loopback.io) and will automatically build everything you need to start writing your [Angular 2 Applications](http://angular.io) right away. From Interfaces and Models to API Services and Real-time communications.
+The [LoopBack SDK Builder](https://www.npmjs.com/package/@mean-expert/loopback-sdk-builder) will explore your [LoopBack Application](http://loopback.io) and will automatically build everything you need to start writing your [Angular 2 Applications](http://angular.io) right away. From Interfaces and Models to API Services and Real-time communications.
 
 # Installation
 
@@ -40,4 +40,6 @@ $ npm install --save-dev @mean-expert/loopback-sdk-builder
 
 Discuss features and ask questions on [@johncasarrubias at Twitter](https://twitter.com/johncasarrubias).
 
-[![NPM](https://nodei.co/npm-dl/loopback-sdk-builder.png)](https://nodei.co/npm/loopback-sdk-builder/)
+[![NPM](https://nodei.co/npm/@mean-expert/loopback-sdk-builder.png?stars&downloads)](https://nodei.co/npm/@mean-expert/loopback-sdk-builder/)
+
+[![NPM](https://nodei.co/npm-dl/@mean-expert/loopback-sdk-builder.png)](https://nodei.co/npm/@mean-expert/loopback-sdk-builder/)
