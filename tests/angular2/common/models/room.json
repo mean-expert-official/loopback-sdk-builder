@@ -37,6 +37,12 @@
       "model": "Account",
       "foreignKey": "",
       "through": "RoomAccount"
+    },
+    "admins": {
+      "type": "hasMany",
+      "model": "Account",
+      "foreignKey": "adminId",
+      "through": "RoomAdmin"
     }
   },
   "acls": [],

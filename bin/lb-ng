@@ -1,3 +1,0 @@
-#!/usr/bin/env node
-
-console.error('ERROR: lb-ng command is deprecated in version 2, use the provided lb-sdk cli tool instead.')

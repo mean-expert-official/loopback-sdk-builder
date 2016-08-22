@@ -2,6 +2,35 @@
 
 This file is created to keep history of the LoopBack SDK Builder, it does not consider or keeps any history of its parent module `loopback-sdk-angular`.
 
+## Release 2.0.0-stable
+
+
+[LINK TO WIKI DOCUMENTATION](https://github.com/mean-expert-official/loopback-sdk-builder/wiki)
+
+- Support for Angular 2 (Final API w/ NgModules & Backwards compatibility < RC5).
+- Support for TypeScript (Fully Typed).
+- Built in Interfaces and Models.
+- Extendable Models for custom logic.
+- Enables Support for Real-Time Applications [loopback-component-pubsub](https://www.npmjs.com/package/loopback-component-pubsub)
+- Built in LoopBack Authentication.
+- Built in Support for LoopBack Query Language [Querying Data](https://docs.strongloop.com/display/public/LB/Querying+data)
+- Built in API Servics.
+- Built in Platform Specific Drivers (Angular2 for web, NativeScript2, ~~Angular Universal~~).
+- Built in CLI Tool for builder.
+- Built in Logger Service.
+- Blacklist mechanism to select which models or methods generate.
+- Ability to point models to different url domains (not global baseUrl)
+- IO Heartbeating to avoid disconnections.
+- Small foot print 100k per generated SDK (Will increase depending on number of models).
+
+- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/92
+- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/91
+- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/87
+- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/86
+- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/45
+- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/38
+
+
 ## Release 2.0.0-rc.9.1
 
 - Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/90

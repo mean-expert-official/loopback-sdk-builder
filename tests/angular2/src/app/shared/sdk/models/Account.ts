@@ -1,6 +1,6 @@
 /* tslint:disable */
 import {
-  Room
+  Room,
 } from '../index';
 
 export interface AccountInterface {
@@ -17,6 +17,7 @@ export interface AccountInterface {
   id?: number;
   accessTokens?: Array<any>;
   rooms?: Array<Room>;
+  administrations?: Array<Room>;
 }
 
 export class Account implements AccountInterface {
@@ -33,6 +34,7 @@ export class Account implements AccountInterface {
   id: number;
   accessTokens: Array<any>;
   rooms: Array<Room>;
+  administrations: Array<Room>;
   constructor(instance?: Account) {
     Object.assign(this, instance);
   }

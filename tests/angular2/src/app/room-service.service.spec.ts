@@ -1,24 +1,19 @@
-import {
-  beforeEachProviders,
-  it,
-  describe,
-  expect,
-  inject,
-  async
-} from '@angular/core/testing';
-
+import { addProviders, async, inject } from '@angular/core/testing';
 import {
   Room,
-  RoomApi,
-  API_PROVIDERS,
-  LoopBackConfig
-} from './shared';
+  LoopBackConfig,
+  API_PROVIDERS
+} from './shared/sdk';
+
+import { RoomApi } from './shared/sdk/services';
 
 LoopBackConfig.setBaseURL('http://127.0.0.1:3000');
 LoopBackConfig.setApiVersion('api');
 
 describe('RoomService Tests', () => {
-  beforeEachProviders(() => [API_PROVIDERS]);
+  beforeEach(() => {
+    addProviders([ API_PROVIDERS ]);
+  });
 
   it('should contain persisted model methods',
     async(inject([RoomApi], (service: RoomApi) => {
