@@ -3,12 +3,10 @@ import { Injectable, Inject, Optional } from '@angular/core';
 import { Http, Headers, Request } from '@angular/http';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import {
-  LoopBackAuth,
-  LoopBackConfig,
-  ErrorHandler,
-  JSONSearchParams
-} from '../../index';
+import { LoopBackAuth } from './auth.service';
+import { JSONSearchParams } from './search.params';
+import { ErrorHandler } from './error.service';
+import { LoopBackConfig } from '../../lb.config';
 
 
 @Injectable()

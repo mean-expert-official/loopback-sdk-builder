@@ -2,6 +2,11 @@
 
 This file is created to keep history of the LoopBack SDK Builder, it does not consider or keeps any history of its parent module `loopback-sdk-angular`.
 
+## Release 2.0.1
+
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/96
+
+
 ## Release 2.0.0-stable
 
 
@@ -23,77 +28,77 @@ This file is created to keep history of the LoopBack SDK Builder, it does not co
 - IO Heartbeating to avoid disconnections.
 - Small foot print 100k per generated SDK (Will increase depending on number of models).
 
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/92
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/91
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/87
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/86
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/45
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/38
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/92
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/91
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/87
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/86
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/45
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/38
 
 
 ## Release 2.0.0-rc.9.1
 
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/90
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/89
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/90
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/89
 
 ## Release 2.0.0-rc.9
 
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/88
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/87
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/85
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/83
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/88
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/87
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/85
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/83
 
 ## Release 2.0.0-rc.8.1
 
-- Hot Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/82
+- Hot Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/82
 
 ## Release 2.0.0-rc.8
 
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/81
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/80
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/79
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/78
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/77
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/76
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/81
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/80
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/79
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/78
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/77
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/76
 
 ## Release 2.0.0-rc.7.2
 
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/74
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/73
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/74
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/73
 
 ## Release 2.0.0-rc.7
 
-- Enhance: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/72
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/71
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/70
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/69
-- Enhance: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/59
-- Enhance: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/57
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/51
+- Enhance: https://github.com/mean-expert-official/loopback-sdk-builder/issues/72
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/71
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/70
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/69
+- Enhance: https://github.com/mean-expert-official/loopback-sdk-builder/issues/59
+- Enhance: https://github.com/mean-expert-official/loopback-sdk-builder/issues/57
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/51
 
 ## Release 2.0.0-rc.6
 
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/68
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/67
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/66
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/63
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/62
-- Enhance: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/60
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/58
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/68
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/67
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/66
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/63
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/62
+- Enhance: https://github.com/mean-expert-official/loopback-sdk-builder/issues/60
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/58
 
 ## Release 2.0.0-rc.5
 
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/50
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/52
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/53
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/54
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/55
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/50
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/52
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/53
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/54
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/55
 - Added new unit tests for custom get and post remote methods
 
 ## Release 2.0.0-rc.4
 
-- Fix: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/49
-- Fix Private Models not being exposed: https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/47
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/49
+- Fix Private Models not being exposed: https://github.com/mean-expert-official/loopback-sdk-builder/issues/47
 
 ## Release 2.0.0-rc.3.2
 
@@ -101,15 +106,15 @@ This file is created to keep history of the LoopBack SDK Builder, it does not co
 
 ## Release 2.0.0-rc.3
 
-- Implemented enhancement https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/44
-- Fixed bug https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/43
+- Implemented enhancement https://github.com/mean-expert-official/loopback-sdk-builder/issues/44
+- Fixed bug https://github.com/mean-expert-official/loopback-sdk-builder/issues/43
 
 ## Release 2.0.0-rc.2
 
 - Refactor SDK Structure (Internal Breaking Change - External istransparent)
 - First refactor draft for generator logic
-- Fixed bug https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/41
-- Fixed bug https://github.com/jonathan-casarrubias/loopback-sdk-builder/issues/42
+- Fixed bug https://github.com/mean-expert-official/loopback-sdk-builder/issues/41
+- Fixed bug https://github.com/mean-expert-official/loopback-sdk-builder/issues/42
 - Upgrade Angular 2 test app to RC4
 
 ## Release 2.0.0-rc.1

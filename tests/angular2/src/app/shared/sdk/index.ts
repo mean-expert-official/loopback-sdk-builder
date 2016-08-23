@@ -21,22 +21,21 @@
 **/
 
 import { HTTP_PROVIDERS } from '@angular/http';
-import {
-  LoopBackAuth,
-  ErrorHandler,
-  LoggerService,
-  JSONSearchParams,
-  UserApi,
-  RoomApi,
-  LikeApi,
-  ApplicationCredentialApi,
-  UserCredentialApi,
-  UserIdentityApi,
-  CategoryApi,
-  AccountApi,
-  RoomAccountApi,
-  StorageApi
-} from './services/index';
+import { LoopBackAuth } from './services/core/auth.service';
+import { ErrorHandler } from './services/core/error.service';
+import { LoggerService } from './services/core/logger.service';
+import { JSONSearchParams } from './services/core/search.params';
+import { UserApi } from './services/custom/User';
+import { RoomApi } from './services/custom/Room';
+import { LikeApi } from './services/custom/Like';
+import { ApplicationCredentialApi } from './services/custom/ApplicationCredential';
+import { UserCredentialApi } from './services/custom/UserCredential';
+import { UserIdentityApi } from './services/custom/UserIdentity';
+import { CategoryApi } from './services/custom/Category';
+import { AccountApi } from './services/custom/Account';
+import { RoomAccountApi } from './services/custom/RoomAccount';
+import { StorageApi } from './services/custom/Storage';
+
 export const API_PROVIDERS: any[] = [
   HTTP_PROVIDERS,
   LoopBackAuth,

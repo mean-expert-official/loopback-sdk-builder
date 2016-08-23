@@ -1,17 +1,13 @@
 /* tslint:disable */
 import { Injectable, Inject, Optional } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import {
-  LoopBackAuth,
-  ErrorHandler,
-  JSONSearchParams,
-  BaseLoopBackApi,
-} from '../core/index';
-import {
-  Storage,
-  LoopBackFilter
-} from '../../models/index';
+import { BaseLoopBackApi } from '../core/base.service';
 import { LoopBackConfig } from '../../lb.config';
+import { LoopBackAuth } from '../core/auth.service';
+import { JSONSearchParams } from '../core/search.params';
+import { ErrorHandler } from '../core/error.service';
+import { Storage } from '../../models/Storage';
+import { LoopBackFilter } from '../../models/BaseModels'
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';

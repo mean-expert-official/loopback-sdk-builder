@@ -28,7 +28,7 @@ $ npm install --save-dev @mean-expert/loopback-sdk-builder
 - Built in LoopBack Authentication.
 - Built in Support for LoopBack Query Language [Querying Data](https://docs.strongloop.com/display/public/LB/Querying+data)
 - Built in API Servics.
-- Built in Platform Specific Drivers (Angular2 for web, NativeScript2, ~~Angular Universal~~).
+- Built in Platform Specific Drivers (Angular2 for web, NativeScript2, [~~Angular Universal~~](https://github.com/mean-expert-official/loopback-sdk-builder/issues/36)).
 - Built in CLI Tool for builder.
 - Built in Logger Service.
 - Blacklist mechanism to select which models or methods generate.
@@ -39,7 +39,3 @@ $ npm install --save-dev @mean-expert/loopback-sdk-builder
 # Contact
 
 Discuss features and ask questions on [@johncasarrubias at Twitter](https://twitter.com/johncasarrubias).
-
-[![NPM](https://nodei.co/npm/@mean-expert/loopback-sdk-builder.png?stars&downloads)](https://nodei.co/npm/@mean-expert/loopback-sdk-builder/)
-
-[![NPM](https://nodei.co/npm-dl/@mean-expert/loopback-sdk-builder.png)](https://nodei.co/npm/@mean-expert/loopback-sdk-builder/)
