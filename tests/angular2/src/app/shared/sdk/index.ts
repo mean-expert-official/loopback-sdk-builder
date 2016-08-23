@@ -14,29 +14,27 @@
 * If your application is equal or above RC 5 It is recommended to import the SDK
 * Module located in ./sdk.module.ts and follow the instructions.
 *
-* Also, It is recommended for you to start upgrading your application in order to 
+* Also, It is recommended for you to start upgrading your application in order to
 * support NgModules before backwards support is also dropped by Angular.
 *
 * READ: https://angular.io/docs/ts/latest/cookbook/rc4-to-rc5.html#!#5-cleanup
 **/
 
-import {
-  LoopBackAuth,
-  ErrorHandler,
-  LoggerService,
-  JSONSearchParams,
-  UserApi,
-  RoomApi,
-  LikeApi,
-  ApplicationCredentialApi,
-  UserCredentialApi,
-  UserIdentityApi,
-  CategoryApi,
-  AccountApi,
-  RoomAccountApi,
-  StorageApi,
-  CoreApi
-} from './services/index';
+import { HTTP_PROVIDERS } from '@angular/http';
+import { LoopBackAuth } from './services/core/auth.service';
+import { ErrorHandler } from './services/core/error.service';
+import { LoggerService } from './services/core/logger.service';
+import { JSONSearchParams } from './services/core/search.params';
+import { UserApi } from './services/custom/User';
+import { RoomApi } from './services/custom/Room';
+import { LikeApi } from './services/custom/Like';
+import { ApplicationCredentialApi } from './services/custom/ApplicationCredential';
+import { UserCredentialApi } from './services/custom/UserCredential';
+import { UserIdentityApi } from './services/custom/UserIdentity';
+import { CategoryApi } from './services/custom/Category';
+import { AccountApi } from './services/custom/Account';
+import { RoomAccountApi } from './services/custom/RoomAccount';
+import { StorageApi } from './services/custom/Storage';
 /**
 * IMPORTANT: API_PROVIDERS WILL BE DEPRECATED WHEN ANGULAR 2 IS STABLE
 * PLEASE MIGRATE YOUR PROJECT AS SOON AS POSSIBLE.

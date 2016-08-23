@@ -30,6 +30,7 @@ Implemented EventSource Support for ChangeStreams
 - Hot Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/98
 - Revert: https://github.com/mean-expert-official/loopback-sdk-builder/issues/96
 
+
 ## Release 2.0.1
 
 - Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/96
