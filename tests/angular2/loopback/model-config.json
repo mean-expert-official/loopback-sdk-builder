@@ -76,5 +76,9 @@
   "Storage": {
     "dataSource": "storage",
     "public": true
+  },
+  "Core": {
+    "dataSource": "corezoid",
+    "public": true
   }
 }

@@ -53,7 +53,8 @@ import {
   CategoryApi,
   AccountApi,
   RoomAccountApi,
-  StorageApi
+  StorageApi,
+  CoreApi
 } from './services/index';
 
 @NgModule({
@@ -81,7 +82,8 @@ export class SDKModule {
         CategoryApi,
         AccountApi,
         RoomAccountApi,
-        StorageApi
+        StorageApi,
+        CoreApi
       ]
     };
   }
