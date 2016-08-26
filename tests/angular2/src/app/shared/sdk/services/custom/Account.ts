@@ -16,6 +16,9 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/share';
 
+// Making Sure EventSource Type is available to avoid compilation issues.
+declare var EventSource: any;
+
 /**
  * Api services for the `Account` model.
  */
@@ -1203,19 +1206,20 @@ export class AccountApi extends BaseLoopBackApi {
    *
    *  - `changes` – `{ReadableStream}` - 
    */
-  public createChangeStream(options: any = undefined) {
-    let method: string = "POST";
+  public createChangeStream() {
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Accounts/change-stream";
-    let routeParams: any = {};
-    let postBody: any = {
-      options: options
-    };
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result;
+    let subject = new Subject();
+    if (typeof EventSource !== 'undefined') {
+      let emit    = (msg) => subject.next(JSON.parse(msg.data));
+      var source = new EventSource(url);
+      source.addEventListener('data', emit);
+      source.onerror = emit;
+    } else {
+      console.warn('SDK Builder: EventSource is not supported'); 
+    }
+    return subject.asObservable();
   }
-
   /**
    * Login a user with username/email and password.
    *
