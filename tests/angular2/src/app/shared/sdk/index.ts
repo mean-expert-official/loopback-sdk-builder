@@ -20,7 +20,6 @@
 * READ: https://angular.io/docs/ts/latest/cookbook/rc4-to-rc5.html#!#5-cleanup
 **/
 
-import { HTTP_PROVIDERS } from '@angular/http';
 import {
   LoopBackAuth,
   ErrorHandler,
@@ -38,8 +37,13 @@ import {
   StorageApi,
   CoreApi
 } from './services/index';
+/**
+* IMPORTANT: API_PROVIDERS WILL BE DEPRECATED WHEN ANGULAR 2 IS STABLE
+* PLEASE MIGRATE YOUR PROJECT AS SOON AS POSSIBLE.
+* ONCE ANGULAR 2 IS STABLE I WON'T KEEP SUPPORTING API PROVIDERS.
+* USER NGMODULE INSTEAD LOCATED IN ./sdk.module.ts
+**/
 export const API_PROVIDERS: any[] = [
-  HTTP_PROVIDERS,
   LoopBackAuth,
   ErrorHandler,
   LoggerService,

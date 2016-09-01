@@ -5,6 +5,7 @@ import {
   AccessTokenInterface,
   API_PROVIDERS
 } from './shared/sdk';
+import { HTTP_PROVIDERS } from '@angular/http';
 
 import { UserApi } from './shared/sdk/services';
 
@@ -13,7 +14,7 @@ LoopBackConfig.setApiVersion('api');
 
 describe('UserService Tests', () => {
   beforeEach(() => {
-    addProviders([ API_PROVIDERS ]);
+    addProviders([ API_PROVIDERS, HTTP_PROVIDERS ]);
   });
   it('should contain authentication methods',
     async(inject([UserApi], (service: UserApi) => {
