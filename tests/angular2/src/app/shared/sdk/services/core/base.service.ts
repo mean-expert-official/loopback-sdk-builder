@@ -3,12 +3,10 @@ import { Injectable, Inject, Optional } from '@angular/core';
 import { Http, Headers, Request } from '@angular/http';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import {
-  LoopBackAuth,
-  LoopBackConfig,
-  ErrorHandler,
-  JSONSearchParams
-} from '../../index';
+import { LoopBackAuth } from './auth.service';
+import { JSONSearchParams } from './search.params';
+import { ErrorHandler } from './error.service';
+import { LoopBackConfig } from '../../lb.config';
 
 
 @Injectable()
@@ -17,11 +15,11 @@ export abstract class BaseLoopBackApi {
   protected path: string;
 
   constructor(
-    @Inject(Http) protected http: Http, 
-    @Inject(LoopBackAuth) protected auth: LoopBackAuth, 
-    @Inject(JSONSearchParams) protected searchParams: JSONSearchParams, 
+    @Inject(Http) protected http: Http,
+    @Inject(LoopBackAuth) protected auth: LoopBackAuth,
+    @Inject(JSONSearchParams) protected searchParams: JSONSearchParams,
     @Optional() @Inject(ErrorHandler) protected errorHandler: ErrorHandler
-  ) {}
+  ) { }
 
   /**
    * Process request
@@ -33,11 +31,11 @@ export abstract class BaseLoopBackApi {
    * @param boolean isio        Request socket connection (When IO is enabled)
    */
   public request(
-    method      : string,
-    url         : string,
-    routeParams : any = {},
-    urlParams   : any = {},
-    postBody    : any = null  
+    method: string,
+    url: string,
+    routeParams: any = {},
+    urlParams: any = {},
+    postBody: any = null
   ) {
 
     let headers = new Headers();
@@ -59,31 +57,31 @@ export abstract class BaseLoopBackApi {
       );
     }
 
-      // Body fix for built in remote methods using "data", "options" or "credentials
-      // that are the actual body, Custom remote method properties are different and need
-      // to be wrapped into a body object
-      let body: any;
-      if (
-        typeof postBody === 'object' &&
-        (postBody.data || postBody.credentials || postBody.options) &&
-        Object.keys(postBody).length === 1
-      ) {
-        body = postBody.data    ? postBody.data :
-               postBody.options ? postBody.options :
-               postBody.credentials;
-      } else {
-        body = postBody;
-      }
-      this.searchParams.setJSON(urlParams);
-      let request: Request = new Request({
-        headers : headers,
-        method  : method,
-        url     : requestUrl,
-        search  : this.searchParams.getURLSearchParams(),
-        body    : body ? JSON.stringify(body) : undefined
-      });
-      return this.http.request(request)
-        .map(res => (res.text() != "" ? res.json() : {}))
-        .catch(this.errorHandler.handleError);
+    // Body fix for built in remote methods using "data", "options" or "credentials
+    // that are the actual body, Custom remote method properties are different and need
+    // to be wrapped into a body object
+    let body: any;
+    if (
+      typeof postBody === 'object' &&
+      (postBody.data || postBody.credentials || postBody.options) &&
+      Object.keys(postBody).length === 1
+    ) {
+      body = postBody.data ? postBody.data :
+        postBody.options ? postBody.options :
+          postBody.credentials;
+    } else {
+      body = postBody;
+    }
+    this.searchParams.setJSON(urlParams);
+    let request: Request = new Request({
+      headers: headers,
+      method: method,
+      url: requestUrl,
+      search: this.searchParams.getURLSearchParams(),
+      body: body ? JSON.stringify(body) : undefined
+    });
+    return this.http.request(request)
+      .map(res => (res.text() != "" ? res.json() : {}))
+      .catch(this.errorHandler.handleError);
   }
 }
