@@ -36,7 +36,7 @@ var argv = optimist
  */
 console.log('================================================================================================================================');
 console.log('*      __                      ____             __      _____  ____  __ __    ____        _ __    __             _    _____    *');
-console.log('*     / /   ___    ___  ____  / __ )____ ______/ /__   / ___/ / __ \\/ //_/   / __ )__  __(_) /___/ /__  _____   | |  / /__ \\   *');
+console.log('*     / /   ___   ___   ____  / __ )____ ______/ /__   / ___/ / __ \\/ //_/   / __ )__  __(_) /___/ /__  _____   | |  / /__ \\   *');
 console.log('*    / /   / __ \\/ __ \\/ __ \\/ __  / __ \'/ ___/ //_/   \\__  \\/ / / /  ,<    / __  / / / / / / __  / _ \\/ ___/   | | / /__/ /   *');
 console.log('*   / /___/ /_/ / /_/ / /_/ / /_/ / /_/ / /__/ , <     ___/ / /_/ / /| |   / /_/ / /_/ / / / /_/ /  __/ /       | |/ // __/    *');
 console.log('*  /_____/\\____/\\____/ .___/_____/\\__,_/\\___/_/|_|   /_____/_____/_/ |_|  /_____/\\__,_/_/_/\\__,_/\\___/_/        |___//____/    *');
@@ -75,7 +75,7 @@ function verifyPath() {
       output: process.stdout
     });
 
-    rl.question('\n\nIMPORTANT: The targeted SDK Directory is not empty, do you want to erase its content? (Y/n) ', (answer) => {
+    rl.question('\n\nWARNING: The targeted SDK Directory is not empty, do you want to erase its content? (Y/n) ', (answer) => {
       switch (answer) {
         case 'No':
         case 'no':

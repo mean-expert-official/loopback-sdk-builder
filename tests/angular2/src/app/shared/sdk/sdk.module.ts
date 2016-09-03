@@ -32,30 +32,24 @@
 * export class AppModule { }
 *
 **/
-
-import { HttpModule }    from '@angular/http';
+import { JSONSearchParams }  from './services/core/search.params';
+import { ErrorHandler }  from './services/core/error.service';
+import { LoopBackAuth }  from './services/core/auth.service';
+import { LoggerService }  from './services/custom/logger.service';
+import { HttpModule }  from '@angular/http';
 import { CommonModule }  from '@angular/common';
-import {
-  NgModule,
-  ModuleWithProviders
-} from '@angular/core';
-import {
-  LoopBackAuth,
-  ErrorHandler,
-  LoggerService,
-  JSONSearchParams,
-  UserApi,
-  RoomApi,
-  LikeApi,
-  ApplicationCredentialApi,
-  UserCredentialApi,
-  UserIdentityApi,
-  CategoryApi,
-  AccountApi,
-  RoomAccountApi,
-  StorageApi,
-  CoreApi
-} from './services/index';
+import { NgModule, ModuleWithProviders }  from '@angular/core';
+import { UserApi }  from './services/custom/User';
+import { RoomApi }  from './services/custom/Room';
+import { LikeApi }  from './services/custom/Like';
+import { ApplicationCredentialApi }  from './services/custom/ApplicationCredential';
+import { UserCredentialApi }  from './services/custom/UserCredential';
+import { UserIdentityApi }  from './services/custom/UserIdentity';
+import { CategoryApi }  from './services/custom/Category';
+import { AccountApi }  from './services/custom/Account';
+import { RoomAccountApi }  from './services/custom/RoomAccount';
+import { StorageApi }  from './services/custom/Storage';
+import { CoreApi }  from './services/custom/Core';
 
 @NgModule({
   imports:      [ CommonModule, HttpModule ],
@@ -73,17 +67,17 @@ export class SDKModule {
       ErrorHandler,
       LoggerService,
       JSONSearchParams,
-        UserApi,
-        RoomApi,
-        LikeApi,
-        ApplicationCredentialApi,
-        UserCredentialApi,
-        UserIdentityApi,
-        CategoryApi,
-        AccountApi,
-        RoomAccountApi,
-        StorageApi,
-        CoreApi
+      UserApi,
+      RoomApi,
+      LikeApi,
+      ApplicationCredentialApi,
+      UserCredentialApi,
+      UserIdentityApi,
+      CategoryApi,
+      AccountApi,
+      RoomAccountApi,
+      StorageApi,
+      CoreApi
       ]
     };
   }

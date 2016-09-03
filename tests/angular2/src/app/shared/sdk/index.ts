@@ -19,24 +19,21 @@
 *
 * READ: https://angular.io/docs/ts/latest/cookbook/rc4-to-rc5.html#!#5-cleanup
 **/
-
-import {
-  LoopBackAuth,
-  ErrorHandler,
-  LoggerService,
-  JSONSearchParams,
-  UserApi,
-  RoomApi,
-  LikeApi,
-  ApplicationCredentialApi,
-  UserCredentialApi,
-  UserIdentityApi,
-  CategoryApi,
-  AccountApi,
-  RoomAccountApi,
-  StorageApi,
-  CoreApi
-} from './services/index';
+import { JSONSearchParams }  from './services/core/search.params';
+import { ErrorHandler }  from './services/core/error.service';
+import { LoopBackAuth }  from './services/core/auth.service';
+import { LoggerService }  from './services/custom/logger.service';
+import { UserApi }  from './services/custom/User';
+import { RoomApi }  from './services/custom/Room';
+import { LikeApi }  from './services/custom/Like';
+import { ApplicationCredentialApi }  from './services/custom/ApplicationCredential';
+import { UserCredentialApi }  from './services/custom/UserCredential';
+import { UserIdentityApi }  from './services/custom/UserIdentity';
+import { CategoryApi }  from './services/custom/Category';
+import { AccountApi }  from './services/custom/Account';
+import { RoomAccountApi }  from './services/custom/RoomAccount';
+import { StorageApi }  from './services/custom/Storage';
+import { CoreApi }  from './services/custom/Core';
 /**
 * IMPORTANT: API_PROVIDERS WILL BE DEPRECATED WHEN ANGULAR 2 IS STABLE
 * PLEASE MIGRATE YOUR PROJECT AS SOON AS POSSIBLE.
@@ -63,3 +60,4 @@ export const API_PROVIDERS: any[] = [
 export * from './models/index';
 export * from './services/index';
 export * from './lb.config';
+export * from './sdk.module';

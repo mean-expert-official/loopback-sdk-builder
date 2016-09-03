@@ -1,19 +1,16 @@
 /* tslint:disable */
-import { Injectable, Inject, Optional } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { BaseLoopBackApi } from '../core/base.service';
-import { LoopBackConfig } from '../../lb.config';
-import { LoopBackAuth } from '../core/auth.service';
-import { JSONSearchParams } from '../core/search.params';
-import { ErrorHandler } from '../core/error.service';
-import { UserIdentity } from '../../models/UserIdentity';
-import { User } from '../../models/User';
-import { LoopBackFilter } from '../../models/BaseModels'
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/share';
+import { Injectable, Inject, Optional }  from '@angular/core';
+import { Http, Response }  from '@angular/http';
+import { BaseLoopBackApi }  from '../core/base.service';
+import { LoopBackConfig }  from '../../lb.config';
+import { LoopBackAuth }  from '../core/auth.service';
+import { LoopBackFilter }  from '../../models/BaseModels';
+import { JSONSearchParams }  from '../core/search.params';
+import { ErrorHandler }  from '../core/error.service';
+import { Subject }  from 'rxjs/Subject';
+import 'rxjs/add/operator/map' ;
+import { UserIdentity }  from '../../models/UserIdentity';
+import { User }  from '../../models/User';
 
 // Making Sure EventSource Type is available to avoid compilation issues.
 declare var EventSource: any;

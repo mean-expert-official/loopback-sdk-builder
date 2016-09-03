@@ -1,16 +1,24 @@
 /* tslint:disable */
-import { Injectable, Inject, Optional } from '@angular/core';
-import { Http, Headers, Request } from '@angular/http';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-import {
-  LoopBackAuth,
-  LoopBackConfig,
-  ErrorHandler,
-  JSONSearchParams
-} from '../../index';
-
-
+import { Injectable, Inject, Optional }  from '@angular/core';
+import { Http, Headers, Request }  from '@angular/http';
+import { NgModule, ModuleWithProviders }  from '@angular/core';
+import { JSONSearchParams }  from './search.params';
+import { ErrorHandler }  from './error.service';
+import { LoopBackAuth }  from './auth.service';
+import { LoopBackConfig }  from '../../lb.config';
+import 'rxjs/add/operator/catch' ;
+import 'rxjs/add/operator/map' ;
+/**
+* @module BaseLoopBackApi
+* @author Nikolay Matiushenkov <https://github.com/mnvx>
+* @contributor Jonathan Casarrubias <@johncasarrubias> <github:jonathan-casarrubias>
+* @license MTI
+* @description
+* Abstract class that will be implemented in every custom service automatically built
+* by the sdk builder.
+* It provides the core functionallity for every API call, either by HTTP Calls or by
+* WebSockets.
+**/
 @Injectable()
 export abstract class BaseLoopBackApi {
 

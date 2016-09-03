@@ -1,21 +1,19 @@
-import { addProviders, async, inject } from '@angular/core/testing';
-import {
-  User,
-  LoopBackConfig,
-  AccessTokenInterface,
-  API_PROVIDERS
-} from './shared/sdk';
-import { HTTP_PROVIDERS } from '@angular/http';
+/* tslint:disable:no-unused-variable */
 
+import { TestBed, async, inject } from '@angular/core/testing';
+import { SDKModule } from './shared/sdk';
+import { User, AccessToken } from './shared/sdk/models';
 import { UserApi } from './shared/sdk/services';
 
-LoopBackConfig.setBaseURL('http://127.0.0.1:3000');
-LoopBackConfig.setApiVersion('api');
-
-describe('UserService Tests', () => {
+describe('Service: User Service', () => {
   beforeEach(() => {
-    addProviders([ API_PROVIDERS, HTTP_PROVIDERS ]);
+    TestBed.configureTestingModule({
+      imports: [
+        SDKModule.forRoot()
+      ]
+    });
   });
+
   it('should contain authentication methods',
     async(inject([UserApi], (service: UserApi) => {
       expect(service).toBeTruthy();
@@ -44,7 +42,7 @@ describe('UserService Tests', () => {
       user.password = 'test';
       return userApi.create(user)
         .subscribe((instance: User)   => userApi.login(user)
-        .subscribe((token: AccessTokenInterface) => {
+        .subscribe((token: AccessToken) => {
           expect(token.id).toBeTruthy();
           expect(token.userId).toBe(instance.id);
         }));
@@ -58,7 +56,7 @@ describe('UserService Tests', () => {
       user.password = 'test';
       return userApi.create(user)
         .subscribe((instance: User) => userApi.login(user)
-        .subscribe((token: AccessTokenInterface)   => {
+        .subscribe((token: AccessToken)   => {
           expect(token.id).toBeTruthy();
           expect(token.userId).toBe(instance.id);
           userApi.logout().subscribe((res: boolean) => {
@@ -82,7 +80,7 @@ describe('UserService Tests', () => {
       user.password = 'test';
       return userApi.create(user)
         .subscribe((instance: User) => userApi.login(user)
-        .subscribe((token: AccessTokenInterface) =>
+        .subscribe((token: AccessToken) =>
           userApi.getCurrent().subscribe((current: User) => {
           expect(current.id).toBe(instance.id);
         }))

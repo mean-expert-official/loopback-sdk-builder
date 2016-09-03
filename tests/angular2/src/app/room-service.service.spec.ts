@@ -1,19 +1,17 @@
-import { addProviders, async, inject } from '@angular/core/testing';
-import {
-  Room,
-  LoopBackConfig,
-  API_PROVIDERS
-} from './shared/sdk';
-import { HTTP_PROVIDERS } from '@angular/http';
+/* tslint:disable:no-unused-variable */
 
+import { TestBed, async, inject } from '@angular/core/testing';
+import { SDKModule } from './shared/sdk';
+import { Room } from './shared/sdk/models';
 import { RoomApi } from './shared/sdk/services';
 
-LoopBackConfig.setBaseURL('http://127.0.0.1:3000');
-LoopBackConfig.setApiVersion('api');
-
-describe('RoomService Tests', () => {
+describe('Service: Room Service', () => {
   beforeEach(() => {
-    addProviders([ API_PROVIDERS, HTTP_PROVIDERS ]);
+    TestBed.configureTestingModule({
+      imports: [
+        SDKModule.forRoot()
+      ]
+    });
   });
 
   it('should contain persisted model methods',

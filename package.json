@@ -1,6 +1,6 @@
 {
   "name": "@mean-expert/loopback-sdk-builder",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "Tool for auto-generating Software Development Kits (SDKs) for LoopBack",
   "bin": {
     "lb-sdk": "bin/lb-sdk"
@@ -10,7 +10,7 @@
     "prepublish": "",
     "test": "npm run test:angular2",
     "pretest": "cd tests/angular2 && npm install",
-    "test:angular2": "cd tests/angular2 && npm install ../../ && npm run test"
+    "test:angular2": "cd tests/angular2 && npm run test"
   },
   "repository": {
     "type": "git",
