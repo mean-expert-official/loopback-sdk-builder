@@ -5,4 +5,7 @@
 declare var System: any;
 declare var module: { id: string };
 declare var require: any;
-
+declare var expect: any;
+declare var it: any;
+declare var describe: any;
+declare var beforeEach: any;

@@ -34,18 +34,27 @@ var argv = optimist
 /**
  * Splash ACII Art
  */
-console.log('================================================================================================================================');
-console.log('*      __                      ____             __      _____  ____  __ __    ____        _ __    __             _    _____    *');
-console.log('*     / /   ___   ___   ____  / __ )____ ______/ /__   / ___/ / __ \\/ //_/   / __ )__  __(_) /___/ /__  _____   | |  / /__ \\   *');
-console.log('*    / /   / __ \\/ __ \\/ __ \\/ __  / __ \'/ ___/ //_/   \\__  \\/ / / /  ,<    / __  / / / / / / __  / _ \\/ ___/   | | / /__/ /   *');
-console.log('*   / /___/ /_/ / /_/ / /_/ / /_/ / /_/ / /__/ , <     ___/ / /_/ / /| |   / /_/ / /_/ / / / /_/ /  __/ /       | |/ // __/    *');
-console.log('*  /_____/\\____/\\____/ .___/_____/\\__,_/\\___/_/|_|   /_____/_____/_/ |_|  /_____/\\__,_/_/_/\\__,_/\\___/_/        |___//____/    *');
-console.log('*                   /_/                                                                                                        *');
-console.log('*                                                                                                                              *');
-console.log('================================================================================================================================');
-console.log('=========== Developed & Maintained by The MEAN Expert · http://mean.expert · http://github.com/mean-expert-official ============');
-console.log('================================================================================================================================');
-console.log('\n\nLOADING LOOPBACK SDK BUILDER PROCESS ...');
+console.log('\n\n===================================================================================================================================');
+console.log('*        __                      ____             __      _____  ____  __ __    ____        _ __    __             _    _____     *');
+console.log('*       / /   ___   ___   ____  / __ )____ ______/ /__   / ___/ / __ \\/ //_/   / __ )__  __(_) /___/ /__  _____   | |  / /__ \\    *');
+console.log('*      / /   / __ \\/ __ \\/ __ \\/ __  / __ \'/ ___/ //_/   \\__  \\/ / / /  ,<    / __  / / / / / / __  / _ \\/ ___/   | | / /__/ /    *');
+console.log('*     / /___/ /_/ / /_/ / /_/ / /_/ / /_/ / /__/ , <     ___/ / /_/ / /| |   / /_/ / /_/ / / / /_/ /  __/ /       | |/ // __/     *');
+console.log('*    /_____/\\____/\\____/ .___/_____/\\__,_/\\___/_/|_|   /_____/_____/_/ |_|  /_____/\\__,_/_/_/\\__,_/\\___/_/        |___//____/     *');
+console.log('*                     /_/                                                                                                         *');
+console.log('*                                                                                                                                 *');
+console.log('*=================================================================================================================================*');
+console.log('*                                                                                                                                 *');
+console.log('*             Developed & Maintained by The MEAN Expert · http://mean.expert · http://github.com/mean-expert-official             *');
+console.log('*                                                                                                                                 *');
+console.log('*                                                          CONTRIBUTORS                                                           *');
+console.log('*                      João Ribeiro <http://jonnybgod.ghost.io>, Nikolay Matiushenkov <https://github.com/mnvx>,                  *');
+console.log('*                                          Sylvain Dumont <https://www.weboaks.com>                                               *');
+console.log('*                                                                                                                                 *');
+console.log('*         Forked from Miroslav Bajtos\' <miroslav@strongloop.com> https://github.com/strongloop/loopback-sdk-angular               *');
+console.log('*                                                                                                                                 *');
+console.log('===================================================================================================================================');
+
+console.log('\n\THE MAGIC IS ABOUT TO HAPPEN ...\n\n');
 
 /**
  * Set Reference For Main Options
@@ -75,13 +84,13 @@ function verifyPath() {
       output: process.stdout
     });
 
-    rl.question('\n\nWARNING: The targeted SDK Directory is not empty, do you want to erase its content? (Y/n) ', (answer) => {
+    rl.question('WARNING: The targeted SDK Directory is not empty, do you want to erase its content? (Y/n) \n\n', (answer) => {
       switch (answer) {
         case 'No':
         case 'no':
         case 'N':
         case 'n':
-          console.log('\n\nThe LoopBack SDK Builder was unable to complete the operation. Finishing process right now.\n\n');
+          console.log('The LoopBack SDK Builder was unable to complete the operation. Finishing process right now.\n\n');
         break;
         default:
         runGenerator()
@@ -107,9 +116,10 @@ function runGenerator() {
   };
   // Load Selected Generator
   console.info('Loading Framework %s', context.framework);
-  console.error('Generating %j for the API endpoint %j', context.moduleName, context.apiUrl);
+  console.info('Generating %j for the API endpoint %j', context.moduleName, context.apiUrl);
   //try {
   generator[context.framework](context);
+  console.info('\n\nEnjoy!!!');
   //} catch (err) {
   //  throw new Error(err);
   //}

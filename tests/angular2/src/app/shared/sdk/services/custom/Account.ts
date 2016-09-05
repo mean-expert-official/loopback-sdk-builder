@@ -1,17 +1,17 @@
 /* tslint:disable */
-import { Injectable, Inject, Optional }  from '@angular/core';
-import { Http, Response }  from '@angular/http';
-import { BaseLoopBackApi }  from '../core/base.service';
-import { LoopBackConfig }  from '../../lb.config';
-import { LoopBackAuth }  from '../core/auth.service';
-import { LoopBackFilter }  from '../../models/BaseModels';
-import { JSONSearchParams }  from '../core/search.params';
-import { ErrorHandler }  from '../core/error.service';
-import { Subject }  from 'rxjs/Subject';
-import 'rxjs/add/operator/map' ;
-import { Account }  from '../../models/Account';
-import { RoomAccount }  from '../../models/RoomAccount';
-import { Room }  from '../../models/Room';
+import { Injectable, Inject, Optional } from '@angular/core';
+import { Http, Response } from '@angular/http';
+import { BaseLoopBackApi } from '../core/base.service';
+import { LoopBackConfig } from '../../lb.config';
+import { LoopBackAuth } from '../core/auth.service';
+import { LoopBackFilter } from '../../models/BaseModels';
+import { JSONSearchParams } from '../core/search.params';
+import { ErrorHandler } from '../core/error.service';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/map';
+import { Account } from '../../models/Account';
+import { RoomAccount } from '../../models/RoomAccount';
+import { Room } from '../../models/Room';
 
 // Making Sure EventSource Type is available to avoid compilation issues.
 declare var EventSource: any;
@@ -88,6 +88,19 @@ export class AccountApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onDestroyByIdAccessTokens(id: any) {
+    let method: string = "DELETE";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts/:id/accessTokens/:fk";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
+    return result;
+  }
+
   /**
    * Update a related item by id for accessTokens.
    *
@@ -121,6 +134,19 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  public onUpdateByIdAccessTokens(id: any) {
+    let method: string = "PUT";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts/:id/accessTokens/:fk";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
     return result;
   }
 
@@ -181,6 +207,19 @@ export class AccountApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onDestroyByIdRooms(id: any) {
+    let method: string = "DELETE";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts/:id/rooms/:fk";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
+    return result;
+  }
+
   /**
    * Update a related item by id for rooms.
    *
@@ -214,6 +253,19 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  public onUpdateByIdRooms(id: any) {
+    let method: string = "PUT";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts/:id/rooms/:fk";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
     return result;
   }
 
@@ -253,6 +305,19 @@ export class AccountApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onLinkRooms(id: any) {
+    let method: string = "PUT";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts/:id/rooms/rel/:fk";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
+    return result;
+  }
+
   /**
    * Remove the rooms relation to an item by id.
    *
@@ -277,6 +342,19 @@ export class AccountApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  public onUnlinkRooms(id: any) {
+    let method: string = "DELETE";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts/:id/rooms/rel/:fk";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
     return result;
   }
 
@@ -367,6 +445,19 @@ export class AccountApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onDestroyByIdAdministrations(id: any) {
+    let method: string = "DELETE";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts/:id/administrations/:fk";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
+    return result;
+  }
+
   /**
    * Update a related item by id for administrations.
    *
@@ -400,6 +491,19 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  public onUpdateByIdAdministrations(id: any) {
+    let method: string = "PUT";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts/:id/administrations/:fk";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
     return result;
   }
 
@@ -439,6 +543,19 @@ export class AccountApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onLinkAdministrations(id: any) {
+    let method: string = "PUT";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts/:id/administrations/rel/:fk";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
+    return result;
+  }
+
   /**
    * Remove the administrations relation to an item by id.
    *
@@ -463,6 +580,19 @@ export class AccountApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  public onUnlinkAdministrations(id: any) {
+    let method: string = "DELETE";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts/:id/administrations/rel/:fk";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
     return result;
   }
 
@@ -559,6 +689,19 @@ export class AccountApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onCreateAccessTokens(id: any) {
+    let method: string = "POST";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts/:id/accessTokens";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
+    return result;
+  }
+
   /**
    * Deletes all accessTokens of this model.
    *
@@ -580,6 +723,19 @@ export class AccountApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  public onDeleteAccessTokens(id: any) {
+    let method: string = "DELETE";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts/:id/accessTokens";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
     return result;
   }
 
@@ -675,6 +831,19 @@ export class AccountApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onCreateRooms(id: any) {
+    let method: string = "POST";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts/:id/rooms";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
+    return result;
+  }
+
   /**
    * Deletes all rooms of this model.
    *
@@ -696,6 +865,19 @@ export class AccountApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  public onDeleteRooms(id: any) {
+    let method: string = "DELETE";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts/:id/rooms";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
     return result;
   }
 
@@ -791,6 +973,19 @@ export class AccountApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onCreateAdministrations(id: any) {
+    let method: string = "POST";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts/:id/administrations";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
+    return result;
+  }
+
   /**
    * Deletes all administrations of this model.
    *
@@ -812,6 +1007,19 @@ export class AccountApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  public onDeleteAdministrations(id: any) {
+    let method: string = "DELETE";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts/:id/administrations";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
     return result;
   }
 
@@ -873,6 +1081,17 @@ export class AccountApi extends BaseLoopBackApi {
     return result.map((instance: Account) => new Account(instance));
   }
 
+  public onCreate() {
+    let method: string = "POST";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts";
+    let routeParams: any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
+    return result;
+  }
+
   /**
    * Patch an existing model instance or insert a new one into the data source.
    *
@@ -902,6 +1121,17 @@ export class AccountApi extends BaseLoopBackApi {
     return result.map((instance: Account) => new Account(instance));
   }
 
+  public onUpsert() {
+    let method: string = "PATCH";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts";
+    let routeParams: any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
+    return result;
+  }
+
   /**
    * Replace an existing model instance or insert a new one into the data source.
    *
@@ -928,6 +1158,17 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  public onReplaceOrCreate() {
+    let method: string = "POST";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts/replaceOrCreate";
+    let routeParams: any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
     return result;
   }
 
@@ -1020,6 +1261,19 @@ export class AccountApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onReplaceById(id: any) {
+    let method: string = "POST";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts/:id/replace";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
+    return result;
+  }
+
   /**
    * Find all instances of the model matched by filter from the data source.
    *
@@ -1103,6 +1357,17 @@ export class AccountApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onUpdateAll(where: any = undefined) {
+    let method: string = "POST";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts/update";
+    let routeParams: any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
+    return result;
+  }
+
   /**
    * Delete a model instance by {{id}} from the data source.
    *
@@ -1127,6 +1392,19 @@ export class AccountApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  public onDeleteById(id: any) {
+    let method: string = "DELETE";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts/:id";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
     return result;
   }
 
@@ -1185,6 +1463,19 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  public onUpdateAttributes(id: any) {
+    let method: string = "PATCH";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts/:id";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
     return result;
   }
 
@@ -1381,6 +1672,19 @@ export class AccountApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onCreateManyAccessTokens(id: any) {
+    let method: string = "POST";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts/:id/accessTokens";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
+    return result;
+  }
+
   /**
    * Creates a new instance in rooms of this model.
    *
@@ -1411,6 +1715,19 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  public onCreateManyRooms(id: any) {
+    let method: string = "POST";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts/:id/rooms";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
     return result;
   }
 
@@ -1447,6 +1764,19 @@ export class AccountApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onCreateManyAdministrations(id: any) {
+    let method: string = "POST";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts/:id/administrations";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
+    return result;
+  }
+
   /**
    * Create a new instance of the model and persist it into the data source.
    *
@@ -1476,6 +1806,17 @@ export class AccountApi extends BaseLoopBackApi {
     return result.map((instances: Array<Account>) =>
         instances.map((instance: Account) => new Account(instance))
     );
+  }
+
+  public onCreateMany() {
+    let method: string = "POST";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/Accounts";
+    let routeParams: any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
+    return result;
   }
   /**
    * @ngdoc method

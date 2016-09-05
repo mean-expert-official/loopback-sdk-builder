@@ -2,14 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { Room } from '../shared/sdk/models';
 import { AccountApi, RoomApi, LoggerService } from '../shared/sdk/services';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 @Component({
-  selector: 'room',
+  selector: 'app-room',
   templateUrl: 'room.component.html'
 })
 
 export class RoomComponent implements OnInit {
 
   private room: Room = new Room();
+  private subscription: Subscription;
 
   constructor(
     private accountApi: AccountApi,
@@ -20,7 +22,7 @@ export class RoomComponent implements OnInit {
     this.logger.info('Room Module Loaded');
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   logout(): void {
     this.accountApi.logout().subscribe(res => this.router.navigate(['/access']));
@@ -29,6 +31,7 @@ export class RoomComponent implements OnInit {
   create(): void {
     this.roomApi.create(this.room).subscribe((room: Room) => {
       this.room = room;
+      this.listen();
     });
   }
 
@@ -36,7 +39,10 @@ export class RoomComponent implements OnInit {
     this.roomApi.findOne({
       where: { name: this.room.name },
       include: 'messages'
-    }).subscribe((room: Room) => this.room = room, err => alert(err.message));
+    }).subscribe((room: Room) => {
+      this.room = room;
+      this.listen();
+    }, err => alert(err.message));
   }
   // We usually would use a Message model, but for testing purposes... The Message model
   // is private, therefore is not exposed to the SDK, that is expected in this test app
@@ -45,10 +51,14 @@ export class RoomComponent implements OnInit {
   send(message: string): void {
     this.roomApi.createMessages(this.room.id, {
       text: message
-    }).subscribe(instance => {
-      message = '';
+    }).subscribe(instance => this.logger.info('Message stored'));
+  }
+
+  listen() {
+    if (this.subscription) { this.subscription.unsubscribe(); }
+    this.subscription = this.roomApi.onCreateMessages(this.room.id).subscribe((message: any) => {
       this.room.messages = Array.isArray(this.room.messages) ? this.room.messages : [];
-      this.room.messages.push(instance);
+      this.room.messages.push(message);
     });
   }
 }

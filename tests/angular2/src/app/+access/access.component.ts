@@ -4,7 +4,7 @@ import { AccountApi } from '../shared/sdk/services';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'access',
+  selector: 'app-access',
   templateUrl: 'access.component.html'
 })
 
@@ -28,5 +28,4 @@ export class AccessComponent implements OnInit {
       this.router.navigate(['/room'])
     );
   }
-
 }

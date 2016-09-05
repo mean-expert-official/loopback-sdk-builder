@@ -9,7 +9,7 @@
     "pree2e": "webdriver-manager update",
     "e2e": "protractor",
     "test": "node loopback/server.js & ng test",
-    "build:sdk": "npm install ../../ && ./node_modules/.bin/lb-sdk loopback/server.js src/app/shared/sdk"
+    "build:sdk": "npm install ../../ && ./node_modules/.bin/lb-sdk loopback/server.js src/app/shared/sdk -i enabled"
   },
   "private": true,
   "dependencies": {
@@ -25,7 +25,6 @@
     "rxjs": "5.0.0-beta.11",
     "ts-helpers": "^1.1.1",
     "zone.js": "0.6.12",
-
     "compression": "^1.0.3",
     "config-chain": "^1.1.10",
     "cors": "^2.5.2",
@@ -42,6 +41,7 @@
   },
   "devDependencies": {
     "@types/jasmine": "^2.2.30",
+    "@types/socket.io-client": "^1.4.26",
     "angular-cli": "1.0.0-beta.11-webpack.8",
     "codelyzer": "~0.0.26",
     "jasmine-core": "2.4.1",
