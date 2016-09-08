@@ -696,7 +696,7 @@ export class CategoryApi extends BaseLoopBackApi {
     "/Categories/change-stream";
     let subject = new Subject();
     if (typeof EventSource !== 'undefined') {
-      let emit    = (msg) => subject.next(JSON.parse(msg.data));
+      let emit   = (msg: any) => subject.next(JSON.parse(msg.data));
       var source = new EventSource(url);
       source.addEventListener('data', emit);
       source.onerror = emit;
@@ -723,7 +723,7 @@ export class CategoryApi extends BaseLoopBackApi {
    * This usually means the response is a `Category` object.)
    * </em>
    */
-  public createManyRooms(id: any, data: Room = undefined) {
+  public createManyRooms(id: any, data: Array<Room> = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Categories/:id/rooms";
@@ -754,7 +754,7 @@ export class CategoryApi extends BaseLoopBackApi {
    * This usually means the response is a `Category` object.)
    * </em>
    */
-  public createMany(data: any = undefined) {
+  public createMany(data: Array<any> = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Categories";

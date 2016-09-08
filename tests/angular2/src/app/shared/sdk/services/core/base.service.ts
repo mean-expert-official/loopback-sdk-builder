@@ -6,6 +6,7 @@ import { JSONSearchParams } from './search.params';
 import { ErrorHandler } from './error.service';
 import { LoopBackAuth } from './auth.service';
 import { LoopBackConfig } from '../../lb.config';
+import { AccessToken } from '../../models';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { Subject } from 'rxjs/Subject';
@@ -76,11 +77,11 @@ export abstract class BaseLoopBackApi {
       }
       let event: string = (`[${method}]${requestUrl}`).replace(/\?/, '');
       let subject: Subject<any> = new Subject<any>();
-      let socket: any = SocketConnections.getHandler(LoopBackConfig.getPath(), {
-        id: this.auth.getAccessTokenId(),
-        userId: this.auth.getCurrentUserId()
-      });
-      socket.on(event, res => subject.next(res));
+      let token: AccessToken = new AccessToken();
+          token.id = this.auth.getAccessTokenId();
+          token.userId = this.auth.getCurrentUserId();
+      let socket: any = SocketConnections.getHandler(LoopBackConfig.getPath(), token);
+          socket.on(event, (res: any) => subject.next(res));
       return subject.asObservable();
     } else {      // Body fix for built in remote methods using "data", "options" or "credentials
       // that are the actual body, Custom remote method properties are different and need
@@ -106,7 +107,7 @@ export abstract class BaseLoopBackApi {
         body    : body ? JSON.stringify(body) : undefined
       });
       return this.http.request(request)
-        .map(res => (res.text() != "" ? res.json() : {}))
+        .map((res: any) => (res.text() != "" ? res.json() : {}))
         .catch(this.errorHandler.handleError);
    }  }
 }

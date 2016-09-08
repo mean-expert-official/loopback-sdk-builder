@@ -455,7 +455,7 @@ export class RoomAccountApi extends BaseLoopBackApi {
     "/room-accounts/change-stream";
     let subject = new Subject();
     if (typeof EventSource !== 'undefined') {
-      let emit    = (msg) => subject.next(JSON.parse(msg.data));
+      let emit   = (msg: any) => subject.next(JSON.parse(msg.data));
       var source = new EventSource(url);
       source.addEventListener('data', emit);
       source.onerror = emit;
@@ -480,7 +480,7 @@ export class RoomAccountApi extends BaseLoopBackApi {
    * This usually means the response is a `RoomAccount` object.)
    * </em>
    */
-  public createMany(data: any = undefined) {
+  public createMany(data: Array<any> = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/room-accounts";
