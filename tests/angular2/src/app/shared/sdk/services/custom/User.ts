@@ -4,7 +4,7 @@ import { Http, Response } from '@angular/http';
 import { BaseLoopBackApi } from '../core/base.service';
 import { LoopBackConfig } from '../../lb.config';
 import { LoopBackAuth } from '../core/auth.service';
-import { LoopBackFilter } from '../../models/BaseModels';
+import { LoopBackFilter, SDKToken, AccessToken } from '../../models/BaseModels';
 import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
@@ -636,7 +636,7 @@ export class UserApi extends BaseLoopBackApi {
    * 
    *
    */
-  public login(credentials: any, include: any = 'user') {
+  public login(credentials: any, include: any = 'user', rememberMe: boolean = true) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Users/login";
@@ -648,9 +648,9 @@ export class UserApi extends BaseLoopBackApi {
     if (include) urlParams.include = include;
     let result = this.request(method, url, routeParams, urlParams, postBody)
       .map(
-        (response: { id: string, userId: string, user: any }) => {
-          this.auth.setUser(response.id, response.userId, response.user);
-          this.auth.setRememberMe(true);
+        (response: SDKToken) => {
+          response.rememberMe = rememberMe;
+          this.auth.setUser(response);
           this.auth.save();
           return response;
         }
@@ -680,8 +680,7 @@ export class UserApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
        urlParams.access_token = this.auth.getAccessTokenId();
-    this.auth.clearStorage();
-    this.auth.clearUser(); 
+    this.auth.clear(); 
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -830,7 +829,6 @@ export class UserApi extends BaseLoopBackApi {
     let postBody: any = {};
     return this.request(method, url, routeParams, urlParams, postBody);
   }
-
   /**
    * Get data of the currently logged user that was returned by the last
    * call to {@link sdk.User#login} or
@@ -838,12 +836,20 @@ export class UserApi extends BaseLoopBackApi {
    * is no user logged in or the data of the current user were not fetched
    * yet.
    *
-   * @returns object A User instance.
+   * @returns object An Account instance.
    */
   public getCachedCurrent() {
     return this.auth.getCurrentUserData();
   }
-
+  /**
+   * Get data of the currently logged access tokern that was returned by the last
+   * call to {@link sdk.User#login}
+   *
+   * @returns object An AccessToken instance.
+   */
+  public getCurrentToken(): AccessToken {
+    return this.auth.getToken();
+  }
   /**
    * @name sdk.User#isAuthenticated
    *

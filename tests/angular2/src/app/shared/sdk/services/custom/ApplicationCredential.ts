@@ -4,7 +4,7 @@ import { Http, Response } from '@angular/http';
 import { BaseLoopBackApi } from '../core/base.service';
 import { LoopBackConfig } from '../../lb.config';
 import { LoopBackAuth } from '../core/auth.service';
-import { LoopBackFilter } from '../../models/BaseModels';
+import { LoopBackFilter,  } from '../../models/BaseModels';
 import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
@@ -432,7 +432,6 @@ export class ApplicationCredentialApi extends BaseLoopBackApi {
         instances.map((instance: ApplicationCredential) => new ApplicationCredential(instance))
     );
   }
-
 
   /**
    * The name of the model represented by this $resource,

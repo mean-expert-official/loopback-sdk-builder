@@ -1,4 +1,5 @@
 /* tslint:disable */
+
 export interface LoopBackFilter {
   fields?: any;
   include?: any;
@@ -14,7 +15,7 @@ export interface AccessTokenInterface {
     ttl?: number;
     created?: any;
     userId?: string;
-    user?: any;
+    rememberMe?: boolean;
 }
 
 export class AccessToken implements AccessTokenInterface {
@@ -25,5 +26,17 @@ export class AccessToken implements AccessTokenInterface {
     user: any;
     constructor(instance?: AccessToken) {
         Object.assign(this, instance);
+    }
+}
+
+export class SDKToken extends AccessToken {
+    id:string = null;
+    ttl: number = null;
+    created: any = null;
+    userId: string = null;
+    user: any = null;
+    rememberMe: boolean = null;
+    constructor(instance?: AccessToken) {
+        super(instance);
     }
 }

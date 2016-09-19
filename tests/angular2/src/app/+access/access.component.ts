@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class AccessComponent implements OnInit {
 
   private account: Account = new Account();
+  private rememberMe: boolean = false;
 
   constructor(
     private accountApi: AccountApi,
@@ -24,7 +25,7 @@ export class AccessComponent implements OnInit {
   }
 
   login() {
-    this.accountApi.login(this.account).subscribe((token: AccessToken) =>
+    this.accountApi.login(this.account, 'user', this.rememberMe).subscribe((token: AccessToken) =>
       this.router.navigate(['/room'])
     );
   }
