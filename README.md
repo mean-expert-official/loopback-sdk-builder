@@ -26,8 +26,7 @@ $ npm install --save-dev @mean-expert/loopback-sdk-builder
 
 Are you willing to build pure and modern Real-Time applications?? Then [CHECK THIS OUT](https://github.com/mean-expert-official/loopback-sdk-builder/wiki/8.-(NEW)-FireLoop-API)
 
-![FireLoop.io](https://storage.googleapis.com/mean-expert-images/fireloop-logo.png)
-
+[![FireLoop.io](https://storage.googleapis.com/mean-expert-images/fireloop-logo.png)](https://github.com/mean-expert-official/loopback-sdk-builder/wiki/8.-(NEW)-FireLoop-API)
 
 # Contact
 
