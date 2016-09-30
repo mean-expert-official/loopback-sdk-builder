@@ -1,5 +1,6 @@
 /* tslint:disable */
 
+declare var Object: any;
 export interface UserInterface {
   realm?: string;
   username?: string;
@@ -28,7 +29,7 @@ export class User implements UserInterface {
   lastUpdated: any;
   id: number;
   accessTokens: Array<any>;
-  constructor(instance?: User) {
+  constructor(instance?: UserInterface) {
     Object.assign(this, instance);
   }
 }

@@ -5,6 +5,7 @@ import {
   Account,
 } from '../index';
 
+declare var Object: any;
 export interface RoomInterface {
   name: string;
   id?: number;
@@ -23,7 +24,7 @@ export class Room implements RoomInterface {
   categories: Array<Category>;
   accounts: Array<Account>;
   admins: Array<Account>;
-  constructor(instance?: Room) {
+  constructor(instance?: RoomInterface) {
     Object.assign(this, instance);
   }
 }

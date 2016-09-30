@@ -3,6 +3,7 @@ import {
   Room,
 } from '../index';
 
+declare var Object: any;
 export interface AccountInterface {
   realm?: string;
   username?: string;
@@ -35,7 +36,7 @@ export class Account implements AccountInterface {
   accessTokens: Array<any>;
   rooms: Array<Room>;
   administrations: Array<Room>;
-  constructor(instance?: Account) {
+  constructor(instance?: AccountInterface) {
     Object.assign(this, instance);
   }
 }

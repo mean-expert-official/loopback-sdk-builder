@@ -242,7 +242,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public updateByIdLikes(id: any, fk: any, data: Like = undefined) {
+  public updateByIdLikes(id: any, fk: any, data: any = undefined) {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/likes/:fk";
@@ -361,7 +361,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public updateByIdCategories(id: any, fk: any, data: Category = undefined) {
+  public updateByIdCategories(id: any, fk: any, data: any = undefined) {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories/:fk";
@@ -599,7 +599,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public updateByIdAccounts(id: any, fk: any, data: Account = undefined) {
+  public updateByIdAccounts(id: any, fk: any, data: any = undefined) {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts/:fk";
@@ -648,7 +648,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public linkAccounts(id: any, fk: any, data: RoomAccount = undefined) {
+  public linkAccounts(id: any, fk: any, data: any = undefined) {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts/rel/:fk";
@@ -837,7 +837,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public updateByIdAdmins(id: any, fk: any, data: Account = undefined) {
+  public updateByIdAdmins(id: any, fk: any, data: any = undefined) {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins/:fk";
@@ -1175,7 +1175,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public createLikes(id: any, data: Like = undefined) {
+  public createLikes(id: any, data: any = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/likes";
@@ -1317,7 +1317,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public createCategories(id: any, data: Category = undefined) {
+  public createCategories(id: any, data: any = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories";
@@ -1459,7 +1459,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public createAccounts(id: any, data: Account = undefined) {
+  public createAccounts(id: any, data: any = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts";
@@ -1601,7 +1601,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public createAdmins(id: any, data: Account = undefined) {
+  public createAdmins(id: any, data: any = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins";
@@ -1752,7 +1752,7 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
   public upsert(data: any = undefined) {
-    let method: string = "PATCH";
+    let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms";
     let routeParams: any = {};
@@ -1765,7 +1765,7 @@ export class RoomApi extends BaseLoopBackApi {
   }
 
   public onUpsert() {
-    let method: string = "PATCH";
+    let method: string = "PUT";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms";
     let routeParams: any = {};
@@ -1808,6 +1808,49 @@ export class RoomApi extends BaseLoopBackApi {
     let method: string = "POST";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/replaceOrCreate";
+    let routeParams: any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
+    return result;
+  }
+
+  /**
+   * Update an existing model instance or insert a new one into the data source based on the where criteria.
+   *
+   * @param object where Criteria to match model instances
+   *
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Room` object.)
+   * </em>
+   */
+  public upsertWithWhere(where: any = undefined, data: any = undefined) {
+    let method: string = "POST";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/upsertWithWhere";
+    let routeParams: any = {};
+    let postBody: any = {
+      data: data
+    };
+    let urlParams: any = {};
+    if (where) urlParams.where = where;
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result.map((instance: Room) => new Room(instance));
+  }
+
+  public onUpsertWithWhere(where: any = undefined) {
+    let method: string = "POST";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/upsertWithWhere";
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
@@ -2095,7 +2138,7 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
   public updateAttributes(id: any, data: any = undefined) {
-    let method: string = "PATCH";
+    let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id";
     let routeParams: any = {
@@ -2110,7 +2153,7 @@ export class RoomApi extends BaseLoopBackApi {
   }
 
   public onUpdateAttributes(id: any) {
-    let method: string = "PATCH";
+    let method: string = "PUT";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id";
     let routeParams: any = {
@@ -2332,7 +2375,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public createManyLikes(id: any, data: Array<Like> = undefined) {
+  public createManyLikes(id: any, data: Array<any> = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/likes";
@@ -2378,7 +2421,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public createManyCategories(id: any, data: Array<Category> = undefined) {
+  public createManyCategories(id: any, data: Array<any> = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories";
@@ -2424,7 +2467,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public createManyAccounts(id: any, data: Array<Account> = undefined) {
+  public createManyAccounts(id: any, data: Array<any> = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts";
@@ -2470,7 +2513,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public createManyAdmins(id: any, data: Array<Account> = undefined) {
+  public createManyAdmins(id: any, data: Array<any> = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins";

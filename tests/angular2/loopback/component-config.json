@@ -2,7 +2,8 @@
   "loopback-component-explorer": {
     "mountPath": "/explorer"
   },
-  "loopback-component-pubsub": {
-    "auth": true
+  "@mean-expert/loopback-component-realtime": {
+    "debug": true,
+    "auth": false
   }
 }

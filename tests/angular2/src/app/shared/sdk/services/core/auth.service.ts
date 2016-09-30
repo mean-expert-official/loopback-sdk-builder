@@ -1,4 +1,5 @@
 /* tslint:disable */
+declare var Object: any;
 import { Injectable } from '@angular/core';
 import { StorageDriver } from '../../storage/storage.driver';
 import { SDKToken, AccessToken } from '../../models/BaseModels';

@@ -1,5 +1,6 @@
 /* tslint:disable */
 
+declare var Object: any;
 export interface UserCredentialInterface {
   provider?: string;
   authScheme?: string;
@@ -22,7 +23,7 @@ export class UserCredential implements UserCredentialInterface {
   modified: any;
   userId: any;
   id: number;
-  constructor(instance?: UserCredential) {
+  constructor(instance?: UserCredentialInterface) {
     Object.assign(this, instance);
   }
 }

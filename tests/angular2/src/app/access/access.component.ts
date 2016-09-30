@@ -5,20 +5,29 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-access',
-  templateUrl: 'access.component.html'
+  template: `
+  <h1>Register or Log In an Account</h1>
+  <form>
+    <input name="email" type="email" [(ngModel)]="account.email" placeholder="email" />
+    <input name="password" type="password" [(ngModel)]="account.password" placeholder="password" />
+    <label for="rememberMe">Remember Me:</label>
+    <input name="rememberMe" type="checkbox" [(ngModel)]="rememberMe"/>
+    <button (click)="register()">Register</button> or <button (click)="login()">Log In</button>
+  </form>
+`
 })
 
 export class AccessComponent implements OnInit {
 
-  private account: Account = new Account();
-  private rememberMe: boolean = false;
+  public account: Account = new Account();
+  public rememberMe: boolean = false;
 
   constructor(
     private accountApi: AccountApi,
     private router: Router
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   register() {
     this.accountApi.create(this.account).subscribe((account: Account) => this.login());

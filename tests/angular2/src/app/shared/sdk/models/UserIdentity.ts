@@ -3,6 +3,7 @@ import {
   User
 } from '../index';
 
+declare var Object: any;
 export interface UserIdentityInterface {
   provider?: string;
   authScheme?: string;
@@ -27,7 +28,7 @@ export class UserIdentity implements UserIdentityInterface {
   userId: number;
   id: number;
   user: User;
-  constructor(instance?: UserIdentity) {
+  constructor(instance?: UserIdentityInterface) {
     Object.assign(this, instance);
   }
 }

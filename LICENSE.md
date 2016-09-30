@@ -1,4 +1,12 @@
-Copyright (c) 2016 Jonathan Casarrubias <@johncasarrubias>
+#Art and Graphics License
+Copyright (c) 2016 MEAN Expert - Jonathan Casarrubias <@johncasarrubias>
+
+All Rights Reserved
+ 
+MEAN Expert, LoopBack SDK Builder, SDK Builder Mascot and The FireLoop.io name and Logos are protected by copyright and distributed under licenses restricting copying, distribution and decompilation.
+
+#Software MTI License
+Copyright (c) 2016 MEAN Expert - Jonathan Casarrubias <@johncasarrubias>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

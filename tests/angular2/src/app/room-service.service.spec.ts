@@ -3,7 +3,7 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 import { SDKModule } from './shared/sdk';
 import { Room } from './shared/sdk/models';
-import { RoomApi } from './shared/sdk/services';
+import { RoomApi, RealTime } from './shared/sdk/services';
 
 describe('Service: Room Service', () => {
   beforeEach(() => {
@@ -110,4 +110,20 @@ describe('Service: Room Service', () => {
         });
     })
   ));
+  
+  /**
+  It can not be tested for now because a strange Angular 2 error (No info available)
+  This is tested running the Test Application using ng serve instead.
+  it('should set data using FireLoop API',
+    async(inject([RealTime], (realTime: RealTime) => {
+      let room: Room = new Room();
+          room.name = 'FireLoop Room';
+      let ref: any =  realTime.FireLoop.ref('Room');
+      return ref.set(room).subscribe((result: Room) => {
+            expect(result.id).toBeTruthy();
+            expect(result.name).toBe(room.name);
+        });
+    })
+  ));
+  **/
 });
