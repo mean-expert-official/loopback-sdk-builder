@@ -23,4 +23,11 @@ export class Like implements LikeInterface {
   constructor(instance?: LikeInterface) {
     Object.assign(this, instance);
   }
+  /**
+   * The name of the model represented by this $resource,
+   * i.e. `Like`.
+   */
+  public static getModelName() {
+    return "Like";
+  }
 }

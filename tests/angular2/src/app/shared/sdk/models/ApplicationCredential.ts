@@ -22,4 +22,11 @@ export class ApplicationCredential implements ApplicationCredentialInterface {
   constructor(instance?: ApplicationCredentialInterface) {
     Object.assign(this, instance);
   }
+  /**
+   * The name of the model represented by this $resource,
+   * i.e. `ApplicationCredential`.
+   */
+  public static getModelName() {
+    return "ApplicationCredential";
+  }
 }

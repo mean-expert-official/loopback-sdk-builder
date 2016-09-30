@@ -39,4 +39,11 @@ export class Account implements AccountInterface {
   constructor(instance?: AccountInterface) {
     Object.assign(this, instance);
   }
+  /**
+   * The name of the model represented by this $resource,
+   * i.e. `Account`.
+   */
+  public static getModelName() {
+    return "Account";
+  }
 }

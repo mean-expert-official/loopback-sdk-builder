@@ -22,4 +22,11 @@ export class RoomAccount implements RoomAccountInterface {
   constructor(instance?: RoomAccountInterface) {
     Object.assign(this, instance);
   }
+  /**
+   * The name of the model represented by this $resource,
+   * i.e. `RoomAccount`.
+   */
+  public static getModelName() {
+    return "RoomAccount";
+  }
 }

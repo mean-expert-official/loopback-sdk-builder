@@ -17,4 +17,11 @@ export class Category implements CategoryInterface {
   constructor(instance?: CategoryInterface) {
     Object.assign(this, instance);
   }
+  /**
+   * The name of the model represented by this $resource,
+   * i.e. `Category`.
+   */
+  public static getModelName() {
+    return "Category";
+  }
 }

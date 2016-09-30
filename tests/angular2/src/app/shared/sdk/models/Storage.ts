@@ -10,4 +10,11 @@ export class Storage implements StorageInterface {
   constructor(instance?: StorageInterface) {
     Object.assign(this, instance);
   }
+  /**
+   * The name of the model represented by this $resource,
+   * i.e. `Storage`.
+   */
+  public static getModelName() {
+    return "Storage";
+  }
 }

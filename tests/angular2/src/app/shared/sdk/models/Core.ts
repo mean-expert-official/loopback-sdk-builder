@@ -10,4 +10,11 @@ export class Core implements CoreInterface {
   constructor(instance?: CoreInterface) {
     Object.assign(this, instance);
   }
+  /**
+   * The name of the model represented by this $resource,
+   * i.e. `Core`.
+   */
+  public static getModelName() {
+    return "Core";
+  }
 }

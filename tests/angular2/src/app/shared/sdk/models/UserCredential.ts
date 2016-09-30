@@ -26,4 +26,11 @@ export class UserCredential implements UserCredentialInterface {
   constructor(instance?: UserCredentialInterface) {
     Object.assign(this, instance);
   }
+  /**
+   * The name of the model represented by this $resource,
+   * i.e. `UserCredential`.
+   */
+  public static getModelName() {
+    return "UserCredential";
+  }
 }

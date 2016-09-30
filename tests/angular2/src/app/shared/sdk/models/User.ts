@@ -32,4 +32,11 @@ export class User implements UserInterface {
   constructor(instance?: UserInterface) {
     Object.assign(this, instance);
   }
+  /**
+   * The name of the model represented by this $resource,
+   * i.e. `User`.
+   */
+  public static getModelName() {
+    return "User";
+  }
 }
