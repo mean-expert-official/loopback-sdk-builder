@@ -8,6 +8,7 @@ import { LoopBackFilter,  } from '../../models/BaseModels';
 import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Core } from '../../models/Core';
 
@@ -49,7 +50,7 @@ export class CoreApi extends BaseLoopBackApi {
    * This usually means the response is a `Core` object.)
    * </em>
    */
-  public run(path: any = undefined, body: any = undefined) {
+  public run(path: any = undefined, body: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/cores/run/:path";
@@ -80,7 +81,7 @@ export class CoreApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public invoke(request: any = undefined) {
+  public invoke(request: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/cores/invoke";

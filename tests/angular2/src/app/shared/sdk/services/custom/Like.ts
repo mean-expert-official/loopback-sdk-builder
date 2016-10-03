@@ -8,6 +8,7 @@ import { LoopBackFilter,  } from '../../models/BaseModels';
 import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Like } from '../../models/Like';
 import { Room } from '../../models/Room';
@@ -46,7 +47,7 @@ export class LikeApi extends BaseLoopBackApi {
    * This usually means the response is a `Like` object.)
    * </em>
    */
-  public getRoom(id: any, refresh: any = undefined) {
+  public getRoom(id: any, refresh: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/likes/:id/room";
@@ -76,7 +77,7 @@ export class LikeApi extends BaseLoopBackApi {
    * This usually means the response is a `Like` object.)
    * </em>
    */
-  public getMessage(id: any, refresh: any = undefined) {
+  public getMessage(id: any, refresh: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/likes/:id/message";
@@ -106,7 +107,7 @@ export class LikeApi extends BaseLoopBackApi {
    * This usually means the response is a `Like` object.)
    * </em>
    */
-  public create(data: any = undefined) {
+  public create(data: any = undefined): Observable<Like> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/likes";
@@ -135,7 +136,7 @@ export class LikeApi extends BaseLoopBackApi {
    * This usually means the response is a `Like` object.)
    * </em>
    */
-  public upsert(data: any = undefined) {
+  public upsert(data: any = undefined): Observable<Like> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/likes";
@@ -164,7 +165,7 @@ export class LikeApi extends BaseLoopBackApi {
    * This usually means the response is a `Like` object.)
    * </em>
    */
-  public replaceOrCreate(data: any = undefined) {
+  public replaceOrCreate(data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/likes/replaceOrCreate";
@@ -195,7 +196,7 @@ export class LikeApi extends BaseLoopBackApi {
    * This usually means the response is a `Like` object.)
    * </em>
    */
-  public upsertWithWhere(where: any = undefined, data: any = undefined) {
+  public upsertWithWhere(where: any = undefined, data: any = undefined): Observable<Like> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/likes/upsertWithWhere";
@@ -222,7 +223,7 @@ export class LikeApi extends BaseLoopBackApi {
    *
    *  - `exists` – `{boolean}` - 
    */
-  public exists(id: any) {
+  public exists(id: any): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/likes/:id/exists";
@@ -251,7 +252,7 @@ export class LikeApi extends BaseLoopBackApi {
    * This usually means the response is a `Like` object.)
    * </em>
    */
-  public findById(id: any, filter: LoopBackFilter = undefined) {
+  public findById(id: any, filter: LoopBackFilter = undefined): Observable<Like> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/likes/:id";
@@ -283,7 +284,7 @@ export class LikeApi extends BaseLoopBackApi {
    * This usually means the response is a `Like` object.)
    * </em>
    */
-  public replaceById(id: any, data: any = undefined) {
+  public replaceById(id: any, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/likes/:id/replace";
@@ -312,7 +313,7 @@ export class LikeApi extends BaseLoopBackApi {
    * This usually means the response is a `Like` object.)
    * </em>
    */
-  public find(filter: LoopBackFilter = undefined) {
+  public find(filter: LoopBackFilter = undefined): Observable<Array<Like>> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/likes";
@@ -340,7 +341,7 @@ export class LikeApi extends BaseLoopBackApi {
    * This usually means the response is a `Like` object.)
    * </em>
    */
-  public findOne(filter: LoopBackFilter = undefined) {
+  public findOne(filter: LoopBackFilter = undefined): Observable<Like> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/likes/findOne";
@@ -367,7 +368,7 @@ export class LikeApi extends BaseLoopBackApi {
    *
    * The number of instances updated
    */
-  public updateAll(where: any = undefined, data: any = undefined) {
+  public updateAll(where: any = undefined, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/likes/update";
@@ -395,7 +396,7 @@ export class LikeApi extends BaseLoopBackApi {
    * This usually means the response is a `Like` object.)
    * </em>
    */
-  public deleteById(id: any) {
+  public deleteById(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/likes/:id";
@@ -421,7 +422,7 @@ export class LikeApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public count(where: any = undefined) {
+  public count(where: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/likes/count";
@@ -451,7 +452,7 @@ export class LikeApi extends BaseLoopBackApi {
    * This usually means the response is a `Like` object.)
    * </em>
    */
-  public updateAttributes(id: any, data: any = undefined) {
+  public updateAttributes(id: any, data: any = undefined): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/likes/:id";
@@ -481,7 +482,7 @@ export class LikeApi extends BaseLoopBackApi {
    *
    *  - `changes` – `{ReadableStream}` - 
    */
-  public createChangeStream() {
+  public createChangeStream(): Observable<any> {
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/likes/change-stream";
     let subject = new Subject();
@@ -511,7 +512,7 @@ export class LikeApi extends BaseLoopBackApi {
    * This usually means the response is a `Like` object.)
    * </em>
    */
-  public createMany(data: Array<any> = undefined) {
+  public createMany(data: Array<any> = undefined): Observable<Array<Like>> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/likes";

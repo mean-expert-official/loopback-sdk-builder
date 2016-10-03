@@ -110,7 +110,7 @@ describe('Service: Room Service', () => {
         });
     })
   ));
-  
+
   /**
   It can not be tested for now because a strange Angular 2 error (No info available)
   This is tested running the Test Application using ng serve instead.

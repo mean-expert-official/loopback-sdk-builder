@@ -8,6 +8,7 @@ import { LoopBackFilter,  } from '../../models/BaseModels';
 import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Room } from '../../models/Room';
 import { Like } from '../../models/Like';
@@ -49,7 +50,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public findByIdMessages(id: any, fk: any) {
+  public findByIdMessages(id: any, fk: any): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/messages/:fk";
@@ -60,7 +61,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instance: Room) => new Room(instance));
+    return result;
   }
 
   /**
@@ -76,7 +77,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public destroyByIdMessages(id: any, fk: any) {
+  public destroyByIdMessages(id: any, fk: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/messages/:fk";
@@ -90,7 +91,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onDestroyByIdMessages(id: any) {
+  public onDestroyByIdMessages(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/messages/:fk";
@@ -100,6 +101,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -123,7 +125,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public updateByIdMessages(id: any, fk: any, data: any = undefined) {
+  public updateByIdMessages(id: any, fk: any, data: any = undefined): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/messages/:fk";
@@ -139,7 +141,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onUpdateByIdMessages(id: any) {
+  public onUpdateByIdMessages(id: any): Observable<any> {
     let method: string = "PUT";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/messages/:fk";
@@ -149,6 +151,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -168,7 +171,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public findByIdLikes(id: any, fk: any) {
+  public findByIdLikes(id: any, fk: any): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/likes/:fk";
@@ -179,7 +182,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instance: Room) => new Room(instance));
+    return result;
   }
 
   /**
@@ -195,7 +198,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public destroyByIdLikes(id: any, fk: any) {
+  public destroyByIdLikes(id: any, fk: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/likes/:fk";
@@ -209,7 +212,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onDestroyByIdLikes(id: any) {
+  public onDestroyByIdLikes(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/likes/:fk";
@@ -219,6 +222,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -242,7 +246,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public updateByIdLikes(id: any, fk: any, data: any = undefined) {
+  public updateByIdLikes(id: any, fk: any, data: any = undefined): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/likes/:fk";
@@ -258,7 +262,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onUpdateByIdLikes(id: any) {
+  public onUpdateByIdLikes(id: any): Observable<any> {
     let method: string = "PUT";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/likes/:fk";
@@ -268,6 +272,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -287,7 +292,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public findByIdCategories(id: any, fk: any) {
+  public findByIdCategories(id: any, fk: any): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories/:fk";
@@ -298,7 +303,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instance: Room) => new Room(instance));
+    return result;
   }
 
   /**
@@ -314,7 +319,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public destroyByIdCategories(id: any, fk: any) {
+  public destroyByIdCategories(id: any, fk: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories/:fk";
@@ -328,7 +333,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onDestroyByIdCategories(id: any) {
+  public onDestroyByIdCategories(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories/:fk";
@@ -338,6 +343,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -361,7 +367,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public updateByIdCategories(id: any, fk: any, data: any = undefined) {
+  public updateByIdCategories(id: any, fk: any, data: any = undefined): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories/:fk";
@@ -377,7 +383,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onUpdateByIdCategories(id: any) {
+  public onUpdateByIdCategories(id: any): Observable<any> {
     let method: string = "PUT";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories/:fk";
@@ -387,6 +393,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -410,7 +417,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public linkCategories(id: any, fk: any, data: any = undefined) {
+  public linkCategories(id: any, fk: any, data: any = undefined): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories/rel/:fk";
@@ -426,7 +433,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onLinkCategories(id: any) {
+  public onLinkCategories(id: any): Observable<any> {
     let method: string = "PUT";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories/rel/:fk";
@@ -436,6 +443,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -452,7 +460,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public unlinkCategories(id: any, fk: any) {
+  public unlinkCategories(id: any, fk: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories/rel/:fk";
@@ -466,7 +474,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onUnlinkCategories(id: any) {
+  public onUnlinkCategories(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories/rel/:fk";
@@ -476,6 +484,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -495,7 +504,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public existsCategories(id: any, fk: any) {
+  public existsCategories(id: any, fk: any): Observable<any> {
     let method: string = "HEAD";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories/rel/:fk";
@@ -525,7 +534,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public findByIdAccounts(id: any, fk: any) {
+  public findByIdAccounts(id: any, fk: any): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts/:fk";
@@ -536,7 +545,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instance: Room) => new Room(instance));
+    return result;
   }
 
   /**
@@ -552,7 +561,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public destroyByIdAccounts(id: any, fk: any) {
+  public destroyByIdAccounts(id: any, fk: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts/:fk";
@@ -566,7 +575,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onDestroyByIdAccounts(id: any) {
+  public onDestroyByIdAccounts(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts/:fk";
@@ -576,6 +585,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -599,7 +609,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public updateByIdAccounts(id: any, fk: any, data: any = undefined) {
+  public updateByIdAccounts(id: any, fk: any, data: any = undefined): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts/:fk";
@@ -615,7 +625,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onUpdateByIdAccounts(id: any) {
+  public onUpdateByIdAccounts(id: any): Observable<any> {
     let method: string = "PUT";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts/:fk";
@@ -625,6 +635,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -648,7 +659,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public linkAccounts(id: any, fk: any, data: any = undefined) {
+  public linkAccounts(id: any, fk: any, data: any = undefined): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts/rel/:fk";
@@ -664,7 +675,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onLinkAccounts(id: any) {
+  public onLinkAccounts(id: any): Observable<any> {
     let method: string = "PUT";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts/rel/:fk";
@@ -674,6 +685,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -690,7 +702,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public unlinkAccounts(id: any, fk: any) {
+  public unlinkAccounts(id: any, fk: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts/rel/:fk";
@@ -704,7 +716,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onUnlinkAccounts(id: any) {
+  public onUnlinkAccounts(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts/rel/:fk";
@@ -714,6 +726,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -733,7 +746,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public existsAccounts(id: any, fk: any) {
+  public existsAccounts(id: any, fk: any): Observable<any> {
     let method: string = "HEAD";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts/rel/:fk";
@@ -763,7 +776,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public findByIdAdmins(id: any, fk: any) {
+  public findByIdAdmins(id: any, fk: any): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins/:fk";
@@ -774,7 +787,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instance: Room) => new Room(instance));
+    return result;
   }
 
   /**
@@ -790,7 +803,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public destroyByIdAdmins(id: any, fk: any) {
+  public destroyByIdAdmins(id: any, fk: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins/:fk";
@@ -804,7 +817,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onDestroyByIdAdmins(id: any) {
+  public onDestroyByIdAdmins(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins/:fk";
@@ -814,6 +827,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -837,7 +851,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public updateByIdAdmins(id: any, fk: any, data: any = undefined) {
+  public updateByIdAdmins(id: any, fk: any, data: any = undefined): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins/:fk";
@@ -853,7 +867,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onUpdateByIdAdmins(id: any) {
+  public onUpdateByIdAdmins(id: any): Observable<any> {
     let method: string = "PUT";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins/:fk";
@@ -863,6 +877,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -886,7 +901,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public linkAdmins(id: any, fk: any, data: any = undefined) {
+  public linkAdmins(id: any, fk: any, data: any = undefined): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins/rel/:fk";
@@ -902,7 +917,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onLinkAdmins(id: any) {
+  public onLinkAdmins(id: any): Observable<any> {
     let method: string = "PUT";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins/rel/:fk";
@@ -912,6 +927,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -928,7 +944,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public unlinkAdmins(id: any, fk: any) {
+  public unlinkAdmins(id: any, fk: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins/rel/:fk";
@@ -942,7 +958,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onUnlinkAdmins(id: any) {
+  public onUnlinkAdmins(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins/rel/:fk";
@@ -952,6 +968,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -971,7 +988,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public existsAdmins(id: any, fk: any) {
+  public existsAdmins(id: any, fk: any): Observable<any> {
     let method: string = "HEAD";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins/rel/:fk";
@@ -1001,7 +1018,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public getMessages(id: any, filter: LoopBackFilter = undefined) {
+  public getMessages(id: any, filter: LoopBackFilter = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/messages";
@@ -1033,7 +1050,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public createMessages(id: any, data: any = undefined) {
+  public createMessages(id: any, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/messages";
@@ -1048,7 +1065,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onCreateMessages(id: any) {
+  public onCreateMessages(id: any): Observable<any> {
     let method: string = "POST";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/messages";
@@ -1058,6 +1075,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -1072,7 +1090,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public deleteMessages(id: any) {
+  public deleteMessages(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/messages";
@@ -1085,7 +1103,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onDeleteMessages(id: any) {
+  public onDeleteMessages(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/messages";
@@ -1095,6 +1113,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -1113,7 +1132,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public countMessages(id: any, where: any = undefined) {
+  public countMessages(id: any, where: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/messages/count";
@@ -1143,7 +1162,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public getLikes(id: any, filter: LoopBackFilter = undefined) {
+  public getLikes(id: any, filter: LoopBackFilter = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/likes";
@@ -1175,7 +1194,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public createLikes(id: any, data: any = undefined) {
+  public createLikes(id: any, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/likes";
@@ -1190,7 +1209,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onCreateLikes(id: any) {
+  public onCreateLikes(id: any): Observable<any> {
     let method: string = "POST";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/likes";
@@ -1200,6 +1219,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -1214,7 +1234,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public deleteLikes(id: any) {
+  public deleteLikes(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/likes";
@@ -1227,7 +1247,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onDeleteLikes(id: any) {
+  public onDeleteLikes(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/likes";
@@ -1237,6 +1257,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -1255,7 +1276,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public countLikes(id: any, where: any = undefined) {
+  public countLikes(id: any, where: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/likes/count";
@@ -1285,7 +1306,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public getCategories(id: any, filter: LoopBackFilter = undefined) {
+  public getCategories(id: any, filter: LoopBackFilter = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories";
@@ -1317,7 +1338,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public createCategories(id: any, data: any = undefined) {
+  public createCategories(id: any, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories";
@@ -1332,7 +1353,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onCreateCategories(id: any) {
+  public onCreateCategories(id: any): Observable<any> {
     let method: string = "POST";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories";
@@ -1342,6 +1363,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -1356,7 +1378,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public deleteCategories(id: any) {
+  public deleteCategories(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories";
@@ -1369,7 +1391,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onDeleteCategories(id: any) {
+  public onDeleteCategories(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories";
@@ -1379,6 +1401,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -1397,7 +1420,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public countCategories(id: any, where: any = undefined) {
+  public countCategories(id: any, where: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories/count";
@@ -1427,7 +1450,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public getAccounts(id: any, filter: LoopBackFilter = undefined) {
+  public getAccounts(id: any, filter: LoopBackFilter = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts";
@@ -1459,7 +1482,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public createAccounts(id: any, data: any = undefined) {
+  public createAccounts(id: any, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts";
@@ -1474,7 +1497,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onCreateAccounts(id: any) {
+  public onCreateAccounts(id: any): Observable<any> {
     let method: string = "POST";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts";
@@ -1484,6 +1507,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -1498,7 +1522,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public deleteAccounts(id: any) {
+  public deleteAccounts(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts";
@@ -1511,7 +1535,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onDeleteAccounts(id: any) {
+  public onDeleteAccounts(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts";
@@ -1521,6 +1545,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -1539,7 +1564,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public countAccounts(id: any, where: any = undefined) {
+  public countAccounts(id: any, where: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts/count";
@@ -1569,7 +1594,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public getAdmins(id: any, filter: LoopBackFilter = undefined) {
+  public getAdmins(id: any, filter: LoopBackFilter = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins";
@@ -1601,7 +1626,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public createAdmins(id: any, data: any = undefined) {
+  public createAdmins(id: any, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins";
@@ -1616,7 +1641,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onCreateAdmins(id: any) {
+  public onCreateAdmins(id: any): Observable<any> {
     let method: string = "POST";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins";
@@ -1626,6 +1651,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -1640,7 +1666,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public deleteAdmins(id: any) {
+  public deleteAdmins(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins";
@@ -1653,7 +1679,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onDeleteAdmins(id: any) {
+  public onDeleteAdmins(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins";
@@ -1663,6 +1689,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -1681,7 +1708,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public countAdmins(id: any, where: any = undefined) {
+  public countAdmins(id: any, where: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins/count";
@@ -1711,7 +1738,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public create(data: any = undefined) {
+  public create(data: any = undefined): Observable<Room> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms";
@@ -1724,7 +1751,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result.map((instance: Room) => new Room(instance));
   }
 
-  public onCreate() {
+  public onCreate(): Observable<Room> {
     let method: string = "POST";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms";
@@ -1732,7 +1759,8 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
-    return result;
+      
+    return result.map((instance: Room) => new Room(instance));
   }
 
   /**
@@ -1751,7 +1779,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public upsert(data: any = undefined) {
+  public upsert(data: any = undefined): Observable<Room> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms";
@@ -1764,7 +1792,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result.map((instance: Room) => new Room(instance));
   }
 
-  public onUpsert() {
+  public onUpsert(): Observable<Room> {
     let method: string = "PUT";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms";
@@ -1772,7 +1800,8 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
-    return result;
+      
+    return result.map((instance: Room) => new Room(instance));
   }
 
   /**
@@ -1791,7 +1820,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public replaceOrCreate(data: any = undefined) {
+  public replaceOrCreate(data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/replaceOrCreate";
@@ -1804,7 +1833,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onReplaceOrCreate() {
+  public onReplaceOrCreate(): Observable<any> {
     let method: string = "POST";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/replaceOrCreate";
@@ -1812,6 +1841,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -1833,7 +1863,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public upsertWithWhere(where: any = undefined, data: any = undefined) {
+  public upsertWithWhere(where: any = undefined, data: any = undefined): Observable<Room> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/upsertWithWhere";
@@ -1847,7 +1877,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result.map((instance: Room) => new Room(instance));
   }
 
-  public onUpsertWithWhere(where: any = undefined) {
+  public onUpsertWithWhere(where: any = undefined): Observable<Room> {
     let method: string = "POST";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/upsertWithWhere";
@@ -1855,7 +1885,8 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
-    return result;
+      
+    return result.map((instance: Room) => new Room(instance));
   }
 
   /**
@@ -1871,7 +1902,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    *  - `exists` – `{boolean}` - 
    */
-  public exists(id: any) {
+  public exists(id: any): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/exists";
@@ -1900,7 +1931,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public findById(id: any, filter: LoopBackFilter = undefined) {
+  public findById(id: any, filter: LoopBackFilter = undefined): Observable<Room> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id";
@@ -1932,7 +1963,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public replaceById(id: any, data: any = undefined) {
+  public replaceById(id: any, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/replace";
@@ -1947,7 +1978,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onReplaceById(id: any) {
+  public onReplaceById(id: any): Observable<any> {
     let method: string = "POST";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/replace";
@@ -1957,6 +1988,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -1974,7 +2006,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public find(filter: LoopBackFilter = undefined) {
+  public find(filter: LoopBackFilter = undefined): Observable<Array<Room>> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms";
@@ -2002,7 +2034,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public findOne(filter: LoopBackFilter = undefined) {
+  public findOne(filter: LoopBackFilter = undefined): Observable<Room> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/findOne";
@@ -2029,7 +2061,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    * The number of instances updated
    */
-  public updateAll(where: any = undefined, data: any = undefined) {
+  public updateAll(where: any = undefined, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/update";
@@ -2043,7 +2075,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onUpdateAll(where: any = undefined) {
+  public onUpdateAll(where: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/update";
@@ -2051,6 +2083,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -2068,7 +2101,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public deleteById(id: any) {
+  public deleteById(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id";
@@ -2081,7 +2114,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onDeleteById(id: any) {
+  public onDeleteById(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id";
@@ -2091,6 +2124,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -2107,7 +2141,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public count(where: any = undefined) {
+  public count(where: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/count";
@@ -2137,7 +2171,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public updateAttributes(id: any, data: any = undefined) {
+  public updateAttributes(id: any, data: any = undefined): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id";
@@ -2152,7 +2186,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onUpdateAttributes(id: any) {
+  public onUpdateAttributes(id: any): Observable<any> {
     let method: string = "PUT";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id";
@@ -2162,6 +2196,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -2180,7 +2215,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    *  - `changes` – `{ReadableStream}` - 
    */
-  public createChangeStream() {
+  public createChangeStream(): Observable<any> {
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/change-stream";
     let subject = new Subject();
@@ -2213,7 +2248,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    *  - `greeting` – `{string}` - 
    */
-  public greetRoute(a: any = undefined, b: any = undefined, c: any = undefined) {
+  public greetRoute(a: any = undefined, b: any = undefined, c: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/what/:a/:b/:c";
@@ -2249,7 +2284,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    *  - `greeting` – `{string}` - 
    */
-  public greetPost(a: any = undefined, b: any = undefined, c: any = undefined) {
+  public greetPost(a: any = undefined, b: any = undefined, c: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/who";
@@ -2267,7 +2302,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onGreetPost(a: any = undefined, b: any = undefined, c: any = undefined) {
+  public onGreetPost(a: any = undefined, b: any = undefined, c: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/who";
@@ -2275,6 +2310,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -2297,7 +2333,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    *  - `greeting` – `{string}` - 
    */
-  public greetGet(a: any = undefined, b: any = undefined, c: any = undefined) {
+  public greetGet(a: any = undefined, b: any = undefined, c: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/slimshady";
@@ -2329,7 +2365,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public createManyMessages(id: any, data: Array<any> = undefined) {
+  public createManyMessages(id: any, data: Array<any> = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/messages";
@@ -2344,7 +2380,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onCreateManyMessages(id: any) {
+  public onCreateManyMessages(id: any): Observable<any> {
     let method: string = "POST";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/messages";
@@ -2354,6 +2390,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -2375,7 +2412,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public createManyLikes(id: any, data: Array<any> = undefined) {
+  public createManyLikes(id: any, data: Array<any> = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/likes";
@@ -2390,7 +2427,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onCreateManyLikes(id: any) {
+  public onCreateManyLikes(id: any): Observable<any> {
     let method: string = "POST";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/likes";
@@ -2400,6 +2437,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -2421,7 +2459,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public createManyCategories(id: any, data: Array<any> = undefined) {
+  public createManyCategories(id: any, data: Array<any> = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories";
@@ -2436,7 +2474,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onCreateManyCategories(id: any) {
+  public onCreateManyCategories(id: any): Observable<any> {
     let method: string = "POST";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories";
@@ -2446,6 +2484,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -2467,7 +2506,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public createManyAccounts(id: any, data: Array<any> = undefined) {
+  public createManyAccounts(id: any, data: Array<any> = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts";
@@ -2482,7 +2521,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onCreateManyAccounts(id: any) {
+  public onCreateManyAccounts(id: any): Observable<any> {
     let method: string = "POST";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts";
@@ -2492,6 +2531,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -2513,7 +2553,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public createManyAdmins(id: any, data: Array<any> = undefined) {
+  public createManyAdmins(id: any, data: Array<any> = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins";
@@ -2528,7 +2568,7 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
-  public onCreateManyAdmins(id: any) {
+  public onCreateManyAdmins(id: any): Observable<any> {
     let method: string = "POST";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins";
@@ -2538,6 +2578,7 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
     return result;
   }
 
@@ -2557,7 +2598,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-  public createMany(data: Array<any> = undefined) {
+  public createMany(data: Array<any> = undefined): Observable<Array<Room>> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms";
@@ -2572,7 +2613,7 @@ export class RoomApi extends BaseLoopBackApi {
     );
   }
 
-  public onCreateMany() {
+  public onCreateMany(): Observable<Array<Room>> {
     let method: string = "POST";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms";
@@ -2580,7 +2621,10 @@ export class RoomApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody, true);
-    return result;
+      ;
+    return result.map((instances: Array<Room>) =>
+        instances.map((instance: Room) => new Room(instance))
+    );
   }
 
   /**
