@@ -2,8 +2,8 @@
 
 import { TestBed, async, inject } from '@angular/core/testing';
 import { SDKModule } from './shared/sdk';
-import { Room } from './shared/sdk/models';
-import { RoomApi, RealTime } from './shared/sdk/services';
+import { Room, Message } from './shared/sdk/models';
+import { RoomApi, MessageApi, RealTime } from './shared/sdk/services';
 
 describe('Service: Room Service', () => {
   beforeEach(() => {
@@ -111,6 +111,38 @@ describe('Service: Room Service', () => {
     })
   ));
 
+  it('should include multiple layers',
+    async(inject([RoomApi, MessageApi], (roomApi: RoomApi, messageApi: MessageApi) => {
+      let room: Room = new Room({ name: Date.now().toString() });
+      let message = new Message({ text: 'Hello Room' });
+      let reply = new Message({ text: 'Hello Reply' });
+      return roomApi.create(room)
+        .subscribe((instance: Room) => roomApi.createMessages(instance.id, message)
+        .subscribe((messageInstance: Message) => messageApi.createReplies(messageInstance.id, reply)
+        .subscribe((replyInstance: Message) => messageApi.createLikes(replyInstance.id, { set: true })
+        .subscribe((likeInstance: any) => roomApi.find({
+          where: { id: instance.id },
+          include: {
+            relation: 'messages',
+            scope: {
+              include: {
+                relation: 'replies',
+                scope: {
+                  include: {
+                    relation: 'likes'
+                  }
+                }
+              }
+            }
+          }
+        }).subscribe((result: Room[]) => {
+          expect(result.length).toBe(1);
+          expect(result[0].messages.length).toBe(1);
+          expect(result[0].messages[0].replies.length).toBe(1);
+          expect(result[0].messages[0].replies[0].likes.length).toBe(1);
+        })))));
+    })
+  ));
   /**
   It can not be tested for now because a strange Angular 2 error (No info available)
   This is tested running the Test Application using ng serve instead.

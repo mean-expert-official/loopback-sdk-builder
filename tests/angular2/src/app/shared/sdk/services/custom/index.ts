@@ -1,7 +1,7 @@
 /* tslint:disable */
 export * from './User';
 export * from './Room';
-export * from './Like';
+export * from './Message';
 export * from './ApplicationCredential';
 export * from './UserCredential';
 export * from './UserIdentity';

@@ -42,7 +42,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { UserApi } from './services/custom/User';
 import { RoomApi } from './services/custom/Room';
-import { LikeApi } from './services/custom/Like';
+import { MessageApi } from './services/custom/Message';
 import { ApplicationCredentialApi } from './services/custom/ApplicationCredential';
 import { UserCredentialApi } from './services/custom/UserCredential';
 import { UserIdentityApi } from './services/custom/UserIdentity';
@@ -71,7 +71,7 @@ export class SDKModule {
       JSONSearchParams,
       UserApi,
       RoomApi,
-      LikeApi,
+      MessageApi,
       ApplicationCredentialApi,
       UserCredentialApi,
       UserIdentityApi,

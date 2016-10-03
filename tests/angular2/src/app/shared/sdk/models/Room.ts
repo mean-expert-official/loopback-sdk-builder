@@ -1,6 +1,6 @@
 /* tslint:disable */
 import {
-  Like,
+  Message,
   Category,
   Account,
 } from '../index';
@@ -9,8 +9,8 @@ declare var Object: any;
 export interface RoomInterface {
   name: string;
   id?: number;
-  messages?: Array<any>;
-  likes?: Array<Like>;
+  messages?: Array<Message>;
+  likes?: Array<any>;
   categories?: Array<Category>;
   accounts?: Array<Account>;
   admins?: Array<Account>;
@@ -19,8 +19,8 @@ export interface RoomInterface {
 export class Room implements RoomInterface {
   name: string;
   id: number;
-  messages: Array<any>;
-  likes: Array<Like>;
+  messages: Array<Message>;
+  likes: Array<any>;
   categories: Array<Category>;
   accounts: Array<Account>;
   admins: Array<Account>;

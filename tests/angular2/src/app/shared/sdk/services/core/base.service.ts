@@ -103,8 +103,10 @@ export abstract class BaseLoopBackApi {
       let request: Request = new Request({
         headers : headers,
         method  : method,
-        url     : requestUrl,
-        search  : this.searchParams.getURLSearchParams(),
+        url     : urlParams.filter ? `${requestUrl}?filter=${ encodeURI(JSON.stringify(urlParams.filter))}`
+                : requestUrl,
+        search  : !urlParams.filter && Object.keys(urlParams).length > 0
+                ? this.searchParams.getURLSearchParams() : null,
         body    : body ? JSON.stringify(body) : undefined
       });
       return this.http.request(request)

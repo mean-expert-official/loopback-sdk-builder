@@ -11,7 +11,7 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Room } from '../../models/Room';
-import { Like } from '../../models/Like';
+import { Message } from '../../models/Message';
 import { Category } from '../../models/Category';
 import { RoomAccount } from '../../models/RoomAccount';
 import { Account } from '../../models/Account';

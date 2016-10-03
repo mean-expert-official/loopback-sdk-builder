@@ -39,11 +39,11 @@
   },
   "Message": {
     "dataSource": "db",
-    "public": false
+    "public": true
   },
   "like": {
     "dataSource": "db",
-    "public": true
+    "public": false
   },
   "ApplicationCredential": {
     "dataSource": "db",
