@@ -64,22 +64,22 @@ export class SDKModule {
     return {
       ngModule: SDKModule,
       providers: [
-      RealTime,
-      LoopBackAuth,
-      ErrorHandler,
-      LoggerService,
-      JSONSearchParams,
-      UserApi,
-      RoomApi,
-      MessageApi,
-      ApplicationCredentialApi,
-      UserCredentialApi,
-      UserIdentityApi,
-      CategoryApi,
-      AccountApi,
-      RoomAccountApi,
-      StorageApi,
-      CoreApi
+        RealTime,
+        LoopBackAuth,
+        ErrorHandler,
+        LoggerService,
+        JSONSearchParams,
+        UserApi,
+        RoomApi,
+        MessageApi,
+        ApplicationCredentialApi,
+        UserCredentialApi,
+        UserIdentityApi,
+        CategoryApi,
+        AccountApi,
+        RoomAccountApi,
+        StorageApi,
+        CoreApi
       ]
     };
   }
