@@ -34,12 +34,12 @@
 **/
 import { JSONSearchParams } from './services/core/search.params';
 import { ErrorHandler } from './services/core/error.service';
-import { RealTime } from './services/core/real.time';
 import { LoopBackAuth } from './services/core/auth.service';
 import { LoggerService } from './services/custom/logger.service';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
+import { RealTime } from './services/core/real.time';
 import { UserApi } from './services/custom/User';
 import { RoomApi } from './services/custom/Room';
 import { MessageApi } from './services/custom/Message';
