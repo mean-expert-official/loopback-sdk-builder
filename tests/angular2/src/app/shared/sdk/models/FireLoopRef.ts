@@ -12,37 +12,45 @@ export class FireLoopRef<T> {
   private observables: any = {};
 
   constructor(name: string, socket: any, parent: FireLoopRef<any> = null) {
-    this.name   = name;
+    this.name = name;
     this.parent = parent;
     this.socket = socket;
     return this;
   }
 
-  public upsert(data: any): Observable<T> {
+  private operation(event: string, data: any): Observable<T> {
     let id: number = Math.floor(Math.random() * 100800) *
-                     Math.floor(Math.random() * 100700) *
-                     Math.floor(Math.random() * 198500);
-    let request: any = {
-        event: `${this.name}.upsert`,
-        data : {
-          id     : id,
-          data   : data,
-          parent : this.parent && this.parent.instance ? this.parent.instance : null
-        }
-    };
+      Math.floor(Math.random() * 100700) *
+      Math.floor(Math.random() * 198500);
     let subject: Subject<T> = new Subject<T>();
-    this.socket.emit('ME:RT:1://event', request);
+    this.socket.emit(`${this.name}.${event}`, {
+      id: id,
+      data: data,
+      parent: this.parent && this.parent.instance ? this.parent.instance : null
+    });
     this.socket.on(`${this.name}.value.result.${id}`, (res: any) =>
       subject.next(res.error ? Observable.throw(res.error) : res)
     );
     return subject.asObservable();
   }
 
-  public on(event: string, filter: LoopBackFilter = { limit: 100 }): Observable<T | T[]> {
+  public upsert(data: any): Observable<T> {
+    return this.operation('upsert', data);
+  }
+
+  public create(data: any): Observable<T> {
+    return this.operation('create', data);
+  }
+
+  public remove(data: any): Observable<T> {
+    return this.operation('remove', data);
+  }
+
+  public on(event: string, filter: LoopBackFilter = { limit: 100, order: 'id DESC' }): Observable<T | T[]> {
     event = `${this.name}.${event}`;
     if (this.observables[event]) { return this.observables[event]; }
     let subject: Subject<T> = new Subject<T>();
-    if (event.match(/(value)/)) {
+    if (event.match(/(value|changes)/)) {
       this.pull(event, filter, subject);
     }
     // Listen for broadcast announces
