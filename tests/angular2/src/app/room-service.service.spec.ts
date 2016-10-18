@@ -111,6 +111,16 @@ describe('Service: Room Service', () => {
     })
   ));
 
+  it('should fetch filter as object from single-param post method',
+    async(inject([RoomApi], (roomApi: RoomApi) => {
+      let param = { child: 'filtered' };
+      return roomApi.singleParamPost(param).subscribe((result: { child: string, param: undefined }) => {
+            expect(result.param).toBe(undefined);
+            expect(result.child).toBe(param.child);
+        });
+    })
+  ));
+
   it('should include multiple layers',
     async(inject([RoomApi, MessageApi], (roomApi: RoomApi, messageApi: MessageApi) => {
       let room: Room = new Room({ name: Date.now().toString() });

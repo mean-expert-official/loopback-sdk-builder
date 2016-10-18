@@ -23,8 +23,8 @@ export class AppComponent {
   ) {
     this.logger.info('LoopBack SDK Builder - Test Application');
     // Simple IO Test
-    //this.realTime.IO.emit('hello', 'world');
-    //this.realTime.IO.on('hello').subscribe((msg: any) => this.logger.info('REALTIME: ', msg));
+    // this.realTime.IO.emit('hello', 'world');
+    // this.realTime.IO.on('hello').subscribe((msg: any) => this.logger.info('REALTIME: ', msg));
     // Simple FireLoop set and get examples.
     let RoomReference: FireLoopRef<Room> = this.realTime.FireLoop.ref<Room>(Room);
     // This will get the list of results and fire every time there is new data.

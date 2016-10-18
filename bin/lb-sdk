@@ -53,6 +53,7 @@ console.log(chalk.green('*                                      CONTRIBUTORS    
 console.log(chalk.green('*                         João Ribeiro <http://jonnybgod.ghost.io>                       *'));
 console.log(chalk.green('*                      Nikolay Matiushenkov <https://github.com/mnvx>                    *'));
 console.log(chalk.green('*                         Sylvain Dumont <https://www.weboaks.com>                       *'));
+console.log(chalk.green('*                        Yonggang Luo <https://github.com/lygstate>                      *'));
 console.log(chalk.green('*                                                                                        *'));
 console.log(chalk.green('*                                 ORIGINALLY FORKED FROM                                 *'));
 console.log(chalk.green('*                      Miroslav Bajtos\' <miroslav@strongloop.com>                        *'));

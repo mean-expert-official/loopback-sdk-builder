@@ -1669,11 +1669,10 @@ export class AccountApi extends BaseLoopBackApi {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Accounts/confirm";
-    let routeParams: any = {
-      uid: uid
-    };
+    let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
+    if (uid) urlParams.uid = uid;
     if (token) urlParams.token = token;
     if (redirect) urlParams.redirect = redirect;
     let result = this.request(method, url, routeParams, urlParams, postBody);

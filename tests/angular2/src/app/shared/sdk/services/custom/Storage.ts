@@ -110,7 +110,6 @@ export class StorageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    if (container) urlParams.container = container;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -140,7 +139,6 @@ export class StorageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    if (container) urlParams.container = container;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -170,7 +168,6 @@ export class StorageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    if (container) urlParams.container = container;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -203,8 +200,6 @@ export class StorageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    if (container) urlParams.container = container;
-    if (file) urlParams.file = file;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -236,8 +231,6 @@ export class StorageApi extends BaseLoopBackApi {
     };
     let postBody: any = {};
     let urlParams: any = {};
-    if (container) urlParams.container = container;
-    if (file) urlParams.file = file;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -266,10 +259,7 @@ export class StorageApi extends BaseLoopBackApi {
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/storages/:container/upload";
     let routeParams: any = {};
-    let postBody: any = {
-      req: req,
-      res: res
-    };
+    let postBody: any = {};
     let urlParams: any = {};
     if (req) urlParams.req = req;
     if (res) urlParams.res = res;

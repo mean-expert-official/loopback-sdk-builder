@@ -1,6 +1,6 @@
 {
   "name": "@mean-expert/loopback-sdk-builder",
-  "version": "2.1.0-beta.10",
+  "version": "2.1.0-beta.11",
   "description": "Tool for auto-generating Software Development Kits (SDKs) for LoopBack",
   "bin": {
     "lb-sdk": "bin/lb-sdk"
@@ -8,9 +8,10 @@
   "main": "index.js",
   "scripts": {
     "prepublish": "",
-    "test": "npm run test:angular2",
-    "pretest": "cd tests/angular2 && npm install",
-    "test:angular2": "cd tests/angular2 && ng lint && npm run test"
+    "test": "npm run load:api & npm run test:angular2",
+    "pretest": "cd tests/angular2 && npm install && npm install ../../ && npm run build:sdk",
+    "load:api": "cd tests/angular2 && NODE_ENV=testing node loopback/server",
+    "test:angular2": "cd tests/angular2 && npm test"
   },
   "repository": {
     "type": "git",
@@ -44,6 +45,11 @@
       "name": "Sylvain Dumont",
       "email": "sylvain.dumont35@gmail.com",
       "url": "https://www.weboaks.com"
+    },
+    {
+      "name": "Yonggang Luo",
+      "email": "luoyonggang@gmail.com",
+      "url": "https://github.com/lygstate"
     }
   ],
   "license": "MIT",

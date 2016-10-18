@@ -15,18 +15,39 @@ module.exports = function (Room) {
     }
   );
 
-  Room.greetPost = greet;
-
+  // We receive 3 copies of the body from loopback, not sure why
+  // I would expect body.a, body.b and body.c in 1 object param.
+  Room.greetPost = (b1, b2, b3, next) => {
+    next(null, `${b1.a}:${b2.b}:${b3.c}`);
+  };
+  
   Room.remoteMethod(
     'greetPost',
     {
       accepts: [
-        { arg: 'a', type: 'string' },
-        { arg: 'b', type: 'string' },
-        { arg: 'c', type: 'string' }
+        { arg: 'a', type: 'object', http: { source: 'body' }},
+        { arg: 'b', type: 'object', http: { source: 'body' }},
+        { arg: 'c', type: 'object', http: { source: 'body' }}
       ],
-      returns: { arg: 'greeting', type: 'string' },
+      returns: { arg: 'greeting', type: 'object' },
       http: { path: '/who', verb: 'post' }
+    }
+  );
+
+  Room.singleParamPost = function (body, next) {
+    next(null, body);
+  };
+
+  Room.remoteMethod(
+    'singleParamPost',
+    {
+      accepts: {
+        arg: 'param',
+        type: 'object',
+        http: { source: 'body' }
+      },
+      returns: { arg: 'param', type: 'object', root: true },
+      http: { path: '/single-param-post', verb: 'post' }
     }
   );
 

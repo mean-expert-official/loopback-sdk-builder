@@ -1,7 +1,10 @@
+[![Build Status](https://travis-ci.org/mean-expert-official/loopback-sdk-builder.svg?branch=development)](https://travis-ci.org/mean-expert-official/loopback-sdk-builder)
+
 ![LoopBack SDK Builder](https://storage.googleapis.com/mean-expert-images/sdk-builder.jpg)
 
-LoopBack SDK Builder
+LoopBack SDK Builder 
 ==================
+
 
 The [@mean-expert/loopback-sdk-builder](https://www.npmjs.com/package/@mean-expert/loopback-sdk-builder) is a community driven module forked from the official `loopback-sdk-angular` and refactored to support [Angular 2](http://angular.io).
 
