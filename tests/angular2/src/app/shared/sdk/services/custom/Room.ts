@@ -2270,11 +2270,11 @@ export class RoomApi extends BaseLoopBackApi {
    *
    * @param object data Request data.
    *
-   *  - `a` – `{string}` - 
+   *  - `a` – `{object}` - 
    *
-   *  - `b` – `{string}` - 
+   *  - `b` – `{object}` - 
    *
-   *  - `c` – `{string}` - 
+   *  - `c` – `{object}` - 
    *
    * @returns object An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -2282,7 +2282,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    * Data properties:
    *
-   *  - `greeting` – `{string}` - 
+   *  - `greeting` – `{object}` - 
    */
   public greetPost(a: any = undefined, b: any = undefined, c: any = undefined): Observable<any> {
     let method: string = "POST";
@@ -2295,9 +2295,6 @@ export class RoomApi extends BaseLoopBackApi {
       c: c
     };
     let urlParams: any = {};
-    if (a) urlParams.a = a;
-    if (b) urlParams.b = b;
-    if (c) urlParams.c = c;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -2306,6 +2303,49 @@ export class RoomApi extends BaseLoopBackApi {
     let method: string = "POST";
     let url: string = "/" + LoopBackConfig.getApiVersion() +
     "/rooms/who";
+    let routeParams: any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody, true);
+      ;
+    return result;
+  }
+
+  /**
+   * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+   *
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Room` object.)
+   * </em>
+   */
+  public singleParamPost(param: any = undefined): Observable<any> {
+    let method: string = "POST";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/single-param-post";
+    let routeParams: any = {};
+    let postBody: any = {
+      param: param
+    };
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  public onSingleParamPost(param: any = undefined): Observable<any> {
+    let method: string = "POST";
+    let url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/single-param-post";
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};

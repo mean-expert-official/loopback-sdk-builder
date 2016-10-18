@@ -1,6 +1,5 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { RoomComponent } from './room/room.component';
 import { AuthGuard } from './shared/auth.guard';
 
 const appRoutes: Routes = [

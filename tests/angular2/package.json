@@ -8,8 +8,9 @@
     "lint": "tslint \"src/**/*.ts\"",
     "pree2e": "webdriver-manager update",
     "e2e": "protractor",
-    "test": "node loopback/server.js & ng test",
-    "build:sdk": "./node_modules/.bin/lb-sdk loopback/server.js src/app/shared/sdk -i enabled"
+    "pretest": "ng lint",
+    "test": "ng test --watch=false",
+    "build:sdk": "./node_modules/.bin/lb-sdk loopback/server.js src/app/shared/sdk -i enabled -w enabled"
   },
   "private": true,
   "dependencies": {
@@ -21,6 +22,7 @@
     "@angular/platform-browser": "2.0.0",
     "@angular/platform-browser-dynamic": "2.0.0",
     "@angular/router": "3.0.0",
+    "@mean-expert/loopback-component-realtime": "^1.0.0-beta.5",
     "@types/socket.io-client": "^1.4.27",
     "compression": "^1.0.3",
     "config-chain": "^1.1.10",
@@ -51,7 +53,9 @@
     "karma-chrome-launcher": "^2.0.0",
     "karma-cli": "^1.0.1",
     "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.2",
     "karma-remap-istanbul": "^0.2.1",
+    "phantomjs": "^2.1.7",
     "protractor": "4.0.5",
     "ts-node": "1.2.1",
     "tslint": "3.13.0",

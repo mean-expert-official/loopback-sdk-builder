@@ -6,7 +6,8 @@ import { JSONSearchParams } from './search.params';
 import { ErrorHandler } from './error.service';
 import { LoopBackAuth } from './auth.service';
 import { LoopBackConfig } from '../../lb.config';
-import { AccessToken } from '../../models';
+import { AccessToken } from '../../models/index';
+import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -29,9 +30,9 @@ export abstract class BaseLoopBackApi {
   protected path: string;
 
   constructor(
-    @Inject(Http) protected http: Http, 
-    @Inject(LoopBackAuth) protected auth: LoopBackAuth, 
-    @Inject(JSONSearchParams) protected searchParams: JSONSearchParams, 
+    @Inject(Http) protected http: Http,
+    @Inject(LoopBackAuth) protected auth: LoopBackAuth,
+    @Inject(JSONSearchParams) protected searchParams: JSONSearchParams,
     @Optional() @Inject(ErrorHandler) protected errorHandler: ErrorHandler
   ) {}
 
@@ -49,8 +50,9 @@ export abstract class BaseLoopBackApi {
     url         : string,
     routeParams : any = {},
     urlParams   : any = {},
-    postBody    : any = null,    isio        : boolean = false  
-  ) {
+    postBody    : any = null,
+    isio        : boolean = false
+  ): Observable<any> {
 
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -84,33 +86,30 @@ export abstract class BaseLoopBackApi {
       let socket: any = SocketConnections.getHandler(LoopBackConfig.getPath(), token);
           socket.on(event, (res: any) => subject.next(res));
       return subject.asObservable();
-    } else {      // Body fix for built in remote methods using "data", "options" or "credentials
-      // that are the actual body, Custom remote method properties are different and need
-      // to be wrapped into a body object
-      let body: any;
-      if (
-        typeof postBody === 'object' &&
-        (postBody.data || postBody.credentials || postBody.options) &&
-        Object.keys(postBody).length === 1
-      ) {
-        body = postBody.data    ? postBody.data :
-               postBody.options ? postBody.options :
-               postBody.credentials;
-      } else {
-        body = postBody;
-      }
-      this.searchParams.setJSON(urlParams);
-      let request: Request = new Request({
-        headers : headers,
-        method  : method,
-        url     : urlParams.filter ? `${requestUrl}?filter=${ encodeURI(JSON.stringify(urlParams.filter))}`
-                : requestUrl,
-        search  : !urlParams.filter && Object.keys(urlParams).length > 0
-                ? this.searchParams.getURLSearchParams() : null,
-        body    : body ? JSON.stringify(body) : undefined
-      });
-      return this.http.request(request)
-        .map((res: any) => (res.text() != "" ? res.json() : {}))
-        .catch(this.errorHandler.handleError);
-   }  }
+    }
+    
+    // Body fix for built in remote methods using "data", "options" or "credentials
+    // that are the actual body, Custom remote method properties are different and need
+    // to be wrapped into a body object
+    let body: any;
+    let postBodyKeys = typeof postBody === 'object' ? Object.keys(postBody) : []
+    if (postBodyKeys.length === 1) {
+      body = postBody[postBodyKeys[0]]
+    } else {
+      body = postBody;
+    }
+    this.searchParams.setJSON(urlParams);
+    let request: Request = new Request({
+      headers : headers,
+      method  : method,
+      url     : urlParams.filter ? `${requestUrl}?filter=${ encodeURI(JSON.stringify(urlParams.filter))}`
+              : requestUrl,
+      search  : !urlParams.filter && Object.keys(urlParams).length > 0
+              ? this.searchParams.getURLSearchParams() : null,
+      body    : body ? JSON.stringify(body) : undefined
+    });
+    return this.http.request(request)
+      .map((res: any) => (res.text() != "" ? res.json() : {}))
+      .catch(this.errorHandler.handleError);
+  }
 }

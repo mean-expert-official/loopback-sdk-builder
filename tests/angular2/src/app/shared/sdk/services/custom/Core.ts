@@ -61,7 +61,6 @@ export class CoreApi extends BaseLoopBackApi {
       body: body
     };
     let urlParams: any = {};
-    if (body) urlParams.body = body;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -90,7 +89,6 @@ export class CoreApi extends BaseLoopBackApi {
       request: request
     };
     let urlParams: any = {};
-    if (request) urlParams.request = request;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
