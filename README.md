@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/mean-expert-official/loopback-sdk-builder.svg?branch=development)](https://travis-ci.org/mean-expert-official/loopback-sdk-builder)
+[![npm version](https://badge.fury.io/js/%40mean-expert%2Floopback-sdk-builder.svg)](https://badge.fury.io/js/%40mean-expert%2Floopback-sdk-builder) [![Build Status](https://travis-ci.org/mean-expert-official/loopback-sdk-builder.svg?branch=development)](https://travis-ci.org/mean-expert-official/loopback-sdk-builder) [![dependencies](https://david-dm.org/mean-expert-official/loopback-sdk-builder.png)](https://david-dm.org/mean-expert-official/loopback-sdk-builder) [![Known Vulnerabilities](https://snyk.io/test/npm/@mean-expert/loopback-sdk-builder/badge.svg)](https://snyk.io/test/npm/@mean-expert/loopback-sdk-builder)
 
 ![LoopBack SDK Builder](https://storage.googleapis.com/mean-expert-images/sdk-builder.jpg)
 
