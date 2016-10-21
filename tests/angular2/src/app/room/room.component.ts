@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Room } from '../shared/sdk/models';
-import { AccountApi, RoomApi, LoggerService } from '../shared/sdk/services';
+import { Room, Account, FireLoopRef } from '../shared/sdk/models';
+import { AccountApi, RoomApi, LoggerService, RealTime } from '../shared/sdk/services';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 @Component({
@@ -10,6 +10,8 @@ import { Subscription } from 'rxjs';
 
 export class RoomComponent implements OnInit {
 
+  private logged: Account;
+  private accountRef: FireLoopRef<Account>;
   private room: Room = new Room();
   private subscription: Subscription;
 
@@ -17,15 +19,22 @@ export class RoomComponent implements OnInit {
     private accountApi: AccountApi,
     private roomApi: RoomApi,
     private router: Router,
-    private logger: LoggerService
+    private logger: LoggerService,
+    private realTime: RealTime
   ) {
     this.logger.info('Room Module Loaded');
+    this.logged = this.accountApi.getCachedCurrent();
+    this.accountRef = this.realTime.FireLoop.ref<Account>(Account);
   }
 
   ngOnInit() {}
 
   logout(): void {
     this.accountApi.logout().subscribe(res => this.router.navigate(['/access']));
+  }
+
+  update(): void {
+    this.accountRef.upsert(this.logged).subscribe(res => console.log(res));
   }
 
   create(): void {

@@ -62,7 +62,7 @@ export class LoopBackAuth {
   }
   
   public clear(): void {
-    Object.keys(this.token).forEach(prop => StorageDriver.remove(`${this.prefix}${prop}`));
+    Object.keys(this.token).forEach((prop: string) => StorageDriver.remove(`${this.prefix}${prop}`));
     this.token = new SDKToken();
   }
   // I do not persist everything in 1 value because I want

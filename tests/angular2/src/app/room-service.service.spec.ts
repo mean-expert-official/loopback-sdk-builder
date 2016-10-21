@@ -2,7 +2,7 @@
 
 import { TestBed, async, inject } from '@angular/core/testing';
 import { SDKModule } from './shared/sdk';
-import { Room, Message } from './shared/sdk/models';
+import { Room, Message, FireLoopRef } from './shared/sdk/models';
 import { RoomApi, MessageApi, RealTime } from './shared/sdk/services';
 
 describe('Service: Room Service', () => {
@@ -25,6 +25,87 @@ describe('Service: Room Service', () => {
       expect(service.findOne).toBeTruthy();
     })
   ));
+
+
+  it('should listen for child_added using FireLoop API',
+    inject([RealTime], (realTime: RealTime) => {
+      let room: Room = new Room();
+      room.name = Date.now().toString();
+      let ref: FireLoopRef<Room> = realTime.FireLoop.ref<Room>(Room);
+      let subscription = ref.on('child_added').subscribe((result: Room) => {
+        console.log(result);
+        expect(result.id).toBeTruthy();
+        expect(result.name).toBe(room.name);
+        subscription.unsubscribe();
+      });
+      ref.create(room).subscribe();
+    })
+  );
+
+  it('should listen for child_changed using FireLoop API',
+    inject([RealTime], (realTime: RealTime) => {
+      let room: Room = new Room();
+      room.name = Date.now().toString();
+      let name2 = room.name + 'SSSS';
+      let ref: FireLoopRef<Room> = realTime.FireLoop.ref<Room>(Room);
+      let subscription = ref.on('child_changed').subscribe((result: Room) => {
+        expect(result.id).toBeTruthy();
+        expect(result.name).toBe(name2);
+        subscription.unsubscribe();
+      });
+      ref.create(room).subscribe((res: Room) => {
+        res.name = name2;
+        ref.upsert(res).subscribe();
+      });
+    })
+  );
+
+  it('should listen for child_removed using FireLoop API',
+    inject([RealTime], (realTime: RealTime) => {
+      let room: Room = new Room();
+      room.name = Date.now().toString();
+      let ref: FireLoopRef<Room> = realTime.FireLoop.ref<Room>(Room);
+      let subscription = ref.on('child_removed').subscribe((result: Room) => {
+        console.log(result);
+        expect(result.id).toBeTruthy();
+        expect(result.name).toBe(room.name);
+        subscription.unsubscribe();
+      });
+      ref.create(room).subscribe((result: Room) => ref.remove(result).subscribe());
+    })
+  );
+
+  it('should set data using FireLoop API',
+    inject([RealTime], (realTime: RealTime) => {
+      let room: Room = new Room();
+      room.name = Date.now().toString();
+      let ref: FireLoopRef<Room> = realTime.FireLoop.ref<Room>(Room);
+      let subscription = ref.create(room).subscribe((result: Room) => {
+        expect(result.id).toBeTruthy();
+        expect(result.name).toBe(room.name);
+        subscription.unsubscribe();
+      });
+    })
+  );
+
+  it('should create child data using FireLoop API',
+    inject([RealTime], (realTime: RealTime) => {
+      let room: Room = new Room();
+      room.name = Date.now().toString();
+      let message: Message = new Message({  text : 'Hello Child Reference' });
+      let RoomReference: FireLoopRef<Room> = realTime.FireLoop.ref<Room>(Room);
+      let RoomSubscription = RoomReference.create(room).subscribe((instance: Room) => {
+         // Child Feature
+      let MessageReference: FireLoopRef<Message> = RoomReference.make(instance).child<Message>('messages');
+          MessageReference.on('child_added').subscribe((result: Message) => {
+            expect(result.id).toBeTruthy();
+            expect(result.text).toBe(message.text);
+          }
+        );
+        MessageReference.create(message).subscribe((res: Message) => console.log(res.text));
+      });
+    })
+  );
 
   it('should create a new room instance',
     async(inject([RoomApi], (roomApi: RoomApi) => {
@@ -56,12 +137,12 @@ describe('Service: Room Service', () => {
       room.name = Date.now().toString();
       return roomApi.create(room).subscribe((instance: Room) =>
         roomApi.createMessages(instance.id, {
-            text: 'HelloRoom'
+          text: 'HelloRoom'
         }).subscribe(message => {
-            expect(message.id).toBeTruthy();
-            expect(message.roomId).toBe(instance.id);
-          })
-        );
+          expect(message.id).toBeTruthy();
+          expect(message.roomId).toBe(instance.id);
+        })
+      );
     })
   ));
 
@@ -74,9 +155,9 @@ describe('Service: Room Service', () => {
         .subscribe((instance: Room) => roomApi.createMessages(instance.id, message)
         .subscribe(messageInstance => roomApi.getMessages(instance.id, { where: message })
         .subscribe(messages => {
-            expect(messages.length).toBe(1);
-            let msg = messages.pop();
-            expect(msg.text).toBe(messageInstance.text);
+          expect(messages.length).toBe(1);
+          let msg = messages.pop();
+          expect(msg.text).toBe(messageInstance.text);
         })));
     })
   ));
@@ -85,8 +166,8 @@ describe('Service: Room Service', () => {
     async(inject([RoomApi], (roomApi: RoomApi) => {
       let params = ['Hi', 'My Name Is', 'What'];
       return roomApi.greetRoute(params[0], params[1], params[2])
-        .subscribe((result: {greeting: string}) => {
-            expect(result.greeting).toBe(params.join(':'));
+        .subscribe((result: { greeting: string }) => {
+          expect(result.greeting).toBe(params.join(':'));
         });
     })
   ));
@@ -95,8 +176,8 @@ describe('Service: Room Service', () => {
     async(inject([RoomApi], (roomApi: RoomApi) => {
       let params = ['Hi', 'My Name Is', 'Who'];
       return roomApi.greetGet(params[0], params[1], params[2])
-        .subscribe((result: {greeting: string}) => {
-            expect(result.greeting).toBe(params.join(':'));
+        .subscribe((result: { greeting: string }) => {
+          expect(result.greeting).toBe(params.join(':'));
         });
     })
   ));
@@ -105,8 +186,8 @@ describe('Service: Room Service', () => {
     async(inject([RoomApi], (roomApi: RoomApi) => {
       let params = ['Hi', 'My Name Is', 'Slim Shady!!'];
       return roomApi.greetPost(params[0], params[1], params[2])
-        .subscribe((result: {greeting: string}) => {
-            expect(result.greeting).toBe(params.join(':'));
+        .subscribe((result: { greeting: string }) => {
+          expect(result.greeting).toBe(params.join(':'));
         });
     })
   ));
@@ -115,9 +196,9 @@ describe('Service: Room Service', () => {
     async(inject([RoomApi], (roomApi: RoomApi) => {
       let param = { child: 'filtered' };
       return roomApi.singleParamPost(param).subscribe((result: { child: string, param: undefined }) => {
-            expect(result.param).toBe(undefined);
-            expect(result.child).toBe(param.child);
-        });
+        expect(result.param).toBe(undefined);
+        expect(result.child).toBe(param.child);
+      });
     })
   ));
 
@@ -153,19 +234,4 @@ describe('Service: Room Service', () => {
         })))));
     })
   ));
-  /**
-  It can not be tested for now because a strange Angular 2 error (No info available)
-  This is tested running the Test Application using ng serve instead.
-  it('should set data using FireLoop API',
-    async(inject([RealTime], (realTime: RealTime) => {
-      let room: Room = new Room();
-          room.name = 'FireLoop Room';
-      let ref: any =  realTime.FireLoop.ref('Room');
-      return ref.set(room).subscribe((result: Room) => {
-            expect(result.id).toBeTruthy();
-            expect(result.name).toBe(room.name);
-        });
-    })
-  ));
-  **/
 });
