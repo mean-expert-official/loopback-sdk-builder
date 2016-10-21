@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { LoggerService } from './shared/sdk/services';
-import { RealTime } from './shared/sdk/services';
-import { Room, FireLoopRef } from './shared/sdk/models';
+// import { RealTime } from './shared/sdk/services';
+// import { Room, FireLoopRef } from './shared/sdk/models';
 // Hardcoded Message interface, this because Messge models
 // Is private, this is only for testing purposes, in real life
 // the Message should not be private -if needed in front end-
@@ -18,15 +18,14 @@ export class AppComponent {
   title = 'LoopBack SDK Builder Test Application';
 
   constructor(
-    private logger: LoggerService,
-    private realTime: RealTime
+    private logger: LoggerService
   ) {
     this.logger.info('LoopBack SDK Builder - Test Application');
     // Simple IO Test
     // this.realTime.IO.emit('hello', 'world');
     // this.realTime.IO.on('hello').subscribe((msg: any) => this.logger.info('REALTIME: ', msg));
     // Simple FireLoop set and get examples.
-    let RoomReference: FireLoopRef<Room> = this.realTime.FireLoop.ref<Room>(Room);
+    /*let RoomReference: FireLoopRef<Room> = this.realTime.FireLoop.ref<Room>(Room);
     // This will get the list of results and fire every time there is new data.
     RoomReference.on('changes').subscribe((rooms: Array<Room>) => this.logger.info(rooms));
     RoomReference.on('child_added', {
@@ -51,6 +50,6 @@ export class AppComponent {
         (messages: Array<Message>) => this.logger.info(messages)
       );
       MessageReference.upsert({  text : 'Hello Child Reference' }).subscribe((res: Message) => console.log(res.text));
-    }));
+    }));*/
   }
 }
