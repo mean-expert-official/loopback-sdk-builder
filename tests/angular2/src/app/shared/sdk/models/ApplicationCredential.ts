@@ -5,8 +5,8 @@ export interface ApplicationCredentialInterface {
   provider?: string;
   authScheme?: string;
   credentials?: string;
-  created?: any;
-  modified?: any;
+  created?: Date;
+  modified?: Date;
   userId?: any;
   id?: number;
 }
@@ -15,8 +15,8 @@ export class ApplicationCredential implements ApplicationCredentialInterface {
   provider: string;
   authScheme: string;
   credentials: string;
-  created: any;
-  modified: any;
+  created: Date;
+  modified: Date;
   userId: any;
   id: number;
   constructor(instance?: ApplicationCredentialInterface) {

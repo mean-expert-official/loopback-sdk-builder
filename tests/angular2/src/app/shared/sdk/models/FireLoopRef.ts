@@ -1,6 +1,6 @@
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import { LoopBackFilter } from './index';
+import { LoopBackFilter, StatFilter } from './index';
 
 export class FireLoopRef<T> {
 
@@ -50,9 +50,27 @@ export class FireLoopRef<T> {
     event = `${this.name}.${event}`;
     if (this.observables[event]) { return this.observables[event]; }
     let subject: Subject<T> = new Subject<T>();
-    if (event.match(/(value|changes)/)) {
+    if (event.match(/(value|change|stats)/)) {
       this.pull(event, filter, subject);
     }
+    // Listen for broadcast announces
+    this.socket.on(
+      // When there is a broadcast announce
+      `${event}.broadcast.announce`,
+      // We send a request containing the filtering options
+      () => this.socket.emit(`${event}.broadcast.request`, filter)
+    );
+    // Once processed our request will return a unique result
+    this.socket.on(`${event}.broadcast`, (res: any) => subject.next(res));
+    this.observables[event] = subject.asObservable();
+    return this.observables[event];
+  }
+
+  public stats(filter?: StatFilter): Observable<T | T[]> {
+    let event = `${this.name}.stats`;
+    if (this.observables[event]) { return this.observables[event]; }
+    let subject: Subject<T> = new Subject<T>();
+    this.pull(event, filter, subject);
     // Listen for broadcast announces
     this.socket.on(
       // When there is a broadcast announce

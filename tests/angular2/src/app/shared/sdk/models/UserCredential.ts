@@ -7,8 +7,8 @@ export interface UserCredentialInterface {
   externalId?: string;
   profile?: any;
   credentials?: string;
-  created?: any;
-  modified?: any;
+  created?: Date;
+  modified?: Date;
   userId?: any;
   id?: number;
 }
@@ -19,8 +19,8 @@ export class UserCredential implements UserCredentialInterface {
   externalId: string;
   profile: any;
   credentials: string;
-  created: any;
-  modified: any;
+  created: Date;
+  modified: Date;
   userId: any;
   id: number;
   constructor(instance?: UserCredentialInterface) {
