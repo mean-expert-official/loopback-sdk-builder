@@ -41,3 +41,18 @@ export class SDKToken extends AccessToken {
         super(instance);
     }
 }
+
+export interface GeoPoint  {
+    lat: number;
+    lng: number;
+}
+
+export interface StatFilter {
+    range: string,
+    custom?: {
+      start: string,
+      end: string
+    },
+    where?: {},
+    groypBy?: string
+}

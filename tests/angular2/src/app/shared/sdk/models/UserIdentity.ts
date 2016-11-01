@@ -10,8 +10,8 @@ export interface UserIdentityInterface {
   externalId?: string;
   profile?: any;
   credentials?: string;
-  created?: any;
-  modified?: any;
+  created?: Date;
+  modified?: Date;
   userId?: number;
   id?: number;
   user?: User;
@@ -23,8 +23,8 @@ export class UserIdentity implements UserIdentityInterface {
   externalId: string;
   profile: any;
   credentials: string;
-  created: any;
-  modified: any;
+  created: Date;
+  modified: Date;
   userId: number;
   id: number;
   user: User;

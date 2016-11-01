@@ -2,7 +2,7 @@
 import {
   Message,
   Category,
-  Account,
+  Account
 } from '../index';
 
 declare var Object: any;

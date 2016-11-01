@@ -10,8 +10,8 @@ export interface UserInterface {
   emailVerified?: boolean;
   verificationToken?: string;
   status?: string;
-  created?: any;
-  lastUpdated?: any;
+  created?: Date;
+  lastUpdated?: Date;
   id?: number;
   accessTokens?: Array<any>;
 }
@@ -25,8 +25,8 @@ export class User implements UserInterface {
   emailVerified: boolean;
   verificationToken: string;
   status: string;
-  created: any;
-  lastUpdated: any;
+  created: Date;
+  lastUpdated: Date;
   id: number;
   accessTokens: Array<any>;
   constructor(instance?: UserInterface) {

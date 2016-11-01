@@ -1,6 +1,6 @@
 /* tslint:disable */
 import {
-  Room,
+  Room
 } from '../index';
 
 declare var Object: any;
@@ -13,8 +13,8 @@ export interface AccountInterface {
   emailVerified?: boolean;
   verificationToken?: string;
   status?: string;
-  created?: any;
-  lastUpdated?: any;
+  created?: Date;
+  lastUpdated?: Date;
   id?: number;
   accessTokens?: Array<any>;
   rooms?: Array<Room>;
@@ -30,8 +30,8 @@ export class Account implements AccountInterface {
   emailVerified: boolean;
   verificationToken: string;
   status: string;
-  created: any;
-  lastUpdated: any;
+  created: Date;
+  lastUpdated: Date;
   id: number;
   accessTokens: Array<any>;
   rooms: Array<Room>;
