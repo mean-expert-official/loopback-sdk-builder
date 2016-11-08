@@ -50,7 +50,7 @@ export class CoreApi extends BaseLoopBackApi {
    * This usually means the response is a `Core` object.)
    * </em>
    */
-  public run(path: any = undefined, body: any = undefined): Observable<any> {
+  public run(path: any = {}, body: any = {}): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/cores/run/:path";
@@ -80,7 +80,7 @@ export class CoreApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public invoke(request: any = undefined): Observable<any> {
+  public invoke(request: any = {}): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/cores/invoke";

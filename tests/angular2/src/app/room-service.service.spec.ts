@@ -2,8 +2,8 @@
 
 import { TestBed, async, inject } from '@angular/core/testing';
 import { SDKModule } from './shared/sdk';
-import { Room, Message, FireLoopRef } from './shared/sdk/models';
-import { RoomApi, MessageApi, RealTime } from './shared/sdk/services';
+import { Room, Category, Message, FireLoopRef } from './shared/sdk/models';
+import { RoomApi, CategoryApi, MessageApi, RealTime } from './shared/sdk/services';
 
 describe('Service: Room Service', () => {
   beforeEach(() => {
@@ -192,6 +192,16 @@ describe('Service: Room Service', () => {
     })
   ));
 
+  it('should find by mock room to test custom remote method',
+    async(inject([RoomApi], (roomApi: RoomApi) => {
+      let room = new Room({ id: 42, name: 'my awesome room' });
+      return roomApi.findByRoom(room)
+        .subscribe((instance: Room) => {
+          expect(room.id).toBe(instance.id);
+        });
+    })
+  ));
+
   it('should fetch filter as object from single-param post method',
     async(inject([RoomApi], (roomApi: RoomApi) => {
       let param = { child: 'filtered' };
@@ -199,6 +209,22 @@ describe('Service: Room Service', () => {
         expect(result.param).toBe(undefined);
         expect(result.child).toBe(param.child);
       });
+    })
+  ));
+
+  it('should create and link rooms with categories',
+    async(inject([CategoryApi, RoomApi], (categoryApi: CategoryApi, roomApi: RoomApi) => {
+      let category: Category = new Category();
+      let room: Room = new Room();
+      room.name = Date.now().toString();
+      category.name = Date.now().toString();
+
+      return roomApi.create(room)
+        .subscribe((roomInstance: Room) => categoryApi.create(category)
+        .subscribe((categoryInstance: Category) => categoryApi.linkRooms(categoryInstance.id, roomInstance.id)
+        .subscribe((result: any) => {
+          expect(result.id).toBeTruthy();
+        })));
     })
   ));
 

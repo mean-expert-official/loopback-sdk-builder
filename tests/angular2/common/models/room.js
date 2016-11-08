@@ -15,6 +15,21 @@ module.exports = function (Room) {
     }
   );
 
+  Room.findByRoom = (room, next) => {
+    next(null, room);
+  };
+  
+  Room.remoteMethod(
+    'findByRoom',
+    {
+      accepts: [
+        { arg: 'room', type: 'object', http: { source: 'body' }}
+      ],
+      returns: { arg: 'room', type: 'object', root: true },
+      http: { path: '/findByRoom', verb: 'post' }
+    }
+  );
+
   // We receive 3 copies of the body from loopback, not sure why
   // I would expect body.a, body.b and body.c in 1 object param.
   Room.greetPost = (b1, b2, b3, next) => {
