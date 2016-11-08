@@ -260,21 +260,4 @@ describe('Service: Room Service', () => {
         })))));
     })
   ));
-
-  /**
-   * This test is to validate that contexts support is working
-   * i modify the name of the room appending the host to the name if it works
-   * if it doesn't work i set room.id = -1 and the name to blank
-   */
-  it('should find by mock room to test custom remote method with context enabled',
-    async(inject([RoomApi], (roomApi: RoomApi) => {
-        let room = new Room({ id: 42, name: 'my awesome room' });
-        return roomApi.findByRoomContext(room)
-          .subscribe((instance: Room) => {
-            expect(room.id).toBe(instance.id);
-            // I append the host onto the instance name so it shouldn't match now
-            expect(room.name).not.toBe(instance.name);
-          });
-      })
-    ));
 });
