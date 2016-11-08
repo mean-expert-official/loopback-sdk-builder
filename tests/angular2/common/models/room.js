@@ -18,7 +18,7 @@ module.exports = function (Room) {
   Room.findByRoom = (room, next) => {
     next(null, room);
   };
-
+  
   Room.remoteMethod(
     'findByRoom',
     {
@@ -35,7 +35,7 @@ module.exports = function (Room) {
   Room.greetPost = (b1, b2, b3, next) => {
     next(null, `${b1.a}:${b2.b}:${b3.c}`);
   };
-
+  
   Room.remoteMethod(
     'greetPost',
     {
@@ -78,35 +78,6 @@ module.exports = function (Room) {
       ],
       returns: { arg: 'greeting', type: 'string' },
       http: { path: '/slimshady', verb: 'get' }
-    }
-  );
-
-  /**
-   * Mock endpoint thta checks to see if we can read the context and returns a valid result to test it.
-   * @param room
-   * @param context
-   * @param next
-   */
-  Room.findByRoomContext = function(room, context, next){
-    var host = (typeof(context.req) !== 'undefined' && typeof(context.req.hostname) !== 'undefined' ? context.req.hostname : false);
-
-    if(host) {
-      room.name += host;
-    } else {
-      room = {id: -1, name: ""};
-    }
-    next(null, room);
-  };
-
-  Room.remoteMethod(
-    'findByRoomContext',
-    {
-      accepts: [
-        { arg: 'room', type: 'object', http: { source: 'body' }},
-        { arg: 'remoteCtx', description: '**Do not implement in clients**.', type: Object, injectCtx: true, http: { source: 'context' }}
-      ],
-      returns: { arg: 'room', type: 'object', root: true },
-      http: { path: '/findByRoomContext', verb: 'post' }
     }
   );
 };
