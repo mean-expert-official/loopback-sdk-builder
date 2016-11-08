@@ -4,7 +4,7 @@
   "port": 3000,
   "remoting": {
     "context": {
-      "enableHttpContext": false
+      "enableHttpContext": true
     },
     "rest": {
       "normalizeHttpPath": false,
