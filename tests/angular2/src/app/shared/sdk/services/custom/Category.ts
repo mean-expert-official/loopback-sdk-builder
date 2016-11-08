@@ -108,7 +108,7 @@ export class CategoryApi extends BaseLoopBackApi {
    * This usually means the response is a `Category` object.)
    * </em>
    */
-  public updateByIdRooms(id: any, fk: any, data: any = undefined): Observable<any> {
+  public updateByIdRooms(id: any, fk: any, data: any = {}): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Categories/:id/rooms/:fk";
@@ -144,7 +144,7 @@ export class CategoryApi extends BaseLoopBackApi {
    * This usually means the response is a `Category` object.)
    * </em>
    */
-  public linkRooms(id: any, fk: any, data: any = undefined): Observable<any> {
+  public linkRooms(id: any, fk: any, data: any = {}): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Categories/:id/rooms/rel/:fk";
@@ -233,7 +233,7 @@ export class CategoryApi extends BaseLoopBackApi {
    * This usually means the response is a `Category` object.)
    * </em>
    */
-  public getRooms(id: any, filter: LoopBackFilter = undefined): Observable<any> {
+  public getRooms(id: any, filter: LoopBackFilter = {}): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Categories/:id/rooms";
@@ -265,7 +265,7 @@ export class CategoryApi extends BaseLoopBackApi {
    * This usually means the response is a `Category` object.)
    * </em>
    */
-  public createRooms(id: any, data: any = undefined): Observable<any> {
+  public createRooms(id: any, data: any = {}): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Categories/:id/rooms";
@@ -319,7 +319,7 @@ export class CategoryApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public countRooms(id: any, where: any = undefined): Observable<any> {
+  public countRooms(id: any, where: any = {}): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Categories/:id/rooms/count";
@@ -349,7 +349,7 @@ export class CategoryApi extends BaseLoopBackApi {
    * This usually means the response is a `Category` object.)
    * </em>
    */
-  public create(data: any = undefined): Observable<Category> {
+  public create(data: any = {}): Observable<Category> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Categories";
@@ -378,7 +378,7 @@ export class CategoryApi extends BaseLoopBackApi {
    * This usually means the response is a `Category` object.)
    * </em>
    */
-  public upsert(data: any = undefined): Observable<Category> {
+  public upsert(data: any = {}): Observable<Category> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Categories";
@@ -407,7 +407,7 @@ export class CategoryApi extends BaseLoopBackApi {
    * This usually means the response is a `Category` object.)
    * </em>
    */
-  public replaceOrCreate(data: any = undefined): Observable<any> {
+  public replaceOrCreate(data: any = {}): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Categories/replaceOrCreate";
@@ -438,7 +438,7 @@ export class CategoryApi extends BaseLoopBackApi {
    * This usually means the response is a `Category` object.)
    * </em>
    */
-  public upsertWithWhere(where: any = undefined, data: any = undefined): Observable<Category> {
+  public upsertWithWhere(where: any = {}, data: any = {}): Observable<Category> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Categories/upsertWithWhere";
@@ -494,7 +494,7 @@ export class CategoryApi extends BaseLoopBackApi {
    * This usually means the response is a `Category` object.)
    * </em>
    */
-  public findById(id: any, filter: LoopBackFilter = undefined): Observable<Category> {
+  public findById(id: any, filter: LoopBackFilter = {}): Observable<Category> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Categories/:id";
@@ -526,7 +526,7 @@ export class CategoryApi extends BaseLoopBackApi {
    * This usually means the response is a `Category` object.)
    * </em>
    */
-  public replaceById(id: any, data: any = undefined): Observable<any> {
+  public replaceById(id: any, data: any = {}): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Categories/:id/replace";
@@ -555,7 +555,7 @@ export class CategoryApi extends BaseLoopBackApi {
    * This usually means the response is a `Category` object.)
    * </em>
    */
-  public find(filter: LoopBackFilter = undefined): Observable<Array<Category>> {
+  public find(filter: LoopBackFilter = {}): Observable<Array<Category>> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Categories";
@@ -583,7 +583,7 @@ export class CategoryApi extends BaseLoopBackApi {
    * This usually means the response is a `Category` object.)
    * </em>
    */
-  public findOne(filter: LoopBackFilter = undefined): Observable<Category> {
+  public findOne(filter: LoopBackFilter = {}): Observable<Category> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Categories/findOne";
@@ -610,7 +610,7 @@ export class CategoryApi extends BaseLoopBackApi {
    *
    * The number of instances updated
    */
-  public updateAll(where: any = undefined, data: any = undefined): Observable<any> {
+  public updateAll(where: any = {}, data: any = {}): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Categories/update";
@@ -664,7 +664,7 @@ export class CategoryApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public count(where: any = undefined): Observable<any> {
+  public count(where: any = {}): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Categories/count";
@@ -694,7 +694,7 @@ export class CategoryApi extends BaseLoopBackApi {
    * This usually means the response is a `Category` object.)
    * </em>
    */
-  public updateAttributes(id: any, data: any = undefined): Observable<any> {
+  public updateAttributes(id: any, data: any = {}): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Categories/:id";
@@ -756,7 +756,7 @@ export class CategoryApi extends BaseLoopBackApi {
    * This usually means the response is a `Category` object.)
    * </em>
    */
-  public createManyRooms(id: any, data: Array<any> = undefined): Observable<any> {
+  public createManyRooms(id: any, data: Array<any> = []): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Categories/:id/rooms";
@@ -787,7 +787,7 @@ export class CategoryApi extends BaseLoopBackApi {
    * This usually means the response is a `Category` object.)
    * </em>
    */
-  public createMany(data: Array<any> = undefined): Observable<Array<Category>> {
+  public createMany(data: Array<any> = []): Observable<Array<Category>> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Categories";

@@ -47,7 +47,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public getRoom(id: any, refresh: any = undefined): Observable<any> {
+  public getRoom(id: any, refresh: any = {}): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/messages/:id/room";
@@ -138,7 +138,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public updateByIdReplies(id: any, fk: any, data: any = undefined): Observable<any> {
+  public updateByIdReplies(id: any, fk: any, data: any = {}): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/messages/:id/replies/:fk";
@@ -170,7 +170,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public getParent(id: any, refresh: any = undefined): Observable<any> {
+  public getParent(id: any, refresh: any = {}): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/messages/:id/parent";
@@ -261,7 +261,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public updateByIdLikes(id: any, fk: any, data: any = undefined): Observable<any> {
+  public updateByIdLikes(id: any, fk: any, data: any = {}): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/messages/:id/likes/:fk";
@@ -293,7 +293,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public getReplies(id: any, filter: LoopBackFilter = undefined): Observable<any> {
+  public getReplies(id: any, filter: LoopBackFilter = {}): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/messages/:id/replies";
@@ -325,7 +325,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public createReplies(id: any, data: any = undefined): Observable<any> {
+  public createReplies(id: any, data: any = {}): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/messages/:id/replies";
@@ -379,7 +379,7 @@ export class MessageApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public countReplies(id: any, where: any = undefined): Observable<any> {
+  public countReplies(id: any, where: any = {}): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/messages/:id/replies/count";
@@ -409,7 +409,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public getLikes(id: any, filter: LoopBackFilter = undefined): Observable<any> {
+  public getLikes(id: any, filter: LoopBackFilter = {}): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/messages/:id/likes";
@@ -441,7 +441,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public createLikes(id: any, data: any = undefined): Observable<any> {
+  public createLikes(id: any, data: any = {}): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/messages/:id/likes";
@@ -495,7 +495,7 @@ export class MessageApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public countLikes(id: any, where: any = undefined): Observable<any> {
+  public countLikes(id: any, where: any = {}): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/messages/:id/likes/count";
@@ -525,7 +525,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public create(data: any = undefined): Observable<Message> {
+  public create(data: any = {}): Observable<Message> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/messages";
@@ -554,7 +554,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public upsert(data: any = undefined): Observable<Message> {
+  public upsert(data: any = {}): Observable<Message> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/messages";
@@ -583,7 +583,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public replaceOrCreate(data: any = undefined): Observable<any> {
+  public replaceOrCreate(data: any = {}): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/messages/replaceOrCreate";
@@ -614,7 +614,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public upsertWithWhere(where: any = undefined, data: any = undefined): Observable<Message> {
+  public upsertWithWhere(where: any = {}, data: any = {}): Observable<Message> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/messages/upsertWithWhere";
@@ -670,7 +670,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public findById(id: any, filter: LoopBackFilter = undefined): Observable<Message> {
+  public findById(id: any, filter: LoopBackFilter = {}): Observable<Message> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/messages/:id";
@@ -702,7 +702,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public replaceById(id: any, data: any = undefined): Observable<any> {
+  public replaceById(id: any, data: any = {}): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/messages/:id/replace";
@@ -731,7 +731,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public find(filter: LoopBackFilter = undefined): Observable<Array<Message>> {
+  public find(filter: LoopBackFilter = {}): Observable<Array<Message>> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/messages";
@@ -759,7 +759,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public findOne(filter: LoopBackFilter = undefined): Observable<Message> {
+  public findOne(filter: LoopBackFilter = {}): Observable<Message> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/messages/findOne";
@@ -786,7 +786,7 @@ export class MessageApi extends BaseLoopBackApi {
    *
    * The number of instances updated
    */
-  public updateAll(where: any = undefined, data: any = undefined): Observable<any> {
+  public updateAll(where: any = {}, data: any = {}): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/messages/update";
@@ -840,7 +840,7 @@ export class MessageApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public count(where: any = undefined): Observable<any> {
+  public count(where: any = {}): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/messages/count";
@@ -870,7 +870,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public updateAttributes(id: any, data: any = undefined): Observable<any> {
+  public updateAttributes(id: any, data: any = {}): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/messages/:id";
@@ -932,7 +932,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public createManyReplies(id: any, data: Array<any> = undefined): Observable<any> {
+  public createManyReplies(id: any, data: Array<any> = []): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/messages/:id/replies";
@@ -965,7 +965,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public createManyLikes(id: any, data: Array<any> = undefined): Observable<any> {
+  public createManyLikes(id: any, data: Array<any> = []): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/messages/:id/likes";
@@ -996,7 +996,7 @@ export class MessageApi extends BaseLoopBackApi {
    * This usually means the response is a `Message` object.)
    * </em>
    */
-  public createMany(data: Array<any> = undefined): Observable<Array<Message>> {
+  public createMany(data: Array<any> = []): Observable<Array<Message>> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/messages";

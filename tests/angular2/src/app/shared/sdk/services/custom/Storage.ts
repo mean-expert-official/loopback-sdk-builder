@@ -73,7 +73,7 @@ export class StorageApi extends BaseLoopBackApi {
    * This usually means the response is a `Storage` object.)
    * </em>
    */
-  public createContainer(options: any = undefined): Observable<any> {
+  public createContainer(options: any = {}): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/storages";
@@ -101,7 +101,7 @@ export class StorageApi extends BaseLoopBackApi {
    *
    *  - `` – `{}` - 
    */
-  public destroyContainer(container: any = undefined): Observable<any> {
+  public destroyContainer(container: any = {}): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/storages/:container";
@@ -130,7 +130,7 @@ export class StorageApi extends BaseLoopBackApi {
    * This usually means the response is a `Storage` object.)
    * </em>
    */
-  public getContainer(container: any = undefined): Observable<any> {
+  public getContainer(container: any = {}): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/storages/:container";
@@ -159,7 +159,7 @@ export class StorageApi extends BaseLoopBackApi {
    * This usually means the response is a `Storage` object.)
    * </em>
    */
-  public getFiles(container: any = undefined): Observable<any> {
+  public getFiles(container: any = {}): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/storages/:container/files";
@@ -190,7 +190,7 @@ export class StorageApi extends BaseLoopBackApi {
    * This usually means the response is a `Storage` object.)
    * </em>
    */
-  public getFile(container: any = undefined, file: any = undefined): Observable<any> {
+  public getFile(container: any = {}, file: any = {}): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/storages/:container/files/:file";
@@ -221,7 +221,7 @@ export class StorageApi extends BaseLoopBackApi {
    *
    *  - `` – `{}` - 
    */
-  public removeFile(container: any = undefined, file: any = undefined): Observable<any> {
+  public removeFile(container: any = {}, file: any = {}): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/storages/:container/files/:file";
@@ -254,7 +254,7 @@ export class StorageApi extends BaseLoopBackApi {
    *
    *  - `result` – `{object}` - 
    */
-  public upload(req: any = undefined, res: any = undefined): Observable<any> {
+  public upload(req: any = {}, res: any = {}): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/storages/:container/upload";
@@ -286,7 +286,7 @@ export class StorageApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public download(container: any = undefined, file: any = undefined, req: any = undefined, res: any = undefined): Observable<any> {
+  public download(container: any = {}, file: any = {}, req: any = {}, res: any = {}): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/storages/:container/download/:file";
