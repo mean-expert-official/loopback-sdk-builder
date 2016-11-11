@@ -22,7 +22,7 @@
     "@angular/platform-browser": "2.0.0",
     "@angular/platform-browser-dynamic": "2.0.0",
     "@angular/router": "3.0.0",
-    "@mean-expert/loopback-component-realtime": "^1.0.0-beta.5",
+    "@mean-expert/loopback-component-realtime": "1.0.0-beta.8",
     "@types/socket.io-client": "^1.4.27",
     "compression": "^1.0.3",
     "config-chain": "^1.1.10",
