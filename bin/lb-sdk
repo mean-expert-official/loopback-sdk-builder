@@ -46,14 +46,16 @@ console.log(chalk.green('*                 /_/                                  
 console.log(chalk.green('*                                                                                        *'));
 console.log(chalk.green('*========================================================================================*'));
 console.log(chalk.green('*                                                                                        *'));
-console.log(chalk.green('*             Developed & Maintained by The MEAN Expert · http://mean.expert             *'));
-console.log(chalk.green('*                          http://github.com/mean-expert-official                        *'));
+console.log(chalk.green('*                       Developed & Maintained by Jonathan Casarrubias                   *'));
+console.log(chalk.green('*       MEAN Expert · http://mean.expert · http://github.com/mean-expert-official        *'));
 console.log(chalk.green('*                                                                                        *'));
 console.log(chalk.green('*                                      CONTRIBUTORS                                      *'));
 console.log(chalk.green('*                         João Ribeiro <http://jonnybgod.ghost.io>                       *'));
 console.log(chalk.green('*                      Nikolay Matiushenkov <https://github.com/mnvx>                    *'));
 console.log(chalk.green('*                         Sylvain Dumont <https://www.weboaks.com>                       *'));
 console.log(chalk.green('*                        Yonggang Luo <https://github.com/lygstate>                      *'));
+console.log(chalk.green('*                       Chris Tunbridge <https://github.com/Destreyf>                    *'));
+console.log(chalk.green('*                       Miguel Serrano <https://github.com/Serranom4>                    *'));
 console.log(chalk.green('*                                                                                        *'));
 console.log(chalk.green('*                                 ORIGINALLY FORKED FROM                                 *'));
 console.log(chalk.green('*                      Miroslav Bajtos\' <miroslav@strongloop.com>                        *'));

@@ -47,15 +47,15 @@ export class UserCredentialApi extends BaseLoopBackApi {
    * </em>
    */
   public create(data: any = {}): Observable<UserCredential> {
-    let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/UserCredentials";
-    let routeParams: any = {};
-    let postBody: any = {
+    let _routeParams: any = {};
+    let _postBody: any = {
       data: data
     };
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result.map((instance: UserCredential) => new UserCredential(instance));
   }
 
@@ -76,15 +76,15 @@ export class UserCredentialApi extends BaseLoopBackApi {
    * </em>
    */
   public upsert(data: any = {}): Observable<UserCredential> {
-    let method: string = "PUT";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "PUT";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/UserCredentials";
-    let routeParams: any = {};
-    let postBody: any = {
+    let _routeParams: any = {};
+    let _postBody: any = {
       data: data
     };
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result.map((instance: UserCredential) => new UserCredential(instance));
   }
 
@@ -105,15 +105,15 @@ export class UserCredentialApi extends BaseLoopBackApi {
    * </em>
    */
   public replaceOrCreate(data: any = {}): Observable<any> {
-    let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/UserCredentials/replaceOrCreate";
-    let routeParams: any = {};
-    let postBody: any = {
+    let _routeParams: any = {};
+    let _postBody: any = {
       data: data
     };
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
@@ -136,16 +136,16 @@ export class UserCredentialApi extends BaseLoopBackApi {
    * </em>
    */
   public upsertWithWhere(where: any = {}, data: any = {}): Observable<UserCredential> {
-    let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/UserCredentials/upsertWithWhere";
-    let routeParams: any = {};
-    let postBody: any = {
+    let _routeParams: any = {};
+    let _postBody: any = {
       data: data
     };
-    let urlParams: any = {};
-    if (where) urlParams.where = where;
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _urlParams: any = {};
+    if (where) _urlParams.where = where;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result.map((instance: UserCredential) => new UserCredential(instance));
   }
 
@@ -163,15 +163,15 @@ export class UserCredentialApi extends BaseLoopBackApi {
    *  - `exists` – `{boolean}` - 
    */
   public exists(id: any): Observable<any> {
-    let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/UserCredentials/:id/exists";
-    let routeParams: any = {
+    let _routeParams: any = {
       id: id
     };
-    let postBody: any = {};
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
@@ -192,16 +192,16 @@ export class UserCredentialApi extends BaseLoopBackApi {
    * </em>
    */
   public findById(id: any, filter: LoopBackFilter = {}): Observable<UserCredential> {
-    let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/UserCredentials/:id";
-    let routeParams: any = {
+    let _routeParams: any = {
       id: id
     };
-    let postBody: any = {};
-    let urlParams: any = {};
-    if (filter) urlParams.filter = filter;
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (filter) _urlParams.filter = filter;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result.map((instance: UserCredential) => new UserCredential(instance));
   }
 
@@ -224,17 +224,17 @@ export class UserCredentialApi extends BaseLoopBackApi {
    * </em>
    */
   public replaceById(id: any, data: any = {}): Observable<any> {
-    let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/UserCredentials/:id/replace";
-    let routeParams: any = {
+    let _routeParams: any = {
       id: id
     };
-    let postBody: any = {
+    let _postBody: any = {
       data: data
     };
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
@@ -253,14 +253,14 @@ export class UserCredentialApi extends BaseLoopBackApi {
    * </em>
    */
   public find(filter: LoopBackFilter = {}): Observable<Array<UserCredential>> {
-    let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/UserCredentials";
-    let routeParams: any = {};
-    let postBody: any = {};
-    let urlParams: any = {};
-    if (filter) urlParams.filter = filter;
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _routeParams: any = {};
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (filter) _urlParams.filter = filter;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result.map((instances: Array<UserCredential>) =>
         instances.map((instance: UserCredential) => new UserCredential(instance))
     );
@@ -281,14 +281,14 @@ export class UserCredentialApi extends BaseLoopBackApi {
    * </em>
    */
   public findOne(filter: LoopBackFilter = {}): Observable<UserCredential> {
-    let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/UserCredentials/findOne";
-    let routeParams: any = {};
-    let postBody: any = {};
-    let urlParams: any = {};
-    if (filter) urlParams.filter = filter;
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _routeParams: any = {};
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (filter) _urlParams.filter = filter;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result.map((instance: UserCredential) => new UserCredential(instance));
   }
 
@@ -308,16 +308,16 @@ export class UserCredentialApi extends BaseLoopBackApi {
    * The number of instances updated
    */
   public updateAll(where: any = {}, data: any = {}): Observable<any> {
-    let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/UserCredentials/update";
-    let routeParams: any = {};
-    let postBody: any = {
+    let _routeParams: any = {};
+    let _postBody: any = {
       data: data
     };
-    let urlParams: any = {};
-    if (where) urlParams.where = where;
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _urlParams: any = {};
+    if (where) _urlParams.where = where;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
@@ -336,15 +336,15 @@ export class UserCredentialApi extends BaseLoopBackApi {
    * </em>
    */
   public deleteById(id: any): Observable<any> {
-    let method: string = "DELETE";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "DELETE";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/UserCredentials/:id";
-    let routeParams: any = {
+    let _routeParams: any = {
       id: id
     };
-    let postBody: any = {};
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
@@ -362,14 +362,14 @@ export class UserCredentialApi extends BaseLoopBackApi {
    *  - `count` – `{number}` - 
    */
   public count(where: any = {}): Observable<any> {
-    let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/UserCredentials/count";
-    let routeParams: any = {};
-    let postBody: any = {};
-    let urlParams: any = {};
-    if (where) urlParams.where = where;
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _routeParams: any = {};
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (where) _urlParams.where = where;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
@@ -392,17 +392,17 @@ export class UserCredentialApi extends BaseLoopBackApi {
    * </em>
    */
   public updateAttributes(id: any, data: any = {}): Observable<any> {
-    let method: string = "PUT";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "PUT";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/UserCredentials/:id";
-    let routeParams: any = {
+    let _routeParams: any = {
       id: id
     };
-    let postBody: any = {
+    let _postBody: any = {
       data: data
     };
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
@@ -422,12 +422,12 @@ export class UserCredentialApi extends BaseLoopBackApi {
    *  - `changes` – `{ReadableStream}` - 
    */
   public createChangeStream(): Observable<any> {
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/UserCredentials/change-stream";
     let subject = new Subject();
     if (typeof EventSource !== 'undefined') {
       let emit   = (msg: any) => subject.next(JSON.parse(msg.data));
-      var source = new EventSource(url);
+      var source = new EventSource(_url);
       source.addEventListener('data', emit);
       source.onerror = emit;
     } else {
@@ -452,15 +452,15 @@ export class UserCredentialApi extends BaseLoopBackApi {
    * </em>
    */
   public createMany(data: Array<any> = []): Observable<Array<UserCredential>> {
-    let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/UserCredentials";
-    let routeParams: any = {};
-    let postBody: any = {
+    let _routeParams: any = {};
+    let _postBody: any = {
       data: data
     };
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result.map((instances: Array<UserCredential>) =>
         instances.map((instance: UserCredential) => new UserCredential(instance))
     );

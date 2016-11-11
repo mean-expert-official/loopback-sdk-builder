@@ -7,12 +7,14 @@ export class FireLoopRef<T> {
   private instance: any;
   private socket: any;
   private name: string;
+  private current: { name: string };
   private parent: FireLoopRef<T>;
   private childs: any = {};
   private observables: any = {};
 
-  constructor(name: string, socket: any, parent: FireLoopRef<any> = null) {
+  constructor(name: string, socket: any, parent: FireLoopRef<any> = null, current = null) {
     this.name = name;
+    this.current = current;
     this.parent = parent;
     this.socket = socket;
     return this;
@@ -23,11 +25,23 @@ export class FireLoopRef<T> {
       Math.floor(Math.random() * 100700) *
       Math.floor(Math.random() * 198500);
     let subject: Subject<T> = new Subject<T>();
-    this.socket.emit(`${this.name}.${event}`, {
+    let config: {id: any, data: any, current: any, parent: any } = {
       id: id,
       data: data,
+      current: this.current,
       parent: this.parent && this.parent.instance ? this.parent.instance : null
-    });
+    };
+    if (!this.parent || (this.parent && this.current)) {
+      this.socket.emit(`${this.name}.${event}`, config);
+    } else {
+      let interval = setInterval(() => {
+        if (this.current) {
+          config.current = this.current;
+          this.socket.emit(`${this.name}.${event}`, config);
+          clearInterval(interval);
+        }
+      }, 500);
+    }
     this.socket.on(`${this.name}.value.result.${id}`, (res: any) =>
       subject.next(res.error ? Observable.throw(res.error) : res)
     );
@@ -98,6 +112,10 @@ export class FireLoopRef<T> {
     if (!this.parent) {
       let childName = `${this.name}.${name}`;
       if (this.childs[childName]) { return this.childs[childName]; }
+      this.socket.emit(`${this.name}.relation.request`, { relation: name });
+      this.socket.on(`${this.name}.relation.request.result`, (Model: { name: string }) => {
+          this.childs[childName].current = Model;
+      });
       this.childs[childName] = new FireLoopRef<T>(childName, this.socket, this);
       return this.childs[childName];
     } else {

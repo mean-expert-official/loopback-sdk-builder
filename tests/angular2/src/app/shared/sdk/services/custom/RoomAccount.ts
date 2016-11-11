@@ -49,16 +49,16 @@ export class RoomAccountApi extends BaseLoopBackApi {
    * </em>
    */
   public getAccount(id: any, refresh: any = {}): Observable<any> {
-    let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/room-accounts/:id/account";
-    let routeParams: any = {
+    let _routeParams: any = {
       id: id
     };
-    let postBody: any = {};
-    let urlParams: any = {};
-    if (refresh) urlParams.refresh = refresh;
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (refresh) _urlParams.refresh = refresh;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
@@ -79,16 +79,16 @@ export class RoomAccountApi extends BaseLoopBackApi {
    * </em>
    */
   public getRoom(id: any, refresh: any = {}): Observable<any> {
-    let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/room-accounts/:id/room";
-    let routeParams: any = {
+    let _routeParams: any = {
       id: id
     };
-    let postBody: any = {};
-    let urlParams: any = {};
-    if (refresh) urlParams.refresh = refresh;
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (refresh) _urlParams.refresh = refresh;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
@@ -109,15 +109,15 @@ export class RoomAccountApi extends BaseLoopBackApi {
    * </em>
    */
   public create(data: any = {}): Observable<RoomAccount> {
-    let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/room-accounts";
-    let routeParams: any = {};
-    let postBody: any = {
+    let _routeParams: any = {};
+    let _postBody: any = {
       data: data
     };
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result.map((instance: RoomAccount) => new RoomAccount(instance));
   }
 
@@ -138,15 +138,15 @@ export class RoomAccountApi extends BaseLoopBackApi {
    * </em>
    */
   public upsert(data: any = {}): Observable<RoomAccount> {
-    let method: string = "PUT";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "PUT";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/room-accounts";
-    let routeParams: any = {};
-    let postBody: any = {
+    let _routeParams: any = {};
+    let _postBody: any = {
       data: data
     };
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result.map((instance: RoomAccount) => new RoomAccount(instance));
   }
 
@@ -167,15 +167,15 @@ export class RoomAccountApi extends BaseLoopBackApi {
    * </em>
    */
   public replaceOrCreate(data: any = {}): Observable<any> {
-    let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/room-accounts/replaceOrCreate";
-    let routeParams: any = {};
-    let postBody: any = {
+    let _routeParams: any = {};
+    let _postBody: any = {
       data: data
     };
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
@@ -198,16 +198,16 @@ export class RoomAccountApi extends BaseLoopBackApi {
    * </em>
    */
   public upsertWithWhere(where: any = {}, data: any = {}): Observable<RoomAccount> {
-    let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/room-accounts/upsertWithWhere";
-    let routeParams: any = {};
-    let postBody: any = {
+    let _routeParams: any = {};
+    let _postBody: any = {
       data: data
     };
-    let urlParams: any = {};
-    if (where) urlParams.where = where;
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _urlParams: any = {};
+    if (where) _urlParams.where = where;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result.map((instance: RoomAccount) => new RoomAccount(instance));
   }
 
@@ -225,15 +225,15 @@ export class RoomAccountApi extends BaseLoopBackApi {
    *  - `exists` – `{boolean}` - 
    */
   public exists(id: any): Observable<any> {
-    let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/room-accounts/:id/exists";
-    let routeParams: any = {
+    let _routeParams: any = {
       id: id
     };
-    let postBody: any = {};
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
@@ -254,16 +254,16 @@ export class RoomAccountApi extends BaseLoopBackApi {
    * </em>
    */
   public findById(id: any, filter: LoopBackFilter = {}): Observable<RoomAccount> {
-    let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/room-accounts/:id";
-    let routeParams: any = {
+    let _routeParams: any = {
       id: id
     };
-    let postBody: any = {};
-    let urlParams: any = {};
-    if (filter) urlParams.filter = filter;
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (filter) _urlParams.filter = filter;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result.map((instance: RoomAccount) => new RoomAccount(instance));
   }
 
@@ -286,17 +286,17 @@ export class RoomAccountApi extends BaseLoopBackApi {
    * </em>
    */
   public replaceById(id: any, data: any = {}): Observable<any> {
-    let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/room-accounts/:id/replace";
-    let routeParams: any = {
+    let _routeParams: any = {
       id: id
     };
-    let postBody: any = {
+    let _postBody: any = {
       data: data
     };
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
@@ -315,14 +315,14 @@ export class RoomAccountApi extends BaseLoopBackApi {
    * </em>
    */
   public find(filter: LoopBackFilter = {}): Observable<Array<RoomAccount>> {
-    let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/room-accounts";
-    let routeParams: any = {};
-    let postBody: any = {};
-    let urlParams: any = {};
-    if (filter) urlParams.filter = filter;
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _routeParams: any = {};
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (filter) _urlParams.filter = filter;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result.map((instances: Array<RoomAccount>) =>
         instances.map((instance: RoomAccount) => new RoomAccount(instance))
     );
@@ -343,14 +343,14 @@ export class RoomAccountApi extends BaseLoopBackApi {
    * </em>
    */
   public findOne(filter: LoopBackFilter = {}): Observable<RoomAccount> {
-    let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/room-accounts/findOne";
-    let routeParams: any = {};
-    let postBody: any = {};
-    let urlParams: any = {};
-    if (filter) urlParams.filter = filter;
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _routeParams: any = {};
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (filter) _urlParams.filter = filter;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result.map((instance: RoomAccount) => new RoomAccount(instance));
   }
 
@@ -370,16 +370,16 @@ export class RoomAccountApi extends BaseLoopBackApi {
    * The number of instances updated
    */
   public updateAll(where: any = {}, data: any = {}): Observable<any> {
-    let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/room-accounts/update";
-    let routeParams: any = {};
-    let postBody: any = {
+    let _routeParams: any = {};
+    let _postBody: any = {
       data: data
     };
-    let urlParams: any = {};
-    if (where) urlParams.where = where;
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _urlParams: any = {};
+    if (where) _urlParams.where = where;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
@@ -398,15 +398,15 @@ export class RoomAccountApi extends BaseLoopBackApi {
    * </em>
    */
   public deleteById(id: any): Observable<any> {
-    let method: string = "DELETE";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "DELETE";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/room-accounts/:id";
-    let routeParams: any = {
+    let _routeParams: any = {
       id: id
     };
-    let postBody: any = {};
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
@@ -424,14 +424,14 @@ export class RoomAccountApi extends BaseLoopBackApi {
    *  - `count` – `{number}` - 
    */
   public count(where: any = {}): Observable<any> {
-    let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/room-accounts/count";
-    let routeParams: any = {};
-    let postBody: any = {};
-    let urlParams: any = {};
-    if (where) urlParams.where = where;
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _routeParams: any = {};
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (where) _urlParams.where = where;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
@@ -454,17 +454,17 @@ export class RoomAccountApi extends BaseLoopBackApi {
    * </em>
    */
   public updateAttributes(id: any, data: any = {}): Observable<any> {
-    let method: string = "PUT";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "PUT";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/room-accounts/:id";
-    let routeParams: any = {
+    let _routeParams: any = {
       id: id
     };
-    let postBody: any = {
+    let _postBody: any = {
       data: data
     };
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
@@ -484,12 +484,12 @@ export class RoomAccountApi extends BaseLoopBackApi {
    *  - `changes` – `{ReadableStream}` - 
    */
   public createChangeStream(): Observable<any> {
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/room-accounts/change-stream";
     let subject = new Subject();
     if (typeof EventSource !== 'undefined') {
       let emit   = (msg: any) => subject.next(JSON.parse(msg.data));
-      var source = new EventSource(url);
+      var source = new EventSource(_url);
       source.addEventListener('data', emit);
       source.onerror = emit;
     } else {
@@ -514,15 +514,15 @@ export class RoomAccountApi extends BaseLoopBackApi {
    * </em>
    */
   public createMany(data: Array<any> = []): Observable<Array<RoomAccount>> {
-    let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/room-accounts";
-    let routeParams: any = {};
-    let postBody: any = {
+    let _routeParams: any = {};
+    let _postBody: any = {
       data: data
     };
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result.map((instances: Array<RoomAccount>) =>
         instances.map((instance: RoomAccount) => new RoomAccount(instance))
     );

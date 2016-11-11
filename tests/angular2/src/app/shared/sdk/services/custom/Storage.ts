@@ -45,13 +45,13 @@ export class StorageApi extends BaseLoopBackApi {
    * </em>
    */
   public getContainers(): Observable<any> {
-    let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/storages";
-    let routeParams: any = {};
-    let postBody: any = {};
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _routeParams: any = {};
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
@@ -74,15 +74,15 @@ export class StorageApi extends BaseLoopBackApi {
    * </em>
    */
   public createContainer(options: any = {}): Observable<any> {
-    let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/storages";
-    let routeParams: any = {};
-    let postBody: any = {
+    let _routeParams: any = {};
+    let _postBody: any = {
       options: options
     };
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
@@ -102,15 +102,15 @@ export class StorageApi extends BaseLoopBackApi {
    *  - `` – `{}` - 
    */
   public destroyContainer(container: any = {}): Observable<any> {
-    let method: string = "DELETE";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "DELETE";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/storages/:container";
-    let routeParams: any = {
+    let _routeParams: any = {
       container: container
     };
-    let postBody: any = {};
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
@@ -131,15 +131,15 @@ export class StorageApi extends BaseLoopBackApi {
    * </em>
    */
   public getContainer(container: any = {}): Observable<any> {
-    let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/storages/:container";
-    let routeParams: any = {
+    let _routeParams: any = {
       container: container
     };
-    let postBody: any = {};
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
@@ -160,15 +160,15 @@ export class StorageApi extends BaseLoopBackApi {
    * </em>
    */
   public getFiles(container: any = {}): Observable<any> {
-    let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/storages/:container/files";
-    let routeParams: any = {
+    let _routeParams: any = {
       container: container
     };
-    let postBody: any = {};
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
@@ -191,16 +191,16 @@ export class StorageApi extends BaseLoopBackApi {
    * </em>
    */
   public getFile(container: any = {}, file: any = {}): Observable<any> {
-    let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/storages/:container/files/:file";
-    let routeParams: any = {
+    let _routeParams: any = {
       container: container,
       file: file
     };
-    let postBody: any = {};
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
@@ -222,16 +222,16 @@ export class StorageApi extends BaseLoopBackApi {
    *  - `` – `{}` - 
    */
   public removeFile(container: any = {}, file: any = {}): Observable<any> {
-    let method: string = "DELETE";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "DELETE";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/storages/:container/files/:file";
-    let routeParams: any = {
+    let _routeParams: any = {
       container: container,
       file: file
     };
-    let postBody: any = {};
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
@@ -255,15 +255,15 @@ export class StorageApi extends BaseLoopBackApi {
    *  - `result` – `{object}` - 
    */
   public upload(req: any = {}, res: any = {}): Observable<any> {
-    let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/storages/:container/upload";
-    let routeParams: any = {};
-    let postBody: any = {};
-    let urlParams: any = {};
-    if (req) urlParams.req = req;
-    if (res) urlParams.res = res;
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _routeParams: any = {};
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (req) _urlParams.req = req;
+    if (res) _urlParams.res = res;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
@@ -287,18 +287,18 @@ export class StorageApi extends BaseLoopBackApi {
    * This method returns no data.
    */
   public download(container: any = {}, file: any = {}, req: any = {}, res: any = {}): Observable<any> {
-    let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/storages/:container/download/:file";
-    let routeParams: any = {
+    let _routeParams: any = {
       container: container,
       file: file
     };
-    let postBody: any = {};
-    let urlParams: any = {};
-    if (req) urlParams.req = req;
-    if (res) urlParams.res = res;
-    let result = this.request(method, url, routeParams, urlParams, postBody);
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (req) _urlParams.req = req;
+    if (res) _urlParams.res = res;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
