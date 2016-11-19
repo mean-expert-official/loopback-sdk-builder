@@ -16,14 +16,14 @@ export interface MessageInterface {
 }
 
 export class Message implements MessageInterface {
-  text: string;
-  id: number;
-  roomId: number;
-  parentId: number;
-  room: Room;
-  replies: Array<Message>;
-  parent: Message;
-  likes: Array<any>;
+  text: string = '';
+  id: number = 0;
+  roomId: number = 0;
+  parentId: number = 0;
+  room: Room = null;
+  replies: Array<Message> = null;
+  parent: Message = null;
+  likes: Array<any> = null;
   constructor(instance?: MessageInterface) {
     Object.assign(this, instance);
   }

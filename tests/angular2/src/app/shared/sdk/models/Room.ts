@@ -17,13 +17,13 @@ export interface RoomInterface {
 }
 
 export class Room implements RoomInterface {
-  name: string;
-  id: number;
-  messages: Array<Message>;
-  likes: Array<any>;
-  categories: Array<Category>;
-  accounts: Array<Account>;
-  admins: Array<Account>;
+  name: string = '';
+  id: number = 0;
+  messages: Array<Message> = null;
+  likes: Array<any> = null;
+  categories: Array<Category> = null;
+  accounts: Array<Account> = null;
+  admins: Array<Account> = null;
   constructor(instance?: RoomInterface) {
     Object.assign(this, instance);
   }

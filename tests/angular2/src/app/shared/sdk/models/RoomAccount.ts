@@ -14,11 +14,11 @@ export interface RoomAccountInterface {
 }
 
 export class RoomAccount implements RoomAccountInterface {
-  id: number;
-  accountId: number;
-  roomId: number;
-  account: Account;
-  room: Room;
+  id: number = 0;
+  accountId: number = 0;
+  roomId: number = 0;
+  account: Account = null;
+  room: Room = null;
   constructor(instance?: RoomAccountInterface) {
     Object.assign(this, instance);
   }

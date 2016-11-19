@@ -11,26 +11,32 @@
       "default": "authScheme"
     },
     "authScheme": {
-      "type": "string"
+      "type": "string",
+      "default": ""
     },
     "externalId": {
       "type": "string",
       "default": ""
     },
     "profile": {
-      "type": "object"
+      "type": "object",
+      "default": null
     },
     "credentials": {
-      "type": "string"
+      "type": "string",
+      "default": ""
     },
     "created": {
-      "type": "date"
+      "type": "date",
+      "default": null
     },
     "modified": {
-      "type": "date"
+      "type": "date",
+      "default": null
     },
     "userId": {
-      "type": "any"
+      "type": "any",
+      "default": null
     }
   },
   "validations": [],

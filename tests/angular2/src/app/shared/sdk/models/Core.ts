@@ -6,7 +6,7 @@ export interface CoreInterface {
 }
 
 export class Core implements CoreInterface {
-  id: number;
+  id: number = 0;
   constructor(instance?: CoreInterface) {
     Object.assign(this, instance);
   }

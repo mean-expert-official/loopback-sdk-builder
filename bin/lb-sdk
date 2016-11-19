@@ -27,11 +27,13 @@ var argv = optimist
   .describe('d', 'Platform specific drivers (ng4web, nativescript2, ng2universal <todo>)')
   .describe('i', 'Enable PubSub, IO and FireLoop functionality')
   .describe('w', 'Automatically wipe SDK Directory')
+  .describe('v', 'Add default values in models')
   .default('l', 'angular2')
   .default('d', 'ng4web')
   .default('i', 'enabled')
   .default('w', 'disabled')
-  .alias({ u: 'url', m: 'module-name', l: 'library', i: 'io', d: 'driver', w: 'wipe' })
+  .default('v', 'disabled')
+  .alias({ u: 'url', m: 'module-name', l: 'library', i: 'io', d: 'driver', w: 'wipe', v: 'default-values' })
   .demand(1)
   .argv;
 /**
@@ -90,7 +92,8 @@ var context = {
   outputFolder: argv._[1],
   isIo: argv['i'] || 'disabled',
   driver: argv['d'] || 'ng4web',
-  wipe: argv['w'] || 'disabled'
+  wipe: argv['w'] || 'disabled',
+  defaultValue: argv['v'] || 'disabled'
 };
 
 function verifyPath() {

@@ -6,7 +6,7 @@ export interface StorageInterface {
 }
 
 export class Storage implements StorageInterface {
-  id: number;
+  id: number = 0;
   constructor(instance?: StorageInterface) {
     Object.assign(this, instance);
   }

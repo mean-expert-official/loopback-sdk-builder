@@ -12,7 +12,8 @@
   "properties": {
     "name": {
       "type": "string",
-      "required": true
+      "required": true,
+      "default": ""
     }
   },
   "validations": [],
