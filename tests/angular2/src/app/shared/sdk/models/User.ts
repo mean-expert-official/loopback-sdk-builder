@@ -28,7 +28,7 @@ export class User implements UserInterface {
   created: Date = new Date(0);
   lastUpdated: Date = new Date(0);
   id: number = 0;
-  accessTokens: Array<any> = null;
+  accessTokens: Array<any> = [];
   constructor(instance?: UserInterface) {
     Object.assign(this, instance);
   }

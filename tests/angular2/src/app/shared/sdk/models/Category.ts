@@ -13,7 +13,7 @@ export interface CategoryInterface {
 export class Category implements CategoryInterface {
   name: string = 'test';
   id: number = 0;
-  rooms: Array<Room> = null;
+  rooms: Array<Room> = [];
   constructor(instance?: CategoryInterface) {
     Object.assign(this, instance);
   }

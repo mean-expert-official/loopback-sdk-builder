@@ -22,7 +22,7 @@ var argv = optimist
   .usage('\n******************************************* LoopBack SDK Builder 2.0 *******************************************\n' +
   '\nGenerate Client SDK for your LoopBack Application.' +
   '\nUsage:' +
-  '\n ./node_modules/.bin/lb-sdk server/server app/shared/sdk -d [ng4web | nativescript2] -i [enabled | disabled]')
+  '\n ./node_modules/.bin/lb-sdk server/server app/shared/sdk -d [ng4web | nativescript2] -i [enabled | disabled] -v [enabled | strict | disabled]')
   .describe('l', 'Client\'s library (angular2, react <todo>, ...)')
   .describe('d', 'Platform specific drivers (ng4web, nativescript2, ng2universal <todo>)')
   .describe('i', 'Enable PubSub, IO and FireLoop functionality')

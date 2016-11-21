@@ -33,9 +33,9 @@ export class Account implements AccountInterface {
   created: Date = new Date(0);
   lastUpdated: Date = new Date(0);
   id: number = 0;
-  accessTokens: Array<any> = null;
-  rooms: Array<Room> = null;
-  administrations: Array<Room> = null;
+  accessTokens: Array<any> = [];
+  rooms: Array<Room> = [];
+  administrations: Array<Room> = [];
   constructor(instance?: AccountInterface) {
     Object.assign(this, instance);
   }

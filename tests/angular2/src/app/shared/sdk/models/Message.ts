@@ -21,9 +21,9 @@ export class Message implements MessageInterface {
   roomId: number = 0;
   parentId: number = 0;
   room: Room = null;
-  replies: Array<Message> = null;
+  replies: Array<Message> = [];
   parent: Message = null;
-  likes: Array<any> = null;
+  likes: Array<any> = [];
   constructor(instance?: MessageInterface) {
     Object.assign(this, instance);
   }
