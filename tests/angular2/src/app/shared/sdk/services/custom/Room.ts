@@ -2059,7 +2059,7 @@ export class RoomApi extends BaseLoopBackApi {
    *   populated with the actual data once the response is returned
    *   from the server.
    *
-   * The number of instances updated
+   * Information related to the outcome of the operation
    */
   public updateAll(where: any = {}, data: any = {}): Observable<any> {
     let _method: string = "POST";

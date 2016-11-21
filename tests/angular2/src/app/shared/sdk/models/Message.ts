@@ -34,4 +34,45 @@ export class Message implements MessageInterface {
   public static getModelName() {
     return "Message";
   }
+  public static getModelDefinition() {
+    return {
+      name: 'Message',
+      properties: {
+        text: {
+          name: 'text',
+          type: 'string'
+        },
+        id: {
+          name: 'id',
+          type: 'number'
+        },
+        roomId: {
+          name: 'roomId',
+          type: 'number'
+        },
+        parentId: {
+          name: 'parentId',
+          type: 'number'
+        },
+      },
+      relations: {
+        room: {
+          name: 'room',
+          type: 'Room'
+        },
+        replies: {
+          name: 'replies',
+          type: 'Array<Message>'
+        },
+        parent: {
+          name: 'parent',
+          type: 'Message'
+        },
+        likes: {
+          name: 'likes',
+          type: 'Array<any>'
+        },
+      }
+    }
+  }
 }

@@ -24,4 +24,25 @@ export class Category implements CategoryInterface {
   public static getModelName() {
     return "Category";
   }
+  public static getModelDefinition() {
+    return {
+      name: 'Category',
+      properties: {
+        name: {
+          name: 'name',
+          type: 'string'
+        },
+        id: {
+          name: 'id',
+          type: 'number'
+        },
+      },
+      relations: {
+        rooms: {
+          name: 'rooms',
+          type: 'Array<Room>'
+        },
+      }
+    }
+  }
 }

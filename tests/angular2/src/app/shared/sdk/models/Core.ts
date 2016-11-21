@@ -17,4 +17,17 @@ export class Core implements CoreInterface {
   public static getModelName() {
     return "Core";
   }
+  public static getModelDefinition() {
+    return {
+      name: 'Core',
+      properties: {
+        id: {
+          name: 'id',
+          type: 'number'
+        },
+      },
+      relations: {
+      }
+    }
+  }
 }
