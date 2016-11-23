@@ -29,4 +29,33 @@ export class RoomAccount implements RoomAccountInterface {
   public static getModelName() {
     return "RoomAccount";
   }
+  public static getModelDefinition() {
+    return {
+      name: 'RoomAccount',
+      properties: {
+        id: {
+          name: 'id',
+          type: 'number'
+        },
+        accountId: {
+          name: 'accountId',
+          type: 'number'
+        },
+        roomId: {
+          name: 'roomId',
+          type: 'number'
+        },
+      },
+      relations: {
+        account: {
+          name: 'account',
+          type: 'Account'
+        },
+        room: {
+          name: 'room',
+          type: 'Room'
+        },
+      }
+    }
+  }
 }

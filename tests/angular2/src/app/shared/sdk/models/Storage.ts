@@ -17,4 +17,17 @@ export class Storage implements StorageInterface {
   public static getModelName() {
     return "Storage";
   }
+  public static getModelDefinition() {
+    return {
+      name: 'Storage',
+      properties: {
+        id: {
+          name: 'id',
+          type: 'number'
+        },
+      },
+      relations: {
+      }
+    }
+  }
 }

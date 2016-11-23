@@ -34,4 +34,41 @@ export class Room implements RoomInterface {
   public static getModelName() {
     return "Room";
   }
+  public static getModelDefinition() {
+    return {
+      name: 'Room',
+      properties: {
+        name: {
+          name: 'name',
+          type: 'string'
+        },
+        id: {
+          name: 'id',
+          type: 'number'
+        },
+      },
+      relations: {
+        messages: {
+          name: 'messages',
+          type: 'Array<Message>'
+        },
+        likes: {
+          name: 'likes',
+          type: 'Array<any>'
+        },
+        categories: {
+          name: 'categories',
+          type: 'Array<Category>'
+        },
+        accounts: {
+          name: 'accounts',
+          type: 'Array<Account>'
+        },
+        admins: {
+          name: 'admins',
+          type: 'Array<Account>'
+        },
+      }
+    }
+  }
 }

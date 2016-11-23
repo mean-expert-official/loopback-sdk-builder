@@ -29,4 +29,42 @@ export class ApplicationCredential implements ApplicationCredentialInterface {
   public static getModelName() {
     return "ApplicationCredential";
   }
+  public static getModelDefinition() {
+    return {
+      name: 'ApplicationCredential',
+      properties: {
+        provider: {
+          name: 'provider',
+          type: 'string',
+          default: 'authScheme'
+        },
+        authScheme: {
+          name: 'authScheme',
+          type: 'string'
+        },
+        credentials: {
+          name: 'credentials',
+          type: 'string'
+        },
+        created: {
+          name: 'created',
+          type: 'Date'
+        },
+        modified: {
+          name: 'modified',
+          type: 'Date'
+        },
+        userId: {
+          name: 'userId',
+          type: 'any'
+        },
+        id: {
+          name: 'id',
+          type: 'number'
+        },
+      },
+      relations: {
+      }
+    }
+  }
 }
