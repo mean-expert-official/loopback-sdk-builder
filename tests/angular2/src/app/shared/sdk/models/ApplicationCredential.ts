@@ -12,13 +12,13 @@ export interface ApplicationCredentialInterface {
 }
 
 export class ApplicationCredential implements ApplicationCredentialInterface {
-  provider: string;
-  authScheme: string;
-  credentials: string;
-  created: Date;
-  modified: Date;
-  userId: any;
-  id: number;
+  provider: string = 'authScheme';
+  authScheme: string = '';
+  credentials: string = '';
+  created: Date = new Date(0);
+  modified: Date = new Date(0);
+  userId: any = null;
+  id: number = 0;
   constructor(instance?: ApplicationCredentialInterface) {
     Object.assign(this, instance);
   }

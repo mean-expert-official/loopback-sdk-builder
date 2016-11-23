@@ -10,7 +10,7 @@
     "e2e": "protractor",
     "pretest": "ng lint",
     "test": "ng test --watch=false",
-    "build:sdk": "./node_modules/.bin/lb-sdk loopback/server.js src/app/shared/sdk -i enabled -w enabled"
+    "build:sdk": "./node_modules/.bin/lb-sdk loopback/server.js src/app/shared/sdk -i enabled -w enabled -v enabled"
   },
   "private": true,
   "dependencies": {
