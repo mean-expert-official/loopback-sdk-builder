@@ -20,14 +20,14 @@ export class Core implements CoreInterface {
   public static getModelDefinition() {
     return {
       name: 'Core',
-      properties: {
-        id: {
+      properties: [
+        {
           name: 'id',
           type: 'number'
         },
-      },
-      relations: {
-      }
+      ],
+      relations: [
+      ]
     }
   }
 }

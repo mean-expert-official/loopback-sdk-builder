@@ -49,70 +49,70 @@ export class Account implements AccountInterface {
   public static getModelDefinition() {
     return {
       name: 'Account',
-      properties: {
-        realm: {
+      properties: [
+        {
           name: 'realm',
           type: 'string'
         },
-        username: {
+        {
           name: 'username',
           type: 'string'
         },
-        password: {
+        {
           name: 'password',
           type: 'string'
         },
-        credentials: {
+        {
           name: 'credentials',
           type: 'any'
         },
-        challenges: {
+        {
           name: 'challenges',
           type: 'any'
         },
-        email: {
+        {
           name: 'email',
           type: 'string'
         },
-        emailVerified: {
+        {
           name: 'emailVerified',
           type: 'boolean'
         },
-        verificationToken: {
+        {
           name: 'verificationToken',
           type: 'string'
         },
-        status: {
+        {
           name: 'status',
           type: 'string'
         },
-        created: {
+        {
           name: 'created',
           type: 'Date'
         },
-        lastUpdated: {
+        {
           name: 'lastUpdated',
           type: 'Date'
         },
-        id: {
+        {
           name: 'id',
           type: 'number'
         },
-      },
-      relations: {
-        accessTokens: {
+      ],
+      relations: [
+        {
           name: 'accessTokens',
           type: 'Array<any>'
         },
-        rooms: {
+        {
           name: 'rooms',
           type: 'Array<Room>'
         },
-        administrations: {
+        {
           name: 'administrations',
           type: 'Array<Room>'
         },
-      }
+      ]
     }
   }
 }

@@ -37,38 +37,38 @@ export class Room implements RoomInterface {
   public static getModelDefinition() {
     return {
       name: 'Room',
-      properties: {
-        name: {
+      properties: [
+        {
           name: 'name',
           type: 'string'
         },
-        id: {
+        {
           name: 'id',
           type: 'number'
         },
-      },
-      relations: {
-        messages: {
+      ],
+      relations: [
+        {
           name: 'messages',
           type: 'Array<Message>'
         },
-        likes: {
+        {
           name: 'likes',
           type: 'Array<any>'
         },
-        categories: {
+        {
           name: 'categories',
           type: 'Array<Category>'
         },
-        accounts: {
+        {
           name: 'accounts',
           type: 'Array<Account>'
         },
-        admins: {
+        {
           name: 'admins',
           type: 'Array<Account>'
         },
-      }
+      ]
     }
   }
 }
