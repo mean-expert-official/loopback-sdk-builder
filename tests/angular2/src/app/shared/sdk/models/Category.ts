@@ -27,22 +27,22 @@ export class Category implements CategoryInterface {
   public static getModelDefinition() {
     return {
       name: 'Category',
-      properties: {
-        name: {
+      properties: [
+        {
           name: 'name',
           type: 'string'
         },
-        id: {
+        {
           name: 'id',
           type: 'number'
         },
-      },
-      relations: {
-        rooms: {
+      ],
+      relations: [
+        {
           name: 'rooms',
           type: 'Array<Room>'
         },
-      }
+      ]
     }
   }
 }

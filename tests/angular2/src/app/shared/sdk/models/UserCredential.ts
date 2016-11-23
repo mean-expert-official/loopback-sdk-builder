@@ -36,48 +36,48 @@ export class UserCredential implements UserCredentialInterface {
   public static getModelDefinition() {
     return {
       name: 'UserCredential',
-      properties: {
-        provider: {
+      properties: [
+        {
           name: 'provider',
           type: 'string',
           default: 'authScheme'
         },
-        authScheme: {
+        {
           name: 'authScheme',
           type: 'string'
         },
-        externalId: {
+        {
           name: 'externalId',
           type: 'string',
           default: ''
         },
-        profile: {
+        {
           name: 'profile',
           type: 'any'
         },
-        credentials: {
+        {
           name: 'credentials',
           type: 'string'
         },
-        created: {
+        {
           name: 'created',
           type: 'Date'
         },
-        modified: {
+        {
           name: 'modified',
           type: 'Date'
         },
-        userId: {
+        {
           name: 'userId',
           type: 'any'
         },
-        id: {
+        {
           name: 'id',
           type: 'number'
         },
-      },
-      relations: {
-      }
+      ],
+      relations: [
+      ]
     }
   }
 }
