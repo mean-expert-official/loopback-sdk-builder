@@ -1,6 +1,6 @@
 {
   "name": "@mean-expert/loopback-sdk-builder",
-  "version": "2.1.0-beta.17",
+  "version": "2.1.0-rc.1",
   "description": "Tool for auto-generating Software Development Kits (SDKs) for LoopBack",
   "bin": {
     "lb-sdk": "bin/lb-sdk"
@@ -60,6 +60,11 @@
       "name": "Miguel Serrano",
       "email": "miguelangelserrano4@gmail.com",
       "url": "https://github.com/Serranom4"
+    },
+    {
+      "name": "Julien Ledun",
+      "email": "j.ledun@iosystems.fr",
+      "url": "https://github.com/jledun"
     }
   ],
   "license": "MIT",
@@ -74,7 +79,9 @@
     "mkdirp": "0.5.1",
     "optimist": "0.6.1",
     "rimraf": "2.5.3",
-    "semver": "4.3.2"
+    "semver": "4.3.2",
+    "underscore": "^1.8.3",
+    "underscore.inflections": "^0.2.1"
   },
   "devDependencies": {}
 }

@@ -24,8 +24,8 @@ export class Room implements RoomInterface {
   categories: Array<Category> = [];
   accounts: Array<Account> = [];
   admins: Array<Account> = [];
-  constructor(instance?: RoomInterface) {
-    Object.assign(this, instance);
+  constructor(data?: RoomInterface) {
+    Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
@@ -34,13 +34,31 @@ export class Room implements RoomInterface {
   public static getModelName() {
     return "Room";
   }
+  /**
+  * @method factory
+  * @author Jonathan Casarrubias
+  * @license MIT
+  * This method creates an instance of Room for dynamic purposes.
+  **/
+  public static factory(data: RoomInterface): Room{
+    return new Room(data);
+  }  
+  /**
+  * @method getModelDefinition
+  * @author Julien Ledun
+  * @license MIT
+  * This method returns an object that represents some of the model
+  * definitions.
+  **/
   public static getModelDefinition() {
     return {
       name: 'Room',
+      plural: 'rooms',
       properties: {
         name: {
           name: 'name',
-          type: 'string'
+          type: 'string',
+          default: ''
         },
         id: {
           name: 'id',

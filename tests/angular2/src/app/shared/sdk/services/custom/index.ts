@@ -10,5 +10,5 @@ export * from './Account';
 export * from './RoomAccount';
 export * from './Storage';
 export * from './Core';
-export * from './Models';
+export * from './SDKModels';
 export * from './logger.service';

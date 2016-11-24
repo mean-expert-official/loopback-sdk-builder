@@ -24,8 +24,8 @@ export class Message implements MessageInterface {
   replies: Array<Message> = [];
   parent: Message = null;
   likes: Array<any> = [];
-  constructor(instance?: MessageInterface) {
-    Object.assign(this, instance);
+  constructor(data?: MessageInterface) {
+    Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
@@ -34,13 +34,31 @@ export class Message implements MessageInterface {
   public static getModelName() {
     return "Message";
   }
+  /**
+  * @method factory
+  * @author Jonathan Casarrubias
+  * @license MIT
+  * This method creates an instance of Message for dynamic purposes.
+  **/
+  public static factory(data: MessageInterface): Message{
+    return new Message(data);
+  }  
+  /**
+  * @method getModelDefinition
+  * @author Julien Ledun
+  * @license MIT
+  * This method returns an object that represents some of the model
+  * definitions.
+  **/
   public static getModelDefinition() {
     return {
       name: 'Message',
+      plural: 'messages',
       properties: {
         text: {
           name: 'text',
-          type: 'string'
+          type: 'string',
+          default: ''
         },
         id: {
           name: 'id',

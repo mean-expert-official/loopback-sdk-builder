@@ -1,7 +1,7 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { SDKModule } from './shared/sdk';
+import { SDKBrowserModule } from './shared/sdk';
 import { Room, Category, Message, FireLoopRef } from './shared/sdk/models';
 import { RoomApi, CategoryApi, MessageApi, RealTime } from './shared/sdk/services';
 
@@ -9,7 +9,7 @@ describe('Service: Room Service', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        SDKModule.forRoot()
+        SDKBrowserModule.forRoot()
       ]
     });
   });

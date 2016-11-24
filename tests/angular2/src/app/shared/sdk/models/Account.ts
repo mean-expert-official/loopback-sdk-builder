@@ -36,8 +36,8 @@ export class Account implements AccountInterface {
   accessTokens: Array<any> = [];
   rooms: Array<Room> = [];
   administrations: Array<Room> = [];
-  constructor(instance?: AccountInterface) {
-    Object.assign(this, instance);
+  constructor(data?: AccountInterface) {
+    Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
@@ -46,9 +46,26 @@ export class Account implements AccountInterface {
   public static getModelName() {
     return "Account";
   }
+  /**
+  * @method factory
+  * @author Jonathan Casarrubias
+  * @license MIT
+  * This method creates an instance of Account for dynamic purposes.
+  **/
+  public static factory(data: AccountInterface): Account{
+    return new Account(data);
+  }  
+  /**
+  * @method getModelDefinition
+  * @author Julien Ledun
+  * @license MIT
+  * This method returns an object that represents some of the model
+  * definitions.
+  **/
   public static getModelDefinition() {
     return {
       name: 'Account',
+      plural: 'accounts',
       properties: {
         realm: {
           name: 'realm',

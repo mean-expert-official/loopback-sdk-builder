@@ -1,13 +1,16 @@
 /* tslint:disable */
 import * as AppSettings from 'application-settings';
-export class StorageDriver {
-  static set(key: string, value: any) {
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class StorageNative {
+  set(key: string, value: any) {
     AppSettings.setString(key, String(value));
   }
-  static get(key: string): any {
+  get(key: string): any {
     return AppSettings.getString(key);
   }
-  static remove(key: string): any {
+  remove(key: string): any {
     if (AppSettings.hasKey(key)) {
       AppSettings.remove(key);
     } else {

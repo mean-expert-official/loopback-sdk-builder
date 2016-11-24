@@ -19,8 +19,8 @@ export class RoomAccount implements RoomAccountInterface {
   roomId: number = 0;
   account: Account = null;
   room: Room = null;
-  constructor(instance?: RoomAccountInterface) {
-    Object.assign(this, instance);
+  constructor(data?: RoomAccountInterface) {
+    Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
@@ -29,9 +29,26 @@ export class RoomAccount implements RoomAccountInterface {
   public static getModelName() {
     return "RoomAccount";
   }
+  /**
+  * @method factory
+  * @author Jonathan Casarrubias
+  * @license MIT
+  * This method creates an instance of RoomAccount for dynamic purposes.
+  **/
+  public static factory(data: RoomAccountInterface): RoomAccount{
+    return new RoomAccount(data);
+  }  
+  /**
+  * @method getModelDefinition
+  * @author Julien Ledun
+  * @license MIT
+  * This method returns an object that represents some of the model
+  * definitions.
+  **/
   public static getModelDefinition() {
     return {
       name: 'RoomAccount',
+      plural: 'room-accounts',
       properties: {
         id: {
           name: 'id',

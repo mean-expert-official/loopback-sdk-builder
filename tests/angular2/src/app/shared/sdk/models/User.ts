@@ -29,8 +29,8 @@ export class User implements UserInterface {
   lastUpdated: Date = new Date(0);
   id: number = 0;
   accessTokens: Array<any> = [];
-  constructor(instance?: UserInterface) {
-    Object.assign(this, instance);
+  constructor(data?: UserInterface) {
+    Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
@@ -39,9 +39,26 @@ export class User implements UserInterface {
   public static getModelName() {
     return "User";
   }
+  /**
+  * @method factory
+  * @author Jonathan Casarrubias
+  * @license MIT
+  * This method creates an instance of User for dynamic purposes.
+  **/
+  public static factory(data: UserInterface): User{
+    return new User(data);
+  }  
+  /**
+  * @method getModelDefinition
+  * @author Julien Ledun
+  * @license MIT
+  * This method returns an object that represents some of the model
+  * definitions.
+  **/
   public static getModelDefinition() {
     return {
       name: 'User',
+      plural: 'Users',
       properties: {
         realm: {
           name: 'realm',

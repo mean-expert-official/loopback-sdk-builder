@@ -1,7 +1,7 @@
 /* tslint:disable */
 declare var Object: any;
-import { Injectable } from '@angular/core';
-import { StorageDriver } from '../../storage/storage.driver';
+import { Injectable, Inject } from '@angular/core';
+import { InternalStorage } from '../../storage/internal.storage';
 import { SDKToken, AccessToken } from '../../models/BaseModels';
 
 /**
@@ -17,7 +17,7 @@ export class LoopBackAuth {
   private token: SDKToken = new SDKToken();
   protected prefix: string = '$LoopBackSDK$';
 
-  constructor() {
+  constructor(@Inject(InternalStorage) protected storage: InternalStorage) {
     this.token.id         = this.load('id');
     this.token.user       = this.load('user');
     this.token.userId     = this.load('userId');
@@ -58,11 +58,11 @@ export class LoopBackAuth {
   }
 
   protected load(prop: string): any {
-    return StorageDriver.get(`${this.prefix}${prop}`);
+    return this.storage.get(`${this.prefix}${prop}`);
   }
   
   public clear(): void {
-    Object.keys(this.token).forEach((prop: string) => StorageDriver.remove(`${this.prefix}${prop}`));
+    Object.keys(this.token).forEach((prop: string) => this.storage.remove(`${this.prefix}${prop}`));
     this.token = new SDKToken();
   }
   // I do not persist everything in 1 value because I want
@@ -70,7 +70,7 @@ export class LoopBackAuth {
   // expected and will be easier to handle as will perform better.
   protected persist(prop: string, value: any): void {
     try {
-      StorageDriver.set(
+      this.storage.set(
         `${this.prefix}${prop}`,
         (typeof value === 'object') ? JSON.stringify(value) : value
       );

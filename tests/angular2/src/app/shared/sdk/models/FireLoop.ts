@@ -1,15 +1,11 @@
-import { LoopBackConfig } from '../lb.config';
-import { AccessToken, FireLoopRef } from './index';
-import { SocketConnections } from '../sockets/socket.connections';
+import { FireLoopRef } from './index';
 
 export class FireLoop {
 
   private socket: any;
   private references: any = {};
 
-  constructor(token: AccessToken) {
-    this.socket = SocketConnections.getHandler(LoopBackConfig.getPath(), token);
-  }
+  constructor(socket: any) { this.socket = socket; }
 
   public ref<T>(model: { getModelName(): string }): FireLoopRef<T> {
     let name: string = model.getModelName();

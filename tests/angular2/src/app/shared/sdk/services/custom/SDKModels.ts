@@ -13,9 +13,9 @@ import { Storage } from '../../models/Storage';
 import { Core } from '../../models/Core';
 
 @Injectable()
-export class ModelsApi {
+export class SDKModels {
 
-  static models: any = {
+  private models: { [name: string]: any } = {
     User: User,
     Room: Room,
     Message: Message,
@@ -30,6 +30,7 @@ export class ModelsApi {
     
   };
 
-  constructor() { }
-
+  public get(modelName: string): any {
+    return this.models[modelName];
+  }
 }

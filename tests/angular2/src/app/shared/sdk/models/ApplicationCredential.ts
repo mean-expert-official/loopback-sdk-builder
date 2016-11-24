@@ -19,8 +19,8 @@ export class ApplicationCredential implements ApplicationCredentialInterface {
   modified: Date = new Date(0);
   userId: any = null;
   id: number = 0;
-  constructor(instance?: ApplicationCredentialInterface) {
-    Object.assign(this, instance);
+  constructor(data?: ApplicationCredentialInterface) {
+    Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
@@ -29,9 +29,26 @@ export class ApplicationCredential implements ApplicationCredentialInterface {
   public static getModelName() {
     return "ApplicationCredential";
   }
+  /**
+  * @method factory
+  * @author Jonathan Casarrubias
+  * @license MIT
+  * This method creates an instance of ApplicationCredential for dynamic purposes.
+  **/
+  public static factory(data: ApplicationCredentialInterface): ApplicationCredential{
+    return new ApplicationCredential(data);
+  }  
+  /**
+  * @method getModelDefinition
+  * @author Julien Ledun
+  * @license MIT
+  * This method returns an object that represents some of the model
+  * definitions.
+  **/
   public static getModelDefinition() {
     return {
       name: 'ApplicationCredential',
+      plural: 'ApplicationCredentials',
       properties: {
         provider: {
           name: 'provider',
@@ -40,11 +57,13 @@ export class ApplicationCredential implements ApplicationCredentialInterface {
         },
         authScheme: {
           name: 'authScheme',
-          type: 'string'
+          type: 'string',
+          default: ''
         },
         credentials: {
           name: 'credentials',
-          type: 'string'
+          type: 'string',
+          default: ''
         },
         created: {
           name: 'created',

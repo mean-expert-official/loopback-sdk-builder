@@ -23,8 +23,8 @@ export class UserCredential implements UserCredentialInterface {
   modified: Date = new Date(0);
   userId: any = null;
   id: number = 0;
-  constructor(instance?: UserCredentialInterface) {
-    Object.assign(this, instance);
+  constructor(data?: UserCredentialInterface) {
+    Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
@@ -33,9 +33,26 @@ export class UserCredential implements UserCredentialInterface {
   public static getModelName() {
     return "UserCredential";
   }
+  /**
+  * @method factory
+  * @author Jonathan Casarrubias
+  * @license MIT
+  * This method creates an instance of UserCredential for dynamic purposes.
+  **/
+  public static factory(data: UserCredentialInterface): UserCredential{
+    return new UserCredential(data);
+  }  
+  /**
+  * @method getModelDefinition
+  * @author Julien Ledun
+  * @license MIT
+  * This method returns an object that represents some of the model
+  * definitions.
+  **/
   public static getModelDefinition() {
     return {
       name: 'UserCredential',
+      plural: 'UserCredentials',
       properties: {
         provider: {
           name: 'provider',
@@ -44,7 +61,8 @@ export class UserCredential implements UserCredentialInterface {
         },
         authScheme: {
           name: 'authScheme',
-          type: 'string'
+          type: 'string',
+          default: ''
         },
         externalId: {
           name: 'externalId',
@@ -53,11 +71,13 @@ export class UserCredential implements UserCredentialInterface {
         },
         profile: {
           name: 'profile',
-          type: 'any'
+          type: 'any',
+          default: null
         },
         credentials: {
           name: 'credentials',
-          type: 'string'
+          type: 'string',
+          default: ''
         },
         created: {
           name: 'created',
@@ -65,7 +85,8 @@ export class UserCredential implements UserCredentialInterface {
         },
         modified: {
           name: 'modified',
-          type: 'Date'
+          type: 'Date',
+          default: new Date(0)
         },
         userId: {
           name: 'userId',

@@ -54,5 +54,5 @@ export interface StatFilter {
       end: string
     },
     where?: {},
-    groypBy?: string
+    groupBy?: string
 }

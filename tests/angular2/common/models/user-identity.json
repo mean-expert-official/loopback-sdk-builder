@@ -20,23 +20,20 @@
     },
     "profile": {
       "type": "object",
-      "default": null
+      "default": ""
     },
     "credentials": {
       "type": "string",
       "default": ""
     },
     "created": {
-      "type": "date",
-      "default": null
+      "type": "date"
     },
     "modified": {
-      "type": "date",
-      "default": null
+      "type": "date"
     },
     "userId": {
-      "type": "any",
-      "default": null
+      "type": "any"
     }
   },
   "validations": [],

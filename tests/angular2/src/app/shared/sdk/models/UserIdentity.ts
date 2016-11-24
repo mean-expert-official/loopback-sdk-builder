@@ -28,8 +28,8 @@ export class UserIdentity implements UserIdentityInterface {
   userId: number = 0;
   id: number = 0;
   user: User = null;
-  constructor(instance?: UserIdentityInterface) {
-    Object.assign(this, instance);
+  constructor(data?: UserIdentityInterface) {
+    Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
@@ -38,9 +38,26 @@ export class UserIdentity implements UserIdentityInterface {
   public static getModelName() {
     return "UserIdentity";
   }
+  /**
+  * @method factory
+  * @author Jonathan Casarrubias
+  * @license MIT
+  * This method creates an instance of UserIdentity for dynamic purposes.
+  **/
+  public static factory(data: UserIdentityInterface): UserIdentity{
+    return new UserIdentity(data);
+  }  
+  /**
+  * @method getModelDefinition
+  * @author Julien Ledun
+  * @license MIT
+  * This method returns an object that represents some of the model
+  * definitions.
+  **/
   public static getModelDefinition() {
     return {
       name: 'UserIdentity',
+      plural: 'UserIdentities',
       properties: {
         provider: {
           name: 'provider',
@@ -49,7 +66,8 @@ export class UserIdentity implements UserIdentityInterface {
         },
         authScheme: {
           name: 'authScheme',
-          type: 'string'
+          type: 'string',
+          default: ''
         },
         externalId: {
           name: 'externalId',
@@ -58,11 +76,13 @@ export class UserIdentity implements UserIdentityInterface {
         },
         profile: {
           name: 'profile',
-          type: 'any'
+          type: 'any',
+          default: null
         },
         credentials: {
           name: 'credentials',
-          type: 'string'
+          type: 'string',
+          default: ''
         },
         created: {
           name: 'created',
