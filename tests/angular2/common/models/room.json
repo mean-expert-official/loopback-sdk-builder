@@ -47,5 +47,33 @@
     }
   },
   "acls": [],
-  "methods": {}
+  "methods": {
+    "getPropertyValues": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "property",
+          "type": "string",
+          "required": true,
+          "description": "Property name to lookup values for."
+        },
+        {
+          "arg": "filter",
+          "type": "object",
+          "description": "Filter defining fields, where, include, order, offset, and limit"
+        }
+      ],
+      "returns": {
+        "type": [
+          "String"
+        ],
+        "root": true
+      },
+      "description": "Gets list of all unique values used for a given property.",
+      "http": {
+        "path": "/propertyValues",
+        "verb": "get"
+      }
+    }
+  }
 }

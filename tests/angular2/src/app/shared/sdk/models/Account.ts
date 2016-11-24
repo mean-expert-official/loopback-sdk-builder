@@ -25,7 +25,7 @@ export class Account implements AccountInterface {
   realm: string = '';
   username: string = '';
   password: string = '';
-  challenges: any = null;
+  challenges: any = <any>null;
   email: string = '';
   emailVerified: boolean = false;
   verificationToken: string = '';
@@ -119,15 +119,18 @@ export class Account implements AccountInterface {
       relations: {
         accessTokens: {
           name: 'accessTokens',
-          type: 'Array<any>'
+          type: 'Array<any>',
+          model: ''
         },
         rooms: {
           name: 'rooms',
-          type: 'Array<Room>'
+          type: 'Array<Room>',
+          model: 'Room'
         },
         administrations: {
           name: 'administrations',
-          type: 'Array<Room>'
+          type: 'Array<Room>',
+          model: 'Room'
         },
       }
     }

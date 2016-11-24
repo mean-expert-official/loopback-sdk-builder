@@ -68,23 +68,28 @@ export class Room implements RoomInterface {
       relations: {
         messages: {
           name: 'messages',
-          type: 'Array<Message>'
+          type: 'Array<Message>',
+          model: 'Message'
         },
         likes: {
           name: 'likes',
-          type: 'Array<any>'
+          type: 'Array<any>',
+          model: ''
         },
         categories: {
           name: 'categories',
-          type: 'Array<Category>'
+          type: 'Array<Category>',
+          model: 'Category'
         },
         accounts: {
           name: 'accounts',
-          type: 'Array<Account>'
+          type: 'Array<Account>',
+          model: 'Account'
         },
         admins: {
           name: 'admins',
-          type: 'Array<Account>'
+          type: 'Array<Account>',
+          model: 'Account'
         },
       }
     }

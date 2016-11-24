@@ -17,11 +17,11 @@ export class UserCredential implements UserCredentialInterface {
   provider: string = 'authScheme';
   authScheme: string = '';
   externalId: string = '';
-  profile: any = null;
+  profile: any = <any>null;
   credentials: string = '';
   created: Date = new Date(0);
   modified: Date = new Date(0);
-  userId: any = null;
+  userId: any = <any>null;
   id: number = 0;
   constructor(data?: UserCredentialInterface) {
     Object.assign(this, data);
@@ -72,7 +72,7 @@ export class UserCredential implements UserCredentialInterface {
         profile: {
           name: 'profile',
           type: 'any',
-          default: null
+          default: <any>null
         },
         credentials: {
           name: 'credentials',

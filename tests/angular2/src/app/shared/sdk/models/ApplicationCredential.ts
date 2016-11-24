@@ -17,7 +17,7 @@ export class ApplicationCredential implements ApplicationCredentialInterface {
   credentials: string = '';
   created: Date = new Date(0);
   modified: Date = new Date(0);
-  userId: any = null;
+  userId: any = <any>null;
   id: number = 0;
   constructor(data?: ApplicationCredentialInterface) {
     Object.assign(this, data);

@@ -66,11 +66,13 @@ export class RoomAccount implements RoomAccountInterface {
       relations: {
         account: {
           name: 'account',
-          type: 'Account'
+          type: 'Account',
+          model: 'Account'
         },
         room: {
           name: 'room',
-          type: 'Room'
+          type: 'Room',
+          model: 'Room'
         },
       }
     }

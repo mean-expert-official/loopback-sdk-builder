@@ -1,5 +1,11 @@
 module.exports = function (Room) {
 
+  Room.getPropertyValues = (property, filter, next) => {
+    let obj = {};
+    obj[property] = filter;
+    next(null, obj);
+  };
+
   Room.greetRoute = greet;
 
   Room.remoteMethod(

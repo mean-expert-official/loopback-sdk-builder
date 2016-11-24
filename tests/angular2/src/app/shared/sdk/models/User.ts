@@ -20,7 +20,7 @@ export class User implements UserInterface {
   realm: string = '';
   username: string = '';
   password: string = '';
-  challenges: any = null;
+  challenges: any = <any>null;
   email: string = '';
   emailVerified: boolean = false;
   verificationToken: string = '';
@@ -112,7 +112,8 @@ export class User implements UserInterface {
       relations: {
         accessTokens: {
           name: 'accessTokens',
-          type: 'Array<any>'
+          type: 'Array<any>',
+          model: ''
         },
       }
     }

@@ -21,7 +21,7 @@ export class UserIdentity implements UserIdentityInterface {
   provider: string = 'authScheme';
   authScheme: string = '';
   externalId: string = '';
-  profile: any = null;
+  profile: any = <any>null;
   credentials: string = '';
   created: Date = new Date(0);
   modified: Date = new Date(0);
@@ -77,7 +77,7 @@ export class UserIdentity implements UserIdentityInterface {
         profile: {
           name: 'profile',
           type: 'any',
-          default: null
+          default: <any>null
         },
         credentials: {
           name: 'credentials',
@@ -104,7 +104,8 @@ export class UserIdentity implements UserIdentityInterface {
       relations: {
         user: {
           name: 'user',
-          type: 'User'
+          type: 'User',
+          model: 'User'
         },
       }
     }

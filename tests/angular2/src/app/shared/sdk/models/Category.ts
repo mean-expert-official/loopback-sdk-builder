@@ -58,7 +58,8 @@ export class Category implements CategoryInterface {
       relations: {
         rooms: {
           name: 'rooms',
-          type: 'Array<Room>'
+          type: 'Array<Room>',
+          model: 'Room'
         },
       }
     }

@@ -278,7 +278,8 @@ export class UserApi extends BaseLoopBackApi {
     if (include) _urlParams.include = include;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody)
       .map(
-        (response: SDKToken) => {
+        (response: any) => {
+          response.ttl = parseInt(response.ttl);
           response.rememberMe = rememberMe;
           this.auth.setUser(response);
           this.auth.save();

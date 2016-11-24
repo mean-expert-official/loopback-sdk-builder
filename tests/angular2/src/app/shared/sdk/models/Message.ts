@@ -76,19 +76,23 @@ export class Message implements MessageInterface {
       relations: {
         room: {
           name: 'room',
-          type: 'Room'
+          type: 'Room',
+          model: 'Room'
         },
         replies: {
           name: 'replies',
-          type: 'Array<Message>'
+          type: 'Array<Message>',
+          model: 'Message'
         },
         parent: {
           name: 'parent',
-          type: 'Message'
+          type: 'Message',
+          model: 'Message'
         },
         likes: {
           name: 'likes',
-          type: 'Array<any>'
+          type: 'Array<any>',
+          model: ''
         },
       }
     }
