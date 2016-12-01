@@ -8,7 +8,7 @@ const appRoutes: Routes = [
     loadChildren: 'app/access/access.module#AccessModule'
   },
   {
-    path: 'room',
+    path: '',
     loadChildren: 'app/room/room.module#RoomModule'
   }
 ];

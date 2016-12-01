@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { SDKModule } from './shared/sdk/index';
+import { SDKBrowserModule } from './shared/sdk/index';
 import { routing, appRoutingProviders } from './app.routing';
 
 @NgModule({
@@ -12,7 +12,7 @@ import { routing, appRoutingProviders } from './app.routing';
   imports: [
     BrowserModule,
     FormsModule,
-    SDKModule.forRoot(),
+    SDKBrowserModule.forRoot(),
     routing
   ],
   providers       : [ appRoutingProviders ],

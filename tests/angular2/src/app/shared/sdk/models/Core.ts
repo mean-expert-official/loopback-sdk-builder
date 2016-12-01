@@ -6,9 +6,9 @@ export interface CoreInterface {
 }
 
 export class Core implements CoreInterface {
-  id: number;
-  constructor(instance?: CoreInterface) {
-    Object.assign(this, instance);
+  id: number = 0;
+  constructor(data?: CoreInterface) {
+    Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
@@ -16,5 +16,35 @@ export class Core implements CoreInterface {
    */
   public static getModelName() {
     return "Core";
+  }
+  /**
+  * @method factory
+  * @author Jonathan Casarrubias
+  * @license MIT
+  * This method creates an instance of Core for dynamic purposes.
+  **/
+  public static factory(data: CoreInterface): Core{
+    return new Core(data);
+  }  
+  /**
+  * @method getModelDefinition
+  * @author Julien Ledun
+  * @license MIT
+  * This method returns an object that represents some of the model
+  * definitions.
+  **/
+  public static getModelDefinition() {
+    return {
+      name: 'Core',
+      plural: 'cores',
+      properties: {
+        id: {
+          name: 'id',
+          type: 'number'
+        },
+      },
+      relations: {
+      }
+    }
   }
 }

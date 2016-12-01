@@ -14,6 +14,7 @@ export interface LoopBackFilter {
 export interface AccessTokenInterface {
     id?: string;
     ttl?: number;
+    issuedAt?: any;
     created?: any;
     userId?: string;
     rememberMe?: boolean;
@@ -22,9 +23,11 @@ export interface AccessTokenInterface {
 export class AccessToken implements AccessTokenInterface {
     id:string;
     ttl: number;
-    created: any;
+    issuedAt?: any;
+    created?: any;
     userId: string;
     user: any;
+    rememberMe: boolean = null;
     constructor(instance?: AccessToken) {
         Object.assign(this, instance);
     }
@@ -33,7 +36,8 @@ export class AccessToken implements AccessTokenInterface {
 export class SDKToken extends AccessToken {
     id: any = null;
     ttl: number = null;
-    created: any = null;
+    issuedAt?: any = null;
+    created?: any = null;
     userId: any = null;
     user: any = null;
     rememberMe: boolean = null;
@@ -54,5 +58,5 @@ export interface StatFilter {
       end: string
     },
     where?: {},
-    groypBy?: string
+    groupBy?: string
 }

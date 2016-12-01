@@ -1,7 +1,8 @@
 /**
 * @module SDKModule
 * @author Jonathan Casarrubias <t:@johncasarrubias> <gh:jonathan-casarrubias>
-* @license MTI 2016 Jonathan Casarrubias
+* @license MIT 2016 Jonathan Casarrubias
+* @version 2.1.0
 * @description
 * The SDKModule is a generated Software Development Kit automatically built by
 * the LoopBack SDK Builder open source module.
@@ -36,9 +37,15 @@ import { JSONSearchParams } from './services/core/search.params';
 import { ErrorHandler } from './services/core/error.service';
 import { LoopBackAuth } from './services/core/auth.service';
 import { LoggerService } from './services/custom/logger.service';
+import { SDKModels } from './services/custom/SDKModels';
+import { InternalStorage } from './storage/internal.storage';
+import { SocketDriver } from './sockets/socket.driver';
+import { SocketConnections } from './sockets/socket.connections';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
+import { CookieBrowser } from './storage/cookie.browser';
+import { SocketBrowser } from './sockets/socket.browser';
 import { RealTime } from './services/core/real.time';
 import { UserApi } from './services/custom/User';
 import { RoomApi } from './services/custom/Room';
@@ -51,24 +58,34 @@ import { AccountApi } from './services/custom/Account';
 import { RoomAccountApi } from './services/custom/RoomAccount';
 import { StorageApi } from './services/custom/Storage';
 import { CoreApi } from './services/custom/Core';
-
+/**
+* @module SDKBrowserModule
+* @description
+* This module should be imported when building a Web Application in the following scenarios:
+*
+*  1.- Regular web application
+*  2.- Angular universal application (Browser Portion)
+*  3.- Progressive applications (Angular Mobile, Ionic, WebViews, etc)
+**/
 @NgModule({
   imports:      [ CommonModule, HttpModule ],
   declarations: [ ],
   exports:      [ ],
-  providers:    [ ]
+  providers:    [
+    ErrorHandler,
+    SocketConnections
+  ]
 })
-
-export class SDKModule {
+export class SDKBrowserModule {
   static forRoot(): ModuleWithProviders {
     return {
-      ngModule: SDKModule,
-      providers: [
-        RealTime,
+      ngModule  : SDKBrowserModule,
+      providers : [
         LoopBackAuth,
-        ErrorHandler,
         LoggerService,
         JSONSearchParams,
+        SDKModels,
+        RealTime,
         UserApi,
         RoomApi,
         MessageApi,
@@ -79,13 +96,18 @@ export class SDKModule {
         AccountApi,
         RoomAccountApi,
         StorageApi,
-        CoreApi
+        CoreApi,
+        { provide: InternalStorage, useClass: CookieBrowser },
+        { provide: SocketDriver, useClass: SocketBrowser }
       ]
     };
   }
 }
-
+/**
+* Have Fun!!!
+* - Jon
+**/
 export * from './models/index';
 export * from './services/index';
 export * from './lb.config';
-export * from './sockets/index';
+

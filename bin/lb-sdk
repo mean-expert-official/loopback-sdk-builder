@@ -22,16 +22,20 @@ var argv = optimist
   .usage('\n******************************************* LoopBack SDK Builder 2.0 *******************************************\n' +
   '\nGenerate Client SDK for your LoopBack Application.' +
   '\nUsage:' +
-  '\n ./node_modules/.bin/lb-sdk server/server app/shared/sdk -d [ng4web | nativescript2] -i [enabled | disabled]')
+  '\n ./node_modules/.bin/lb-sdk server/server app/shared/sdk -d [ng2web | ng2native | ng2universal] -i [enabled | disabled] -v [enabled | strict | disabled]')
   .describe('l', 'Client\'s library (angular2, react <todo>, ...)')
-  .describe('d', 'Platform specific drivers (ng4web, nativescript2, ng2universal <todo>)')
+  .describe('d', 'Platform specific drivers (ng2web, ng2native, ng2universal)')
   .describe('i', 'Enable PubSub, IO and FireLoop functionality')
   .describe('w', 'Automatically wipe SDK Directory')
+  .describe('v', 'Add default values in models')
+  .describe('f', 'Generate only FireLoop SDK + Auth Services')
   .default('l', 'angular2')
-  .default('d', 'ng4web')
+  .default('d', 'ng2web')
   .default('i', 'enabled')
   .default('w', 'disabled')
-  .alias({ u: 'url', m: 'module-name', l: 'library', i: 'io', d: 'driver', w: 'wipe' })
+  .default('v', 'disabled')
+  .default('f', 'disabled')
+  .alias({ u: 'url', m: 'module-name', l: 'library', i: 'io', d: 'driver', w: 'wipe', v: 'default-values', v: 'fireloop-only' })
   .demand(1)
   .argv;
 /**
@@ -56,6 +60,9 @@ console.log(chalk.green('*                         Sylvain Dumont <https://www.w
 console.log(chalk.green('*                        Yonggang Luo <https://github.com/lygstate>                      *'));
 console.log(chalk.green('*                       Chris Tunbridge <https://github.com/Destreyf>                    *'));
 console.log(chalk.green('*                       Miguel Serrano <https://github.com/Serranom4>                    *'));
+console.log(chalk.green('*                         Julien Ledun <https://github.com/jledun>                       *'));
+console.log(chalk.green('*                           Paul Robinson <http://nextfaze.com>                          *'));
+console.log(chalk.green('*                         Corentin Hatte <https://github.com/viki53>                     *'));
 console.log(chalk.green('*                                                                                        *'));
 console.log(chalk.green('*                                 ORIGINALLY FORKED FROM                                 *'));
 console.log(chalk.green('*                      Miroslav Bajtos\' <miroslav@strongloop.com>                        *'));
@@ -89,8 +96,10 @@ var context = {
   apiUrl: argv['url'] || app.get('restApiRoot') || '/api',
   outputFolder: argv._[1],
   isIo: argv['i'] || 'disabled',
-  driver: argv['d'] || 'ng4web',
-  wipe: argv['w'] || 'disabled'
+  driver: argv['d'] || 'ng2web',
+  wipe: argv['w'] || 'disabled',
+  defaultValue: argv['v'] || 'disabled',
+  fireloopOnly: argv['f'] || 'disabled'
 };
 
 function verifyPath() {

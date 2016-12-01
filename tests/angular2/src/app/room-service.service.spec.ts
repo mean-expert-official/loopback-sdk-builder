@@ -1,7 +1,7 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { SDKModule } from './shared/sdk';
+import { SDKBrowserModule } from './shared/sdk';
 import { Room, Category, Message, FireLoopRef } from './shared/sdk/models';
 import { RoomApi, CategoryApi, MessageApi, RealTime } from './shared/sdk/services';
 
@@ -9,7 +9,7 @@ describe('Service: Room Service', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        SDKModule.forRoot()
+        SDKBrowserModule.forRoot()
       ]
     });
   });
@@ -32,8 +32,7 @@ describe('Service: Room Service', () => {
       let room: Room = new Room();
       room.name = Date.now().toString();
       let ref: FireLoopRef<Room> = realTime.FireLoop.ref<Room>(Room);
-      let subscription = ref.on('child_added').subscribe((result: Room) => {
-        console.log(result);
+      let subscription = ref.on('child_added', { where: room }).subscribe((result: Room) => {
         expect(result.id).toBeTruthy();
         expect(result.name).toBe(room.name);
         subscription.unsubscribe();
@@ -159,6 +158,16 @@ describe('Service: Room Service', () => {
           let msg = messages.pop();
           expect(msg.text).toBe(messageInstance.text);
         })));
+    })
+  ));
+
+  it('should property and filter params',
+    async(inject([RoomApi], (roomApi: RoomApi) => {
+      let filter = { where: 'Yo' };
+      return roomApi.getPropertyValues('newfilter', filter)
+        .subscribe((result: { newfilter: { where: string }}) => {
+          expect(filter.where).toBe(result.newfilter.where);
+        });
     })
   ));
 

@@ -1,73 +1,79 @@
-import { Component, OnInit } from '@angular/core';
-import { Room, Account, FireLoopRef } from '../shared/sdk/models';
-import { AccountApi, RoomApi, LoggerService, RealTime } from '../shared/sdk/services';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Room, Message, FireLoopRef } from '../shared/sdk/models';
+import { LoggerService, RealTime, SDKModels } from '../shared/sdk/services';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-room',
   templateUrl: 'room.component.html'
 })
 
-export class RoomComponent implements OnInit {
+export class RoomComponent implements OnInit, OnDestroy {
 
-  private logged: Account;
-  private accountRef: FireLoopRef<Account>;
+  private roomRef: FireLoopRef<Room>;
+  private message: Message = new Message();
+  private messageRef: FireLoopRef<Message>;
+  private replyRefs: { [key: number]: FireLoopRef<Message> } = {};
   private room: Room = new Room();
-  private subscription: Subscription;
+  private subscriptions: Subscription[] = new Array<Subscription>();
 
   constructor(
-    private accountApi: AccountApi,
-    private roomApi: RoomApi,
+    private route: ActivatedRoute,
     private router: Router,
     private logger: LoggerService,
-    private realTime: RealTime
+    private realTime: RealTime,
+    private models: SDKModels
   ) {
     this.logger.info('Room Module Loaded');
-    this.logged = this.accountApi.getCachedCurrent();
-    this.accountRef = this.realTime.FireLoop.ref<Account>(Account);
+    this.roomRef = realTime.FireLoop.ref<Room>(Room);
   }
 
-  ngOnInit() {}
-
-  logout(): void {
-    this.accountApi.logout().subscribe(res => this.router.navigate(['/access']));
-  }
-
-  update(): void {
-    this.accountRef.upsert(this.logged).subscribe(res => console.log(res));
-  }
-
-  create(): void {
-    this.roomApi.create(this.room).subscribe((room: Room) => {
-      this.room = room;
-      this.listen();
+  ngOnInit() {
+    this.route.params.subscribe((room: Room) => {
+      this.subscriptions.push(this.roomRef.on('value', {
+        where: { id: room.id }
+      }).subscribe((list: Room[]) => {
+        this.room = list.pop();
+        this.messageRef = this.roomRef.make(this.room).child<Message>('messages');
+        this.listenMessages();
+      }, err => alert(err.message)));
     });
   }
 
-  join(): void {
-    this.roomApi.findOne({
-      where: { name: this.room.name },
-      include: 'messages'
-    }).subscribe((room: Room) => {
-      this.room = room;
-      this.listen();
-    }, err => alert(err.message));
-  }
-  // We usually would use a Message model, but for testing purposes... The Message model
-  // is private, therefore is not exposed to the SDK, that is expected in this test app
-  // to address that use case. I don't recommend to follow the below as an example as I 
-  // would normally use the Message model exposed, like we did with Room. (JC)'
-  send(message: string): void {
-    this.roomApi.createMessages(this.room.id, {
-      text: message
-    }).subscribe(instance => this.logger.info('Message stored'));
+  ngOnDestroy() {
+    this.subscriptions.forEach((subscription: Subscription) => subscription.unsubscribe());
+    this.roomRef    = null;
+    this.messageRef = null;
+    this.replyRefs  = {};
   }
 
-  listen() {
-    if (this.subscription) { this.subscription.unsubscribe(); }
-    this.subscription = this.roomApi.onCreateMessages(this.room.id).subscribe((message: any) => {
-      this.room.messages = Array.isArray(this.room.messages) ? this.room.messages : [];
-      this.room.messages.push(message);
-    });
+  send(): void {
+    this.messageRef.create(this.message).subscribe((instance: Message) => {
+      this.logger.info('Message stored');
+      this.replyRefs[instance.id] = this.messageRef.make(instance).child<Message>('replies');
+      this.message = new Message();
+    }).unsubscribe();
+  }
+
+  sendReply(parent: Message, text: string): void {
+    this.replyRefs[parent.id].create(new Message({ text: text })).subscribe((instance: Message) => {
+      this.logger.info('Reply stored');
+      text = '';
+    }).unsubscribe();
+  }
+
+  listenMessages() {
+    this.subscriptions.push(
+      this.messageRef.on('change')
+        .subscribe((messages: Message[]) => {
+          this.room.messages = messages;
+          this.room.messages.forEach((message: Message) => {
+            this.replyRefs[message.id] = this.messageRef.make(message).child<Message>('replies');
+            this.subscriptions.push(this.replyRefs[message.id].on('change').subscribe((replies: Message[]) => {
+              message.replies = replies;
+            }));
+          });
+        })
+    );
   }
 }

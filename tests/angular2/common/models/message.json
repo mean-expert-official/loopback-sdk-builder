@@ -9,7 +9,8 @@
   "properties": {
     "text": {
       "type": "string",
-      "required": true
+      "required": true,
+      "default": ""
     }
   },
   "validations": [],

@@ -1,6 +1,7 @@
 {
   "name": "Account",
   "base": "User",
+  "plural": "accounts",
   "idInjection": true,
   "options": {
     "validateUpsert": true

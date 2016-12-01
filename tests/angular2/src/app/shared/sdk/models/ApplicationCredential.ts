@@ -12,15 +12,15 @@ export interface ApplicationCredentialInterface {
 }
 
 export class ApplicationCredential implements ApplicationCredentialInterface {
-  provider: string;
-  authScheme: string;
-  credentials: string;
-  created: Date;
-  modified: Date;
-  userId: any;
-  id: number;
-  constructor(instance?: ApplicationCredentialInterface) {
-    Object.assign(this, instance);
+  provider: string = 'authScheme';
+  authScheme: string = '';
+  credentials: string = '';
+  created: Date = new Date(0);
+  modified: Date = new Date(0);
+  userId: any = <any>null;
+  id: number = 0;
+  constructor(data?: ApplicationCredentialInterface) {
+    Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
@@ -28,5 +28,62 @@ export class ApplicationCredential implements ApplicationCredentialInterface {
    */
   public static getModelName() {
     return "ApplicationCredential";
+  }
+  /**
+  * @method factory
+  * @author Jonathan Casarrubias
+  * @license MIT
+  * This method creates an instance of ApplicationCredential for dynamic purposes.
+  **/
+  public static factory(data: ApplicationCredentialInterface): ApplicationCredential{
+    return new ApplicationCredential(data);
+  }  
+  /**
+  * @method getModelDefinition
+  * @author Julien Ledun
+  * @license MIT
+  * This method returns an object that represents some of the model
+  * definitions.
+  **/
+  public static getModelDefinition() {
+    return {
+      name: 'ApplicationCredential',
+      plural: 'ApplicationCredentials',
+      properties: {
+        provider: {
+          name: 'provider',
+          type: 'string',
+          default: 'authScheme'
+        },
+        authScheme: {
+          name: 'authScheme',
+          type: 'string',
+          default: ''
+        },
+        credentials: {
+          name: 'credentials',
+          type: 'string',
+          default: ''
+        },
+        created: {
+          name: 'created',
+          type: 'Date'
+        },
+        modified: {
+          name: 'modified',
+          type: 'Date'
+        },
+        userId: {
+          name: 'userId',
+          type: 'any'
+        },
+        id: {
+          name: 'id',
+          type: 'number'
+        },
+      },
+      relations: {
+      }
+    }
   }
 }
