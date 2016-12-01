@@ -5,7 +5,7 @@ import { AccessToken } from '../models';
 /**
 * @author Jonathan Casarrubias <twitter:@johncasarrubias> <github:@johncasarrubias>
 * @module SocketConnections
-* @license MTI
+* @license MIT
 * @description
 * This module handle socket connections and return singleton instances for each
 * connection, it will use the SDK Socket Driver Available currently supporting
