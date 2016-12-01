@@ -20,7 +20,7 @@ declare var EventSource: any;
 * @module BaseLoopBackApi
 * @author Nikolay Matiushenkov <https://github.com/mnvx>
 * @contributor Jonathan Casarrubias <@johncasarrubias> <github:jonathan-casarrubias>
-* @license MTI
+* @license MIT
 * @description
 * Abstract class that will be implemented in every custom service automatically built
 * by the sdk builder.

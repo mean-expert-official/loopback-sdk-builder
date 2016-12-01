@@ -4,7 +4,7 @@ import { URLSearchParams } from '@angular/http';
 /**
 * @author Jonathan Casarrubias <twitter:@johncasarrubias> <github:@johncasarrubias>
 * @module JSONSearchParams
-* @license MTI
+* @license MIT
 * @description
 * JSON Parser and Wrapper for the Angular2 URLSearchParams
 * This module correctly encodes a json object into a query string and then creates

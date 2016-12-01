@@ -12,7 +12,7 @@ import { LoopBackFilter, StatFilter } from './index';
  **/
 export class FireLoopRef<T> {
   // Reference ID
-  private id: number = Date.now() + this.buildId();
+  private id: number = this.buildId();
   // Model Instance (For child references, empty on root references)
   private instance: any;
   // Model Childs
@@ -97,7 +97,6 @@ export class FireLoopRef<T> {
     } else {
       return this.broadcasts(event, request);
     }
-
   }
   /**
   * @method stats
@@ -108,14 +107,7 @@ export class FireLoopRef<T> {
   * TIP: You can improve performance by adding memcached to LoopBack models.
   **/
   public stats(filter?: StatFilter): Observable<T | T[]> {
-    let event = `${this.model.getModelName()}.stats`;
-    let src_pull: Observable<T> = this.pull(event, filter);
-    // Listen for broadcast announces
-    let src_request: Observable<T> = Observable.fromEvent<T>(this.socket, `${event}.broadcast.announce`);
-        src_request.subscribe((res: T) => this.socket.emit(`${event}.broadcast.request`, filter));
-    // Listen for broadcasted results
-    let src_broadcast: Observable<T> = Observable.fromEvent<T>(this.socket, `${event}.broadcast`);
-    return Observable.merge(src_pull, src_broadcast);
+    return this.on('stats', filter);
   }
   /**
   * @method make
@@ -167,7 +159,7 @@ export class FireLoopRef<T> {
     let that: FireLoopRef<T> = this;
     let nowEvent: any = `${event}.pull.requested.${ this.id }`;
     this.socket.emit(`${event}.pull.request.${ this.id }`, request);
-    function pullNow(data) {
+    function pullNow(data: any) {
       that.socket.removeListener(nowEvent, pullNow);
       sbj.next(data);
     };
@@ -221,7 +213,7 @@ export class FireLoopRef<T> {
   * multiple references for the same model or relationships.
   **/
   private buildId(): number {
-    return Math.floor(Math.random() * 100800) *
+    return Date.now() + Math.floor(Math.random() * 100800) *
       Math.floor(Math.random() * 100700) *
       Math.floor(Math.random() * 198500);
   }
