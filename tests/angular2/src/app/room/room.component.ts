@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Room, Message, FireLoopRef } from '../shared/sdk/models';
-import { LoggerService, RealTime, SDKModels } from '../shared/sdk/services';
+import { Room, Message, Account, FireLoopRef } from '../shared/sdk/models';
+import { LoggerService, AccountApi, RealTime, SDKModels } from '../shared/sdk/services';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 @Component({
@@ -18,6 +18,7 @@ export class RoomComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = new Array<Subscription>();
 
   constructor(
+    private accountApi: AccountApi,
     private route: ActivatedRoute,
     private router: Router,
     private logger: LoggerService,
@@ -26,6 +27,7 @@ export class RoomComponent implements OnInit, OnDestroy {
   ) {
     this.logger.info('Room Module Loaded');
     this.roomRef = realTime.FireLoop.ref<Room>(Room);
+    accountApi.getCurrent().subscribe((res: Account) => console.log(res));
   }
 
   ngOnInit() {
