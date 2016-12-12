@@ -4,6 +4,8 @@ import { Room, Account, FireLoopRef } from '../shared/sdk/models';
 import { AccountApi, RoomApi, LoggerService, RealTime, SDKModels } from '../shared/sdk/services';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { LoopBackConfig } from '../shared/sdk/lb.config';
+LoopBackConfig.setBaseURL('http://127.0.0.1:3002');
 @Component({
   selector: 'app-room',
   templateUrl: 'room.list.component.html'
@@ -30,6 +32,7 @@ export class RoomListComponent implements OnInit, OnDestroy {
     this.logged     = this.accountApi.getCachedCurrent();
     this.accountRef = this.realTime.FireLoop.ref<Account>(Account);
     this.roomRef    = this.realTime.FireLoop.ref<Room>(Room);
+    accountApi.getCurrent().subscribe((res: Account) => console.log(res));
   }
 
   ngOnInit() {
