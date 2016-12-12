@@ -5,7 +5,6 @@ import { SDKModels } from './SDKModels';
 import { BaseLoopBackApi } from '../core/base.service';
 import { LoopBackConfig } from '../../lb.config';
 import { LoopBackAuth } from '../core/auth.service';
-import { SocketConnections } from '../../sockets/socket.connections';
 import { LoopBackFilter, SDKToken, AccessToken } from '../../models/BaseModels';
 import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
@@ -13,6 +12,7 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { User } from '../../models/User';
+import { SocketConnections } from '../../sockets/socket.connections';
 
 
 /**

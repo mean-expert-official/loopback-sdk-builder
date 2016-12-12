@@ -35,7 +35,7 @@ var argv = optimist
   .default('w', 'disabled')
   .default('v', 'disabled')
   .default('f', 'disabled')
-  .alias({ u: 'url', m: 'module-name', l: 'library', i: 'io', d: 'driver', w: 'wipe', v: 'default-values', v: 'fireloop-only' })
+  .alias({ u: 'url', m: 'module-name', l: 'library', i: 'io', d: 'driver', w: 'wipe', v: 'default-values', f: 'fireloop-only' })
   .demand(1)
   .argv;
 /**

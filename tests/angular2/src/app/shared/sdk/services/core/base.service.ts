@@ -6,7 +6,7 @@ import { JSONSearchParams } from './search.params';
 import { ErrorHandler } from './error.service';
 import { LoopBackAuth } from './auth.service';
 import { LoopBackConfig } from '../../lb.config';
-import { LoopBackFilter, SDKToken, AccessToken } from '../../models/BaseModels';
+import { LoopBackFilter, AccessToken } from '../../models/BaseModels';
 import { SDKModels } from '../custom/SDKModels';
 import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
@@ -124,7 +124,7 @@ export abstract class BaseLoopBackApi {
     });
     return this.http.request(request)
       .map((res: any) => (res.text() != "" ? res.json() : {}))
-      .catch(this.errorHandler.handleError);
+      .catch((e) => this.errorHandler.handleError(e));
   }
   /**
    * @method create
