@@ -1,6 +1,6 @@
 {
   "name": "@mean-expert/loopback-sdk-builder",
-  "version": "2.1.0-rc.2",
+  "version": "2.1.0-rc.3",
   "description": "Tool for auto-generating Software Development Kits (SDKs) for LoopBack",
   "bin": {
     "lb-sdk": "bin/lb-sdk"
@@ -76,6 +76,14 @@
       "email": "contact@corentin-hatte.eu",
       "url": "https://github.com/viki53"
     }
+  ],
+  "files": [
+    "bin",
+    "lib",
+    "index.js",
+    "CHANGELOG.md",
+    "LICENSE.md",
+    "README.md"
   ],
   "license": "MIT",
   "bugs": {
