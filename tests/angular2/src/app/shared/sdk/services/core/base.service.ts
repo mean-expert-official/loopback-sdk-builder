@@ -9,17 +9,17 @@ import { LoopBackConfig } from '../../lb.config';
 import { LoopBackFilter, AccessToken } from '../../models/BaseModels';
 import { SDKModels } from '../custom/SDKModels';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import { Subject } from 'rxjs/Subject';
 import { SocketConnections } from '../../sockets/socket.connections';
 // Making Sure EventSource Type is available to avoid compilation issues.
 declare var EventSource: any;
 /**
 * @module BaseLoopBackApi
+* @author Jonathan Casarrubias <@johncasarrubias> <github:jonathan-casarrubias>
 * @author Nikolay Matiushenkov <https://github.com/mnvx>
-* @contributor Jonathan Casarrubias <@johncasarrubias> <github:jonathan-casarrubias>
 * @license MIT
 * @description
 * Abstract class that will be implemented in every custom service automatically built
@@ -133,7 +133,7 @@ export abstract class BaseLoopBackApi {
    * @description
    * Generic create method
    */
-  public create<T>(data: any = {}): Observable<T> {
+  public create<T>(data: T): Observable<T> {
     return this.request('POST', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
@@ -147,7 +147,7 @@ export abstract class BaseLoopBackApi {
    * @description
    * Generic create method
    */
-  public createMany<T>(data: any = {}): Observable<T[]> {
+  public createMany<T>(data: T[]): Observable<T[]> {
     return this.request('POST', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
@@ -289,7 +289,7 @@ export abstract class BaseLoopBackApi {
    * @description
    * Generic upsert method
    */
-  public upsert<T>(data: any = {}): Observable<T> {
+  public upsert<T>(data: T): Observable<T> {
     return this.request('PUT', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
@@ -303,7 +303,7 @@ export abstract class BaseLoopBackApi {
    * @description
    * Generic upsertWithWhere method
    */
-  public upsertWithWhere<T>(where: any = {}, data: any = {}): Observable<T> {
+  public upsertWithWhere<T>(where: any = {}, data: T): Observable<T> {
     let _urlParams: any = {};
     if (where) _urlParams.where = where;
     return this.request('PUT', [
@@ -320,7 +320,7 @@ export abstract class BaseLoopBackApi {
    * @description
    * Generic replaceOrCreate method
    */
-  public replaceOrCreate<T>(data: any = {}): Observable<T> {
+  public replaceOrCreate<T>(data: T): Observable<T> {
     return this.request('PUT', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
@@ -335,13 +335,13 @@ export abstract class BaseLoopBackApi {
    * @description
    * Generic replaceById method
    */
-  public replaceById<T>(id: any, data: any = {}): Observable<T> {
+  public replaceById<T>(id: any, data: T): Observable<T> {
     return this.request('POST', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
       this.model.getModelDefinition().plural,
       ':id', 'replace'
-    ].join('/'), undefined, undefined, { data }).map((data: T) => this.model.factory(data));
+    ].join('/'), { id }, undefined, { data }).map((data: T) => this.model.factory(data));
   }
   /**
    * @method createChangeStream
