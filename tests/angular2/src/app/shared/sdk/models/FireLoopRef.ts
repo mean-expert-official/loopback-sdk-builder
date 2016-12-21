@@ -160,10 +160,12 @@ export class FireLoopRef<T> {
     let nowEvent: any = `${event}.pull.requested.${ this.id }`;
     this.socket.emit(`${event}.pull.request.${ this.id }`, request);
     function pullNow(data: any) {
-      that.socket.removeListener(nowEvent, pullNow);
+      if (that.socket.removeListener) {
+        that.socket.removeListener(nowEvent, pullNow);
+      }
       sbj.next(data);
     };
-    this.socket.on(nowEvent, pullNow);
+    this.socket.onZone(nowEvent, pullNow);
     return sbj.asObservable();
   }
   /**
@@ -174,12 +176,12 @@ export class FireLoopRef<T> {
   **/
   private broadcasts(event: string, request: any): Observable<T> {
     let sbj: Subject<T> = new Subject<T>();
-    this.socket.on(
+    this.socket.onZone(
       `${event}.broadcast.announce.${ this.id }`,
       (res: T) =>
         this.socket.emit(`${event}.broadcast.request.${ this.id }`, request)
     );
-    this.socket.on(`${ event }.broadcast.${ this.id }`, (data) => sbj.next(data));
+    this.socket.onZone(`${ event }.broadcast.${ this.id }`, (data) => sbj.next(data));
     return sbj.asObservable();
   }
   /**
@@ -201,7 +203,7 @@ export class FireLoopRef<T> {
       parent: this.parent && this.parent.instance ? this.parent.instance : null
     };
     this.socket.emit(event, config);
-    this.socket.on(`${ this.model.getModelName() }.value.result.${ this.id }`, (res: any) =>
+    this.socket.onZone(`${ this.model.getModelName() }.value.result.${ this.id }`, (res: any) =>
       subject.next(res.error ? Observable.throw(res.error) : res)
     );
     return subject.asObservable();

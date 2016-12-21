@@ -1,7 +1,7 @@
 /* tslint:disable */
 declare var Object: any;
 import { Injectable, Inject } from '@angular/core';
-import { InternalStorage } from '../../storage/internal.storage';
+import { InternalStorage } from '../../storage/storage.swaps';
 import { SDKToken, AccessToken } from '../../models/BaseModels';
 
 /**

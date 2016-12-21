@@ -18,14 +18,14 @@
 * // App Root 
 * import { AppComponent }   from './app.component';
 * // Feature Modules
-* import { SDKModule }      from './shared/sdk/sdk.module';
+* import { SDK[Browser|Node|Native]Module } from './shared/sdk/sdk.module';
 * // Import Routing
 * import { routing }        from './app.routing';
 * @NgModule({
 *  imports: [
 *    BrowserModule,
 *    routing,
-*    SDKModule.forRoot()
+*    SDK[Browser|Node|Native]Module.forRoot()
 *  ],
 *  declarations: [ AppComponent ],
 *  bootstrap:    [ AppComponent ]
@@ -38,11 +38,12 @@ import { ErrorHandler } from './services/core/error.service';
 import { LoopBackAuth } from './services/core/auth.service';
 import { LoggerService } from './services/custom/logger.service';
 import { SDKModels } from './services/custom/SDKModels';
-import { InternalStorage } from './storage/internal.storage';
+import { InternalStorage, SDKStorage } from './storage/storage.swaps';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CookieBrowser } from './storage/cookie.browser';
+import { StorageBrowser } from './storage/storage.browser';
 import { SocketBrowser } from './sockets/socket.browser';
 import { SocketDriver } from './sockets/socket.driver';
 import { SocketConnections } from './sockets/socket.connections';
@@ -98,6 +99,7 @@ export class SDKBrowserModule {
         StorageApi,
         CoreApi,
         { provide: InternalStorage, useClass: CookieBrowser },
+        { provide: SDKStorage, useClass: StorageBrowser },
         { provide: SocketDriver, useClass: SocketBrowser }
       ]
     };
