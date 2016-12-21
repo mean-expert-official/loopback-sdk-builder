@@ -28,54 +28,59 @@ describe('Service: Room Service', () => {
 
 
   it('should listen for child_added using FireLoop API',
-    inject([RealTime], (realTime: RealTime) => {
-      let room: Room = new Room();
-      room.name = Date.now().toString();
-      let ref: FireLoopRef<Room> = realTime.FireLoop.ref<Room>(Room);
-      let subscription = ref.on('child_added', { where: room }).subscribe((result: Room) => {
-        expect(result.id).toBeTruthy();
-        expect(result.name).toBe(room.name);
-        subscription.unsubscribe();
-      });
-      ref.create(room).subscribe();
-    })
+    inject([RealTime], (realTime: RealTime) =>
+      realTime.onReady().subscribe(() => {
+        let room: Room = new Room();
+        room.name = Date.now().toString();
+        let ref: FireLoopRef<Room> = realTime.FireLoop.ref<Room>(Room);
+        let subscription = ref.on('child_added', { where: room }).subscribe((result: Room) => {
+          expect(result.id).toBeTruthy();
+          expect(result.name).toBe(room.name);
+          subscription.unsubscribe();
+        });
+        ref.create(room).subscribe();
+      })
+    )
   );
 
   it('should listen for child_changed using FireLoop API',
-    inject([RealTime], (realTime: RealTime) => {
-      let room: Room = new Room();
-      room.name = Date.now().toString();
-      let name2 = room.name + 'SSSS';
-      let ref: FireLoopRef<Room> = realTime.FireLoop.ref<Room>(Room);
-      let subscription = ref.on('child_changed').subscribe((result: Room) => {
-        expect(result.id).toBeTruthy();
-        expect(result.name).toBe(name2);
-        subscription.unsubscribe();
-      });
-      ref.create(room).subscribe((res: Room) => {
-        res.name = name2;
-        ref.upsert(res).subscribe();
-      });
-    })
+    inject([RealTime], (realTime: RealTime) =>
+      realTime.onReady().subscribe(() => {
+        let room: Room = new Room();
+        room.name = Date.now().toString();
+        let name2 = room.name + 'SSSS';
+        let ref: FireLoopRef<Room> = realTime.FireLoop.ref<Room>(Room);
+        let subscription = ref.on('child_changed').subscribe((result: Room) => {
+          expect(result.id).toBeTruthy();
+          expect(result.name).toBe(name2);
+          subscription.unsubscribe();
+        });
+        ref.create(room).subscribe((res: Room) => {
+          res.name = name2;
+          ref.upsert(res).subscribe();
+        });
+      })
+    )
   );
 
   it('should listen for child_removed using FireLoop API',
-    inject([RealTime], (realTime: RealTime) => {
-      let room: Room = new Room();
-      room.name = Date.now().toString();
-      let ref: FireLoopRef<Room> = realTime.FireLoop.ref<Room>(Room);
-      let subscription = ref.on('child_removed').subscribe((result: Room) => {
-        console.log(result);
-        expect(result.id).toBeTruthy();
-        expect(result.name).toBe(room.name);
-        subscription.unsubscribe();
-      });
-      ref.create(room).subscribe((result: Room) => ref.remove(result).subscribe());
-    })
+    inject([RealTime], (realTime: RealTime) => realTime.onReady().subscribe(() => {
+        let room: Room = new Room();
+        room.name = Date.now().toString();
+        let ref: FireLoopRef<Room> = realTime.FireLoop.ref<Room>(Room);
+        let subscription = ref.on('child_removed').subscribe((result: Room) => {
+          console.log(result);
+          expect(result.id).toBeTruthy();
+          expect(result.name).toBe(room.name);
+          subscription.unsubscribe();
+        });
+        ref.create(room).subscribe((result: Room) => ref.remove(result).subscribe());
+      })
+    )
   );
 
   it('should set data using FireLoop API',
-    inject([RealTime], (realTime: RealTime) => {
+    inject([RealTime], (realTime: RealTime) => realTime.onReady().subscribe(() => {
       let room: Room = new Room();
       room.name = Date.now().toString();
       let ref: FireLoopRef<Room> = realTime.FireLoop.ref<Room>(Room);
@@ -85,10 +90,10 @@ describe('Service: Room Service', () => {
         subscription.unsubscribe();
       });
     })
-  );
+  ));
 
   it('should create child data using FireLoop API',
-    inject([RealTime], (realTime: RealTime) => {
+    inject([RealTime], (realTime: RealTime) => realTime.onReady().subscribe(() => {
       let room: Room = new Room();
       room.name = Date.now().toString();
       let message: Message = new Message({  text : 'Hello Child Reference' });
@@ -104,7 +109,7 @@ describe('Service: Room Service', () => {
         MessageReference.create(message).subscribe((res: Message) => console.log(res.text));
       });
     })
-  );
+  ));
 
   it('should create a new room instance',
     async(inject([RoomApi], (roomApi: RoomApi) => {

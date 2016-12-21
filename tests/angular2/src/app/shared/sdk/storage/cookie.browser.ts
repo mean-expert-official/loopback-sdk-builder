@@ -26,7 +26,7 @@ export class CookieBrowser {
 
   set(key: string, value: any, expires?: Date) {
     this.cookies[key] = value;
-    let cookie = `${key}=${value}${expires ? `; expires=${ expires.toUTCString() }` : ''}`;
+    let cookie = `${key}=${value}; path=/${expires ? `; expires=${ expires.toUTCString() }` : ''}`;
     window.document.cookie = cookie;
   }
 

@@ -1,22 +1,27 @@
 /* tslint:disable */
-import * as AppSettings from 'application-settings';
 import { Injectable } from '@angular/core';
-
+/**
+* @module StorageBrowser
+* @author Jonathan Casarrubias
+* @license MIT
+* @description
+* Stand-alone cookie service for browsers
+**/
 @Injectable()
-export class StorageNative {
+export class StorageBrowser {
   set(key: string, value: any) {
-    AppSettings.setString(
+    localStorage.setItem(
       key,
-      String(typeof value === 'object' ? JSON.stringify(value) : value)
+      typeof value === 'object' ? JSON.stringify(value) : value
     );
   }
   get(key: string): any {
-    let data: string = AppSettings.getString(key);
+    let data: string = localStorage.getItem(key);
     return this.isJSON(data) ? JSON.parse(data) : data;
   }
   remove(key: string): any {
-    if (AppSettings.hasKey(key)) {
-      AppSettings.remove(key);
+    if (localStorage[key]) {
+      localStorage.removeItem(key);
     } else {
       console.log('Trying to remove unexisting key: ', key);
     }

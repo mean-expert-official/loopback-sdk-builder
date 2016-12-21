@@ -107,9 +107,8 @@ export abstract class BaseLoopBackApi {
       body = postBody;
     }
     // Separate filter object from url params
-    let filter: string = '';
     if (urlParams.filter) {
-      filter = `?filter=${ encodeURI(JSON.stringify(urlParams.filter))}`;
+      headers.append('filter', JSON.stringify(urlParams.filter));
       delete urlParams.filter;
     }
 
@@ -117,7 +116,7 @@ export abstract class BaseLoopBackApi {
     let request: Request = new Request({
       headers : headers,
       method  : method,
-      url     : `${requestUrl}${filter}`,
+      url     : requestUrl,
       search  : Object.keys(urlParams).length > 0
               ? this.searchParams.getURLSearchParams() : null,
       body    : body ? JSON.stringify(body) : undefined
@@ -133,7 +132,7 @@ export abstract class BaseLoopBackApi {
    * @description
    * Generic create method
    */
-  public create<T>(data: T): Observable<T> {
+  public create<T>(data: any = {}): Observable<T> {
     return this.request('POST', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
@@ -147,7 +146,7 @@ export abstract class BaseLoopBackApi {
    * @description
    * Generic create method
    */
-  public createMany<T>(data: T[]): Observable<T[]> {
+  public createMany<T>(data: any = {}): Observable<T[]> {
     return this.request('POST', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
@@ -199,7 +198,7 @@ export abstract class BaseLoopBackApi {
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
       this.model.getModelDefinition().plural,
-      'exists'
+      ':id/exists'
     ].join('/'), { id }, undefined, undefined);
   }
   /**
@@ -289,7 +288,7 @@ export abstract class BaseLoopBackApi {
    * @description
    * Generic upsert method
    */
-  public upsert<T>(data: T): Observable<T> {
+  public upsert<T>(data: any = {}): Observable<T> {
     return this.request('PUT', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
@@ -303,7 +302,7 @@ export abstract class BaseLoopBackApi {
    * @description
    * Generic upsertWithWhere method
    */
-  public upsertWithWhere<T>(where: any = {}, data: T): Observable<T> {
+  public upsertWithWhere<T>(where: any = {}, data: any = {}): Observable<T> {
     let _urlParams: any = {};
     if (where) _urlParams.where = where;
     return this.request('PUT', [
@@ -320,7 +319,7 @@ export abstract class BaseLoopBackApi {
    * @description
    * Generic replaceOrCreate method
    */
-  public replaceOrCreate<T>(data: T): Observable<T> {
+  public replaceOrCreate<T>(data: any = {}): Observable<T> {
     return this.request('PUT', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
@@ -335,7 +334,7 @@ export abstract class BaseLoopBackApi {
    * @description
    * Generic replaceById method
    */
-  public replaceById<T>(id: any, data: T): Observable<T> {
+  public replaceById<T>(id: any, data: any = {}): Observable<T> {
     return this.request('POST', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),

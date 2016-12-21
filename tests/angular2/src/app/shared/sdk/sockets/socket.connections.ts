@@ -1,5 +1,5 @@
 /* tslint:disable */
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, Inject, NgZone } from '@angular/core';
 import { SocketDriver } from './socket.driver';
 import { AccessToken } from '../models';
 /**
@@ -14,16 +14,25 @@ import { AccessToken } from '../models';
 @Injectable()
 export class SocketConnections {
   private connections: any = {};
-  private configured: boolean  = false;
-  constructor(@Inject(SocketDriver) private driver: SocketDriver) {}
+  private configured: boolean = false;
+  constructor(
+    @Inject(SocketDriver) private driver: SocketDriver,
+    @Inject(NgZone) private zone: NgZone
+  ) { }
   getHandler(url: string, token: AccessToken) {
+      console.log('Getting handler for socket connections');
     if (!this.connections[url]) {
       console.log('Creating a new connection with: ', url);
-      let config: any = { log: false, secure: false, forceWebsockets: true };
+      let config: any = { log: false, secure: false, forceNew: true, forceWebsockets: true };
       this.connections[url] = this.driver.connect(url, config);
+      this.connections[url].onZone = ((event: string, handler: Function) => {
+        this.connections[url].on(event, (data: any) => {
+          this.zone.run(() => handler(data));
+        });
+      });
       this.connections[url].on('connect', () => {
-        if (!this.configured) 
-        this.setupConnection(url, token, config);
+        if (!this.configured)
+          this.setupConnection(url, token, config);
       });
       let forceConfig: any = setInterval(() => {
         if (!this.configured && this.connections[url].connected) {
@@ -40,17 +49,35 @@ export class SocketConnections {
     return this.connections[url];
   }
 
+  public disconnect() {
+    Object.keys(this.connections).forEach((connKey) => {
+      if (this.connections[connKey].connected) {
+        this.connections[connKey].disconnect();
+      }
+    });
+    this.connections = {};
+    this.configured  = false;
+  }
+
   private setupConnection(url: string, token: AccessToken, config: any): void {
     this.configured = true;
     console.log('Connected to %s', url);
-    if(token.id) {
+    if (token.id) {
+      console.log('Emitting authentication', token.id);
       this.connections[url].emit('authentication', token);
     }
     this.connections[url].on('unauthorized', (res: any) => console.error('Unauthenticated', res));
-    setInterval(() => this.connections[url].emit('lb-ping'), 15000);
+    let heartbeater: any = setInterval(() => {
+      if (this.connections[url]) {
+        this.connections[url].emit('lb-ping');
+      } else {
+      clearInterval(heartbeater);
+      }
+    }, 15000);
     this.connections[url].on('lb-pong', (data: any) => console.info('Heartbeat: ', data));
     this.connections[url].on('disconnect', (data: any) => {
-      console.info('Unexpected disconnection from IO - Socket IO will try to reconnect');
+      this.disconnect();
+      console.info('Disconnected from WebSocket server');
     });
   }
 }
