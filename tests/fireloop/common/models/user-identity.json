@@ -1,0 +1,65 @@
+{
+  "name": "UserIdentity",
+  "plural": "user-identities",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "provider": {
+      "type": "string",
+      "default": "authScheme"
+    },
+    "authScheme": {
+      "type": "string",
+      "default": ""
+    },
+    "externalId": {
+      "type": "string",
+      "default": ""
+    },
+    "profile": {
+      "type": "object",
+      "default": ""
+    },
+    "credentials": {
+      "type": "string",
+      "default": ""
+    },
+    "created": {
+      "type": "date"
+    },
+    "modified": {
+      "type": "date"
+    },
+    "userId": {
+      "type": "any"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "User",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {},
+  "mixins": {
+    "TimeStamp": true,
+    "Stats": [
+      {
+        "method": "stats",
+        "endpoint": "/stats",
+        "description": "Statistical information for UserIdentity registers.",
+        "type": "model",
+        "count": {
+          "on": "createdAt",
+          "by": "index"
+        }
+      }
+    ]
+  }
+}

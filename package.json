@@ -1,6 +1,6 @@
 {
   "name": "@mean-expert/loopback-sdk-builder",
-  "version": "2.1.0-rc.6",
+  "version": "2.1.0-rc.7",
   "description": "Tool for auto-generating Software Development Kits (SDKs) for LoopBack",
   "bin": {
     "lb-sdk": "bin/lb-sdk"
@@ -8,10 +8,10 @@
   "main": "index.js",
   "scripts": {
     "prepublish": "",
-    "test": "npm run load:api & npm run test:angular2",
-    "pretest": "cd tests/angular2 && npm install && npm install ../../ && npm run build:sdk",
-    "load:api": "cd tests/angular2 && NODE_ENV=testing node loopback/server",
-    "test:angular2": "cd tests/angular2 && npm test"
+    "test": "npm run load:api & npm run test:ng2web",
+    "pretest": "cd tests/fireloop && npm install && npm install ../../ && npm run build:sdk",
+    "load:api": "cd tests/fireloop && NODE_ENV=ci node server/server",
+    "test:ng2web": "cd tests/ng2web && npm test"
   },
   "repository": {
     "type": "git",

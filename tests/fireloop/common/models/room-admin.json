@@ -1,0 +1,40 @@
+{
+  "name": "RoomAdmin",
+  "plural": "room-admins",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "TimeStamp": true,
+    "Stats": [
+      {
+        "method": "stats",
+        "endpoint": "/stats",
+        "description": "Statistical information for RoomAdmin registers.",
+        "type": "model",
+        "count": {
+          "on": "createdAt",
+          "by": "index"
+        }
+      }
+    ]
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "account": {
+      "type": "belongsTo",
+      "model": "Account",
+      "foreignKey": "adminId"
+    },
+    "room": {
+      "type": "belongsTo",
+      "model": "Room",
+      "foreignKey": "administrationId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

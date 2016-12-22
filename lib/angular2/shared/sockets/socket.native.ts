@@ -1,7 +1,7 @@
 /* tslint:disable */
-var SocketIO = require('nativescript-socket.io');
+import * as SocketIO from 'nativescript-socket.io';
 export class SocketNative {
-  connect(url: any, options: any) {
+  connect(url: any, options: any): SocketIO.Socket {
     return SocketIO.connect(url, options);
   }
 }
