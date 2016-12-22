@@ -21,9 +21,9 @@ export class StorageNative {
       console.log('Trying to remove unexisting key: ', key);
     }
   }
-  private isJSON(str) {
+  private isJSON(data: string) {
     try {
-      JSON.parse(str);
+      JSON.parse(data);
     } catch (e) {
       return false;
     }

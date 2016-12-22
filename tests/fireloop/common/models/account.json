@@ -1,0 +1,42 @@
+{
+  "name": "Account",
+  "plural": "accounts",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "TimeStamp": true,
+    "Stats": [
+      {
+        "method": "stats",
+        "endpoint": "/stats",
+        "description": "Statistical information for Account registers.",
+        "type": "model",
+        "count": {
+          "on": "createdAt",
+          "by": "index"
+        }
+      }
+    ]
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "rooms": {
+      "type": "hasMany",
+      "model": "Room",
+      "foreignKey": "",
+      "through": "RoomAccount"
+    },
+    "administrations": {
+      "type": "hasMany",
+      "model": "Room",
+      "foreignKey": "administrationId",
+      "through": "RoomAdmin"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
