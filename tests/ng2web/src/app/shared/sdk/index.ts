@@ -49,6 +49,7 @@ import { SocketDriver } from './sockets/socket.driver';
 import { SocketConnection } from './sockets/socket.connections';
 import { RealTime } from './services/core/real.time';
 import { UserApi } from './services/custom/User';
+import { AccessTokenApi } from './services/custom/AccessToken';
 import { AccountApi } from './services/custom/Account';
 import { ApplicationCredentialApi } from './services/custom/ApplicationCredential';
 import { CategoryApi } from './services/custom/Category';
@@ -90,6 +91,7 @@ export class SDKBrowserModule {
         SDKModels,
         RealTime,
         UserApi,
+        AccessTokenApi,
         AccountApi,
         ApplicationCredentialApi,
         CategoryApi,
