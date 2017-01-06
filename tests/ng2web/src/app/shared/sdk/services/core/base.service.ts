@@ -34,7 +34,7 @@ export abstract class BaseLoopBackApi {
   protected model: any;
 
   constructor(
-    @Inject(Http) protected http: Http,
+     @Inject(Http) protected http: Http,
     @Inject(SocketConnection) protected connection: SocketConnection,
     @Inject(SDKModels) protected models: SDKModels,
     @Inject(LoopBackAuth) protected auth: LoopBackAuth,
@@ -95,7 +95,8 @@ export abstract class BaseLoopBackApi {
           this.connection.on(event, (res: any) => subject.next(res));
       return subject.asObservable();
     }
-    
+
+
     // Body fix for built in remote methods using "data", "options" or "credentials
     // that are the actual body, Custom remote method properties are different and need
     // to be wrapped into a body object

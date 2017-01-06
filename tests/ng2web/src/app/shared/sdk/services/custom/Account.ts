@@ -9,7 +9,7 @@ import { LoopBackFilter, SDKToken, AccessToken } from '../../models/BaseModels';
 import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/rx';
+import { Observable } from 'rxjs/Rx';
 import { Account } from '../../models/Account';
 import { SocketConnection } from '../../sockets/socket.connections';
 import { RoomAccount } from '../../models/RoomAccount';
