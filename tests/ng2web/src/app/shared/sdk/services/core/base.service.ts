@@ -13,7 +13,7 @@ import { Subject } from 'rxjs/Subject';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import { SocketConnections } from '../../sockets/socket.connections';
+import { SocketConnection } from '../../sockets/socket.connections';
 // Making Sure EventSource Type is available to avoid compilation issues.
 declare var EventSource: any;
 /**
@@ -35,7 +35,7 @@ export abstract class BaseLoopBackApi {
 
   constructor(
     @Inject(Http) protected http: Http,
-    @Inject(SocketConnections) protected connections: SocketConnections,
+    @Inject(SocketConnection) protected connection: SocketConnection,
     @Inject(SDKModels) protected models: SDKModels,
     @Inject(LoopBackAuth) protected auth: LoopBackAuth,
     @Inject(JSONSearchParams) protected searchParams: JSONSearchParams,
@@ -43,7 +43,6 @@ export abstract class BaseLoopBackApi {
   ) {
     this.model = this.models.get(this.getModelName());
   }
-
   /**
    * Process request
    * @param string  method      Request method (GET, POST, PUT)
@@ -58,65 +57,37 @@ export abstract class BaseLoopBackApi {
     url         : string,
     routeParams : any = {},
     urlParams   : any = {},
-    postBody    : any = {},
-    isio        : boolean = false
+    postBody    : any = {}
   ): Observable<any> {
-
-    let headers = new Headers();
+    // Headers to be sent
+    let headers: Headers = new Headers();
     headers.append('Content-Type', 'application/json');
-
-    if (this.auth.getAccessTokenId()) {
-      headers.append(
-        'Authorization',
-        LoopBackConfig.getAuthPrefix() + this.auth.getAccessTokenId()
-      );
-    }
-
-    let requestUrl = url;
-    let key: string;
-    for (key in routeParams) {
-      requestUrl = requestUrl.replace(
-        new RegExp(":" + key + "(\/|$)", "g"),
-        routeParams[key] + "$1"
-      );
-    }
-
-    if (isio) {
-      if (requestUrl.match(/fk/)) {
-        let arr = requestUrl.split('/'); arr.pop();
-        requestUrl = arr.join('/');
-      }
-      let event: string = (`[${method}]${requestUrl}`).replace(/\?/, '');
-      let subject: Subject<any> = new Subject<any>();
-      let token: AccessToken = new AccessToken();
-          token.id = this.auth.getAccessTokenId();
-          token.userId = this.auth.getCurrentUserId();
-      let socket: any = this.connections.getHandler(LoopBackConfig.getPath(), token);
-          socket.on(event, (res: any) => subject.next(res));
-      return subject.asObservable();
-    }
-    
+    // Authenticate request
+    this.authenticate(url, headers);
+    // Transpile route variables to the actual request Values
+    Object.keys(routeParams).forEach((key: string) => {
+      url = url.replace(new RegExp(":" + key + "(\/|$)", "g"), routeParams[key] + "$1")
+    });
     // Body fix for built in remote methods using "data", "options" or "credentials
     // that are the actual body, Custom remote method properties are different and need
     // to be wrapped into a body object
     let body: any;
     let postBodyKeys = typeof postBody === 'object' ? Object.keys(postBody) : []
     if (postBodyKeys.length === 1) {
-      body = postBody[postBodyKeys[0]]
+      body = postBody[postBodyKeys[0]];
     } else {
       body = postBody;
     }
-    // Separate filter object from url params
+    // Separate filter object from url params and add to search query
     if (urlParams.filter) {
       headers.append('filter', JSON.stringify(urlParams.filter));
       delete urlParams.filter;
     }
-
     this.searchParams.setJSON(urlParams);
     let request: Request = new Request({
       headers : headers,
       method  : method,
-      url     : requestUrl,
+      url     : url,
       search  : Object.keys(urlParams).length > 0
               ? this.searchParams.getURLSearchParams() : null,
       body    : body ? JSON.stringify(body) : undefined
@@ -124,6 +95,21 @@ export abstract class BaseLoopBackApi {
     return this.http.request(request)
       .map((res: any) => (res.text() != "" ? res.json() : {}))
       .catch((e) => this.errorHandler.handleError(e));
+  }
+  /**
+   * @method authenticate
+   * @author Jonathan Casarrubias <t: johncasarrubias, gh: mean-expert-official>
+   * @license MIT
+   * @description
+   * This method will try to authenticate using either an access_token or basic http auth
+   */
+  public authenticate<T>(url: string, headers: Headers): void {
+    if (this.auth.getAccessTokenId()) {
+      headers.append(
+        'Authorization',
+        LoopBackConfig.getAuthPrefix() + this.auth.getAccessTokenId()
+      );
+    }
   }
   /**
    * @method create

@@ -1,6 +1,7 @@
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { LoopBackFilter, StatFilter } from './index';
+import { SocketConnection } from '../sockets/socket.connections';
 /**
  * @class FireLoopRef<T>
  * @author Jonathan Casarrubias <t: johncasarrubias, gh: mean-expert-official>
@@ -31,7 +32,7 @@ export class FireLoopRef<T> {
   **/
   constructor(
     private model: any,
-    private socket: any,
+    private socket: SocketConnection,
     private parent: any = null,
     private relationship: any = null
   ) {
@@ -40,6 +41,21 @@ export class FireLoopRef<T> {
       { id : this.id, scope:  model.getModelName(), relationship: relationship }
     );
     return this;
+  }
+  /**
+  * @method dispose
+  * @description
+  * This method is super important to avoid memory leaks in the server.
+  * This method requires to be called on components destroy
+  *
+  * ngOnDestroy() {
+  *  this.someRef.dispose() 
+  * }
+  **/
+  public dispose() {
+    this.operation('dispose', {})
+        .subscribe()
+        .unsubscribe();
   }
   /**
   * @method upsert
@@ -51,7 +67,7 @@ export class FireLoopRef<T> {
     return this.operation('upsert', data);
   }
   /**
-  * @method upsert
+  * @method create
   * @param data
   * @description
   * Operation wrapper for create function.
@@ -60,13 +76,44 @@ export class FireLoopRef<T> {
     return this.operation('create', data);
   }
   /**
-  * @method upsert
+  * @method remove
   * @param data
   * @description
   * Operation wrapper for remove function.
   **/
   public remove(data: any): Observable<T> {
     return this.operation('remove', data);
+  }
+  /**
+  * @method remote
+  * @param method
+  * @param params
+  * @description
+  * This method calls for any remote method. It is flexible enough to
+  * allow you call either built-in or custom remote methods.
+  *
+  * FireLoop provides this interface to enable calling remote methods
+  * but also to optionally send any defined accept params that will be
+  * applied within the server.
+  **/
+  public remote(method: string, params?: any[], broadcast: Boolean = false): Observable<T> {
+    return this.operation('remote', { method, params, broadcast });
+  }
+  /**
+  * @method onRemote
+  * @param method
+  * @param params
+  * @description
+  * This method listen for public .
+  **/
+  public onRemote(method: string): Observable<T> {
+    let event: string = 'remote';
+    if (!this.relationship) {
+      event = `${ this.model.getModelName() }.${event}`;
+    } else {
+      event = `${ this.parent.model.getModelName() }.${ this.relationship }.${event}`;
+    }
+    return this.broadcasts(event, {});
   }
   /**
   * @method on
@@ -81,6 +128,9 @@ export class FireLoopRef<T> {
   *   - child_removed (Triggers when a child is removed)
   **/
   public on(event: string, filter: LoopBackFilter = { limit: 100, order: 'id DESC' }): Observable<T | T[]> {
+    if (event === 'remote') {
+      throw new Error('The "remote" event is not allowed using "on()" method, use "onRemote()" instead');
+    }
     let request: any;
     if (!this.relationship) {
       event = `${ this.model.getModelName() }.${event}`;
@@ -113,8 +163,12 @@ export class FireLoopRef<T> {
   * @method make
   * @param instance
   * @description
-  * This method will set a model instance into this current FireLoop Reference.
+  * This method will set a model instance into this a new FireLoop Reference.
   * This allows to persiste parentship when creating related instances.
+  *
+  * It also allows to have multiple different persisted instance references to same model.
+  * otherwise if using singleton will replace a previous instance for a new instance, when
+  * we actually want to have more than 1 instance of same model.
   **/
   public make(instance: any): FireLoopRef<T> {
     let reference: FireLoopRef<T> = new FireLoopRef<T>(this.model, this.socket);
@@ -165,7 +219,7 @@ export class FireLoopRef<T> {
       }
       sbj.next(data);
     };
-    this.socket.onZone(nowEvent, pullNow);
+    this.socket.on(nowEvent, pullNow);
     return sbj.asObservable();
   }
   /**
@@ -176,12 +230,12 @@ export class FireLoopRef<T> {
   **/
   private broadcasts(event: string, request: any): Observable<T> {
     let sbj: Subject<T> = new Subject<T>();
-    this.socket.onZone(
+    this.socket.on(
       `${event}.broadcast.announce.${ this.id }`,
       (res: T) =>
         this.socket.emit(`${event}.broadcast.request.${ this.id }`, request)
     );
-    this.socket.onZone(`${ event }.broadcast.${ this.id }`, (data: any) => sbj.next(data));
+    this.socket.on(`${ event }.broadcast.${ this.id }`, (data: any) => sbj.next(data));
     return sbj.asObservable();
   }
   /**
@@ -203,10 +257,16 @@ export class FireLoopRef<T> {
       parent: this.parent && this.parent.instance ? this.parent.instance : null
     };
     this.socket.emit(event, config);
-    this.socket.onZone(`${ this.model.getModelName() }.value.result.${ this.id }`, (res: any) =>
-      subject.next(res.error ? Observable.throw(res.error) : res)
-    );
-    return subject.asObservable();
+    this.socket.on(`${ this.model.getModelName() }.value.result.${ this.id }`, (res: any) => {
+      if (res.error) {
+        subject.error(res);
+      } else {
+        subject.next(res);
+      }
+    });
+    // This event listener will be wiped within socket.connections
+    this.socket.sharedObservables.sharedOnDisconnect.subscribe(() => subject.complete());
+    return subject.asObservable().catch((error: any) => Observable.throw(error));
   }
   /**
   * @method buildId

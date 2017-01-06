@@ -40,14 +40,32 @@ export class RoomComponent implements OnInit, OnDestroy {
           this.listenMessages();
         }, err => alert(err.message)));
       });
+      this.roomRef.onRemote('findByRoom').subscribe((room: Room) => {
+        this.logger.info(`OnRemote Method Result`);
+        this.logger.info(room);
+      });
+    }, (error: any) => {
+      console.log('ERROR: ', error);
     });
+  }
+
+  findByRoom(): void {
+    let subscription: Subscription = this.roomRef
+        .remote('findByRoom', [this.room], true)
+        .subscribe((room: Room) => {
+          this.logger.info(`Remote Method Result`);
+          this.logger.info(room);
+          subscription.unsubscribe();
+        });
   }
 
   ngOnDestroy() {
     this.subscriptions.forEach((subscription: Subscription) => subscription.unsubscribe());
-    this.roomRef    = null;
+    this.roomRef.dispose();
+    this.messageRef.dispose();
+    this.roomRef = null;
     this.messageRef = null;
-    this.replyRefs  = {};
+    this.replyRefs = {};
   }
 
   send(): void {

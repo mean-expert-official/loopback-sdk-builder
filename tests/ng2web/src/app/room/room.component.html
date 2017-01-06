@@ -5,6 +5,7 @@
   <input name="text" type="text" [(ngModel)]="message.text" placeholder="Message" />
   <button (click)="send()">Send Message</button>
 </form>
+<button (click)="findByRoom()">FindByRoom</button>
 <ul *ngIf="room.id">
   <li *ngFor="let _message of room.messages">
     <b>Message:</b> {{ _message.text }}

@@ -6,6 +6,11 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoopBackConfig } from '../shared/sdk/lb.config';
 LoopBackConfig.setBaseURL('http://127.0.0.1:3002');
+
+import * as io from 'socket.io-client';
+
+var i = 0;
+
 @Component({
   selector: 'app-room',
   templateUrl: './room.list.component.html'
@@ -18,7 +23,9 @@ export class RoomListComponent implements OnInit, OnDestroy {
   private roomRef: FireLoopRef<Room>;
   private room: Room = new Room();
   private rooms: Room[];
+  private connected: boolean = false;
   private subscriptions: Subscription[] = new Array<Subscription>();
+  //private socket: any = io.connect(LoopBackConfig.getPath(), { secure: false });
 
   constructor(
     private accountApi: AccountApi,
@@ -29,31 +36,33 @@ export class RoomListComponent implements OnInit, OnDestroy {
     private models: SDKModels
   ) {
     this.logger.info('Room Module Loaded');
-    this.logged     = this.accountApi.getCachedCurrent();
+    this.logged = this.accountApi.getCachedCurrent();
   }
 
   ngOnInit() {
-    this.realTime.onReady().subscribe(() => {
+    this.subscriptions.push(this.realTime.onReady().subscribe((status: string) => {
+      console.log('CONNECT STATUS: ', status);
+      this.connected = true;
       this.accountRef = this.realTime.FireLoop.ref<Account>(Account);
-      this.roomRef    = this.realTime.FireLoop.ref<Room>(Room);
+      this.roomRef = this.realTime.FireLoop.ref<Room>(Room);
       this.subscriptions.push(
         this.roomRef.on('change').subscribe((rooms: Room[]) => this.rooms = rooms)
       );
       this.subscriptions.push(
-        this.roomRef.on('child_added').subscribe((child: Room) => {
-          console.log('CHILD ADDED: ', child);
-        }
-      ));
+        this.roomRef.on('child_added').subscribe((child: Room) => {})
+      );
+    }));
+  }
+
+  logout(): void {
+    this.accountApi.logout().subscribe(() => {
+      this.realTime.connection.disconnect();
+      this.router.navigate(['/access']);
     });
   }
 
   ngOnDestroy() {
     this.subscriptions.forEach((subscription: Subscription) => subscription.unsubscribe());
-  }
-
-  logout(): void {
-    this.realTime.disconnect();
-    this.accountApi.logout().subscribe(res => this.router.navigate(['/access']));
   }
 
   update(): void {

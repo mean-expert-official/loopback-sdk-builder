@@ -10,15 +10,16 @@ import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
-import { UserCredential } from '../../models/UserCredential';
+import { AccessToken } from '../../models/AccessToken';
 import { SocketConnection } from '../../sockets/socket.connections';
+import { User } from '../../models/User';
 
 
 /**
- * Api services for the `UserCredential` model.
+ * Api services for the `AccessToken` model.
  */
 @Injectable()
-export class UserCredentialApi extends BaseLoopBackApi {
+export class AccessTokenApi extends BaseLoopBackApi {
 
   constructor(
     @Inject(Http) protected http: Http,
@@ -32,69 +33,40 @@ export class UserCredentialApi extends BaseLoopBackApi {
   }
 
   /**
-   * <em>
-         * (The remote method definition does not provide any description.)
-         * </em>
+   * Fetches belongsTo relation user.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param boolean refresh 
    *
    * @returns object An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
-   * Data properties:
-   *
-   *  - `result` – `{any}` - 
-   */
-  public myRemote(): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/user-credentials/my-remote";
-    let _routeParams: any = {};
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
-    return result;
-  }
-
-  /**
-   * Statistical information for UserCredential registers.
-   *
-   * @param string range hourly, daily, weekly, monthly, yearly, custom
-   *
-   * @param object custom {"start": date, "end": date }
-   *
-   * @param object where where filter 
-   *
-   * @param string groupBy group by filter 
-   *
-   * @returns object[] An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `UserCredential` object.)
+   * This usually means the response is a `AccessToken` object.)
    * </em>
    */
-  public stats(range: any, custom: any = {}, where: any = {}, groupBy: any = {}): Observable<any> {
+  public getUser(id: any, refresh: any = {}): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/user-credentials/stats";
-    let _routeParams: any = {};
+    "/AccessTokens/:id/user";
+    let _routeParams: any = {
+      id: id
+    };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (range) _urlParams.range = range;
-    if (custom) _urlParams.custom = custom;
-    if (where) _urlParams.where = where;
-    if (groupBy) _urlParams.groupBy = groupBy;
+    if (refresh) _urlParams.refresh = refresh;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
 
   /**
    * The name of the model represented by this $resource,
-   * i.e. `UserCredential`.
+   * i.e. `AccessToken`.
    */
   public getModelName() {
-    return "UserCredential";
+    return "AccessToken";
   }
 }

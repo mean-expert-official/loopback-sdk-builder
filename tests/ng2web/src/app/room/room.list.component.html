@@ -1,9 +1,10 @@
-<button (click)="logout()">Log Out</button>
-<h3>Update Email</h3>
+<button *ngIf="connected" (click)="logout()">Disconnect</button>
+<button *ngIf="!connected" (click)="connect()">Connect</button>
+<!--h3>Update Email</h3>
 <form>
   <input name="email" type="email" [(ngModel)]="logged.email" placeholder="Edit Email" />
   <button (click)="update()">Update</button>
-</form>
+</form-->
 <h3>Room Name {{ room.name }}</h3>
 <form>
   <input name="name" type="text" [(ngModel)]="room.name" placeholder="Room Name" />

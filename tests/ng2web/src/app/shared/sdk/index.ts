@@ -46,9 +46,10 @@ import { CookieBrowser } from './storage/cookie.browser';
 import { StorageBrowser } from './storage/storage.browser';
 import { SocketBrowser } from './sockets/socket.browser';
 import { SocketDriver } from './sockets/socket.driver';
-import { SocketConnections } from './sockets/socket.connections';
+import { SocketConnection } from './sockets/socket.connections';
 import { RealTime } from './services/core/real.time';
 import { UserApi } from './services/custom/User';
+import { AccessTokenApi } from './services/custom/AccessToken';
 import { AccountApi } from './services/custom/Account';
 import { ApplicationCredentialApi } from './services/custom/ApplicationCredential';
 import { CategoryApi } from './services/custom/Category';
@@ -76,7 +77,7 @@ import { UserIdentityApi } from './services/custom/UserIdentity';
   exports:      [ ],
   providers:    [
     ErrorHandler,
-    SocketConnections
+    SocketConnection
   ]
 })
 export class SDKBrowserModule {
@@ -90,6 +91,7 @@ export class SDKBrowserModule {
         SDKModels,
         RealTime,
         UserApi,
+        AccessTokenApi,
         AccountApi,
         ApplicationCredentialApi,
         CategoryApi,
