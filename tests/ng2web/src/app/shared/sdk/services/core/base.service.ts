@@ -13,7 +13,7 @@ import { Subject } from 'rxjs/Subject';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import { SocketConnections } from '../../sockets/socket.connections';
+import { SocketConnection } from '../../sockets/socket.connections';
 // Making Sure EventSource Type is available to avoid compilation issues.
 declare var EventSource: any;
 /**
@@ -35,7 +35,7 @@ export abstract class BaseLoopBackApi {
 
   constructor(
     @Inject(Http) protected http: Http,
-    @Inject(SocketConnections) protected connections: SocketConnections,
+    @Inject(SocketConnection) protected connection: SocketConnection,
     @Inject(SDKModels) protected models: SDKModels,
     @Inject(LoopBackAuth) protected auth: LoopBackAuth,
     @Inject(JSONSearchParams) protected searchParams: JSONSearchParams,
@@ -91,8 +91,8 @@ export abstract class BaseLoopBackApi {
       let token: AccessToken = new AccessToken();
           token.id = this.auth.getAccessTokenId();
           token.userId = this.auth.getCurrentUserId();
-      let socket: any = this.connections.getHandler(LoopBackConfig.getPath(), token);
-          socket.on(event, (res: any) => subject.next(res));
+          this.connection.connect(token);
+          this.connection.on(event, (res: any) => subject.next(res));
       return subject.asObservable();
     }
     

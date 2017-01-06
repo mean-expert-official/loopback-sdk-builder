@@ -2,9 +2,12 @@
 import { Injectable, Inject, NgZone } from '@angular/core';
 import { SocketDriver } from './socket.driver';
 import { AccessToken } from '../models';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
+import { LoopBackConfig } from '../lb.config';
 /**
 * @author Jonathan Casarrubias <twitter:@johncasarrubias> <github:@johncasarrubias>
-* @module SocketConnections
+* @module SocketConnection
 * @license MIT
 * @description
 * This module handle socket connections and return singleton instances for each
@@ -12,75 +15,143 @@ import { AccessToken } from '../models';
 * Angular 2 for web and NativeScript 2.
 **/
 @Injectable()
-export class SocketConnections {
-  private connections: any = {};
-  private configured: boolean = false;
+export class SocketConnection {
+  private socket: any;
+  private subjects: {
+    onConnect: Subject<{}>,
+    onDisconnect: Subject<{}>,
+    onAuthenticated: Subject<{}>,
+    onUnAuthorized: Subject<{}>
+  } = {
+    onConnect: new Subject(),
+    onDisconnect: new Subject(),
+    onAuthenticated: new Subject(),
+    onUnAuthorized: new Subject()
+  };
+  public sharedObservables: {
+    sharedOnConnect?: Observable<{}>,
+    sharedOnDisconnect?: Observable<{}>,
+    sharedOnAuthenticated?: Observable<{}>,
+    sharedOnUnAuthorized?: Observable<{}>
+  } = {};
+  private unauthenticated: boolean = true;
+  /**
+   * @method constructor
+   * @param driver
+   * @param zone
+   **/
   constructor(
     @Inject(SocketDriver) private driver: SocketDriver,
     @Inject(NgZone) private zone: NgZone
-  ) { }
-  getHandler(url: string, token: AccessToken) {
-      console.log('Getting handler for socket connections');
-    if (!this.connections[url]) {
-      console.log('Creating a new connection with: ', url);
-      let config: any = { log: false, secure: false, forceNew: true, forceWebsockets: true };
-      this.connections[url] = this.driver.connect(url, config);
-      this.connections[url].onZone = ((event: string, handler: Function) => {
-        this.connections[url].on(event, (data: any) => {
-          this.zone.run(() => handler(data));
-        });
-      });
-      this.connections[url].on('connect', () => {
-        if (!this.configured)
-          this.setupConnection(url, token, config);
-      });
-      let forceConfig: any = setInterval(() => {
-        if (!this.configured && this.connections[url] && this.connections[url].connected) {
-          console.info('Forcing IO Configuration');
-          this.setupConnection(url, token, config);
-          clearInterval(forceConfig);
-        } else if (this.configured) {
-          clearInterval(forceConfig);
-        }
-      }, 1000)
-    } else {
-      console.log('Reusing existing connection: ', url);
-    }
-    return this.connections[url];
+  ) {
+    this.sharedObservables = {
+      sharedOnConnect: this.subjects.onConnect.asObservable().share(),
+      sharedOnDisconnect: this.subjects.onDisconnect.asObservable().share(),
+      sharedOnAuthenticated: this.subjects.onAuthenticated.asObservable().share(),
+      sharedOnUnAuthorized: this.subjects.onUnAuthorized.asObservable().share()
+    };
+    // This is needed to create the first channel, subsequents will share the connection
+    // We are using Hot Observables to avoid duplicating connection status events.
+    this.sharedObservables.sharedOnConnect.subscribe();
+    this.sharedObservables.sharedOnDisconnect.subscribe();
+    this.sharedObservables.sharedOnAuthenticated.subscribe();
+    this.sharedObservables.sharedOnUnAuthorized.subscribe();
   }
-
-  public disconnect() {
-    Object.keys(this.connections).forEach((connKey) => {
-      if (this.connections[connKey] && this.connections[connKey].connected) {
-        this.connections[connKey].disconnect();
-      }
-      if (this.connections[connKey].off) {
-        this.connections[connKey].off();
-      }
-    });
-    this.connections = {};
-    this.configured  = false;
-  }
-
-  private setupConnection(url: string, token: AccessToken, config: any): void {
-    this.configured = true;
-    console.log('Connected to %s', url);
-    if (token.id) {
-      console.log('Emitting authentication', token.id);
-      this.connections[url].emit('authentication', token);
+  /**
+   * @method connect
+   * @param url string
+   * @param token AccessToken
+   * @description
+   * This method will return a socket socket connection
+   **/
+  public connect(token: AccessToken = null): void {
+    if (!this.socket) {
+      console.info('Creating a new connection with: ', LoopBackConfig.getPath());
+      // Create new socket connection
+      this.socket = this.driver.connect(LoopBackConfig.getPath(), {
+        log: false,
+        secure: false,
+        forceNew: true,
+        forceWebsockets: true
+      });
+      // Listen for connection
+      this.on('connect', () => {
+        this.subjects.onConnect.next('connected');
+        // Authenticate or start heartbeat now    
+        this.emit('authentication', token);
+      });
+      // Listen for authentication
+      this.on('authenticated', () => {
+        this.subjects.onAuthenticated.next();
+        this.heartbeater();
+      })
+      // Listen for authentication
+      this.on('unauthorized', (err: any) => {
+        this.subjects.onUnAuthorized.next(err);
+      })
+      // Listen for disconnections
+      this.on('disconnect', (status: any) => this.subjects.onDisconnect.next(status));
+    } else if (this.socket && !this.socket.connected){
+      this.socket.off();
+      this.socket.destroy();
+      delete this.socket;
+      this.connect(token);
     }
-    this.connections[url].on('unauthorized', (res: any) => console.error('Unauthenticated', res));
+  }
+  /**
+   * @method isConnected
+   * @description
+   * This method will return true or false depending on established connections
+   **/
+  public isConnected(): boolean {
+    return (this.socket && this.socket.connected);
+  }
+  /**
+   * @method on
+   * @description
+   * This method will wrap the original "on" method and run it within the Angular Zone
+   **/
+  public on(event: string, handler: Function): void {
+    this.socket.on(event, (data: any) => this.zone.run(() => handler(data)));
+  }
+  /**
+   * @method emit
+   * @description
+   * This method will wrap the original "on" method and run it within the Angular Zone
+   **/
+  public emit(event: string, data: any): void {
+    this.socket.emit(event, data);
+  }
+  /**
+   * @method removeListener
+   * @description
+   * This method will wrap the original "on" method and run it within the Angular Zone
+   **/
+  public removeListener(event: string, handler: Function): void {
+    this.socket.removeListener(event, handler);
+  }
+  /**
+   * @method disconnect
+   * @description
+   * This will disconnect the client from the server
+   **/
+  public disconnect(): void {
+    this.socket.disconnect();
+  }
+  /**
+   * @method heartbeater
+   * @description
+   * This will keep the connection as active, even when users are not sending
+   * data, this avoids disconnection because of a connection not being used.
+   **/
+  private heartbeater(): void {
     let heartbeater: any = setInterval(() => {
-      if (this.connections[url]) {
-        this.connections[url].emit('lb-ping');
+      if (this.socket && this.socket.connected) {
+        this.socket.emit('lb-ping');
       } else {
-      clearInterval(heartbeater);
+        clearInterval(heartbeater);
       }
     }, 15000);
-    this.connections[url].on('lb-pong', (data: any) => console.info('Heartbeat: ', data));
-    this.connections[url].on('disconnect', (data: any) => {
-      this.disconnect();
-      console.info('Disconnected from WebSocket server');
-    });
+    this.socket.on('lb-pong', (data: any) => console.info('Heartbeat: ', data));
   }
 }

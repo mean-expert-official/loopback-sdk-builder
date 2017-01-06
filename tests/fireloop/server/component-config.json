@@ -4,6 +4,6 @@
   },
   "@mean-expert/loopback-component-realtime": {
     "auth": true,
-    "debug": false
+    "debug": true
   }
 }
