@@ -126,9 +126,11 @@ export class SocketConnection {
    * @method removeListener
    * @description
    * This method will wrap the original "on" method and run it within the Angular Zone
+   * Note: off is being used since the nativescript socket io client does not provide
+   * removeListener method, but only provides with off.
    **/
   public removeListener(event: string, handler: Function): void {
-    this.socket.removeListener(event, handler);
+    this.socket.off(event, handler);
   }
   /**
    * @method disconnect
