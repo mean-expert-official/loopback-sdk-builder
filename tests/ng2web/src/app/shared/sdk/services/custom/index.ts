@@ -1,6 +1,5 @@
 /* tslint:disable */
 export * from './User';
-export * from './AccessToken';
 export * from './Account';
 export * from './ApplicationCredential';
 export * from './Category';

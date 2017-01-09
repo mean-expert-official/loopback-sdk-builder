@@ -1,6 +1,5 @@
 /* tslint:disable */
 import {
-  AccessToken,
   Room
 } from '../index';
 
@@ -19,7 +18,7 @@ export interface AccountInterface {
   id?: number;
   createdAt: Date;
   updatedAt: Date;
-  accessTokens?: Array<AccessToken>;
+  accessTokens?: Array<any>;
   rooms?: Array<Room>;
   administrations?: Array<Room>;
 }
@@ -38,7 +37,7 @@ export class Account implements AccountInterface {
   id: number = 0;
   createdAt: Date = new Date(0);
   updatedAt: Date = new Date(0);
-  accessTokens: Array<AccessToken> = [];
+  accessTokens: Array<any> = [];
   rooms: Array<Room> = [];
   administrations: Array<Room> = [];
   constructor(data?: AccountInterface) {
@@ -132,8 +131,8 @@ export class Account implements AccountInterface {
       relations: {
         accessTokens: {
           name: 'accessTokens',
-          type: 'Array<AccessToken>',
-          model: 'AccessToken'
+          type: 'Array<any>',
+          model: ''
         },
         rooms: {
           name: 'rooms',

@@ -18,10 +18,10 @@ import { LoopBackConfig } from '../lb.config';
 export class SocketConnection {
   private socket: any;
   private subjects: {
-    onConnect: Subject<{}>,
-    onDisconnect: Subject<{}>,
-    onAuthenticated: Subject<{}>,
-    onUnAuthorized: Subject<{}>
+    onConnect: Subject<any>,
+    onDisconnect: Subject<any>,
+    onAuthenticated: Subject<any>,
+    onUnAuthorized: Subject<any>
   } = {
     onConnect: new Subject(),
     onDisconnect: new Subject(),
@@ -29,10 +29,10 @@ export class SocketConnection {
     onUnAuthorized: new Subject()
   };
   public sharedObservables: {
-    sharedOnConnect?: Observable<{}>,
-    sharedOnDisconnect?: Observable<{}>,
-    sharedOnAuthenticated?: Observable<{}>,
-    sharedOnUnAuthorized?: Observable<{}>
+    sharedOnConnect?: Observable<any>,
+    sharedOnDisconnect?: Observable<any>,
+    sharedOnAuthenticated?: Observable<any>,
+    sharedOnUnAuthorized?: Observable<any>
   } = {};
   private unauthenticated: boolean = true;
   /**

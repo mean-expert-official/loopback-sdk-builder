@@ -1,7 +1,4 @@
 /* tslint:disable */
-import {
-  AccessToken
-} from '../index';
 
 declare var Object: any;
 export interface UserInterface {
@@ -16,7 +13,7 @@ export interface UserInterface {
   created?: Date;
   lastUpdated?: Date;
   id?: number;
-  accessTokens?: Array<AccessToken>;
+  accessTokens?: Array<any>;
 }
 
 export class User implements UserInterface {
@@ -31,7 +28,7 @@ export class User implements UserInterface {
   created: Date = new Date(0);
   lastUpdated: Date = new Date(0);
   id: number = 0;
-  accessTokens: Array<AccessToken> = [];
+  accessTokens: Array<any> = [];
   constructor(data?: UserInterface) {
     Object.assign(this, data);
   }
@@ -115,8 +112,8 @@ export class User implements UserInterface {
       relations: {
         accessTokens: {
           name: 'accessTokens',
-          type: 'Array<AccessToken>',
-          model: 'AccessToken'
+          type: 'Array<any>',
+          model: ''
         },
       }
     }
