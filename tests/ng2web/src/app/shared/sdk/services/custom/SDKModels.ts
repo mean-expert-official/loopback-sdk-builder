@@ -1,7 +1,6 @@
 /* tslint:disable */
 import { Injectable } from '@angular/core';
 import { User } from '../../models/User';
-import { AccessToken } from '../../models/AccessToken';
 import { Account } from '../../models/Account';
 import { ApplicationCredential } from '../../models/ApplicationCredential';
 import { Category } from '../../models/Category';
@@ -22,7 +21,6 @@ export class SDKModels {
 
   private models: Models = {
     User: User,
-    AccessToken: AccessToken,
     Account: Account,
     ApplicationCredential: ApplicationCredential,
     Category: Category,
