@@ -31,7 +31,7 @@ export class CookieBrowser {
   }
 
   remove(key: string) {
-    document.cookie = key + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    document.cookie = key + '=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
   }
 
   private parse(value: any) {
