@@ -18,7 +18,7 @@ export class CookieBrowser {
         return null;
       }
 
-      this.cookies[key] = this.parse(cookie.split('=').pop());
+      this.cookies[key] = this.parse(cookie.split('=').slice(1).join('='));
     }
 
     return this.cookies[key];
