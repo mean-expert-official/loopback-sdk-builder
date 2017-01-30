@@ -62,6 +62,8 @@ export class RoomListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.roomRef.dispose();
+    this.accountRef.dispose();
     this.subscriptions.forEach((subscription: Subscription) => subscription.unsubscribe());
   }
 

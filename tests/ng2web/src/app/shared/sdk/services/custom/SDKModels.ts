@@ -14,7 +14,7 @@ import { Storage } from '../../models/Storage';
 import { UserCredential } from '../../models/UserCredential';
 import { UserIdentity } from '../../models/UserIdentity';
 
-interface Models { [name: string]: any }
+export interface Models { [name: string]: any }
 
 @Injectable()
 export class SDKModels {

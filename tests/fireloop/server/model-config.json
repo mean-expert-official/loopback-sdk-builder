@@ -72,7 +72,7 @@
     "public": true
   },
   "Storage": {
-    "dataSource": "db",
+    "dataSource": "storage",
     "public": true
   },
   "UserCredential": {

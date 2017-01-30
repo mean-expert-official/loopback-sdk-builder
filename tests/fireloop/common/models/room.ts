@@ -50,8 +50,8 @@ import { Model } from '@mean-expert/model';
 
     findByRoomContext: {
       accepts: [
-        { arg: 'room', type: 'object', http: { source: 'body' }},
-        { arg: 'remoteCtx', description: '**Do not implement in clients**.', type: Object, injectCtx: true, http: { source: 'context' }}
+        { arg: 'room', type: 'object'},
+        { arg: 'remoteCtx', description: '**Do not implement in clients**.', type: 'object', injectCtx: true, http: { source: 'context' }}
       ],
       returns: { arg: 'room', type: 'object', root: true },
       http: { path: '/findByRoomContext', verb: 'post' }

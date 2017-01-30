@@ -1,6 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
 import { IO } from './io.service';
-import { JSONSearchParams } from './search.params';
 import { LoopBackAuth } from './auth.service';
 import { LoopBackConfig } from '../../lb.config';
 import { FireLoop } from '../../models/FireLoop';
@@ -20,23 +19,29 @@ import { Subscription } from 'rxjs/Subscription';
 **/
 @Injectable()
 export class RealTime {
-
   public IO: IO;
   public FireLoop: FireLoop;
   private connecting: boolean = false;
   private onReadySubject: Subject<string> = new Subject<string>();
   private sharedOnReady: Observable<string> = this.onReadySubject.asObservable().share();
-
+  /**
+  * @method constructor
+  * @param {SocketConnection} connection WebSocket connection service
+  * @param {SDKModels} models Model provider service
+  * @param {LoopBackAuth} auth LoopBack authentication service
+  * @description
+  * It will intialize the shared on ready communication channel.
+  **/
   constructor(
     @Inject(SocketConnection) public connection: SocketConnection,
     @Inject(SDKModels) protected models: SDKModels,
-    @Inject(LoopBackAuth) protected auth: LoopBackAuth,
-    @Inject(JSONSearchParams) protected searchParams: JSONSearchParams
+    @Inject(LoopBackAuth) protected auth: LoopBackAuth
   ) {
     this.sharedOnReady.subscribe();
   }
   /**
   * @method onDisconnect
+  * @return {Observable<any>} 
   * @description
   * Will trigger when Real-Time Service is disconnected from server.
   **/
@@ -45,41 +50,50 @@ export class RealTime {
   }
   /**
   * @method onAuthenticated
+  * @return {Observable<any>} 
   * @description
-  * Will trigger when Real-Time Service is not authorized from server.
+  * Will trigger when Real-Time Service is authenticated with the server.
   **/
   onAuthenticated(): Observable<any> {
     return this.connection.sharedObservables.sharedOnAuthenticated;
   }
   /**
   * @method onUnAuthorized
+  * @return {Observable<any>} 
   * @description
-  * Will trigger when Real-Time Service is not authorized from server.
+  * Will trigger when Real-Time Service is not authorized to connect with the server.
   **/
   onUnAuthorized(): Observable<any> {
     return this.connection.sharedObservables.sharedOnUnAuthorized;
   }
   /**
   * @method onReady
+  * @return {Observable<any>} 
   * @description
   * Will trigger when Real-Time Service is Ready for broadcasting.
   * and will register connection flow events to notify subscribers.
   **/
-  public onReady(): Observable<string> {
+  public onReady(): Observable<any> {
+    // If there is a valid connection, then we just send back to the EventLoop
+    // Or next will be executed before the actual subscription.
     if (this.connection.isConnected()) {
-      // Send back to the event loop so it executes after subscription
       let to = setTimeout(() => {
-        this.onReadySubject.next();
+        this.onReadySubject.next('shared-connection');
         clearTimeout(to);
       });
+    // Else if there is a current attempt of connection we wait for the prior
+    // process that started the connection flow.
     } else if (this.connecting) {
       let ti = setInterval(() => {
         if (this.connection.isConnected()) {
-          this.onReadySubject.next();
+          this.onReadySubject.next('shared-connection');
           clearInterval(ti);
         }
       }, 500);
-
+    // If there is not valid connection or attempt, then we start the connection flow
+    // and make sure we notify all the onReady subscribers when done.
+    // Also it will listen for desconnections so we unsubscribe and avoid both:
+    // Memory leaks and duplicated triggered events.
     } else {
       this.connecting = true;
       this.connection.connect(this.auth.getToken());

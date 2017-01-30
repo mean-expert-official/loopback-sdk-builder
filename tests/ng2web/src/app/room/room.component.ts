@@ -63,8 +63,7 @@ export class RoomComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach((subscription: Subscription) => subscription.unsubscribe());
     this.roomRef.dispose();
     this.messageRef.dispose();
-    this.roomRef = null;
-    this.messageRef = null;
+    Object.keys(this.replyRefs).forEach((id: any) => this.replyRefs[id].dispose());
     this.replyRefs = {};
   }
 

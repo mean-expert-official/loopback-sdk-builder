@@ -12,23 +12,23 @@ export interface RoomInterface {
   id?: number;
   createdAt?: Date;
   updatedAt?: Date;
-  messages?: Array<Message>;
-  likes?: Array<Like>;
-  categories?: Array<Category>;
-  accounts?: Array<Account>;
-  admins?: Array<Account>;
+  messages?: Message[];
+  likes?: Like[];
+  categories?: Category[];
+  accounts?: Account[];
+  admins?: Account[];
 }
 
 export class Room implements RoomInterface {
-  name: string = '';
-  id: number = 0;
-  createdAt: Date = new Date(0);
-  updatedAt: Date = new Date(0);
-  messages: Array<Message> = [];
-  likes: Array<Like> = [];
-  categories: Array<Category> = [];
-  accounts: Array<Account> = [];
-  admins: Array<Account> = [];
+  name: string;
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  messages: Message[];
+  likes: Like[];
+  categories: Category[];
+  accounts: Account[];
+  admins: Account[];
   constructor(data?: RoomInterface) {
     Object.assign(this, data);
   }
@@ -81,27 +81,27 @@ export class Room implements RoomInterface {
       relations: {
         messages: {
           name: 'messages',
-          type: 'Array<Message>',
+          type: 'Message[]',
           model: 'Message'
         },
         likes: {
           name: 'likes',
-          type: 'Array<Like>',
+          type: 'Like[]',
           model: 'Like'
         },
         categories: {
           name: 'categories',
-          type: 'Array<Category>',
+          type: 'Category[]',
           model: 'Category'
         },
         accounts: {
           name: 'accounts',
-          type: 'Array<Account>',
+          type: 'Account[]',
           model: 'Account'
         },
         admins: {
           name: 'admins',
-          type: 'Array<Account>',
+          type: 'Account[]',
           model: 'Account'
         },
       }
