@@ -30,7 +30,7 @@ export class CookieBrowser {
         return null;
       }
 
-      this.cookies[key] = this.parse(cookie.split('=').pop());
+      this.cookies[key] = this.parse(cookie.split('=').slice(1).join('='));
     }
 
     return this.cookies[key];
@@ -56,8 +56,8 @@ export class CookieBrowser {
    * @description
    * This method will remove a cookie from the client.
    **/
-  remove(key: string): void {
-    document.cookie = key + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  remove(key: string) {
+    document.cookie = key + '=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
   }
   /**
    * @method parse
