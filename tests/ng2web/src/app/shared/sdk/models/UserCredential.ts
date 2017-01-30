@@ -16,17 +16,17 @@ export interface UserCredentialInterface {
 }
 
 export class UserCredential implements UserCredentialInterface {
-  provider: string = 'authScheme';
-  authScheme: string = '';
-  externalId: string = '';
-  profile: any = <any>null;
-  credentials: string = '';
-  created: Date = new Date(0);
-  modified: Date = new Date(0);
-  userId: any = <any>null;
-  id: number = 0;
-  createdAt: Date = new Date(0);
-  updatedAt: Date = new Date(0);
+  provider: string;
+  authScheme: string;
+  externalId: string;
+  profile: any;
+  credentials: string;
+  created: Date;
+  modified: Date;
+  userId: any;
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
   constructor(data?: UserCredentialInterface) {
     Object.assign(this, data);
   }

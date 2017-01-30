@@ -12,23 +12,23 @@ export interface MessageInterface {
   createdAt?: Date;
   updatedAt?: Date;
   roomId?: number;
-  likes?: Array<Like>;
-  replies?: Array<Message>;
+  likes?: Like[];
+  replies?: Message[];
   parent?: Message;
   room?: Room;
 }
 
 export class Message implements MessageInterface {
-  text: string = '';
-  id: number = 0;
-  parentId: number = 0;
-  createdAt: Date = new Date(0);
-  updatedAt: Date = new Date(0);
-  roomId: number = 0;
-  likes: Array<Like> = [];
-  replies: Array<Message> = [];
-  parent: Message = null;
-  room: Room = null;
+  text: string;
+  id: number;
+  parentId: number;
+  createdAt: Date;
+  updatedAt: Date;
+  roomId: number;
+  likes: Like[];
+  replies: Message[];
+  parent: Message;
+  room: Room;
   constructor(data?: MessageInterface) {
     Object.assign(this, data);
   }
@@ -89,12 +89,12 @@ export class Message implements MessageInterface {
       relations: {
         likes: {
           name: 'likes',
-          type: 'Array<Like>',
+          type: 'Like[]',
           model: 'Like'
         },
         replies: {
           name: 'replies',
-          type: 'Array<Message>',
+          type: 'Message[]',
           model: 'Message'
         },
         parent: {

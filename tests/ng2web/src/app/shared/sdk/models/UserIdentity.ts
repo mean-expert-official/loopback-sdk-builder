@@ -20,18 +20,18 @@ export interface UserIdentityInterface {
 }
 
 export class UserIdentity implements UserIdentityInterface {
-  provider: string = 'authScheme';
-  authScheme: string = '';
-  externalId: string = '';
-  profile: any = <any>null;
-  credentials: string = '';
-  created: Date = new Date(0);
-  modified: Date = new Date(0);
-  userId: number = 0;
-  id: number = 0;
-  createdAt: Date = new Date(0);
-  updatedAt: Date = new Date(0);
-  user: User = null;
+  provider: string;
+  authScheme: string;
+  externalId: string;
+  profile: any;
+  credentials: string;
+  created: Date;
+  modified: Date;
+  userId: number;
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  user: User;
   constructor(data?: UserIdentityInterface) {
     Object.assign(this, data);
   }

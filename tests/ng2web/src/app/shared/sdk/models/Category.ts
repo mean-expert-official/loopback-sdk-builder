@@ -9,15 +9,15 @@ export interface CategoryInterface {
   id?: number;
   createdAt: Date;
   updatedAt: Date;
-  rooms?: Array<Room>;
+  rooms?: Room[];
 }
 
 export class Category implements CategoryInterface {
-  name: string = 'test';
-  id: number = 0;
-  createdAt: Date = new Date(0);
-  updatedAt: Date = new Date(0);
-  rooms: Array<Room> = [];
+  name: string;
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  rooms: Room[];
   constructor(data?: CategoryInterface) {
     Object.assign(this, data);
   }
@@ -70,7 +70,7 @@ export class Category implements CategoryInterface {
       relations: {
         rooms: {
           name: 'rooms',
-          type: 'Array<Room>',
+          type: 'Room[]',
           model: 'Room'
         },
       }

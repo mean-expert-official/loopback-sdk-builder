@@ -5,6 +5,18 @@ import { SDKBrowserModule } from './shared/sdk';
 import { User, AccessToken } from './shared/sdk/models';
 import { UserApi } from './shared/sdk/services';
 
+
+let Helpers: {
+  create: Function
+} = {
+  create : function(userApi: UserApi) {
+    let user: User = new User();
+    user.email = Date.now() + '@test.com';
+    user.password = 'test';
+    return userApi.create(user);
+  }
+}
+
 describe('Service: User Service', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -27,21 +39,19 @@ describe('Service: User Service', () => {
 
   it('should create a new instance',
     async(inject([UserApi], (userApi: UserApi) => {
-      let user: User = new User();
-      user.email = Date.now() + '@test.com';
-      user.password = 'test';
-      return userApi.create(user)
-        .subscribe((instance: User) => expect(instance.id).toBeTruthy());
+      return Helpers.create(userApi).subscribe(
+        (instance: User) => expect(instance.id).toBeTruthy()
+      );
     })
   ));
 
   it('should login the user',
     async(inject([UserApi], (userApi: UserApi) => {
-      let user: User = new User();
-      user.email = Date.now() + '@test.com';
-      user.password = 'test';
-      return userApi.create(user)
-        .subscribe((instance: User)   => userApi.login(user)
+      return Helpers.create(userApi)
+        .subscribe((instance: User)   => userApi.login({
+          email: instance.email,
+          password: 'test'
+        })
         .subscribe((token: AccessToken) => {
           expect(token.id).toBeTruthy();
           expect(token.userId).toBe(instance.id);
@@ -51,11 +61,11 @@ describe('Service: User Service', () => {
 
   it('should logout the user',
     async(inject([UserApi], (userApi: UserApi) => {
-      let user: User = new User();
-      user.email = Date.now() + '@test.com';
-      user.password = 'test';
-      return userApi.create(user)
-        .subscribe((instance: User) => userApi.login(user)
+      return Helpers.create(userApi)
+        .subscribe((instance: User)   => userApi.login({
+          email: instance.email,
+          password: 'test'
+        }, true)
         .subscribe((token: AccessToken)   => {
           expect(token.id).toBeTruthy();
           expect(token.userId).toBe(instance.id);
@@ -69,17 +79,17 @@ describe('Service: User Service', () => {
   it('should fail login the user',
     async(inject([UserApi], (userApi: UserApi) => {
       return userApi.login({ email: 'not@existing.com', password: 'duh' })
-        .subscribe((res) => { }, err => expect(err.status).toEqual(401));
+        .subscribe((res) => { }, err => expect(err.statusCode).toEqual(401));
     })
   ));
 
   it('should get current user',
     async(inject([UserApi], (userApi: UserApi) => {
-      let user: User = new User();
-      user.email = Date.now() + '@test.com';
-      user.password = 'test';
-      return userApi.create(user)
-        .subscribe((instance: User) => userApi.login(user)
+      return Helpers.create(userApi)
+        .subscribe((instance: User)   => userApi.login({
+          email: instance.email,
+          password: 'test'
+        }, true)
         .subscribe((token: AccessToken) =>
           userApi.getCurrent().subscribe((current: User) => {
           expect(current.id).toBe(instance.id);

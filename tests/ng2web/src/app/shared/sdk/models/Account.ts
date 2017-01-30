@@ -8,38 +8,30 @@ export interface AccountInterface {
   realm?: string;
   username?: string;
   password: string;
-  challenges?: any;
   email: string;
   emailVerified?: boolean;
   verificationToken?: string;
-  status?: string;
-  created?: Date;
-  lastUpdated?: Date;
   id?: number;
   createdAt: Date;
   updatedAt: Date;
-  accessTokens?: Array<any>;
-  rooms?: Array<Room>;
-  administrations?: Array<Room>;
+  accessTokens?: any[];
+  rooms?: Room[];
+  administrations?: Room[];
 }
 
 export class Account implements AccountInterface {
-  realm: string = '';
-  username: string = '';
-  password: string = '';
-  challenges: any = <any>null;
-  email: string = '';
-  emailVerified: boolean = false;
-  verificationToken: string = '';
-  status: string = '';
-  created: Date = new Date(0);
-  lastUpdated: Date = new Date(0);
-  id: number = 0;
-  createdAt: Date = new Date(0);
-  updatedAt: Date = new Date(0);
-  accessTokens: Array<any> = [];
-  rooms: Array<Room> = [];
-  administrations: Array<Room> = [];
+  realm: string;
+  username: string;
+  password: string;
+  email: string;
+  emailVerified: boolean;
+  verificationToken: string;
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  accessTokens: any[];
+  rooms: Room[];
+  administrations: Room[];
   constructor(data?: AccountInterface) {
     Object.assign(this, data);
   }
@@ -83,14 +75,6 @@ export class Account implements AccountInterface {
           name: 'password',
           type: 'string'
         },
-        credentials: {
-          name: 'credentials',
-          type: 'any'
-        },
-        challenges: {
-          name: 'challenges',
-          type: 'any'
-        },
         email: {
           name: 'email',
           type: 'string'
@@ -102,18 +86,6 @@ export class Account implements AccountInterface {
         verificationToken: {
           name: 'verificationToken',
           type: 'string'
-        },
-        status: {
-          name: 'status',
-          type: 'string'
-        },
-        created: {
-          name: 'created',
-          type: 'Date'
-        },
-        lastUpdated: {
-          name: 'lastUpdated',
-          type: 'Date'
         },
         id: {
           name: 'id',
@@ -131,17 +103,17 @@ export class Account implements AccountInterface {
       relations: {
         accessTokens: {
           name: 'accessTokens',
-          type: 'Array<any>',
+          type: 'any[]',
           model: ''
         },
         rooms: {
           name: 'rooms',
-          type: 'Array<Room>',
+          type: 'Room[]',
           model: 'Room'
         },
         administrations: {
           name: 'administrations',
-          type: 'Array<Room>',
+          type: 'Room[]',
           model: 'Room'
         },
       }

@@ -8,9 +8,9 @@ export interface StorageInterface {
 }
 
 export class Storage implements StorageInterface {
-  id: number = 0;
-  createdAt: Date = new Date(0);
-  updatedAt: Date = new Date(0);
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
   constructor(data?: StorageInterface) {
     Object.assign(this, data);
   }

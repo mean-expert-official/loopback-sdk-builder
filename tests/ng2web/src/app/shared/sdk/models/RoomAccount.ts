@@ -16,13 +16,13 @@ export interface RoomAccountInterface {
 }
 
 export class RoomAccount implements RoomAccountInterface {
-  id: number = 0;
-  accountId: number = 0;
-  roomId: number = 0;
-  createdAt: Date = new Date(0);
-  updatedAt: Date = new Date(0);
-  account: Account = null;
-  room: Room = null;
+  id: number;
+  accountId: number;
+  roomId: number;
+  createdAt: Date;
+  updatedAt: Date;
+  account: Account;
+  room: Room;
   constructor(data?: RoomAccountInterface) {
     Object.assign(this, data);
   }

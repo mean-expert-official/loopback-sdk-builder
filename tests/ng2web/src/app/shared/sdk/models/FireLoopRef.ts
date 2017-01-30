@@ -20,10 +20,10 @@ export class FireLoopRef<T> {
   private childs: any = {};
   /**
   * @method constructor
-  * @param model
-  * @param socket
-  * @param parent
-  * @param relationship
+  * @param {any} model The model we want to create a reference
+  * @param {SocketConnection} socket Socket connection to handle events
+  * @param {FireLoopRef<any>} parent Parent FireLoop model reference
+  * @param {string} relationship The defined model relationship
   * @description
   * The constructor will receive the required parameters and then will register this reference
   * into the server, needed to allow multiple references for the same model.
@@ -33,8 +33,8 @@ export class FireLoopRef<T> {
   constructor(
     private model: any,
     private socket: SocketConnection,
-    private parent: any = null,
-    private relationship: any = null
+    private parent: FireLoopRef<any> = null,
+    private relationship: string = null
   ) {
     this.socket.emit(
       `Subscribe.${ !parent ? model.getModelName() : parent.model.getModelName() }`,
@@ -44,6 +44,7 @@ export class FireLoopRef<T> {
   }
   /**
   * @method dispose
+  * @return {void}
   * @description
   * This method is super important to avoid memory leaks in the server.
   * This method requires to be called on components destroy
@@ -52,42 +53,47 @@ export class FireLoopRef<T> {
   *  this.someRef.dispose() 
   * }
   **/
-  public dispose() {
+  public dispose(): void {
     this.operation('dispose', {})
         .subscribe()
         .unsubscribe();
   }
   /**
   * @method upsert
-  * @param data
+  * @param {T} data Persisted model instance
+  * @return {Observable<T>}
   * @description
   * Operation wrapper for upsert function.
   **/
-  public upsert(data: any): Observable<T> {
+  public upsert(data: T): Observable<T> {
     return this.operation('upsert', data);
   }
   /**
   * @method create
-  * @param data
+  * @param {T} data Persisted model instance
+  * @return {Observable<T>}
   * @description
   * Operation wrapper for create function.
   **/
-  public create(data: any): Observable<T> {
+  public create(data: T): Observable<T> {
     return this.operation('create', data);
   }
   /**
   * @method remove
-  * @param data
+  * @param {T} data Persisted model instance
+  * @return {Observable<T>}
   * @description
   * Operation wrapper for remove function.
   **/
-  public remove(data: any): Observable<T> {
+  public remove(data: T): Observable<T> {
     return this.operation('remove', data);
   }
   /**
   * @method remote
-  * @param method
-  * @param params
+  * @param {string} method Remote method name
+  * @param {any[]=} params Parameters to be applied into the remote method
+  * @param {boolean} broadcast Flag to define if the method results should be broadcasted
+  * @return {Observable<any>}
   * @description
   * This method calls for any remote method. It is flexible enough to
   * allow you call either built-in or custom remote methods.
@@ -96,17 +102,18 @@ export class FireLoopRef<T> {
   * but also to optionally send any defined accept params that will be
   * applied within the server.
   **/
-  public remote(method: string, params?: any[], broadcast: Boolean = false): Observable<T> {
+  public remote(method: string, params?: any[], broadcast: boolean = false): Observable<any> {
     return this.operation('remote', { method, params, broadcast });
   }
   /**
   * @method onRemote
-  * @param method
-  * @param params
+  * @param {string} method Remote method name
+  * @return {Observable<any>}
   * @description
-  * This method listen for public .
+  * This method listen for public broadcasted remote method results. If the remote method
+  * execution is not public only the owner will receive the result data.
   **/
-  public onRemote(method: string): Observable<T> {
+  public onRemote(method: string): Observable<any> {
     let event: string = 'remote';
     if (!this.relationship) {
       event = `${ this.model.getModelName() }.${event}`;
@@ -117,8 +124,9 @@ export class FireLoopRef<T> {
   }
   /**
   * @method on
-  * @param event
-  * @param filter
+  * @param {string} event Event name
+  * @param {LoopBackFilter} filter LoopBack query filter
+  * @return {Observable<T>}
   * @description
   * Listener for different type of events. Valid events are:
   *   - change (Triggers on any model change -create, update, remove-)
@@ -150,7 +158,8 @@ export class FireLoopRef<T> {
   }
   /**
   * @method stats
-  * @param filter
+  * @param {LoopBackFilter=} filter LoopBack query filter
+  * @return {Observable<T>}
   * @description
   * Listener for real-time statistics, will trigger on every
   * statistic modification.
@@ -161,7 +170,8 @@ export class FireLoopRef<T> {
   }
   /**
   * @method make
-  * @param instance
+  * @param {any} instance Persisted model instance reference
+  * @return {Observable<T>}
   * @description
   * This method will set a model instance into this a new FireLoop Reference.
   * This allows to persiste parentship when creating related instances.
@@ -177,7 +187,8 @@ export class FireLoopRef<T> {
   }
   /**
   * @method child
-  * @param relationship
+  * @param {string} relationship A defined model relationship
+  * @return {FireLoopRef<T>}
   * @description
   * This method creates child references, which will persist related model
   * instances. e.g. Room.messages, where messages belongs to a specific Room.
@@ -204,7 +215,9 @@ export class FireLoopRef<T> {
   }
   /**
   * @method pull
-  * @param relationship
+  * @param {string} event Event name
+  * @param {any} request Type of request, can be LB-only filter or FL+LB filter
+  * @return {Observable<T>}
   * @description
   * This method will pull initial data from server
   **/
@@ -223,10 +236,13 @@ export class FireLoopRef<T> {
     return sbj.asObservable();
   }
   /**
-  * @method operation
-  * @param relationship
+  * @method broadcasts
+  * @param {string} event Event name
+  * @param {any} request Type of request, can be LB-only filter or FL+LB filter
+  * @return {Observable<T>}
   * @description
-  * This internal method will run operations depending on current context 
+  * This will listen for public broadcasts announces and then request
+  * for data according a specific client request, not shared with other clients.
   **/
   private broadcasts(event: string, request: any): Observable<T> {
     let sbj: Subject<T> = new Subject<T>();
@@ -240,8 +256,9 @@ export class FireLoopRef<T> {
   }
   /**
   * @method operation
-  * @param event
-  * @param data
+  * @param {string} event Event name
+  * @param {any} data Any type of data sent to the server
+  * @return {Observable<T>}
   * @description
   * This internal method will run operations depending on current context 
   **/
@@ -270,6 +287,7 @@ export class FireLoopRef<T> {
   }
   /**
   * @method buildId
+  * @return {number}
   * @description
   * This internal method build an ID for this reference, this allows to have
   * multiple references for the same model or relationships.

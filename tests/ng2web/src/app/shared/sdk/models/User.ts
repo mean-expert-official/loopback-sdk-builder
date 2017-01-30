@@ -5,30 +5,22 @@ export interface UserInterface {
   realm?: string;
   username?: string;
   password: string;
-  challenges?: any;
   email: string;
   emailVerified?: boolean;
   verificationToken?: string;
-  status?: string;
-  created?: Date;
-  lastUpdated?: Date;
   id?: number;
-  accessTokens?: Array<any>;
+  accessTokens?: any[];
 }
 
 export class User implements UserInterface {
-  realm: string = '';
-  username: string = '';
-  password: string = '';
-  challenges: any = <any>null;
-  email: string = '';
-  emailVerified: boolean = false;
-  verificationToken: string = '';
-  status: string = '';
-  created: Date = new Date(0);
-  lastUpdated: Date = new Date(0);
-  id: number = 0;
-  accessTokens: Array<any> = [];
+  realm: string;
+  username: string;
+  password: string;
+  email: string;
+  emailVerified: boolean;
+  verificationToken: string;
+  id: number;
+  accessTokens: any[];
   constructor(data?: UserInterface) {
     Object.assign(this, data);
   }
@@ -72,14 +64,6 @@ export class User implements UserInterface {
           name: 'password',
           type: 'string'
         },
-        credentials: {
-          name: 'credentials',
-          type: 'any'
-        },
-        challenges: {
-          name: 'challenges',
-          type: 'any'
-        },
         email: {
           name: 'email',
           type: 'string'
@@ -92,18 +76,6 @@ export class User implements UserInterface {
           name: 'verificationToken',
           type: 'string'
         },
-        status: {
-          name: 'status',
-          type: 'string'
-        },
-        created: {
-          name: 'created',
-          type: 'Date'
-        },
-        lastUpdated: {
-          name: 'lastUpdated',
-          type: 'Date'
-        },
         id: {
           name: 'id',
           type: 'number'
@@ -112,7 +84,7 @@ export class User implements UserInterface {
       relations: {
         accessTokens: {
           name: 'accessTokens',
-          type: 'Array<any>',
+          type: 'any[]',
           model: ''
         },
       }

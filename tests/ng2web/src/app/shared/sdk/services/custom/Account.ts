@@ -37,11 +37,11 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Find a related item by id for accessTokens.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param any fk Foreign key for accessTokens
+   * @param {any} fk Foreign key for accessTokens
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -67,11 +67,11 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Delete a related item by id for accessTokens.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param any fk Foreign key for accessTokens
+   * @param {any} fk Foreign key for accessTokens
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -94,15 +94,15 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Update a related item by id for accessTokens.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param any fk Foreign key for accessTokens
+   * @param {any} fk Foreign key for accessTokens
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -130,11 +130,11 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Find a related item by id for rooms.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param any fk Foreign key for rooms
+   * @param {any} fk Foreign key for rooms
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -160,11 +160,11 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Delete a related item by id for rooms.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param any fk Foreign key for rooms
+   * @param {any} fk Foreign key for rooms
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -187,15 +187,15 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Update a related item by id for rooms.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param any fk Foreign key for rooms
+   * @param {any} fk Foreign key for rooms
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -223,15 +223,15 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Add a related item by id for rooms.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param any fk Foreign key for rooms
+   * @param {any} fk Foreign key for rooms
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -259,11 +259,11 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Remove the rooms relation to an item by id.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param any fk Foreign key for rooms
+   * @param {any} fk Foreign key for rooms
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -286,11 +286,11 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Check the existence of rooms relation to an item by id.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param any fk Foreign key for rooms
+   * @param {any} fk Foreign key for rooms
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -316,11 +316,11 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Find a related item by id for administrations.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param any fk Foreign key for administrations
+   * @param {any} fk Foreign key for administrations
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -346,11 +346,11 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Delete a related item by id for administrations.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param any fk Foreign key for administrations
+   * @param {any} fk Foreign key for administrations
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -373,15 +373,15 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Update a related item by id for administrations.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param any fk Foreign key for administrations
+   * @param {any} fk Foreign key for administrations
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -409,15 +409,15 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Add a related item by id for administrations.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param any fk Foreign key for administrations
+   * @param {any} fk Foreign key for administrations
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -445,11 +445,11 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Remove the administrations relation to an item by id.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param any fk Foreign key for administrations
+   * @param {any} fk Foreign key for administrations
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -472,11 +472,11 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Check the existence of administrations relation to an item by id.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param any fk Foreign key for administrations
+   * @param {any} fk Foreign key for administrations
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -502,11 +502,11 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Queries accessTokens of Account.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param object filter 
+   * @param {object} filter 
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -532,13 +532,13 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in accessTokens of this model.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -565,9 +565,9 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Deletes all accessTokens of this model.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -589,11 +589,11 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Counts accessTokens of Account.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param object where Criteria to match model instances
+   * @param {object} where Criteria to match model instances
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -618,11 +618,11 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Queries rooms of Account.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param object filter 
+   * @param {object} filter 
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -648,13 +648,13 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in rooms of this model.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -681,9 +681,9 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Deletes all rooms of this model.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -705,11 +705,11 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Counts rooms of Account.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param object where Criteria to match model instances
+   * @param {object} where Criteria to match model instances
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -734,11 +734,11 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Queries administrations of Account.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param object filter 
+   * @param {object} filter 
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -764,13 +764,13 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in administrations of this model.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -797,9 +797,9 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Deletes all administrations of this model.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -821,11 +821,11 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Counts administrations of Account.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param object where Criteria to match model instances
+   * @param {object} where Criteria to match model instances
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -848,20 +848,84 @@ export class AccountApi extends BaseLoopBackApi {
   }
 
   /**
+   * Patch an existing model instance or insert a new one into the data source.
+   *
+   * @param {object} data Request data.
+   *
+   *  - `data` – `{object}` - Model instance data
+   *
+   *  - `options` – `{object}` - 
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Account` object.)
+   * </em>
+   */
+  public patchOrCreate(data: any = {}, options: any = {}): Observable<any> {
+    let _method: string = "PATCH";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/accounts";
+    let _routeParams: any = {};
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Patch attributes for a model instance and persist it into the data source.
+   *
+   * @param {any} id Account id
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Account` object.)
+   * </em>
+   */
+  public patchAttributes(id: any, data: any = {}): Observable<any> {
+    let _method: string = "PATCH";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/accounts/:id";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
    * Login a user with username/email and password.
    *
-   * @param string include Related objects to include in the response. See the description of return value for more details.
+   * @param {string} include Related objects to include in the response. See the description of return value for more details.
    *   Default value: `user`.
    *
    *  - `rememberMe` - `boolean` - Whether the authentication credentials
    *     should be remembered in localStorage across app/browser restarts.
    *     Default: `true`.
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -887,8 +951,7 @@ export class AccountApi extends BaseLoopBackApi {
         (response: any) => {
           response.ttl = parseInt(response.ttl);
           response.rememberMe = rememberMe;
-          this.auth.setUser(response);
-          this.auth.save();
+          this.auth.setToken(response);
           return response;
         }
       );
@@ -899,11 +962,11 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Logout a user with access token.
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    *  - `access_token` – `{string}` - Do not supply this argument, it is automatically extracted from request headers.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -925,13 +988,13 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Confirm a user registration with email verification token.
    *
-   * @param string uid 
+   * @param {string} uid 
    *
-   * @param string token 
+   * @param {string} token 
    *
-   * @param string redirect 
+   * @param {string} redirect 
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -954,11 +1017,11 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Reset password for a user with email.
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -982,7 +1045,7 @@ export class AccountApi extends BaseLoopBackApi {
          * (The remote method definition does not provide any description.)
          * </em>
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1004,15 +1067,15 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Statistical information for Account registers.
    *
-   * @param string range hourly, daily, weekly, monthly, yearly, custom
+   * @param {string} range hourly, daily, weekly, monthly, yearly, custom
    *
-   * @param object custom {"start": date, "end": date }
+   * @param {object} custom {"start": date, "end": date }
    *
-   * @param object where where filter 
+   * @param {object} where where filter 
    *
-   * @param string groupBy group by filter 
+   * @param {string} groupBy group by filter 
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1039,13 +1102,13 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in accessTokens of this model.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1072,13 +1135,13 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in rooms of this model.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1105,13 +1168,13 @@ export class AccountApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in administrations of this model.
    *
-   * @param any id User id
+   * @param {any} id Account id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *

@@ -36,11 +36,11 @@ export class MessageApi extends BaseLoopBackApi {
   /**
    * Find a related item by id for likes.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Message id
    *
-   * @param any fk Foreign key for likes
+   * @param {any} fk Foreign key for likes
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -66,11 +66,11 @@ export class MessageApi extends BaseLoopBackApi {
   /**
    * Delete a related item by id for likes.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Message id
    *
-   * @param any fk Foreign key for likes
+   * @param {any} fk Foreign key for likes
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -93,15 +93,15 @@ export class MessageApi extends BaseLoopBackApi {
   /**
    * Update a related item by id for likes.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Message id
    *
-   * @param any fk Foreign key for likes
+   * @param {any} fk Foreign key for likes
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -129,11 +129,11 @@ export class MessageApi extends BaseLoopBackApi {
   /**
    * Find a related item by id for replies.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Message id
    *
-   * @param any fk Foreign key for replies
+   * @param {any} fk Foreign key for replies
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -159,11 +159,11 @@ export class MessageApi extends BaseLoopBackApi {
   /**
    * Delete a related item by id for replies.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Message id
    *
-   * @param any fk Foreign key for replies
+   * @param {any} fk Foreign key for replies
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -186,15 +186,15 @@ export class MessageApi extends BaseLoopBackApi {
   /**
    * Update a related item by id for replies.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Message id
    *
-   * @param any fk Foreign key for replies
+   * @param {any} fk Foreign key for replies
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -222,11 +222,11 @@ export class MessageApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation parent.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Message id
    *
-   * @param boolean refresh 
+   * @param {boolean} refresh 
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -252,11 +252,11 @@ export class MessageApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation room.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Message id
    *
-   * @param boolean refresh 
+   * @param {boolean} refresh 
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -282,11 +282,11 @@ export class MessageApi extends BaseLoopBackApi {
   /**
    * Queries likes of Message.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Message id
    *
-   * @param object filter 
+   * @param {object} filter 
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -312,13 +312,13 @@ export class MessageApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in likes of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Message id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -345,9 +345,9 @@ export class MessageApi extends BaseLoopBackApi {
   /**
    * Deletes all likes of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Message id
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -369,11 +369,11 @@ export class MessageApi extends BaseLoopBackApi {
   /**
    * Counts likes of Message.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Message id
    *
-   * @param object where Criteria to match model instances
+   * @param {object} where Criteria to match model instances
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -398,11 +398,11 @@ export class MessageApi extends BaseLoopBackApi {
   /**
    * Queries replies of Message.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Message id
    *
-   * @param object filter 
+   * @param {object} filter 
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -428,13 +428,13 @@ export class MessageApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in replies of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Message id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -461,9 +461,9 @@ export class MessageApi extends BaseLoopBackApi {
   /**
    * Deletes all replies of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Message id
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -485,11 +485,11 @@ export class MessageApi extends BaseLoopBackApi {
   /**
    * Counts replies of Message.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Message id
    *
-   * @param object where Criteria to match model instances
+   * @param {object} where Criteria to match model instances
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -512,11 +512,75 @@ export class MessageApi extends BaseLoopBackApi {
   }
 
   /**
+   * Patch an existing model instance or insert a new one into the data source.
+   *
+   * @param {object} data Request data.
+   *
+   *  - `data` – `{object}` - Model instance data
+   *
+   *  - `options` – `{object}` - 
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Message` object.)
+   * </em>
+   */
+  public patchOrCreate(data: any = {}, options: any = {}): Observable<any> {
+    let _method: string = "PATCH";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/messages";
+    let _routeParams: any = {};
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Patch attributes for a model instance and persist it into the data source.
+   *
+   * @param {any} id Message id
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Message` object.)
+   * </em>
+   */
+  public patchAttributes(id: any, data: any = {}): Observable<any> {
+    let _method: string = "PATCH";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/messages/:id";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
    * <em>
          * (The remote method definition does not provide any description.)
          * </em>
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -538,15 +602,15 @@ export class MessageApi extends BaseLoopBackApi {
   /**
    * Statistical information for Message registers.
    *
-   * @param string range hourly, daily, weekly, monthly, yearly, custom
+   * @param {string} range hourly, daily, weekly, monthly, yearly, custom
    *
-   * @param object custom {"start": date, "end": date }
+   * @param {object} custom {"start": date, "end": date }
    *
-   * @param object where where filter 
+   * @param {object} where where filter 
    *
-   * @param string groupBy group by filter 
+   * @param {string} groupBy group by filter 
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -573,13 +637,13 @@ export class MessageApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in likes of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Message id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -606,13 +670,13 @@ export class MessageApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in replies of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Message id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *

@@ -35,11 +35,11 @@ export class CategoryApi extends BaseLoopBackApi {
   /**
    * Find a related item by id for rooms.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Category id
    *
-   * @param any fk Foreign key for rooms
+   * @param {any} fk Foreign key for rooms
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -65,11 +65,11 @@ export class CategoryApi extends BaseLoopBackApi {
   /**
    * Delete a related item by id for rooms.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Category id
    *
-   * @param any fk Foreign key for rooms
+   * @param {any} fk Foreign key for rooms
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -92,15 +92,15 @@ export class CategoryApi extends BaseLoopBackApi {
   /**
    * Update a related item by id for rooms.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Category id
    *
-   * @param any fk Foreign key for rooms
+   * @param {any} fk Foreign key for rooms
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -128,15 +128,15 @@ export class CategoryApi extends BaseLoopBackApi {
   /**
    * Add a related item by id for rooms.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Category id
    *
-   * @param any fk Foreign key for rooms
+   * @param {any} fk Foreign key for rooms
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -164,11 +164,11 @@ export class CategoryApi extends BaseLoopBackApi {
   /**
    * Remove the rooms relation to an item by id.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Category id
    *
-   * @param any fk Foreign key for rooms
+   * @param {any} fk Foreign key for rooms
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -191,11 +191,11 @@ export class CategoryApi extends BaseLoopBackApi {
   /**
    * Check the existence of rooms relation to an item by id.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Category id
    *
-   * @param any fk Foreign key for rooms
+   * @param {any} fk Foreign key for rooms
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -221,11 +221,11 @@ export class CategoryApi extends BaseLoopBackApi {
   /**
    * Queries rooms of Category.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Category id
    *
-   * @param object filter 
+   * @param {object} filter 
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -251,13 +251,13 @@ export class CategoryApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in rooms of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Category id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -284,9 +284,9 @@ export class CategoryApi extends BaseLoopBackApi {
   /**
    * Deletes all rooms of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Category id
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -308,11 +308,11 @@ export class CategoryApi extends BaseLoopBackApi {
   /**
    * Counts rooms of Category.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Category id
    *
-   * @param object where Criteria to match model instances
+   * @param {object} where Criteria to match model instances
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -335,11 +335,75 @@ export class CategoryApi extends BaseLoopBackApi {
   }
 
   /**
+   * Patch an existing model instance or insert a new one into the data source.
+   *
+   * @param {object} data Request data.
+   *
+   *  - `data` – `{object}` - Model instance data
+   *
+   *  - `options` – `{object}` - 
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Category` object.)
+   * </em>
+   */
+  public patchOrCreate(data: any = {}, options: any = {}): Observable<any> {
+    let _method: string = "PATCH";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/categories";
+    let _routeParams: any = {};
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Patch attributes for a model instance and persist it into the data source.
+   *
+   * @param {any} id Category id
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Category` object.)
+   * </em>
+   */
+  public patchAttributes(id: any, data: any = {}): Observable<any> {
+    let _method: string = "PATCH";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/categories/:id";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
    * <em>
          * (The remote method definition does not provide any description.)
          * </em>
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -361,15 +425,15 @@ export class CategoryApi extends BaseLoopBackApi {
   /**
    * Statistical information for Category registers.
    *
-   * @param string range hourly, daily, weekly, monthly, yearly, custom
+   * @param {string} range hourly, daily, weekly, monthly, yearly, custom
    *
-   * @param object custom {"start": date, "end": date }
+   * @param {object} custom {"start": date, "end": date }
    *
-   * @param object where where filter 
+   * @param {object} where where filter 
    *
-   * @param string groupBy group by filter 
+   * @param {string} groupBy group by filter 
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -396,13 +460,13 @@ export class CategoryApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in rooms of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Category id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *

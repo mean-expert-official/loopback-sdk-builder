@@ -40,11 +40,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Find a related item by id for messages.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param any fk Foreign key for messages
+   * @param {any} fk Foreign key for messages
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -70,11 +70,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Delete a related item by id for messages.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param any fk Foreign key for messages
+   * @param {any} fk Foreign key for messages
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -97,15 +97,15 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Update a related item by id for messages.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param any fk Foreign key for messages
+   * @param {any} fk Foreign key for messages
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -133,11 +133,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Find a related item by id for likes.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param any fk Foreign key for likes
+   * @param {any} fk Foreign key for likes
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -163,11 +163,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Delete a related item by id for likes.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param any fk Foreign key for likes
+   * @param {any} fk Foreign key for likes
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -190,15 +190,15 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Update a related item by id for likes.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param any fk Foreign key for likes
+   * @param {any} fk Foreign key for likes
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -226,11 +226,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Find a related item by id for categories.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param any fk Foreign key for categories
+   * @param {any} fk Foreign key for categories
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -256,11 +256,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Delete a related item by id for categories.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param any fk Foreign key for categories
+   * @param {any} fk Foreign key for categories
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -283,15 +283,15 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Update a related item by id for categories.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param any fk Foreign key for categories
+   * @param {any} fk Foreign key for categories
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -319,15 +319,15 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Add a related item by id for categories.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param any fk Foreign key for categories
+   * @param {any} fk Foreign key for categories
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -355,11 +355,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Remove the categories relation to an item by id.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param any fk Foreign key for categories
+   * @param {any} fk Foreign key for categories
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -382,11 +382,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Check the existence of categories relation to an item by id.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param any fk Foreign key for categories
+   * @param {any} fk Foreign key for categories
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -412,11 +412,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Find a related item by id for accounts.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param any fk Foreign key for accounts
+   * @param {any} fk Foreign key for accounts
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -442,11 +442,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Delete a related item by id for accounts.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param any fk Foreign key for accounts
+   * @param {any} fk Foreign key for accounts
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -469,15 +469,15 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Update a related item by id for accounts.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param any fk Foreign key for accounts
+   * @param {any} fk Foreign key for accounts
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -505,15 +505,15 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Add a related item by id for accounts.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param any fk Foreign key for accounts
+   * @param {any} fk Foreign key for accounts
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -541,11 +541,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Remove the accounts relation to an item by id.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param any fk Foreign key for accounts
+   * @param {any} fk Foreign key for accounts
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -568,11 +568,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Check the existence of accounts relation to an item by id.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param any fk Foreign key for accounts
+   * @param {any} fk Foreign key for accounts
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -598,11 +598,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Find a related item by id for admins.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param any fk Foreign key for admins
+   * @param {any} fk Foreign key for admins
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -628,11 +628,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Delete a related item by id for admins.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param any fk Foreign key for admins
+   * @param {any} fk Foreign key for admins
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -655,15 +655,15 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Update a related item by id for admins.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param any fk Foreign key for admins
+   * @param {any} fk Foreign key for admins
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -691,15 +691,15 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Add a related item by id for admins.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param any fk Foreign key for admins
+   * @param {any} fk Foreign key for admins
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -727,11 +727,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Remove the admins relation to an item by id.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param any fk Foreign key for admins
+   * @param {any} fk Foreign key for admins
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -754,11 +754,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Check the existence of admins relation to an item by id.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param any fk Foreign key for admins
+   * @param {any} fk Foreign key for admins
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -784,11 +784,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Queries messages of Room.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param object filter 
+   * @param {object} filter 
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -814,13 +814,13 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in messages of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -847,9 +847,9 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Deletes all messages of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -871,11 +871,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Counts messages of Room.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param object where Criteria to match model instances
+   * @param {object} where Criteria to match model instances
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -900,11 +900,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Queries likes of Room.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param object filter 
+   * @param {object} filter 
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -930,13 +930,13 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in likes of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -963,9 +963,9 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Deletes all likes of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -987,11 +987,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Counts likes of Room.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param object where Criteria to match model instances
+   * @param {object} where Criteria to match model instances
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1016,11 +1016,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Queries categories of Room.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param object filter 
+   * @param {object} filter 
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1046,13 +1046,13 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in categories of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1079,9 +1079,9 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Deletes all categories of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1103,11 +1103,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Counts categories of Room.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param object where Criteria to match model instances
+   * @param {object} where Criteria to match model instances
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1132,11 +1132,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Queries accounts of Room.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param object filter 
+   * @param {object} filter 
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1162,13 +1162,13 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in accounts of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1195,9 +1195,9 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Deletes all accounts of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1219,11 +1219,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Counts accounts of Room.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param object where Criteria to match model instances
+   * @param {object} where Criteria to match model instances
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1248,11 +1248,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Queries admins of Room.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param object filter 
+   * @param {object} filter 
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1278,13 +1278,13 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in admins of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1311,9 +1311,9 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Deletes all admins of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1335,11 +1335,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Counts admins of Room.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param object where Criteria to match model instances
+   * @param {object} where Criteria to match model instances
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1362,17 +1362,81 @@ export class RoomApi extends BaseLoopBackApi {
   }
 
   /**
+   * Patch an existing model instance or insert a new one into the data source.
+   *
+   * @param {object} data Request data.
+   *
+   *  - `data` – `{object}` - Model instance data
+   *
+   *  - `options` – `{object}` - 
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Room` object.)
+   * </em>
+   */
+  public patchOrCreate(data: any = {}, options: any = {}): Observable<any> {
+    let _method: string = "PATCH";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/rooms";
+    let _routeParams: any = {};
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Patch attributes for a model instance and persist it into the data source.
+   *
+   * @param {any} id Room id
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Room` object.)
+   * </em>
+   */
+  public patchAttributes(id: any, data: any = {}): Observable<any> {
+    let _method: string = "PATCH";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
    * <em>
          * (The remote method definition does not provide any description.)
          * </em>
    *
-   * @param string a 
+   * @param {string} a 
    *
-   * @param string b 
+   * @param {string} b 
    *
-   * @param string c 
+   * @param {string} c 
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1400,13 +1464,13 @@ export class RoomApi extends BaseLoopBackApi {
          * (The remote method definition does not provide any description.)
          * </em>
    *
-   * @param string a 
+   * @param {string} a 
    *
-   * @param string b 
+   * @param {string} b 
    *
-   * @param string c 
+   * @param {string} c 
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1433,7 +1497,7 @@ export class RoomApi extends BaseLoopBackApi {
          * (The remote method definition does not provide any description.)
          * </em>
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    *  - `a` – `{object}` - 
    *
@@ -1441,7 +1505,7 @@ export class RoomApi extends BaseLoopBackApi {
    *
    *  - `c` – `{object}` - 
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1469,11 +1533,11 @@ export class RoomApi extends BaseLoopBackApi {
          * (The remote method definition does not provide any description.)
          * </em>
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1500,11 +1564,11 @@ export class RoomApi extends BaseLoopBackApi {
          * (The remote method definition does not provide any description.)
          * </em>
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
-   * This method expects a subset of model properties as request parameters.
+   *  - `room` – `{object}` - 
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1518,10 +1582,9 @@ export class RoomApi extends BaseLoopBackApi {
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/findByRoomContext";
     let _routeParams: any = {};
-    let _postBody: any = {
-      room: room
-    };
+    let _postBody: any = {};
     let _urlParams: any = {};
+    if (room) _urlParams.room = room;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result.map((instance: Room) => new Room(instance));
   }
@@ -1531,11 +1594,11 @@ export class RoomApi extends BaseLoopBackApi {
          * (The remote method definition does not provide any description.)
          * </em>
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1560,11 +1623,11 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Gets list of all unique values used for a given property.
    *
-   * @param string property Property name to lookup values for.
+   * @param {string} property Property name to lookup values for.
    *
-   * @param object filter Filter defining fields, where, include, order, offset, and limit
+   * @param {object} filter Filter defining fields, where, include, order, offset, and limit
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1589,15 +1652,15 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Statistical information for Room registers.
    *
-   * @param string range hourly, daily, weekly, monthly, yearly, custom
+   * @param {string} range hourly, daily, weekly, monthly, yearly, custom
    *
-   * @param object custom {"start": date, "end": date }
+   * @param {object} custom {"start": date, "end": date }
    *
-   * @param object where where filter 
+   * @param {object} where where filter 
    *
-   * @param string groupBy group by filter 
+   * @param {string} groupBy group by filter 
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1624,13 +1687,13 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in messages of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1657,13 +1720,13 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in likes of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1690,13 +1753,13 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in categories of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1723,13 +1786,13 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in accounts of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1756,13 +1819,13 @@ export class RoomApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in admins of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Room id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *

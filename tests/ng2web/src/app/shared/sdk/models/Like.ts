@@ -17,14 +17,14 @@ export interface LikeInterface {
 }
 
 export class Like implements LikeInterface {
-  set: boolean = true;
-  id: number = 0;
-  createdAt: Date = new Date(0);
-  updatedAt: Date = new Date(0);
-  messageId: number = 0;
-  roomId: number = 0;
-  message: Message = null;
-  room: Room = null;
+  set: boolean;
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  messageId: number;
+  roomId: number;
+  message: Message;
+  room: Room;
   constructor(data?: LikeInterface) {
     Object.assign(this, data);
   }
