@@ -16,13 +16,13 @@ export interface RoomAdminInterface {
 }
 
 export class RoomAdmin implements RoomAdminInterface {
-  id: number = 0;
-  adminId: number = 0;
-  administrationId: number = 0;
-  createdAt: Date = new Date(0);
-  updatedAt: Date = new Date(0);
-  account: Account = null;
-  room: Room = null;
+  id: number;
+  adminId: number;
+  administrationId: number;
+  createdAt: Date;
+  updatedAt: Date;
+  account: Account;
+  room: Room;
   constructor(data?: RoomAdminInterface) {
     Object.assign(this, data);
   }

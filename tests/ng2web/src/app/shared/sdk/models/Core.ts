@@ -8,9 +8,9 @@ export interface CoreInterface {
 }
 
 export class Core implements CoreInterface {
-  id: number = 0;
-  createdAt: Date = new Date(0);
-  updatedAt: Date = new Date(0);
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
   constructor(data?: CoreInterface) {
     Object.assign(this, data);
   }
