@@ -29,48 +29,53 @@ var argv = optimist
   .describe('w', 'Automatically wipe SDK Directory')
   .describe('v', 'Add default values in models')
   .describe('f', 'Generate only FireLoop SDK + Auth Services')
+  .describe('q', 'quiet mode - no console output (forces -w)')
   .default('l', 'angular2')
   .default('d', 'ng2web')
   .default('i', 'enabled')
   .default('w', 'disabled')
   .default('v', 'disabled')
   .default('f', 'disabled')
-  .alias({ u: 'url', m: 'module-name', l: 'library', i: 'io', d: 'driver', w: 'wipe', v: 'default-values', f: 'fireloop-only' })
+  .default('q', false)
+  .alias({ u: 'url', m: 'module-name', l: 'library', i: 'io', d: 'driver', w: 'wipe', v: 'default-values', f: 'fireloop-only', q: 'quiet' })
   .demand(1)
   .argv;
 /**
  * Splash ACII Art
  */
-console.log(chalk.green('\n\n=========================================================================================='));
-console.log(chalk.green('*    __                  ___           __     _______  __ __  ___       _ __   __        *'));
-console.log(chalk.green('*   / /  ___  ___  ___  / _ )___ _____/ /__  / __/ _ \\/ //_/ / _ )__ __(_) /__/ /__ ____ *'));
-console.log(chalk.green('*  / /__/ _ \\/ _ \\/ _ \\/ _  / _ `/ __/  \'_/ _\\ \\/ // / ,<   / _  / // / / / _  / -_) __/ *'));
-console.log(chalk.green('* /____/\\___/\\___/ .__/____/\\_,_/\\__/_/\\_\\ /___/____/_/|_| /____/\\_,_/_/_/\\_,_/\\__/_/V2  *'));
-console.log(chalk.green('*                 /_/                                                                    *'));
-console.log(chalk.green('*                                                                                        *'));
-console.log(chalk.green('*========================================================================================*'));
-console.log(chalk.green('*                                                                                        *'));
-console.log(chalk.green('*                       Developed & Maintained by Jonathan Casarrubias                   *'));
-console.log(chalk.green('*       MEAN Expert · http://mean.expert · http://github.com/mean-expert-official        *'));
-console.log(chalk.green('*                                                                                        *'));
-console.log(chalk.green('*                                      CONTRIBUTORS                                      *'));
-console.log(chalk.green('*                         João Ribeiro <http://jonnybgod.ghost.io>                       *'));
-console.log(chalk.green('*                      Nikolay Matiushenkov <https://github.com/mnvx>                    *'));
-console.log(chalk.green('*                         Sylvain Dumont <https://www.weboaks.com>                       *'));
-console.log(chalk.green('*                        Yonggang Luo <https://github.com/lygstate>                      *'));
-console.log(chalk.green('*                       Chris Tunbridge <https://github.com/Destreyf>                    *'));
-console.log(chalk.green('*                       Miguel Serrano <https://github.com/Serranom4>                    *'));
-console.log(chalk.green('*                         Julien Ledun <https://github.com/jledun>                       *'));
-console.log(chalk.green('*                           Paul Robinson <http://nextfaze.com>                          *'));
-console.log(chalk.green('*                         Corentin Hatte <https://github.com/viki53>                     *'));
-console.log(chalk.green('*                                                                                        *'));
-console.log(chalk.green('*                                 ORIGINALLY FORKED FROM                                 *'));
-console.log(chalk.green('*                      Miroslav Bajtos\' <miroslav@strongloop.com>                        *'));
-console.log(chalk.green('*                   https://github.com/strongloop/loopback-sdk-angular                   *'));
-console.log(chalk.green('*                                                                                        *'));
-console.log(chalk.green('=========================================================================================='));
 
-console.log('\n\THE MAGIC IS ABOUT TO HAPPEN ...\n\n');
+if (!argv['q']) {
+  console.log(chalk.green('\n\n=========================================================================================='));
+  console.log(chalk.green('*    __                  ___           __     _______  __ __  ___       _ __   __        *'));
+  console.log(chalk.green('*   / /  ___  ___  ___  / _ )___ _____/ /__  / __/ _ \\/ //_/ / _ )__ __(_) /__/ /__ ____ *'));
+  console.log(chalk.green('*  / /__/ _ \\/ _ \\/ _ \\/ _  / _ `/ __/  \'_/ _\\ \\/ // / ,<   / _  / // / / / _  / -_) __/ *'));
+  console.log(chalk.green('* /____/\\___/\\___/ .__/____/\\_,_/\\__/_/\\_\\ /___/____/_/|_| /____/\\_,_/_/_/\\_,_/\\__/_/V2  *'));
+  console.log(chalk.green('*                 /_/                                                                    *'));
+  console.log(chalk.green('*                                                                                        *'));
+  console.log(chalk.green('*========================================================================================*'));
+  console.log(chalk.green('*                                                                                        *'));
+  console.log(chalk.green('*                       Developed & Maintained by Jonathan Casarrubias                   *'));
+  console.log(chalk.green('*       MEAN Expert · http://mean.expert · http://github.com/mean-expert-official        *'));
+  console.log(chalk.green('*                                                                                        *'));
+  console.log(chalk.green('*                                      CONTRIBUTORS                                      *'));
+  console.log(chalk.green('*                         João Ribeiro <http://jonnybgod.ghost.io>                       *'));
+  console.log(chalk.green('*                      Nikolay Matiushenkov <https://github.com/mnvx>                    *'));
+  console.log(chalk.green('*                         Sylvain Dumont <https://www.weboaks.com>                       *'));
+  console.log(chalk.green('*                        Yonggang Luo <https://github.com/lygstate>                      *'));
+  console.log(chalk.green('*                       Chris Tunbridge <https://github.com/Destreyf>                    *'));
+  console.log(chalk.green('*                       Miguel Serrano <https://github.com/Serranom4>                    *'));
+  console.log(chalk.green('*                         Julien Ledun <https://github.com/jledun>                       *'));
+  console.log(chalk.green('*                           Paul Robinson <http://nextfaze.com>                          *'));
+  console.log(chalk.green('*                         Corentin Hatte <https://github.com/viki53>                     *'));
+  console.log(chalk.green('*                                                                                        *'));
+  console.log(chalk.green('*                                 ORIGINALLY FORKED FROM                                 *'));
+  console.log(chalk.green('*                      Miroslav Bajtos\' <miroslav@strongloop.com>                        *'));
+  console.log(chalk.green('*                   https://github.com/strongloop/loopback-sdk-angular                   *'));
+  console.log(chalk.green('*                                                                                        *'));
+  console.log(chalk.green('=========================================================================================='));
+  
+  console.log('\n\THE MAGIC IS ABOUT TO HAPPEN ...\n\n');
+}
 
 /**
  * Set Reference For Main Options
@@ -80,13 +85,6 @@ var appFile = path.resolve(argv._[0]);
  * Load and Boot LoopBack Application
  */
 var app = require(appFile);
-
-//assertLoopBackVersion();
-if (app.booting) {
-  app.on('booted', verifyPath);
-} else {
-  verifyPath();
-}
 
 // Default Values
 var context = {
@@ -99,39 +97,54 @@ var context = {
   driver: argv['d'] || 'ng2web',
   wipe: argv['w'] || 'disabled',
   defaultValue: argv['v'] || 'disabled',
-  fireloopOnly: argv['f'] || 'disabled'
+  fireloopOnly: argv['f'] || 'disabled',
+  quiet: argv['q'] || false
 };
+
+if (context.quiet) {
+  context.wipe = 'enabled';
+}
+
+app.once('booted', verifyPath);
 
 function verifyPath() {
   if (fs.isEmptySync(context.outputFolder)) {
-    runGenerator()
-  } else if (fs.isEmptySync(context.outputFolder) || context.wipe === 'enabled') {
-    console.log(chalk.yellow('WARNING: The targeted SDK Directory is not empty but the "-w" flag is enabled. Removing contents.\n\n'));
     runGenerator();
   } else {
-    const readline = require('readline');
-    const rl = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout
-    });
 
-    rl.question(chalk.yellow('WARNING: The targeted SDK Directory is not empty, do you want to erase its content? (Y/n) \n\n'), (answer) => {
-      switch (answer) {
-        case 'No':
-        case 'no':
-        case 'N':
-        case 'n':
-        case 'nop':
-        case 'nope':
-        case 'na':
-          console.log(chalk.red('The LoopBack SDK Builder was unable to complete the operation. Finishing process right now.\n\n'));
-          break;
-        default:
-          runGenerator()
+    if (context.wipe === 'enabled') {
+    
+      if (!context.quiet) {
+        console.log(chalk.yellow('WARNING: The targeted SDK Directory is not empty but the "-w" flag is enabled. Removing contents.\n\n'));
       }
-      rl.close();
-    });
-  };
+      
+      runGenerator();
+      
+    } else {
+      const readline = require('readline');
+      const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+      });
+  
+      rl.question(chalk.yellow('WARNING: The targeted SDK Directory is not empty, do you want to erase its content? (Y/n) \n\n'), (answer) => {
+        switch (answer) {
+          case 'No':
+          case 'no':
+          case 'N':
+          case 'n':
+          case 'nop':
+          case 'nope':
+          case 'na':
+            console.log(chalk.red('The LoopBack SDK Builder was unable to complete the operation. Finishing process right now.\n\n'));
+            break;
+          default:
+            runGenerator();
+        }
+        rl.close();
+      });
+    }
+  }
 }
 
 /**
@@ -139,11 +152,18 @@ function verifyPath() {
  */
 function runGenerator() {
   // Load Selected Generator
-  console.info('Loading Framework %s', context.framework);
-  console.info('Generating %j for the API endpoint %j', context.moduleName, context.apiUrl);
+
+  if (!context.quiet) {
+    console.info('Loading Framework %s', context.framework);
+    console.info('Generating %j for the API endpoint %j', context.moduleName, context.apiUrl);
+  }
   //try {
   generator[context.framework](context);
-  console.info('\n\nEnjoy!!!');
+
+  if (!context.quiet) {
+    console.info('\n\nEnjoy!!!');
+  }
+  
   //} catch (err) {
   //  throw new Error(err);
   //}
