@@ -6,12 +6,12 @@ import {
 
 declare var Object: any;
 export interface MessageInterface {
-  text: string;
-  id?: number;
-  parentId?: number;
-  createdAt?: Date;
-  updatedAt?: Date;
-  roomId?: number;
+  "text": any;
+  "id"?: any;
+  "parentId"?: any;
+  "createdAt"?: any;
+  "updatedAt"?: any;
+  "roomId"?: any;
   likes?: Like[];
   replies?: Message[];
   parent?: Message;
@@ -19,12 +19,12 @@ export interface MessageInterface {
 }
 
 export class Message implements MessageInterface {
-  text: string;
-  id: number;
-  parentId: number;
-  createdAt: Date;
-  updatedAt: Date;
-  roomId: number;
+  "text": any;
+  "id": any;
+  "parentId": any;
+  "createdAt": any;
+  "updatedAt": any;
+  "roomId": any;
   likes: Like[];
   replies: Message[];
   parent: Message;
@@ -47,7 +47,7 @@ export class Message implements MessageInterface {
   **/
   public static factory(data: MessageInterface): Message{
     return new Message(data);
-  }  
+  }
   /**
   * @method getModelDefinition
   * @author Julien Ledun
@@ -60,30 +60,30 @@ export class Message implements MessageInterface {
       name: 'Message',
       plural: 'messages',
       properties: {
-        text: {
+        "text": {
           name: 'text',
-          type: 'string',
+          type: 'any',
           default: ''
         },
-        id: {
+        "id": {
           name: 'id',
-          type: 'number'
+          type: 'any'
         },
-        parentId: {
+        "parentId": {
           name: 'parentId',
-          type: 'number'
+          type: 'any'
         },
-        createdAt: {
+        "createdAt": {
           name: 'createdAt',
-          type: 'Date'
+          type: 'any'
         },
-        updatedAt: {
+        "updatedAt": {
           name: 'updatedAt',
-          type: 'Date'
+          type: 'any'
         },
-        roomId: {
+        "roomId": {
           name: 'roomId',
-          type: 'number'
+          type: 'any'
         },
       },
       relations: {

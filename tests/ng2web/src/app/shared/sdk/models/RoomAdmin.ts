@@ -6,21 +6,21 @@ import {
 
 declare var Object: any;
 export interface RoomAdminInterface {
-  id?: number;
-  adminId?: number;
-  administrationId?: number;
-  createdAt: Date;
-  updatedAt: Date;
+  "id"?: any;
+  "adminId"?: any;
+  "administrationId"?: any;
+  "createdAt": any;
+  "updatedAt": any;
   account?: Account;
   room?: Room;
 }
 
 export class RoomAdmin implements RoomAdminInterface {
-  id: number;
-  adminId: number;
-  administrationId: number;
-  createdAt: Date;
-  updatedAt: Date;
+  "id": any;
+  "adminId": any;
+  "administrationId": any;
+  "createdAt": any;
+  "updatedAt": any;
   account: Account;
   room: Room;
   constructor(data?: RoomAdminInterface) {
@@ -41,7 +41,7 @@ export class RoomAdmin implements RoomAdminInterface {
   **/
   public static factory(data: RoomAdminInterface): RoomAdmin{
     return new RoomAdmin(data);
-  }  
+  }
   /**
   * @method getModelDefinition
   * @author Julien Ledun
@@ -54,25 +54,25 @@ export class RoomAdmin implements RoomAdminInterface {
       name: 'RoomAdmin',
       plural: 'room-admins',
       properties: {
-        id: {
+        "id": {
           name: 'id',
-          type: 'number'
+          type: 'any'
         },
-        adminId: {
+        "adminId": {
           name: 'adminId',
-          type: 'number'
+          type: 'any'
         },
-        administrationId: {
+        "administrationId": {
           name: 'administrationId',
-          type: 'number'
+          type: 'any'
         },
-        createdAt: {
+        "createdAt": {
           name: 'createdAt',
-          type: 'Date'
+          type: 'any'
         },
-        updatedAt: {
+        "updatedAt": {
           name: 'updatedAt',
-          type: 'Date'
+          type: 'any'
         },
       },
       relations: {

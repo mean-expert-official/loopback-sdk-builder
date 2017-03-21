@@ -247,8 +247,6 @@ export class UserApi extends BaseLoopBackApi {
    *
    *  - `data` – `{object}` - Model instance data
    *
-   *  - `options` – `{object}` - 
-   *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
@@ -258,7 +256,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public patchOrCreate(data: any = {}, options: any = {}): Observable<any> {
+  public patchOrCreate(data: any = {}): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Users";
@@ -278,7 +276,7 @@ export class UserApi extends BaseLoopBackApi {
    *
    * @param {object} data Request data.
    *
-   * This method expects a subset of model properties as request parameters.
+   *  - `data` – `{object}` - An object of model property name/value pairs
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -357,7 +355,7 @@ export class UserApi extends BaseLoopBackApi {
    *
    * @param {object} data Request data.
    *
-   *  - `access_token` – `{string}` - Do not supply this argument, it is automatically extracted from request headers.
+   * This method does not accept any data. Supply an empty object.
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -479,7 +477,7 @@ export class UserApi extends BaseLoopBackApi {
    *   populated with the actual data once the response is returned
    *   from the server.
    */
-  public getCurrent(): any {
+  public getCurrent(): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/Users" + "/:id";
     let id: any = this.auth.getCurrentUserId();

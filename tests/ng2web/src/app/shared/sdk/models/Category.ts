@@ -5,18 +5,18 @@ import {
 
 declare var Object: any;
 export interface CategoryInterface {
-  name?: string;
-  id?: number;
-  createdAt: Date;
-  updatedAt: Date;
+  "name"?: any;
+  "id"?: any;
+  "createdAt": any;
+  "updatedAt": any;
   rooms?: Room[];
 }
 
 export class Category implements CategoryInterface {
-  name: string;
-  id: number;
-  createdAt: Date;
-  updatedAt: Date;
+  "name": any;
+  "id": any;
+  "createdAt": any;
+  "updatedAt": any;
   rooms: Room[];
   constructor(data?: CategoryInterface) {
     Object.assign(this, data);
@@ -36,7 +36,7 @@ export class Category implements CategoryInterface {
   **/
   public static factory(data: CategoryInterface): Category{
     return new Category(data);
-  }  
+  }
   /**
   * @method getModelDefinition
   * @author Julien Ledun
@@ -49,22 +49,22 @@ export class Category implements CategoryInterface {
       name: 'Category',
       plural: 'categories',
       properties: {
-        name: {
+        "name": {
           name: 'name',
-          type: 'string',
+          type: 'any',
           default: 'test'
         },
-        id: {
+        "id": {
           name: 'id',
-          type: 'number'
+          type: 'any'
         },
-        createdAt: {
+        "createdAt": {
           name: 'createdAt',
-          type: 'Date'
+          type: 'any'
         },
-        updatedAt: {
+        "updatedAt": {
           name: 'updatedAt',
-          type: 'Date'
+          type: 'any'
         },
       },
       relations: {
