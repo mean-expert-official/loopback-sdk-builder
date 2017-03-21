@@ -6,21 +6,21 @@ import {
 
 declare var Object: any;
 export interface RoomAccountInterface {
-  id?: number;
-  accountId?: number;
-  roomId?: number;
-  createdAt: Date;
-  updatedAt: Date;
+  "id"?: any;
+  "accountId"?: any;
+  "roomId"?: any;
+  "createdAt": any;
+  "updatedAt": any;
   account?: Account;
   room?: Room;
 }
 
 export class RoomAccount implements RoomAccountInterface {
-  id: number;
-  accountId: number;
-  roomId: number;
-  createdAt: Date;
-  updatedAt: Date;
+  "id": any;
+  "accountId": any;
+  "roomId": any;
+  "createdAt": any;
+  "updatedAt": any;
   account: Account;
   room: Room;
   constructor(data?: RoomAccountInterface) {
@@ -41,7 +41,7 @@ export class RoomAccount implements RoomAccountInterface {
   **/
   public static factory(data: RoomAccountInterface): RoomAccount{
     return new RoomAccount(data);
-  }  
+  }
   /**
   * @method getModelDefinition
   * @author Julien Ledun
@@ -54,25 +54,25 @@ export class RoomAccount implements RoomAccountInterface {
       name: 'RoomAccount',
       plural: 'room-accounts',
       properties: {
-        id: {
+        "id": {
           name: 'id',
-          type: 'number'
+          type: 'any'
         },
-        accountId: {
+        "accountId": {
           name: 'accountId',
-          type: 'number'
+          type: 'any'
         },
-        roomId: {
+        "roomId": {
           name: 'roomId',
-          type: 'number'
+          type: 'any'
         },
-        createdAt: {
+        "createdAt": {
           name: 'createdAt',
-          type: 'Date'
+          type: 'any'
         },
-        updatedAt: {
+        "updatedAt": {
           name: 'updatedAt',
-          type: 'Date'
+          type: 'any'
         },
       },
       relations: {

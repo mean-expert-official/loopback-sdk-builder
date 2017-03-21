@@ -6,23 +6,23 @@ import {
 
 declare var Object: any;
 export interface LikeInterface {
-  set: boolean;
-  id?: number;
-  createdAt: Date;
-  updatedAt: Date;
-  messageId?: number;
-  roomId?: number;
+  "set": any;
+  "id"?: any;
+  "createdAt": any;
+  "updatedAt": any;
+  "messageId"?: any;
+  "roomId"?: any;
   message?: Message;
   room?: Room;
 }
 
 export class Like implements LikeInterface {
-  set: boolean;
-  id: number;
-  createdAt: Date;
-  updatedAt: Date;
-  messageId: number;
-  roomId: number;
+  "set": any;
+  "id": any;
+  "createdAt": any;
+  "updatedAt": any;
+  "messageId": any;
+  "roomId": any;
   message: Message;
   room: Room;
   constructor(data?: LikeInterface) {
@@ -43,7 +43,7 @@ export class Like implements LikeInterface {
   **/
   public static factory(data: LikeInterface): Like{
     return new Like(data);
-  }  
+  }
   /**
   * @method getModelDefinition
   * @author Julien Ledun
@@ -56,30 +56,30 @@ export class Like implements LikeInterface {
       name: 'Like',
       plural: 'likes',
       properties: {
-        set: {
+        "set": {
           name: 'set',
-          type: 'boolean',
+          type: 'any',
           default: true
         },
-        id: {
+        "id": {
           name: 'id',
-          type: 'number'
+          type: 'any'
         },
-        createdAt: {
+        "createdAt": {
           name: 'createdAt',
-          type: 'Date'
+          type: 'any'
         },
-        updatedAt: {
+        "updatedAt": {
           name: 'updatedAt',
-          type: 'Date'
+          type: 'any'
         },
-        messageId: {
+        "messageId": {
           name: 'messageId',
-          type: 'number'
+          type: 'any'
         },
-        roomId: {
+        "roomId": {
           name: 'roomId',
-          type: 'number'
+          type: 'any'
         },
       },
       relations: {

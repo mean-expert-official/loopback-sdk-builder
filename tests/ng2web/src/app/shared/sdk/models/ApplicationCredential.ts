@@ -2,27 +2,27 @@
 
 declare var Object: any;
 export interface ApplicationCredentialInterface {
-  provider?: string;
-  authScheme?: string;
-  credentials?: string;
-  created?: Date;
-  modified?: Date;
-  userId?: any;
-  id?: number;
-  createdAt: Date;
-  updatedAt: Date;
+  "provider"?: any;
+  "authScheme"?: any;
+  "credentials"?: any;
+  "created"?: any;
+  "modified"?: any;
+  "userId"?: any;
+  "id"?: any;
+  "createdAt": any;
+  "updatedAt": any;
 }
 
 export class ApplicationCredential implements ApplicationCredentialInterface {
-  provider: string;
-  authScheme: string;
-  credentials: string;
-  created: Date;
-  modified: Date;
-  userId: any;
-  id: number;
-  createdAt: Date;
-  updatedAt: Date;
+  "provider": any;
+  "authScheme": any;
+  "credentials": any;
+  "created": any;
+  "modified": any;
+  "userId": any;
+  "id": any;
+  "createdAt": any;
+  "updatedAt": any;
   constructor(data?: ApplicationCredentialInterface) {
     Object.assign(this, data);
   }
@@ -41,7 +41,7 @@ export class ApplicationCredential implements ApplicationCredentialInterface {
   **/
   public static factory(data: ApplicationCredentialInterface): ApplicationCredential{
     return new ApplicationCredential(data);
-  }  
+  }
   /**
   * @method getModelDefinition
   * @author Julien Ledun
@@ -54,44 +54,44 @@ export class ApplicationCredential implements ApplicationCredentialInterface {
       name: 'ApplicationCredential',
       plural: 'application-credentials',
       properties: {
-        provider: {
+        "provider": {
           name: 'provider',
-          type: 'string',
+          type: 'any',
           default: 'authScheme'
         },
-        authScheme: {
+        "authScheme": {
           name: 'authScheme',
-          type: 'string',
+          type: 'any',
           default: ''
         },
-        credentials: {
+        "credentials": {
           name: 'credentials',
-          type: 'string',
+          type: 'any',
           default: ''
         },
-        created: {
+        "created": {
           name: 'created',
-          type: 'Date'
+          type: 'any'
         },
-        modified: {
+        "modified": {
           name: 'modified',
-          type: 'Date'
+          type: 'any'
         },
-        userId: {
+        "userId": {
           name: 'userId',
           type: 'any'
         },
-        id: {
+        "id": {
           name: 'id',
-          type: 'number'
+          type: 'any'
         },
-        createdAt: {
+        "createdAt": {
           name: 'createdAt',
-          type: 'Date'
+          type: 'any'
         },
-        updatedAt: {
+        "updatedAt": {
           name: 'updatedAt',
-          type: 'Date'
+          type: 'any'
         },
       },
       relations: {

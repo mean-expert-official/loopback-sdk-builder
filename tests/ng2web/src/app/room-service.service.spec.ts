@@ -135,6 +135,22 @@ describe('Service: Room Service', () => {
     })
   ));
 
+  it('should update room attributes',
+    async(inject([RoomApi], (roomApi: RoomApi) => {
+      let room: Room = new Room();
+      room.name = Date.now().toString();
+      return roomApi.create(room)
+        .subscribe((createdRoom: Room) => {
+          expect(createdRoom.id).toBeTruthy();
+          roomApi.updateAttributes(createdRoom.id, { name: 'updated!!!'})
+            .subscribe((updatedRoom: Room) => {
+              expect(updatedRoom.id).toBe(createdRoom.id);
+              expect(updatedRoom.name).toBe('updated!!!');
+            });
+        });
+    })
+  ));
+
   it('should create a room message',
     async(inject([RoomApi], (roomApi: RoomApi) => {
       let room: Room = new Room();
@@ -284,7 +300,7 @@ describe('Service: Room Service', () => {
   it('should find by mock room to test custom remote method with context enabled',
     async(inject([RoomApi], (roomApi: RoomApi) => {
         let room = new Room({ id: 42, name: 'my awesome room' });
-        return roomApi.findByRoomContext(room)
+        return roomApi.findByRoomContext(room).subscribe( (instance: Room) => {
             expect(room.id).toBe(Number.parseInt(instance.id));
             // I append the host onto the instance name so it shouldn't match now
             expect(room.name).not.toBe(instance.name);

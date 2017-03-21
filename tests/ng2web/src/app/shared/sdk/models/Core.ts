@@ -2,15 +2,15 @@
 
 declare var Object: any;
 export interface CoreInterface {
-  id?: number;
-  createdAt: Date;
-  updatedAt: Date;
+  "id"?: any;
+  "createdAt": any;
+  "updatedAt": any;
 }
 
 export class Core implements CoreInterface {
-  id: number;
-  createdAt: Date;
-  updatedAt: Date;
+  "id": any;
+  "createdAt": any;
+  "updatedAt": any;
   constructor(data?: CoreInterface) {
     Object.assign(this, data);
   }
@@ -29,7 +29,7 @@ export class Core implements CoreInterface {
   **/
   public static factory(data: CoreInterface): Core{
     return new Core(data);
-  }  
+  }
   /**
   * @method getModelDefinition
   * @author Julien Ledun
@@ -42,17 +42,17 @@ export class Core implements CoreInterface {
       name: 'Core',
       plural: 'cores',
       properties: {
-        id: {
+        "id": {
           name: 'id',
-          type: 'number'
+          type: 'any'
         },
-        createdAt: {
+        "createdAt": {
           name: 'createdAt',
-          type: 'Date'
+          type: 'any'
         },
-        updatedAt: {
+        "updatedAt": {
           name: 'updatedAt',
-          type: 'Date'
+          type: 'any'
         },
       },
       relations: {
