@@ -15,7 +15,7 @@
     "helmet#frameguard": {
       "params": [
         "deny"
-       ]
+      ]
     },
     "helmet#hsts": {
       "params": {

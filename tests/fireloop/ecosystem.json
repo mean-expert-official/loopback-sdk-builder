@@ -1,0 +1,16 @@
+{
+  /**
+   * Application configuration section
+   * http://pm2.keymetrics.io/docs/usage/application-declaration/
+   */
+  apps : [
+
+    // First application
+    {
+      name      : "SDK_API",
+      script    : "server/server.js",
+      exec_mode : "cluster",
+      instances : 0,
+    }
+  ]
+}

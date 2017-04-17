@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@mean-expert/boot-script": "^1.0.0",
-    "@mean-expert/loopback-component-realtime": "^1.0.0-rc.4",
+    "@mean-expert/loopback-component-realtime": "^1.0.0-rc.5",
     "@mean-expert/loopback-stats-mixin": "^1.2.0",
     "@mean-expert/model": "^1.0.9",
     "chai": "^3.5.0",
@@ -25,11 +25,13 @@
     "loopback-component-explorer": "^2.4.0",
     "loopback-component-passport": "^3.0.0",
     "loopback-component-storage": "^3.0.0",
+    "loopback-connector-mongodb": "^1.18.1",
     "loopback-connector-rest": "^2.1.0",
     "loopback-datasource-juggler": "^2.39.0",
     "loopback-ds-timestamp-mixin": "^3.4.0",
     "mocha": "^3.2.0",
     "serve-favicon": "^2.0.1",
+    "socket.io-adapter-mongo": "^0.1.6",
     "strong-error-handler": "^1.0.1",
     "supertest": "^2.0.1"
   },

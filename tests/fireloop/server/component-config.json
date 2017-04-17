@@ -4,6 +4,15 @@
   },
   "@mean-expert/loopback-component-realtime": {
     "auth": true,
-    "debug": true
+    "debug": false,
+    "driver": {
+      "name": "socket.io",
+      "options": {
+        "adapter": {
+          "name": "socket.io-adapter-mongo",
+          "datasource": "mongodb"
+        }
+      }
+    }
   }
 }

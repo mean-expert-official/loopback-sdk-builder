@@ -3,14 +3,14 @@
 declare var Object: any;
 export interface CoreInterface {
   "id"?: any;
-  "createdAt": any;
-  "updatedAt": any;
+  "createdAt": Date;
+  "updatedAt": Date;
 }
 
 export class Core implements CoreInterface {
   "id": any;
-  "createdAt": any;
-  "updatedAt": any;
+  "createdAt": Date;
+  "updatedAt": Date;
   constructor(data?: CoreInterface) {
     Object.assign(this, data);
   }
@@ -48,11 +48,11 @@ export class Core implements CoreInterface {
         },
         "createdAt": {
           name: 'createdAt',
-          type: 'any'
+          type: 'Date'
         },
         "updatedAt": {
           name: 'updatedAt',
-          type: 'any'
+          type: 'Date'
         },
       },
       relations: {

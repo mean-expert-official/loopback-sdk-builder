@@ -5,18 +5,18 @@ import {
 
 declare var Object: any;
 export interface CategoryInterface {
-  "name"?: any;
+  "name"?: string;
   "id"?: any;
-  "createdAt": any;
-  "updatedAt": any;
+  "createdAt": Date;
+  "updatedAt": Date;
   rooms?: Room[];
 }
 
 export class Category implements CategoryInterface {
-  "name": any;
+  "name": string;
   "id": any;
-  "createdAt": any;
-  "updatedAt": any;
+  "createdAt": Date;
+  "updatedAt": Date;
   rooms: Room[];
   constructor(data?: CategoryInterface) {
     Object.assign(this, data);
@@ -51,7 +51,7 @@ export class Category implements CategoryInterface {
       properties: {
         "name": {
           name: 'name',
-          type: 'any',
+          type: 'string',
           default: 'test'
         },
         "id": {
@@ -60,11 +60,11 @@ export class Category implements CategoryInterface {
         },
         "createdAt": {
           name: 'createdAt',
-          type: 'any'
+          type: 'Date'
         },
         "updatedAt": {
           name: 'updatedAt',
-          type: 'any'
+          type: 'Date'
         },
       },
       relations: {

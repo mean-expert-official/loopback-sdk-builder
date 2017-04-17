@@ -6,11 +6,11 @@ import {
 
 declare var Object: any;
 export interface MessageInterface {
-  "text": any;
+  "text": string;
   "id"?: any;
   "parentId"?: any;
-  "createdAt"?: any;
-  "updatedAt"?: any;
+  "createdAt"?: Date;
+  "updatedAt"?: Date;
   "roomId"?: any;
   likes?: Like[];
   replies?: Message[];
@@ -19,11 +19,11 @@ export interface MessageInterface {
 }
 
 export class Message implements MessageInterface {
-  "text": any;
+  "text": string;
   "id": any;
   "parentId": any;
-  "createdAt": any;
-  "updatedAt": any;
+  "createdAt": Date;
+  "updatedAt": Date;
   "roomId": any;
   likes: Like[];
   replies: Message[];
@@ -62,7 +62,7 @@ export class Message implements MessageInterface {
       properties: {
         "text": {
           name: 'text',
-          type: 'any',
+          type: 'string',
           default: ''
         },
         "id": {
@@ -75,11 +75,11 @@ export class Message implements MessageInterface {
         },
         "createdAt": {
           name: 'createdAt',
-          type: 'any'
+          type: 'Date'
         },
         "updatedAt": {
           name: 'updatedAt',
-          type: 'any'
+          type: 'Date'
         },
         "roomId": {
           name: 'roomId',

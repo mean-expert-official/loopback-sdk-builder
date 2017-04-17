@@ -6,11 +6,18 @@ class NG2Finder {
 
     constructor(app: any) {
       if (process.NODE_ENV === 'ci') {
+        console.log('Waiting for port 9876 to be taken');
         let testing: boolean  = false;
         let interval: any = setInterval(() => {
           this.isPortTaken(9876, (err: Error, taken: boolean) => {
-            if (!testing && taken) testing = true;
-            if (testing && !taken) process.exit()
+            if (!testing && taken) {
+              console.log('Port 9876 has been taken');
+              testing = true;
+            }
+            if (testing && !taken) {
+              console.log('Port 9876 has been released');
+              process.exit();
+            }
           })
         }, 1000);
       }

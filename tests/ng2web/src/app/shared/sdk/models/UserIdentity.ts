@@ -5,32 +5,32 @@ import {
 
 declare var Object: any;
 export interface UserIdentityInterface {
-  "provider"?: any;
-  "authScheme"?: any;
-  "externalId"?: any;
+  "provider"?: string;
+  "authScheme"?: string;
+  "externalId"?: string;
   "profile"?: any;
-  "credentials"?: any;
-  "created"?: any;
-  "modified"?: any;
+  "credentials"?: string;
+  "created"?: Date;
+  "modified"?: Date;
   "userId"?: any;
   "id"?: any;
-  "createdAt": any;
-  "updatedAt": any;
+  "createdAt": Date;
+  "updatedAt": Date;
   user?: User;
 }
 
 export class UserIdentity implements UserIdentityInterface {
-  "provider": any;
-  "authScheme": any;
-  "externalId": any;
+  "provider": string;
+  "authScheme": string;
+  "externalId": string;
   "profile": any;
-  "credentials": any;
-  "created": any;
-  "modified": any;
+  "credentials": string;
+  "created": Date;
+  "modified": Date;
   "userId": any;
   "id": any;
-  "createdAt": any;
-  "updatedAt": any;
+  "createdAt": Date;
+  "updatedAt": Date;
   user: User;
   constructor(data?: UserIdentityInterface) {
     Object.assign(this, data);
@@ -65,17 +65,17 @@ export class UserIdentity implements UserIdentityInterface {
       properties: {
         "provider": {
           name: 'provider',
-          type: 'any',
+          type: 'string',
           default: 'authScheme'
         },
         "authScheme": {
           name: 'authScheme',
-          type: 'any',
+          type: 'string',
           default: ''
         },
         "externalId": {
           name: 'externalId',
-          type: 'any',
+          type: 'string',
           default: ''
         },
         "profile": {
@@ -85,16 +85,16 @@ export class UserIdentity implements UserIdentityInterface {
         },
         "credentials": {
           name: 'credentials',
-          type: 'any',
+          type: 'string',
           default: ''
         },
         "created": {
           name: 'created',
-          type: 'any'
+          type: 'Date'
         },
         "modified": {
           name: 'modified',
-          type: 'any'
+          type: 'Date'
         },
         "userId": {
           name: 'userId',
@@ -106,11 +106,11 @@ export class UserIdentity implements UserIdentityInterface {
         },
         "createdAt": {
           name: 'createdAt',
-          type: 'any'
+          type: 'Date'
         },
         "updatedAt": {
           name: 'updatedAt',
-          type: 'any'
+          type: 'Date'
         },
       },
       relations: {
