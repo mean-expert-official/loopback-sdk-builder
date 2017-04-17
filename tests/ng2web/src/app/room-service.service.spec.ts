@@ -151,6 +151,22 @@ describe('Service: Room Service', () => {
     })
   ));
 
+  it('should patch room attributes',
+    async(inject([RoomApi], (roomApi: RoomApi) => {
+      let room: Room = new Room();
+      room.name = Date.now().toString();
+      return roomApi.create(room)
+        .subscribe((createdRoom: Room) => {
+          expect(createdRoom.id).toBeTruthy();
+          roomApi.updateAttributes(createdRoom.id, { name: 'patched!!!'})
+            .subscribe((patchedRoom: Room) => {
+              expect(patchedRoom.id).toBe(createdRoom.id);
+              expect(patchedRoom.name).toBe('patched!!!');
+            });
+        });
+    })
+  ));
+
   it('should create a room message',
     async(inject([RoomApi], (roomApi: RoomApi) => {
       let room: Room = new Room();

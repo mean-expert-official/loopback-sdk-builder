@@ -77,7 +77,8 @@ export class SocketConnection {
         log: false,
         secure: false,
         forceNew: true,
-        forceWebsockets: true
+        forceWebsockets: true,
+        transports: ['websocket']
       });
       // Listen for connection
       this.on('connect', () => {

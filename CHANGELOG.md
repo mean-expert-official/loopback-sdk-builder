@@ -2,6 +2,16 @@
 
 This file is created to keep history of the LoopBack SDK Builder, it does not consider or keeps any history of its parent module `loopback-sdk-angular`
 
+## Release 2.1.0-rc.10
+
+- Milestone Details: https://github.com/mean-expert-official/loopback-sdk-builder/milestone/37?closed=1
+
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/401
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/399
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/394
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/393
+- Fix: https://github.com/mean-expert-official/loopback-sdk-builder/issues/368
+
 ## Release 2.1.0-rc.9
 
 - Milestone Details: https://github.com/mean-expert-official/loopback-sdk-builder/milestone/36?closed=1
