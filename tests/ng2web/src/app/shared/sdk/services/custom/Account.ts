@@ -1039,6 +1039,34 @@ export class AccountApi extends BaseLoopBackApi {
   }
 
   /**
+   * Change a user's password.
+   *
+   * @param {object} data Request data.
+   *
+   *  - `oldPassword` – `{string}` - 
+   *
+   *  - `newPassword` – `{string}` - 
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * This method returns no data.
+   */
+  public changePassword(oldPassword: any, newPassword: any): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/accounts/change-password";
+    let _routeParams: any = {};
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (oldPassword) _urlParams.oldPassword = oldPassword;
+    if (newPassword) _urlParams.newPassword = newPassword;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
    * <em>
          * (The remote method definition does not provide any description.)
          * </em>

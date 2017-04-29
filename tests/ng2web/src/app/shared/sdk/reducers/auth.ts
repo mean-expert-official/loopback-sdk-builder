@@ -5,7 +5,7 @@ import { Action } from '@ngrx/store';
 import { SDKToken } from '../models/BaseModels';
 import { User } from '../models/user';
 import { LoopbackAuthActionTypes } from '../actions/auth';
-import { <%- userModelName %>ActionTypes } from '../actions/<%- userModelName %>';
+import { AccountActionTypes } from '../actions/Account';
 
 const initialState: SDKToken = {
   id: null,
@@ -26,7 +26,7 @@ const initialState: SDKToken = {
  */
 export function LoopbackAuthReducer(state = initialState, action: Action): SDKToken {
   switch (action.type) {
-    case <%- userModelName %>ActionTypes.LOGIN_SUCCESS:
+    case AccountActionTypes.LOGIN_SUCCESS:
     case LoopbackAuthActionTypes.SET_TOKEN:
     case LoopbackAuthActionTypes.LOAD_TOKEN_SUCCESS: {
       const token: SDKToken = action.payload;
@@ -44,8 +44,8 @@ export function LoopbackAuthReducer(state = initialState, action: Action): SDKTo
       return updateState;
     }
 
-    case <%- userModelName %>ActionTypes.LOGOUT_SUCCESS:
-    case <%- userModelName %>ActionTypes.LOGOUT_FAIL: {
+    case AccountActionTypes.LOGOUT_SUCCESS:
+    case AccountActionTypes.LOGOUT_FAIL: {
       return Object.assign({}, initialState);
     }
 

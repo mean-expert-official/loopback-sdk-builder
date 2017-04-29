@@ -22,11 +22,17 @@ export const LoopbackReducer = {
 
 export const LoopbackEffects = [
   EffectsModule.run(effects.LoopbackAuthEffects),
-<% for (var modelName in models) {
-  var meta = models[modelName];
-  // capitalize the model name
-  modelName = modelName[0].toUpperCase() + modelName.slice(1);
--%>
-	EffectsModule.run(effects.<%- modelName %>Effects),
-<% } // for modelName in models -%>
+	EffectsModule.run(effects.UserEffects),
+	EffectsModule.run(effects.AccountEffects),
+	EffectsModule.run(effects.ApplicationCredentialEffects),
+	EffectsModule.run(effects.CategoryEffects),
+	EffectsModule.run(effects.CoreEffects),
+	EffectsModule.run(effects.LikeEffects),
+	EffectsModule.run(effects.MessageEffects),
+	EffectsModule.run(effects.RoomEffects),
+	EffectsModule.run(effects.RoomAccountEffects),
+	EffectsModule.run(effects.RoomAdminEffects),
+	EffectsModule.run(effects.StorageEffects),
+	EffectsModule.run(effects.UserCredentialEffects),
+	EffectsModule.run(effects.UserIdentityEffects),
 ];
