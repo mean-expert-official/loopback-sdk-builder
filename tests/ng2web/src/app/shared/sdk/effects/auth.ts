@@ -12,7 +12,7 @@ import { LoopbackAction } from '../models/BaseModels';
 import { LoopbackAuthActionTypes, LoopbackAuthActions } from '../actions/auth';
 import { LoopbackErrorActions } from '../actions/error';
 import { LoopBackAuth } from '../services/core/auth.service';
-import { <%- userModelName %>Api } from '../services/index';
+import { UserApi } from '../services/index';
 
 
 /**
@@ -95,6 +95,6 @@ export class LoopbackAuthEffects {
     private actions$: Actions,
     private store: Store<any>,
     private auth: LoopBackAuth,
-    private user: <%- userModelName %>Api
+    private user: UserApi
   ) {}
 }
