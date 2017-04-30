@@ -20,160 +20,114 @@ import { StorageApi } from '../services/index';
 
 @Injectable()
 export class StorageEffects extends BaseLoopbackEffects {
-  /**
-   * @author João Ribeiro <@JonnyBGod> <github:JonnyBGod>
-   * @description
-   * OAuthClientApplications relation effects
-   */
   @Effect()
-  protected findByIdOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(StorageActionTypes.FIND_BY_ID_OAUTHCLIENTAPPLICATIONS)
+  protected getContainers: Observable<LoopbackAction> = this.actions$
+    .ofType(StorageActionTypes.GET_CONTAINERS)
     .mergeMap((action: LoopbackAction) =>
-      this.storage.findByIdOAuthClientApplications(action.payload.id, action.payload.fk)
-        .map((response) => new StorageActions.findByIdOAuthClientApplicationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new StorageActions.findByIdOAuthClientApplicationsFail(error, action.meta)),
+      this.storage.getContainers()
+              .map((response) => new StorageActions.getContainersSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new StorageActions.getContainersFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected destroyByIdOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(StorageActionTypes.DESTROY_BY_ID_OAUTHCLIENTAPPLICATIONS)
+  protected createContainer: Observable<LoopbackAction> = this.actions$
+    .ofType(StorageActionTypes.CREATE_CONTAINER)
     .mergeMap((action: LoopbackAction) =>
-      this.storage.destroyByIdOAuthClientApplications(action.payload.id, action.payload.fk)
-        .map(() => new StorageActions.destroyByIdOAuthClientApplicationsSuccess(action.payload, action.meta))
-        .catch((error) => concat(
-          of(new StorageActions.destroyByIdOAuthClientApplicationsFail(error, action.meta)),
+      this.storage.createContainer(action.payload.options)
+              .map((response) => new StorageActions.createContainerSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new StorageActions.createContainerFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected updateByIdOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(StorageActionTypes.UPDATE_BY_ID_OAUTHCLIENTAPPLICATIONS)
+  protected destroyContainer: Observable<LoopbackAction> = this.actions$
+    .ofType(StorageActionTypes.DESTROY_CONTAINER)
     .mergeMap((action: LoopbackAction) =>
-      this.storage.updateByIdOAuthClientApplications(action.payload.id, action.payload.fk, action.payload.data)
-        .map((response) => new StorageActions.updateByIdOAuthClientApplicationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new StorageActions.updateByIdOAuthClientApplicationsFail(error, action.meta)),
+      this.storage.destroyContainer(action.payload.container)
+              .map((response) => new StorageActions.destroyContainerSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new StorageActions.destroyContainerFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected createOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(StorageActionTypes.CREATE_OAUTHCLIENTAPPLICATIONS)
+  protected getContainer: Observable<LoopbackAction> = this.actions$
+    .ofType(StorageActionTypes.GET_CONTAINER)
     .mergeMap((action: LoopbackAction) =>
-      this.storage.createOAuthClientApplications(action.payload.id, action.payload.data)
-        .map((response) => new StorageActions.createOAuthClientApplicationsSuccess(action.payload.id,response, action.meta))
-        .catch((error) => concat(
-          of(new StorageActions.createOAuthClientApplicationsFail(error, action.meta)),
+      this.storage.getContainer(action.payload.container)
+              .map((response) => new StorageActions.getContainerSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new StorageActions.getContainerFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected deleteOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(StorageActionTypes.DELETE_OAUTHCLIENTAPPLICATIONS)
+  protected getFiles: Observable<LoopbackAction> = this.actions$
+    .ofType(StorageActionTypes.GET_FILES)
     .mergeMap((action: LoopbackAction) =>
-      this.storage.deleteOAuthClientApplications(action.payload.id)
-        .map(() => new StorageActions.deleteOAuthClientApplicationsSuccess(action.payload.id, action.meta))
-        .catch((error) => concat(
-          of(new StorageActions.deleteOAuthClientApplicationsFail(error, action.meta)),
+      this.storage.getFiles(action.payload.container)
+              .map((response) => new StorageActions.getFilesSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new StorageActions.getFilesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected createManyOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(StorageActionTypes.CREATE_MANY_OAUTHCLIENTAPPLICATIONS)
+  protected getFile: Observable<LoopbackAction> = this.actions$
+    .ofType(StorageActionTypes.GET_FILE)
     .mergeMap((action: LoopbackAction) =>
-      this.storage.createManyOAuthClientApplications(action.payload.id, action.payload.data)
-        .map((response) => new StorageActions.createManyOAuthClientApplicationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new StorageActions.createManyOAuthClientApplicationsFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  /**
-   * @author João Ribeiro <@JonnyBGod> <github:JonnyBGod>
-   * @description
-   * Organizations relation effects
-   */
-  @Effect()
-  protected findByIdOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(StorageActionTypes.FIND_BY_ID_ORGANIZATIONS)
-    .mergeMap((action: LoopbackAction) =>
-      this.storage.findByIdOrganizations(action.payload.id, action.payload.fk)
-        .map((response) => new StorageActions.findByIdOrganizationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new StorageActions.findByIdOrganizationsFail(error, action.meta)),
+      this.storage.getFile(action.payload.container, action.payload.file)
+              .map((response) => new StorageActions.getFileSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new StorageActions.getFileFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected destroyByIdOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(StorageActionTypes.DESTROY_BY_ID_ORGANIZATIONS)
+  protected removeFile: Observable<LoopbackAction> = this.actions$
+    .ofType(StorageActionTypes.REMOVE_FILE)
     .mergeMap((action: LoopbackAction) =>
-      this.storage.destroyByIdOrganizations(action.payload.id, action.payload.fk)
-        .map(() => new StorageActions.destroyByIdOrganizationsSuccess(action.payload, action.meta))
-        .catch((error) => concat(
-          of(new StorageActions.destroyByIdOrganizationsFail(error, action.meta)),
+      this.storage.removeFile(action.payload.container, action.payload.file)
+              .map((response) => new StorageActions.removeFileSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new StorageActions.removeFileFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected updateByIdOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(StorageActionTypes.UPDATE_BY_ID_ORGANIZATIONS)
+  protected upload: Observable<LoopbackAction> = this.actions$
+    .ofType(StorageActionTypes.UPLOAD)
     .mergeMap((action: LoopbackAction) =>
-      this.storage.updateByIdOrganizations(action.payload.id, action.payload.fk, action.payload.data)
-        .map((response) => new StorageActions.updateByIdOrganizationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new StorageActions.updateByIdOrganizationsFail(error, action.meta)),
+      this.storage.upload(action.payload.req, action.payload.res)
+              .map((response) => new StorageActions.uploadSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new StorageActions.uploadFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected createOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(StorageActionTypes.CREATE_ORGANIZATIONS)
+  protected download: Observable<LoopbackAction> = this.actions$
+    .ofType(StorageActionTypes.DOWNLOAD)
     .mergeMap((action: LoopbackAction) =>
-      this.storage.createOrganizations(action.payload.id, action.payload.data)
-        .map((response) => new StorageActions.createOrganizationsSuccess(action.payload.id,response, action.meta))
-        .catch((error) => concat(
-          of(new StorageActions.createOrganizationsFail(error, action.meta)),
+      this.storage.download(action.payload.container, action.payload.file, action.payload.req, action.payload.res)
+              .map((response) => new StorageActions.downloadSuccess(action.payload.id, response, action.meta))
+              .catch((error) => concat(
+          of(new StorageActions.downloadFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
-  @Effect()
-  protected deleteOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(StorageActionTypes.DELETE_ORGANIZATIONS)
-    .mergeMap((action: LoopbackAction) =>
-      this.storage.deleteOrganizations(action.payload.id)
-        .map(() => new StorageActions.deleteOrganizationsSuccess(action.payload.id, action.meta))
-        .catch((error) => concat(
-          of(new StorageActions.deleteOrganizationsFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected createManyOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(StorageActionTypes.CREATE_MANY_ORGANIZATIONS)
-    .mergeMap((action: LoopbackAction) =>
-      this.storage.createManyOrganizations(action.payload.id, action.payload.data)
-        .map((response) => new StorageActions.createManyOrganizationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new StorageActions.createManyOrganizationsFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-  
     /**
    * @author João Ribeiro <@JonnyBGod> <github:JonnyBGod>
    * @description
