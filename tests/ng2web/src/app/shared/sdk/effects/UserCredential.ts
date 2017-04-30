@@ -20,160 +20,30 @@ import { UserCredentialApi } from '../services/index';
 
 @Injectable()
 export class UserCredentialEffects extends BaseLoopbackEffects {
-  /**
-   * @author João Ribeiro <@JonnyBGod> <github:JonnyBGod>
-   * @description
-   * OAuthClientApplications relation effects
-   */
   @Effect()
-  protected findByIdOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(UserCredentialActionTypes.FIND_BY_ID_OAUTHCLIENTAPPLICATIONS)
+  protected patchOrCreate: Observable<LoopbackAction> = this.actions$
+    .ofType(UserCredentialActionTypes.PATCH_OR_CREATE)
     .mergeMap((action: LoopbackAction) =>
-      this.usercredential.findByIdOAuthClientApplications(action.payload.id, action.payload.fk)
-        .map((response) => new UserCredentialActions.findByIdOAuthClientApplicationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new UserCredentialActions.findByIdOAuthClientApplicationsFail(error, action.meta)),
+      this.usercredential.patchOrCreate(action.payload.data)
+              .map((response) => new UserCredentialActions.patchOrCreateSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new UserCredentialActions.patchOrCreateFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected destroyByIdOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(UserCredentialActionTypes.DESTROY_BY_ID_OAUTHCLIENTAPPLICATIONS)
+  protected patchAttributes: Observable<LoopbackAction> = this.actions$
+    .ofType(UserCredentialActionTypes.PATCH_ATTRIBUTES)
     .mergeMap((action: LoopbackAction) =>
-      this.usercredential.destroyByIdOAuthClientApplications(action.payload.id, action.payload.fk)
-        .map(() => new UserCredentialActions.destroyByIdOAuthClientApplicationsSuccess(action.payload, action.meta))
-        .catch((error) => concat(
-          of(new UserCredentialActions.destroyByIdOAuthClientApplicationsFail(error, action.meta)),
+      this.usercredential.patchAttributes(action.payload.id, action.payload.data)
+              .map((response) => new UserCredentialActions.patchAttributesSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new UserCredentialActions.patchAttributesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
-  @Effect()
-  protected updateByIdOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(UserCredentialActionTypes.UPDATE_BY_ID_OAUTHCLIENTAPPLICATIONS)
-    .mergeMap((action: LoopbackAction) =>
-      this.usercredential.updateByIdOAuthClientApplications(action.payload.id, action.payload.fk, action.payload.data)
-        .map((response) => new UserCredentialActions.updateByIdOAuthClientApplicationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new UserCredentialActions.updateByIdOAuthClientApplicationsFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected createOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(UserCredentialActionTypes.CREATE_OAUTHCLIENTAPPLICATIONS)
-    .mergeMap((action: LoopbackAction) =>
-      this.usercredential.createOAuthClientApplications(action.payload.id, action.payload.data)
-        .map((response) => new UserCredentialActions.createOAuthClientApplicationsSuccess(action.payload.id,response, action.meta))
-        .catch((error) => concat(
-          of(new UserCredentialActions.createOAuthClientApplicationsFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected deleteOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(UserCredentialActionTypes.DELETE_OAUTHCLIENTAPPLICATIONS)
-    .mergeMap((action: LoopbackAction) =>
-      this.usercredential.deleteOAuthClientApplications(action.payload.id)
-        .map(() => new UserCredentialActions.deleteOAuthClientApplicationsSuccess(action.payload.id, action.meta))
-        .catch((error) => concat(
-          of(new UserCredentialActions.deleteOAuthClientApplicationsFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected createManyOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(UserCredentialActionTypes.CREATE_MANY_OAUTHCLIENTAPPLICATIONS)
-    .mergeMap((action: LoopbackAction) =>
-      this.usercredential.createManyOAuthClientApplications(action.payload.id, action.payload.data)
-        .map((response) => new UserCredentialActions.createManyOAuthClientApplicationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new UserCredentialActions.createManyOAuthClientApplicationsFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  /**
-   * @author João Ribeiro <@JonnyBGod> <github:JonnyBGod>
-   * @description
-   * Organizations relation effects
-   */
-  @Effect()
-  protected findByIdOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(UserCredentialActionTypes.FIND_BY_ID_ORGANIZATIONS)
-    .mergeMap((action: LoopbackAction) =>
-      this.usercredential.findByIdOrganizations(action.payload.id, action.payload.fk)
-        .map((response) => new UserCredentialActions.findByIdOrganizationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new UserCredentialActions.findByIdOrganizationsFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected destroyByIdOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(UserCredentialActionTypes.DESTROY_BY_ID_ORGANIZATIONS)
-    .mergeMap((action: LoopbackAction) =>
-      this.usercredential.destroyByIdOrganizations(action.payload.id, action.payload.fk)
-        .map(() => new UserCredentialActions.destroyByIdOrganizationsSuccess(action.payload, action.meta))
-        .catch((error) => concat(
-          of(new UserCredentialActions.destroyByIdOrganizationsFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected updateByIdOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(UserCredentialActionTypes.UPDATE_BY_ID_ORGANIZATIONS)
-    .mergeMap((action: LoopbackAction) =>
-      this.usercredential.updateByIdOrganizations(action.payload.id, action.payload.fk, action.payload.data)
-        .map((response) => new UserCredentialActions.updateByIdOrganizationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new UserCredentialActions.updateByIdOrganizationsFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected createOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(UserCredentialActionTypes.CREATE_ORGANIZATIONS)
-    .mergeMap((action: LoopbackAction) =>
-      this.usercredential.createOrganizations(action.payload.id, action.payload.data)
-        .map((response) => new UserCredentialActions.createOrganizationsSuccess(action.payload.id,response, action.meta))
-        .catch((error) => concat(
-          of(new UserCredentialActions.createOrganizationsFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected deleteOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(UserCredentialActionTypes.DELETE_ORGANIZATIONS)
-    .mergeMap((action: LoopbackAction) =>
-      this.usercredential.deleteOrganizations(action.payload.id)
-        .map(() => new UserCredentialActions.deleteOrganizationsSuccess(action.payload.id, action.meta))
-        .catch((error) => concat(
-          of(new UserCredentialActions.deleteOrganizationsFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected createManyOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(UserCredentialActionTypes.CREATE_MANY_ORGANIZATIONS)
-    .mergeMap((action: LoopbackAction) =>
-      this.usercredential.createManyOrganizations(action.payload.id, action.payload.data)
-        .map((response) => new UserCredentialActions.createManyOrganizationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new UserCredentialActions.createManyOrganizationsFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-  
     /**
    * @author João Ribeiro <@JonnyBGod> <github:JonnyBGod>
    * @description

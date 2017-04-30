@@ -20,185 +20,338 @@ import { AccountApi } from '../services/index';
 
 @Injectable()
 export class AccountEffects extends BaseLoopbackEffects {
-  /**
-   * @author João Ribeiro <@JonnyBGod> <github:JonnyBGod>
-   * @description
-   * OAuthClientApplications relation effects
-   */
   @Effect()
-  protected findByIdOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(AccountActionTypes.FIND_BY_ID_OAUTHCLIENTAPPLICATIONS)
+  protected findByIdAccessTokens: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.FIND_BY_ID_ACCESSTOKENS)
     .mergeMap((action: LoopbackAction) =>
-      this.account.findByIdOAuthClientApplications(action.payload.id, action.payload.fk)
-        .map((response) => new AccountActions.findByIdOAuthClientApplicationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new AccountActions.findByIdOAuthClientApplicationsFail(error, action.meta)),
+      this.account.findByIdAccessTokens(action.payload.id, action.payload.fk)
+              .map((response) => new AccountActions.findByIdAccessTokensSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.findByIdAccessTokensFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected destroyByIdOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(AccountActionTypes.DESTROY_BY_ID_OAUTHCLIENTAPPLICATIONS)
+  protected destroyByIdAccessTokens: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.DESTROY_BY_ID_ACCESSTOKENS)
     .mergeMap((action: LoopbackAction) =>
-      this.account.destroyByIdOAuthClientApplications(action.payload.id, action.payload.fk)
-        .map(() => new AccountActions.destroyByIdOAuthClientApplicationsSuccess(action.payload, action.meta))
-        .catch((error) => concat(
-          of(new AccountActions.destroyByIdOAuthClientApplicationsFail(error, action.meta)),
+      this.account.destroyByIdAccessTokens(action.payload.id, action.payload.fk)
+              .map((response) => new AccountActions.destroyByIdAccessTokensSuccess(action.payload.id, response, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.destroyByIdAccessTokensFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected updateByIdOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(AccountActionTypes.UPDATE_BY_ID_OAUTHCLIENTAPPLICATIONS)
+  protected updateByIdAccessTokens: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.UPDATE_BY_ID_ACCESSTOKENS)
     .mergeMap((action: LoopbackAction) =>
-      this.account.updateByIdOAuthClientApplications(action.payload.id, action.payload.fk, action.payload.data)
-        .map((response) => new AccountActions.updateByIdOAuthClientApplicationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new AccountActions.updateByIdOAuthClientApplicationsFail(error, action.meta)),
+      this.account.updateByIdAccessTokens(action.payload.id, action.payload.fk, action.payload.data)
+              .map((response) => new AccountActions.updateByIdAccessTokensSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.updateByIdAccessTokensFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected createOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(AccountActionTypes.CREATE_OAUTHCLIENTAPPLICATIONS)
+  protected findByIdRooms: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.FIND_BY_ID_ROOMS)
     .mergeMap((action: LoopbackAction) =>
-      this.account.createOAuthClientApplications(action.payload.id, action.payload.data)
-        .map((response) => new AccountActions.createOAuthClientApplicationsSuccess(action.payload.id,response, action.meta))
-        .catch((error) => concat(
-          of(new AccountActions.createOAuthClientApplicationsFail(error, action.meta)),
+      this.account.findByIdRooms(action.payload.id, action.payload.fk)
+              .map((response) => new AccountActions.findByIdRoomsSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.findByIdRoomsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected deleteOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(AccountActionTypes.DELETE_OAUTHCLIENTAPPLICATIONS)
+  protected destroyByIdRooms: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.DESTROY_BY_ID_ROOMS)
     .mergeMap((action: LoopbackAction) =>
-      this.account.deleteOAuthClientApplications(action.payload.id)
-        .map(() => new AccountActions.deleteOAuthClientApplicationsSuccess(action.payload.id, action.meta))
-        .catch((error) => concat(
-          of(new AccountActions.deleteOAuthClientApplicationsFail(error, action.meta)),
+      this.account.destroyByIdRooms(action.payload.id, action.payload.fk)
+              .map((response) => new AccountActions.destroyByIdRoomsSuccess(action.payload.id, response, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.destroyByIdRoomsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected createManyOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(AccountActionTypes.CREATE_MANY_OAUTHCLIENTAPPLICATIONS)
+  protected updateByIdRooms: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.UPDATE_BY_ID_ROOMS)
     .mergeMap((action: LoopbackAction) =>
-      this.account.createManyOAuthClientApplications(action.payload.id, action.payload.data)
-        .map((response) => new AccountActions.createManyOAuthClientApplicationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new AccountActions.createManyOAuthClientApplicationsFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  /**
-   * @author João Ribeiro <@JonnyBGod> <github:JonnyBGod>
-   * @description
-   * Organizations relation effects
-   */
-  @Effect()
-  protected findByIdOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(AccountActionTypes.FIND_BY_ID_ORGANIZATIONS)
-    .mergeMap((action: LoopbackAction) =>
-      this.account.findByIdOrganizations(action.payload.id, action.payload.fk)
-        .map((response) => new AccountActions.findByIdOrganizationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new AccountActions.findByIdOrganizationsFail(error, action.meta)),
+      this.account.updateByIdRooms(action.payload.id, action.payload.fk, action.payload.data)
+              .map((response) => new AccountActions.updateByIdRoomsSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.updateByIdRoomsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected destroyByIdOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(AccountActionTypes.DESTROY_BY_ID_ORGANIZATIONS)
+  protected linkRooms: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.LINK_ROOMS)
     .mergeMap((action: LoopbackAction) =>
-      this.account.destroyByIdOrganizations(action.payload.id, action.payload.fk)
-        .map(() => new AccountActions.destroyByIdOrganizationsSuccess(action.payload, action.meta))
-        .catch((error) => concat(
-          of(new AccountActions.destroyByIdOrganizationsFail(error, action.meta)),
+      this.account.linkRooms(action.payload.id, action.payload.fk, action.payload.data)
+              .map((response) => new AccountActions.linkRoomsSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.linkRoomsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected updateByIdOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(AccountActionTypes.UPDATE_BY_ID_ORGANIZATIONS)
+  protected unlinkRooms: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.UNLINK_ROOMS)
     .mergeMap((action: LoopbackAction) =>
-      this.account.updateByIdOrganizations(action.payload.id, action.payload.fk, action.payload.data)
-        .map((response) => new AccountActions.updateByIdOrganizationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new AccountActions.updateByIdOrganizationsFail(error, action.meta)),
+      this.account.unlinkRooms(action.payload.id, action.payload.fk)
+              .map((response) => new AccountActions.unlinkRoomsSuccess(action.payload.id, response, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.unlinkRoomsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected createOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(AccountActionTypes.CREATE_ORGANIZATIONS)
+  protected findByIdAdministrations: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.FIND_BY_ID_ADMINISTRATIONS)
     .mergeMap((action: LoopbackAction) =>
-      this.account.createOrganizations(action.payload.id, action.payload.data)
-        .map((response) => new AccountActions.createOrganizationsSuccess(action.payload.id,response, action.meta))
-        .catch((error) => concat(
-          of(new AccountActions.createOrganizationsFail(error, action.meta)),
+      this.account.findByIdAdministrations(action.payload.id, action.payload.fk)
+              .map((response) => new AccountActions.findByIdAdministrationsSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.findByIdAdministrationsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected deleteOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(AccountActionTypes.DELETE_ORGANIZATIONS)
+  protected destroyByIdAdministrations: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.DESTROY_BY_ID_ADMINISTRATIONS)
     .mergeMap((action: LoopbackAction) =>
-      this.account.deleteOrganizations(action.payload.id)
-        .map(() => new AccountActions.deleteOrganizationsSuccess(action.payload.id, action.meta))
-        .catch((error) => concat(
-          of(new AccountActions.deleteOrganizationsFail(error, action.meta)),
+      this.account.destroyByIdAdministrations(action.payload.id, action.payload.fk)
+              .map((response) => new AccountActions.destroyByIdAdministrationsSuccess(action.payload.id, response, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.destroyByIdAdministrationsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected createManyOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(AccountActionTypes.CREATE_MANY_ORGANIZATIONS)
+  protected updateByIdAdministrations: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.UPDATE_BY_ID_ADMINISTRATIONS)
     .mergeMap((action: LoopbackAction) =>
-      this.account.createManyOrganizations(action.payload.id, action.payload.data)
-        .map((response) => new AccountActions.createManyOrganizationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new AccountActions.createManyOrganizationsFail(error, action.meta)),
+      this.account.updateByIdAdministrations(action.payload.id, action.payload.fk, action.payload.data)
+              .map((response) => new AccountActions.updateByIdAdministrationsSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.updateByIdAdministrationsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
-  
-    /**
-   * @author João Ribeiro <@JonnyBGod> <github:JonnyBGod>
-   * @description
-   * Account specific actions
-   */
+
+  @Effect()
+  protected linkAdministrations: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.LINK_ADMINISTRATIONS)
+    .mergeMap((action: LoopbackAction) =>
+      this.account.linkAdministrations(action.payload.id, action.payload.fk, action.payload.data)
+              .map((response) => new AccountActions.linkAdministrationsSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.linkAdministrationsFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected unlinkAdministrations: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.UNLINK_ADMINISTRATIONS)
+    .mergeMap((action: LoopbackAction) =>
+      this.account.unlinkAdministrations(action.payload.id, action.payload.fk)
+              .map((response) => new AccountActions.unlinkAdministrationsSuccess(action.payload.id, response, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.unlinkAdministrationsFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected getAccessTokens: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.GET_ACCESSTOKENS)
+    .mergeMap((action: LoopbackAction) =>
+      this.account.getAccessTokens(action.payload.id, action.payload.filter)
+              .map((response) => new AccountActions.getAccessTokensSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.getAccessTokensFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected createAccessTokens: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.CREATE_ACCESSTOKENS)
+    .mergeMap((action: LoopbackAction) =>
+      this.account.createAccessTokens(action.payload.id, action.payload.data)
+              .map((response) => new AccountActions.createAccessTokensSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.createAccessTokensFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected deleteAccessTokens: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.DELETE_ACCESSTOKENS)
+    .mergeMap((action: LoopbackAction) =>
+      this.account.deleteAccessTokens(action.payload.id)
+              .map((response) => new AccountActions.deleteAccessTokensSuccess(action.payload.id, response, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.deleteAccessTokensFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected countAccessTokens: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.COUNT_ACCESSTOKENS)
+    .mergeMap((action: LoopbackAction) =>
+      this.account.countAccessTokens(action.payload.id, action.payload.where)
+              .map((response) => new AccountActions.countAccessTokensSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.countAccessTokensFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected getRooms: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.GET_ROOMS)
+    .mergeMap((action: LoopbackAction) =>
+      this.account.getRooms(action.payload.id, action.payload.filter)
+              .map((response) => new AccountActions.getRoomsSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.getRoomsFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected createRooms: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.CREATE_ROOMS)
+    .mergeMap((action: LoopbackAction) =>
+      this.account.createRooms(action.payload.id, action.payload.data)
+              .map((response) => new AccountActions.createRoomsSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.createRoomsFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected deleteRooms: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.DELETE_ROOMS)
+    .mergeMap((action: LoopbackAction) =>
+      this.account.deleteRooms(action.payload.id)
+              .map((response) => new AccountActions.deleteRoomsSuccess(action.payload.id, response, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.deleteRoomsFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected countRooms: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.COUNT_ROOMS)
+    .mergeMap((action: LoopbackAction) =>
+      this.account.countRooms(action.payload.id, action.payload.where)
+              .map((response) => new AccountActions.countRoomsSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.countRoomsFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected getAdministrations: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.GET_ADMINISTRATIONS)
+    .mergeMap((action: LoopbackAction) =>
+      this.account.getAdministrations(action.payload.id, action.payload.filter)
+              .map((response) => new AccountActions.getAdministrationsSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.getAdministrationsFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected createAdministrations: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.CREATE_ADMINISTRATIONS)
+    .mergeMap((action: LoopbackAction) =>
+      this.account.createAdministrations(action.payload.id, action.payload.data)
+              .map((response) => new AccountActions.createAdministrationsSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.createAdministrationsFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected deleteAdministrations: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.DELETE_ADMINISTRATIONS)
+    .mergeMap((action: LoopbackAction) =>
+      this.account.deleteAdministrations(action.payload.id)
+              .map((response) => new AccountActions.deleteAdministrationsSuccess(action.payload.id, response, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.deleteAdministrationsFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected countAdministrations: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.COUNT_ADMINISTRATIONS)
+    .mergeMap((action: LoopbackAction) =>
+      this.account.countAdministrations(action.payload.id, action.payload.where)
+              .map((response) => new AccountActions.countAdministrationsSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.countAdministrationsFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected patchOrCreate: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.PATCH_OR_CREATE)
+    .mergeMap((action: LoopbackAction) =>
+      this.account.patchOrCreate(action.payload.data)
+              .map((response) => new AccountActions.patchOrCreateSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.patchOrCreateFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected patchAttributes: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.PATCH_ATTRIBUTES)
+    .mergeMap((action: LoopbackAction) =>
+      this.account.patchAttributes(action.payload.id, action.payload.data)
+              .map((response) => new AccountActions.patchAttributesSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.patchAttributesFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
   @Effect()
   protected login: Observable<LoopbackAction> = this.actions$
     .ofType(AccountActionTypes.LOGIN)
     .mergeMap((action: LoopbackAction) =>
-      this.account.login(action.payload.credentials, action.payload.include, action.payload.rememberMe)
-        .map((response) => new AccountActions.loginSuccess(response, action.meta))
-        .catch((error) => concat(
+      this.account.login(action.payload.credentials, action.payload.include)
+              .map((response) => new AccountActions.loginSuccess(action.payload, action.meta))
+              .catch((error) => concat(
           of(new AccountActions.loginFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected signup: Observable<LoopbackAction> = this.actions$
-    .ofType(AccountActionTypes.SIGNUP)
-    .mergeMap((action: LoopbackAction) =>
-      this.account.create(action.payload)
-        .map((response) => new AccountActions.signupSuccess(action.payload, response, action.meta))
-        .catch((error) => concat(
-          of(new AccountActions.signupFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
@@ -208,9 +361,98 @@ export class AccountEffects extends BaseLoopbackEffects {
     .ofType(AccountActionTypes.LOGOUT)
     .mergeMap((action: LoopbackAction) =>
       this.account.logout()
-        .map(() => new AccountActions.logoutSuccess(action.meta))
+              .map((response) => new AccountActions.logoutSuccess(action.payload.id, response, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.logoutFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected confirm: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.CONFIRM)
+    .mergeMap((action: LoopbackAction) =>
+      this.account.confirm(action.payload.uid, action.payload.token, action.payload.redirect)
+              .map((response) => new AccountActions.confirmSuccess(action.payload.id, response, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.confirmFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected resetPassword: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.RESET_PASSWORD)
+    .mergeMap((action: LoopbackAction) =>
+      this.account.resetPassword(action.payload.options)
+              .map((response) => new AccountActions.resetPasswordSuccess(action.payload.id, response, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.resetPasswordFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected changePassword: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.CHANGE_PASSWORD)
+    .mergeMap((action: LoopbackAction) =>
+      this.account.changePassword(action.payload.oldPassword, action.payload.newPassword)
+              .map((response) => new AccountActions.changePasswordSuccess(action.payload.id, response, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.changePasswordFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected createManyAccessTokens: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.CREATE_MANY_ACCESSTOKENS)
+    .mergeMap((action: LoopbackAction) =>
+      this.account.createManyAccessTokens(action.payload.id, action.payload.data)
+              .map((response) => new AccountActions.createManyAccessTokensSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.createManyAccessTokensFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected createManyRooms: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.CREATE_MANY_ROOMS)
+    .mergeMap((action: LoopbackAction) =>
+      this.account.createManyRooms(action.payload.id, action.payload.data)
+              .map((response) => new AccountActions.createManyRoomsSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.createManyRoomsFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected createManyAdministrations: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.CREATE_MANY_ADMINISTRATIONS)
+    .mergeMap((action: LoopbackAction) =>
+      this.account.createManyAdministrations(action.payload.id, action.payload.data)
+              .map((response) => new AccountActions.createManyAdministrationsSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new AccountActions.createManyAdministrationsFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+    /**
+   * @author João Ribeiro <@JonnyBGod> <github:JonnyBGod>
+   * @description
+   * Account specific actions
+   */
+  @Effect()
+  protected signup: Observable<LoopbackAction> = this.actions$
+    .ofType(AccountActionTypes.SIGNUP)
+    .mergeMap((action: LoopbackAction) =>
+      this.account.create(action.payload)
+        .map((response) => new AccountActions.signupSuccess(action.payload, response, action.meta))
         .catch((error) => concat(
-          of(new AccountActions.logoutFail()),
+          of(new AccountActions.signupFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );

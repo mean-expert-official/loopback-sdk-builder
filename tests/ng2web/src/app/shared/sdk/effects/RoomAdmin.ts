@@ -20,160 +20,54 @@ import { RoomAdminApi } from '../services/index';
 
 @Injectable()
 export class RoomAdminEffects extends BaseLoopbackEffects {
-  /**
-   * @author João Ribeiro <@JonnyBGod> <github:JonnyBGod>
-   * @description
-   * OAuthClientApplications relation effects
-   */
   @Effect()
-  protected findByIdOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(RoomAdminActionTypes.FIND_BY_ID_OAUTHCLIENTAPPLICATIONS)
+  protected getAccount: Observable<LoopbackAction> = this.actions$
+    .ofType(RoomAdminActionTypes.GET_ACCOUNT)
     .mergeMap((action: LoopbackAction) =>
-      this.roomadmin.findByIdOAuthClientApplications(action.payload.id, action.payload.fk)
-        .map((response) => new RoomAdminActions.findByIdOAuthClientApplicationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new RoomAdminActions.findByIdOAuthClientApplicationsFail(error, action.meta)),
+      this.roomadmin.getAccount(action.payload.id, action.payload.refresh)
+              .map((response) => new RoomAdminActions.getAccountSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new RoomAdminActions.getAccountFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected destroyByIdOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(RoomAdminActionTypes.DESTROY_BY_ID_OAUTHCLIENTAPPLICATIONS)
+  protected getRoom: Observable<LoopbackAction> = this.actions$
+    .ofType(RoomAdminActionTypes.GET_ROOM)
     .mergeMap((action: LoopbackAction) =>
-      this.roomadmin.destroyByIdOAuthClientApplications(action.payload.id, action.payload.fk)
-        .map(() => new RoomAdminActions.destroyByIdOAuthClientApplicationsSuccess(action.payload, action.meta))
-        .catch((error) => concat(
-          of(new RoomAdminActions.destroyByIdOAuthClientApplicationsFail(error, action.meta)),
+      this.roomadmin.getRoom(action.payload.id, action.payload.refresh)
+              .map((response) => new RoomAdminActions.getRoomSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new RoomAdminActions.getRoomFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected updateByIdOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(RoomAdminActionTypes.UPDATE_BY_ID_OAUTHCLIENTAPPLICATIONS)
+  protected patchOrCreate: Observable<LoopbackAction> = this.actions$
+    .ofType(RoomAdminActionTypes.PATCH_OR_CREATE)
     .mergeMap((action: LoopbackAction) =>
-      this.roomadmin.updateByIdOAuthClientApplications(action.payload.id, action.payload.fk, action.payload.data)
-        .map((response) => new RoomAdminActions.updateByIdOAuthClientApplicationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new RoomAdminActions.updateByIdOAuthClientApplicationsFail(error, action.meta)),
+      this.roomadmin.patchOrCreate(action.payload.data)
+              .map((response) => new RoomAdminActions.patchOrCreateSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new RoomAdminActions.patchOrCreateFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected createOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(RoomAdminActionTypes.CREATE_OAUTHCLIENTAPPLICATIONS)
+  protected patchAttributes: Observable<LoopbackAction> = this.actions$
+    .ofType(RoomAdminActionTypes.PATCH_ATTRIBUTES)
     .mergeMap((action: LoopbackAction) =>
-      this.roomadmin.createOAuthClientApplications(action.payload.id, action.payload.data)
-        .map((response) => new RoomAdminActions.createOAuthClientApplicationsSuccess(action.payload.id,response, action.meta))
-        .catch((error) => concat(
-          of(new RoomAdminActions.createOAuthClientApplicationsFail(error, action.meta)),
+      this.roomadmin.patchAttributes(action.payload.id, action.payload.data)
+              .map((response) => new RoomAdminActions.patchAttributesSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new RoomAdminActions.patchAttributesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
-  @Effect()
-  protected deleteOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(RoomAdminActionTypes.DELETE_OAUTHCLIENTAPPLICATIONS)
-    .mergeMap((action: LoopbackAction) =>
-      this.roomadmin.deleteOAuthClientApplications(action.payload.id)
-        .map(() => new RoomAdminActions.deleteOAuthClientApplicationsSuccess(action.payload.id, action.meta))
-        .catch((error) => concat(
-          of(new RoomAdminActions.deleteOAuthClientApplicationsFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected createManyOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(RoomAdminActionTypes.CREATE_MANY_OAUTHCLIENTAPPLICATIONS)
-    .mergeMap((action: LoopbackAction) =>
-      this.roomadmin.createManyOAuthClientApplications(action.payload.id, action.payload.data)
-        .map((response) => new RoomAdminActions.createManyOAuthClientApplicationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new RoomAdminActions.createManyOAuthClientApplicationsFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  /**
-   * @author João Ribeiro <@JonnyBGod> <github:JonnyBGod>
-   * @description
-   * Organizations relation effects
-   */
-  @Effect()
-  protected findByIdOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(RoomAdminActionTypes.FIND_BY_ID_ORGANIZATIONS)
-    .mergeMap((action: LoopbackAction) =>
-      this.roomadmin.findByIdOrganizations(action.payload.id, action.payload.fk)
-        .map((response) => new RoomAdminActions.findByIdOrganizationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new RoomAdminActions.findByIdOrganizationsFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected destroyByIdOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(RoomAdminActionTypes.DESTROY_BY_ID_ORGANIZATIONS)
-    .mergeMap((action: LoopbackAction) =>
-      this.roomadmin.destroyByIdOrganizations(action.payload.id, action.payload.fk)
-        .map(() => new RoomAdminActions.destroyByIdOrganizationsSuccess(action.payload, action.meta))
-        .catch((error) => concat(
-          of(new RoomAdminActions.destroyByIdOrganizationsFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected updateByIdOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(RoomAdminActionTypes.UPDATE_BY_ID_ORGANIZATIONS)
-    .mergeMap((action: LoopbackAction) =>
-      this.roomadmin.updateByIdOrganizations(action.payload.id, action.payload.fk, action.payload.data)
-        .map((response) => new RoomAdminActions.updateByIdOrganizationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new RoomAdminActions.updateByIdOrganizationsFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected createOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(RoomAdminActionTypes.CREATE_ORGANIZATIONS)
-    .mergeMap((action: LoopbackAction) =>
-      this.roomadmin.createOrganizations(action.payload.id, action.payload.data)
-        .map((response) => new RoomAdminActions.createOrganizationsSuccess(action.payload.id,response, action.meta))
-        .catch((error) => concat(
-          of(new RoomAdminActions.createOrganizationsFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected deleteOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(RoomAdminActionTypes.DELETE_ORGANIZATIONS)
-    .mergeMap((action: LoopbackAction) =>
-      this.roomadmin.deleteOrganizations(action.payload.id)
-        .map(() => new RoomAdminActions.deleteOrganizationsSuccess(action.payload.id, action.meta))
-        .catch((error) => concat(
-          of(new RoomAdminActions.deleteOrganizationsFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected createManyOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(RoomAdminActionTypes.CREATE_MANY_ORGANIZATIONS)
-    .mergeMap((action: LoopbackAction) =>
-      this.roomadmin.createManyOrganizations(action.payload.id, action.payload.data)
-        .map((response) => new RoomAdminActions.createManyOrganizationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new RoomAdminActions.createManyOrganizationsFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-  
     /**
    * @author João Ribeiro <@JonnyBGod> <github:JonnyBGod>
    * @description

@@ -20,160 +20,246 @@ import { MessageApi } from '../services/index';
 
 @Injectable()
 export class MessageEffects extends BaseLoopbackEffects {
-  /**
-   * @author João Ribeiro <@JonnyBGod> <github:JonnyBGod>
-   * @description
-   * OAuthClientApplications relation effects
-   */
   @Effect()
-  protected findByIdOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(MessageActionTypes.FIND_BY_ID_OAUTHCLIENTAPPLICATIONS)
+  protected findByIdLikes: Observable<LoopbackAction> = this.actions$
+    .ofType(MessageActionTypes.FIND_BY_ID_LIKES)
     .mergeMap((action: LoopbackAction) =>
-      this.message.findByIdOAuthClientApplications(action.payload.id, action.payload.fk)
-        .map((response) => new MessageActions.findByIdOAuthClientApplicationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new MessageActions.findByIdOAuthClientApplicationsFail(error, action.meta)),
+      this.message.findByIdLikes(action.payload.id, action.payload.fk)
+              .map((response) => new MessageActions.findByIdLikesSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new MessageActions.findByIdLikesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected destroyByIdOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(MessageActionTypes.DESTROY_BY_ID_OAUTHCLIENTAPPLICATIONS)
+  protected destroyByIdLikes: Observable<LoopbackAction> = this.actions$
+    .ofType(MessageActionTypes.DESTROY_BY_ID_LIKES)
     .mergeMap((action: LoopbackAction) =>
-      this.message.destroyByIdOAuthClientApplications(action.payload.id, action.payload.fk)
-        .map(() => new MessageActions.destroyByIdOAuthClientApplicationsSuccess(action.payload, action.meta))
-        .catch((error) => concat(
-          of(new MessageActions.destroyByIdOAuthClientApplicationsFail(error, action.meta)),
+      this.message.destroyByIdLikes(action.payload.id, action.payload.fk)
+              .map((response) => new MessageActions.destroyByIdLikesSuccess(action.payload.id, response, action.meta))
+              .catch((error) => concat(
+          of(new MessageActions.destroyByIdLikesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected updateByIdOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(MessageActionTypes.UPDATE_BY_ID_OAUTHCLIENTAPPLICATIONS)
+  protected updateByIdLikes: Observable<LoopbackAction> = this.actions$
+    .ofType(MessageActionTypes.UPDATE_BY_ID_LIKES)
     .mergeMap((action: LoopbackAction) =>
-      this.message.updateByIdOAuthClientApplications(action.payload.id, action.payload.fk, action.payload.data)
-        .map((response) => new MessageActions.updateByIdOAuthClientApplicationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new MessageActions.updateByIdOAuthClientApplicationsFail(error, action.meta)),
+      this.message.updateByIdLikes(action.payload.id, action.payload.fk, action.payload.data)
+              .map((response) => new MessageActions.updateByIdLikesSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new MessageActions.updateByIdLikesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected createOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(MessageActionTypes.CREATE_OAUTHCLIENTAPPLICATIONS)
+  protected findByIdReplies: Observable<LoopbackAction> = this.actions$
+    .ofType(MessageActionTypes.FIND_BY_ID_REPLIES)
     .mergeMap((action: LoopbackAction) =>
-      this.message.createOAuthClientApplications(action.payload.id, action.payload.data)
-        .map((response) => new MessageActions.createOAuthClientApplicationsSuccess(action.payload.id,response, action.meta))
-        .catch((error) => concat(
-          of(new MessageActions.createOAuthClientApplicationsFail(error, action.meta)),
+      this.message.findByIdReplies(action.payload.id, action.payload.fk)
+              .map((response) => new MessageActions.findByIdRepliesSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new MessageActions.findByIdRepliesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected deleteOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(MessageActionTypes.DELETE_OAUTHCLIENTAPPLICATIONS)
+  protected destroyByIdReplies: Observable<LoopbackAction> = this.actions$
+    .ofType(MessageActionTypes.DESTROY_BY_ID_REPLIES)
     .mergeMap((action: LoopbackAction) =>
-      this.message.deleteOAuthClientApplications(action.payload.id)
-        .map(() => new MessageActions.deleteOAuthClientApplicationsSuccess(action.payload.id, action.meta))
-        .catch((error) => concat(
-          of(new MessageActions.deleteOAuthClientApplicationsFail(error, action.meta)),
+      this.message.destroyByIdReplies(action.payload.id, action.payload.fk)
+              .map((response) => new MessageActions.destroyByIdRepliesSuccess(action.payload.id, response, action.meta))
+              .catch((error) => concat(
+          of(new MessageActions.destroyByIdRepliesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected createManyOAuthClientApplications: Observable<LoopbackAction> = this.actions$
-    .ofType(MessageActionTypes.CREATE_MANY_OAUTHCLIENTAPPLICATIONS)
+  protected updateByIdReplies: Observable<LoopbackAction> = this.actions$
+    .ofType(MessageActionTypes.UPDATE_BY_ID_REPLIES)
     .mergeMap((action: LoopbackAction) =>
-      this.message.createManyOAuthClientApplications(action.payload.id, action.payload.data)
-        .map((response) => new MessageActions.createManyOAuthClientApplicationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new MessageActions.createManyOAuthClientApplicationsFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  /**
-   * @author João Ribeiro <@JonnyBGod> <github:JonnyBGod>
-   * @description
-   * Organizations relation effects
-   */
-  @Effect()
-  protected findByIdOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(MessageActionTypes.FIND_BY_ID_ORGANIZATIONS)
-    .mergeMap((action: LoopbackAction) =>
-      this.message.findByIdOrganizations(action.payload.id, action.payload.fk)
-        .map((response) => new MessageActions.findByIdOrganizationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new MessageActions.findByIdOrganizationsFail(error, action.meta)),
+      this.message.updateByIdReplies(action.payload.id, action.payload.fk, action.payload.data)
+              .map((response) => new MessageActions.updateByIdRepliesSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new MessageActions.updateByIdRepliesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected destroyByIdOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(MessageActionTypes.DESTROY_BY_ID_ORGANIZATIONS)
+  protected getParent: Observable<LoopbackAction> = this.actions$
+    .ofType(MessageActionTypes.GET_PARENT)
     .mergeMap((action: LoopbackAction) =>
-      this.message.destroyByIdOrganizations(action.payload.id, action.payload.fk)
-        .map(() => new MessageActions.destroyByIdOrganizationsSuccess(action.payload, action.meta))
-        .catch((error) => concat(
-          of(new MessageActions.destroyByIdOrganizationsFail(error, action.meta)),
+      this.message.getParent(action.payload.id, action.payload.refresh)
+              .map((response) => new MessageActions.getParentSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new MessageActions.getParentFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected updateByIdOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(MessageActionTypes.UPDATE_BY_ID_ORGANIZATIONS)
+  protected getRoom: Observable<LoopbackAction> = this.actions$
+    .ofType(MessageActionTypes.GET_ROOM)
     .mergeMap((action: LoopbackAction) =>
-      this.message.updateByIdOrganizations(action.payload.id, action.payload.fk, action.payload.data)
-        .map((response) => new MessageActions.updateByIdOrganizationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new MessageActions.updateByIdOrganizationsFail(error, action.meta)),
+      this.message.getRoom(action.payload.id, action.payload.refresh)
+              .map((response) => new MessageActions.getRoomSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new MessageActions.getRoomFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected createOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(MessageActionTypes.CREATE_ORGANIZATIONS)
+  protected getLikes: Observable<LoopbackAction> = this.actions$
+    .ofType(MessageActionTypes.GET_LIKES)
     .mergeMap((action: LoopbackAction) =>
-      this.message.createOrganizations(action.payload.id, action.payload.data)
-        .map((response) => new MessageActions.createOrganizationsSuccess(action.payload.id,response, action.meta))
-        .catch((error) => concat(
-          of(new MessageActions.createOrganizationsFail(error, action.meta)),
+      this.message.getLikes(action.payload.id, action.payload.filter)
+              .map((response) => new MessageActions.getLikesSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new MessageActions.getLikesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected deleteOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(MessageActionTypes.DELETE_ORGANIZATIONS)
+  protected createLikes: Observable<LoopbackAction> = this.actions$
+    .ofType(MessageActionTypes.CREATE_LIKES)
     .mergeMap((action: LoopbackAction) =>
-      this.message.deleteOrganizations(action.payload.id)
-        .map(() => new MessageActions.deleteOrganizationsSuccess(action.payload.id, action.meta))
-        .catch((error) => concat(
-          of(new MessageActions.deleteOrganizationsFail(error, action.meta)),
+      this.message.createLikes(action.payload.id, action.payload.data)
+              .map((response) => new MessageActions.createLikesSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new MessageActions.createLikesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected createManyOrganizations: Observable<LoopbackAction> = this.actions$
-    .ofType(MessageActionTypes.CREATE_MANY_ORGANIZATIONS)
+  protected deleteLikes: Observable<LoopbackAction> = this.actions$
+    .ofType(MessageActionTypes.DELETE_LIKES)
     .mergeMap((action: LoopbackAction) =>
-      this.message.createManyOrganizations(action.payload.id, action.payload.data)
-        .map((response) => new MessageActions.createManyOrganizationsSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
-          of(new MessageActions.createManyOrganizationsFail(error, action.meta)),
+      this.message.deleteLikes(action.payload.id)
+              .map((response) => new MessageActions.deleteLikesSuccess(action.payload.id, response, action.meta))
+              .catch((error) => concat(
+          of(new MessageActions.deleteLikesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
-  
+
+  @Effect()
+  protected countLikes: Observable<LoopbackAction> = this.actions$
+    .ofType(MessageActionTypes.COUNT_LIKES)
+    .mergeMap((action: LoopbackAction) =>
+      this.message.countLikes(action.payload.id, action.payload.where)
+              .map((response) => new MessageActions.countLikesSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new MessageActions.countLikesFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected getReplies: Observable<LoopbackAction> = this.actions$
+    .ofType(MessageActionTypes.GET_REPLIES)
+    .mergeMap((action: LoopbackAction) =>
+      this.message.getReplies(action.payload.id, action.payload.filter)
+              .map((response) => new MessageActions.getRepliesSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new MessageActions.getRepliesFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected createReplies: Observable<LoopbackAction> = this.actions$
+    .ofType(MessageActionTypes.CREATE_REPLIES)
+    .mergeMap((action: LoopbackAction) =>
+      this.message.createReplies(action.payload.id, action.payload.data)
+              .map((response) => new MessageActions.createRepliesSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new MessageActions.createRepliesFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected deleteReplies: Observable<LoopbackAction> = this.actions$
+    .ofType(MessageActionTypes.DELETE_REPLIES)
+    .mergeMap((action: LoopbackAction) =>
+      this.message.deleteReplies(action.payload.id)
+              .map((response) => new MessageActions.deleteRepliesSuccess(action.payload.id, response, action.meta))
+              .catch((error) => concat(
+          of(new MessageActions.deleteRepliesFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected countReplies: Observable<LoopbackAction> = this.actions$
+    .ofType(MessageActionTypes.COUNT_REPLIES)
+    .mergeMap((action: LoopbackAction) =>
+      this.message.countReplies(action.payload.id, action.payload.where)
+              .map((response) => new MessageActions.countRepliesSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new MessageActions.countRepliesFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected patchOrCreate: Observable<LoopbackAction> = this.actions$
+    .ofType(MessageActionTypes.PATCH_OR_CREATE)
+    .mergeMap((action: LoopbackAction) =>
+      this.message.patchOrCreate(action.payload.data)
+              .map((response) => new MessageActions.patchOrCreateSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new MessageActions.patchOrCreateFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected patchAttributes: Observable<LoopbackAction> = this.actions$
+    .ofType(MessageActionTypes.PATCH_ATTRIBUTES)
+    .mergeMap((action: LoopbackAction) =>
+      this.message.patchAttributes(action.payload.id, action.payload.data)
+              .map((response) => new MessageActions.patchAttributesSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new MessageActions.patchAttributesFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected createManyLikes: Observable<LoopbackAction> = this.actions$
+    .ofType(MessageActionTypes.CREATE_MANY_LIKES)
+    .mergeMap((action: LoopbackAction) =>
+      this.message.createManyLikes(action.payload.id, action.payload.data)
+              .map((response) => new MessageActions.createManyLikesSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new MessageActions.createManyLikesFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected createManyReplies: Observable<LoopbackAction> = this.actions$
+    .ofType(MessageActionTypes.CREATE_MANY_REPLIES)
+    .mergeMap((action: LoopbackAction) =>
+      this.message.createManyReplies(action.payload.id, action.payload.data)
+              .map((response) => new MessageActions.createManyRepliesSuccess(action.payload, action.meta))
+              .catch((error) => concat(
+          of(new MessageActions.createManyRepliesFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
     /**
    * @author João Ribeiro <@JonnyBGod> <github:JonnyBGod>
    * @description
