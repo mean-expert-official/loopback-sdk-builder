@@ -25,8 +25,8 @@ export class RoomAdminEffects extends BaseLoopbackEffects {
     .ofType(RoomAdminActionTypes.GET_ACCOUNT)
     .mergeMap((action: LoopbackAction) =>
       this.roomadmin.getAccount(action.payload.id, action.payload.refresh)
-              .map((response) => new RoomAdminActions.getAccountSuccess(action.payload, action.meta))
-              .catch((error) => concat(
+        .map((response) => new RoomAdminActions.getAccountSuccess(action.payload.id, response, action.meta))
+        .catch((error) => concat(
           of(new RoomAdminActions.getAccountFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
@@ -37,33 +37,9 @@ export class RoomAdminEffects extends BaseLoopbackEffects {
     .ofType(RoomAdminActionTypes.GET_ROOM)
     .mergeMap((action: LoopbackAction) =>
       this.roomadmin.getRoom(action.payload.id, action.payload.refresh)
-              .map((response) => new RoomAdminActions.getRoomSuccess(action.payload, action.meta))
-              .catch((error) => concat(
+        .map((response) => new RoomAdminActions.getRoomSuccess(action.payload.id, response, action.meta))
+        .catch((error) => concat(
           of(new RoomAdminActions.getRoomFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected patchOrCreate: Observable<LoopbackAction> = this.actions$
-    .ofType(RoomAdminActionTypes.PATCH_OR_CREATE)
-    .mergeMap((action: LoopbackAction) =>
-      this.roomadmin.patchOrCreate(action.payload.data)
-              .map((response) => new RoomAdminActions.patchOrCreateSuccess(action.payload, action.meta))
-              .catch((error) => concat(
-          of(new RoomAdminActions.patchOrCreateFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected patchAttributes: Observable<LoopbackAction> = this.actions$
-    .ofType(RoomAdminActionTypes.PATCH_ATTRIBUTES)
-    .mergeMap((action: LoopbackAction) =>
-      this.roomadmin.patchAttributes(action.payload.id, action.payload.data)
-              .map((response) => new RoomAdminActions.patchAttributesSuccess(action.payload, action.meta))
-              .catch((error) => concat(
-          of(new RoomAdminActions.patchAttributesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );

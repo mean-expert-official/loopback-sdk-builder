@@ -25,8 +25,8 @@ export class StorageEffects extends BaseLoopbackEffects {
     .ofType(StorageActionTypes.GET_CONTAINERS)
     .mergeMap((action: LoopbackAction) =>
       this.storage.getContainers()
-              .map((response) => new StorageActions.getContainersSuccess(action.payload, action.meta))
-              .catch((error) => concat(
+        .map((response) => new StorageActions.getContainersSuccess(action.payload.id, response, action.meta))
+        .catch((error) => concat(
           of(new StorageActions.getContainersFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
@@ -37,8 +37,8 @@ export class StorageEffects extends BaseLoopbackEffects {
     .ofType(StorageActionTypes.CREATE_CONTAINER)
     .mergeMap((action: LoopbackAction) =>
       this.storage.createContainer(action.payload.options)
-              .map((response) => new StorageActions.createContainerSuccess(action.payload, action.meta))
-              .catch((error) => concat(
+        .map((response) => new StorageActions.createContainerSuccess(action.payload.id, response, action.meta))
+        .catch((error) => concat(
           of(new StorageActions.createContainerFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
@@ -49,8 +49,8 @@ export class StorageEffects extends BaseLoopbackEffects {
     .ofType(StorageActionTypes.DESTROY_CONTAINER)
     .mergeMap((action: LoopbackAction) =>
       this.storage.destroyContainer(action.payload.container)
-              .map((response) => new StorageActions.destroyContainerSuccess(action.payload, action.meta))
-              .catch((error) => concat(
+        .map((response) => new StorageActions.destroyContainerSuccess(action.payload.id, response, action.meta))
+        .catch((error) => concat(
           of(new StorageActions.destroyContainerFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
@@ -61,8 +61,8 @@ export class StorageEffects extends BaseLoopbackEffects {
     .ofType(StorageActionTypes.GET_CONTAINER)
     .mergeMap((action: LoopbackAction) =>
       this.storage.getContainer(action.payload.container)
-              .map((response) => new StorageActions.getContainerSuccess(action.payload, action.meta))
-              .catch((error) => concat(
+        .map((response) => new StorageActions.getContainerSuccess(action.payload.id, response, action.meta))
+        .catch((error) => concat(
           of(new StorageActions.getContainerFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
@@ -73,8 +73,8 @@ export class StorageEffects extends BaseLoopbackEffects {
     .ofType(StorageActionTypes.GET_FILES)
     .mergeMap((action: LoopbackAction) =>
       this.storage.getFiles(action.payload.container)
-              .map((response) => new StorageActions.getFilesSuccess(action.payload, action.meta))
-              .catch((error) => concat(
+        .map((response) => new StorageActions.getFilesSuccess(action.payload.id, response, action.meta))
+        .catch((error) => concat(
           of(new StorageActions.getFilesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
@@ -85,8 +85,8 @@ export class StorageEffects extends BaseLoopbackEffects {
     .ofType(StorageActionTypes.GET_FILE)
     .mergeMap((action: LoopbackAction) =>
       this.storage.getFile(action.payload.container, action.payload.file)
-              .map((response) => new StorageActions.getFileSuccess(action.payload, action.meta))
-              .catch((error) => concat(
+        .map((response) => new StorageActions.getFileSuccess(action.payload.id, response, action.meta))
+        .catch((error) => concat(
           of(new StorageActions.getFileFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
@@ -97,8 +97,8 @@ export class StorageEffects extends BaseLoopbackEffects {
     .ofType(StorageActionTypes.REMOVE_FILE)
     .mergeMap((action: LoopbackAction) =>
       this.storage.removeFile(action.payload.container, action.payload.file)
-              .map((response) => new StorageActions.removeFileSuccess(action.payload, action.meta))
-              .catch((error) => concat(
+        .map((response) => new StorageActions.removeFileSuccess(action.payload.id, response, action.meta))
+        .catch((error) => concat(
           of(new StorageActions.removeFileFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
@@ -109,8 +109,8 @@ export class StorageEffects extends BaseLoopbackEffects {
     .ofType(StorageActionTypes.UPLOAD)
     .mergeMap((action: LoopbackAction) =>
       this.storage.upload(action.payload.req, action.payload.res)
-              .map((response) => new StorageActions.uploadSuccess(action.payload, action.meta))
-              .catch((error) => concat(
+        .map((response) => new StorageActions.uploadSuccess(action.payload.id, response, action.meta))
+        .catch((error) => concat(
           of(new StorageActions.uploadFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
@@ -121,8 +121,8 @@ export class StorageEffects extends BaseLoopbackEffects {
     .ofType(StorageActionTypes.DOWNLOAD)
     .mergeMap((action: LoopbackAction) =>
       this.storage.download(action.payload.container, action.payload.file, action.payload.req, action.payload.res)
-              .map((response) => new StorageActions.downloadSuccess(action.payload.id, response, action.meta))
-              .catch((error) => concat(
+        .map((response) => new StorageActions.downloadSuccess(action.payload.id, action.payload.fk, action.meta))
+        .catch((error) => concat(
           of(new StorageActions.downloadFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))

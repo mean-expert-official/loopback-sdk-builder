@@ -25,33 +25,9 @@ export class UserIdentityEffects extends BaseLoopbackEffects {
     .ofType(UserIdentityActionTypes.GET_USER)
     .mergeMap((action: LoopbackAction) =>
       this.useridentity.getUser(action.payload.id, action.payload.refresh)
-              .map((response) => new UserIdentityActions.getUserSuccess(action.payload, action.meta))
-              .catch((error) => concat(
+        .map((response) => new UserIdentityActions.getUserSuccess(action.payload.id, response, action.meta))
+        .catch((error) => concat(
           of(new UserIdentityActions.getUserFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected patchOrCreate: Observable<LoopbackAction> = this.actions$
-    .ofType(UserIdentityActionTypes.PATCH_OR_CREATE)
-    .mergeMap((action: LoopbackAction) =>
-      this.useridentity.patchOrCreate(action.payload.data)
-              .map((response) => new UserIdentityActions.patchOrCreateSuccess(action.payload, action.meta))
-              .catch((error) => concat(
-          of(new UserIdentityActions.patchOrCreateFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected patchAttributes: Observable<LoopbackAction> = this.actions$
-    .ofType(UserIdentityActionTypes.PATCH_ATTRIBUTES)
-    .mergeMap((action: LoopbackAction) =>
-      this.useridentity.patchAttributes(action.payload.id, action.payload.data)
-              .map((response) => new UserIdentityActions.patchAttributesSuccess(action.payload, action.meta))
-              .catch((error) => concat(
-          of(new UserIdentityActions.patchAttributesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );

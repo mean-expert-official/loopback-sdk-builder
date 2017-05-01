@@ -70,14 +70,6 @@ Object.assign(BaseLoopbackActionTypesFactory('Message'), {
   COUNT_REPLIES_SUCCESS: type('[Message] countReplies success'),
   COUNT_REPLIES_FAIL: type('[Message] countReplies fail'),
 
-  PATCH_OR_CREATE: type('[Message] patchOrCreate'),
-  PATCH_OR_CREATE_SUCCESS: type('[Message] patchOrCreate success'),
-  PATCH_OR_CREATE_FAIL: type('[Message] patchOrCreate fail'),
-
-  PATCH_ATTRIBUTES: type('[Message] patchAttributes'),
-  PATCH_ATTRIBUTES_SUCCESS: type('[Message] patchAttributes success'),
-  PATCH_ATTRIBUTES_FAIL: type('[Message] patchAttributes fail'),
-
   CREATE_MANY_LIKES: type('[Message] createManyLikes'),
   CREATE_MANY_LIKES_SUCCESS: type('[Message] createManyLikes success'),
   CREATE_MANY_LIKES_FAIL: type('[Message] createManyLikes fail'),
@@ -163,8 +155,11 @@ Object.assign(BaseLoopbackActionsFactory<Message>('Message', MessageActionTypes)
    */
   destroyByIdLikesSuccess: class implements Action {
     public readonly type = MessageActionTypes.DESTROY_BY_ID_LIKES_SUCCESS;
-  
-    constructor(public payload: any, public meta?: any) {}
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
   },
   /**
    * destroyByIdLikesFail Action.
@@ -301,8 +296,11 @@ Object.assign(BaseLoopbackActionsFactory<Message>('Message', MessageActionTypes)
    */
   destroyByIdRepliesSuccess: class implements Action {
     public readonly type = MessageActionTypes.DESTROY_BY_ID_REPLIES_SUCCESS;
-  
-    constructor(public payload: any, public meta?: any) {}
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
   },
   /**
    * destroyByIdRepliesFail Action.
@@ -592,54 +590,6 @@ Object.assign(BaseLoopbackActionsFactory<Message>('Message', MessageActionTypes)
   },
 
   /**
-   * countLikes Action.
-   * Counts likes of Message.
-   *
-   * @param {any} id Message id
-   * @param {object} where Criteria to match model instances
-   * @param {any} meta (optional).
-   * 
-   */
-  countLikes: class implements Action {
-    public readonly type = MessageActionTypes.COUNT_LIKES;
-      public payload: {id: any, where: any};
-
-    constructor(id: any, where: any = {}, public meta?: any) {
-      this.payload = {id, where};
-    }
-  },
-  /**
-   * countLikesSuccess Action.
-   * 
-   * @param {any} id 
-   * Data properties:
-   *
-   *  - `count` – `{number}` - 
-   * @param {any} meta (optional).
-   * 
-   */
-  countLikesSuccess: class implements Action {
-    public readonly type = MessageActionTypes.COUNT_LIKES_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * countLikesFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  countLikesFail: class implements Action {
-    public readonly type = MessageActionTypes.COUNT_LIKES_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
    * getReplies Action.
    * Queries replies of Message.
    *
@@ -768,146 +718,6 @@ Object.assign(BaseLoopbackActionsFactory<Message>('Message', MessageActionTypes)
    */
   deleteRepliesFail: class implements Action {
     public readonly type = MessageActionTypes.DELETE_REPLIES_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
-   * countReplies Action.
-   * Counts replies of Message.
-   *
-   * @param {any} id Message id
-   * @param {object} where Criteria to match model instances
-   * @param {any} meta (optional).
-   * 
-   */
-  countReplies: class implements Action {
-    public readonly type = MessageActionTypes.COUNT_REPLIES;
-      public payload: {id: any, where: any};
-
-    constructor(id: any, where: any = {}, public meta?: any) {
-      this.payload = {id, where};
-    }
-  },
-  /**
-   * countRepliesSuccess Action.
-   * 
-   * @param {any} id 
-   * Data properties:
-   *
-   *  - `count` – `{number}` - 
-   * @param {any} meta (optional).
-   * 
-   */
-  countRepliesSuccess: class implements Action {
-    public readonly type = MessageActionTypes.COUNT_REPLIES_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * countRepliesFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  countRepliesFail: class implements Action {
-    public readonly type = MessageActionTypes.COUNT_REPLIES_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
-   * patchOrCreate Action.
-   * Patch an existing model instance or insert a new one into the data source.
-   *
-   * @param {object} data Request data.
-   *
-   *  - `data` – `{object}` - Model instance data
-   * @param {any} meta (optional).
-   * 
-   */
-  patchOrCreate: class implements Action {
-    public readonly type = MessageActionTypes.PATCH_OR_CREATE;
-      
-    constructor(public payload: any, public meta?: any) {}
-  },
-  /**
-   * patchOrCreateSuccess Action.
-   * 
-   * @param {any} id 
-   * @param {object} data 
-   * @param {any} meta (optional).
-   * 
-   */
-  patchOrCreateSuccess: class implements Action {
-    public readonly type = MessageActionTypes.PATCH_OR_CREATE_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * patchOrCreateFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  patchOrCreateFail: class implements Action {
-    public readonly type = MessageActionTypes.PATCH_OR_CREATE_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
-   * patchAttributes Action.
-   * Patch attributes for a model instance and persist it into the data source.
-   *
-   * @param {any} id Message id
-   * @param {object} data Request data.
-   *
-   *  - `data` – `{object}` - An object of model property name/value pairs
-   * @param {any} meta (optional).
-   * 
-   */
-  patchAttributes: class implements Action {
-    public readonly type = MessageActionTypes.PATCH_ATTRIBUTES;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any = {}, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * patchAttributesSuccess Action.
-   * 
-   * @param {any} id 
-   * @param {object} data 
-   * @param {any} meta (optional).
-   * 
-   */
-  patchAttributesSuccess: class implements Action {
-    public readonly type = MessageActionTypes.PATCH_ATTRIBUTES_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * patchAttributesFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  patchAttributesFail: class implements Action {
-    public readonly type = MessageActionTypes.PATCH_ATTRIBUTES_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },

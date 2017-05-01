@@ -14,14 +14,6 @@ Object.assign(BaseLoopbackActionTypesFactory('Like'), {
   GET_ROOM_SUCCESS: type('[Like] getRoom success'),
   GET_ROOM_FAIL: type('[Like] getRoom fail'),
 
-  PATCH_OR_CREATE: type('[Like] patchOrCreate'),
-  PATCH_OR_CREATE_SUCCESS: type('[Like] patchOrCreate success'),
-  PATCH_OR_CREATE_FAIL: type('[Like] patchOrCreate fail'),
-
-  PATCH_ATTRIBUTES: type('[Like] patchAttributes'),
-  PATCH_ATTRIBUTES_SUCCESS: type('[Like] patchAttributes success'),
-  PATCH_ATTRIBUTES_FAIL: type('[Like] patchAttributes fail'),
-
 });
 export const LikeActions =
 Object.assign(BaseLoopbackActionsFactory<Like>('Like', LikeActionTypes), {
@@ -114,98 +106,6 @@ Object.assign(BaseLoopbackActionsFactory<Like>('Like', LikeActionTypes), {
    */
   getRoomFail: class implements Action {
     public readonly type = LikeActionTypes.GET_ROOM_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
-   * patchOrCreate Action.
-   * Patch an existing model instance or insert a new one into the data source.
-   *
-   * @param {object} data Request data.
-   *
-   *  - `data` – `{object}` - Model instance data
-   * @param {any} meta (optional).
-   * 
-   */
-  patchOrCreate: class implements Action {
-    public readonly type = LikeActionTypes.PATCH_OR_CREATE;
-      
-    constructor(public payload: any, public meta?: any) {}
-  },
-  /**
-   * patchOrCreateSuccess Action.
-   * 
-   * @param {any} id 
-   * @param {object} data 
-   * @param {any} meta (optional).
-   * 
-   */
-  patchOrCreateSuccess: class implements Action {
-    public readonly type = LikeActionTypes.PATCH_OR_CREATE_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * patchOrCreateFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  patchOrCreateFail: class implements Action {
-    public readonly type = LikeActionTypes.PATCH_OR_CREATE_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
-   * patchAttributes Action.
-   * Patch attributes for a model instance and persist it into the data source.
-   *
-   * @param {any} id like id
-   * @param {object} data Request data.
-   *
-   *  - `data` – `{object}` - An object of model property name/value pairs
-   * @param {any} meta (optional).
-   * 
-   */
-  patchAttributes: class implements Action {
-    public readonly type = LikeActionTypes.PATCH_ATTRIBUTES;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any = {}, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * patchAttributesSuccess Action.
-   * 
-   * @param {any} id 
-   * @param {object} data 
-   * @param {any} meta (optional).
-   * 
-   */
-  patchAttributesSuccess: class implements Action {
-    public readonly type = LikeActionTypes.PATCH_ATTRIBUTES_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * patchAttributesFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  patchAttributesFail: class implements Action {
-    public readonly type = LikeActionTypes.PATCH_ATTRIBUTES_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },

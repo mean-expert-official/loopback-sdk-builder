@@ -42,14 +42,6 @@ Object.assign(BaseLoopbackActionTypesFactory('Category'), {
   COUNT_ROOMS_SUCCESS: type('[Category] countRooms success'),
   COUNT_ROOMS_FAIL: type('[Category] countRooms fail'),
 
-  PATCH_OR_CREATE: type('[Category] patchOrCreate'),
-  PATCH_OR_CREATE_SUCCESS: type('[Category] patchOrCreate success'),
-  PATCH_OR_CREATE_FAIL: type('[Category] patchOrCreate fail'),
-
-  PATCH_ATTRIBUTES: type('[Category] patchAttributes'),
-  PATCH_ATTRIBUTES_SUCCESS: type('[Category] patchAttributes success'),
-  PATCH_ATTRIBUTES_FAIL: type('[Category] patchAttributes fail'),
-
   CREATE_MANY_ROOMS: type('[Category] createManyRooms'),
   CREATE_MANY_ROOMS_SUCCESS: type('[Category] createManyRooms success'),
   CREATE_MANY_ROOMS_FAIL: type('[Category] createManyRooms fail'),
@@ -131,8 +123,11 @@ Object.assign(BaseLoopbackActionsFactory<Category>('Category', CategoryActionTyp
    */
   destroyByIdRoomsSuccess: class implements Action {
     public readonly type = CategoryActionTypes.DESTROY_BY_ID_ROOMS_SUCCESS;
-  
-    constructor(public payload: any, public meta?: any) {}
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
   },
   /**
    * destroyByIdRoomsFail Action.
@@ -272,8 +267,11 @@ Object.assign(BaseLoopbackActionsFactory<Category>('Category', CategoryActionTyp
    */
   unlinkRoomsSuccess: class implements Action {
     public readonly type = CategoryActionTypes.UNLINK_ROOMS_SUCCESS;
-  
-    constructor(public payload: any, public meta?: any) {}
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
   },
   /**
    * unlinkRoomsFail Action.
@@ -417,146 +415,6 @@ Object.assign(BaseLoopbackActionsFactory<Category>('Category', CategoryActionTyp
    */
   deleteRoomsFail: class implements Action {
     public readonly type = CategoryActionTypes.DELETE_ROOMS_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
-   * countRooms Action.
-   * Counts rooms of Category.
-   *
-   * @param {any} id Category id
-   * @param {object} where Criteria to match model instances
-   * @param {any} meta (optional).
-   * 
-   */
-  countRooms: class implements Action {
-    public readonly type = CategoryActionTypes.COUNT_ROOMS;
-      public payload: {id: any, where: any};
-
-    constructor(id: any, where: any = {}, public meta?: any) {
-      this.payload = {id, where};
-    }
-  },
-  /**
-   * countRoomsSuccess Action.
-   * 
-   * @param {any} id 
-   * Data properties:
-   *
-   *  - `count` – `{number}` - 
-   * @param {any} meta (optional).
-   * 
-   */
-  countRoomsSuccess: class implements Action {
-    public readonly type = CategoryActionTypes.COUNT_ROOMS_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * countRoomsFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  countRoomsFail: class implements Action {
-    public readonly type = CategoryActionTypes.COUNT_ROOMS_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
-   * patchOrCreate Action.
-   * Patch an existing model instance or insert a new one into the data source.
-   *
-   * @param {object} data Request data.
-   *
-   *  - `data` – `{object}` - Model instance data
-   * @param {any} meta (optional).
-   * 
-   */
-  patchOrCreate: class implements Action {
-    public readonly type = CategoryActionTypes.PATCH_OR_CREATE;
-      
-    constructor(public payload: any, public meta?: any) {}
-  },
-  /**
-   * patchOrCreateSuccess Action.
-   * 
-   * @param {any} id 
-   * @param {object} data 
-   * @param {any} meta (optional).
-   * 
-   */
-  patchOrCreateSuccess: class implements Action {
-    public readonly type = CategoryActionTypes.PATCH_OR_CREATE_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * patchOrCreateFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  patchOrCreateFail: class implements Action {
-    public readonly type = CategoryActionTypes.PATCH_OR_CREATE_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
-   * patchAttributes Action.
-   * Patch attributes for a model instance and persist it into the data source.
-   *
-   * @param {any} id Category id
-   * @param {object} data Request data.
-   *
-   *  - `data` – `{object}` - An object of model property name/value pairs
-   * @param {any} meta (optional).
-   * 
-   */
-  patchAttributes: class implements Action {
-    public readonly type = CategoryActionTypes.PATCH_ATTRIBUTES;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any = {}, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * patchAttributesSuccess Action.
-   * 
-   * @param {any} id 
-   * @param {object} data 
-   * @param {any} meta (optional).
-   * 
-   */
-  patchAttributesSuccess: class implements Action {
-    public readonly type = CategoryActionTypes.PATCH_ATTRIBUTES_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * patchAttributesFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  patchAttributesFail: class implements Action {
-    public readonly type = CategoryActionTypes.PATCH_ATTRIBUTES_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },

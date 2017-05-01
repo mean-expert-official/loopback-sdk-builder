@@ -451,8 +451,11 @@ Object.assign(BaseLoopbackActionsFactory<Storage>('Storage', StorageActionTypes)
    */
   downloadSuccess: class implements Action {
     public readonly type = StorageActionTypes.DOWNLOAD_SUCCESS;
-  
-    constructor(public payload: any, public meta?: any) {}
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
   },
   /**
    * downloadFail Action.

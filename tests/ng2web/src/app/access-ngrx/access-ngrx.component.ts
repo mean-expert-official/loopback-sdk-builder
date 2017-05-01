@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Account, AccessToken } from '../shared/sdk/models';
 import { AccountApi } from '../shared/sdk/services';
-import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+
+import { LoopbackStateInterface, AccountActions } from '../shared/sdk';
 
 @Component({
-  selector: 'app-access',
+  selector: 'app-access-ngrx',
   template: `
   <h1>Register or Log In an Account</h1>
   <form>
@@ -17,25 +19,23 @@ import { Router } from '@angular/router';
 `
 })
 
-export class AccessComponent implements OnInit {
+export class AccessNgrxComponent implements OnInit {
 
   public account: Account = new Account();
   public rememberMe: boolean = false;
 
   constructor(
     private accountApi: AccountApi,
-    private router: Router
+    private store: Store<LoopbackStateInterface>
   ) { }
 
   ngOnInit() {}
 
   register() {
-    this.accountApi.create(this.account).subscribe((account: Account) => this.login());
+    this.store.dispatch(new AccountActions.signup(this.account));
   }
 
   login() {
-    this.accountApi.login(this.account, 'user', this.rememberMe).subscribe((token: AccessToken) =>
-      this.router.navigate(['/home'])
-    );
+    this.store.dispatch(new AccountActions.login(this.account, 'user', this.rememberMe));
   }
 }
