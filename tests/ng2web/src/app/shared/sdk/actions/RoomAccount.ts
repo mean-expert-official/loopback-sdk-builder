@@ -14,14 +14,6 @@ Object.assign(BaseLoopbackActionTypesFactory('RoomAccount'), {
   GET_ROOM_SUCCESS: type('[RoomAccount] getRoom success'),
   GET_ROOM_FAIL: type('[RoomAccount] getRoom fail'),
 
-  PATCH_OR_CREATE: type('[RoomAccount] patchOrCreate'),
-  PATCH_OR_CREATE_SUCCESS: type('[RoomAccount] patchOrCreate success'),
-  PATCH_OR_CREATE_FAIL: type('[RoomAccount] patchOrCreate fail'),
-
-  PATCH_ATTRIBUTES: type('[RoomAccount] patchAttributes'),
-  PATCH_ATTRIBUTES_SUCCESS: type('[RoomAccount] patchAttributes success'),
-  PATCH_ATTRIBUTES_FAIL: type('[RoomAccount] patchAttributes fail'),
-
 });
 export const RoomAccountActions =
 Object.assign(BaseLoopbackActionsFactory<RoomAccount>('RoomAccount', RoomAccountActionTypes), {
@@ -114,98 +106,6 @@ Object.assign(BaseLoopbackActionsFactory<RoomAccount>('RoomAccount', RoomAccount
    */
   getRoomFail: class implements Action {
     public readonly type = RoomAccountActionTypes.GET_ROOM_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
-   * patchOrCreate Action.
-   * Patch an existing model instance or insert a new one into the data source.
-   *
-   * @param {object} data Request data.
-   *
-   *  - `data` – `{object}` - Model instance data
-   * @param {any} meta (optional).
-   * 
-   */
-  patchOrCreate: class implements Action {
-    public readonly type = RoomAccountActionTypes.PATCH_OR_CREATE;
-      
-    constructor(public payload: any, public meta?: any) {}
-  },
-  /**
-   * patchOrCreateSuccess Action.
-   * 
-   * @param {any} id 
-   * @param {object} data 
-   * @param {any} meta (optional).
-   * 
-   */
-  patchOrCreateSuccess: class implements Action {
-    public readonly type = RoomAccountActionTypes.PATCH_OR_CREATE_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * patchOrCreateFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  patchOrCreateFail: class implements Action {
-    public readonly type = RoomAccountActionTypes.PATCH_OR_CREATE_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
-   * patchAttributes Action.
-   * Patch attributes for a model instance and persist it into the data source.
-   *
-   * @param {any} id RoomAccount id
-   * @param {object} data Request data.
-   *
-   *  - `data` – `{object}` - An object of model property name/value pairs
-   * @param {any} meta (optional).
-   * 
-   */
-  patchAttributes: class implements Action {
-    public readonly type = RoomAccountActionTypes.PATCH_ATTRIBUTES;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any = {}, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * patchAttributesSuccess Action.
-   * 
-   * @param {any} id 
-   * @param {object} data 
-   * @param {any} meta (optional).
-   * 
-   */
-  patchAttributesSuccess: class implements Action {
-    public readonly type = RoomAccountActionTypes.PATCH_ATTRIBUTES_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * patchAttributesFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  patchAttributesFail: class implements Action {
-    public readonly type = RoomAccountActionTypes.PATCH_ATTRIBUTES_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },

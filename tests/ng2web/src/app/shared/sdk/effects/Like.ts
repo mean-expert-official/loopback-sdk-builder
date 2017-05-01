@@ -25,8 +25,8 @@ export class LikeEffects extends BaseLoopbackEffects {
     .ofType(LikeActionTypes.GET_MESSAGE)
     .mergeMap((action: LoopbackAction) =>
       this.like.getMessage(action.payload.id, action.payload.refresh)
-              .map((response) => new LikeActions.getMessageSuccess(action.payload, action.meta))
-              .catch((error) => concat(
+        .map((response) => new LikeActions.getMessageSuccess(action.payload.id, response, action.meta))
+        .catch((error) => concat(
           of(new LikeActions.getMessageFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
@@ -37,33 +37,9 @@ export class LikeEffects extends BaseLoopbackEffects {
     .ofType(LikeActionTypes.GET_ROOM)
     .mergeMap((action: LoopbackAction) =>
       this.like.getRoom(action.payload.id, action.payload.refresh)
-              .map((response) => new LikeActions.getRoomSuccess(action.payload, action.meta))
-              .catch((error) => concat(
+        .map((response) => new LikeActions.getRoomSuccess(action.payload.id, response, action.meta))
+        .catch((error) => concat(
           of(new LikeActions.getRoomFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected patchOrCreate: Observable<LoopbackAction> = this.actions$
-    .ofType(LikeActionTypes.PATCH_OR_CREATE)
-    .mergeMap((action: LoopbackAction) =>
-      this.like.patchOrCreate(action.payload.data)
-              .map((response) => new LikeActions.patchOrCreateSuccess(action.payload, action.meta))
-              .catch((error) => concat(
-          of(new LikeActions.patchOrCreateFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected patchAttributes: Observable<LoopbackAction> = this.actions$
-    .ofType(LikeActionTypes.PATCH_ATTRIBUTES)
-    .mergeMap((action: LoopbackAction) =>
-      this.like.patchAttributes(action.payload.id, action.payload.data)
-              .map((response) => new LikeActions.patchAttributesSuccess(action.payload, action.meta))
-              .catch((error) => concat(
-          of(new LikeActions.patchAttributesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );

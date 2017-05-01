@@ -170,14 +170,6 @@ Object.assign(BaseLoopbackActionTypesFactory('Room'), {
   COUNT_ADMINS_SUCCESS: type('[Room] countAdmins success'),
   COUNT_ADMINS_FAIL: type('[Room] countAdmins fail'),
 
-  PATCH_OR_CREATE: type('[Room] patchOrCreate'),
-  PATCH_OR_CREATE_SUCCESS: type('[Room] patchOrCreate success'),
-  PATCH_OR_CREATE_FAIL: type('[Room] patchOrCreate fail'),
-
-  PATCH_ATTRIBUTES: type('[Room] patchAttributes'),
-  PATCH_ATTRIBUTES_SUCCESS: type('[Room] patchAttributes success'),
-  PATCH_ATTRIBUTES_FAIL: type('[Room] patchAttributes fail'),
-
   GREET_ROUTE: type('[Room] greetRoute'),
   GREET_ROUTE_SUCCESS: type('[Room] greetRoute success'),
   GREET_ROUTE_FAIL: type('[Room] greetRoute fail'),
@@ -303,8 +295,11 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
    */
   destroyByIdMessagesSuccess: class implements Action {
     public readonly type = RoomActionTypes.DESTROY_BY_ID_MESSAGES_SUCCESS;
-  
-    constructor(public payload: any, public meta?: any) {}
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
   },
   /**
    * destroyByIdMessagesFail Action.
@@ -441,8 +436,11 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
    */
   destroyByIdLikesSuccess: class implements Action {
     public readonly type = RoomActionTypes.DESTROY_BY_ID_LIKES_SUCCESS;
-  
-    constructor(public payload: any, public meta?: any) {}
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
   },
   /**
    * destroyByIdLikesFail Action.
@@ -579,8 +577,11 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
    */
   destroyByIdCategoriesSuccess: class implements Action {
     public readonly type = RoomActionTypes.DESTROY_BY_ID_CATEGORIES_SUCCESS;
-  
-    constructor(public payload: any, public meta?: any) {}
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
   },
   /**
    * destroyByIdCategoriesFail Action.
@@ -720,8 +721,11 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
    */
   unlinkCategoriesSuccess: class implements Action {
     public readonly type = RoomActionTypes.UNLINK_CATEGORIES_SUCCESS;
-  
-    constructor(public payload: any, public meta?: any) {}
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
   },
   /**
    * unlinkCategoriesFail Action.
@@ -809,8 +813,11 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
    */
   destroyByIdAccountsSuccess: class implements Action {
     public readonly type = RoomActionTypes.DESTROY_BY_ID_ACCOUNTS_SUCCESS;
-  
-    constructor(public payload: any, public meta?: any) {}
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
   },
   /**
    * destroyByIdAccountsFail Action.
@@ -950,8 +957,11 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
    */
   unlinkAccountsSuccess: class implements Action {
     public readonly type = RoomActionTypes.UNLINK_ACCOUNTS_SUCCESS;
-  
-    constructor(public payload: any, public meta?: any) {}
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
   },
   /**
    * unlinkAccountsFail Action.
@@ -1039,8 +1049,11 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
    */
   destroyByIdAdminsSuccess: class implements Action {
     public readonly type = RoomActionTypes.DESTROY_BY_ID_ADMINS_SUCCESS;
-  
-    constructor(public payload: any, public meta?: any) {}
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
   },
   /**
    * destroyByIdAdminsFail Action.
@@ -1180,8 +1193,11 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
    */
   unlinkAdminsSuccess: class implements Action {
     public readonly type = RoomActionTypes.UNLINK_ADMINS_SUCCESS;
-  
-    constructor(public payload: any, public meta?: any) {}
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
   },
   /**
    * unlinkAdminsFail Action.
@@ -1330,54 +1346,6 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
   },
 
   /**
-   * countMessages Action.
-   * Counts messages of Room.
-   *
-   * @param {any} id Room id
-   * @param {object} where Criteria to match model instances
-   * @param {any} meta (optional).
-   * 
-   */
-  countMessages: class implements Action {
-    public readonly type = RoomActionTypes.COUNT_MESSAGES;
-      public payload: {id: any, where: any};
-
-    constructor(id: any, where: any = {}, public meta?: any) {
-      this.payload = {id, where};
-    }
-  },
-  /**
-   * countMessagesSuccess Action.
-   * 
-   * @param {any} id 
-   * Data properties:
-   *
-   *  - `count` – `{number}` - 
-   * @param {any} meta (optional).
-   * 
-   */
-  countMessagesSuccess: class implements Action {
-    public readonly type = RoomActionTypes.COUNT_MESSAGES_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * countMessagesFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  countMessagesFail: class implements Action {
-    public readonly type = RoomActionTypes.COUNT_MESSAGES_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
    * getLikes Action.
    * Queries likes of Room.
    *
@@ -1506,54 +1474,6 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
    */
   deleteLikesFail: class implements Action {
     public readonly type = RoomActionTypes.DELETE_LIKES_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
-   * countLikes Action.
-   * Counts likes of Room.
-   *
-   * @param {any} id Room id
-   * @param {object} where Criteria to match model instances
-   * @param {any} meta (optional).
-   * 
-   */
-  countLikes: class implements Action {
-    public readonly type = RoomActionTypes.COUNT_LIKES;
-      public payload: {id: any, where: any};
-
-    constructor(id: any, where: any = {}, public meta?: any) {
-      this.payload = {id, where};
-    }
-  },
-  /**
-   * countLikesSuccess Action.
-   * 
-   * @param {any} id 
-   * Data properties:
-   *
-   *  - `count` – `{number}` - 
-   * @param {any} meta (optional).
-   * 
-   */
-  countLikesSuccess: class implements Action {
-    public readonly type = RoomActionTypes.COUNT_LIKES_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * countLikesFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  countLikesFail: class implements Action {
-    public readonly type = RoomActionTypes.COUNT_LIKES_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },
@@ -1692,54 +1612,6 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
   },
 
   /**
-   * countCategories Action.
-   * Counts categories of Room.
-   *
-   * @param {any} id Room id
-   * @param {object} where Criteria to match model instances
-   * @param {any} meta (optional).
-   * 
-   */
-  countCategories: class implements Action {
-    public readonly type = RoomActionTypes.COUNT_CATEGORIES;
-      public payload: {id: any, where: any};
-
-    constructor(id: any, where: any = {}, public meta?: any) {
-      this.payload = {id, where};
-    }
-  },
-  /**
-   * countCategoriesSuccess Action.
-   * 
-   * @param {any} id 
-   * Data properties:
-   *
-   *  - `count` – `{number}` - 
-   * @param {any} meta (optional).
-   * 
-   */
-  countCategoriesSuccess: class implements Action {
-    public readonly type = RoomActionTypes.COUNT_CATEGORIES_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * countCategoriesFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  countCategoriesFail: class implements Action {
-    public readonly type = RoomActionTypes.COUNT_CATEGORIES_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
    * getAccounts Action.
    * Queries accounts of Room.
    *
@@ -1873,54 +1745,6 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
   },
 
   /**
-   * countAccounts Action.
-   * Counts accounts of Room.
-   *
-   * @param {any} id Room id
-   * @param {object} where Criteria to match model instances
-   * @param {any} meta (optional).
-   * 
-   */
-  countAccounts: class implements Action {
-    public readonly type = RoomActionTypes.COUNT_ACCOUNTS;
-      public payload: {id: any, where: any};
-
-    constructor(id: any, where: any = {}, public meta?: any) {
-      this.payload = {id, where};
-    }
-  },
-  /**
-   * countAccountsSuccess Action.
-   * 
-   * @param {any} id 
-   * Data properties:
-   *
-   *  - `count` – `{number}` - 
-   * @param {any} meta (optional).
-   * 
-   */
-  countAccountsSuccess: class implements Action {
-    public readonly type = RoomActionTypes.COUNT_ACCOUNTS_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * countAccountsFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  countAccountsFail: class implements Action {
-    public readonly type = RoomActionTypes.COUNT_ACCOUNTS_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
    * getAdmins Action.
    * Queries admins of Room.
    *
@@ -2049,146 +1873,6 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
    */
   deleteAdminsFail: class implements Action {
     public readonly type = RoomActionTypes.DELETE_ADMINS_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
-   * countAdmins Action.
-   * Counts admins of Room.
-   *
-   * @param {any} id Room id
-   * @param {object} where Criteria to match model instances
-   * @param {any} meta (optional).
-   * 
-   */
-  countAdmins: class implements Action {
-    public readonly type = RoomActionTypes.COUNT_ADMINS;
-      public payload: {id: any, where: any};
-
-    constructor(id: any, where: any = {}, public meta?: any) {
-      this.payload = {id, where};
-    }
-  },
-  /**
-   * countAdminsSuccess Action.
-   * 
-   * @param {any} id 
-   * Data properties:
-   *
-   *  - `count` – `{number}` - 
-   * @param {any} meta (optional).
-   * 
-   */
-  countAdminsSuccess: class implements Action {
-    public readonly type = RoomActionTypes.COUNT_ADMINS_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * countAdminsFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  countAdminsFail: class implements Action {
-    public readonly type = RoomActionTypes.COUNT_ADMINS_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
-   * patchOrCreate Action.
-   * Patch an existing model instance or insert a new one into the data source.
-   *
-   * @param {object} data Request data.
-   *
-   *  - `data` – `{object}` - Model instance data
-   * @param {any} meta (optional).
-   * 
-   */
-  patchOrCreate: class implements Action {
-    public readonly type = RoomActionTypes.PATCH_OR_CREATE;
-      
-    constructor(public payload: any, public meta?: any) {}
-  },
-  /**
-   * patchOrCreateSuccess Action.
-   * 
-   * @param {any} id 
-   * @param {object} data 
-   * @param {any} meta (optional).
-   * 
-   */
-  patchOrCreateSuccess: class implements Action {
-    public readonly type = RoomActionTypes.PATCH_OR_CREATE_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * patchOrCreateFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  patchOrCreateFail: class implements Action {
-    public readonly type = RoomActionTypes.PATCH_OR_CREATE_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
-   * patchAttributes Action.
-   * Patch attributes for a model instance and persist it into the data source.
-   *
-   * @param {any} id Room id
-   * @param {object} data Request data.
-   *
-   *  - `data` – `{object}` - An object of model property name/value pairs
-   * @param {any} meta (optional).
-   * 
-   */
-  patchAttributes: class implements Action {
-    public readonly type = RoomActionTypes.PATCH_ATTRIBUTES;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any = {}, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * patchAttributesSuccess Action.
-   * 
-   * @param {any} id 
-   * @param {object} data 
-   * @param {any} meta (optional).
-   * 
-   */
-  patchAttributesSuccess: class implements Action {
-    public readonly type = RoomActionTypes.PATCH_ATTRIBUTES_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * patchAttributesFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  patchAttributesFail: class implements Action {
-    public readonly type = RoomActionTypes.PATCH_ATTRIBUTES_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },

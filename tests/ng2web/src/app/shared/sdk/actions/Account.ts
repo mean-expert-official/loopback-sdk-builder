@@ -106,14 +106,6 @@ Object.assign(BaseLoopbackActionTypesFactory('Account'), {
   COUNT_ADMINISTRATIONS_SUCCESS: type('[Account] countAdministrations success'),
   COUNT_ADMINISTRATIONS_FAIL: type('[Account] countAdministrations fail'),
 
-  PATCH_OR_CREATE: type('[Account] patchOrCreate'),
-  PATCH_OR_CREATE_SUCCESS: type('[Account] patchOrCreate success'),
-  PATCH_OR_CREATE_FAIL: type('[Account] patchOrCreate fail'),
-
-  PATCH_ATTRIBUTES: type('[Account] patchAttributes'),
-  PATCH_ATTRIBUTES_SUCCESS: type('[Account] patchAttributes success'),
-  PATCH_ATTRIBUTES_FAIL: type('[Account] patchAttributes fail'),
-
   LOGIN: type('[Account] login'),
   LOGIN_SUCCESS: type('[Account] login success'),
   LOGIN_FAIL: type('[Account] login fail'),
@@ -153,8 +145,8 @@ Object.assign(BaseLoopbackActionTypesFactory('Account'), {
    * Account specific action types
    */
   SIGNUP: type('[Account] Signup'),
-  SIGNUP_success: type('[Account] Signup success'),
-  SIGNUP_fail: type('[Account] Signup fail'),
+  SIGNUP_SUCCESS: type('[Account] Signup success'),
+  SIGNUP_FAIL: type('[Account] Signup fail'),
 });
 export const AccountActions =
 Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes), {
@@ -232,8 +224,11 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
    */
   destroyByIdAccessTokensSuccess: class implements Action {
     public readonly type = AccountActionTypes.DESTROY_BY_ID_ACCESSTOKENS_SUCCESS;
-  
-    constructor(public payload: any, public meta?: any) {}
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
   },
   /**
    * destroyByIdAccessTokensFail Action.
@@ -370,8 +365,11 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
    */
   destroyByIdRoomsSuccess: class implements Action {
     public readonly type = AccountActionTypes.DESTROY_BY_ID_ROOMS_SUCCESS;
-  
-    constructor(public payload: any, public meta?: any) {}
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
   },
   /**
    * destroyByIdRoomsFail Action.
@@ -511,8 +509,11 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
    */
   unlinkRoomsSuccess: class implements Action {
     public readonly type = AccountActionTypes.UNLINK_ROOMS_SUCCESS;
-  
-    constructor(public payload: any, public meta?: any) {}
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
   },
   /**
    * unlinkRoomsFail Action.
@@ -600,8 +601,11 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
    */
   destroyByIdAdministrationsSuccess: class implements Action {
     public readonly type = AccountActionTypes.DESTROY_BY_ID_ADMINISTRATIONS_SUCCESS;
-  
-    constructor(public payload: any, public meta?: any) {}
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
   },
   /**
    * destroyByIdAdministrationsFail Action.
@@ -741,8 +745,11 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
    */
   unlinkAdministrationsSuccess: class implements Action {
     public readonly type = AccountActionTypes.UNLINK_ADMINISTRATIONS_SUCCESS;
-  
-    constructor(public payload: any, public meta?: any) {}
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
   },
   /**
    * unlinkAdministrationsFail Action.
@@ -891,54 +898,6 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
   },
 
   /**
-   * countAccessTokens Action.
-   * Counts accessTokens of Account.
-   *
-   * @param {any} id Account id
-   * @param {object} where Criteria to match model instances
-   * @param {any} meta (optional).
-   * 
-   */
-  countAccessTokens: class implements Action {
-    public readonly type = AccountActionTypes.COUNT_ACCESSTOKENS;
-      public payload: {id: any, where: any};
-
-    constructor(id: any, where: any = {}, public meta?: any) {
-      this.payload = {id, where};
-    }
-  },
-  /**
-   * countAccessTokensSuccess Action.
-   * 
-   * @param {any} id 
-   * Data properties:
-   *
-   *  - `count` – `{number}` - 
-   * @param {any} meta (optional).
-   * 
-   */
-  countAccessTokensSuccess: class implements Action {
-    public readonly type = AccountActionTypes.COUNT_ACCESSTOKENS_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * countAccessTokensFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  countAccessTokensFail: class implements Action {
-    public readonly type = AccountActionTypes.COUNT_ACCESSTOKENS_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
    * getRooms Action.
    * Queries rooms of Account.
    *
@@ -1067,54 +1026,6 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
    */
   deleteRoomsFail: class implements Action {
     public readonly type = AccountActionTypes.DELETE_ROOMS_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
-   * countRooms Action.
-   * Counts rooms of Account.
-   *
-   * @param {any} id Account id
-   * @param {object} where Criteria to match model instances
-   * @param {any} meta (optional).
-   * 
-   */
-  countRooms: class implements Action {
-    public readonly type = AccountActionTypes.COUNT_ROOMS;
-      public payload: {id: any, where: any};
-
-    constructor(id: any, where: any = {}, public meta?: any) {
-      this.payload = {id, where};
-    }
-  },
-  /**
-   * countRoomsSuccess Action.
-   * 
-   * @param {any} id 
-   * Data properties:
-   *
-   *  - `count` – `{number}` - 
-   * @param {any} meta (optional).
-   * 
-   */
-  countRoomsSuccess: class implements Action {
-    public readonly type = AccountActionTypes.COUNT_ROOMS_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * countRoomsFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  countRoomsFail: class implements Action {
-    public readonly type = AccountActionTypes.COUNT_ROOMS_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },
@@ -1253,146 +1164,6 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
   },
 
   /**
-   * countAdministrations Action.
-   * Counts administrations of Account.
-   *
-   * @param {any} id Account id
-   * @param {object} where Criteria to match model instances
-   * @param {any} meta (optional).
-   * 
-   */
-  countAdministrations: class implements Action {
-    public readonly type = AccountActionTypes.COUNT_ADMINISTRATIONS;
-      public payload: {id: any, where: any};
-
-    constructor(id: any, where: any = {}, public meta?: any) {
-      this.payload = {id, where};
-    }
-  },
-  /**
-   * countAdministrationsSuccess Action.
-   * 
-   * @param {any} id 
-   * Data properties:
-   *
-   *  - `count` – `{number}` - 
-   * @param {any} meta (optional).
-   * 
-   */
-  countAdministrationsSuccess: class implements Action {
-    public readonly type = AccountActionTypes.COUNT_ADMINISTRATIONS_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * countAdministrationsFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  countAdministrationsFail: class implements Action {
-    public readonly type = AccountActionTypes.COUNT_ADMINISTRATIONS_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
-   * patchOrCreate Action.
-   * Patch an existing model instance or insert a new one into the data source.
-   *
-   * @param {object} data Request data.
-   *
-   *  - `data` – `{object}` - Model instance data
-   * @param {any} meta (optional).
-   * 
-   */
-  patchOrCreate: class implements Action {
-    public readonly type = AccountActionTypes.PATCH_OR_CREATE;
-      
-    constructor(public payload: any, public meta?: any) {}
-  },
-  /**
-   * patchOrCreateSuccess Action.
-   * 
-   * @param {any} id 
-   * @param {object} data 
-   * @param {any} meta (optional).
-   * 
-   */
-  patchOrCreateSuccess: class implements Action {
-    public readonly type = AccountActionTypes.PATCH_OR_CREATE_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * patchOrCreateFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  patchOrCreateFail: class implements Action {
-    public readonly type = AccountActionTypes.PATCH_OR_CREATE_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
-   * patchAttributes Action.
-   * Patch attributes for a model instance and persist it into the data source.
-   *
-   * @param {any} id Account id
-   * @param {object} data Request data.
-   *
-   *  - `data` – `{object}` - An object of model property name/value pairs
-   * @param {any} meta (optional).
-   * 
-   */
-  patchAttributes: class implements Action {
-    public readonly type = AccountActionTypes.PATCH_ATTRIBUTES;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any = {}, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * patchAttributesSuccess Action.
-   * 
-   * @param {any} id 
-   * @param {object} data 
-   * @param {any} meta (optional).
-   * 
-   */
-  patchAttributesSuccess: class implements Action {
-    public readonly type = AccountActionTypes.PATCH_ATTRIBUTES_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * patchAttributesFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  patchAttributesFail: class implements Action {
-    public readonly type = AccountActionTypes.PATCH_ATTRIBUTES_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
    * login Action.
    * Login a user with username/email and password.
    *
@@ -1430,11 +1201,8 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
    */
   loginSuccess: class implements Action {
     public readonly type = AccountActionTypes.LOGIN_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
+  
+    constructor(public payload: any, public meta?: any) {}
   },
   /**
    * loginFail Action.
@@ -1475,7 +1243,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
   logoutSuccess: class implements Action {
     public readonly type = AccountActionTypes.LOGOUT_SUCCESS;
   
-    constructor(public payload: any, public meta?: any) {}
+    constructor(public meta?: any) {}
   },
   /**
    * logoutFail Action.
@@ -1518,8 +1286,11 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
    */
   confirmSuccess: class implements Action {
     public readonly type = AccountActionTypes.CONFIRM_SUCCESS;
-  
-    constructor(public payload: any, public meta?: any) {}
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
   },
   /**
    * confirmFail Action.
@@ -1559,8 +1330,11 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
    */
   resetPasswordSuccess: class implements Action {
     public readonly type = AccountActionTypes.RESET_PASSWORD_SUCCESS;
-  
-    constructor(public payload: any, public meta?: any) {}
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
   },
   /**
    * resetPasswordFail Action.
@@ -1605,8 +1379,11 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
    */
   changePasswordSuccess: class implements Action {
     public readonly type = AccountActionTypes.CHANGE_PASSWORD_SUCCESS;
-  
-    constructor(public payload: any, public meta?: any) {}
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
   },
   /**
    * changePasswordFail Action.
@@ -1775,7 +1552,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
   },
 
   signupSuccess: class implements Action {
-    public readonly type = AccountActionTypes.SIGNUP_success;
+    public readonly type = AccountActionTypes.SIGNUP_SUCCESS;
     public payload: {credentials: any, data: any};
 
     constructor(credentials: any, data: any, public meta?: any) {
@@ -1784,7 +1561,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
   },
 
   signupFail: class implements Action {
-    public readonly type = AccountActionTypes.SIGNUP_fail;
+    public readonly type = AccountActionTypes.SIGNUP_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },

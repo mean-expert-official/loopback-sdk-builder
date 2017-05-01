@@ -20,30 +20,6 @@ import { ApplicationCredentialApi } from '../services/index';
 
 @Injectable()
 export class ApplicationCredentialEffects extends BaseLoopbackEffects {
-  @Effect()
-  protected patchOrCreate: Observable<LoopbackAction> = this.actions$
-    .ofType(ApplicationCredentialActionTypes.PATCH_OR_CREATE)
-    .mergeMap((action: LoopbackAction) =>
-      this.applicationcredential.patchOrCreate(action.payload.data)
-              .map((response) => new ApplicationCredentialActions.patchOrCreateSuccess(action.payload, action.meta))
-              .catch((error) => concat(
-          of(new ApplicationCredentialActions.patchOrCreateFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected patchAttributes: Observable<LoopbackAction> = this.actions$
-    .ofType(ApplicationCredentialActionTypes.PATCH_ATTRIBUTES)
-    .mergeMap((action: LoopbackAction) =>
-      this.applicationcredential.patchAttributes(action.payload.id, action.payload.data)
-              .map((response) => new ApplicationCredentialActions.patchAttributesSuccess(action.payload, action.meta))
-              .catch((error) => concat(
-          of(new ApplicationCredentialActions.patchAttributesFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
     /**
    * @author João Ribeiro <@JonnyBGod> <github:JonnyBGod>
    * @description

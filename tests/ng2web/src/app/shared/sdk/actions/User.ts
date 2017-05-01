@@ -34,14 +34,6 @@ Object.assign(BaseLoopbackActionTypesFactory('User'), {
   COUNT_ACCESSTOKENS_SUCCESS: type('[User] countAccessTokens success'),
   COUNT_ACCESSTOKENS_FAIL: type('[User] countAccessTokens fail'),
 
-  PATCH_OR_CREATE: type('[User] patchOrCreate'),
-  PATCH_OR_CREATE_SUCCESS: type('[User] patchOrCreate success'),
-  PATCH_OR_CREATE_FAIL: type('[User] patchOrCreate fail'),
-
-  PATCH_ATTRIBUTES: type('[User] patchAttributes'),
-  PATCH_ATTRIBUTES_SUCCESS: type('[User] patchAttributes success'),
-  PATCH_ATTRIBUTES_FAIL: type('[User] patchAttributes fail'),
-
   LOGIN: type('[User] login'),
   LOGIN_SUCCESS: type('[User] login success'),
   LOGIN_FAIL: type('[User] login fail'),
@@ -73,8 +65,8 @@ Object.assign(BaseLoopbackActionTypesFactory('User'), {
    * User specific action types
    */
   SIGNUP: type('[User] Signup'),
-  SIGNUP_success: type('[User] Signup success'),
-  SIGNUP_fail: type('[User] Signup fail'),
+  SIGNUP_SUCCESS: type('[User] Signup success'),
+  SIGNUP_FAIL: type('[User] Signup fail'),
 });
 export const UserActions =
 Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
@@ -152,8 +144,11 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
    */
   destroyByIdAccessTokensSuccess: class implements Action {
     public readonly type = UserActionTypes.DESTROY_BY_ID_ACCESSTOKENS_SUCCESS;
-  
-    constructor(public payload: any, public meta?: any) {}
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
   },
   /**
    * destroyByIdAccessTokensFail Action.
@@ -351,146 +346,6 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
   },
 
   /**
-   * countAccessTokens Action.
-   * Counts accessTokens of User.
-   *
-   * @param {any} id User id
-   * @param {object} where Criteria to match model instances
-   * @param {any} meta (optional).
-   * 
-   */
-  countAccessTokens: class implements Action {
-    public readonly type = UserActionTypes.COUNT_ACCESSTOKENS;
-      public payload: {id: any, where: any};
-
-    constructor(id: any, where: any = {}, public meta?: any) {
-      this.payload = {id, where};
-    }
-  },
-  /**
-   * countAccessTokensSuccess Action.
-   * 
-   * @param {any} id 
-   * Data properties:
-   *
-   *  - `count` – `{number}` - 
-   * @param {any} meta (optional).
-   * 
-   */
-  countAccessTokensSuccess: class implements Action {
-    public readonly type = UserActionTypes.COUNT_ACCESSTOKENS_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * countAccessTokensFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  countAccessTokensFail: class implements Action {
-    public readonly type = UserActionTypes.COUNT_ACCESSTOKENS_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
-   * patchOrCreate Action.
-   * Patch an existing model instance or insert a new one into the data source.
-   *
-   * @param {object} data Request data.
-   *
-   *  - `data` – `{object}` - Model instance data
-   * @param {any} meta (optional).
-   * 
-   */
-  patchOrCreate: class implements Action {
-    public readonly type = UserActionTypes.PATCH_OR_CREATE;
-      
-    constructor(public payload: any, public meta?: any) {}
-  },
-  /**
-   * patchOrCreateSuccess Action.
-   * 
-   * @param {any} id 
-   * @param {object} data 
-   * @param {any} meta (optional).
-   * 
-   */
-  patchOrCreateSuccess: class implements Action {
-    public readonly type = UserActionTypes.PATCH_OR_CREATE_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * patchOrCreateFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  patchOrCreateFail: class implements Action {
-    public readonly type = UserActionTypes.PATCH_OR_CREATE_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
-   * patchAttributes Action.
-   * Patch attributes for a model instance and persist it into the data source.
-   *
-   * @param {any} id User id
-   * @param {object} data Request data.
-   *
-   *  - `data` – `{object}` - An object of model property name/value pairs
-   * @param {any} meta (optional).
-   * 
-   */
-  patchAttributes: class implements Action {
-    public readonly type = UserActionTypes.PATCH_ATTRIBUTES;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any = {}, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * patchAttributesSuccess Action.
-   * 
-   * @param {any} id 
-   * @param {object} data 
-   * @param {any} meta (optional).
-   * 
-   */
-  patchAttributesSuccess: class implements Action {
-    public readonly type = UserActionTypes.PATCH_ATTRIBUTES_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * patchAttributesFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  patchAttributesFail: class implements Action {
-    public readonly type = UserActionTypes.PATCH_ATTRIBUTES_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
    * login Action.
    * Login a user with username/email and password.
    *
@@ -528,11 +383,8 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
    */
   loginSuccess: class implements Action {
     public readonly type = UserActionTypes.LOGIN_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
+  
+    constructor(public payload: any, public meta?: any) {}
   },
   /**
    * loginFail Action.
@@ -573,7 +425,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
   logoutSuccess: class implements Action {
     public readonly type = UserActionTypes.LOGOUT_SUCCESS;
   
-    constructor(public payload: any, public meta?: any) {}
+    constructor(public meta?: any) {}
   },
   /**
    * logoutFail Action.
@@ -616,8 +468,11 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
    */
   confirmSuccess: class implements Action {
     public readonly type = UserActionTypes.CONFIRM_SUCCESS;
-  
-    constructor(public payload: any, public meta?: any) {}
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
   },
   /**
    * confirmFail Action.
@@ -657,8 +512,11 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
    */
   resetPasswordSuccess: class implements Action {
     public readonly type = UserActionTypes.RESET_PASSWORD_SUCCESS;
-  
-    constructor(public payload: any, public meta?: any) {}
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
   },
   /**
    * resetPasswordFail Action.
@@ -703,8 +561,11 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
    */
   changePasswordSuccess: class implements Action {
     public readonly type = UserActionTypes.CHANGE_PASSWORD_SUCCESS;
-  
-    constructor(public payload: any, public meta?: any) {}
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
   },
   /**
    * changePasswordFail Action.
@@ -777,7 +638,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
   },
 
   signupSuccess: class implements Action {
-    public readonly type = UserActionTypes.SIGNUP_success;
+    public readonly type = UserActionTypes.SIGNUP_SUCCESS;
     public payload: {credentials: any, data: any};
 
     constructor(credentials: any, data: any, public meta?: any) {
@@ -786,7 +647,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
   },
 
   signupFail: class implements Action {
-    public readonly type = UserActionTypes.SIGNUP_fail;
+    public readonly type = UserActionTypes.SIGNUP_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },

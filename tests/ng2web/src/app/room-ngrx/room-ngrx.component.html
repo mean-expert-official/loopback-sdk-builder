@@ -1,0 +1,25 @@
+<a routerLink="/">Return to rooms list</a>
+<h3>Room Name {{ room.name }}</h3>
+<h3 *ngIf="room.id">Messages</h3>
+<form *ngIf="room.id">
+  <input name="text" type="text" [(ngModel)]="message.text" placeholder="Message" />
+  <button (click)="send()">Send Message</button>
+</form>
+<button (click)="findByRoom()">FindByRoom</button>
+<ul *ngIf="room.id">
+  <li *ngFor="let _message of room.messages">
+    <b>Message:</b> {{ _message.text }}
+    <form>
+      <input #reply name="text" type="text" placeholder="Reply" />
+      <button (click)="sendReply(_message, reply.value)">Send Reply</button>
+    </form>
+    <br/>----------------------------------------------------<br/>
+    <span *ngIf="!_message.replies || _message.replies.length === 0">No Replies Added</span>
+    <ul>
+      <li *ngFor="let _reply of _message.replies">
+        {{ _reply.text }}
+      </li>
+    </ul>
+    <br/>===============================<br/>
+  </li>
+</ul>

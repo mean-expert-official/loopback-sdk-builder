@@ -25,8 +25,8 @@ export class UserEffects extends BaseLoopbackEffects {
     .ofType(UserActionTypes.FIND_BY_ID_ACCESSTOKENS)
     .mergeMap((action: LoopbackAction) =>
       this.user.findByIdAccessTokens(action.payload.id, action.payload.fk)
-              .map((response) => new UserActions.findByIdAccessTokensSuccess(action.payload, action.meta))
-              .catch((error) => concat(
+        .map((response) => new UserActions.findByIdAccessTokensSuccess(action.payload.id, response, action.meta))
+        .catch((error) => concat(
           of(new UserActions.findByIdAccessTokensFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
@@ -37,8 +37,8 @@ export class UserEffects extends BaseLoopbackEffects {
     .ofType(UserActionTypes.DESTROY_BY_ID_ACCESSTOKENS)
     .mergeMap((action: LoopbackAction) =>
       this.user.destroyByIdAccessTokens(action.payload.id, action.payload.fk)
-              .map((response) => new UserActions.destroyByIdAccessTokensSuccess(action.payload.id, response, action.meta))
-              .catch((error) => concat(
+        .map((response) => new UserActions.destroyByIdAccessTokensSuccess(action.payload.id, action.payload.fk, action.meta))
+        .catch((error) => concat(
           of(new UserActions.destroyByIdAccessTokensFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
@@ -49,8 +49,8 @@ export class UserEffects extends BaseLoopbackEffects {
     .ofType(UserActionTypes.UPDATE_BY_ID_ACCESSTOKENS)
     .mergeMap((action: LoopbackAction) =>
       this.user.updateByIdAccessTokens(action.payload.id, action.payload.fk, action.payload.data)
-              .map((response) => new UserActions.updateByIdAccessTokensSuccess(action.payload, action.meta))
-              .catch((error) => concat(
+        .map((response) => new UserActions.updateByIdAccessTokensSuccess(action.payload.id, response, action.meta))
+        .catch((error) => concat(
           of(new UserActions.updateByIdAccessTokensFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
@@ -61,8 +61,8 @@ export class UserEffects extends BaseLoopbackEffects {
     .ofType(UserActionTypes.GET_ACCESSTOKENS)
     .mergeMap((action: LoopbackAction) =>
       this.user.getAccessTokens(action.payload.id, action.payload.filter)
-              .map((response) => new UserActions.getAccessTokensSuccess(action.payload, action.meta))
-              .catch((error) => concat(
+        .map((response) => new UserActions.getAccessTokensSuccess(action.payload.id, response, action.meta))
+        .catch((error) => concat(
           of(new UserActions.getAccessTokensFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
@@ -73,8 +73,8 @@ export class UserEffects extends BaseLoopbackEffects {
     .ofType(UserActionTypes.CREATE_ACCESSTOKENS)
     .mergeMap((action: LoopbackAction) =>
       this.user.createAccessTokens(action.payload.id, action.payload.data)
-              .map((response) => new UserActions.createAccessTokensSuccess(action.payload, action.meta))
-              .catch((error) => concat(
+        .map((response) => new UserActions.createAccessTokensSuccess(action.payload.id, response, action.meta))
+        .catch((error) => concat(
           of(new UserActions.createAccessTokensFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
@@ -85,45 +85,9 @@ export class UserEffects extends BaseLoopbackEffects {
     .ofType(UserActionTypes.DELETE_ACCESSTOKENS)
     .mergeMap((action: LoopbackAction) =>
       this.user.deleteAccessTokens(action.payload.id)
-              .map((response) => new UserActions.deleteAccessTokensSuccess(action.payload.id, response, action.meta))
-              .catch((error) => concat(
+        .map((response) => new UserActions.deleteAccessTokensSuccess(action.payload, action.meta))
+        .catch((error) => concat(
           of(new UserActions.deleteAccessTokensFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected countAccessTokens: Observable<LoopbackAction> = this.actions$
-    .ofType(UserActionTypes.COUNT_ACCESSTOKENS)
-    .mergeMap((action: LoopbackAction) =>
-      this.user.countAccessTokens(action.payload.id, action.payload.where)
-              .map((response) => new UserActions.countAccessTokensSuccess(action.payload, action.meta))
-              .catch((error) => concat(
-          of(new UserActions.countAccessTokensFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected patchOrCreate: Observable<LoopbackAction> = this.actions$
-    .ofType(UserActionTypes.PATCH_OR_CREATE)
-    .mergeMap((action: LoopbackAction) =>
-      this.user.patchOrCreate(action.payload.data)
-              .map((response) => new UserActions.patchOrCreateSuccess(action.payload, action.meta))
-              .catch((error) => concat(
-          of(new UserActions.patchOrCreateFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  protected patchAttributes: Observable<LoopbackAction> = this.actions$
-    .ofType(UserActionTypes.PATCH_ATTRIBUTES)
-    .mergeMap((action: LoopbackAction) =>
-      this.user.patchAttributes(action.payload.id, action.payload.data)
-              .map((response) => new UserActions.patchAttributesSuccess(action.payload, action.meta))
-              .catch((error) => concat(
-          of(new UserActions.patchAttributesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
@@ -133,8 +97,8 @@ export class UserEffects extends BaseLoopbackEffects {
     .ofType(UserActionTypes.LOGIN)
     .mergeMap((action: LoopbackAction) =>
       this.user.login(action.payload.credentials, action.payload.include)
-              .map((response) => new UserActions.loginSuccess(action.payload, action.meta))
-              .catch((error) => concat(
+        .map((response) => new UserActions.loginSuccess(response, action.meta))
+        .catch((error) => concat(
           of(new UserActions.loginFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
@@ -145,8 +109,8 @@ export class UserEffects extends BaseLoopbackEffects {
     .ofType(UserActionTypes.LOGOUT)
     .mergeMap((action: LoopbackAction) =>
       this.user.logout()
-              .map((response) => new UserActions.logoutSuccess(action.payload.id, response, action.meta))
-              .catch((error) => concat(
+        .map((response) => new UserActions.logoutSuccess(action.meta))
+        .catch((error) => concat(
           of(new UserActions.logoutFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
@@ -157,8 +121,8 @@ export class UserEffects extends BaseLoopbackEffects {
     .ofType(UserActionTypes.CONFIRM)
     .mergeMap((action: LoopbackAction) =>
       this.user.confirm(action.payload.uid, action.payload.token, action.payload.redirect)
-              .map((response) => new UserActions.confirmSuccess(action.payload.id, response, action.meta))
-              .catch((error) => concat(
+        .map((response) => new UserActions.confirmSuccess(action.payload.id, action.payload.fk, action.meta))
+        .catch((error) => concat(
           of(new UserActions.confirmFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
@@ -169,8 +133,8 @@ export class UserEffects extends BaseLoopbackEffects {
     .ofType(UserActionTypes.RESET_PASSWORD)
     .mergeMap((action: LoopbackAction) =>
       this.user.resetPassword(action.payload.options)
-              .map((response) => new UserActions.resetPasswordSuccess(action.payload.id, response, action.meta))
-              .catch((error) => concat(
+        .map((response) => new UserActions.resetPasswordSuccess(action.payload.id, action.payload.fk, action.meta))
+        .catch((error) => concat(
           of(new UserActions.resetPasswordFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
@@ -181,8 +145,8 @@ export class UserEffects extends BaseLoopbackEffects {
     .ofType(UserActionTypes.CHANGE_PASSWORD)
     .mergeMap((action: LoopbackAction) =>
       this.user.changePassword(action.payload.oldPassword, action.payload.newPassword)
-              .map((response) => new UserActions.changePasswordSuccess(action.payload.id, response, action.meta))
-              .catch((error) => concat(
+        .map((response) => new UserActions.changePasswordSuccess(action.payload.id, action.payload.fk, action.meta))
+        .catch((error) => concat(
           of(new UserActions.changePasswordFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
@@ -193,8 +157,8 @@ export class UserEffects extends BaseLoopbackEffects {
     .ofType(UserActionTypes.CREATE_MANY_ACCESSTOKENS)
     .mergeMap((action: LoopbackAction) =>
       this.user.createManyAccessTokens(action.payload.id, action.payload.data)
-              .map((response) => new UserActions.createManyAccessTokensSuccess(action.payload, action.meta))
-              .catch((error) => concat(
+        .map((response) => new UserActions.createManyAccessTokensSuccess(action.payload.id, response, action.meta))
+        .catch((error) => concat(
           of(new UserActions.createManyAccessTokensFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
