@@ -50,10 +50,6 @@ Object.assign(BaseLoopbackActionTypesFactory('Message'), {
   DELETE_LIKES_SUCCESS: type('[Message] deleteLikes success'),
   DELETE_LIKES_FAIL: type('[Message] deleteLikes fail'),
 
-  COUNT_LIKES: type('[Message] countLikes'),
-  COUNT_LIKES_SUCCESS: type('[Message] countLikes success'),
-  COUNT_LIKES_FAIL: type('[Message] countLikes fail'),
-
   GET_REPLIES: type('[Message] getReplies'),
   GET_REPLIES_SUCCESS: type('[Message] getReplies success'),
   GET_REPLIES_FAIL: type('[Message] getReplies fail'),
@@ -65,10 +61,6 @@ Object.assign(BaseLoopbackActionTypesFactory('Message'), {
   DELETE_REPLIES: type('[Message] deleteReplies'),
   DELETE_REPLIES_SUCCESS: type('[Message] deleteReplies success'),
   DELETE_REPLIES_FAIL: type('[Message] deleteReplies fail'),
-
-  COUNT_REPLIES: type('[Message] countReplies'),
-  COUNT_REPLIES_SUCCESS: type('[Message] countReplies success'),
-  COUNT_REPLIES_FAIL: type('[Message] countReplies fail'),
 
   CREATE_MANY_LIKES: type('[Message] createManyLikes'),
   CREATE_MANY_LIKES_SUCCESS: type('[Message] createManyLikes success'),

@@ -70,10 +70,6 @@ Object.assign(BaseLoopbackActionTypesFactory('Account'), {
   DELETE_ACCESSTOKENS_SUCCESS: type('[Account] deleteAccessTokens success'),
   DELETE_ACCESSTOKENS_FAIL: type('[Account] deleteAccessTokens fail'),
 
-  COUNT_ACCESSTOKENS: type('[Account] countAccessTokens'),
-  COUNT_ACCESSTOKENS_SUCCESS: type('[Account] countAccessTokens success'),
-  COUNT_ACCESSTOKENS_FAIL: type('[Account] countAccessTokens fail'),
-
   GET_ROOMS: type('[Account] getRooms'),
   GET_ROOMS_SUCCESS: type('[Account] getRooms success'),
   GET_ROOMS_FAIL: type('[Account] getRooms fail'),
@@ -85,10 +81,6 @@ Object.assign(BaseLoopbackActionTypesFactory('Account'), {
   DELETE_ROOMS: type('[Account] deleteRooms'),
   DELETE_ROOMS_SUCCESS: type('[Account] deleteRooms success'),
   DELETE_ROOMS_FAIL: type('[Account] deleteRooms fail'),
-
-  COUNT_ROOMS: type('[Account] countRooms'),
-  COUNT_ROOMS_SUCCESS: type('[Account] countRooms success'),
-  COUNT_ROOMS_FAIL: type('[Account] countRooms fail'),
 
   GET_ADMINISTRATIONS: type('[Account] getAdministrations'),
   GET_ADMINISTRATIONS_SUCCESS: type('[Account] getAdministrations success'),
@@ -102,10 +94,6 @@ Object.assign(BaseLoopbackActionTypesFactory('Account'), {
   DELETE_ADMINISTRATIONS_SUCCESS: type('[Account] deleteAdministrations success'),
   DELETE_ADMINISTRATIONS_FAIL: type('[Account] deleteAdministrations fail'),
 
-  COUNT_ADMINISTRATIONS: type('[Account] countAdministrations'),
-  COUNT_ADMINISTRATIONS_SUCCESS: type('[Account] countAdministrations success'),
-  COUNT_ADMINISTRATIONS_FAIL: type('[Account] countAdministrations fail'),
-
   LOGIN: type('[Account] login'),
   LOGIN_SUCCESS: type('[Account] login success'),
   LOGIN_FAIL: type('[Account] login fail'),
@@ -113,6 +101,10 @@ Object.assign(BaseLoopbackActionTypesFactory('Account'), {
   LOGOUT: type('[Account] logout'),
   LOGOUT_SUCCESS: type('[Account] logout success'),
   LOGOUT_FAIL: type('[Account] logout fail'),
+
+  VERIFY: type('[Account] verify'),
+  VERIFY_SUCCESS: type('[Account] verify success'),
+  VERIFY_FAIL: type('[Account] verify fail'),
 
   CONFIRM: type('[Account] confirm'),
   CONFIRM_SUCCESS: type('[Account] confirm success'),
@@ -125,6 +117,10 @@ Object.assign(BaseLoopbackActionTypesFactory('Account'), {
   CHANGE_PASSWORD: type('[Account] changePassword'),
   CHANGE_PASSWORD_SUCCESS: type('[Account] changePassword success'),
   CHANGE_PASSWORD_FAIL: type('[Account] changePassword fail'),
+
+  SET_PASSWORD: type('[Account] setPassword'),
+  SET_PASSWORD_SUCCESS: type('[Account] setPassword success'),
+  SET_PASSWORD_FAIL: type('[Account] setPassword fail'),
 
   CREATE_MANY_ACCESSTOKENS: type('[Account] createManyAccessTokens'),
   CREATE_MANY_ACCESSTOKENS_SUCCESS: type('[Account] createManyAccessTokens success'),
@@ -1259,8 +1255,53 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
   },
 
   /**
+   * verify Action.
+   * Trigger user's identity verification with configured verifyOptions
+   *
+   * @param {any} id Account id
+   * @param {object} data Request data.
+   *
+   * This method does not accept any data. Supply an empty object.
+   * @param {any} meta (optional).
+   * 
+   */
+  verify: class implements Action {
+    public readonly type = AccountActionTypes.VERIFY;
+      
+    constructor(public payload: any, public meta?: any) {}
+  },
+  /**
+   * verifySuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  verifySuccess: class implements Action {
+    public readonly type = AccountActionTypes.VERIFY_SUCCESS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * verifyFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  verifyFail: class implements Action {
+    public readonly type = AccountActionTypes.VERIFY_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
    * confirm Action.
-   * Confirm a user registration with email verification token.
+   * Confirm a user registration with identity verification token.
    *
    * @param {string} uid 
    * @param {string} token 
@@ -1394,6 +1435,50 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
    */
   changePasswordFail: class implements Action {
     public readonly type = AccountActionTypes.CHANGE_PASSWORD_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * setPassword Action.
+   * Reset user's password via a password-reset token.
+   *
+   * @param {object} data Request data.
+   *
+   *  - `newPassword` – `{string}` - 
+   * @param {any} meta (optional).
+   * 
+   */
+  setPassword: class implements Action {
+    public readonly type = AccountActionTypes.SET_PASSWORD;
+      
+    constructor(public payload: any, public meta?: any) {}
+  },
+  /**
+   * setPasswordSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  setPasswordSuccess: class implements Action {
+    public readonly type = AccountActionTypes.SET_PASSWORD_SUCCESS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * setPasswordFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  setPasswordFail: class implements Action {
+    public readonly type = AccountActionTypes.SET_PASSWORD_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },

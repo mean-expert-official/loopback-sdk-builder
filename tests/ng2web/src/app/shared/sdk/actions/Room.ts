@@ -102,10 +102,6 @@ Object.assign(BaseLoopbackActionTypesFactory('Room'), {
   DELETE_MESSAGES_SUCCESS: type('[Room] deleteMessages success'),
   DELETE_MESSAGES_FAIL: type('[Room] deleteMessages fail'),
 
-  COUNT_MESSAGES: type('[Room] countMessages'),
-  COUNT_MESSAGES_SUCCESS: type('[Room] countMessages success'),
-  COUNT_MESSAGES_FAIL: type('[Room] countMessages fail'),
-
   GET_LIKES: type('[Room] getLikes'),
   GET_LIKES_SUCCESS: type('[Room] getLikes success'),
   GET_LIKES_FAIL: type('[Room] getLikes fail'),
@@ -117,10 +113,6 @@ Object.assign(BaseLoopbackActionTypesFactory('Room'), {
   DELETE_LIKES: type('[Room] deleteLikes'),
   DELETE_LIKES_SUCCESS: type('[Room] deleteLikes success'),
   DELETE_LIKES_FAIL: type('[Room] deleteLikes fail'),
-
-  COUNT_LIKES: type('[Room] countLikes'),
-  COUNT_LIKES_SUCCESS: type('[Room] countLikes success'),
-  COUNT_LIKES_FAIL: type('[Room] countLikes fail'),
 
   GET_CATEGORIES: type('[Room] getCategories'),
   GET_CATEGORIES_SUCCESS: type('[Room] getCategories success'),
@@ -134,10 +126,6 @@ Object.assign(BaseLoopbackActionTypesFactory('Room'), {
   DELETE_CATEGORIES_SUCCESS: type('[Room] deleteCategories success'),
   DELETE_CATEGORIES_FAIL: type('[Room] deleteCategories fail'),
 
-  COUNT_CATEGORIES: type('[Room] countCategories'),
-  COUNT_CATEGORIES_SUCCESS: type('[Room] countCategories success'),
-  COUNT_CATEGORIES_FAIL: type('[Room] countCategories fail'),
-
   GET_ACCOUNTS: type('[Room] getAccounts'),
   GET_ACCOUNTS_SUCCESS: type('[Room] getAccounts success'),
   GET_ACCOUNTS_FAIL: type('[Room] getAccounts fail'),
@@ -150,10 +138,6 @@ Object.assign(BaseLoopbackActionTypesFactory('Room'), {
   DELETE_ACCOUNTS_SUCCESS: type('[Room] deleteAccounts success'),
   DELETE_ACCOUNTS_FAIL: type('[Room] deleteAccounts fail'),
 
-  COUNT_ACCOUNTS: type('[Room] countAccounts'),
-  COUNT_ACCOUNTS_SUCCESS: type('[Room] countAccounts success'),
-  COUNT_ACCOUNTS_FAIL: type('[Room] countAccounts fail'),
-
   GET_ADMINS: type('[Room] getAdmins'),
   GET_ADMINS_SUCCESS: type('[Room] getAdmins success'),
   GET_ADMINS_FAIL: type('[Room] getAdmins fail'),
@@ -165,10 +149,6 @@ Object.assign(BaseLoopbackActionTypesFactory('Room'), {
   DELETE_ADMINS: type('[Room] deleteAdmins'),
   DELETE_ADMINS_SUCCESS: type('[Room] deleteAdmins success'),
   DELETE_ADMINS_FAIL: type('[Room] deleteAdmins fail'),
-
-  COUNT_ADMINS: type('[Room] countAdmins'),
-  COUNT_ADMINS_SUCCESS: type('[Room] countAdmins success'),
-  COUNT_ADMINS_FAIL: type('[Room] countAdmins fail'),
 
   GREET_ROUTE: type('[Room] greetRoute'),
   GREET_ROUTE_SUCCESS: type('[Room] greetRoute success'),

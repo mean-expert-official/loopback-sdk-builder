@@ -38,10 +38,6 @@ Object.assign(BaseLoopbackActionTypesFactory('Category'), {
   DELETE_ROOMS_SUCCESS: type('[Category] deleteRooms success'),
   DELETE_ROOMS_FAIL: type('[Category] deleteRooms fail'),
 
-  COUNT_ROOMS: type('[Category] countRooms'),
-  COUNT_ROOMS_SUCCESS: type('[Category] countRooms success'),
-  COUNT_ROOMS_FAIL: type('[Category] countRooms fail'),
-
   CREATE_MANY_ROOMS: type('[Category] createManyRooms'),
   CREATE_MANY_ROOMS_SUCCESS: type('[Category] createManyRooms success'),
   CREATE_MANY_ROOMS_FAIL: type('[Category] createManyRooms fail'),

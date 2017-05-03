@@ -117,6 +117,18 @@ export class UserEffects extends BaseLoopbackEffects {
     );
 
   @Effect()
+  protected verify: Observable<LoopbackAction> = this.actions$
+    .ofType(UserActionTypes.VERIFY)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.verify(action.payload.id)
+        .map((response) => new UserActions.verifySuccess(action.payload.id, action.payload.fk, action.meta))
+        .catch((error) => concat(
+          of(new UserActions.verifyFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
   protected confirm: Observable<LoopbackAction> = this.actions$
     .ofType(UserActionTypes.CONFIRM)
     .mergeMap((action: LoopbackAction) =>
@@ -148,6 +160,18 @@ export class UserEffects extends BaseLoopbackEffects {
         .map((response) => new UserActions.changePasswordSuccess(action.payload.id, action.payload.fk, action.meta))
         .catch((error) => concat(
           of(new UserActions.changePasswordFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected setPassword: Observable<LoopbackAction> = this.actions$
+    .ofType(UserActionTypes.SET_PASSWORD)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.setPassword(action.payload.newPassword)
+        .map((response) => new UserActions.setPasswordSuccess(action.payload.id, action.payload.fk, action.meta))
+        .catch((error) => concat(
+          of(new UserActions.setPasswordFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );

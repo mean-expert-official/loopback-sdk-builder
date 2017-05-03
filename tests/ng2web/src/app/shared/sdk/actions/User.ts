@@ -30,10 +30,6 @@ Object.assign(BaseLoopbackActionTypesFactory('User'), {
   DELETE_ACCESSTOKENS_SUCCESS: type('[User] deleteAccessTokens success'),
   DELETE_ACCESSTOKENS_FAIL: type('[User] deleteAccessTokens fail'),
 
-  COUNT_ACCESSTOKENS: type('[User] countAccessTokens'),
-  COUNT_ACCESSTOKENS_SUCCESS: type('[User] countAccessTokens success'),
-  COUNT_ACCESSTOKENS_FAIL: type('[User] countAccessTokens fail'),
-
   LOGIN: type('[User] login'),
   LOGIN_SUCCESS: type('[User] login success'),
   LOGIN_FAIL: type('[User] login fail'),
@@ -41,6 +37,10 @@ Object.assign(BaseLoopbackActionTypesFactory('User'), {
   LOGOUT: type('[User] logout'),
   LOGOUT_SUCCESS: type('[User] logout success'),
   LOGOUT_FAIL: type('[User] logout fail'),
+
+  VERIFY: type('[User] verify'),
+  VERIFY_SUCCESS: type('[User] verify success'),
+  VERIFY_FAIL: type('[User] verify fail'),
 
   CONFIRM: type('[User] confirm'),
   CONFIRM_SUCCESS: type('[User] confirm success'),
@@ -53,6 +53,10 @@ Object.assign(BaseLoopbackActionTypesFactory('User'), {
   CHANGE_PASSWORD: type('[User] changePassword'),
   CHANGE_PASSWORD_SUCCESS: type('[User] changePassword success'),
   CHANGE_PASSWORD_FAIL: type('[User] changePassword fail'),
+
+  SET_PASSWORD: type('[User] setPassword'),
+  SET_PASSWORD_SUCCESS: type('[User] setPassword success'),
+  SET_PASSWORD_FAIL: type('[User] setPassword fail'),
 
   CREATE_MANY_ACCESSTOKENS: type('[User] createManyAccessTokens'),
   CREATE_MANY_ACCESSTOKENS_SUCCESS: type('[User] createManyAccessTokens success'),
@@ -441,8 +445,53 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
   },
 
   /**
+   * verify Action.
+   * Trigger user's identity verification with configured verifyOptions
+   *
+   * @param {any} id User id
+   * @param {object} data Request data.
+   *
+   * This method does not accept any data. Supply an empty object.
+   * @param {any} meta (optional).
+   * 
+   */
+  verify: class implements Action {
+    public readonly type = UserActionTypes.VERIFY;
+      
+    constructor(public payload: any, public meta?: any) {}
+  },
+  /**
+   * verifySuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  verifySuccess: class implements Action {
+    public readonly type = UserActionTypes.VERIFY_SUCCESS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * verifyFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  verifyFail: class implements Action {
+    public readonly type = UserActionTypes.VERIFY_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
    * confirm Action.
-   * Confirm a user registration with email verification token.
+   * Confirm a user registration with identity verification token.
    *
    * @param {string} uid 
    * @param {string} token 
@@ -576,6 +625,50 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
    */
   changePasswordFail: class implements Action {
     public readonly type = UserActionTypes.CHANGE_PASSWORD_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * setPassword Action.
+   * Reset user's password via a password-reset token.
+   *
+   * @param {object} data Request data.
+   *
+   *  - `newPassword` – `{string}` - 
+   * @param {any} meta (optional).
+   * 
+   */
+  setPassword: class implements Action {
+    public readonly type = UserActionTypes.SET_PASSWORD;
+      
+    constructor(public payload: any, public meta?: any) {}
+  },
+  /**
+   * setPasswordSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  setPasswordSuccess: class implements Action {
+    public readonly type = UserActionTypes.SET_PASSWORD_SUCCESS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * setPasswordFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  setPasswordFail: class implements Action {
+    public readonly type = UserActionTypes.SET_PASSWORD_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },
