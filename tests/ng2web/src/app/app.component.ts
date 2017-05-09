@@ -26,7 +26,7 @@ export class AppComponent {
       console.log('Disconnected', error);
     });
     this.realTime.onUnAuthorized().subscribe((error: string) => {
-      this.router.navigate(['/access']);
+      this.router.navigate(['/access-ngrx']);
     });
     this.realTime.onAuthenticated().subscribe((error: string) => {
       console.log('I am authorized');
