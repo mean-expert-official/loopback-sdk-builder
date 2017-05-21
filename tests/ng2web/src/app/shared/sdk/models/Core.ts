@@ -41,6 +41,7 @@ export class Core implements CoreInterface {
     return {
       name: 'Core',
       plural: 'cores',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',

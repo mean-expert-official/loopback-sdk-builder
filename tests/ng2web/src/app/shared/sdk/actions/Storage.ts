@@ -58,7 +58,7 @@ Object.assign(BaseLoopbackActionsFactory<Storage>('Storage', StorageActionTypes)
   getContainers: class implements Action {
     public readonly type = StorageActionTypes.GET_CONTAINERS;
       
-    constructor(public payload: any, public meta?: any) {}
+    constructor(public meta?: any) {}
   },
   /**
    * getContainersSuccess Action.

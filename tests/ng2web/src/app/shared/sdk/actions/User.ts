@@ -416,7 +416,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
   logout: class implements Action {
     public readonly type = UserActionTypes.LOGOUT;
       
-    constructor(public payload: any, public meta?: any) {}
+    constructor(public meta?: any) {}
   },
   /**
    * logoutSuccess Action.

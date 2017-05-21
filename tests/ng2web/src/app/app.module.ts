@@ -11,6 +11,8 @@ import { AppEffects } from './shared/app.effects';
 import * as fromApp from './shared/app.reducer';
 import { routing, appRoutingProviders } from './app.routing';
 
+import { OrmModule } from './shared/sdk/orm';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -28,7 +30,8 @@ import { routing, appRoutingProviders } from './app.routing';
     }),
     ...LoopbackEffects,
     EffectsModule.run(AppEffects),
-    routing
+    routing,
+    OrmModule.forRoot()
   ],
   providers       : [ appRoutingProviders ],
   entryComponents : [ AppComponent ],

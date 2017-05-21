@@ -62,6 +62,7 @@ export class UserIdentity implements UserIdentityInterface {
     return {
       name: 'UserIdentity',
       plural: 'user-identities',
+      idName: 'id',
       properties: {
         "provider": {
           name: 'provider',
@@ -117,7 +118,10 @@ export class UserIdentity implements UserIdentityInterface {
         user: {
           name: 'user',
           type: 'User',
-          model: 'User'
+          model: 'User',
+          relationType: 'belongsTo',
+          keyFrom: 'userId',
+          keyTo: 'id'
         },
       }
     }

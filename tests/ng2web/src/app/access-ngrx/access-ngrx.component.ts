@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Account, AccessToken } from '../shared/sdk/models';
 import { AccountApi } from '../shared/sdk/services';
-import { Store } from '@ngrx/store';
 
-import { LoopbackStateInterface, AccountActions } from '../shared/sdk';
+import { Orm } from '../shared/sdk/orm';
 
 @Component({
   selector: 'app-access-ngrx',
@@ -24,18 +23,15 @@ export class AccessNgrxComponent implements OnInit {
   public account: Account = new Account();
   public rememberMe: boolean = false;
 
-  constructor(
-    private accountApi: AccountApi,
-    private store: Store<LoopbackStateInterface>
-  ) { }
+  constructor(private orm: Orm) { }
 
   ngOnInit() {}
 
   register() {
-    this.store.dispatch(new AccountActions.signup(this.account));
+    this.orm.Account.signup(this.account);
   }
 
   login() {
-    this.store.dispatch(new AccountActions.login(this.account, 'user', this.rememberMe));
+    this.orm.Account.login(this.account, 'user', this.rememberMe);
   }
 }

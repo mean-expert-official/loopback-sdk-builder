@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { concat } from 'rxjs/observable/concat';
 import { Actions } from '@ngrx/effects';
-
+import { resolver } from './resolver';
 import { LoopbackAction } from '../models/BaseModels';
 import { LoopbackErrorActions } from '../actions/error';
 
@@ -46,7 +46,7 @@ export class BaseLoopbackEffects {
     .ofType(this.actionTypes.FIND_BY_ID)
     .mergeMap((action: LoopbackAction) =>
       this.apiService.findById(action.payload.id, action.payload.filter)
-        .map((response) => new this.actions.findByIdSuccess(response, action.meta))
+        .mergeMap((response) => resolver({data: response, meta: action.meta}, this.modelName, 'findByIdSuccess'))
         .catch((error) => concat(
           of(new this.actions.findByIdFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -57,7 +57,7 @@ export class BaseLoopbackEffects {
     .ofType(this.actionTypes.FIND)
     .mergeMap((action: LoopbackAction) =>
       this.apiService.find(action.payload)
-        .map((response) => new this.actions.findSuccess(response, action.meta))
+        .mergeMap((response) => resolver({data: response, meta: action.meta}, this.modelName, 'findSuccess'))
         .catch((error) => concat(
           of(new this.actions.findFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -68,7 +68,7 @@ export class BaseLoopbackEffects {
     .ofType(this.actionTypes.FIND_ONE)
     .mergeMap((action: LoopbackAction) =>
       this.apiService.findOne(action.payload)
-        .map((response) => new this.actions.findOneSuccess(response, action.meta))
+        .mergeMap((response) => resolver({data: response, meta: action.meta}, this.modelName, 'findOneSuccess'))
         .catch((error) => concat(
           of(new this.actions.findOneFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))

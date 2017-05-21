@@ -13,6 +13,7 @@ import { Effect, Actions } from '@ngrx/effects';
 
 import { LoopbackAction } from '../models/BaseModels';
 import { BaseLoopbackEffects } from './base';
+import { resolver } from './resolver';
 
 import { MessageActionTypes, MessageActions } from '../actions/Message';
 import { LoopbackErrorActions } from '../actions/error';
@@ -25,7 +26,10 @@ export class MessageEffects extends BaseLoopbackEffects {
     .ofType(MessageActionTypes.FIND_BY_ID_LIKES)
     .mergeMap((action: LoopbackAction) =>
       this.message.findByIdLikes(action.payload.id, action.payload.fk)
-        .map((response) => new MessageActions.findByIdLikesSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => {
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Like', 'findByIdSuccess');
+          return new MessageActions.findByIdLikesSuccess(action.payload.id, response, action.meta);
+        })
         .catch((error) => concat(
           of(new MessageActions.findByIdLikesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -61,7 +65,10 @@ export class MessageEffects extends BaseLoopbackEffects {
     .ofType(MessageActionTypes.FIND_BY_ID_REPLIES)
     .mergeMap((action: LoopbackAction) =>
       this.message.findByIdReplies(action.payload.id, action.payload.fk)
-        .map((response) => new MessageActions.findByIdRepliesSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => {
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Message', 'findByIdSuccess');
+          return new MessageActions.findByIdRepliesSuccess(action.payload.id, response, action.meta);
+        })
         .catch((error) => concat(
           of(new MessageActions.findByIdRepliesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))

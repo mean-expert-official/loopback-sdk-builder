@@ -48,6 +48,7 @@ export class Category implements CategoryInterface {
     return {
       name: 'Category',
       plural: 'categories',
+      idName: 'id',
       properties: {
         "name": {
           name: 'name',
@@ -71,7 +72,10 @@ export class Category implements CategoryInterface {
         rooms: {
           name: 'rooms',
           type: 'Room[]',
-          model: 'Room'
+          model: 'Room',
+          relationType: 'hasMany',
+          keyFrom: 'id',
+          keyTo: 'categoryId'
         },
       }
     }

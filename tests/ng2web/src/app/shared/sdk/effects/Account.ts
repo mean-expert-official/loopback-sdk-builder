@@ -13,6 +13,7 @@ import { Effect, Actions } from '@ngrx/effects';
 
 import { LoopbackAction } from '../models/BaseModels';
 import { BaseLoopbackEffects } from './base';
+import { resolver } from './resolver';
 
 import { AccountActionTypes, AccountActions } from '../actions/Account';
 import { LoopbackErrorActions } from '../actions/error';
@@ -61,7 +62,10 @@ export class AccountEffects extends BaseLoopbackEffects {
     .ofType(AccountActionTypes.FIND_BY_ID_ROOMS)
     .mergeMap((action: LoopbackAction) =>
       this.account.findByIdRooms(action.payload.id, action.payload.fk)
-        .map((response) => new AccountActions.findByIdRoomsSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => {
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Room', 'findByIdSuccess');
+          return new AccountActions.findByIdRoomsSuccess(action.payload.id, response, action.meta);
+        })
         .catch((error) => concat(
           of(new AccountActions.findByIdRoomsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -121,7 +125,10 @@ export class AccountEffects extends BaseLoopbackEffects {
     .ofType(AccountActionTypes.FIND_BY_ID_ADMINISTRATIONS)
     .mergeMap((action: LoopbackAction) =>
       this.account.findByIdAdministrations(action.payload.id, action.payload.fk)
-        .map((response) => new AccountActions.findByIdAdministrationsSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => {
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Room', 'findByIdSuccess');
+          return new AccountActions.findByIdAdministrationsSuccess(action.payload.id, response, action.meta);
+        })
         .catch((error) => concat(
           of(new AccountActions.findByIdAdministrationsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))

@@ -53,6 +53,7 @@ export class RoomAdmin implements RoomAdminInterface {
     return {
       name: 'RoomAdmin',
       plural: 'room-admins',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',
@@ -79,12 +80,18 @@ export class RoomAdmin implements RoomAdminInterface {
         account: {
           name: 'account',
           type: 'Account',
-          model: 'Account'
+          model: 'Account',
+          relationType: 'belongsTo',
+          keyFrom: 'adminId',
+          keyTo: 'id'
         },
         room: {
           name: 'room',
           type: 'Room',
-          model: 'Room'
+          model: 'Room',
+          relationType: 'belongsTo',
+          keyFrom: 'administrationId',
+          keyTo: 'id'
         },
       }
     }

@@ -9,6 +9,8 @@ LoopBackConfig.setBaseURL('http://127.0.0.1:3002');
 
 import * as io from 'socket.io-client';
 
+import { Orm } from '../shared/sdk/orm';
+
 var i = 0;
 
 @Component({
@@ -25,7 +27,7 @@ export class RoomNgrxListComponent implements OnInit, OnDestroy {
   private rooms: Room[];
   private connected: boolean = false;
   private subscriptions: Subscription[] = new Array<Subscription>();
-  //private socket: any = io.connect(LoopBackConfig.getPath(), { secure: false });
+  // private socket: any = io.connect(LoopBackConfig.getPath(), { secure: false });
 
   constructor(
     private accountApi: AccountApi,
@@ -33,7 +35,8 @@ export class RoomNgrxListComponent implements OnInit, OnDestroy {
     private router: Router,
     private logger: LoggerService,
     private realTime: RealTime,
-    private models: SDKModels
+    private models: SDKModels,
+    private orm: Orm
   ) {
     this.logger.info('Room Module Loaded');
     this.logged = this.accountApi.getCachedCurrent();
@@ -52,13 +55,41 @@ export class RoomNgrxListComponent implements OnInit, OnDestroy {
         this.roomRef.on('child_added').subscribe((child: Room) => {})
       );
     }));
+    
+    console.log(this.orm);
+    
+    this.orm.Room.find({
+      order: 'id DESC',
+      limit: 10
+    }).subscribe((data) => console.log(data));
+
+    this.orm.Room.find({
+      where: {
+        // name: 'Testando'
+        name: {like: 'Test'}
+      },
+      order: 'id DESC',
+      limit: 10,
+      // include: 'messages'
+      include: [
+        {
+          relation: 'messages',
+          scope: {
+            limit: 1
+          }
+        },
+        {
+          relation: 'likes',
+          scope: {
+            limit: 1
+          }
+        }
+      ]
+    }).subscribe((data) => console.log(data));
   }
 
   logout(): void {
-    this.accountApi.logout().subscribe(() => {
-      this.realTime.connection.disconnect();
-      this.router.navigate(['/access']);
-    });
+    this.orm.Account.logout();
   }
 
   ngOnDestroy() {
@@ -72,9 +103,7 @@ export class RoomNgrxListComponent implements OnInit, OnDestroy {
   }
 
   create(): void {
-    this.roomRef.create(this.room).subscribe((room: Room) => {
-      this.room = new Room();
-    });
+    this.orm.Room.create(this.room);
   }
 
   join(_room): void {

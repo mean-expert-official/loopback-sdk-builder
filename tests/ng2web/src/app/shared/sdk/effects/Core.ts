@@ -13,6 +13,7 @@ import { Effect, Actions } from '@ngrx/effects';
 
 import { LoopbackAction } from '../models/BaseModels';
 import { BaseLoopbackEffects } from './base';
+import { resolver } from './resolver';
 
 import { CoreActionTypes, CoreActions } from '../actions/Core';
 import { LoopbackErrorActions } from '../actions/error';

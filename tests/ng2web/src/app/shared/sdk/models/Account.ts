@@ -62,6 +62,7 @@ export class Account implements AccountInterface {
     return {
       name: 'Account',
       plural: 'accounts',
+      idName: 'id',
       properties: {
         "realm": {
           name: 'realm',
@@ -104,17 +105,26 @@ export class Account implements AccountInterface {
         accessTokens: {
           name: 'accessTokens',
           type: 'any[]',
-          model: ''
+          model: '',
+          relationType: 'hasMany',
+          keyFrom: 'id',
+          keyTo: 'userId'
         },
         rooms: {
           name: 'rooms',
           type: 'Room[]',
-          model: 'Room'
+          model: 'Room',
+          relationType: 'hasMany',
+          keyFrom: 'id',
+          keyTo: 'accountId'
         },
         administrations: {
           name: 'administrations',
           type: 'Room[]',
-          model: 'Room'
+          model: 'Room',
+          relationType: 'hasMany',
+          keyFrom: 'id',
+          keyTo: 'administrationId'
         },
       }
     }

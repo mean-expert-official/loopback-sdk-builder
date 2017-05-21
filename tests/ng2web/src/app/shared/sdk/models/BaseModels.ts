@@ -19,12 +19,13 @@ export interface LoopBackFilter {
 }
 
 export interface AccessTokenInterface {
-    id?: any;
-    ttl?: number;
-    issuedAt?: any;
-    created: any;
-    userId?: number;
-    rememberMe?: boolean;
+  id?: any;
+  ttl?: number;
+  issuedAt?: any;
+  created: any;
+  userId?: number;
+  rememberMe?: boolean;
+  scopes: any;
 }
 
 export class AccessToken implements AccessTokenInterface {
@@ -33,6 +34,7 @@ export class AccessToken implements AccessTokenInterface {
   created: Date = new Date(0);
   userId: number = 0;
   user: any = null;
+  scopes: any = null;
   constructor(data?: AccessTokenInterface) {
     Object.assign(this, data);
   }
@@ -49,9 +51,9 @@ export class AccessToken implements AccessTokenInterface {
   * @license MIT
   * This method creates an instance of AccessToken for dynamic purposes.
   **/
-  public static factory(data: AccessTokenInterface): AccessToken{
+  public static factory(data: AccessTokenInterface): AccessToken {
     return new AccessToken(data);
-  }  
+  }
   /**
   * @method getModelDefinition
   * @author Julien Ledun
@@ -82,6 +84,10 @@ export class AccessToken implements AccessTokenInterface {
           name: 'userId',
           type: 'number'
         },
+        scopes: {
+          type: ['string'],
+          description: 'Array of scopes granted to this access token.'
+        },
       },
       relations: {
         user: {
@@ -95,33 +101,34 @@ export class AccessToken implements AccessTokenInterface {
 }
 
 export class SDKToken implements AccessTokenInterface {
-    id: any = null;
-    ttl: number = null;
-    issuedAt: any = null;
-    created: any = null;
-    userId: any = null;
-    user: any = null;
-    rememberMe: boolean = null;
-    constructor(data?: AccessTokenInterface) {
-        Object.assign(this, data);
-    }
+  id: any = null;
+  ttl: number = null;
+  issuedAt: any = null;
+  created: any = null;
+  userId: any = null;
+  user: any = null;
+  rememberMe: boolean = null;
+  scopes: any = null;
+  constructor(data?: AccessTokenInterface) {
+    Object.assign(this, data);
+  }
 }
 /**
 * This GeoPoint represents both, LoopBack and MongoDB GeoPoint
 **/
-export interface GeoPoint  {
-    lat?: number;
-    lng?: number;
-    type?: string;
-    coordinates?: number[];
+export interface GeoPoint {
+  lat?: number;
+  lng?: number;
+  type?: string;
+  coordinates?: number[];
 }
 
 export interface StatFilter {
-    range: string,
-    custom?: {
-      start: string,
-      end: string
-    },
-    where?: {},
-    groupBy?: string
+  range: string,
+  custom?: {
+    start: string,
+    end: string
+  },
+  where?: {},
+  groupBy?: string
 }

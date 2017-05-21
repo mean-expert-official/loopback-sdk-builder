@@ -2,7 +2,6 @@
 import { Observable } from 'rxjs/Observable';
 import { Action } from '@ngrx/store';
 import { SDKToken } from '../models/BaseModels';
-import { User } from '../models/user';
 import { LoopbackAuthActionTypes } from '../actions/auth';
 import { AccountActionTypes } from '../actions/Account';
 
@@ -13,7 +12,8 @@ const initialState: SDKToken = {
   issuedAt: null,
   created: null,
   ttl: null,
-  rememberMe: null
+  rememberMe: null,
+  scopes: null
 };
 
 /**

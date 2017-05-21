@@ -13,6 +13,7 @@ import { Effect, Actions } from '@ngrx/effects';
 
 import { LoopbackAction } from '../models/BaseModels';
 import { BaseLoopbackEffects } from './base';
+import { resolver } from './resolver';
 
 import { CategoryActionTypes, CategoryActions } from '../actions/Category';
 import { LoopbackErrorActions } from '../actions/error';
@@ -25,7 +26,10 @@ export class CategoryEffects extends BaseLoopbackEffects {
     .ofType(CategoryActionTypes.FIND_BY_ID_ROOMS)
     .mergeMap((action: LoopbackAction) =>
       this.category.findByIdRooms(action.payload.id, action.payload.fk)
-        .map((response) => new CategoryActions.findByIdRoomsSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => {
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Room', 'findByIdSuccess');
+          return new CategoryActions.findByIdRoomsSuccess(action.payload.id, response, action.meta);
+        })
         .catch((error) => concat(
           of(new CategoryActions.findByIdRoomsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))

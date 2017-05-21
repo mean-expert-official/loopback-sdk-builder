@@ -16,7 +16,20 @@ export interface LoopbackStateInterface {
 };
 
 export const LoopbackReducer = {
-  loopbackAuth: reducers.LoopbackAuthReducer
+  loopbackAuth: reducers.LoopbackAuthReducer,
+	Users: reducers.UsersReducer,
+	Accounts: reducers.AccountsReducer,
+	ApplicationCredentials: reducers.ApplicationCredentialsReducer,
+	Categorys: reducers.CategorysReducer,
+	Cores: reducers.CoresReducer,
+	Likes: reducers.LikesReducer,
+	Messages: reducers.MessagesReducer,
+	Rooms: reducers.RoomsReducer,
+	RoomAccounts: reducers.RoomAccountsReducer,
+	RoomAdmins: reducers.RoomAdminsReducer,
+	Storages: reducers.StoragesReducer,
+	UserCredentials: reducers.UserCredentialsReducer,
+	UserIdentitys: reducers.UserIdentitysReducer,
 };
 
 export const LoopbackEffects = [
