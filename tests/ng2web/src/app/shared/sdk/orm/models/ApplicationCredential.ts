@@ -1,3 +1,10 @@
+/* tslint:disable */
+
+import 'rxjs/add/operator/finally';
+import 'rxjs/add/operator/takeUntil';
+import { AsyncSubject } from 'rxjs/AsyncSubject';
+import { RealTime } from '../../services';
+
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
@@ -9,7 +16,7 @@ import { ApplicationCredential, LoopBackFilter } from '../../models';
 import { ApplicationCredentialActions } from '../../actions';
 
 export class OrmApplicationCredential extends OrmBase<ApplicationCredential> {
-  constructor(protected store: Store<ApplicationCredential>) {
-    super(store, ApplicationCredential, ApplicationCredentialActions);
+  constructor(protected store: Store<ApplicationCredential>, protected realTime?: RealTime) {
+    super(store, ApplicationCredential, ApplicationCredentialActions, realTime);
   }
 }

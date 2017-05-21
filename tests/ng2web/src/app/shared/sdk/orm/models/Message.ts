@@ -1,3 +1,10 @@
+/* tslint:disable */
+
+import 'rxjs/add/operator/finally';
+import 'rxjs/add/operator/takeUntil';
+import { AsyncSubject } from 'rxjs/AsyncSubject';
+import { RealTime } from '../../services';
+
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
@@ -9,8 +16,8 @@ import { Message, LoopBackFilter } from '../../models';
 import { MessageActions } from '../../actions';
 
 export class OrmMessage extends OrmBase<Message> {
-  constructor(protected store: Store<Message>) {
-    super(store, Message, MessageActions);
+  constructor(protected store: Store<Message>, protected realTime?: RealTime) {
+    super(store, Message, MessageActions, realTime);
   }
 
 	public findByIdLikes(id: any, fk: any, meta?: any): Observable<any> {

@@ -5,6 +5,9 @@ import { Store } from '@ngrx/store';
 import * as OrmModels from './models';
 import * as models from '../models';
 
+import { RealTime } from '../services';
+
+
 @Injectable()
 export class Orm {
   public User: OrmModels.OrmUser;
@@ -21,21 +24,19 @@ export class Orm {
   public UserCredential: OrmModels.OrmUserCredential;
   public UserIdentity: OrmModels.OrmUserIdentity;
 
-  constructor(
-    private store: Store<any>
-  ) {
-    this.User = new OrmModels.OrmUser(store);
-    this.Account = new OrmModels.OrmAccount(store);
-    this.ApplicationCredential = new OrmModels.OrmApplicationCredential(store);
-    this.Category = new OrmModels.OrmCategory(store);
-    this.Core = new OrmModels.OrmCore(store);
-    this.Like = new OrmModels.OrmLike(store);
-    this.Message = new OrmModels.OrmMessage(store);
-    this.Room = new OrmModels.OrmRoom(store);
-    this.RoomAccount = new OrmModels.OrmRoomAccount(store);
-    this.RoomAdmin = new OrmModels.OrmRoomAdmin(store);
-    this.Storage = new OrmModels.OrmStorage(store);
-    this.UserCredential = new OrmModels.OrmUserCredential(store);
-    this.UserIdentity = new OrmModels.OrmUserIdentity(store);
+  constructor(private store: Store<any>, protected realTime?: RealTime) {
+    this.User = new OrmModels.OrmUser(store, realTime);
+    this.Account = new OrmModels.OrmAccount(store, realTime);
+    this.ApplicationCredential = new OrmModels.OrmApplicationCredential(store, realTime);
+    this.Category = new OrmModels.OrmCategory(store, realTime);
+    this.Core = new OrmModels.OrmCore(store, realTime);
+    this.Like = new OrmModels.OrmLike(store, realTime);
+    this.Message = new OrmModels.OrmMessage(store, realTime);
+    this.Room = new OrmModels.OrmRoom(store, realTime);
+    this.RoomAccount = new OrmModels.OrmRoomAccount(store, realTime);
+    this.RoomAdmin = new OrmModels.OrmRoomAdmin(store, realTime);
+    this.Storage = new OrmModels.OrmStorage(store, realTime);
+    this.UserCredential = new OrmModels.OrmUserCredential(store, realTime);
+    this.UserIdentity = new OrmModels.OrmUserIdentity(store, realTime);
   }
 }

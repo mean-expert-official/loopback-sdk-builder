@@ -55,37 +55,41 @@ export class RoomNgrxListComponent implements OnInit, OnDestroy {
         this.roomRef.on('child_added').subscribe((child: Room) => {})
       );
     }));
-    
-    console.log(this.orm);
-    
-    this.orm.Room.find({
-      order: 'id DESC',
-      limit: 10
-    }).subscribe((data) => console.log(data));
 
-    this.orm.Room.find({
-      where: {
-        // name: 'Testando'
-        name: {like: 'Test'}
-      },
-      order: 'id DESC',
-      limit: 10,
-      // include: 'messages'
-      include: [
-        {
-          relation: 'messages',
-          scope: {
-            limit: 1
-          }
+    console.log(this.orm);
+    /*this.subscriptions.push(
+      this.orm.Room.find({
+        order: 'id DESC',
+        limit: 10
+      }).subscribe((data) => console.log(data))
+    );*/
+
+    this.subscriptions.push(
+      this.orm.Room.find({
+        where: {
+          // name: 'Testando'
+          name: {like: 'Test'}
         },
-        {
-          relation: 'likes',
-          scope: {
-            limit: 1
+        order: 'id DESC',
+        limit: 10,
+        // include: 'messages'
+        include: [
+          {
+            relation: 'messages',
+            scope: {
+              limit: 1
+            }
+          },
+          {
+            relation: 'likes',
+            scope: {
+              limit: 1
+            }
           }
-        }
-      ]
-    }).subscribe((data) => console.log(data));
+        ]
+      }, {io: true}).subscribe((data) => console.log(data))
+    );
+
   }
 
   logout(): void {

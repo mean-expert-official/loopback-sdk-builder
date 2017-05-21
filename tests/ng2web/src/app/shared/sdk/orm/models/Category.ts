@@ -1,3 +1,10 @@
+/* tslint:disable */
+
+import 'rxjs/add/operator/finally';
+import 'rxjs/add/operator/takeUntil';
+import { AsyncSubject } from 'rxjs/AsyncSubject';
+import { RealTime } from '../../services';
+
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
@@ -9,8 +16,8 @@ import { Category, LoopBackFilter } from '../../models';
 import { CategoryActions } from '../../actions';
 
 export class OrmCategory extends OrmBase<Category> {
-  constructor(protected store: Store<Category>) {
-    super(store, Category, CategoryActions);
+  constructor(protected store: Store<Category>, protected realTime?: RealTime) {
+    super(store, Category, CategoryActions, realTime);
   }
 
 	public findByIdRooms(id: any, fk: any, meta?: any): Observable<any> {

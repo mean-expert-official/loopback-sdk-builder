@@ -1,3 +1,10 @@
+/* tslint:disable */
+
+import 'rxjs/add/operator/finally';
+import 'rxjs/add/operator/takeUntil';
+import { AsyncSubject } from 'rxjs/AsyncSubject';
+import { RealTime } from '../../services';
+
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
@@ -9,8 +16,8 @@ import { User, LoopBackFilter } from '../../models';
 import { UserActions } from '../../actions';
 
 export class OrmUser extends OrmBase<User> {
-  constructor(protected store: Store<User>) {
-    super(store, User, UserActions);
+  constructor(protected store: Store<User>, protected realTime?: RealTime) {
+    super(store, User, UserActions, realTime);
   }
 
 	public findByIdAccessTokens(id: any, fk: any, meta?: any): Observable<any> {

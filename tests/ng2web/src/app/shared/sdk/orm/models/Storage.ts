@@ -1,3 +1,10 @@
+/* tslint:disable */
+
+import 'rxjs/add/operator/finally';
+import 'rxjs/add/operator/takeUntil';
+import { AsyncSubject } from 'rxjs/AsyncSubject';
+import { RealTime } from '../../services';
+
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
@@ -9,8 +16,8 @@ import { Storage, LoopBackFilter } from '../../models';
 import { StorageActions } from '../../actions';
 
 export class OrmStorage extends OrmBase<Storage> {
-  constructor(protected store: Store<Storage>) {
-    super(store, Storage, StorageActions);
+  constructor(protected store: Store<Storage>, protected realTime?: RealTime) {
+    super(store, Storage, StorageActions, realTime);
   }
 
 	public getContainers(meta?: any): void {
