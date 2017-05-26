@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@mean-expert/boot-script": "^1.0.0",
-    "@mean-expert/loopback-component-realtime": "^1.0.0-rc.5",
+    "@mean-expert/loopback-component-realtime": "^1.0.0-rc.6",
     "@mean-expert/loopback-stats-mixin": "^1.2.0",
     "@mean-expert/model": "^1.0.9",
     "chai": "^3.5.0",
