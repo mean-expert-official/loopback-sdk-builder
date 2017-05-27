@@ -66,7 +66,7 @@ export class LoopBackAuth {
    * This method will set a flag in order to remember the current credentials
    **/
   public setToken(token: SDKToken): void {
-    this.token = Object.assign(this.token, token);
+    this.token = Object.assign({}, this.token, token);
     this.save();
   }
   /**
