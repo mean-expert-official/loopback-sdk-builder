@@ -7,13 +7,12 @@ import { AccountActionTypes } from '../actions/Account';
 
 const initialState: SDKToken = {
   id: null,
-  user: null,
-  userId: null,
-  issuedAt: null,
-  created: null,
   ttl: null,
-  rememberMe: null,
-  scopes: null
+  scopes: null,
+  created: null,
+  userId: null,
+  user: null,
+  rememberMe: null
 };
 
 /**
@@ -64,22 +63,7 @@ export function LoopbackAuthReducer(state = initialState, action: Action): SDKTo
   }
 }
 
-export function getLoopbackAuthState() {
-  return (state$: Observable<any>) => state$
-    .select((s) => s.loopbackAuth);
-}
-
-export function getLoopbackAuthToken() {
-  return (state$: Observable<any>) => state$
-    .select((s) => s.loopbackAuth);
-}
-
-export function getLoopbackAuthAccount() {
-  return (state$: Observable<any>) => state$
-    .select((s) => s.loopbackAuth.user);
-}
-
-export function getLoopbackAuthAccountId() {
-  return (state$: Observable<any>) => state$
-    .select((s) => s.loopbackAuth.userId);
-}
+export const getLoopbackAuthState = (state: any) => state.loopbackAuth;
+export const getLoopbackAuthToken = (state: any) => state.loopbackAuth;
+export const getLoopbackAuthAccount = (state: any) => state.loopbackAuth.user;
+export const getLoopbackAuthAccountId = (state: any) => state.loopbackAuth.userId;

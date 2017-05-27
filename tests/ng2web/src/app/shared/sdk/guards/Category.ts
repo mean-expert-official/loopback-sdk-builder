@@ -1,3 +1,4 @@
+/* tslint:disable */
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
@@ -11,6 +12,7 @@ import { of } from 'rxjs/observable/of';
 
 import { CategoryApi } from '../services/index';
 import { getCategoryById } from '../reducers/Category';
+import { CategoryActions } from '../actions/Category';
 
 @Injectable()
 export class CategoryExistsGuard implements CanActivate {
@@ -24,7 +26,7 @@ export class CategoryExistsGuard implements CanActivate {
   }
 
   protected hasEntityInStore(id: string): Observable<boolean> {
-    return this.store.let(getCategoryById(id))
+    return this.store.select(getCategoryById(id))
       .map((entitie) => !!entitie)
       .take(1);
   }
@@ -33,6 +35,7 @@ export class CategoryExistsGuard implements CanActivate {
     return this.Category.exists(id)
       .map((response: any) => !!response.exists)
       .catch(() => {
+        this.store.dispatch(new CategoryActions.guardFail());
         return of(false);
       });
   }

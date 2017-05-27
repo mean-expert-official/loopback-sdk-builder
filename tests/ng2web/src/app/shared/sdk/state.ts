@@ -1,3 +1,4 @@
+/* tslint:disable */
 import { Observable } from 'rxjs/Observable';
 import { ActionReducer } from '@ngrx/store';
 import '@ngrx/core/add/operator/select';
@@ -12,7 +13,20 @@ import * as reducers from './reducers/index';
 import * as effects from './effects/index';
 
 export interface LoopbackStateInterface {
-  auth: SDKToken;
+  loopbackAuth: SDKToken;
+    Users: reducers.UsersState;
+  Accounts: reducers.AccountsState;
+  ApplicationCredentials: reducers.ApplicationCredentialsState;
+  Categorys: reducers.CategorysState;
+  Cores: reducers.CoresState;
+  Likes: reducers.LikesState;
+  Messages: reducers.MessagesState;
+  Rooms: reducers.RoomsState;
+  RoomAccounts: reducers.RoomAccountsState;
+  RoomAdmins: reducers.RoomAdminsState;
+  Storages: reducers.StoragesState;
+  UserCredentials: reducers.UserCredentialsState;
+  UserIdentitys: reducers.UserIdentitysState;
 };
 
 export const LoopbackReducer = {

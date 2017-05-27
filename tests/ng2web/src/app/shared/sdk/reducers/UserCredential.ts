@@ -1,3 +1,4 @@
+/* tslint:disable */
 import { Observable } from 'rxjs/Observable';
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
@@ -5,17 +6,17 @@ import { BaseReducerFactory } from './base';
 import { UserCredential } from '../models';
 import { UserCredentialActionTypes } from '../actions';
 
-export interface UserCredentialState {
+export interface UserCredentialsState {
   ids: string[];
   entities: { [id: string]: UserCredential };
 };
 
-const initialState: UserCredentialState = {
+const initialState: UserCredentialsState = {
   ids: [],
   entities: {},
 };
 
-const cases = BaseReducerFactory<UserCredentialState, UserCredential>(UserCredentialActionTypes);
+const cases = BaseReducerFactory<UserCredentialsState, UserCredential>(UserCredentialActionTypes);
 
 /**
  * @module UserCredentialsReducer
@@ -24,7 +25,7 @@ const cases = BaseReducerFactory<UserCredentialState, UserCredential>(UserCreden
  * @description
  * Provides with a LoopBack compatible UserCredential reducer.
  */
-export function UserCredentialsReducer(state = initialState, action: Action): UserCredentialState {
+export function UserCredentialsReducer(state = initialState, action: Action): UserCredentialsState {
   if (cases[action.type]) {
     return cases[action.type](state, action);
   } else {
@@ -32,15 +33,15 @@ export function UserCredentialsReducer(state = initialState, action: Action): Us
   }
 }
 
-export const getUserCredentialsState = (state: any) => state.UserCredential;
-export const getUserCredentialsEntities = (state: any) => state.UserCredential.entities;
-export const getUserCredentialsIds = (state: any) => state.UserCredential.ids;
+export const getUserCredentialsState = (state: any) => state.UserCredentials;
+export const getUserCredentialsEntities = (state: any) => state.UserCredentials.entities;
+export const getUserCredentialsIds = (state: any) => state.UserCredentials.ids;
 
 export const getUserCredentials =
   createSelector(getUserCredentialsEntities, getUserCredentialsIds, (entities, ids) => ids.map((id) => entities[id]));
 
 export function getUserCredentialById(id: string) {
-  return (state: any) => state.UserCredential.entities[id];
+  return (state: any) => state.UserCredentials.entities[id];
 }
 
 export function getUserCredentialsById(ids: string[]) {

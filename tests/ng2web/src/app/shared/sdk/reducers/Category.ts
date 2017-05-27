@@ -1,3 +1,4 @@
+/* tslint:disable */
 import { Observable } from 'rxjs/Observable';
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
@@ -5,17 +6,17 @@ import { BaseReducerFactory } from './base';
 import { Category } from '../models';
 import { CategoryActionTypes } from '../actions';
 
-export interface CategoryState {
+export interface CategorysState {
   ids: string[];
   entities: { [id: string]: Category };
 };
 
-const initialState: CategoryState = {
+const initialState: CategorysState = {
   ids: [],
   entities: {},
 };
 
-const cases = BaseReducerFactory<CategoryState, Category>(CategoryActionTypes);
+const cases = BaseReducerFactory<CategorysState, Category>(CategoryActionTypes);
 
 /**
  * @module CategorysReducer
@@ -24,7 +25,7 @@ const cases = BaseReducerFactory<CategoryState, Category>(CategoryActionTypes);
  * @description
  * Provides with a LoopBack compatible Category reducer.
  */
-export function CategorysReducer(state = initialState, action: Action): CategoryState {
+export function CategorysReducer(state = initialState, action: Action): CategorysState {
   if (cases[action.type]) {
     return cases[action.type](state, action);
   } else {
@@ -32,15 +33,15 @@ export function CategorysReducer(state = initialState, action: Action): Category
   }
 }
 
-export const getCategorysState = (state: any) => state.Category;
-export const getCategorysEntities = (state: any) => state.Category.entities;
-export const getCategorysIds = (state: any) => state.Category.ids;
+export const getCategorysState = (state: any) => state.Categorys;
+export const getCategorysEntities = (state: any) => state.Categorys.entities;
+export const getCategorysIds = (state: any) => state.Categorys.ids;
 
 export const getCategorys =
   createSelector(getCategorysEntities, getCategorysIds, (entities, ids) => ids.map((id) => entities[id]));
 
 export function getCategoryById(id: string) {
-  return (state: any) => state.Category.entities[id];
+  return (state: any) => state.Categorys.entities[id];
 }
 
 export function getCategorysById(ids: string[]) {

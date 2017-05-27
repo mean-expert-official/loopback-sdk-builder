@@ -1,3 +1,4 @@
+/* tslint:disable */
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
@@ -11,6 +12,7 @@ import { of } from 'rxjs/observable/of';
 
 import { RoomAdminApi } from '../services/index';
 import { getRoomAdminById } from '../reducers/RoomAdmin';
+import { RoomAdminActions } from '../actions/RoomAdmin';
 
 @Injectable()
 export class RoomAdminExistsGuard implements CanActivate {
@@ -24,7 +26,7 @@ export class RoomAdminExistsGuard implements CanActivate {
   }
 
   protected hasEntityInStore(id: string): Observable<boolean> {
-    return this.store.let(getRoomAdminById(id))
+    return this.store.select(getRoomAdminById(id))
       .map((entitie) => !!entitie)
       .take(1);
   }
@@ -33,6 +35,7 @@ export class RoomAdminExistsGuard implements CanActivate {
     return this.RoomAdmin.exists(id)
       .map((response: any) => !!response.exists)
       .catch(() => {
+        this.store.dispatch(new RoomAdminActions.guardFail());
         return of(false);
       });
   }

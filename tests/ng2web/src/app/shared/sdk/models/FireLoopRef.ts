@@ -1,3 +1,4 @@
+/* tslint:disable */
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { LoopBackFilter, StatFilter } from './index';
@@ -274,7 +275,13 @@ export class FireLoopRef<T> {
       parent: this.parent && this.parent.instance ? this.parent.instance : null
     };
     this.socket.emit(event, config);
-    this.socket.on(`${ this.model.getModelName() }.value.result.${ this.id }`, (res: any) => {
+    let resultEvent: string = '';
+    if (!this.relationship) {
+      resultEvent = `${ this.model.getModelName()}.value.result.${ this.id }`;
+    } else {
+      resultEvent = `${ this.parent.model.getModelName() }.${ this.relationship }.value.result.${ this.id }`;
+    }
+    this.socket.on(resultEvent, (res: any) => {
       if (res.error) {
         subject.error(res);
       } else {

@@ -14,6 +14,6 @@ export class AuthAccountResolver implements Resolve<Account> {
   public resolve(
     route: ActivatedRouteSnapshot
   ): Observable<any> | Promise<any> | any {
-    return this.store.let(getLoopbackAuthAccount());
+    return this.store.select(getLoopbackAuthAccount);
   }
 }

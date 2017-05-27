@@ -1,3 +1,4 @@
+/* tslint:disable */
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
@@ -11,6 +12,7 @@ import { of } from 'rxjs/observable/of';
 
 import { UserIdentityApi } from '../services/index';
 import { getUserIdentityById } from '../reducers/UserIdentity';
+import { UserIdentityActions } from '../actions/UserIdentity';
 
 @Injectable()
 export class UserIdentityExistsGuard implements CanActivate {
@@ -24,7 +26,7 @@ export class UserIdentityExistsGuard implements CanActivate {
   }
 
   protected hasEntityInStore(id: string): Observable<boolean> {
-    return this.store.let(getUserIdentityById(id))
+    return this.store.select(getUserIdentityById(id))
       .map((entitie) => !!entitie)
       .take(1);
   }
@@ -33,6 +35,7 @@ export class UserIdentityExistsGuard implements CanActivate {
     return this.UserIdentity.exists(id)
       .map((response: any) => !!response.exists)
       .catch(() => {
+        this.store.dispatch(new UserIdentityActions.guardFail());
         return of(false);
       });
   }

@@ -7,6 +7,7 @@ export interface LoopbackAction extends Action {
   meta?: any;
 }
 
+
 declare var Object: any;
 export interface LoopBackFilter {
   fields?: any;
@@ -19,22 +20,21 @@ export interface LoopBackFilter {
 }
 
 export interface AccessTokenInterface {
-  id?: any;
-  ttl?: number;
-  issuedAt?: any;
-  created: any;
-  userId?: number;
-  rememberMe?: boolean;
-  scopes: any;
+  "id"?: string;
+  "ttl"?: number;
+  "scopes"?: ["string"];
+  "created"?: Date;
+  "userId"?: string;
+  "user"?: any;
 }
 
 export class AccessToken implements AccessTokenInterface {
-  id: any = '';
-  ttl: number = 1209600;
-  created: Date = new Date(0);
-  userId: number = 0;
-  user: any = null;
-  scopes: any = null;
+  "id": string;
+  "ttl": number;
+  "scopes": ["string"];
+  "created": Date;
+  "userId": string;
+  "user": any;
   constructor(data?: AccessTokenInterface) {
     Object.assign(this, data);
   }
@@ -51,9 +51,9 @@ export class AccessToken implements AccessTokenInterface {
   * @license MIT
   * This method creates an instance of AccessToken for dynamic purposes.
   **/
-  public static factory(data: AccessTokenInterface): AccessToken {
+  public static factory(data: AccessTokenInterface): AccessToken{
     return new AccessToken(data);
-  }
+  }  
   /**
   * @method getModelDefinition
   * @author Julien Ledun
@@ -66,27 +66,26 @@ export class AccessToken implements AccessTokenInterface {
       name: 'AccessToken',
       plural: 'AccessTokens',
       properties: {
-        id: {
+        "id": {
           name: 'id',
           type: 'string'
         },
-        ttl: {
+        "ttl": {
           name: 'ttl',
           type: 'number',
           default: 1209600
         },
-        created: {
+        "scopes": {
+          name: 'scopes',
+          type: '["string"]'
+        },
+        "created": {
           name: 'created',
-          type: 'Date',
-          default: new Date(0)
+          type: 'Date'
         },
-        userId: {
+        "userId": {
           name: 'userId',
-          type: 'number'
-        },
-        scopes: {
-          type: ['string'],
-          description: 'Array of scopes granted to this access token.'
+          type: 'string'
         },
       },
       relations: {
@@ -103,12 +102,11 @@ export class AccessToken implements AccessTokenInterface {
 export class SDKToken implements AccessTokenInterface {
   id: any = null;
   ttl: number = null;
-  issuedAt: any = null;
+  scopes: any = null;
   created: any = null;
   userId: any = null;
   user: any = null;
   rememberMe: boolean = null;
-  scopes: any = null;
   constructor(data?: AccessTokenInterface) {
     Object.assign(this, data);
   }
@@ -116,19 +114,19 @@ export class SDKToken implements AccessTokenInterface {
 /**
 * This GeoPoint represents both, LoopBack and MongoDB GeoPoint
 **/
-export interface GeoPoint {
-  lat?: number;
-  lng?: number;
-  type?: string;
-  coordinates?: number[];
+export interface GeoPoint  {
+    lat?: number;
+    lng?: number;
+    type?: string;
+    coordinates?: number[];
 }
 
 export interface StatFilter {
-  range: string,
-  custom?: {
-    start: string,
-    end: string
-  },
-  where?: {},
-  groupBy?: string
+    range: string,
+    custom?: {
+      start: string,
+      end: string
+    },
+    where?: {},
+    groupBy?: string
 }

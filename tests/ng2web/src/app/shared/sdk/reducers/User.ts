@@ -1,3 +1,4 @@
+/* tslint:disable */
 import { Observable } from 'rxjs/Observable';
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
@@ -5,17 +6,17 @@ import { BaseReducerFactory } from './base';
 import { User } from '../models';
 import { UserActionTypes } from '../actions';
 
-export interface UserState {
+export interface UsersState {
   ids: string[];
   entities: { [id: string]: User };
 };
 
-const initialState: UserState = {
+const initialState: UsersState = {
   ids: [],
   entities: {},
 };
 
-const cases = BaseReducerFactory<UserState, User>(UserActionTypes);
+const cases = BaseReducerFactory<UsersState, User>(UserActionTypes);
 
 /**
  * @module UsersReducer
@@ -24,7 +25,7 @@ const cases = BaseReducerFactory<UserState, User>(UserActionTypes);
  * @description
  * Provides with a LoopBack compatible User reducer.
  */
-export function UsersReducer(state = initialState, action: Action): UserState {
+export function UsersReducer(state = initialState, action: Action): UsersState {
   if (cases[action.type]) {
     return cases[action.type](state, action);
   } else {
@@ -32,15 +33,15 @@ export function UsersReducer(state = initialState, action: Action): UserState {
   }
 }
 
-export const getUsersState = (state: any) => state.User;
-export const getUsersEntities = (state: any) => state.User.entities;
-export const getUsersIds = (state: any) => state.User.ids;
+export const getUsersState = (state: any) => state.Users;
+export const getUsersEntities = (state: any) => state.Users.entities;
+export const getUsersIds = (state: any) => state.Users.ids;
 
 export const getUsers =
   createSelector(getUsersEntities, getUsersIds, (entities, ids) => ids.map((id) => entities[id]));
 
 export function getUserById(id: string) {
-  return (state: any) => state.User.entities[id];
+  return (state: any) => state.Users.entities[id];
 }
 
 export function getUsersById(ids: string[]) {

@@ -1,3 +1,4 @@
+/* tslint:disable */
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
@@ -11,6 +12,7 @@ import { of } from 'rxjs/observable/of';
 
 import { AccountApi } from '../services/index';
 import { getAccountById } from '../reducers/Account';
+import { AccountActions } from '../actions/Account';
 
 @Injectable()
 export class AccountExistsGuard implements CanActivate {
@@ -24,7 +26,7 @@ export class AccountExistsGuard implements CanActivate {
   }
 
   protected hasEntityInStore(id: string): Observable<boolean> {
-    return this.store.let(getAccountById(id))
+    return this.store.select(getAccountById(id))
       .map((entitie) => !!entitie)
       .take(1);
   }
@@ -33,6 +35,7 @@ export class AccountExistsGuard implements CanActivate {
     return this.Account.exists(id)
       .map((response: any) => !!response.exists)
       .catch(() => {
+        this.store.dispatch(new AccountActions.guardFail());
         return of(false);
       });
   }

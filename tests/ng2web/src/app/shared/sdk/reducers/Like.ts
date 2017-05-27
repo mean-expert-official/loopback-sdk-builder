@@ -1,3 +1,4 @@
+/* tslint:disable */
 import { Observable } from 'rxjs/Observable';
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
@@ -5,17 +6,17 @@ import { BaseReducerFactory } from './base';
 import { Like } from '../models';
 import { LikeActionTypes } from '../actions';
 
-export interface LikeState {
+export interface LikesState {
   ids: string[];
   entities: { [id: string]: Like };
 };
 
-const initialState: LikeState = {
+const initialState: LikesState = {
   ids: [],
   entities: {},
 };
 
-const cases = BaseReducerFactory<LikeState, Like>(LikeActionTypes);
+const cases = BaseReducerFactory<LikesState, Like>(LikeActionTypes);
 
 /**
  * @module LikesReducer
@@ -24,7 +25,7 @@ const cases = BaseReducerFactory<LikeState, Like>(LikeActionTypes);
  * @description
  * Provides with a LoopBack compatible Like reducer.
  */
-export function LikesReducer(state = initialState, action: Action): LikeState {
+export function LikesReducer(state = initialState, action: Action): LikesState {
   if (cases[action.type]) {
     return cases[action.type](state, action);
   } else {
@@ -32,15 +33,15 @@ export function LikesReducer(state = initialState, action: Action): LikeState {
   }
 }
 
-export const getLikesState = (state: any) => state.Like;
-export const getLikesEntities = (state: any) => state.Like.entities;
-export const getLikesIds = (state: any) => state.Like.ids;
+export const getLikesState = (state: any) => state.Likes;
+export const getLikesEntities = (state: any) => state.Likes.entities;
+export const getLikesIds = (state: any) => state.Likes.ids;
 
 export const getLikes =
   createSelector(getLikesEntities, getLikesIds, (entities, ids) => ids.map((id) => entities[id]));
 
 export function getLikeById(id: string) {
-  return (state: any) => state.Like.entities[id];
+  return (state: any) => state.Likes.entities[id];
 }
 
 export function getLikesById(ids: string[]) {

@@ -1,3 +1,4 @@
+/* tslint:disable */
 import { Observable } from 'rxjs/Observable';
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
@@ -5,17 +6,17 @@ import { BaseReducerFactory } from './base';
 import { ApplicationCredential } from '../models';
 import { ApplicationCredentialActionTypes } from '../actions';
 
-export interface ApplicationCredentialState {
+export interface ApplicationCredentialsState {
   ids: string[];
   entities: { [id: string]: ApplicationCredential };
 };
 
-const initialState: ApplicationCredentialState = {
+const initialState: ApplicationCredentialsState = {
   ids: [],
   entities: {},
 };
 
-const cases = BaseReducerFactory<ApplicationCredentialState, ApplicationCredential>(ApplicationCredentialActionTypes);
+const cases = BaseReducerFactory<ApplicationCredentialsState, ApplicationCredential>(ApplicationCredentialActionTypes);
 
 /**
  * @module ApplicationCredentialsReducer
@@ -24,7 +25,7 @@ const cases = BaseReducerFactory<ApplicationCredentialState, ApplicationCredenti
  * @description
  * Provides with a LoopBack compatible ApplicationCredential reducer.
  */
-export function ApplicationCredentialsReducer(state = initialState, action: Action): ApplicationCredentialState {
+export function ApplicationCredentialsReducer(state = initialState, action: Action): ApplicationCredentialsState {
   if (cases[action.type]) {
     return cases[action.type](state, action);
   } else {
@@ -32,15 +33,15 @@ export function ApplicationCredentialsReducer(state = initialState, action: Acti
   }
 }
 
-export const getApplicationCredentialsState = (state: any) => state.ApplicationCredential;
-export const getApplicationCredentialsEntities = (state: any) => state.ApplicationCredential.entities;
-export const getApplicationCredentialsIds = (state: any) => state.ApplicationCredential.ids;
+export const getApplicationCredentialsState = (state: any) => state.ApplicationCredentials;
+export const getApplicationCredentialsEntities = (state: any) => state.ApplicationCredentials.entities;
+export const getApplicationCredentialsIds = (state: any) => state.ApplicationCredentials.ids;
 
 export const getApplicationCredentials =
   createSelector(getApplicationCredentialsEntities, getApplicationCredentialsIds, (entities, ids) => ids.map((id) => entities[id]));
 
 export function getApplicationCredentialById(id: string) {
-  return (state: any) => state.ApplicationCredential.entities[id];
+  return (state: any) => state.ApplicationCredentials.entities[id];
 }
 
 export function getApplicationCredentialsById(ids: string[]) {

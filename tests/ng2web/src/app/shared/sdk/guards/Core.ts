@@ -1,3 +1,4 @@
+/* tslint:disable */
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
@@ -11,6 +12,7 @@ import { of } from 'rxjs/observable/of';
 
 import { CoreApi } from '../services/index';
 import { getCoreById } from '../reducers/Core';
+import { CoreActions } from '../actions/Core';
 
 @Injectable()
 export class CoreExistsGuard implements CanActivate {
@@ -24,7 +26,7 @@ export class CoreExistsGuard implements CanActivate {
   }
 
   protected hasEntityInStore(id: string): Observable<boolean> {
-    return this.store.let(getCoreById(id))
+    return this.store.select(getCoreById(id))
       .map((entitie) => !!entitie)
       .take(1);
   }
@@ -33,6 +35,7 @@ export class CoreExistsGuard implements CanActivate {
     return this.Core.exists(id)
       .map((response: any) => !!response.exists)
       .catch(() => {
+        this.store.dispatch(new CoreActions.guardFail());
         return of(false);
       });
   }

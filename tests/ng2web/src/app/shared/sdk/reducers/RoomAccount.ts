@@ -1,3 +1,4 @@
+/* tslint:disable */
 import { Observable } from 'rxjs/Observable';
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
@@ -5,17 +6,17 @@ import { BaseReducerFactory } from './base';
 import { RoomAccount } from '../models';
 import { RoomAccountActionTypes } from '../actions';
 
-export interface RoomAccountState {
+export interface RoomAccountsState {
   ids: string[];
   entities: { [id: string]: RoomAccount };
 };
 
-const initialState: RoomAccountState = {
+const initialState: RoomAccountsState = {
   ids: [],
   entities: {},
 };
 
-const cases = BaseReducerFactory<RoomAccountState, RoomAccount>(RoomAccountActionTypes);
+const cases = BaseReducerFactory<RoomAccountsState, RoomAccount>(RoomAccountActionTypes);
 
 /**
  * @module RoomAccountsReducer
@@ -24,7 +25,7 @@ const cases = BaseReducerFactory<RoomAccountState, RoomAccount>(RoomAccountActio
  * @description
  * Provides with a LoopBack compatible RoomAccount reducer.
  */
-export function RoomAccountsReducer(state = initialState, action: Action): RoomAccountState {
+export function RoomAccountsReducer(state = initialState, action: Action): RoomAccountsState {
   if (cases[action.type]) {
     return cases[action.type](state, action);
   } else {
@@ -32,15 +33,15 @@ export function RoomAccountsReducer(state = initialState, action: Action): RoomA
   }
 }
 
-export const getRoomAccountsState = (state: any) => state.RoomAccount;
-export const getRoomAccountsEntities = (state: any) => state.RoomAccount.entities;
-export const getRoomAccountsIds = (state: any) => state.RoomAccount.ids;
+export const getRoomAccountsState = (state: any) => state.RoomAccounts;
+export const getRoomAccountsEntities = (state: any) => state.RoomAccounts.entities;
+export const getRoomAccountsIds = (state: any) => state.RoomAccounts.ids;
 
 export const getRoomAccounts =
   createSelector(getRoomAccountsEntities, getRoomAccountsIds, (entities, ids) => ids.map((id) => entities[id]));
 
 export function getRoomAccountById(id: string) {
-  return (state: any) => state.RoomAccount.entities[id];
+  return (state: any) => state.RoomAccounts.entities[id];
 }
 
 export function getRoomAccountsById(ids: string[]) {

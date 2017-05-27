@@ -1,3 +1,4 @@
+/* tslint:disable */
 import { Observable } from 'rxjs/Observable';
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
@@ -5,17 +6,17 @@ import { BaseReducerFactory } from './base';
 import { Core } from '../models';
 import { CoreActionTypes } from '../actions';
 
-export interface CoreState {
+export interface CoresState {
   ids: string[];
   entities: { [id: string]: Core };
 };
 
-const initialState: CoreState = {
+const initialState: CoresState = {
   ids: [],
   entities: {},
 };
 
-const cases = BaseReducerFactory<CoreState, Core>(CoreActionTypes);
+const cases = BaseReducerFactory<CoresState, Core>(CoreActionTypes);
 
 /**
  * @module CoresReducer
@@ -24,7 +25,7 @@ const cases = BaseReducerFactory<CoreState, Core>(CoreActionTypes);
  * @description
  * Provides with a LoopBack compatible Core reducer.
  */
-export function CoresReducer(state = initialState, action: Action): CoreState {
+export function CoresReducer(state = initialState, action: Action): CoresState {
   if (cases[action.type]) {
     return cases[action.type](state, action);
   } else {
@@ -32,15 +33,15 @@ export function CoresReducer(state = initialState, action: Action): CoreState {
   }
 }
 
-export const getCoresState = (state: any) => state.Core;
-export const getCoresEntities = (state: any) => state.Core.entities;
-export const getCoresIds = (state: any) => state.Core.ids;
+export const getCoresState = (state: any) => state.Cores;
+export const getCoresEntities = (state: any) => state.Cores.entities;
+export const getCoresIds = (state: any) => state.Cores.ids;
 
 export const getCores =
   createSelector(getCoresEntities, getCoresIds, (entities, ids) => ids.map((id) => entities[id]));
 
 export function getCoreById(id: string) {
-  return (state: any) => state.Core.entities[id];
+  return (state: any) => state.Cores.entities[id];
 }
 
 export function getCoresById(ids: string[]) {

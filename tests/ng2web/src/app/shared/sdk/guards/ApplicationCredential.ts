@@ -1,3 +1,4 @@
+/* tslint:disable */
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
@@ -11,6 +12,7 @@ import { of } from 'rxjs/observable/of';
 
 import { ApplicationCredentialApi } from '../services/index';
 import { getApplicationCredentialById } from '../reducers/ApplicationCredential';
+import { ApplicationCredentialActions } from '../actions/ApplicationCredential';
 
 @Injectable()
 export class ApplicationCredentialExistsGuard implements CanActivate {
@@ -24,7 +26,7 @@ export class ApplicationCredentialExistsGuard implements CanActivate {
   }
 
   protected hasEntityInStore(id: string): Observable<boolean> {
-    return this.store.let(getApplicationCredentialById(id))
+    return this.store.select(getApplicationCredentialById(id))
       .map((entitie) => !!entitie)
       .take(1);
   }
@@ -33,6 +35,7 @@ export class ApplicationCredentialExistsGuard implements CanActivate {
     return this.ApplicationCredential.exists(id)
       .map((response: any) => !!response.exists)
       .catch(() => {
+        this.store.dispatch(new ApplicationCredentialActions.guardFail());
         return of(false);
       });
   }

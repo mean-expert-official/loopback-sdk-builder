@@ -1,3 +1,4 @@
+/* tslint:disable */
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
@@ -11,6 +12,7 @@ import { of } from 'rxjs/observable/of';
 
 import { StorageApi } from '../services/index';
 import { getStorageById } from '../reducers/Storage';
+import { StorageActions } from '../actions/Storage';
 
 @Injectable()
 export class StorageExistsGuard implements CanActivate {
@@ -24,7 +26,7 @@ export class StorageExistsGuard implements CanActivate {
   }
 
   protected hasEntityInStore(id: string): Observable<boolean> {
-    return this.store.let(getStorageById(id))
+    return this.store.select(getStorageById(id))
       .map((entitie) => !!entitie)
       .take(1);
   }
@@ -33,6 +35,7 @@ export class StorageExistsGuard implements CanActivate {
     return this.Storage.exists(id)
       .map((response: any) => !!response.exists)
       .catch(() => {
+        this.store.dispatch(new StorageActions.guardFail());
         return of(false);
       });
   }

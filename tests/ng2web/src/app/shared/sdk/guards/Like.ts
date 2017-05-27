@@ -1,3 +1,4 @@
+/* tslint:disable */
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
@@ -11,6 +12,7 @@ import { of } from 'rxjs/observable/of';
 
 import { LikeApi } from '../services/index';
 import { getLikeById } from '../reducers/Like';
+import { LikeActions } from '../actions/Like';
 
 @Injectable()
 export class LikeExistsGuard implements CanActivate {
@@ -24,7 +26,7 @@ export class LikeExistsGuard implements CanActivate {
   }
 
   protected hasEntityInStore(id: string): Observable<boolean> {
-    return this.store.let(getLikeById(id))
+    return this.store.select(getLikeById(id))
       .map((entitie) => !!entitie)
       .take(1);
   }
@@ -33,6 +35,7 @@ export class LikeExistsGuard implements CanActivate {
     return this.Like.exists(id)
       .map((response: any) => !!response.exists)
       .catch(() => {
+        this.store.dispatch(new LikeActions.guardFail());
         return of(false);
       });
   }

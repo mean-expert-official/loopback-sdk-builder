@@ -1,3 +1,4 @@
+/* tslint:disable */
 import { Observable } from 'rxjs/Observable';
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
@@ -5,17 +6,17 @@ import { BaseReducerFactory } from './base';
 import { Storage } from '../models';
 import { StorageActionTypes } from '../actions';
 
-export interface StorageState {
+export interface StoragesState {
   ids: string[];
   entities: { [id: string]: Storage };
 };
 
-const initialState: StorageState = {
+const initialState: StoragesState = {
   ids: [],
   entities: {},
 };
 
-const cases = BaseReducerFactory<StorageState, Storage>(StorageActionTypes);
+const cases = BaseReducerFactory<StoragesState, Storage>(StorageActionTypes);
 
 /**
  * @module StoragesReducer
@@ -24,7 +25,7 @@ const cases = BaseReducerFactory<StorageState, Storage>(StorageActionTypes);
  * @description
  * Provides with a LoopBack compatible Storage reducer.
  */
-export function StoragesReducer(state = initialState, action: Action): StorageState {
+export function StoragesReducer(state = initialState, action: Action): StoragesState {
   if (cases[action.type]) {
     return cases[action.type](state, action);
   } else {
@@ -32,15 +33,15 @@ export function StoragesReducer(state = initialState, action: Action): StorageSt
   }
 }
 
-export const getStoragesState = (state: any) => state.Storage;
-export const getStoragesEntities = (state: any) => state.Storage.entities;
-export const getStoragesIds = (state: any) => state.Storage.ids;
+export const getStoragesState = (state: any) => state.Storages;
+export const getStoragesEntities = (state: any) => state.Storages.entities;
+export const getStoragesIds = (state: any) => state.Storages.ids;
 
 export const getStorages =
   createSelector(getStoragesEntities, getStoragesIds, (entities, ids) => ids.map((id) => entities[id]));
 
 export function getStorageById(id: string) {
-  return (state: any) => state.Storage.entities[id];
+  return (state: any) => state.Storages.entities[id];
 }
 
 export function getStoragesById(ids: string[]) {

@@ -71,6 +71,8 @@ export function BaseLoopbackActionTypesFactory(modelName: string): any {
   types['PATCH_ATTRIBUTES_SUCCESS'] = type('[' + modelName + '] PatchAttributes Success');
   types['PATCH_ATTRIBUTES_FAIL'] = type('[' + modelName + '] PatchAttributes Fail');
 
+  types['GUARD_FAIL'] = type('[' + modelName + '] Guard Fail');
+
   return types;
 };
 
@@ -610,6 +612,16 @@ export function BaseLoopbackActionsFactory<T>(modelName: string, actionTypes: an
     public readonly type = actionTypes['PATCH_ATTRIBUTES_FAIL'];
 
     constructor(public payload: any, public meta?: any) { }
+  }
+  /**
+   * @method guardFail
+   * @author João Ribeiro <t: JonnyBGod, gh: mean-expert-official>
+   * @license MIT
+   * @description
+   * Generic guardFail action
+   */
+  actions.guardFail = class implements Action {
+    public type = actionTypes['GUARD_FAIL'];
   }
 
   return actions;

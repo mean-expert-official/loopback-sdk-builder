@@ -1,3 +1,4 @@
+/* tslint:disable */
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
@@ -11,6 +12,7 @@ import { of } from 'rxjs/observable/of';
 
 import { MessageApi } from '../services/index';
 import { getMessageById } from '../reducers/Message';
+import { MessageActions } from '../actions/Message';
 
 @Injectable()
 export class MessageExistsGuard implements CanActivate {
@@ -24,7 +26,7 @@ export class MessageExistsGuard implements CanActivate {
   }
 
   protected hasEntityInStore(id: string): Observable<boolean> {
-    return this.store.let(getMessageById(id))
+    return this.store.select(getMessageById(id))
       .map((entitie) => !!entitie)
       .take(1);
   }
@@ -33,6 +35,7 @@ export class MessageExistsGuard implements CanActivate {
     return this.Message.exists(id)
       .map((response: any) => !!response.exists)
       .catch(() => {
+        this.store.dispatch(new MessageActions.guardFail());
         return of(false);
       });
   }
