@@ -1,12 +1,13 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { SDKBrowserModule } from './shared/sdk';
+import { SDKBrowserModule, LoopBackConfig } from './shared/sdk';
 import { Storage, Category, Message, FireLoopRef } from './shared/sdk/models';
 import { StorageApi, CategoryApi, MessageApi, RealTime } from './shared/sdk/services';
 
 describe('Service: Storage Service', () => {
   beforeEach(() => {
+    LoopBackConfig.filterOnUrl();
     TestBed.configureTestingModule({
       imports: [
         SDKBrowserModule.forRoot()
