@@ -18,6 +18,7 @@ describe('Service: Room Service', () => {
     async(inject([RoomApi], (service: RoomApi) => {
       expect(service).toBeTruthy();
       expect(service.create).toBeTruthy();
+      expect(service.exists).toBeTruthy();
       expect(service.updateAll).toBeTruthy();
       expect(service.updateAttributes).toBeTruthy();
       expect(service.find).toBeTruthy();
@@ -322,5 +323,27 @@ describe('Service: Room Service', () => {
             expect(room.name).not.toBe(instance.name);
           });
       })
+    ));
+
+  it('should return correct response if the room does not exist',
+    async(inject([RoomApi], (roomApi: RoomApi) => {
+      return roomApi.exists<{ exists: boolean }>(42)
+        .subscribe((result) => {
+          expect(result.exists).toBe(false);
+        });
+    })
+    ));
+
+  it('should return correct response if the room does not exist',
+    async(inject([RoomApi], (roomApi: RoomApi) => {
+      let room: Room = new Room();
+      room.name = Date.now().toString();
+      return roomApi
+        .create(room)
+        .switchMap((instance: Room) => roomApi.exists<{ exists: boolean }>(instance.id))
+        .subscribe((result: { exists: boolean }) => {
+          expect(result.exists).toBe(true);
+        });
+    })
     ));
 });
