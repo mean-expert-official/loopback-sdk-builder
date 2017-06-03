@@ -38,9 +38,9 @@ describe('Ngrx: Account', () => {
   });
 
   it('should signup and login the user',
-    async(inject([Store], (store: Store) => {
+    async(inject([Store], (store: Store<any>) => {
       store.dispatch(new AccountActions.signup(Helpers.create()));
-      return store.let(getLoopbackAuthState())
+      return store.select(getLoopbackAuthState)
         .debounceTime(2000)
         .subscribe((token: SDKToken) => {
           expect(token.id).toBeTruthy();
@@ -49,7 +49,7 @@ describe('Ngrx: Account', () => {
   ));
 
   it('should fail login the user',
-    async(inject([Store], (store: Store) => {
+    async(inject([Store], (store: Store<any>) => {
       store.dispatch(new AccountActions.login({ email: 'not@existing.com', password: 'duh' }));
       return store.let(fromApp.getAppState())
         .debounceTime(2000)

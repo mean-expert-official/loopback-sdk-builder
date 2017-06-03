@@ -3,7 +3,7 @@ import { Room, Account, FireLoopRef } from '../shared/sdk/models';
 // import { AccountApi, RoomApi, LoggerService, RealTime } from '../shared/sdk/services';
 import { AccountApi, RoomApi, LoggerService, RealTime, SDKModels } from '../shared/sdk/services';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 import { LoopBackConfig } from '../shared/sdk/lb.config';
 LoopBackConfig.setBaseURL('http://127.0.0.1:3002');
 
@@ -11,7 +11,7 @@ import * as io from 'socket.io-client';
 
 import { Orm } from '../shared/sdk/orm';
 
-var i = 0;
+const i = 0;
 
 @Component({
   selector: 'app-room',
@@ -25,7 +25,7 @@ export class RoomNgrxListComponent implements OnInit, OnDestroy {
   private roomRef: FireLoopRef<Room>;
   private room: Room = new Room();
   private rooms: Room[];
-  private connected: boolean = false;
+  private connected = false;
   private subscriptions: Subscription[] = new Array<Subscription>();
   // private socket: any = io.connect(LoopBackConfig.getPath(), { secure: false });
 
@@ -75,10 +75,7 @@ export class RoomNgrxListComponent implements OnInit, OnDestroy {
         // include: 'messages'
         include: [
           {
-            relation: 'messages',
-            scope: {
-              limit: 1
-            }
+            relation: 'messages'
           },
           {
             relation: 'likes',

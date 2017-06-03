@@ -4,6 +4,7 @@ import 'rxjs/add/operator/finally';
 import 'rxjs/add/operator/takeUntil';
 import { AsyncSubject } from 'rxjs/AsyncSubject';
 import { RealTime } from '../../services';
+import { createIO } from '../io';
 
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
@@ -21,10 +22,25 @@ export class OrmUser extends OrmBase<User> {
   }
 
 	public findByIdAccessTokens(id: any, fk: any, meta?: any): Observable<any> {
-    this.store.dispatch(new this.actions.findByIdAccessTokens(id, fk, meta));
+    
+    if (meta && meta.io) {
+      const destroyStream$: AsyncSubject<any> = new AsyncSubject();
 
-    return this.store.select(this.model.getModelDefinition().relations.accessTokens.model + 's')
-      .map((state: any) => state.entities[fk]);
+      createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
+
+      return this.store.select(this.model.getModelDefinition().relations.accessTokens.model + 's')
+        .map((state: any) => state.entities[fk])
+        .finally(() => {
+          destroyStream$.next(1);
+          destroyStream$.complete();
+        });
+    } else {
+      this.store.dispatch(new this.actions.findByIdAccessTokens(id, fk, meta));
+
+      return this.store.select(this.model.getModelDefinition().relations.accessTokens.model + 's')
+        .map((state: any) => state.entities[fk]);
+    }
+    
   }
   
 	public destroyByIdAccessTokens(id: any, fk: any, meta?: any): void {
@@ -36,12 +52,29 @@ export class OrmUser extends OrmBase<User> {
   }
   
 	public getAccessTokens(id: any, filter: LoopBackFilter = {}, meta?: any): Observable<any[]> {
-    this.store.dispatch(new this.actions.getAccessTokens(id, filter, meta));
+    
+    if (meta && meta.io) {
+      const destroyStream$: AsyncSubject<any> = new AsyncSubject();
 
-    return applyFilter(
-      this.store.select(this.model.getModelDefinition().relations.accessTokens.model + 's')
-        .map((state: any) => state.entities)
-      , filter, this.store, models[this.model.getModelDefinition().relations.accessTokens.model]);
+      createIO(filter, this.store, destroyStream$, models[this.model.getModelDefinition().relations.accessTokens.model], this.realTime, meta);
+
+      return applyFilter(
+        this.store.select(this.model.getModelDefinition().relations.accessTokens.model + 's')
+          .map((state: any) => state.entities)
+          .finally(() => {
+            destroyStream$.next(1);
+            destroyStream$.complete();
+          })
+        , filter, this.store, models[this.model.getModelDefinition().relations.accessTokens.model]);
+    } else {
+      this.store.dispatch(new this.actions.getAccessTokens(id, filter, meta));
+
+      return applyFilter(
+        this.store.select(this.model.getModelDefinition().relations.accessTokens.model + 's')
+          .map((state: any) => state.entities)
+        , filter, this.store, models[this.model.getModelDefinition().relations.accessTokens.model]);
+    }
+    
   }
 	
 	public createAccessTokens(id: any, data: any = {}, meta?: any): void {

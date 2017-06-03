@@ -4,7 +4,7 @@ import 'rxjs/add/operator/finally';
 import 'rxjs/add/operator/takeUntil';
 import { AsyncSubject } from 'rxjs/AsyncSubject';
 import { RealTime } from '../services';
-import { resolver } from '../effects/resolver';
+import { createIO } from './io';
 
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
@@ -19,18 +19,7 @@ export class OrmBase<T> {
   public find(filter: LoopBackFilter = {}, meta?: any): Observable<T[]> {
     if (meta && meta.io) {
       const destroyStream$: AsyncSubject<any> = new AsyncSubject();
-      const reference = this.realTime.FireLoop.ref<T>(this.model);
-      reference.on('change', filter)
-        .map((data: any) => {
-          const resolved = resolver({data, meta}, this.model.getModelName(), 'findSuccess');
-          for (const item of resolved) {
-            this.store.dispatch(item);
-          }
-          return;
-        })
-        .finally(() => reference.dispose())
-        .takeUntil(destroyStream$)
-        .subscribe();
+      createIO(filter, this.store, destroyStream$, this.model, this.realTime, meta);
 
       return applyFilter(
         this.store.select(this.model.getModelName() + 's')
@@ -57,12 +46,7 @@ export class OrmBase<T> {
       newFilter.limit = 1;
 
       const destroyStream$: AsyncSubject<any> = new AsyncSubject();
-      const reference = this.realTime.FireLoop.ref<T>(this.model)
-      reference.on('change', newFilter)
-        .mergeMap((data: any) => resolver({data, meta}, this.model.getModelName(), 'findByIdSuccess'))
-        .finally(() => reference.dispose())
-        .takeUntil(destroyStream$)
-        .subscribe();
+      createIO(newFilter, this.store, destroyStream$, this.model, this.realTime, meta);
 
       return applyFilter(
         this.store.select(this.model.getModelName() + 's')
@@ -88,12 +72,7 @@ export class OrmBase<T> {
 
     if (meta && meta.io) {
       const destroyStream$: AsyncSubject<any> = new AsyncSubject();
-      const reference = this.realTime.FireLoop.ref<T>(this.model)
-      reference.on('change', newFilter)
-        .mergeMap((data: any) => resolver({data, meta}, this.model.getModelName(), 'findOneSuccess'))
-        .finally(() => reference.dispose())
-        .takeUntil(destroyStream$)
-        .subscribe();
+      createIO(newFilter, this.store, destroyStream$, this.model, this.realTime, meta);
 
       return applyFilter(
         this.store.select(this.model.getModelName() + 's')

@@ -1,5 +1,0 @@
-{
-  "verbose": true,
-  "ext": "js,ts,json",
-  "watch": ["common", "server"]
-}

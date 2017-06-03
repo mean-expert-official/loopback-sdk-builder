@@ -4,6 +4,7 @@ import 'rxjs/add/operator/finally';
 import 'rxjs/add/operator/takeUntil';
 import { AsyncSubject } from 'rxjs/AsyncSubject';
 import { RealTime } from '../../services';
+import { createIO } from '../io';
 
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
@@ -21,10 +22,25 @@ export class OrmRoom extends OrmBase<Room> {
   }
 
 	public findByIdMessages(id: any, fk: any, meta?: any): Observable<any> {
-    this.store.dispatch(new this.actions.findByIdMessages(id, fk, meta));
+    
+    if (meta && meta.io) {
+      const destroyStream$: AsyncSubject<any> = new AsyncSubject();
 
-    return this.store.select(this.model.getModelDefinition().relations.messages.model + 's')
-      .map((state: any) => state.entities[fk]);
+      createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
+
+      return this.store.select(this.model.getModelDefinition().relations.messages.model + 's')
+        .map((state: any) => state.entities[fk])
+        .finally(() => {
+          destroyStream$.next(1);
+          destroyStream$.complete();
+        });
+    } else {
+      this.store.dispatch(new this.actions.findByIdMessages(id, fk, meta));
+
+      return this.store.select(this.model.getModelDefinition().relations.messages.model + 's')
+        .map((state: any) => state.entities[fk]);
+    }
+    
   }
   
 	public destroyByIdMessages(id: any, fk: any, meta?: any): void {
@@ -36,10 +52,25 @@ export class OrmRoom extends OrmBase<Room> {
   }
   
 	public findByIdLikes(id: any, fk: any, meta?: any): Observable<any> {
-    this.store.dispatch(new this.actions.findByIdLikes(id, fk, meta));
+    
+    if (meta && meta.io) {
+      const destroyStream$: AsyncSubject<any> = new AsyncSubject();
 
-    return this.store.select(this.model.getModelDefinition().relations.likes.model + 's')
-      .map((state: any) => state.entities[fk]);
+      createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
+
+      return this.store.select(this.model.getModelDefinition().relations.likes.model + 's')
+        .map((state: any) => state.entities[fk])
+        .finally(() => {
+          destroyStream$.next(1);
+          destroyStream$.complete();
+        });
+    } else {
+      this.store.dispatch(new this.actions.findByIdLikes(id, fk, meta));
+
+      return this.store.select(this.model.getModelDefinition().relations.likes.model + 's')
+        .map((state: any) => state.entities[fk]);
+    }
+    
   }
   
 	public destroyByIdLikes(id: any, fk: any, meta?: any): void {
@@ -51,10 +82,25 @@ export class OrmRoom extends OrmBase<Room> {
   }
   
 	public findByIdCategories(id: any, fk: any, meta?: any): Observable<any> {
-    this.store.dispatch(new this.actions.findByIdCategories(id, fk, meta));
+    
+    if (meta && meta.io) {
+      const destroyStream$: AsyncSubject<any> = new AsyncSubject();
 
-    return this.store.select(this.model.getModelDefinition().relations.categories.model + 's')
-      .map((state: any) => state.entities[fk]);
+      createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
+
+      return this.store.select(this.model.getModelDefinition().relations.categories.model + 's')
+        .map((state: any) => state.entities[fk])
+        .finally(() => {
+          destroyStream$.next(1);
+          destroyStream$.complete();
+        });
+    } else {
+      this.store.dispatch(new this.actions.findByIdCategories(id, fk, meta));
+
+      return this.store.select(this.model.getModelDefinition().relations.categories.model + 's')
+        .map((state: any) => state.entities[fk]);
+    }
+    
   }
   
 	public destroyByIdCategories(id: any, fk: any, meta?: any): void {
@@ -74,10 +120,25 @@ export class OrmRoom extends OrmBase<Room> {
   }
   
 	public findByIdAccounts(id: any, fk: any, meta?: any): Observable<any> {
-    this.store.dispatch(new this.actions.findByIdAccounts(id, fk, meta));
+    
+    if (meta && meta.io) {
+      const destroyStream$: AsyncSubject<any> = new AsyncSubject();
 
-    return this.store.select(this.model.getModelDefinition().relations.accounts.model + 's')
-      .map((state: any) => state.entities[fk]);
+      createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
+
+      return this.store.select(this.model.getModelDefinition().relations.accounts.model + 's')
+        .map((state: any) => state.entities[fk])
+        .finally(() => {
+          destroyStream$.next(1);
+          destroyStream$.complete();
+        });
+    } else {
+      this.store.dispatch(new this.actions.findByIdAccounts(id, fk, meta));
+
+      return this.store.select(this.model.getModelDefinition().relations.accounts.model + 's')
+        .map((state: any) => state.entities[fk]);
+    }
+    
   }
   
 	public destroyByIdAccounts(id: any, fk: any, meta?: any): void {
@@ -97,10 +158,25 @@ export class OrmRoom extends OrmBase<Room> {
   }
   
 	public findByIdAdmins(id: any, fk: any, meta?: any): Observable<any> {
-    this.store.dispatch(new this.actions.findByIdAdmins(id, fk, meta));
+    
+    if (meta && meta.io) {
+      const destroyStream$: AsyncSubject<any> = new AsyncSubject();
 
-    return this.store.select(this.model.getModelDefinition().relations.admins.model + 's')
-      .map((state: any) => state.entities[fk]);
+      createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
+
+      return this.store.select(this.model.getModelDefinition().relations.admins.model + 's')
+        .map((state: any) => state.entities[fk])
+        .finally(() => {
+          destroyStream$.next(1);
+          destroyStream$.complete();
+        });
+    } else {
+      this.store.dispatch(new this.actions.findByIdAdmins(id, fk, meta));
+
+      return this.store.select(this.model.getModelDefinition().relations.admins.model + 's')
+        .map((state: any) => state.entities[fk]);
+    }
+    
   }
   
 	public destroyByIdAdmins(id: any, fk: any, meta?: any): void {
@@ -120,12 +196,29 @@ export class OrmRoom extends OrmBase<Room> {
   }
   
 	public getMessages(id: any, filter: LoopBackFilter = {}, meta?: any): Observable<any[]> {
-    this.store.dispatch(new this.actions.getMessages(id, filter, meta));
+    
+    if (meta && meta.io) {
+      const destroyStream$: AsyncSubject<any> = new AsyncSubject();
 
-    return applyFilter(
-      this.store.select(this.model.getModelDefinition().relations.messages.model + 's')
-        .map((state: any) => state.entities)
-      , filter, this.store, models[this.model.getModelDefinition().relations.messages.model]);
+      createIO(filter, this.store, destroyStream$, models[this.model.getModelDefinition().relations.messages.model], this.realTime, meta);
+
+      return applyFilter(
+        this.store.select(this.model.getModelDefinition().relations.messages.model + 's')
+          .map((state: any) => state.entities)
+          .finally(() => {
+            destroyStream$.next(1);
+            destroyStream$.complete();
+          })
+        , filter, this.store, models[this.model.getModelDefinition().relations.messages.model]);
+    } else {
+      this.store.dispatch(new this.actions.getMessages(id, filter, meta));
+
+      return applyFilter(
+        this.store.select(this.model.getModelDefinition().relations.messages.model + 's')
+          .map((state: any) => state.entities)
+        , filter, this.store, models[this.model.getModelDefinition().relations.messages.model]);
+    }
+    
   }
 	
 	public createMessages(id: any, data: any = {}, meta?: any): void {
@@ -137,12 +230,29 @@ export class OrmRoom extends OrmBase<Room> {
   }
   
 	public getLikes(id: any, filter: LoopBackFilter = {}, meta?: any): Observable<any[]> {
-    this.store.dispatch(new this.actions.getLikes(id, filter, meta));
+    
+    if (meta && meta.io) {
+      const destroyStream$: AsyncSubject<any> = new AsyncSubject();
 
-    return applyFilter(
-      this.store.select(this.model.getModelDefinition().relations.likes.model + 's')
-        .map((state: any) => state.entities)
-      , filter, this.store, models[this.model.getModelDefinition().relations.likes.model]);
+      createIO(filter, this.store, destroyStream$, models[this.model.getModelDefinition().relations.likes.model], this.realTime, meta);
+
+      return applyFilter(
+        this.store.select(this.model.getModelDefinition().relations.likes.model + 's')
+          .map((state: any) => state.entities)
+          .finally(() => {
+            destroyStream$.next(1);
+            destroyStream$.complete();
+          })
+        , filter, this.store, models[this.model.getModelDefinition().relations.likes.model]);
+    } else {
+      this.store.dispatch(new this.actions.getLikes(id, filter, meta));
+
+      return applyFilter(
+        this.store.select(this.model.getModelDefinition().relations.likes.model + 's')
+          .map((state: any) => state.entities)
+        , filter, this.store, models[this.model.getModelDefinition().relations.likes.model]);
+    }
+    
   }
 	
 	public createLikes(id: any, data: any = {}, meta?: any): void {
@@ -154,12 +264,29 @@ export class OrmRoom extends OrmBase<Room> {
   }
   
 	public getCategories(id: any, filter: LoopBackFilter = {}, meta?: any): Observable<any[]> {
-    this.store.dispatch(new this.actions.getCategories(id, filter, meta));
+    
+    if (meta && meta.io) {
+      const destroyStream$: AsyncSubject<any> = new AsyncSubject();
 
-    return applyFilter(
-      this.store.select(this.model.getModelDefinition().relations.categories.model + 's')
-        .map((state: any) => state.entities)
-      , filter, this.store, models[this.model.getModelDefinition().relations.categories.model]);
+      createIO(filter, this.store, destroyStream$, models[this.model.getModelDefinition().relations.categories.model], this.realTime, meta);
+
+      return applyFilter(
+        this.store.select(this.model.getModelDefinition().relations.categories.model + 's')
+          .map((state: any) => state.entities)
+          .finally(() => {
+            destroyStream$.next(1);
+            destroyStream$.complete();
+          })
+        , filter, this.store, models[this.model.getModelDefinition().relations.categories.model]);
+    } else {
+      this.store.dispatch(new this.actions.getCategories(id, filter, meta));
+
+      return applyFilter(
+        this.store.select(this.model.getModelDefinition().relations.categories.model + 's')
+          .map((state: any) => state.entities)
+        , filter, this.store, models[this.model.getModelDefinition().relations.categories.model]);
+    }
+    
   }
 	
 	public createCategories(id: any, data: any = {}, meta?: any): void {
@@ -171,12 +298,29 @@ export class OrmRoom extends OrmBase<Room> {
   }
   
 	public getAccounts(id: any, filter: LoopBackFilter = {}, meta?: any): Observable<any[]> {
-    this.store.dispatch(new this.actions.getAccounts(id, filter, meta));
+    
+    if (meta && meta.io) {
+      const destroyStream$: AsyncSubject<any> = new AsyncSubject();
 
-    return applyFilter(
-      this.store.select(this.model.getModelDefinition().relations.accounts.model + 's')
-        .map((state: any) => state.entities)
-      , filter, this.store, models[this.model.getModelDefinition().relations.accounts.model]);
+      createIO(filter, this.store, destroyStream$, models[this.model.getModelDefinition().relations.accounts.model], this.realTime, meta);
+
+      return applyFilter(
+        this.store.select(this.model.getModelDefinition().relations.accounts.model + 's')
+          .map((state: any) => state.entities)
+          .finally(() => {
+            destroyStream$.next(1);
+            destroyStream$.complete();
+          })
+        , filter, this.store, models[this.model.getModelDefinition().relations.accounts.model]);
+    } else {
+      this.store.dispatch(new this.actions.getAccounts(id, filter, meta));
+
+      return applyFilter(
+        this.store.select(this.model.getModelDefinition().relations.accounts.model + 's')
+          .map((state: any) => state.entities)
+        , filter, this.store, models[this.model.getModelDefinition().relations.accounts.model]);
+    }
+    
   }
 	
 	public createAccounts(id: any, data: any = {}, meta?: any): void {
@@ -188,12 +332,29 @@ export class OrmRoom extends OrmBase<Room> {
   }
   
 	public getAdmins(id: any, filter: LoopBackFilter = {}, meta?: any): Observable<any[]> {
-    this.store.dispatch(new this.actions.getAdmins(id, filter, meta));
+    
+    if (meta && meta.io) {
+      const destroyStream$: AsyncSubject<any> = new AsyncSubject();
 
-    return applyFilter(
-      this.store.select(this.model.getModelDefinition().relations.admins.model + 's')
-        .map((state: any) => state.entities)
-      , filter, this.store, models[this.model.getModelDefinition().relations.admins.model]);
+      createIO(filter, this.store, destroyStream$, models[this.model.getModelDefinition().relations.admins.model], this.realTime, meta);
+
+      return applyFilter(
+        this.store.select(this.model.getModelDefinition().relations.admins.model + 's')
+          .map((state: any) => state.entities)
+          .finally(() => {
+            destroyStream$.next(1);
+            destroyStream$.complete();
+          })
+        , filter, this.store, models[this.model.getModelDefinition().relations.admins.model]);
+    } else {
+      this.store.dispatch(new this.actions.getAdmins(id, filter, meta));
+
+      return applyFilter(
+        this.store.select(this.model.getModelDefinition().relations.admins.model + 's')
+          .map((state: any) => state.entities)
+        , filter, this.store, models[this.model.getModelDefinition().relations.admins.model]);
+    }
+    
   }
 	
 	public createAdmins(id: any, data: any = {}, meta?: any): void {
