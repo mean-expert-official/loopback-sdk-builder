@@ -55,14 +55,18 @@ export class OrmBase<T> {
             destroyStream$.next(1);
             destroyStream$.complete();
           })
-        , filter, this.store, this.model);
+        , filter, this.store, this.model).map((data: any[]) => {
+          return data[0];
+        });
     } else {
       this.store.dispatch(new this.actions.findById(id, filter, meta));
 
       return applyFilter(
         this.store.select(this.model.getModelName() + 's')
           .map((state: any) => state.entities[id])
-        , filter, this.store, this.model);
+        , filter, this.store, this.model).map((data: any[]) => {
+          return data[0];
+        });
     }
   }
 
@@ -81,14 +85,18 @@ export class OrmBase<T> {
             destroyStream$.next(1);
             destroyStream$.complete();
           })
-        , newFilter, this.store, this.model);
+        , newFilter, this.store, this.model).map((data: any[]) => {
+          return data[0];
+        });
     } else {
       this.store.dispatch(new this.actions.findOne(filter, meta));
 
       return applyFilter(
         this.store.select(this.model.getModelName() + 's')
           .map((state: any) => state.entities)
-        , newFilter, this.store, this.model);
+        , newFilter, this.store, this.model).map((data: any[]) => {
+          return data[0];
+        });
     }
   }
 

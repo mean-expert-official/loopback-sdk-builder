@@ -20,15 +20,7 @@ export function applyFilter(state$: Observable<any>, filter: LoopBackFilter, sto
           return state;
         }
 
-        const data: any[] = [];
-
-        for (const key in state) {
-          if (state.hasOwnProperty(key)) {
-            data.push(state[key]);
-          }
-        }
-
-        return data;
+        return [state];
       })
       .map((data: any | any[]) => filterNodes(data, filter))
       .publishReplay(1).refCount()
@@ -82,6 +74,13 @@ function include(state$: Observable<any>, filter: LoopBackFilter, store: any, mo
             }
 
             return data;
+          })
+          .map((data: any | any[]) => {
+            if (!include.scope) {
+              return data;
+            }
+
+            return filterNodes(data, include.scope)
           })
           .publishReplay(1).refCount()
         , include.scope || include, store, models[relationSchema.model])
