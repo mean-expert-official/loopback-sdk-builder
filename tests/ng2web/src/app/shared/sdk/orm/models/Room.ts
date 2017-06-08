@@ -204,7 +204,17 @@ export class OrmRoom extends OrmBase<Room> {
 
       return applyFilter(
         this.store.select(this.model.getModelDefinition().relations.messages.model + 's')
-          .map((state: any) => state.entities)
+          .map((state: any) => {
+            const entities = [];
+            
+            for (let key in state.entities) {
+              if (state.entities.hasOwnProperty(key)) {
+                entities.push(state.entities[key]);
+              }
+            }
+
+            return entities;
+          })
           .finally(() => {
             destroyStream$.next(1);
             destroyStream$.complete();
@@ -215,7 +225,17 @@ export class OrmRoom extends OrmBase<Room> {
 
       return applyFilter(
         this.store.select(this.model.getModelDefinition().relations.messages.model + 's')
-          .map((state: any) => state.entities)
+          .map((state: any) => {
+            const entities = [];
+            
+            for (let key in state.entities) {
+              if (state.entities.hasOwnProperty(key)) {
+                entities.push(state.entities[key]);
+              }
+            }
+
+            return entities;
+          })
         , filter, this.store, models[this.model.getModelDefinition().relations.messages.model]);
     }
     
@@ -238,7 +258,17 @@ export class OrmRoom extends OrmBase<Room> {
 
       return applyFilter(
         this.store.select(this.model.getModelDefinition().relations.likes.model + 's')
-          .map((state: any) => state.entities)
+          .map((state: any) => {
+            const entities = [];
+            
+            for (let key in state.entities) {
+              if (state.entities.hasOwnProperty(key)) {
+                entities.push(state.entities[key]);
+              }
+            }
+
+            return entities;
+          })
           .finally(() => {
             destroyStream$.next(1);
             destroyStream$.complete();
@@ -249,7 +279,17 @@ export class OrmRoom extends OrmBase<Room> {
 
       return applyFilter(
         this.store.select(this.model.getModelDefinition().relations.likes.model + 's')
-          .map((state: any) => state.entities)
+          .map((state: any) => {
+            const entities = [];
+            
+            for (let key in state.entities) {
+              if (state.entities.hasOwnProperty(key)) {
+                entities.push(state.entities[key]);
+              }
+            }
+
+            return entities;
+          })
         , filter, this.store, models[this.model.getModelDefinition().relations.likes.model]);
     }
     
@@ -272,7 +312,17 @@ export class OrmRoom extends OrmBase<Room> {
 
       return applyFilter(
         this.store.select(this.model.getModelDefinition().relations.categories.model + 's')
-          .map((state: any) => state.entities)
+          .map((state: any) => {
+            const entities = [];
+            
+            for (let key in state.entities) {
+              if (state.entities.hasOwnProperty(key)) {
+                entities.push(state.entities[key]);
+              }
+            }
+
+            return entities;
+          })
           .finally(() => {
             destroyStream$.next(1);
             destroyStream$.complete();
@@ -283,7 +333,17 @@ export class OrmRoom extends OrmBase<Room> {
 
       return applyFilter(
         this.store.select(this.model.getModelDefinition().relations.categories.model + 's')
-          .map((state: any) => state.entities)
+          .map((state: any) => {
+            const entities = [];
+            
+            for (let key in state.entities) {
+              if (state.entities.hasOwnProperty(key)) {
+                entities.push(state.entities[key]);
+              }
+            }
+
+            return entities;
+          })
         , filter, this.store, models[this.model.getModelDefinition().relations.categories.model]);
     }
     
@@ -306,7 +366,17 @@ export class OrmRoom extends OrmBase<Room> {
 
       return applyFilter(
         this.store.select(this.model.getModelDefinition().relations.accounts.model + 's')
-          .map((state: any) => state.entities)
+          .map((state: any) => {
+            const entities = [];
+            
+            for (let key in state.entities) {
+              if (state.entities.hasOwnProperty(key)) {
+                entities.push(state.entities[key]);
+              }
+            }
+
+            return entities;
+          })
           .finally(() => {
             destroyStream$.next(1);
             destroyStream$.complete();
@@ -317,7 +387,17 @@ export class OrmRoom extends OrmBase<Room> {
 
       return applyFilter(
         this.store.select(this.model.getModelDefinition().relations.accounts.model + 's')
-          .map((state: any) => state.entities)
+          .map((state: any) => {
+            const entities = [];
+            
+            for (let key in state.entities) {
+              if (state.entities.hasOwnProperty(key)) {
+                entities.push(state.entities[key]);
+              }
+            }
+
+            return entities;
+          })
         , filter, this.store, models[this.model.getModelDefinition().relations.accounts.model]);
     }
     
@@ -340,7 +420,17 @@ export class OrmRoom extends OrmBase<Room> {
 
       return applyFilter(
         this.store.select(this.model.getModelDefinition().relations.admins.model + 's')
-          .map((state: any) => state.entities)
+          .map((state: any) => {
+            const entities = [];
+            
+            for (let key in state.entities) {
+              if (state.entities.hasOwnProperty(key)) {
+                entities.push(state.entities[key]);
+              }
+            }
+
+            return entities;
+          })
           .finally(() => {
             destroyStream$.next(1);
             destroyStream$.complete();
@@ -351,7 +441,17 @@ export class OrmRoom extends OrmBase<Room> {
 
       return applyFilter(
         this.store.select(this.model.getModelDefinition().relations.admins.model + 's')
-          .map((state: any) => state.entities)
+          .map((state: any) => {
+            const entities = [];
+            
+            for (let key in state.entities) {
+              if (state.entities.hasOwnProperty(key)) {
+                entities.push(state.entities[key]);
+              }
+            }
+
+            return entities;
+          })
         , filter, this.store, models[this.model.getModelDefinition().relations.admins.model]);
     }
     

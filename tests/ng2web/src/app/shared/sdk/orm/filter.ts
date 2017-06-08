@@ -20,23 +20,42 @@ export function applyFilter(state$: Observable<any>, filter: LoopBackFilter, sto
           return state;
         }
 
-        return [state];
+        return state ? [state]: [];
       })
       .map((data: any | any[]) => filterNodes(data, filter))
       .publishReplay(1).refCount()
     , filter, store, model);
 }
 
-function include(state$: Observable<any>, filter: LoopBackFilter, store: any, model: any) {
+function include(state$: Observable<any>, filter: LoopBackFilter, store: any, model: any): Observable<any> {
   if (!filter.include) {
     return state$;
   }
+
+  const normalizedInclude = normalizeInclude(filter.include);
 
   const stateWithEntities$ = state$.map((data) => {
     const state: any = {
       entities: {},
       data: data
     };
+
+    for (const include of normalizedInclude) {
+      let relationSchema: any;
+      if (isPlainObject(include)) {
+        relationSchema = model.getModelDefinition().relations[include.relation];
+      } else {
+        relationSchema = model.getModelDefinition().relations[include];
+      }
+
+      if (relationSchema.type.indexOf('[]') !== -1) {
+        for (var i = 0; i < data.length; ++i) {
+          data[i] = Object.assign({}, data[i], {
+            [relationSchema.name]: []
+          });
+        }
+      }
+    }
 
     for (const item of data) {
       state.entities[item[model.getModelDefinition().idName]] = item;
@@ -46,7 +65,6 @@ function include(state$: Observable<any>, filter: LoopBackFilter, store: any, mo
   })
   .publishReplay(1).refCount();
 
-  const normalizedInclude = normalizeInclude(filter.include);
   const includesArray: any[] = [];
 
   for (const include of normalizedInclude) {
@@ -57,40 +75,42 @@ function include(state$: Observable<any>, filter: LoopBackFilter, store: any, mo
       relationSchema = model.getModelDefinition().relations[include];
     }
 
-    includesArray.push(
-      applyFilter(
-        store.select(relationSchema.model + 's')
-          .map((state: any) => state.entities)
-          .withLatestFrom(stateWithEntities$, // not sure if should use combineLatest
-            (includeState: any, stateWithEntities: any) => ({includeState, stateWithEntities}))
-          .map(({includeState, stateWithEntities}) => {
-            const data: any[] = [];
+    if (!!relationSchema.model) {
+      includesArray.push(
+        applyFilter(
+          store.select(relationSchema.model + 's')
+            .map((state: any) => state.entities)
+            .withLatestFrom(stateWithEntities$, // not sure if should use combineLatest
+              (includeState: any, stateWithEntities: any) => ({includeState, stateWithEntities}))
+            .map(({includeState, stateWithEntities}) => {
+              const data: any[] = [];
 
-            for (const key in includeState) {
-              if (includeState.hasOwnProperty(key) &&
-                stateWithEntities.entities.hasOwnProperty(includeState[key][relationSchema.keyTo])) {
-                data.push(includeState[key]);
+              for (const key in includeState) {
+                if (includeState.hasOwnProperty(key) &&
+                  stateWithEntities.entities.hasOwnProperty(includeState[key][relationSchema.keyTo])) {
+                  data.push(includeState[key]);
+                }
               }
-            }
 
-            return data;
-          })
-          .map((data: any | any[]) => {
-            if (!include.scope) {
               return data;
-            }
+            })
+            .map((data: any | any[]) => {
+              if (!include.scope) {
+                return data;
+              }
 
-            return filterNodes(data, include.scope)
-          })
-          .publishReplay(1).refCount()
-        , include.scope || include, store, models[relationSchema.model])
-    );
+              return filterNodes(data, include.scope)
+            })
+            .publishReplay(1).refCount()
+          , include.scope || include, store, models[relationSchema.model])
+      );
+    }
   }
 
   return stateWithEntities$.combineLatest(...includesArray, (...args) => {
     const stateWithEntities: any = args[0];
 
-    for (let i = 0; i < args.length; ++i) {
+    for (let i = 1; i < args.length; ++i) {
       for (const item of args[i]) {
         const includeString: string = normalizedInclude[i - 1].relation || normalizedInclude[i - 1];
         const relationSchema = model.getModelDefinition().relations[includeString];

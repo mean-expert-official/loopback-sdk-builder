@@ -23,7 +23,17 @@ export class OrmBase<T> {
 
       return applyFilter(
         this.store.select(this.model.getModelName() + 's')
-          .map((state: any) => state.entities)
+          .map((state: any) => {
+            const entities = [];
+            
+            for (let key in state.entities) {
+              if (state.entities.hasOwnProperty(key)) {
+                entities.push(state.entities[key]);
+              }
+            }
+
+            return entities;
+          })
           .finally(() => {
             destroyStream$.next(1);
             destroyStream$.complete();
@@ -34,7 +44,17 @@ export class OrmBase<T> {
 
       return applyFilter(
         this.store.select(this.model.getModelName() + 's')
-          .map((state: any) => state.entities)
+          .map((state: any) => {
+            const entities = [];
+            
+            for (let key in state.entities) {
+              if (state.entities.hasOwnProperty(key)) {
+                entities.push(state.entities[key]);
+              }
+            }
+
+            return entities;
+          })
         , filter, this.store, this.model);
     }
   }
@@ -80,7 +100,17 @@ export class OrmBase<T> {
 
       return applyFilter(
         this.store.select(this.model.getModelName() + 's')
-          .map((state: any) => state.entities)
+          .map((state: any) => {
+            const entities = [];
+            
+            for (let key in state.entities) {
+              if (state.entities.hasOwnProperty(key)) {
+                entities.push(state.entities[key]);
+              }
+            }
+
+            return entities;
+          })
           .finally(() => {
             destroyStream$.next(1);
             destroyStream$.complete();
@@ -93,7 +123,17 @@ export class OrmBase<T> {
 
       return applyFilter(
         this.store.select(this.model.getModelName() + 's')
-          .map((state: any) => state.entities)
+          .map((state: any) => {
+            const entities = [];
+            
+            for (let key in state.entities) {
+              if (state.entities.hasOwnProperty(key)) {
+                entities.push(state.entities[key]);
+              }
+            }
+
+            return entities;
+          })
         , newFilter, this.store, this.model).map((data: any[]) => {
           return data[0];
         });

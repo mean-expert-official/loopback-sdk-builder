@@ -29,7 +29,7 @@ export function BaseReducerFactory<S, T>(actionTypes: any): any {
       let newEntities = Object.assign({}, state.entities);
       for (let value of action.payload) {
         newIds = [ ...newIds, value.id ];
-        newEntities = Object.assign({}, {
+        newEntities = Object.assign({}, newEntities, {
           [value.id]: Object.assign({}, newEntities[value.id], value)
         });
       }
@@ -42,7 +42,7 @@ export function BaseReducerFactory<S, T>(actionTypes: any): any {
       return Object.assign({}, state, {
         ids: Array.from(new Set([ ...state.ids, action.payload.id ])),
         entities: Object.assign({}, state.entities, {
-          [action.payload.id]: action.payload
+          [action.payload.id]: Object.assign({}, state.entities[action.payload.id], action.payload)
         })
       });
     }
@@ -59,7 +59,7 @@ export function BaseReducerFactory<S, T>(actionTypes: any): any {
     let newEntities = Object.assign({}, state.entities);
     for (let value of action.payload) {
       newIds = [ ...newIds, value.id ];
-      newEntities = Object.assign({}, {
+      newEntities = Object.assign({}, newEntities, {
         [value.id]: Object.assign({}, newEntities[value.id], value)
       });
     }
