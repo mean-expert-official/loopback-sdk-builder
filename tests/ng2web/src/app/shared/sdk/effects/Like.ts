@@ -26,7 +26,10 @@ export class LikeEffects extends BaseLoopbackEffects {
     .ofType(LikeActionTypes.GET_MESSAGE)
     .mergeMap((action: LoopbackAction) =>
       this.like.getMessage(action.payload.id, action.payload.refresh)
-        .map((response) => new LikeActions.getMessageSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => concat(
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Message', 'findSuccess'),
+          of(new LikeActions.getMessageSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new LikeActions.getMessageFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -38,7 +41,10 @@ export class LikeEffects extends BaseLoopbackEffects {
     .ofType(LikeActionTypes.GET_ROOM)
     .mergeMap((action: LoopbackAction) =>
       this.like.getRoom(action.payload.id, action.payload.refresh)
-        .map((response) => new LikeActions.getRoomSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => concat(
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Room', 'findSuccess'),
+          of(new LikeActions.getRoomSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new LikeActions.getRoomFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))

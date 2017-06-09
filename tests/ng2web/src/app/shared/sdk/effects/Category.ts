@@ -26,10 +26,10 @@ export class CategoryEffects extends BaseLoopbackEffects {
     .ofType(CategoryActionTypes.FIND_BY_ID_ROOMS)
     .mergeMap((action: LoopbackAction) =>
       this.category.findByIdRooms(action.payload.id, action.payload.fk)
-        .mergeMap((response) => {
-          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Room', 'findByIdSuccess');
-          return new CategoryActions.findByIdRoomsSuccess(action.payload.id, response, action.meta);
-        })
+        .mergeMap((response) => concat(
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Room', 'findByIdSuccess'),
+          of(new CategoryActions.findByIdRoomsSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new CategoryActions.findByIdRoomsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -89,7 +89,10 @@ export class CategoryEffects extends BaseLoopbackEffects {
     .ofType(CategoryActionTypes.GET_ROOMS)
     .mergeMap((action: LoopbackAction) =>
       this.category.getRooms(action.payload.id, action.payload.filter)
-        .map((response) => new CategoryActions.getRoomsSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => concat(
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Room', 'findSuccess'),
+          of(new CategoryActions.getRoomsSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new CategoryActions.getRoomsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))

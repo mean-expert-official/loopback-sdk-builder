@@ -26,7 +26,10 @@ export class RoomAdminEffects extends BaseLoopbackEffects {
     .ofType(RoomAdminActionTypes.GET_ACCOUNT)
     .mergeMap((action: LoopbackAction) =>
       this.roomadmin.getAccount(action.payload.id, action.payload.refresh)
-        .map((response) => new RoomAdminActions.getAccountSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => concat(
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Account', 'findSuccess'),
+          of(new RoomAdminActions.getAccountSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new RoomAdminActions.getAccountFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -38,7 +41,10 @@ export class RoomAdminEffects extends BaseLoopbackEffects {
     .ofType(RoomAdminActionTypes.GET_ROOM)
     .mergeMap((action: LoopbackAction) =>
       this.roomadmin.getRoom(action.payload.id, action.payload.refresh)
-        .map((response) => new RoomAdminActions.getRoomSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => concat(
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Room', 'findSuccess'),
+          of(new RoomAdminActions.getRoomSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new RoomAdminActions.getRoomFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
