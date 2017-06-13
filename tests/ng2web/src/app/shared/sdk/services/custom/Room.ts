@@ -94,6 +94,18 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onDestroyByIdMessages(id: any): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/messages/:fk";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
+  }
+
   /**
    * Update a related item by id for messages.
    *
@@ -128,6 +140,18 @@ export class RoomApi extends BaseLoopBackApi {
     let _urlParams: any = {};
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
+  }
+
+  public onUpdateByIdMessages(id: any): Observable<any> {
+    let _method: string = "PUT";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/messages/:fk";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
   }
 
   /**
@@ -187,6 +211,18 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onDestroyByIdLikes(id: any): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/likes/:fk";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
+  }
+
   /**
    * Update a related item by id for likes.
    *
@@ -221,6 +257,18 @@ export class RoomApi extends BaseLoopBackApi {
     let _urlParams: any = {};
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
+  }
+
+  public onUpdateByIdLikes(id: any): Observable<any> {
+    let _method: string = "PUT";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/likes/:fk";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
   }
 
   /**
@@ -280,6 +328,18 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onDestroyByIdCategories(id: any): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/categories/:fk";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
+  }
+
   /**
    * Update a related item by id for categories.
    *
@@ -314,6 +374,18 @@ export class RoomApi extends BaseLoopBackApi {
     let _urlParams: any = {};
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
+  }
+
+  public onUpdateByIdCategories(id: any): Observable<any> {
+    let _method: string = "PUT";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/categories/:fk";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
   }
 
   /**
@@ -352,6 +424,18 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onLinkCategories(id: any): Observable<any> {
+    let _method: string = "PUT";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/categories/rel/:fk";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
+  }
+
   /**
    * Remove the categories relation to an item by id.
    *
@@ -377,6 +461,18 @@ export class RoomApi extends BaseLoopBackApi {
     let _urlParams: any = {};
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
+  }
+
+  public onUnlinkCategories(id: any): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/categories/rel/:fk";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
   }
 
   /**
@@ -466,6 +562,18 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onDestroyByIdAccounts(id: any): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/accounts/:fk";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
+  }
+
   /**
    * Update a related item by id for accounts.
    *
@@ -500,6 +608,18 @@ export class RoomApi extends BaseLoopBackApi {
     let _urlParams: any = {};
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
+  }
+
+  public onUpdateByIdAccounts(id: any): Observable<any> {
+    let _method: string = "PUT";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/accounts/:fk";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
   }
 
   /**
@@ -538,6 +658,18 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onLinkAccounts(id: any): Observable<any> {
+    let _method: string = "PUT";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/accounts/rel/:fk";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
+  }
+
   /**
    * Remove the accounts relation to an item by id.
    *
@@ -563,6 +695,18 @@ export class RoomApi extends BaseLoopBackApi {
     let _urlParams: any = {};
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
+  }
+
+  public onUnlinkAccounts(id: any): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/accounts/rel/:fk";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
   }
 
   /**
@@ -652,6 +796,18 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onDestroyByIdAdmins(id: any): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/admins/:fk";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
+  }
+
   /**
    * Update a related item by id for admins.
    *
@@ -686,6 +842,18 @@ export class RoomApi extends BaseLoopBackApi {
     let _urlParams: any = {};
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
+  }
+
+  public onUpdateByIdAdmins(id: any): Observable<any> {
+    let _method: string = "PUT";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/admins/:fk";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
   }
 
   /**
@@ -724,6 +892,18 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onLinkAdmins(id: any): Observable<any> {
+    let _method: string = "PUT";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/admins/rel/:fk";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
+  }
+
   /**
    * Remove the admins relation to an item by id.
    *
@@ -749,6 +929,18 @@ export class RoomApi extends BaseLoopBackApi {
     let _urlParams: any = {};
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
+  }
+
+  public onUnlinkAdmins(id: any): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/admins/rel/:fk";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
   }
 
   /**
@@ -806,7 +998,7 @@ export class RoomApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (filter) _urlParams.filter = filter;
+    if (typeof filter !== 'undefined' && filter !== null) _urlParams.filter = filter;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
@@ -844,6 +1036,18 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onCreateMessages(id: any): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/messages";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
+  }
+
   /**
    * Deletes all messages of this model.
    *
@@ -866,6 +1070,18 @@ export class RoomApi extends BaseLoopBackApi {
     let _urlParams: any = {};
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
+  }
+
+  public onDeleteMessages(id: any): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/messages";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
   }
 
   /**
@@ -892,7 +1108,7 @@ export class RoomApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (where) _urlParams.where = where;
+    if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
@@ -922,7 +1138,7 @@ export class RoomApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (filter) _urlParams.filter = filter;
+    if (typeof filter !== 'undefined' && filter !== null) _urlParams.filter = filter;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
@@ -960,6 +1176,18 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onCreateLikes(id: any): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/likes";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
+  }
+
   /**
    * Deletes all likes of this model.
    *
@@ -982,6 +1210,18 @@ export class RoomApi extends BaseLoopBackApi {
     let _urlParams: any = {};
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
+  }
+
+  public onDeleteLikes(id: any): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/likes";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
   }
 
   /**
@@ -1008,7 +1248,7 @@ export class RoomApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (where) _urlParams.where = where;
+    if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
@@ -1038,7 +1278,7 @@ export class RoomApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (filter) _urlParams.filter = filter;
+    if (typeof filter !== 'undefined' && filter !== null) _urlParams.filter = filter;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
@@ -1076,6 +1316,18 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onCreateCategories(id: any): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/categories";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
+  }
+
   /**
    * Deletes all categories of this model.
    *
@@ -1098,6 +1350,18 @@ export class RoomApi extends BaseLoopBackApi {
     let _urlParams: any = {};
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
+  }
+
+  public onDeleteCategories(id: any): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/categories";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
   }
 
   /**
@@ -1124,7 +1388,7 @@ export class RoomApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (where) _urlParams.where = where;
+    if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
@@ -1154,7 +1418,7 @@ export class RoomApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (filter) _urlParams.filter = filter;
+    if (typeof filter !== 'undefined' && filter !== null) _urlParams.filter = filter;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
@@ -1192,6 +1456,18 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onCreateAccounts(id: any): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/accounts";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
+  }
+
   /**
    * Deletes all accounts of this model.
    *
@@ -1214,6 +1490,18 @@ export class RoomApi extends BaseLoopBackApi {
     let _urlParams: any = {};
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
+  }
+
+  public onDeleteAccounts(id: any): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/accounts";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
   }
 
   /**
@@ -1240,7 +1528,7 @@ export class RoomApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (where) _urlParams.where = where;
+    if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
@@ -1270,7 +1558,7 @@ export class RoomApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (filter) _urlParams.filter = filter;
+    if (typeof filter !== 'undefined' && filter !== null) _urlParams.filter = filter;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
@@ -1308,6 +1596,18 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onCreateAdmins(id: any): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/admins";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
+  }
+
   /**
    * Deletes all admins of this model.
    *
@@ -1330,6 +1630,18 @@ export class RoomApi extends BaseLoopBackApi {
     let _urlParams: any = {};
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
+  }
+
+  public onDeleteAdmins(id: any): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/admins";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
   }
 
   /**
@@ -1356,7 +1668,7 @@ export class RoomApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (where) _urlParams.where = where;
+    if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
@@ -1390,6 +1702,16 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onPatchOrCreate(): Observable<any> {
+    let _method: string = "PATCH";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms";
+    let _routeParams: any = {};
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
+  }
+
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
@@ -1421,6 +1743,18 @@ export class RoomApi extends BaseLoopBackApi {
     let _urlParams: any = {};
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
+  }
+
+  public onPatchAttributes(id: any): Observable<any> {
+    let _method: string = "PATCH";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
   }
 
   /**
@@ -1483,9 +1817,9 @@ export class RoomApi extends BaseLoopBackApi {
     let _routeParams: any = {};
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (a) _urlParams.a = a;
-    if (b) _urlParams.b = b;
-    if (c) _urlParams.c = c;
+    if (typeof a !== 'undefined' && a !== null) _urlParams.a = a;
+    if (typeof b !== 'undefined' && b !== null) _urlParams.b = b;
+    if (typeof c !== 'undefined' && c !== null) _urlParams.c = c;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
@@ -1526,6 +1860,16 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onGreetPost(a: any = {}, b: any = {}, c: any = {}): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/who";
+    let _routeParams: any = {};
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
+  }
+
   /**
    * <em>
          * (The remote method definition does not provide any description.)
@@ -1557,6 +1901,16 @@ export class RoomApi extends BaseLoopBackApi {
     return result.map((instance: Room) => new Room(instance));
   }
 
+  public onFindByRoom(room: any = {}): Observable<Room> {
+    let _method: string = "POST";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/findByRoom";
+    let _routeParams: any = {};
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
+  }
+
   /**
    * <em>
          * (The remote method definition does not provide any description.)
@@ -1582,9 +1936,19 @@ export class RoomApi extends BaseLoopBackApi {
     let _routeParams: any = {};
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (room) _urlParams.room = room;
+    if (typeof room !== 'undefined' && room !== null) _urlParams.room = room;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result.map((instance: Room) => new Room(instance));
+  }
+
+  public onFindByRoomContext(room: any = {}): Observable<Room> {
+    let _method: string = "POST";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/findByRoomContext";
+    let _routeParams: any = {};
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
   }
 
   /**
@@ -1618,6 +1982,16 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onSingleParamPost(param: any = {}): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/single-param-post";
+    let _routeParams: any = {};
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
+  }
+
   /**
    * Gets list of all unique values used for a given property.
    *
@@ -1641,8 +2015,8 @@ export class RoomApi extends BaseLoopBackApi {
     let _routeParams: any = {};
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (property) _urlParams.property = property;
-    if (filter) _urlParams.filter = filter;
+    if (typeof property !== 'undefined' && property !== null) _urlParams.property = property;
+    if (typeof filter !== 'undefined' && filter !== null) _urlParams.filter = filter;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
@@ -1674,10 +2048,10 @@ export class RoomApi extends BaseLoopBackApi {
     let _routeParams: any = {};
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (range) _urlParams.range = range;
-    if (custom) _urlParams.custom = custom;
-    if (where) _urlParams.where = where;
-    if (groupBy) _urlParams.groupBy = groupBy;
+    if (typeof range !== 'undefined' && range !== null) _urlParams.range = range;
+    if (typeof custom !== 'undefined' && custom !== null) _urlParams.custom = custom;
+    if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
+    if (typeof groupBy !== 'undefined' && groupBy !== null) _urlParams.groupBy = groupBy;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
   }
@@ -1715,6 +2089,18 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onCreateManyMessages(id: any): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/messages";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
+  }
+
   /**
    * Creates a new instance in likes of this model.
    *
@@ -1746,6 +2132,18 @@ export class RoomApi extends BaseLoopBackApi {
     let _urlParams: any = {};
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
+  }
+
+  public onCreateManyLikes(id: any): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/likes";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
   }
 
   /**
@@ -1781,6 +2179,18 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onCreateManyCategories(id: any): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/categories";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
+  }
+
   /**
    * Creates a new instance in accounts of this model.
    *
@@ -1814,6 +2224,18 @@ export class RoomApi extends BaseLoopBackApi {
     return result;
   }
 
+  public onCreateManyAccounts(id: any): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/accounts";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
+  }
+
   /**
    * Creates a new instance in admins of this model.
    *
@@ -1845,6 +2267,18 @@ export class RoomApi extends BaseLoopBackApi {
     let _urlParams: any = {};
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;
+  }
+
+  public onCreateManyAdmins(id: any): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = "/" + LoopBackConfig.getApiVersion() +
+    "/rooms/:id/admins";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody, true);
   }
 
   /**
