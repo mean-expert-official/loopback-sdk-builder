@@ -60,59 +60,73 @@ export abstract class BaseLoopBackApi {
     url         : string,
     routeParams : any = {},
     urlParams   : any = {},
-    postBody    : any = {}
+    postBody    : any = {},
+    pubsub      : boolean = false
   ): Observable<any> {
-    // Headers to be sent
-    let headers: Headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    // Authenticate request
-    this.authenticate(url, headers);
     // Transpile route variables to the actual request Values
     Object.keys(routeParams).forEach((key: string) => {
       url = url.replace(new RegExp(":" + key + "(\/|$)", "g"), routeParams[key] + "$1")
     });
-    // Body fix for built in remote methods using "data", "options" or "credentials
-    // that are the actual body, Custom remote method properties are different and need
-    // to be wrapped into a body object
-    let body: any;
-    let postBodyKeys = typeof postBody === 'object' ? Object.keys(postBody) : []
-    if (postBodyKeys.length === 1) {
-      body = postBody[postBodyKeys.shift()];
+    if (pubsub) {
+      if (url.match(/fk/)) {
+        let arr = url.split('/'); arr.pop();
+        url = arr.join('/');
+      }
+      let event: string = (`[${method}]${url}`).replace(/\?/, '');
+      let subject: Subject<any> = new Subject<any>();
+      this.connection.on(event, res => subject.next(res));
+      return subject.asObservable();
     } else {
-      body = postBody;
+      // Headers to be sent
+      let headers: Headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      // Authenticate request
+      this.authenticate(url, headers);
+      // Body fix for built in remote methods using "data", "options" or "credentials
+      // that are the actual body, Custom remote method properties are different and need
+      // to be wrapped into a body object
+      let body: any;
+      let postBodyKeys = typeof postBody === 'object' ? Object.keys(postBody) : []
+      if (postBodyKeys.length === 1) {
+        body = postBody[postBodyKeys.shift()];
+      } else {
+        body = postBody;
+      }
+      let filter: string = '';
+      // Separate filter object from url params and add to search query
+      if (urlParams.filter) {
+        if (LoopBackConfig.isHeadersFilteringSet()) {
+          headers.append('filter', JSON.stringify(urlParams.filter));
+        } else {
+          filter = `?filter=${ encodeURI(JSON.stringify(urlParams.filter))}`;
+        }
+        delete urlParams.filter;
+      }
+      // Separate where object from url params and add to search query
+      /**
+      CODE BELOW WILL GENERATE THE FOLLOWING ISSUES:
+      - https://github.com/mean-expert-official/loopback-sdk-builder/issues/356
+      - https://github.com/mean-expert-official/loopback-sdk-builder/issues/328 
+      if (urlParams.where) {
+        headers.append('where', JSON.stringify(urlParams.where));
+        delete urlParams.where;
+      }
+      **/
+      this.searchParams.setJSON(urlParams);
+      let request: Request = new Request(
+        new RequestOptions({
+          headers : headers,
+          method  : method,
+          url     : `${url}${filter}`,
+          search  : Object.keys(urlParams).length > 0
+                  ? this.searchParams.getURLSearchParams() : null,
+          body    : body ? JSON.stringify(body) : undefined
+        })
+      );
+      return this.http.request(request)
+        .map((res: any) => (res.text() != "" ? res.json() : {}))
+        .catch((e) => this.errorHandler.handleError(e));
     }
-    let filter: string = '';
-    // Separate filter object from url params and add to search query
-    if (urlParams.filter && LoopBackConfig.isHeadersFilteringSet()) {
-      headers.append('filter', JSON.stringify(urlParams.filter));
-    } else {
-      filter = `?filter=${ encodeURI(JSON.stringify(urlParams.filter))}`;
-    }
-    delete urlParams.filter;
-    // Separate where object from url params and add to search query
-    /**
-    CODE BELOW WILL GENERATE THE FOLLOWING ISSUES:
-    - https://github.com/mean-expert-official/loopback-sdk-builder/issues/356
-    - https://github.com/mean-expert-official/loopback-sdk-builder/issues/328 
-    if (urlParams.where) {
-      headers.append('where', JSON.stringify(urlParams.where));
-      delete urlParams.where;
-    }
-    **/
-    this.searchParams.setJSON(urlParams);
-    let request: Request = new Request(
-      new RequestOptions({
-        headers : headers,
-        method  : method,
-        url     : `${url}${filter}`,
-        search  : Object.keys(urlParams).length > 0
-                ? this.searchParams.getURLSearchParams() : null,
-        body    : body ? JSON.stringify(body) : undefined
-      })
-    );
-    return this.http.request(request)
-      .map((res: any) => (res.text() != "" ? res.json() : {}))
-      .catch((e) => this.errorHandler.handleError(e));
   }
   /**
    * @method authenticate
@@ -149,7 +163,24 @@ export abstract class BaseLoopBackApi {
     ].join('/'), undefined, undefined, { data }).map((data: T) => this.model.factory(data));
   }
   /**
-   * @method create
+   * @method onCreate
+   * @author Jonathan Casarrubias <t: johncasarrubias, gh: mean-expert-official>
+   * @license MIT
+   * @param {T[]} data Generic data type array
+   * @return {Observable<T[]>}
+   * @description
+   * Generic pubsub oncreate many method
+   */
+  public onCreate<T>(data: T[]): Observable<T[]> {
+    return this.request('POST', [
+      LoopBackConfig.getPath(),
+      LoopBackConfig.getApiVersion(),
+      this.model.getModelDefinition().plural
+    ].join('/'), undefined, undefined, { data }, true)
+    .map((datum: T[]) => datum.map((data: T) => this.model.factory(data)));
+  }
+  /**
+   * @method createMany
    * @author Jonathan Casarrubias <t: johncasarrubias, gh: mean-expert-official>
    * @license MIT
    * @param {T[]} data Generic data type array
@@ -163,6 +194,23 @@ export abstract class BaseLoopBackApi {
       LoopBackConfig.getApiVersion(),
       this.model.getModelDefinition().plural
     ].join('/'), undefined, undefined, { data })
+    .map((datum: T[]) => datum.map((data: T) => this.model.factory(data)));
+  }
+  /**
+   * @method onCreateMany
+   * @author Jonathan Casarrubias <t: johncasarrubias, gh: mean-expert-official>
+   * @license MIT
+   * @param {T[]} data Generic data type array
+   * @return {Observable<T[]>}
+   * @description
+   * Generic create many method
+   */
+  public onCreateMany<T>(data: T[]): Observable<T[]> {
+    return this.request('POST', [
+      LoopBackConfig.getPath(),
+      LoopBackConfig.getApiVersion(),
+      this.model.getModelDefinition().plural
+    ].join('/'), undefined, undefined, { data }, true)
     .map((datum: T[]) => datum.map((data: T) => this.model.factory(data)));
   }
   /**
@@ -251,6 +299,24 @@ export abstract class BaseLoopBackApi {
     ].join('/'), undefined, _urlParams, { data });
   }
   /**
+   * @method onUpdateAll
+   * @author Jonathan Casarrubias <t: johncasarrubias, gh: mean-expert-official>
+   * @license MIT
+   * @return {Observable<T[]>}
+   * @description
+   * Generic pubsub onUpdateAll method
+   */
+  public onUpdateAll<T>(where: any = {}, data: T): Observable<{ count: 'number' }> {
+    let _urlParams: any = {};
+    if (where) _urlParams.where = where;
+    return this.request('POST', [
+      LoopBackConfig.getPath(),
+      LoopBackConfig.getApiVersion(),
+      this.model.getModelDefinition().plural,
+      'update'
+    ].join('/'), undefined, _urlParams, { data }, true);
+  }
+  /**
    * @method deleteById
    * @author Jonathan Casarrubias <t: johncasarrubias, gh: mean-expert-official>
    * @license MIT
@@ -265,6 +331,22 @@ export abstract class BaseLoopBackApi {
       this.model.getModelDefinition().plural,
       ':id'
     ].join('/'), { id }, undefined, undefined).map((data: T) => this.model.factory(data));
+  }
+  /**
+   * @method onDeleteById
+   * @author Jonathan Casarrubias <t: johncasarrubias, gh: mean-expert-official>
+   * @license MIT
+   * @return {Observable<T>}
+   * @description
+   * Generic pubsub onDeleteById method
+   */
+  public onDeleteById<T>(id: any): Observable<T> {
+    return this.request('DELETE', [
+      LoopBackConfig.getPath(),
+      LoopBackConfig.getApiVersion(),
+      this.model.getModelDefinition().plural,
+      ':id'
+    ].join('/'), { id }, undefined, undefined, true).map((data: T) => this.model.factory(data));
   }
   /**
    * @method count
@@ -301,6 +383,22 @@ export abstract class BaseLoopBackApi {
     ].join('/'), { id }, undefined, { data }).map((data: T) => this.model.factory(data));
   }
   /**
+   * @method onUpdateAttributes
+   * @author Jonathan Casarrubias <t: johncasarrubias, gh: mean-expert-official>
+   * @license MIT
+   * @return {Observable<T>}
+   * @description
+   * Generic onUpdateAttributes method
+   */
+  public onUpdateAttributes<T>(id: any, data: T): Observable<T> {
+    return this.request('PUT', [
+      LoopBackConfig.getPath(),
+      LoopBackConfig.getApiVersion(),
+      this.model.getModelDefinition().plural,
+      ':id'
+    ].join('/'), { id }, undefined, { data }, true).map((data: T) => this.model.factory(data));
+  }
+  /**
    * @method upsert
    * @author Jonathan Casarrubias <t: johncasarrubias, gh: mean-expert-official>
    * @license MIT
@@ -316,6 +414,21 @@ export abstract class BaseLoopBackApi {
     ].join('/'), undefined, undefined, { data }).map((data: T) => this.model.factory(data));
   }
   /**
+   * @method onUpsert
+   * @author Jonathan Casarrubias <t: johncasarrubias, gh: mean-expert-official>
+   * @license MIT
+   * @return {Observable<T>}
+   * @description
+   * Generic pubsub onUpsert method
+   */
+  public onUpsert<T>(data: any = {}): Observable<T> {
+    return this.request('PUT', [
+      LoopBackConfig.getPath(),
+      LoopBackConfig.getApiVersion(),
+      this.model.getModelDefinition().plural,
+    ].join('/'), undefined, undefined, { data }, true).map((data: T) => this.model.factory(data));
+  }
+  /**
    * @method upsertPatch
    * @author Jonathan Casarrubias <t: johncasarrubias, gh: mean-expert-official>
    * @license MIT
@@ -329,6 +442,21 @@ export abstract class BaseLoopBackApi {
       LoopBackConfig.getApiVersion(),
       this.model.getModelDefinition().plural,
     ].join('/'), undefined, undefined, { data }).map((data: T) => this.model.factory(data));
+  }
+  /**
+   * @method onUpsertPatch
+   * @author Jonathan Casarrubias <t: johncasarrubias, gh: mean-expert-official>
+   * @license MIT
+   * @return {Observable<T>}
+   * @description
+   * Generic pubsub onUpsertPatch method using patch http method
+   */
+  public onUpsertPatch<T>(data: any = {}): Observable<T> {
+    return this.request('PATCH', [
+      LoopBackConfig.getPath(),
+      LoopBackConfig.getApiVersion(),
+      this.model.getModelDefinition().plural,
+    ].join('/'), undefined, undefined, { data }, true).map((data: T) => this.model.factory(data));
   }
   /**
    * @method upsertWithWhere
@@ -349,6 +477,24 @@ export abstract class BaseLoopBackApi {
     ].join('/'), undefined, _urlParams, { data }).map((data: T) => this.model.factory(data));
   }
   /**
+   * @method onUpsertWithWhere
+   * @author Jonathan Casarrubias <t: johncasarrubias, gh: mean-expert-official>
+   * @license MIT
+   * @return {Observable<T>}
+   * @description
+   * Generic pubsub onUpsertWithWhere method
+   */
+  public onUpsertWithWhere<T>(where: any = {}, data: any = {}): Observable<T> {
+    let _urlParams: any = {};
+    if (where) _urlParams.where = where;
+    return this.request('POST', [
+      LoopBackConfig.getPath(),
+      LoopBackConfig.getApiVersion(),
+      this.model.getModelDefinition().plural,
+      'upsertWithWhere'
+    ].join('/'), undefined, _urlParams, { data }, true).map((data: T) => this.model.factory(data));
+  }
+  /**
    * @method replaceOrCreate
    * @author Jonathan Casarrubias <t: johncasarrubias, gh: mean-expert-official>
    * @license MIT
@@ -365,6 +511,22 @@ export abstract class BaseLoopBackApi {
     ].join('/'), undefined, undefined, { data }).map((data: T) => this.model.factory(data));
   }
   /**
+   * @method onReplaceOrCreate
+   * @author Jonathan Casarrubias <t: johncasarrubias, gh: mean-expert-official>
+   * @license MIT
+   * @return {Observable<T>}
+   * @description
+   * Generic onReplaceOrCreate method
+   */
+  public onReplaceOrCreate<T>(data: any = {}): Observable<T> {
+    return this.request('POST', [
+      LoopBackConfig.getPath(),
+      LoopBackConfig.getApiVersion(),
+      this.model.getModelDefinition().plural,
+      'replaceOrCreate'
+    ].join('/'), undefined, undefined, { data }, true).map((data: T) => this.model.factory(data));
+  }
+  /**
    * @method replaceById
    * @author Jonathan Casarrubias <t: johncasarrubias, gh: mean-expert-official>
    * @license MIT
@@ -379,6 +541,22 @@ export abstract class BaseLoopBackApi {
       this.model.getModelDefinition().plural,
       ':id', 'replace'
     ].join('/'), { id }, undefined, { data }).map((data: T) => this.model.factory(data));
+  }
+  /**
+   * @method onReplaceById
+   * @author Jonathan Casarrubias <t: johncasarrubias, gh: mean-expert-official>
+   * @license MIT
+   * @return {Observable<T>}
+   * @description
+   * Generic onReplaceById method
+   */
+  public onReplaceById<T>(id: any, data: any = {}): Observable<T> {
+    return this.request('POST', [
+      LoopBackConfig.getPath(),
+      LoopBackConfig.getApiVersion(),
+      this.model.getModelDefinition().plural,
+      ':id', 'replace'
+    ].join('/'), { id }, undefined, { data }, true).map((data: T) => this.model.factory(data));
   }
   /**
    * @method createChangeStream
