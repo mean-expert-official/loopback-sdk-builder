@@ -27,7 +27,7 @@ export class UserIdentityEffects extends BaseLoopbackEffects {
     .mergeMap((action: LoopbackAction) =>
       this.useridentity.getUser(action.payload.id, action.payload.refresh)
         .mergeMap((response) => concat(
-          resolver({id: action.payload.id, data: response, meta: action.meta}, 'User', 'findSuccess'),
+          resolver({data: response, meta: action.meta}, 'User', 'findSuccess'),
           of(new UserIdentityActions.getUserSuccess(action.payload.id, response, action.meta))
         ))
         .catch((error) => concat(

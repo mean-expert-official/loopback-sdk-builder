@@ -41,7 +41,10 @@ export class MessageEffects extends BaseLoopbackEffects {
     .ofType(MessageActionTypes.DESTROY_BY_ID_LIKES)
     .mergeMap((action: LoopbackAction) =>
       this.message.destroyByIdLikes(action.payload.id, action.payload.fk)
-        .map((response) => new MessageActions.destroyByIdLikesSuccess(action.payload.id, action.payload.fk, action.meta))
+        .mergeMap((response) => concat(
+          resolver({data: response, meta: action.meta}, 'Like', 'deleteByIdSuccess'),
+          of(new MessageActions.destroyByIdLikesSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new MessageActions.destroyByIdLikesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -53,7 +56,10 @@ export class MessageEffects extends BaseLoopbackEffects {
     .ofType(MessageActionTypes.UPDATE_BY_ID_LIKES)
     .mergeMap((action: LoopbackAction) =>
       this.message.updateByIdLikes(action.payload.id, action.payload.fk, action.payload.data)
-        .map((response) => new MessageActions.updateByIdLikesSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => concat(
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Like', 'findByIdSuccess'),
+          of(new MessageActions.updateByIdLikesSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new MessageActions.updateByIdLikesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -80,7 +86,10 @@ export class MessageEffects extends BaseLoopbackEffects {
     .ofType(MessageActionTypes.DESTROY_BY_ID_REPLIES)
     .mergeMap((action: LoopbackAction) =>
       this.message.destroyByIdReplies(action.payload.id, action.payload.fk)
-        .map((response) => new MessageActions.destroyByIdRepliesSuccess(action.payload.id, action.payload.fk, action.meta))
+        .mergeMap((response) => concat(
+          resolver({data: response, meta: action.meta}, 'Message', 'deleteByIdSuccess'),
+          of(new MessageActions.destroyByIdRepliesSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new MessageActions.destroyByIdRepliesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -92,7 +101,10 @@ export class MessageEffects extends BaseLoopbackEffects {
     .ofType(MessageActionTypes.UPDATE_BY_ID_REPLIES)
     .mergeMap((action: LoopbackAction) =>
       this.message.updateByIdReplies(action.payload.id, action.payload.fk, action.payload.data)
-        .map((response) => new MessageActions.updateByIdRepliesSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => concat(
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Message', 'findByIdSuccess'),
+          of(new MessageActions.updateByIdRepliesSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new MessageActions.updateByIdRepliesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -105,7 +117,7 @@ export class MessageEffects extends BaseLoopbackEffects {
     .mergeMap((action: LoopbackAction) =>
       this.message.getParent(action.payload.id, action.payload.refresh)
         .mergeMap((response) => concat(
-          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Message', 'findSuccess'),
+          resolver({data: response, meta: action.meta}, 'Message', 'findSuccess'),
           of(new MessageActions.getParentSuccess(action.payload.id, response, action.meta))
         ))
         .catch((error) => concat(
@@ -120,7 +132,7 @@ export class MessageEffects extends BaseLoopbackEffects {
     .mergeMap((action: LoopbackAction) =>
       this.message.getRoom(action.payload.id, action.payload.refresh)
         .mergeMap((response) => concat(
-          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Room', 'findSuccess'),
+          resolver({data: response, meta: action.meta}, 'Room', 'findSuccess'),
           of(new MessageActions.getRoomSuccess(action.payload.id, response, action.meta))
         ))
         .catch((error) => concat(
@@ -135,7 +147,7 @@ export class MessageEffects extends BaseLoopbackEffects {
     .mergeMap((action: LoopbackAction) =>
       this.message.getLikes(action.payload.id, action.payload.filter)
         .mergeMap((response) => concat(
-          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Like', 'findSuccess'),
+          resolver({data: response, meta: action.meta}, 'Like', 'findSuccess'),
           of(new MessageActions.getLikesSuccess(action.payload.id, response, action.meta))
         ))
         .catch((error) => concat(
@@ -149,7 +161,10 @@ export class MessageEffects extends BaseLoopbackEffects {
     .ofType(MessageActionTypes.CREATE_LIKES)
     .mergeMap((action: LoopbackAction) =>
       this.message.createLikes(action.payload.id, action.payload.data)
-        .map((response) => new MessageActions.createLikesSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => concat(
+          resolver({data: response, meta: action.meta}, 'Like', 'findSuccess'),
+          of(new MessageActions.createLikesSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new MessageActions.createLikesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -174,7 +189,7 @@ export class MessageEffects extends BaseLoopbackEffects {
     .mergeMap((action: LoopbackAction) =>
       this.message.getReplies(action.payload.id, action.payload.filter)
         .mergeMap((response) => concat(
-          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Message', 'findSuccess'),
+          resolver({data: response, meta: action.meta}, 'Message', 'findSuccess'),
           of(new MessageActions.getRepliesSuccess(action.payload.id, response, action.meta))
         ))
         .catch((error) => concat(
@@ -188,7 +203,10 @@ export class MessageEffects extends BaseLoopbackEffects {
     .ofType(MessageActionTypes.CREATE_REPLIES)
     .mergeMap((action: LoopbackAction) =>
       this.message.createReplies(action.payload.id, action.payload.data)
-        .map((response) => new MessageActions.createRepliesSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => concat(
+          resolver({data: response, meta: action.meta}, 'Message', 'findSuccess'),
+          of(new MessageActions.createRepliesSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new MessageActions.createRepliesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -212,7 +230,10 @@ export class MessageEffects extends BaseLoopbackEffects {
     .ofType(MessageActionTypes.CREATE_MANY_LIKES)
     .mergeMap((action: LoopbackAction) =>
       this.message.createManyLikes(action.payload.id, action.payload.data)
-        .map((response) => new MessageActions.createManyLikesSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => concat(
+          resolver({data: response, meta: action.meta}, 'Like', 'findSuccess'),
+          of(new MessageActions.createManyLikesSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new MessageActions.createManyLikesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -224,7 +245,10 @@ export class MessageEffects extends BaseLoopbackEffects {
     .ofType(MessageActionTypes.CREATE_MANY_REPLIES)
     .mergeMap((action: LoopbackAction) =>
       this.message.createManyReplies(action.payload.id, action.payload.data)
-        .map((response) => new MessageActions.createManyRepliesSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => concat(
+          resolver({data: response, meta: action.meta}, 'Message', 'findSuccess'),
+          of(new MessageActions.createManyRepliesSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new MessageActions.createManyRepliesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))

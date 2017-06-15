@@ -41,7 +41,10 @@ export class CategoryEffects extends BaseLoopbackEffects {
     .ofType(CategoryActionTypes.DESTROY_BY_ID_ROOMS)
     .mergeMap((action: LoopbackAction) =>
       this.category.destroyByIdRooms(action.payload.id, action.payload.fk)
-        .map((response) => new CategoryActions.destroyByIdRoomsSuccess(action.payload.id, action.payload.fk, action.meta))
+        .mergeMap((response) => concat(
+          resolver({data: response, meta: action.meta}, 'Room', 'deleteByIdSuccess'),
+          of(new CategoryActions.destroyByIdRoomsSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new CategoryActions.destroyByIdRoomsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -53,7 +56,10 @@ export class CategoryEffects extends BaseLoopbackEffects {
     .ofType(CategoryActionTypes.UPDATE_BY_ID_ROOMS)
     .mergeMap((action: LoopbackAction) =>
       this.category.updateByIdRooms(action.payload.id, action.payload.fk, action.payload.data)
-        .map((response) => new CategoryActions.updateByIdRoomsSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => concat(
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Room', 'findByIdSuccess'),
+          of(new CategoryActions.updateByIdRoomsSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new CategoryActions.updateByIdRoomsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -90,7 +96,7 @@ export class CategoryEffects extends BaseLoopbackEffects {
     .mergeMap((action: LoopbackAction) =>
       this.category.getRooms(action.payload.id, action.payload.filter)
         .mergeMap((response) => concat(
-          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Room', 'findSuccess'),
+          resolver({data: response, meta: action.meta}, 'Room', 'findSuccess'),
           of(new CategoryActions.getRoomsSuccess(action.payload.id, response, action.meta))
         ))
         .catch((error) => concat(
@@ -104,7 +110,10 @@ export class CategoryEffects extends BaseLoopbackEffects {
     .ofType(CategoryActionTypes.CREATE_ROOMS)
     .mergeMap((action: LoopbackAction) =>
       this.category.createRooms(action.payload.id, action.payload.data)
-        .map((response) => new CategoryActions.createRoomsSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => concat(
+          resolver({data: response, meta: action.meta}, 'Room', 'findSuccess'),
+          of(new CategoryActions.createRoomsSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new CategoryActions.createRoomsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -128,7 +137,10 @@ export class CategoryEffects extends BaseLoopbackEffects {
     .ofType(CategoryActionTypes.CREATE_MANY_ROOMS)
     .mergeMap((action: LoopbackAction) =>
       this.category.createManyRooms(action.payload.id, action.payload.data)
-        .map((response) => new CategoryActions.createManyRoomsSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => concat(
+          resolver({data: response, meta: action.meta}, 'Room', 'findSuccess'),
+          of(new CategoryActions.createManyRoomsSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new CategoryActions.createManyRoomsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))

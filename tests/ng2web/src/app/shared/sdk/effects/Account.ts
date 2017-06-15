@@ -77,7 +77,10 @@ export class AccountEffects extends BaseLoopbackEffects {
     .ofType(AccountActionTypes.DESTROY_BY_ID_ROOMS)
     .mergeMap((action: LoopbackAction) =>
       this.account.destroyByIdRooms(action.payload.id, action.payload.fk)
-        .map((response) => new AccountActions.destroyByIdRoomsSuccess(action.payload.id, action.payload.fk, action.meta))
+        .mergeMap((response) => concat(
+          resolver({data: response, meta: action.meta}, 'Room', 'deleteByIdSuccess'),
+          of(new AccountActions.destroyByIdRoomsSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new AccountActions.destroyByIdRoomsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -89,7 +92,10 @@ export class AccountEffects extends BaseLoopbackEffects {
     .ofType(AccountActionTypes.UPDATE_BY_ID_ROOMS)
     .mergeMap((action: LoopbackAction) =>
       this.account.updateByIdRooms(action.payload.id, action.payload.fk, action.payload.data)
-        .map((response) => new AccountActions.updateByIdRoomsSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => concat(
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Room', 'findByIdSuccess'),
+          of(new AccountActions.updateByIdRoomsSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new AccountActions.updateByIdRoomsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -140,7 +146,10 @@ export class AccountEffects extends BaseLoopbackEffects {
     .ofType(AccountActionTypes.DESTROY_BY_ID_ADMINISTRATIONS)
     .mergeMap((action: LoopbackAction) =>
       this.account.destroyByIdAdministrations(action.payload.id, action.payload.fk)
-        .map((response) => new AccountActions.destroyByIdAdministrationsSuccess(action.payload.id, action.payload.fk, action.meta))
+        .mergeMap((response) => concat(
+          resolver({data: response, meta: action.meta}, 'Room', 'deleteByIdSuccess'),
+          of(new AccountActions.destroyByIdAdministrationsSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new AccountActions.destroyByIdAdministrationsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -152,7 +161,10 @@ export class AccountEffects extends BaseLoopbackEffects {
     .ofType(AccountActionTypes.UPDATE_BY_ID_ADMINISTRATIONS)
     .mergeMap((action: LoopbackAction) =>
       this.account.updateByIdAdministrations(action.payload.id, action.payload.fk, action.payload.data)
-        .map((response) => new AccountActions.updateByIdAdministrationsSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => concat(
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Room', 'findByIdSuccess'),
+          of(new AccountActions.updateByIdAdministrationsSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new AccountActions.updateByIdAdministrationsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -225,7 +237,7 @@ export class AccountEffects extends BaseLoopbackEffects {
     .mergeMap((action: LoopbackAction) =>
       this.account.getRooms(action.payload.id, action.payload.filter)
         .mergeMap((response) => concat(
-          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Room', 'findSuccess'),
+          resolver({data: response, meta: action.meta}, 'Room', 'findSuccess'),
           of(new AccountActions.getRoomsSuccess(action.payload.id, response, action.meta))
         ))
         .catch((error) => concat(
@@ -239,7 +251,10 @@ export class AccountEffects extends BaseLoopbackEffects {
     .ofType(AccountActionTypes.CREATE_ROOMS)
     .mergeMap((action: LoopbackAction) =>
       this.account.createRooms(action.payload.id, action.payload.data)
-        .map((response) => new AccountActions.createRoomsSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => concat(
+          resolver({data: response, meta: action.meta}, 'Room', 'findSuccess'),
+          of(new AccountActions.createRoomsSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new AccountActions.createRoomsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -264,7 +279,7 @@ export class AccountEffects extends BaseLoopbackEffects {
     .mergeMap((action: LoopbackAction) =>
       this.account.getAdministrations(action.payload.id, action.payload.filter)
         .mergeMap((response) => concat(
-          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Room', 'findSuccess'),
+          resolver({data: response, meta: action.meta}, 'Room', 'findSuccess'),
           of(new AccountActions.getAdministrationsSuccess(action.payload.id, response, action.meta))
         ))
         .catch((error) => concat(
@@ -278,7 +293,10 @@ export class AccountEffects extends BaseLoopbackEffects {
     .ofType(AccountActionTypes.CREATE_ADMINISTRATIONS)
     .mergeMap((action: LoopbackAction) =>
       this.account.createAdministrations(action.payload.id, action.payload.data)
-        .map((response) => new AccountActions.createAdministrationsSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => concat(
+          resolver({data: response, meta: action.meta}, 'Room', 'findSuccess'),
+          of(new AccountActions.createAdministrationsSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new AccountActions.createAdministrationsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -398,7 +416,10 @@ export class AccountEffects extends BaseLoopbackEffects {
     .ofType(AccountActionTypes.CREATE_MANY_ROOMS)
     .mergeMap((action: LoopbackAction) =>
       this.account.createManyRooms(action.payload.id, action.payload.data)
-        .map((response) => new AccountActions.createManyRoomsSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => concat(
+          resolver({data: response, meta: action.meta}, 'Room', 'findSuccess'),
+          of(new AccountActions.createManyRoomsSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new AccountActions.createManyRoomsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -410,7 +431,10 @@ export class AccountEffects extends BaseLoopbackEffects {
     .ofType(AccountActionTypes.CREATE_MANY_ADMINISTRATIONS)
     .mergeMap((action: LoopbackAction) =>
       this.account.createManyAdministrations(action.payload.id, action.payload.data)
-        .map((response) => new AccountActions.createManyAdministrationsSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => concat(
+          resolver({data: response, meta: action.meta}, 'Room', 'findSuccess'),
+          of(new AccountActions.createManyAdministrationsSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error) => concat(
           of(new AccountActions.createManyAdministrationsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
