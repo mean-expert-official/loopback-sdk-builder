@@ -71,7 +71,7 @@ if (!argv['q']) {
   console.log(chalk.green('*                    Michał Frączkiewicz <https://github.com/bonaventoora>               *'));
   console.log(chalk.green('*                                                                                        *'));
   console.log(chalk.green('*                                 ORIGINALLY FORKED FROM                                 *'));
-  console.log(chalk.green('*                      Miroslav Bajtos\' <miroslav@strongloop.com>                       *'));
+  console.log(chalk.green('*                      Miroslav Bajtos\' <miroslav@strongloop.com>                        *'));
   console.log(chalk.green('*                   https://github.com/strongloop/loopback-sdk-angular                   *'));
   console.log(chalk.green('*                                                                                        *'));
   console.log(chalk.green('=========================================================================================='));
