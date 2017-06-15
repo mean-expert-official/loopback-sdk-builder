@@ -44,14 +44,14 @@ export class CoreApi extends BaseLoopBackApi {
    *
    *  - `result` – `{any}` - 
    */
-  public myRemote(): Observable<any> {
+  public myRemote(customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/cores/my-remote";
     let _routeParams: any = {};
     let _postBody: any = {};
     let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -75,7 +75,7 @@ export class CoreApi extends BaseLoopBackApi {
    * This usually means the response is a `Core` object.)
    * </em>
    */
-  public stats(range: any, custom: any = {}, where: any = {}, groupBy: any = {}): Observable<any> {
+  public stats(range: any, custom: any = {}, where: any = {}, groupBy: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/cores/stats";
@@ -86,7 +86,7 @@ export class CoreApi extends BaseLoopBackApi {
     if (typeof custom !== 'undefined' && custom !== null) _urlParams.custom = custom;
     if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
     if (typeof groupBy !== 'undefined' && groupBy !== null) _urlParams.groupBy = groupBy;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 

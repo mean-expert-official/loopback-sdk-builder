@@ -8,7 +8,6 @@
   },
   "mixins": {
     "FireLoop": true,
-    "PubSub": true,
     "TimeStamp": {
       "required": false
     },
