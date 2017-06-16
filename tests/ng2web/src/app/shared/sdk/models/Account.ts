@@ -107,7 +107,7 @@ export class Account implements AccountInterface {
           type: 'any[]',
           model: '',
           relationType: 'hasMany',
-          keyFrom: 'id',
+                  keyFrom: 'id',
           keyTo: 'userId'
         },
         rooms: {
@@ -115,6 +115,8 @@ export class Account implements AccountInterface {
           type: 'Room[]',
           model: 'Room',
           relationType: 'hasMany',
+          modelThrough: 'RoomAccount',
+          keyThrough: 'roomId',
           keyFrom: 'id',
           keyTo: 'accountId'
         },
@@ -123,6 +125,8 @@ export class Account implements AccountInterface {
           type: 'Room[]',
           model: 'Room',
           relationType: 'hasMany',
+          modelThrough: 'RoomAdmin',
+          keyThrough: 'roomId',
           keyFrom: 'id',
           keyTo: 'administrationId'
         },

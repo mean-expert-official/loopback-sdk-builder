@@ -82,7 +82,7 @@ export class RoomAccount implements RoomAccountInterface {
           type: 'Account',
           model: 'Account',
           relationType: 'belongsTo',
-          keyFrom: 'accountId',
+                  keyFrom: 'accountId',
           keyTo: 'id'
         },
         room: {
@@ -90,7 +90,7 @@ export class RoomAccount implements RoomAccountInterface {
           type: 'Room',
           model: 'Room',
           relationType: 'belongsTo',
-          keyFrom: 'roomId',
+                  keyFrom: 'roomId',
           keyTo: 'id'
         },
       }

@@ -135,7 +135,7 @@ export class OrmMessage extends OrmBase<Message> {
       return applyFilter(
         this.store.select(this.model.getModelDefinition().relations.likes.model + 's')
           .map(toArray)
-          .map((state: any[]) => filterById(state, id, models[this.model.getModelDefinition().relations.likes.keyTo]))
+          .map((state: any[]) => filterById(state, id, 'likes', Message))
           .finally(() => {
             destroyStream$.next(1);
             destroyStream$.complete();
@@ -147,7 +147,7 @@ export class OrmMessage extends OrmBase<Message> {
       return applyFilter(
         this.store.select(this.model.getModelDefinition().relations.likes.model + 's')
           .map(toArray)
-          .map((state: any[]) => filterById(state, id, models[this.model.getModelDefinition().relations.likes.keyTo]))
+          .map((state: any[]) => filterById(state, id, 'likes', Message))
         , filter, this.store, models[this.model.getModelDefinition().relations.likes.model]);
     }
     
@@ -171,7 +171,7 @@ export class OrmMessage extends OrmBase<Message> {
       return applyFilter(
         this.store.select(this.model.getModelDefinition().relations.replies.model + 's')
           .map(toArray)
-          .map((state: any[]) => filterById(state, id, models[this.model.getModelDefinition().relations.replies.keyTo]))
+          .map((state: any[]) => filterById(state, id, 'replies', Message))
           .finally(() => {
             destroyStream$.next(1);
             destroyStream$.complete();
@@ -183,7 +183,7 @@ export class OrmMessage extends OrmBase<Message> {
       return applyFilter(
         this.store.select(this.model.getModelDefinition().relations.replies.model + 's')
           .map(toArray)
-          .map((state: any[]) => filterById(state, id, models[this.model.getModelDefinition().relations.replies.keyTo]))
+          .map((state: any[]) => filterById(state, id, 'replies', Message))
         , filter, this.store, models[this.model.getModelDefinition().relations.replies.model]);
     }
     

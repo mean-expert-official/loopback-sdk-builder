@@ -171,6 +171,12 @@ export function toArray(state: any): any[] {
   return entities;
 }
 
-export function filterById(state: any[], id: any, keyTo: string): any[] {
-  return state.filter((item: any) => item[keyTo] === id);
+export function filterById(state: any[], id: any, relation: string, model: any): any[] {
+  if (model.getModelDefinition().relations[relation].modelThrough && model.getModelDefinition().relations[relation].keyThrough) {
+    return state
+      .filter((item: any) =>
+        item[model.getModelDefinition().relations[relation].modelThrough][model.getModelDefinition().relations[relation].keyThrough] === id);
+  } else {
+    return state.filter((item: any) => item[model.getModelDefinition().relations[relation].keyTo] === id);
+  }
 }

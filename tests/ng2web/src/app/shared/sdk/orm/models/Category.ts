@@ -69,7 +69,7 @@ export class OrmCategory extends OrmBase<Category> {
       return applyFilter(
         this.store.select(this.model.getModelDefinition().relations.rooms.model + 's')
           .map(toArray)
-          .map((state: any[]) => filterById(state, id, models[this.model.getModelDefinition().relations.rooms.keyTo]))
+          .map((state: any[]) => filterById(state, id, 'rooms', Category))
           .finally(() => {
             destroyStream$.next(1);
             destroyStream$.complete();
@@ -81,7 +81,7 @@ export class OrmCategory extends OrmBase<Category> {
       return applyFilter(
         this.store.select(this.model.getModelDefinition().relations.rooms.model + 's')
           .map(toArray)
-          .map((state: any[]) => filterById(state, id, models[this.model.getModelDefinition().relations.rooms.keyTo]))
+          .map((state: any[]) => filterById(state, id, 'rooms', Category))
         , filter, this.store, models[this.model.getModelDefinition().relations.rooms.model]);
     }
     

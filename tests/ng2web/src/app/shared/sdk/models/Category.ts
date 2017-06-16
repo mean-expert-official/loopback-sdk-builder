@@ -74,6 +74,8 @@ export class Category implements CategoryInterface {
           type: 'Room[]',
           model: 'Room',
           relationType: 'hasMany',
+          modelThrough: 'RoomCategory',
+          keyThrough: 'roomId',
           keyFrom: 'id',
           keyTo: 'categoryId'
         },

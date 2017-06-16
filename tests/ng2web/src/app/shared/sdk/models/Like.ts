@@ -89,7 +89,7 @@ export class Like implements LikeInterface {
           type: 'Message',
           model: 'Message',
           relationType: 'belongsTo',
-          keyFrom: 'messageId',
+                  keyFrom: 'messageId',
           keyTo: 'id'
         },
         room: {
@@ -97,7 +97,7 @@ export class Like implements LikeInterface {
           type: 'Room',
           model: 'Room',
           relationType: 'belongsTo',
-          keyFrom: 'roomId',
+                  keyFrom: 'roomId',
           keyTo: 'id'
         },
       }

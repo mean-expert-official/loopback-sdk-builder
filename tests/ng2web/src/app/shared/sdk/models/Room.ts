@@ -85,7 +85,7 @@ export class Room implements RoomInterface {
           type: 'Message[]',
           model: 'Message',
           relationType: 'hasMany',
-          keyFrom: 'id',
+                  keyFrom: 'id',
           keyTo: 'roomId'
         },
         likes: {
@@ -93,7 +93,7 @@ export class Room implements RoomInterface {
           type: 'Like[]',
           model: 'Like',
           relationType: 'hasMany',
-          keyFrom: 'id',
+                  keyFrom: 'id',
           keyTo: 'roomId'
         },
         categories: {
@@ -101,6 +101,8 @@ export class Room implements RoomInterface {
           type: 'Category[]',
           model: 'Category',
           relationType: 'hasMany',
+          modelThrough: 'RoomCategory',
+          keyThrough: 'categoryId',
           keyFrom: 'id',
           keyTo: 'roomId'
         },
@@ -109,6 +111,8 @@ export class Room implements RoomInterface {
           type: 'Account[]',
           model: 'Account',
           relationType: 'hasMany',
+          modelThrough: 'RoomAccount',
+          keyThrough: 'accountId',
           keyFrom: 'id',
           keyTo: 'roomId'
         },
@@ -117,6 +121,8 @@ export class Room implements RoomInterface {
           type: 'Account[]',
           model: 'Account',
           relationType: 'hasMany',
+          modelThrough: 'RoomAdmin',
+          keyThrough: 'accountId',
           keyFrom: 'id',
           keyTo: 'adminId'
         },

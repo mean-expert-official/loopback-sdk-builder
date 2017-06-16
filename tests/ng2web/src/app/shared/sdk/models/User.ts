@@ -88,7 +88,7 @@ export class User implements UserInterface {
           type: 'any[]',
           model: '',
           relationType: 'hasMany',
-          keyFrom: 'id',
+                  keyFrom: 'id',
           keyTo: 'userId'
         },
       }

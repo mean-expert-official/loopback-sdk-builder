@@ -93,7 +93,7 @@ export class Message implements MessageInterface {
           type: 'Like[]',
           model: 'Like',
           relationType: 'hasMany',
-          keyFrom: 'id',
+                  keyFrom: 'id',
           keyTo: 'messageId'
         },
         replies: {
@@ -101,7 +101,7 @@ export class Message implements MessageInterface {
           type: 'Message[]',
           model: 'Message',
           relationType: 'hasMany',
-          keyFrom: 'id',
+                  keyFrom: 'id',
           keyTo: 'parentId'
         },
         parent: {
@@ -109,7 +109,7 @@ export class Message implements MessageInterface {
           type: 'Message',
           model: 'Message',
           relationType: 'belongsTo',
-          keyFrom: 'parentId',
+                  keyFrom: 'parentId',
           keyTo: 'id'
         },
         room: {
@@ -117,7 +117,7 @@ export class Message implements MessageInterface {
           type: 'Room',
           model: 'Room',
           relationType: 'belongsTo',
-          keyFrom: 'roomId',
+                  keyFrom: 'roomId',
           keyTo: 'id'
         },
       }

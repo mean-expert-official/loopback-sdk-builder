@@ -120,7 +120,7 @@ export class UserIdentity implements UserIdentityInterface {
           type: 'User',
           model: 'User',
           relationType: 'belongsTo',
-          keyFrom: 'userId',
+                  keyFrom: 'userId',
           keyTo: 'id'
         },
       }

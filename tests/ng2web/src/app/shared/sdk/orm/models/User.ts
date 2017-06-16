@@ -61,7 +61,7 @@ export class OrmUser extends OrmBase<User> {
       return applyFilter(
         this.store.select(this.model.getModelDefinition().relations.accessTokens.model + 's')
           .map(toArray)
-          .map((state: any[]) => filterById(state, id, models[this.model.getModelDefinition().relations.accessTokens.keyTo]))
+          .map((state: any[]) => filterById(state, id, 'accessTokens', User))
           .finally(() => {
             destroyStream$.next(1);
             destroyStream$.complete();
@@ -73,7 +73,7 @@ export class OrmUser extends OrmBase<User> {
       return applyFilter(
         this.store.select(this.model.getModelDefinition().relations.accessTokens.model + 's')
           .map(toArray)
-          .map((state: any[]) => filterById(state, id, models[this.model.getModelDefinition().relations.accessTokens.keyTo]))
+          .map((state: any[]) => filterById(state, id, 'accessTokens', User))
         , filter, this.store, models[this.model.getModelDefinition().relations.accessTokens.model]);
     }
     
