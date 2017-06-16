@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
 import { OrmBase } from '../base';
-import { applyFilter } from '../filter';
+import { applyFilter, toArray, filterById } from '../filter';
 
 import * as models from '../../models';
 import { UserIdentity, LoopBackFilter } from '../../models';
