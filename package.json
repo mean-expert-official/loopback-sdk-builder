@@ -1,6 +1,6 @@
 {
   "name": "@mean-expert/loopback-sdk-builder",
-  "version": "2.1.0-rc.10.3",
+  "version": "2.1.0-rc.12.1",
   "description": "Tool for auto-generating Software Development Kits (SDKs) for LoopBack",
   "bin": {
     "lb-sdk": "bin/lb-sdk"
@@ -80,6 +80,11 @@
       "name": "Fabian Scheidt",
       "email": "fabianscheidt@yahoo.de",
       "url": "https://github.com/fabianscheidt"
+    },
+    {
+      "name": "Michał Frączkiewicz",
+      "email": "fraczkiewicz.m@gmail.com",
+      "url": "https://github.com/bonaventoora"
     }
   ],
   "files": [

@@ -34,7 +34,7 @@ export class SocketConnection {
     sharedOnAuthenticated?: Observable<any>,
     sharedOnUnAuthorized?: Observable<any>
   } = {};
-  private unauthenticated: boolean = true;
+  public authenticated: boolean = false;
   /**
    * @method constructor
    * @param {SocketDriver} driver Socket IO Driver
@@ -88,11 +88,13 @@ export class SocketConnection {
       });
       // Listen for authentication
       this.on('authenticated', () => {
+        this.authenticated = true;
         this.subjects.onAuthenticated.next();
         this.heartbeater();
       })
       // Listen for authentication
       this.on('unauthorized', (err: any) => {
+        this.authenticated = false;
         this.subjects.onUnAuthorized.next(err);
       })
       // Listen for disconnections
