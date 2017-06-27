@@ -59,4 +59,24 @@ export class Storage implements StorageInterface {
       }
     }
   }
+
+  /**
+  * @method emptyInstanceFactory
+  * @author Michal Fraczkiewicz <bonaventoora@gmail.com>
+  * @license MIT
+  * This method returns an object instance with attributes initialised with default values
+  * (to insert it into angular's FormBuilder for example).
+  *
+  * @example
+  * // creates form group with fields from model definition
+  * this.form = this._formBuilder.group(MeanModel.emptyInstanceFactory());
+  **/
+  public static emptyInstanceFactory() {
+    let instance = {
+       id: 0,
+       createdAt: new Date(0),
+       updatedAt: new Date(0),
+     };
+    return Storage.factory(instance);
+  }
 }

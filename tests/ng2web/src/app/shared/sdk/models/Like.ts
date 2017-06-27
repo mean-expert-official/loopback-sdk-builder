@@ -96,4 +96,27 @@ export class Like implements LikeInterface {
       }
     }
   }
+
+  /**
+  * @method emptyInstanceFactory
+  * @author Michal Fraczkiewicz <bonaventoora@gmail.com>
+  * @license MIT
+  * This method returns an object instance with attributes initialised with default values
+  * (to insert it into angular's FormBuilder for example).
+  *
+  * @example
+  * // creates form group with fields from model definition
+  * this.form = this._formBuilder.group(MeanModel.emptyInstanceFactory());
+  **/
+  public static emptyInstanceFactory() {
+    let instance = {
+       set: true,
+       id: <any>null,
+       createdAt: new Date(0),
+       updatedAt: new Date(0),
+       messageId: <any>null,
+       roomId: <any>null,
+     };
+    return Like.factory(instance);
+  }
 }

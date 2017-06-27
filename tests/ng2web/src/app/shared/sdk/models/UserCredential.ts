@@ -113,4 +113,32 @@ export class UserCredential implements UserCredentialInterface {
       }
     }
   }
+
+  /**
+  * @method emptyInstanceFactory
+  * @author Michal Fraczkiewicz <bonaventoora@gmail.com>
+  * @license MIT
+  * This method returns an object instance with attributes initialised with default values
+  * (to insert it into angular's FormBuilder for example).
+  *
+  * @example
+  * // creates form group with fields from model definition
+  * this.form = this._formBuilder.group(MeanModel.emptyInstanceFactory());
+  **/
+  public static emptyInstanceFactory() {
+    let instance = {
+       provider: 'authScheme',
+       authScheme: '',
+       externalId: '',
+       profile: <any>null,
+       credentials: '',
+       created: new Date(0),
+       modified: new Date(0),
+       userId: <any>null,
+       id: <any>null,
+       createdAt: new Date(0),
+       updatedAt: new Date(0),
+     };
+    return UserCredential.factory(instance);
+  }
 }
