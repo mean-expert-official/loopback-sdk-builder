@@ -1,5 +1,5 @@
 import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { LoopBackFilter, StatFilter } from './index';
 import { SocketConnection } from '../sockets/socket.connections';
 /**
