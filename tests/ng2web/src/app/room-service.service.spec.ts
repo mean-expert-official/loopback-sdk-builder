@@ -314,7 +314,7 @@ describe('Service: Room Service', () => {
    * i modify the name of the room appending the host to the name if it works
    * if it doesn't work i set room.id = -1 and the name to blank
    */
-   
+
   it('should find by mock room to test custom remote method with context enabled',
     async(inject([RoomApi], (roomApi: RoomApi) => {
         let room = new Room({ id: 42, name: 'my awesome room' });
@@ -347,4 +347,17 @@ describe('Service: Room Service', () => {
         });
     })
     ));
+
+  it('Should create empty Room instance',
+    async(inject([], () => {
+      let room         = Room.emptyInstanceFactory();
+      let expectedRoom = Room.factory({
+        name:      '',
+        id:        <any>null,
+        createdAt: new Date(0),
+        updatedAt: new Date(0),
+      });
+      expect(room).toEqual(expectedRoom)
+    }))
+  );
 });
