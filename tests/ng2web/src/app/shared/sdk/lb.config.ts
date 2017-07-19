@@ -20,11 +20,12 @@
 * }
 **/
 export class LoopBackConfig {
-  private static path: string = '//0.0.0.0:3002';
+  private static path: string = '//0.0.0.0:3000';
   private static version: string | number = 'api';
   private static authPrefix: string = '';
   private static debug: boolean = true;
   private static filterOn: string = 'headers';
+  private static secure: boolean = false;
 
   public static setApiVersion(version: string = 'api'): void {
     LoopBackConfig.version = version;
@@ -68,5 +69,17 @@ export class LoopBackConfig {
 
   public static isHeadersFilteringSet(): boolean {
     return (LoopBackConfig.filterOn === 'headers');
+  }
+
+  public static setSecureWebSockets(): void {
+    LoopBackConfig.secure = true;
+  }
+
+  public static unsetSecureWebSockets(): void {
+    LoopBackConfig.secure = false;
+  }
+
+  public static isSecureWebSocketsSet(): void {
+    return LoopBackConfig.secure;
   }
 }

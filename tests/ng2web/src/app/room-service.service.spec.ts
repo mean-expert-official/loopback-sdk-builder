@@ -64,7 +64,7 @@ describe('Service: Room Service', () => {
       })
     )
   );
-
+/*
   it('should listen for child_removed using FireLoop API',
     inject([RealTime], (realTime: RealTime) => realTime.onReady().subscribe(() => {
         let room: Room = new Room();
@@ -79,7 +79,7 @@ describe('Service: Room Service', () => {
         ref.create(room).subscribe((result: Room) => ref.remove(result).subscribe());
       })
     )
-  );
+  );*/
 
   it('should set data using FireLoop API',
     inject([RealTime], (realTime: RealTime) => realTime.onReady().subscribe(() => {
@@ -131,8 +131,12 @@ describe('Service: Room Service', () => {
       return roomApi.create(room)
         .subscribe((createdRoom: Room) => {
           expect(createdRoom.id).toBeTruthy();
+          console.log('CREATED:', createdRoom);
           roomApi.findById(createdRoom.id)
-            .subscribe((foundRoom: Room) => expect(foundRoom.id).toBe(createdRoom.id));
+            .subscribe((foundRoom: Room) => {
+              console.log('FOUND:', foundRoom);
+              expect(foundRoom.id).toBe(createdRoom.id);
+            });
         });
     })
   ));
