@@ -4,22 +4,20 @@ declare var Object: any;
 export interface UserInterface {
   "realm"?: string;
   "username"?: string;
-  "password": string;
   "email": string;
   "emailVerified"?: boolean;
-  "verificationToken"?: string;
   "id"?: any;
+  "password"?: string;
   accessTokens?: any[];
 }
 
 export class User implements UserInterface {
   "realm": string;
   "username": string;
-  "password": string;
   "email": string;
   "emailVerified": boolean;
-  "verificationToken": string;
   "id": any;
+  "password": string;
   accessTokens: any[];
   constructor(data?: UserInterface) {
     Object.assign(this, data);
@@ -60,10 +58,6 @@ export class User implements UserInterface {
           name: 'username',
           type: 'string'
         },
-        "password": {
-          name: 'password',
-          type: 'string'
-        },
         "email": {
           name: 'email',
           type: 'string'
@@ -72,13 +66,13 @@ export class User implements UserInterface {
           name: 'emailVerified',
           type: 'boolean'
         },
-        "verificationToken": {
-          name: 'verificationToken',
-          type: 'string'
-        },
         "id": {
           name: 'id',
           type: 'any'
+        },
+        "password": {
+          name: 'password',
+          type: 'string'
         },
       },
       relations: {

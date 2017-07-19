@@ -7,13 +7,12 @@ declare var Object: any;
 export interface AccountInterface {
   "realm"?: string;
   "username"?: string;
-  "password": string;
   "email": string;
   "emailVerified"?: boolean;
-  "verificationToken"?: string;
   "id"?: any;
   "createdAt": Date;
   "updatedAt": Date;
+  "password"?: string;
   accessTokens?: any[];
   rooms?: Room[];
   administrations?: Room[];
@@ -22,13 +21,12 @@ export interface AccountInterface {
 export class Account implements AccountInterface {
   "realm": string;
   "username": string;
-  "password": string;
   "email": string;
   "emailVerified": boolean;
-  "verificationToken": string;
   "id": any;
   "createdAt": Date;
   "updatedAt": Date;
+  "password": string;
   accessTokens: any[];
   rooms: Room[];
   administrations: Room[];
@@ -71,10 +69,6 @@ export class Account implements AccountInterface {
           name: 'username',
           type: 'string'
         },
-        "password": {
-          name: 'password',
-          type: 'string'
-        },
         "email": {
           name: 'email',
           type: 'string'
@@ -82,10 +76,6 @@ export class Account implements AccountInterface {
         "emailVerified": {
           name: 'emailVerified',
           type: 'boolean'
-        },
-        "verificationToken": {
-          name: 'verificationToken',
-          type: 'string'
         },
         "id": {
           name: 'id',
@@ -98,6 +88,10 @@ export class Account implements AccountInterface {
         "updatedAt": {
           name: 'updatedAt',
           type: 'Date'
+        },
+        "password": {
+          name: 'password',
+          type: 'string'
         },
       },
       relations: {

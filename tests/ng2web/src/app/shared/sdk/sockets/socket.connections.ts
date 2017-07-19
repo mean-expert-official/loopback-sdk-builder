@@ -75,7 +75,7 @@ export class SocketConnection {
       // Create new socket connection
       this.socket = this.driver.connect(LoopBackConfig.getPath(), {
         log: false,
-        secure: false,
+        secure: LoopBackConfig.isSecureWebSocketsSet(),
         forceNew: true,
         forceWebsockets: true,
         transports: ['websocket']

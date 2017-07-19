@@ -1,0 +1,14 @@
+{
+  "name": "FireLoop App Platform",
+  "description": "Modern Real-Time Framework by MEAN Expert",
+  "repository": "https://github.com/mean-expert-official/fireloop-starter.git",
+  "logo": "http://docs.fireloop.io/img/avatar.png",
+  "keywords": [
+      "node",
+      "express",
+      "static",
+      "loopback",
+      "fireloop",
+      "realtime"
+   ]
+}
