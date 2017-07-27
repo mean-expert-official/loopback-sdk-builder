@@ -1,12 +1,13 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { SDKBrowserModule } from './shared/sdk';
+import { SDKBrowserModule, LoopBackConfig } from './shared/sdk';
 import { Room, Category, Message, FireLoopRef } from './shared/sdk/models';
 import { RoomApi, CategoryApi, MessageApi, RealTime } from './shared/sdk/services';
 
 describe('Service: Room Service', () => {
   beforeEach(() => {
+    LoopBackConfig.filterOnUrl();
     TestBed.configureTestingModule({
       imports: [
         SDKBrowserModule.forRoot()
@@ -18,6 +19,7 @@ describe('Service: Room Service', () => {
     async(inject([RoomApi], (service: RoomApi) => {
       expect(service).toBeTruthy();
       expect(service.create).toBeTruthy();
+      expect(service.exists).toBeTruthy();
       expect(service.updateAll).toBeTruthy();
       expect(service.updateAttributes).toBeTruthy();
       expect(service.find).toBeTruthy();
@@ -62,7 +64,7 @@ describe('Service: Room Service', () => {
       })
     )
   );
-
+/*
   it('should listen for child_removed using FireLoop API',
     inject([RealTime], (realTime: RealTime) => realTime.onReady().subscribe(() => {
         let room: Room = new Room();
@@ -77,7 +79,7 @@ describe('Service: Room Service', () => {
         ref.create(room).subscribe((result: Room) => ref.remove(result).subscribe());
       })
     )
-  );
+  );*/
 
   it('should set data using FireLoop API',
     inject([RealTime], (realTime: RealTime) => realTime.onReady().subscribe(() => {
@@ -129,8 +131,12 @@ describe('Service: Room Service', () => {
       return roomApi.create(room)
         .subscribe((createdRoom: Room) => {
           expect(createdRoom.id).toBeTruthy();
+          console.log('CREATED:', createdRoom);
           roomApi.findById(createdRoom.id)
-            .subscribe((foundRoom: Room) => expect(foundRoom.id).toBe(createdRoom.id));
+            .subscribe((foundRoom: Room) => {
+              console.log('FOUND:', foundRoom);
+              expect(foundRoom.id).toBe(createdRoom.id);
+            });
         });
     })
   ));
@@ -146,6 +152,22 @@ describe('Service: Room Service', () => {
             .subscribe((updatedRoom: Room) => {
               expect(updatedRoom.id).toBe(createdRoom.id);
               expect(updatedRoom.name).toBe('updated!!!');
+            });
+        });
+    })
+  ));
+
+  it('should patch room attributes',
+    async(inject([RoomApi], (roomApi: RoomApi) => {
+      let room: Room = new Room();
+      room.name = Date.now().toString();
+      return roomApi.create(room)
+        .subscribe((createdRoom: Room) => {
+          expect(createdRoom.id).toBeTruthy();
+          roomApi.updateAttributes(createdRoom.id, { name: 'patched!!!'})
+            .subscribe((patchedRoom: Room) => {
+              expect(patchedRoom.id).toBe(createdRoom.id);
+              expect(patchedRoom.name).toBe('patched!!!');
             });
         });
     })
@@ -306,5 +328,27 @@ describe('Service: Room Service', () => {
             expect(room.name).not.toBe(instance.name);
           });
       })
+    ));
+
+  it('should return correct response if the room does not exist',
+    async(inject([RoomApi], (roomApi: RoomApi) => {
+      return roomApi.exists<{ exists: boolean }>(42)
+        .subscribe((result) => {
+          expect(result.exists).toBe(false);
+        });
+    })
+    ));
+
+  it('should return correct response if the room does not exist',
+    async(inject([RoomApi], (roomApi: RoomApi) => {
+      let room: Room = new Room();
+      room.name = Date.now().toString();
+      return roomApi
+        .create(room)
+        .switchMap((instance: Room) => roomApi.exists<{ exists: boolean }>(instance.id))
+        .subscribe((result: { exists: boolean }) => {
+          expect(result.exists).toBe(true);
+        });
+    })
     ));
 });

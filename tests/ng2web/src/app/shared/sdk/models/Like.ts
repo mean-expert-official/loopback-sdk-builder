@@ -6,10 +6,10 @@ import {
 
 declare var Object: any;
 export interface LikeInterface {
-  "set": any;
+  "set": boolean;
   "id"?: any;
-  "createdAt": any;
-  "updatedAt": any;
+  "createdAt": Date;
+  "updatedAt": Date;
   "messageId"?: any;
   "roomId"?: any;
   message?: Message;
@@ -17,10 +17,10 @@ export interface LikeInterface {
 }
 
 export class Like implements LikeInterface {
-  "set": any;
+  "set": boolean;
   "id": any;
-  "createdAt": any;
-  "updatedAt": any;
+  "createdAt": Date;
+  "updatedAt": Date;
   "messageId": any;
   "roomId": any;
   message: Message;
@@ -58,7 +58,7 @@ export class Like implements LikeInterface {
       properties: {
         "set": {
           name: 'set',
-          type: 'any',
+          type: 'boolean',
           default: true
         },
         "id": {
@@ -67,11 +67,11 @@ export class Like implements LikeInterface {
         },
         "createdAt": {
           name: 'createdAt',
-          type: 'any'
+          type: 'Date'
         },
         "updatedAt": {
           name: 'updatedAt',
-          type: 'any'
+          type: 'Date'
         },
         "messageId": {
           name: 'messageId',

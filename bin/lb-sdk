@@ -67,6 +67,8 @@ if (!argv['q']) {
   console.log(chalk.green('*                         Julien Ledun <https://github.com/jledun>                       *'));
   console.log(chalk.green('*                           Paul Robinson <http://nextfaze.com>                          *'));
   console.log(chalk.green('*                         Corentin Hatte <https://github.com/viki53>                     *'));
+  console.log(chalk.green('*                      Fabian Scheidt <https://github.com/fabianscheidt>                 *'));
+  console.log(chalk.green('*                    Michał Frączkiewicz <https://github.com/bonaventoora>               *'));
   console.log(chalk.green('*                                                                                        *'));
   console.log(chalk.green('*                                 ORIGINALLY FORKED FROM                                 *'));
   console.log(chalk.green('*                      Miroslav Bajtos\' <miroslav@strongloop.com>                        *'));

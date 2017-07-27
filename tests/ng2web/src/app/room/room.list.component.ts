@@ -21,9 +21,9 @@ export class RoomListComponent implements OnInit, OnDestroy {
   private logged: Account;
   private accountRef: FireLoopRef<Account>;
   private roomRef: FireLoopRef<Room>;
-  private room: Room = new Room();
-  private rooms: Room[];
-  private connected: boolean = false;
+  public room: Room = new Room();
+  public rooms: Room[];
+  public connected: boolean = false;
   private subscriptions: Subscription[] = new Array<Subscription>();
   //private socket: any = io.connect(LoopBackConfig.getPath(), { secure: false });
 

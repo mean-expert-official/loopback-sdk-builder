@@ -1,7 +1,7 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { SDKBrowserModule } from './shared/sdk';
+import { SDKBrowserModule, LoopBackConfig } from './shared/sdk';
 import { User, AccessToken } from './shared/sdk/models';
 import { UserApi } from './shared/sdk/services';
 
@@ -19,6 +19,7 @@ let Helpers: {
 
 describe('Service: User Service', () => {
   beforeEach(() => {
+    LoopBackConfig.filterOnUrl();
     TestBed.configureTestingModule({
       imports: [
         SDKBrowserModule.forRoot()

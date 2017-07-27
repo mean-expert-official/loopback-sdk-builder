@@ -9,8 +9,8 @@ export interface RoomAdminInterface {
   "id"?: any;
   "adminId"?: any;
   "administrationId"?: any;
-  "createdAt": any;
-  "updatedAt": any;
+  "createdAt": Date;
+  "updatedAt": Date;
   account?: Account;
   room?: Room;
 }
@@ -19,8 +19,8 @@ export class RoomAdmin implements RoomAdminInterface {
   "id": any;
   "adminId": any;
   "administrationId": any;
-  "createdAt": any;
-  "updatedAt": any;
+  "createdAt": Date;
+  "updatedAt": Date;
   account: Account;
   room: Room;
   constructor(data?: RoomAdminInterface) {
@@ -68,11 +68,11 @@ export class RoomAdmin implements RoomAdminInterface {
         },
         "createdAt": {
           name: 'createdAt',
-          type: 'any'
+          type: 'Date'
         },
         "updatedAt": {
           name: 'updatedAt',
-          type: 'any'
+          type: 'Date'
         },
       },
       relations: {

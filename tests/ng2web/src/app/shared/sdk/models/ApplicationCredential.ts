@@ -2,27 +2,27 @@
 
 declare var Object: any;
 export interface ApplicationCredentialInterface {
-  "provider"?: any;
-  "authScheme"?: any;
-  "credentials"?: any;
-  "created"?: any;
-  "modified"?: any;
+  "provider"?: string;
+  "authScheme"?: string;
+  "credentials"?: string;
+  "created"?: Date;
+  "modified"?: Date;
   "userId"?: any;
   "id"?: any;
-  "createdAt": any;
-  "updatedAt": any;
+  "createdAt": Date;
+  "updatedAt": Date;
 }
 
 export class ApplicationCredential implements ApplicationCredentialInterface {
-  "provider": any;
-  "authScheme": any;
-  "credentials": any;
-  "created": any;
-  "modified": any;
+  "provider": string;
+  "authScheme": string;
+  "credentials": string;
+  "created": Date;
+  "modified": Date;
   "userId": any;
   "id": any;
-  "createdAt": any;
-  "updatedAt": any;
+  "createdAt": Date;
+  "updatedAt": Date;
   constructor(data?: ApplicationCredentialInterface) {
     Object.assign(this, data);
   }
@@ -56,26 +56,26 @@ export class ApplicationCredential implements ApplicationCredentialInterface {
       properties: {
         "provider": {
           name: 'provider',
-          type: 'any',
+          type: 'string',
           default: 'authScheme'
         },
         "authScheme": {
           name: 'authScheme',
-          type: 'any',
+          type: 'string',
           default: ''
         },
         "credentials": {
           name: 'credentials',
-          type: 'any',
+          type: 'string',
           default: ''
         },
         "created": {
           name: 'created',
-          type: 'any'
+          type: 'Date'
         },
         "modified": {
           name: 'modified',
-          type: 'any'
+          type: 'Date'
         },
         "userId": {
           name: 'userId',
@@ -87,11 +87,11 @@ export class ApplicationCredential implements ApplicationCredentialInterface {
         },
         "createdAt": {
           name: 'createdAt',
-          type: 'any'
+          type: 'Date'
         },
         "updatedAt": {
           name: 'updatedAt',
-          type: 'any'
+          type: 'Date'
         },
       },
       relations: {

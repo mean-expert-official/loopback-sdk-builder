@@ -14,7 +14,7 @@ export class RoomComponent implements OnInit, OnDestroy {
   private message: Message = new Message();
   private messageRef: FireLoopRef<Message>;
   private replyRefs: { [key: number]: FireLoopRef<Message> } = {};
-  private room: Room = new Room();
+  public room: Room = new Room();
   private subscriptions: Subscription[] = new Array<Subscription>();
 
   constructor(

@@ -2,15 +2,15 @@
 
 declare var Object: any;
 export interface StorageInterface {
-  "id"?: any;
-  "createdAt": any;
-  "updatedAt": any;
+  "id"?: number;
+  "createdAt": Date;
+  "updatedAt": Date;
 }
 
 export class Storage implements StorageInterface {
-  "id": any;
-  "createdAt": any;
-  "updatedAt": any;
+  "id": number;
+  "createdAt": Date;
+  "updatedAt": Date;
   constructor(data?: StorageInterface) {
     Object.assign(this, data);
   }
@@ -44,15 +44,15 @@ export class Storage implements StorageInterface {
       properties: {
         "id": {
           name: 'id',
-          type: 'any'
+          type: 'number'
         },
         "createdAt": {
           name: 'createdAt',
-          type: 'any'
+          type: 'Date'
         },
         "updatedAt": {
           name: 'updatedAt',
-          type: 'any'
+          type: 'Date'
         },
       },
       relations: {

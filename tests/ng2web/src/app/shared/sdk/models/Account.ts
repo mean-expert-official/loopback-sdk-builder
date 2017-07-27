@@ -5,30 +5,28 @@ import {
 
 declare var Object: any;
 export interface AccountInterface {
-  "realm"?: any;
-  "username"?: any;
-  "password": any;
-  "email": any;
-  "emailVerified"?: any;
-  "verificationToken"?: any;
+  "realm"?: string;
+  "username"?: string;
+  "email": string;
+  "emailVerified"?: boolean;
   "id"?: any;
-  "createdAt": any;
-  "updatedAt": any;
+  "createdAt": Date;
+  "updatedAt": Date;
+  "password"?: string;
   accessTokens?: any[];
   rooms?: Room[];
   administrations?: Room[];
 }
 
 export class Account implements AccountInterface {
-  "realm": any;
-  "username": any;
-  "password": any;
-  "email": any;
-  "emailVerified": any;
-  "verificationToken": any;
+  "realm": string;
+  "username": string;
+  "email": string;
+  "emailVerified": boolean;
   "id": any;
-  "createdAt": any;
-  "updatedAt": any;
+  "createdAt": Date;
+  "updatedAt": Date;
+  "password": string;
   accessTokens: any[];
   rooms: Room[];
   administrations: Room[];
@@ -65,27 +63,19 @@ export class Account implements AccountInterface {
       properties: {
         "realm": {
           name: 'realm',
-          type: 'any'
+          type: 'string'
         },
         "username": {
           name: 'username',
-          type: 'any'
-        },
-        "password": {
-          name: 'password',
-          type: 'any'
+          type: 'string'
         },
         "email": {
           name: 'email',
-          type: 'any'
+          type: 'string'
         },
         "emailVerified": {
           name: 'emailVerified',
-          type: 'any'
-        },
-        "verificationToken": {
-          name: 'verificationToken',
-          type: 'any'
+          type: 'boolean'
         },
         "id": {
           name: 'id',
@@ -93,11 +83,15 @@ export class Account implements AccountInterface {
         },
         "createdAt": {
           name: 'createdAt',
-          type: 'any'
+          type: 'Date'
         },
         "updatedAt": {
           name: 'updatedAt',
-          type: 'any'
+          type: 'Date'
+        },
+        "password": {
+          name: 'password',
+          type: 'string'
         },
       },
       relations: {
