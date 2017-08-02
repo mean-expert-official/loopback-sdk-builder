@@ -59,6 +59,7 @@ export class Message implements MessageInterface {
     return {
       name: 'Message',
       plural: 'messages',
+      path: 'messages',
       properties: {
         "text": {
           name: 'text',

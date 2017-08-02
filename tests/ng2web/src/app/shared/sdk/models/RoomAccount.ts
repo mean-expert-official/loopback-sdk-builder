@@ -53,6 +53,7 @@ export class RoomAccount implements RoomAccountInterface {
     return {
       name: 'RoomAccount',
       plural: 'room-accounts',
+      path: 'room-accounts',
       properties: {
         "id": {
           name: 'id',

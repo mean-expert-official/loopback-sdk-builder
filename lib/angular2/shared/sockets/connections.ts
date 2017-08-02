@@ -183,6 +183,7 @@ export class SocketConnection {
       if (this.isConnected()) {
         this.socket.emit('lb-ping');
       } else {
+        this.socket.removeAllListeners('lb-pong');
         clearInterval(heartbeater);
       }
     }, 15000);

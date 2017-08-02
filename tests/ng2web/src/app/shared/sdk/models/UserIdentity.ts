@@ -62,6 +62,7 @@ export class UserIdentity implements UserIdentityInterface {
     return {
       name: 'UserIdentity',
       plural: 'user-identities',
+      path: 'user-identities',
       properties: {
         "provider": {
           name: 'provider',

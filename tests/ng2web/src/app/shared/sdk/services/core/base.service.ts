@@ -163,7 +163,7 @@ export abstract class BaseLoopBackApi {
     return this.request('POST', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().plural
+      this.model.getModelDefinition().path
     ].join('/'), undefined, undefined, { data }, null, customHeaders).map((data: T) => this.model.factory(data));
   }
   /**
@@ -179,7 +179,7 @@ export abstract class BaseLoopBackApi {
     return this.request('POST', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().plural
+      this.model.getModelDefinition().path
     ].join('/'), undefined, undefined, { data }, true)
     .map((datum: T[]) => datum.map((data: T) => this.model.factory(data)));
   }
@@ -196,7 +196,7 @@ export abstract class BaseLoopBackApi {
     return this.request('POST', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().plural
+      this.model.getModelDefinition().path
     ].join('/'), undefined, undefined, { data }, null, customHeaders)
     .map((datum: T[]) => datum.map((data: T) => this.model.factory(data)));
   }
@@ -213,7 +213,7 @@ export abstract class BaseLoopBackApi {
     return this.request('POST', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().plural
+      this.model.getModelDefinition().path
     ].join('/'), undefined, undefined, { data }, true)
     .map((datum: T[]) => datum.map((data: T) => this.model.factory(data)));
   }
@@ -232,7 +232,7 @@ export abstract class BaseLoopBackApi {
     return this.request('GET', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().plural,
+      this.model.getModelDefinition().path,
       ':id'
     ].join('/'), { id }, _urlParams, undefined, null, customHeaders)
     .map((data: T) => this.model.factory(data));
@@ -249,7 +249,7 @@ export abstract class BaseLoopBackApi {
     return this.request('GET', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().plural
+      this.model.getModelDefinition().path
     ].join('/'), undefined, { filter }, undefined, null, customHeaders)
     .map((datum: T[]) => datum.map((data: T) => this.model.factory(data)));
   }
@@ -265,7 +265,7 @@ export abstract class BaseLoopBackApi {
     return this.request('GET', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().plural,
+      this.model.getModelDefinition().path,
       ':id/exists'
     ].join('/'), { id }, undefined, undefined, null, customHeaders);
   }
@@ -281,7 +281,7 @@ export abstract class BaseLoopBackApi {
     return this.request('GET', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().plural,
+      this.model.getModelDefinition().path,
       'findOne'
     ].join('/'), undefined, { filter }, undefined, null, customHeaders)
     .map((data: T) => this.model.factory(data));
@@ -300,7 +300,7 @@ export abstract class BaseLoopBackApi {
     return this.request('POST', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().plural,
+      this.model.getModelDefinition().path,
       'update'
     ].join('/'), undefined, _urlParams, { data }, null, customHeaders);
   }
@@ -318,7 +318,7 @@ export abstract class BaseLoopBackApi {
     return this.request('POST', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().plural,
+      this.model.getModelDefinition().path,
       'update'
     ].join('/'), undefined, _urlParams, { data }, true);
   }
@@ -334,7 +334,7 @@ export abstract class BaseLoopBackApi {
     return this.request('DELETE', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().plural,
+      this.model.getModelDefinition().path,
       ':id'
     ].join('/'), { id }, undefined, undefined, null, customHeaders)
     .map((data: T) => this.model.factory(data));
@@ -351,7 +351,7 @@ export abstract class BaseLoopBackApi {
     return this.request('DELETE', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().plural,
+      this.model.getModelDefinition().path,
       ':id'
     ].join('/'), { id }, undefined, undefined, true).map((data: T) => this.model.factory(data));
   }
@@ -369,7 +369,7 @@ export abstract class BaseLoopBackApi {
     return this.request('GET', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().plural,
+      this.model.getModelDefinition().path,
       'count'
     ].join('/'), undefined, _urlParams, undefined, null, customHeaders);
   }
@@ -385,7 +385,7 @@ export abstract class BaseLoopBackApi {
     return this.request('PUT', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().plural,
+      this.model.getModelDefinition().path,
       ':id'
     ].join('/'), { id }, undefined, { data }, null, customHeaders)
     .map((data: T) => this.model.factory(data));
@@ -402,7 +402,7 @@ export abstract class BaseLoopBackApi {
     return this.request('PUT', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().plural,
+      this.model.getModelDefinition().path,
       ':id'
     ].join('/'), { id }, undefined, { data }, true).map((data: T) => this.model.factory(data));
   }
@@ -418,7 +418,7 @@ export abstract class BaseLoopBackApi {
     return this.request('PUT', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().plural,
+      this.model.getModelDefinition().path,
     ].join('/'), undefined, undefined, { data }, null, customHeaders)
     .map((data: T) => this.model.factory(data));
   }
@@ -434,7 +434,7 @@ export abstract class BaseLoopBackApi {
     return this.request('PUT', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().plural,
+      this.model.getModelDefinition().path,
     ].join('/'), undefined, undefined, { data }, true).map((data: T) => this.model.factory(data));
   }
   /**
@@ -449,7 +449,7 @@ export abstract class BaseLoopBackApi {
     return this.request('PATCH', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().plural,
+      this.model.getModelDefinition().path,
     ].join('/'), undefined, undefined, { data }, null, customHeaders)
     .map((data: T) => this.model.factory(data));
   }
@@ -465,7 +465,7 @@ export abstract class BaseLoopBackApi {
     return this.request('PATCH', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().plural,
+      this.model.getModelDefinition().path,
     ].join('/'), undefined, undefined, { data }, true).map((data: T) => this.model.factory(data));
   }
   /**
@@ -482,7 +482,7 @@ export abstract class BaseLoopBackApi {
     return this.request('POST', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().plural,
+      this.model.getModelDefinition().path,
       'upsertWithWhere'
     ].join('/'), undefined, _urlParams, { data }, null, customHeaders)
     .map((data: T) => this.model.factory(data));
@@ -501,7 +501,7 @@ export abstract class BaseLoopBackApi {
     return this.request('POST', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().plural,
+      this.model.getModelDefinition().path,
       'upsertWithWhere'
     ].join('/'), undefined, _urlParams, { data }, true).map((data: T) => this.model.factory(data));
   }
@@ -517,7 +517,7 @@ export abstract class BaseLoopBackApi {
     return this.request('POST', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().plural,
+      this.model.getModelDefinition().path,
       'replaceOrCreate'
     ].join('/'), undefined, undefined, { data }, null, customHeaders)
     .map((data: T) => this.model.factory(data));
@@ -534,7 +534,7 @@ export abstract class BaseLoopBackApi {
     return this.request('POST', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().plural,
+      this.model.getModelDefinition().path,
       'replaceOrCreate'
     ].join('/'), undefined, undefined, { data }, true).map((data: T) => this.model.factory(data));
   }
@@ -550,7 +550,7 @@ export abstract class BaseLoopBackApi {
     return this.request('POST', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().plural,
+      this.model.getModelDefinition().path,
       ':id', 'replace'
     ].join('/'), { id }, undefined, { data }, null, customHeaders)
     .map((data: T) => this.model.factory(data));
@@ -567,7 +567,7 @@ export abstract class BaseLoopBackApi {
     return this.request('POST', [
       LoopBackConfig.getPath(),
       LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().plural,
+      this.model.getModelDefinition().path,
       ':id', 'replace'
     ].join('/'), { id }, undefined, { data }, true).map((data: T) => this.model.factory(data));
   }
@@ -586,7 +586,7 @@ export abstract class BaseLoopBackApi {
       var source = new EventSource([
         LoopBackConfig.getPath(),
         LoopBackConfig.getApiVersion(),
-        this.model.getModelDefinition().plural,
+        this.model.getModelDefinition().path,
         'change-stream'
       ].join('/'));
       source.addEventListener('data', emit);

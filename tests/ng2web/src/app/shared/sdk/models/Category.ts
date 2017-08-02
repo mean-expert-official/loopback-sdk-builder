@@ -48,6 +48,7 @@ export class Category implements CategoryInterface {
     return {
       name: 'Category',
       plural: 'categories',
+      path: 'categories',
       properties: {
         "name": {
           name: 'name',

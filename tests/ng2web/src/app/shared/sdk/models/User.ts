@@ -49,6 +49,7 @@ export class User implements UserInterface {
     return {
       name: 'User',
       plural: 'Users',
+      path: 'Users',
       properties: {
         "realm": {
           name: 'realm',

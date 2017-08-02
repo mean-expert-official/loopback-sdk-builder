@@ -53,6 +53,7 @@ export class RoomAdmin implements RoomAdminInterface {
     return {
       name: 'RoomAdmin',
       plural: 'room-admins',
+      path: 'room-admins',
       properties: {
         "id": {
           name: 'id',
