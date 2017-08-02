@@ -60,6 +60,7 @@ export class Account implements AccountInterface {
     return {
       name: 'Account',
       plural: 'accounts',
+      path: 'accounts',
       properties: {
         "realm": {
           name: 'realm',

@@ -55,6 +55,7 @@ export class Like implements LikeInterface {
     return {
       name: 'Like',
       plural: 'likes',
+      path: 'likes',
       properties: {
         "set": {
           name: 'set',

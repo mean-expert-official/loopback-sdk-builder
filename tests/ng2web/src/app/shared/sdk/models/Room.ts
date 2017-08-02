@@ -59,6 +59,7 @@ export class Room implements RoomInterface {
     return {
       name: 'Room',
       plural: 'rooms',
+      path: 'rooms',
       properties: {
         "name": {
           name: 'name',
