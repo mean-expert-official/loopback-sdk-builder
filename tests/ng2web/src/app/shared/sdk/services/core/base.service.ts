@@ -75,7 +75,7 @@ export abstract class BaseLoopBackApi {
       }
       let event: string = (`[${method}]${url}`).replace(/\?/, '');
       let subject: Subject<any> = new Subject<any>();
-      this.connection.on(event, res => subject.next(res));
+      this.connection.on(event, (res: any) => subject.next(res));
       return subject.asObservable();
     } else {
       // Headers to be sent
