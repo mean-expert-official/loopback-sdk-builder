@@ -1086,7 +1086,10 @@ export class AccountApi extends BaseLoopBackApi {
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/change-password";
     let _routeParams: any = {};
-    let _postBody: any = {};
+    let _postBody: any = {
+      oldPassword: oldPassword,
+      newPassword: newPassword
+    };
     let _urlParams: any = {};
     if (typeof oldPassword !== 'undefined' && oldPassword !== null) _urlParams.oldPassword = oldPassword;
     if (typeof newPassword !== 'undefined' && newPassword !== null) _urlParams.newPassword = newPassword;
@@ -1112,7 +1115,9 @@ export class AccountApi extends BaseLoopBackApi {
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/reset-password";
     let _routeParams: any = {};
-    let _postBody: any = {};
+    let _postBody: any = {
+      newPassword: newPassword
+    };
     let _urlParams: any = {};
     if (typeof newPassword !== 'undefined' && newPassword !== null) _urlParams.newPassword = newPassword;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
