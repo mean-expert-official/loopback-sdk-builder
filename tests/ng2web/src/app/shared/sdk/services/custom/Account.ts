@@ -1087,8 +1087,10 @@ export class AccountApi extends BaseLoopBackApi {
     "/accounts/change-password";
     let _routeParams: any = {};
     let _postBody: any = {
-      oldPassword: oldPassword,
-      newPassword: newPassword
+      data: {
+        oldPassword: oldPassword,
+        newPassword: newPassword
+      }
     };
     let _urlParams: any = {};
     if (typeof oldPassword !== 'undefined' && oldPassword !== null) _urlParams.oldPassword = oldPassword;
@@ -1116,7 +1118,9 @@ export class AccountApi extends BaseLoopBackApi {
     "/accounts/reset-password";
     let _routeParams: any = {};
     let _postBody: any = {
-      newPassword: newPassword
+      data: {
+        newPassword: newPassword
+      }
     };
     let _urlParams: any = {};
     if (typeof newPassword !== 'undefined' && newPassword !== null) _urlParams.newPassword = newPassword;
