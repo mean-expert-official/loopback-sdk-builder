@@ -262,8 +262,6 @@ export class StorageApi extends BaseLoopBackApi {
     let _routeParams: any = {};
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (typeof req !== 'undefined' && req !== null) _urlParams.req = req;
-    if (typeof res !== 'undefined' && res !== null) _urlParams.res = res;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -297,8 +295,6 @@ export class StorageApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (typeof req !== 'undefined' && req !== null) _urlParams.req = req;
-    if (typeof res !== 'undefined' && res !== null) _urlParams.res = res;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }

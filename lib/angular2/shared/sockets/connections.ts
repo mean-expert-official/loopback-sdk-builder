@@ -163,6 +163,21 @@ export class SocketConnection {
     }
   }
   /**
+   * @method removeAllListeners
+   * @param {string} event Event name
+   * @param {Function} handler Event listener handler
+   * @return {void}
+   * @description
+   * This method will wrap the original "on" method and run it within the Angular Zone
+   * Note: off is being used since the nativescript socket io client does not provide
+   * removeListener method, but only provides with off which is provided in any platform.
+   **/
+  public removeAllListeners(event: string): void {
+    if (typeof this.socket.removeAllListeners === 'function') {
+      this.socket.removeAllListeners(event);
+    }
+  }
+  /**
    * @method disconnect
    * @return {void}
    * @description
