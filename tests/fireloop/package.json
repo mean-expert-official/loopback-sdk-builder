@@ -11,12 +11,12 @@
     "posttest": "npm run lint && nsp check",
     "test": "NODE_ENV=testing npm run start",
     "build:sdk": "npm run build:sdk:ng2web",
-    "build:sdk:ng2web": "./node_modules/.bin/lb-sdk server/server.js ../ng2web/src/app/shared/sdk -d ng2web -i enabled -w enabled -v disabled -f disabled"
+    "build:sdk:ng2web": "./node_modules/.bin/lb-sdk server/server.js ../ng2web/src/app/shared/sdk -d ng2web -i enabled -w enabled -n enabled -v disabled -f disabled"
   },
   "dependencies": {
     "@mean-expert/boot-script": "^1.0.0",
     "@mean-expert/loopback-component-realtime": "^1.0.0-rc.9.3",
-    "@mean-expert/loopback-sdk-builder": "^2.1.0-rc.12.2",
+    "@mean-expert/loopback-sdk-builder": "file:../..",
     "@mean-expert/loopback-stats-mixin": "^1.2.1",
     "@mean-expert/model": "^1.0.9",
     "@types/mocha": "^2.2.41",
