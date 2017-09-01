@@ -30,7 +30,7 @@ export class StorageNative {
    * @description
    * The setter will return any type of data persisted in localStorage.
    **/
-  set(key: string, value: any): void {
+  set(key: string, value: any, expires?: Date): void {
     AppSettings.setString(
       key,
       String(typeof value === 'object' ? JSON.stringify(value) : value)
