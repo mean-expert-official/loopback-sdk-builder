@@ -1,7 +1,6 @@
 import 'rxjs/add/operator/map';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
-import { go } from '@ngrx/router-store';
 
 import { LoopbackAction, LoopbackAuthActionTypes, AccountActionTypes, AccountActions } from './sdk';
 

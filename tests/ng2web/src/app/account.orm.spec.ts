@@ -8,7 +8,8 @@ import { AppEffects } from './shared/app.effects';
 import * as fromApp from './shared/app.reducer';
 import { SDKBrowserModule, LoopbackEffects, LoopbackReducer, LoopbackStateInterface } from './shared/sdk/index';
 import { Account, AccessToken } from './shared/sdk/models';
-import { getLoopbackAuthState, SDKToken } from './shared/sdk';
+import { AccountActions, getLoopbackAuthState, SDKToken } from './shared/sdk';
+import { OrmModule } from './shared/sdk/orm';
 
 const Helpers: {
   create: Function
@@ -30,7 +31,8 @@ describe('Ngrx: Account', () => {
           app: fromApp.reducer
         })),
         ...LoopbackEffects,
-        EffectsModule.forRoot(AppEffects)
+        EffectsModule.run(AppEffects),
+        OrmModule.forRoot()
       ]
     });
   });
