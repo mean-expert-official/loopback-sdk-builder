@@ -8,5 +8,5 @@ export const UserCredentialActionTypes =
 Object.assign(BaseLoopbackActionTypesFactory('UserCredential'), {
 });
 export const UserCredentialActions =
-Object.assign(BaseLoopbackActionsFactory<UserCredential>('UserCredential', UserCredentialActionTypes), {
+Object.assign(BaseLoopbackActionsFactory<UserCredential>(UserCredentialActionTypes), {
 });

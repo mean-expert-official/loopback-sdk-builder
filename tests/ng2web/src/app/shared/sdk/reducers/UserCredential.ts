@@ -1,9 +1,9 @@
 /* tslint:disable */
-import { Observable } from 'rxjs/Observable';
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
 import { BaseReducerFactory } from './base';
 import { UserCredential } from '../models';
+import { LoopbackAction } from '../models/BaseModels';
 import { UserCredentialActionTypes } from '../actions';
 
 export interface UserCredentialsState {
@@ -25,7 +25,7 @@ const cases = BaseReducerFactory<UserCredentialsState, UserCredential>(UserCrede
  * @description
  * Provides with a LoopBack compatible UserCredential reducer.
  */
-export function UserCredentialsReducer(state = initialState, action: Action): UserCredentialsState {
+export function UserCredentialsReducer(state = initialState, action: LoopbackAction): UserCredentialsState {
   if (cases[action.type]) {
     return cases[action.type](state, action);
   } else {

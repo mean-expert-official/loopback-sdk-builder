@@ -4,11 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { RouterStoreModule } from '@ngrx/router-store';
 import { AppComponent } from './app.component';
 import { SDKBrowserModule, LoopbackEffects, LoopbackReducer } from './shared/sdk/index';
-import { AppEffects } from './shared/app.effects';
-import * as fromApp from './shared/app.reducer';
+import { reducerToken, reducerProvider, effects } from './shared/app.state';
 import { routing, appRoutingProviders } from './app.routing';
 
 import { OrmModule } from './shared/sdk/orm';
@@ -21,19 +19,18 @@ import { OrmModule } from './shared/sdk/orm';
     BrowserModule,
     FormsModule,
     SDKBrowserModule.forRoot(),
-    StoreModule.provideStore(Object.assign({}, LoopbackReducer, {
-      app: fromApp.reducer
-    })),
-    RouterStoreModule.connectRouter(),
-    StoreDevtoolsModule.instrumentOnlyWithExtension({
+    StoreModule.forRoot(reducerToken, {}),
+    StoreDevtoolsModule.instrument({
       maxAge: 5
     }),
-    ...LoopbackEffects,
-    EffectsModule.run(AppEffects),
+    EffectsModule.forRoot(effects),
     routing,
     OrmModule.forRoot()
   ],
-  providers       : [ appRoutingProviders ],
+  providers       : [
+    appRoutingProviders,
+    reducerProvider
+  ],
   entryComponents : [ AppComponent ],
   bootstrap       : [ AppComponent ]
 })

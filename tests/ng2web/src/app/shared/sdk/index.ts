@@ -125,7 +125,6 @@ export { CookieBrowser } from './storage/cookie.browser';
 export { StorageBrowser } from './storage/storage.browser';
 
 export * from './actions/index';
-export * from './effects/index';
 export * from './reducers/index';
 export * from './state';
 export * from './guards/index';

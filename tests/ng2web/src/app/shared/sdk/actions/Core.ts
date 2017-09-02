@@ -8,5 +8,5 @@ export const CoreActionTypes =
 Object.assign(BaseLoopbackActionTypesFactory('Core'), {
 });
 export const CoreActions =
-Object.assign(BaseLoopbackActionsFactory<Core>('Core', CoreActionTypes), {
+Object.assign(BaseLoopbackActionsFactory<Core>(CoreActionTypes), {
 });

@@ -4,6 +4,7 @@
 import { Action } from '@ngrx/store';
 
 export interface LoopbackAction extends Action {
+  payload?: any;
   meta?: any;
 }
 

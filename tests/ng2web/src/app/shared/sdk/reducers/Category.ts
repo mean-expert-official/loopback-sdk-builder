@@ -1,9 +1,9 @@
 /* tslint:disable */
-import { Observable } from 'rxjs/Observable';
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
 import { BaseReducerFactory } from './base';
 import { Category } from '../models';
+import { LoopbackAction } from '../models/BaseModels';
 import { CategoryActionTypes } from '../actions';
 
 export interface CategorysState {
@@ -25,7 +25,7 @@ const cases = BaseReducerFactory<CategorysState, Category>(CategoryActionTypes);
  * @description
  * Provides with a LoopBack compatible Category reducer.
  */
-export function CategorysReducer(state = initialState, action: Action): CategorysState {
+export function CategorysReducer(state = initialState, action: LoopbackAction): CategorysState {
   if (cases[action.type]) {
     return cases[action.type](state, action);
   } else {

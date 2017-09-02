@@ -145,7 +145,7 @@ Object.assign(BaseLoopbackActionTypesFactory('Account'), {
   SIGNUP_FAIL: type('[Account] Signup fail'),
 });
 export const AccountActions =
-Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes), {
+Object.assign(BaseLoopbackActionsFactory<Account>(AccountActionTypes), {
 
   /**
    * findByIdAccessTokens Action.
@@ -160,7 +160,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
     public readonly type = AccountActionTypes.FIND_BY_ID_ACCESSTOKENS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -206,7 +206,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
     public readonly type = AccountActionTypes.DESTROY_BY_ID_ACCESSTOKENS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -255,7 +255,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
     public readonly type = AccountActionTypes.UPDATE_BY_ID_ACCESSTOKENS;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -301,7 +301,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
     public readonly type = AccountActionTypes.FIND_BY_ID_ROOMS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -347,7 +347,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
     public readonly type = AccountActionTypes.DESTROY_BY_ID_ROOMS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -396,7 +396,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
     public readonly type = AccountActionTypes.UPDATE_BY_ID_ROOMS;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -445,7 +445,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
     public readonly type = AccountActionTypes.LINK_ROOMS;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -491,7 +491,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
     public readonly type = AccountActionTypes.UNLINK_ROOMS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -537,7 +537,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
     public readonly type = AccountActionTypes.FIND_BY_ID_ADMINISTRATIONS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -583,7 +583,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
     public readonly type = AccountActionTypes.DESTROY_BY_ID_ADMINISTRATIONS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -632,7 +632,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
     public readonly type = AccountActionTypes.UPDATE_BY_ID_ADMINISTRATIONS;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -681,7 +681,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
     public readonly type = AccountActionTypes.LINK_ADMINISTRATIONS;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -727,7 +727,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
     public readonly type = AccountActionTypes.UNLINK_ADMINISTRATIONS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -773,7 +773,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
     public readonly type = AccountActionTypes.GET_ACCESSTOKENS;
       public payload: {id: any, filter: LoopBackFilter};
 
-    constructor(id: any, filter: LoopBackFilter = {}, public meta?: any) {
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, filter};
     }
   },
@@ -821,7 +821,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
     public readonly type = AccountActionTypes.CREATE_ACCESSTOKENS;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -906,7 +906,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
     public readonly type = AccountActionTypes.GET_ROOMS;
       public payload: {id: any, filter: LoopBackFilter};
 
-    constructor(id: any, filter: LoopBackFilter = {}, public meta?: any) {
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, filter};
     }
   },
@@ -954,7 +954,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
     public readonly type = AccountActionTypes.CREATE_ROOMS;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -1039,7 +1039,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
     public readonly type = AccountActionTypes.GET_ADMINISTRATIONS;
       public payload: {id: any, filter: LoopBackFilter};
 
-    constructor(id: any, filter: LoopBackFilter = {}, public meta?: any) {
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, filter};
     }
   },
@@ -1087,7 +1087,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
     public readonly type = AccountActionTypes.CREATE_ADMINISTRATIONS;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -1178,7 +1178,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
     public readonly type = AccountActionTypes.LOGIN;
       public payload: {credentials: any, include: any};
 
-    constructor(credentials: any, include: any = 'user', rememberMe: boolean = true, public meta?: any) {
+    constructor(credentials: any, include: any = 'user', rememberMe: boolean = true, customHeaders?: Function, public meta?: any) {
       this.payload = {credentials, include};
     }
   },
@@ -1313,7 +1313,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
     public readonly type = AccountActionTypes.CONFIRM;
       public payload: {uid: any, token: any, redirect: any};
 
-    constructor(uid: any, token: any, redirect: any = {}, public meta?: any) {
+    constructor(uid: any, token: any, redirect: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {uid, token, redirect};
     }
   },
@@ -1406,7 +1406,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
     public readonly type = AccountActionTypes.CHANGE_PASSWORD;
       public payload: {oldPassword: any, newPassword: any};
 
-    constructor(oldPassword: any, newPassword: any, public meta?: any) {
+    constructor(oldPassword: any, newPassword: any, customHeaders?: Function, public meta?: any) {
       this.payload = {oldPassword, newPassword};
     }
   },
@@ -1498,7 +1498,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
     public readonly type = AccountActionTypes.CREATE_MANY_ACCESSTOKENS;
       public payload: {id: any, data: any[]};
 
-    constructor(id: any, data: any[] = [], public meta?: any) {
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -1546,7 +1546,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
     public readonly type = AccountActionTypes.CREATE_MANY_ROOMS;
       public payload: {id: any, data: any[]};
 
-    constructor(id: any, data: any[] = [], public meta?: any) {
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -1594,7 +1594,7 @@ Object.assign(BaseLoopbackActionsFactory<Account>('Account', AccountActionTypes)
     public readonly type = AccountActionTypes.CREATE_MANY_ADMINISTRATIONS;
       public payload: {id: any, data: any[]};
 
-    constructor(id: any, data: any[] = [], public meta?: any) {
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },

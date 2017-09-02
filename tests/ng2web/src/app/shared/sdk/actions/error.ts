@@ -22,7 +22,7 @@ export const LoopbackErrorActionTypes = {
  */
 export const LoopbackErrorActions = {
   error: class implements Action {
-    public type = LoopbackErrorActionTypes.ERROR;
+    public readonly type = LoopbackErrorActionTypes.ERROR;
 
     constructor(public payload: any, public meta?: any) { }
   }

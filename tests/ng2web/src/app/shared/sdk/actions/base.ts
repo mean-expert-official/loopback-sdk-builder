@@ -85,9 +85,7 @@ export function BaseLoopbackActionTypesFactory(modelName: string): any {
 * by the sdk builder.
 * It provides the core actions for each model to interact with API
 **/
-export function BaseLoopbackActionsFactory<T>(modelName: string, actionTypes: any): any {
-  const upperName = modelName.toUpperCase();
-
+export function BaseLoopbackActionsFactory<T>(actionTypes: any): any {
   let actions: any = {};
 
   /**
@@ -621,7 +619,7 @@ export function BaseLoopbackActionsFactory<T>(modelName: string, actionTypes: an
    * Generic guardFail action
    */
   actions.guardFail = class implements Action {
-    public type = actionTypes['GUARD_FAIL'];
+    public readonly type = actionTypes['GUARD_FAIL'];
   }
 
   return actions;

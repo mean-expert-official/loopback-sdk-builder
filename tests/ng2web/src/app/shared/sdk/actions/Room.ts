@@ -200,7 +200,7 @@ Object.assign(BaseLoopbackActionTypesFactory('Room'), {
 
 });
 export const RoomActions =
-Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
+Object.assign(BaseLoopbackActionsFactory<Room>(RoomActionTypes), {
 
   /**
    * findByIdMessages Action.
@@ -215,7 +215,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.FIND_BY_ID_MESSAGES;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -261,7 +261,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.DESTROY_BY_ID_MESSAGES;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -310,7 +310,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.UPDATE_BY_ID_MESSAGES;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -356,7 +356,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.FIND_BY_ID_LIKES;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -402,7 +402,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.DESTROY_BY_ID_LIKES;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -451,7 +451,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.UPDATE_BY_ID_LIKES;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -497,7 +497,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.FIND_BY_ID_CATEGORIES;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -543,7 +543,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.DESTROY_BY_ID_CATEGORIES;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -592,7 +592,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.UPDATE_BY_ID_CATEGORIES;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -641,7 +641,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.LINK_CATEGORIES;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -687,7 +687,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.UNLINK_CATEGORIES;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -733,7 +733,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.FIND_BY_ID_ACCOUNTS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -779,7 +779,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.DESTROY_BY_ID_ACCOUNTS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -828,7 +828,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.UPDATE_BY_ID_ACCOUNTS;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -877,7 +877,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.LINK_ACCOUNTS;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -923,7 +923,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.UNLINK_ACCOUNTS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -969,7 +969,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.FIND_BY_ID_ADMINS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -1015,7 +1015,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.DESTROY_BY_ID_ADMINS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -1064,7 +1064,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.UPDATE_BY_ID_ADMINS;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -1113,7 +1113,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.LINK_ADMINS;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -1159,7 +1159,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.UNLINK_ADMINS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -1205,7 +1205,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.GET_MESSAGES;
       public payload: {id: any, filter: LoopBackFilter};
 
-    constructor(id: any, filter: LoopBackFilter = {}, public meta?: any) {
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, filter};
     }
   },
@@ -1253,7 +1253,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.CREATE_MESSAGES;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -1338,7 +1338,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.GET_LIKES;
       public payload: {id: any, filter: LoopBackFilter};
 
-    constructor(id: any, filter: LoopBackFilter = {}, public meta?: any) {
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, filter};
     }
   },
@@ -1386,7 +1386,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.CREATE_LIKES;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -1471,7 +1471,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.GET_CATEGORIES;
       public payload: {id: any, filter: LoopBackFilter};
 
-    constructor(id: any, filter: LoopBackFilter = {}, public meta?: any) {
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, filter};
     }
   },
@@ -1519,7 +1519,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.CREATE_CATEGORIES;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -1604,7 +1604,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.GET_ACCOUNTS;
       public payload: {id: any, filter: LoopBackFilter};
 
-    constructor(id: any, filter: LoopBackFilter = {}, public meta?: any) {
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, filter};
     }
   },
@@ -1652,7 +1652,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.CREATE_ACCOUNTS;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -1737,7 +1737,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.GET_ADMINS;
       public payload: {id: any, filter: LoopBackFilter};
 
-    constructor(id: any, filter: LoopBackFilter = {}, public meta?: any) {
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, filter};
     }
   },
@@ -1785,7 +1785,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.CREATE_ADMINS;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -1873,7 +1873,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.GREET_ROUTE;
       public payload: {a: any, b: any, c: any};
 
-    constructor(a: any = {}, b: any = {}, c: any = {}, public meta?: any) {
+    constructor(a: any = {}, b: any = {}, c: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {a, b, c};
     }
   },
@@ -1924,7 +1924,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.GREET_GET;
       public payload: {a: any, b: any, c: any};
 
-    constructor(a: any = {}, b: any = {}, c: any = {}, public meta?: any) {
+    constructor(a: any = {}, b: any = {}, c: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {a, b, c};
     }
   },
@@ -1979,7 +1979,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.GREET_POST;
       public payload: {a: any, b: any, c: any};
 
-    constructor(a: any = {}, b: any = {}, c: any = {}, public meta?: any) {
+    constructor(a: any = {}, b: any = {}, c: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {a, b, c};
     }
   },
@@ -2165,7 +2165,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.GET_PROPERTY_VALUES;
       public payload: {property: any, filter: LoopBackFilter};
 
-    constructor(property: any, filter: LoopBackFilter = {}, public meta?: any) {
+    constructor(property: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {property, filter};
     }
   },
@@ -2213,7 +2213,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.CREATE_MANY_MESSAGES;
       public payload: {id: any, data: any[]};
 
-    constructor(id: any, data: any[] = [], public meta?: any) {
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -2261,7 +2261,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.CREATE_MANY_LIKES;
       public payload: {id: any, data: any[]};
 
-    constructor(id: any, data: any[] = [], public meta?: any) {
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -2309,7 +2309,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.CREATE_MANY_CATEGORIES;
       public payload: {id: any, data: any[]};
 
-    constructor(id: any, data: any[] = [], public meta?: any) {
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -2357,7 +2357,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.CREATE_MANY_ACCOUNTS;
       public payload: {id: any, data: any[]};
 
-    constructor(id: any, data: any[] = [], public meta?: any) {
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -2405,7 +2405,7 @@ Object.assign(BaseLoopbackActionsFactory<Room>('Room', RoomActionTypes), {
     public readonly type = RoomActionTypes.CREATE_MANY_ADMINS;
       public payload: {id: any, data: any[]};
 
-    constructor(id: any, data: any[] = [], public meta?: any) {
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },

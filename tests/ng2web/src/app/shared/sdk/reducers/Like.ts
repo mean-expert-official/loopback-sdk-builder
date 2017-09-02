@@ -1,9 +1,9 @@
 /* tslint:disable */
-import { Observable } from 'rxjs/Observable';
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
 import { BaseReducerFactory } from './base';
 import { Like } from '../models';
+import { LoopbackAction } from '../models/BaseModels';
 import { LikeActionTypes } from '../actions';
 
 export interface LikesState {
@@ -25,7 +25,7 @@ const cases = BaseReducerFactory<LikesState, Like>(LikeActionTypes);
  * @description
  * Provides with a LoopBack compatible Like reducer.
  */
-export function LikesReducer(state = initialState, action: Action): LikesState {
+export function LikesReducer(state = initialState, action: LoopbackAction): LikesState {
   if (cases[action.type]) {
     return cases[action.type](state, action);
   } else {

@@ -1,20 +1,26 @@
 /* tslint:disable */
-import { Observable } from 'rxjs/Observable';
-import { ActionReducer } from '@ngrx/store';
-import '@ngrx/core/add/operator/select';
-import { compose } from '@ngrx/core/compose';
-import { combineReducers } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-
 import { SDKToken } from './models/BaseModels';
 
 import * as reducers from './reducers/index';
 
-import * as effects from './effects/index';
+import { LoopbackAuthEffects } from './effects/auth';
+import { UserEffects } from './effects/User';
+import { AccountEffects } from './effects/Account';
+import { ApplicationCredentialEffects } from './effects/ApplicationCredential';
+import { CategoryEffects } from './effects/Category';
+import { CoreEffects } from './effects/Core';
+import { LikeEffects } from './effects/Like';
+import { MessageEffects } from './effects/Message';
+import { RoomEffects } from './effects/Room';
+import { RoomAccountEffects } from './effects/RoomAccount';
+import { RoomAdminEffects } from './effects/RoomAdmin';
+import { StorageEffects } from './effects/Storage';
+import { UserCredentialEffects } from './effects/UserCredential';
+import { UserIdentityEffects } from './effects/UserIdentity';
 
 export interface LoopbackStateInterface {
-  loopbackAuth: SDKToken;
-    Users: reducers.UsersState;
+  LoopbackAuth: SDKToken;
+  Users: reducers.UsersState;
   Accounts: reducers.AccountsState;
   ApplicationCredentials: reducers.ApplicationCredentialsState;
   Categorys: reducers.CategorysState;
@@ -30,7 +36,7 @@ export interface LoopbackStateInterface {
 };
 
 export const LoopbackReducer = {
-  loopbackAuth: reducers.LoopbackAuthReducer,
+  LoopbackAuth: reducers.LoopbackAuthReducer,
 	Users: reducers.UsersReducer,
 	Accounts: reducers.AccountsReducer,
 	ApplicationCredentials: reducers.ApplicationCredentialsReducer,
@@ -47,18 +53,18 @@ export const LoopbackReducer = {
 };
 
 export const LoopbackEffects = [
-  EffectsModule.run(effects.LoopbackAuthEffects),
-	EffectsModule.run(effects.UserEffects),
-	EffectsModule.run(effects.AccountEffects),
-	EffectsModule.run(effects.ApplicationCredentialEffects),
-	EffectsModule.run(effects.CategoryEffects),
-	EffectsModule.run(effects.CoreEffects),
-	EffectsModule.run(effects.LikeEffects),
-	EffectsModule.run(effects.MessageEffects),
-	EffectsModule.run(effects.RoomEffects),
-	EffectsModule.run(effects.RoomAccountEffects),
-	EffectsModule.run(effects.RoomAdminEffects),
-	EffectsModule.run(effects.StorageEffects),
-	EffectsModule.run(effects.UserCredentialEffects),
-	EffectsModule.run(effects.UserIdentityEffects),
+  LoopbackAuthEffects,
+  UserEffects,
+  AccountEffects,
+  ApplicationCredentialEffects,
+  CategoryEffects,
+  CoreEffects,
+  LikeEffects,
+  MessageEffects,
+  RoomEffects,
+  RoomAccountEffects,
+  RoomAdminEffects,
+  StorageEffects,
+  UserCredentialEffects,
+  UserIdentityEffects,
 ];

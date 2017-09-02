@@ -1,9 +1,9 @@
 /* tslint:disable */
-import { Observable } from 'rxjs/Observable';
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
 import { BaseReducerFactory } from './base';
 import { Room } from '../models';
+import { LoopbackAction } from '../models/BaseModels';
 import { RoomActionTypes } from '../actions';
 
 export interface RoomsState {
@@ -25,7 +25,7 @@ const cases = BaseReducerFactory<RoomsState, Room>(RoomActionTypes);
  * @description
  * Provides with a LoopBack compatible Room reducer.
  */
-export function RoomsReducer(state = initialState, action: Action): RoomsState {
+export function RoomsReducer(state = initialState, action: LoopbackAction): RoomsState {
   if (cases[action.type]) {
     return cases[action.type](state, action);
   } else {

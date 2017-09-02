@@ -1,11 +1,7 @@
 /* tslint:disable */
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/toArray';
-import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { concat } from 'rxjs/observable/concat';
 import { Injectable, Inject } from '@angular/core';
@@ -22,108 +18,108 @@ import { StorageApi } from '../services/index';
 @Injectable()
 export class StorageEffects extends BaseLoopbackEffects {
   @Effect()
-  protected getContainers: Observable<LoopbackAction> = this.actions$
+  public getContainers$ = this.actions$
     .ofType(StorageActionTypes.GET_CONTAINERS)
     .mergeMap((action: LoopbackAction) =>
       this.storage.getContainers()
-        .map((response) => new StorageActions.getContainersSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
+        .map((response: any) => new StorageActions.getContainersSuccess(action.payload.id, response, action.meta))
+        .catch((error: any) => concat(
           of(new StorageActions.getContainersFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected createContainer: Observable<LoopbackAction> = this.actions$
+  public createContainer$ = this.actions$
     .ofType(StorageActionTypes.CREATE_CONTAINER)
     .mergeMap((action: LoopbackAction) =>
       this.storage.createContainer(action.payload.options)
-        .map((response) => new StorageActions.createContainerSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
+        .map((response: any) => new StorageActions.createContainerSuccess(action.payload.id, response, action.meta))
+        .catch((error: any) => concat(
           of(new StorageActions.createContainerFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected destroyContainer: Observable<LoopbackAction> = this.actions$
+  public destroyContainer$ = this.actions$
     .ofType(StorageActionTypes.DESTROY_CONTAINER)
     .mergeMap((action: LoopbackAction) =>
       this.storage.destroyContainer(action.payload.container)
-        .map((response) => new StorageActions.destroyContainerSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
+        .map((response: any) => new StorageActions.destroyContainerSuccess(action.payload.id, response, action.meta))
+        .catch((error: any) => concat(
           of(new StorageActions.destroyContainerFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected getContainer: Observable<LoopbackAction> = this.actions$
+  public getContainer$ = this.actions$
     .ofType(StorageActionTypes.GET_CONTAINER)
     .mergeMap((action: LoopbackAction) =>
       this.storage.getContainer(action.payload.container)
-        .map((response) => new StorageActions.getContainerSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
+        .map((response: any) => new StorageActions.getContainerSuccess(action.payload.id, response, action.meta))
+        .catch((error: any) => concat(
           of(new StorageActions.getContainerFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected getFiles: Observable<LoopbackAction> = this.actions$
+  public getFiles$ = this.actions$
     .ofType(StorageActionTypes.GET_FILES)
     .mergeMap((action: LoopbackAction) =>
       this.storage.getFiles(action.payload.container)
-        .map((response) => new StorageActions.getFilesSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
+        .map((response: any) => new StorageActions.getFilesSuccess(action.payload.id, response, action.meta))
+        .catch((error: any) => concat(
           of(new StorageActions.getFilesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected getFile: Observable<LoopbackAction> = this.actions$
+  public getFile$ = this.actions$
     .ofType(StorageActionTypes.GET_FILE)
     .mergeMap((action: LoopbackAction) =>
       this.storage.getFile(action.payload.container, action.payload.file)
-        .map((response) => new StorageActions.getFileSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
+        .map((response: any) => new StorageActions.getFileSuccess(action.payload.id, response, action.meta))
+        .catch((error: any) => concat(
           of(new StorageActions.getFileFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected removeFile: Observable<LoopbackAction> = this.actions$
+  public removeFile$ = this.actions$
     .ofType(StorageActionTypes.REMOVE_FILE)
     .mergeMap((action: LoopbackAction) =>
       this.storage.removeFile(action.payload.container, action.payload.file)
-        .map((response) => new StorageActions.removeFileSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
+        .map((response: any) => new StorageActions.removeFileSuccess(action.payload.id, response, action.meta))
+        .catch((error: any) => concat(
           of(new StorageActions.removeFileFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected upload: Observable<LoopbackAction> = this.actions$
+  public upload$ = this.actions$
     .ofType(StorageActionTypes.UPLOAD)
     .mergeMap((action: LoopbackAction) =>
-      this.storage.upload(action.payload.req, action.payload.res)
-        .map((response) => new StorageActions.uploadSuccess(action.payload.id, response, action.meta))
-        .catch((error) => concat(
+      this.storage.upload(action.payload.container, action.payload.req, action.payload.res)
+        .map((response: any) => new StorageActions.uploadSuccess(action.payload.id, response, action.meta))
+        .catch((error: any) => concat(
           of(new StorageActions.uploadFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected download: Observable<LoopbackAction> = this.actions$
+  public download$ = this.actions$
     .ofType(StorageActionTypes.DOWNLOAD)
     .mergeMap((action: LoopbackAction) =>
       this.storage.download(action.payload.container, action.payload.file, action.payload.req, action.payload.res)
-        .map((response) => new StorageActions.downloadSuccess(action.payload.id, action.payload.fk, action.meta))
-        .catch((error) => concat(
+        .map((response: any) => new StorageActions.downloadSuccess(action.payload.id, action.payload.fk, action.meta))
+        .catch((error: any) => concat(
           of(new StorageActions.downloadFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
@@ -134,20 +130,20 @@ export class StorageEffects extends BaseLoopbackEffects {
    * @description
    * Decorate base effects metadata
    */
-  @Effect() protected create;
-  @Effect() protected createMany;
-  @Effect() protected findById;
-  @Effect() protected find;
-  @Effect() protected findOne;
-  @Effect() protected updateAll;
-  @Effect() protected deleteById;
-  @Effect() protected updateAttributes;
-  @Effect() protected upsert;
-  @Effect() protected upsertWithWhere;
-  @Effect() protected replaceOrCreate;
-  @Effect() protected replaceById;
-  @Effect() protected patchOrCreate;
-  @Effect() protected patchAttributes;
+  @Effect() public create$;
+  @Effect() public createMany$;
+  @Effect() public findById$;
+  @Effect() public find$;
+  @Effect() public findOne$;
+  @Effect() public updateAll$;
+  @Effect() public deleteById$;
+  @Effect() public updateAttributes$;
+  @Effect() public upsert$;
+  @Effect() public upsertWithWhere$;
+  @Effect() public replaceOrCreate$;
+  @Effect() public replaceById$;
+  @Effect() public patchOrCreate$;
+  @Effect() public patchAttributes$;
 
   constructor(
     @Inject(Actions) public actions$: Actions,

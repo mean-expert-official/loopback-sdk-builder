@@ -1,5 +1,7 @@
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, Effect } from '@ngrx/effects';
 
 import { LoopbackAction, LoopbackAuthActionTypes, AccountActionTypes, AccountActions } from './sdk';
@@ -7,10 +9,10 @@ import { LoopbackAction, LoopbackAuthActionTypes, AccountActionTypes, AccountAct
 @Injectable()
 export class AppEffects {
 
-  @Effect()
+  @Effect({dispatch: false})
   public loginSuccess$ = this.actions$
     .ofType(AccountActionTypes.LOGIN_SUCCESS)
-    .map(() => go(['/ngrx-home']));
+    .do(() => this.router.navigate(['/ngrx-home']));
 
   @Effect()
   public signupSuccess$ = this.actions$
@@ -19,6 +21,7 @@ export class AppEffects {
       new AccountActions.login(action.payload.credentials, 'user'));
 
   constructor(
+    private router: Router,
     private actions$: Actions
   ) {}
 }

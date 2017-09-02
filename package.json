@@ -102,7 +102,7 @@
   "dependencies": {
     "@mean-expert/loopback-component-realtime": "^1.0.0-beta.8",
     "chalk": "^2.1.0",
-    "ejs": "^2.5.7",
+    "ejs": "1.0",
     "extfs": "0.0.7",
     "mkdirp": "0.5.1",
     "optimist": "0.6.1",

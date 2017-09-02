@@ -1,5 +1,5 @@
 /* tslint:disable */
-import { Action } from '@ngrx/store';
+import { LoopbackAction } from '../models/BaseModels';
 
 /**
 * @module BaseReducerFactory
@@ -23,7 +23,7 @@ export function BaseReducerFactory<S, T>(actionTypes: any): any {
   cases[actionTypes.PATCH_ATTRIBUTES_SUCCESS] =
   cases[actionTypes.FIND_BY_ID_SUCCESS] =
   cases[actionTypes.FIND_ONE_SUCCESS] =
-  (state: any, action: Action) => {
+  (state: any, action: LoopbackAction) => {
     if (Array.isArray(action.payload)) {
       let newIds = [...state.ids];
       let newEntities = Object.assign({}, state.entities);
@@ -49,12 +49,12 @@ export function BaseReducerFactory<S, T>(actionTypes: any): any {
   };
 
   cases[actionTypes.CREATE_MANY_SUCCESS] =
-  (state: any, action: Action) => {
+  (state: any, action: LoopbackAction) => {
     // TODO: check what is the response for this...
   };
 
   cases[actionTypes.FIND_SUCCESS] =
-  (state: any, action: Action) => {
+  (state: any, action: LoopbackAction) => {
     let newIds = [...state.ids];
     let newEntities = Object.assign({}, state.entities);
     for (let value of action.payload) {
@@ -71,12 +71,12 @@ export function BaseReducerFactory<S, T>(actionTypes: any): any {
   };
 
   cases[actionTypes.UPDATE_ALL_SUCCESS] =
-  (state: any, action: Action) => {
+  (state: any, action: LoopbackAction) => {
     // TODO: figure out how to do this...
   };
 
   cases[actionTypes.DELETE_BY_ID_SUCCESS] =
-  (state: any, action: Action) => {
+  (state: any, action: LoopbackAction) => {
     delete state.entities[action.payload];
     
     let ids: Set<{}> = new Set(state.ids);

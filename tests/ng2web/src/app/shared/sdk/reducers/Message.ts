@@ -1,9 +1,9 @@
 /* tslint:disable */
-import { Observable } from 'rxjs/Observable';
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
 import { BaseReducerFactory } from './base';
 import { Message } from '../models';
+import { LoopbackAction } from '../models/BaseModels';
 import { MessageActionTypes } from '../actions';
 
 export interface MessagesState {
@@ -25,7 +25,7 @@ const cases = BaseReducerFactory<MessagesState, Message>(MessageActionTypes);
  * @description
  * Provides with a LoopBack compatible Message reducer.
  */
-export function MessagesReducer(state = initialState, action: Action): MessagesState {
+export function MessagesReducer(state = initialState, action: LoopbackAction): MessagesState {
   if (cases[action.type]) {
     return cases[action.type](state, action);
   } else {

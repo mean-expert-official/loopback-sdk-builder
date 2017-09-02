@@ -1,9 +1,9 @@
 /* tslint:disable */
-import { Observable } from 'rxjs/Observable';
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
 import { BaseReducerFactory } from './base';
 import { UserIdentity } from '../models';
+import { LoopbackAction } from '../models/BaseModels';
 import { UserIdentityActionTypes } from '../actions';
 
 export interface UserIdentitysState {
@@ -25,7 +25,7 @@ const cases = BaseReducerFactory<UserIdentitysState, UserIdentity>(UserIdentityA
  * @description
  * Provides with a LoopBack compatible UserIdentity reducer.
  */
-export function UserIdentitysReducer(state = initialState, action: Action): UserIdentitysState {
+export function UserIdentitysReducer(state = initialState, action: LoopbackAction): UserIdentitysState {
   if (cases[action.type]) {
     return cases[action.type](state, action);
   } else {

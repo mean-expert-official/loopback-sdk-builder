@@ -72,7 +72,7 @@ Object.assign(BaseLoopbackActionTypesFactory('Message'), {
 
 });
 export const MessageActions =
-Object.assign(BaseLoopbackActionsFactory<Message>('Message', MessageActionTypes), {
+Object.assign(BaseLoopbackActionsFactory<Message>(MessageActionTypes), {
 
   /**
    * findByIdLikes Action.
@@ -87,7 +87,7 @@ Object.assign(BaseLoopbackActionsFactory<Message>('Message', MessageActionTypes)
     public readonly type = MessageActionTypes.FIND_BY_ID_LIKES;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -133,7 +133,7 @@ Object.assign(BaseLoopbackActionsFactory<Message>('Message', MessageActionTypes)
     public readonly type = MessageActionTypes.DESTROY_BY_ID_LIKES;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -182,7 +182,7 @@ Object.assign(BaseLoopbackActionsFactory<Message>('Message', MessageActionTypes)
     public readonly type = MessageActionTypes.UPDATE_BY_ID_LIKES;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -228,7 +228,7 @@ Object.assign(BaseLoopbackActionsFactory<Message>('Message', MessageActionTypes)
     public readonly type = MessageActionTypes.FIND_BY_ID_REPLIES;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -274,7 +274,7 @@ Object.assign(BaseLoopbackActionsFactory<Message>('Message', MessageActionTypes)
     public readonly type = MessageActionTypes.DESTROY_BY_ID_REPLIES;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -323,7 +323,7 @@ Object.assign(BaseLoopbackActionsFactory<Message>('Message', MessageActionTypes)
     public readonly type = MessageActionTypes.UPDATE_BY_ID_REPLIES;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -369,7 +369,7 @@ Object.assign(BaseLoopbackActionsFactory<Message>('Message', MessageActionTypes)
     public readonly type = MessageActionTypes.GET_PARENT;
       public payload: {id: any, refresh: any};
 
-    constructor(id: any, refresh: any = {}, public meta?: any) {
+    constructor(id: any, refresh: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, refresh};
     }
   },
@@ -415,7 +415,7 @@ Object.assign(BaseLoopbackActionsFactory<Message>('Message', MessageActionTypes)
     public readonly type = MessageActionTypes.GET_ROOM;
       public payload: {id: any, refresh: any};
 
-    constructor(id: any, refresh: any = {}, public meta?: any) {
+    constructor(id: any, refresh: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, refresh};
     }
   },
@@ -461,7 +461,7 @@ Object.assign(BaseLoopbackActionsFactory<Message>('Message', MessageActionTypes)
     public readonly type = MessageActionTypes.GET_LIKES;
       public payload: {id: any, filter: LoopBackFilter};
 
-    constructor(id: any, filter: LoopBackFilter = {}, public meta?: any) {
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, filter};
     }
   },
@@ -509,7 +509,7 @@ Object.assign(BaseLoopbackActionsFactory<Message>('Message', MessageActionTypes)
     public readonly type = MessageActionTypes.CREATE_LIKES;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -594,7 +594,7 @@ Object.assign(BaseLoopbackActionsFactory<Message>('Message', MessageActionTypes)
     public readonly type = MessageActionTypes.GET_REPLIES;
       public payload: {id: any, filter: LoopBackFilter};
 
-    constructor(id: any, filter: LoopBackFilter = {}, public meta?: any) {
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, filter};
     }
   },
@@ -642,7 +642,7 @@ Object.assign(BaseLoopbackActionsFactory<Message>('Message', MessageActionTypes)
     public readonly type = MessageActionTypes.CREATE_REPLIES;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -729,7 +729,7 @@ Object.assign(BaseLoopbackActionsFactory<Message>('Message', MessageActionTypes)
     public readonly type = MessageActionTypes.CREATE_MANY_LIKES;
       public payload: {id: any, data: any[]};
 
-    constructor(id: any, data: any[] = [], public meta?: any) {
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -777,7 +777,7 @@ Object.assign(BaseLoopbackActionsFactory<Message>('Message', MessageActionTypes)
     public readonly type = MessageActionTypes.CREATE_MANY_REPLIES;
       public payload: {id: any, data: any[]};
 
-    constructor(id: any, data: any[] = [], public meta?: any) {
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },

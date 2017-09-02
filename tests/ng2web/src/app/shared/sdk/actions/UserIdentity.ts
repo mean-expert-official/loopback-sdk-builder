@@ -12,7 +12,7 @@ Object.assign(BaseLoopbackActionTypesFactory('UserIdentity'), {
 
 });
 export const UserIdentityActions =
-Object.assign(BaseLoopbackActionsFactory<UserIdentity>('UserIdentity', UserIdentityActionTypes), {
+Object.assign(BaseLoopbackActionsFactory<UserIdentity>(UserIdentityActionTypes), {
 
   /**
    * getUser Action.
@@ -27,7 +27,7 @@ Object.assign(BaseLoopbackActionsFactory<UserIdentity>('UserIdentity', UserIdent
     public readonly type = UserIdentityActionTypes.GET_USER;
       public payload: {id: any, refresh: any};
 
-    constructor(id: any, refresh: any = {}, public meta?: any) {
+    constructor(id: any, refresh: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, refresh};
     }
   },

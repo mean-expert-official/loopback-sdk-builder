@@ -1,9 +1,9 @@
 /* tslint:disable */
-import { Observable } from 'rxjs/Observable';
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
 import { BaseReducerFactory } from './base';
 import { Storage } from '../models';
+import { LoopbackAction } from '../models/BaseModels';
 import { StorageActionTypes } from '../actions';
 
 export interface StoragesState {
@@ -25,7 +25,7 @@ const cases = BaseReducerFactory<StoragesState, Storage>(StorageActionTypes);
  * @description
  * Provides with a LoopBack compatible Storage reducer.
  */
-export function StoragesReducer(state = initialState, action: Action): StoragesState {
+export function StoragesReducer(state = initialState, action: LoopbackAction): StoragesState {
   if (cases[action.type]) {
     return cases[action.type](state, action);
   } else {

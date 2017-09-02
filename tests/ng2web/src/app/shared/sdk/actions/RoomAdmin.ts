@@ -16,7 +16,7 @@ Object.assign(BaseLoopbackActionTypesFactory('RoomAdmin'), {
 
 });
 export const RoomAdminActions =
-Object.assign(BaseLoopbackActionsFactory<RoomAdmin>('RoomAdmin', RoomAdminActionTypes), {
+Object.assign(BaseLoopbackActionsFactory<RoomAdmin>(RoomAdminActionTypes), {
 
   /**
    * getAccount Action.
@@ -31,7 +31,7 @@ Object.assign(BaseLoopbackActionsFactory<RoomAdmin>('RoomAdmin', RoomAdminAction
     public readonly type = RoomAdminActionTypes.GET_ACCOUNT;
       public payload: {id: any, refresh: any};
 
-    constructor(id: any, refresh: any = {}, public meta?: any) {
+    constructor(id: any, refresh: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, refresh};
     }
   },
@@ -77,7 +77,7 @@ Object.assign(BaseLoopbackActionsFactory<RoomAdmin>('RoomAdmin', RoomAdminAction
     public readonly type = RoomAdminActionTypes.GET_ROOM;
       public payload: {id: any, refresh: any};
 
-    constructor(id: any, refresh: any = {}, public meta?: any) {
+    constructor(id: any, refresh: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, refresh};
     }
   },

@@ -1,7 +1,5 @@
 /* tslint:disable */
-import { Observable } from 'rxjs/Observable';
-import { Action } from '@ngrx/store';
-import { SDKToken } from '../models/BaseModels';
+import { SDKToken, LoopbackAction } from '../models/BaseModels';
 import { LoopbackAuthActionTypes } from '../actions/auth';
 import { AccountActionTypes } from '../actions/Account';
 
@@ -22,7 +20,7 @@ const initialState: SDKToken = {
  * @description
  * Provides with a LoopBack compatible authentication reducer.
  */
-export function LoopbackAuthReducer(state = initialState, action: Action): SDKToken {
+export function LoopbackAuthReducer(state = initialState, action: LoopbackAction): SDKToken {
   switch (action.type) {
     case AccountActionTypes.LOGIN_SUCCESS:
     case LoopbackAuthActionTypes.SET_TOKEN:
@@ -63,7 +61,7 @@ export function LoopbackAuthReducer(state = initialState, action: Action): SDKTo
   }
 }
 
-export const getLoopbackAuthState = (state: any) => state.loopbackAuth;
-export const getLoopbackAuthToken = (state: any) => state.loopbackAuth;
-export const getLoopbackAuthAccount = (state: any) => state.loopbackAuth.user;
-export const getLoopbackAuthAccountId = (state: any) => state.loopbackAuth.userId;
+export const getLoopbackAuthState = (state: any) => state.LoopbackAuth;
+export const getLoopbackAuthToken = (state: any) => state.LoopbackAuth;
+export const getLoopbackAuthAccount = (state: any) => state.LoopbackAuth.user;
+export const getLoopbackAuthAccountId = (state: any) => state.LoopbackAuth.userId;

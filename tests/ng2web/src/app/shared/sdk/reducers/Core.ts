@@ -1,9 +1,9 @@
 /* tslint:disable */
-import { Observable } from 'rxjs/Observable';
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
 import { BaseReducerFactory } from './base';
 import { Core } from '../models';
+import { LoopbackAction } from '../models/BaseModels';
 import { CoreActionTypes } from '../actions';
 
 export interface CoresState {
@@ -25,7 +25,7 @@ const cases = BaseReducerFactory<CoresState, Core>(CoreActionTypes);
  * @description
  * Provides with a LoopBack compatible Core reducer.
  */
-export function CoresReducer(state = initialState, action: Action): CoresState {
+export function CoresReducer(state = initialState, action: LoopbackAction): CoresState {
   if (cases[action.type]) {
     return cases[action.type](state, action);
   } else {

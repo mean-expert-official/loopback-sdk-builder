@@ -1,11 +1,7 @@
 /* tslint:disable */
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/toArray';
-import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { concat } from 'rxjs/observable/concat';
 import { Injectable, Inject } from '@angular/core';
@@ -22,30 +18,30 @@ import { RoomAdminApi } from '../services/index';
 @Injectable()
 export class RoomAdminEffects extends BaseLoopbackEffects {
   @Effect()
-  protected getAccount: Observable<LoopbackAction> = this.actions$
+  public getAccount$ = this.actions$
     .ofType(RoomAdminActionTypes.GET_ACCOUNT)
     .mergeMap((action: LoopbackAction) =>
       this.roomadmin.getAccount(action.payload.id, action.payload.refresh)
-        .mergeMap((response) => concat(
+        .mergeMap((response: any) => concat(
           resolver({data: response, meta: action.meta}, 'Account', 'findSuccess'),
           of(new RoomAdminActions.getAccountSuccess(action.payload.id, response, action.meta))
         ))
-        .catch((error) => concat(
+        .catch((error: any) => concat(
           of(new RoomAdminActions.getAccountFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected getRoom: Observable<LoopbackAction> = this.actions$
+  public getRoom$ = this.actions$
     .ofType(RoomAdminActionTypes.GET_ROOM)
     .mergeMap((action: LoopbackAction) =>
       this.roomadmin.getRoom(action.payload.id, action.payload.refresh)
-        .mergeMap((response) => concat(
+        .mergeMap((response: any) => concat(
           resolver({data: response, meta: action.meta}, 'Room', 'findSuccess'),
           of(new RoomAdminActions.getRoomSuccess(action.payload.id, response, action.meta))
         ))
-        .catch((error) => concat(
+        .catch((error: any) => concat(
           of(new RoomAdminActions.getRoomFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
@@ -56,20 +52,20 @@ export class RoomAdminEffects extends BaseLoopbackEffects {
    * @description
    * Decorate base effects metadata
    */
-  @Effect() protected create;
-  @Effect() protected createMany;
-  @Effect() protected findById;
-  @Effect() protected find;
-  @Effect() protected findOne;
-  @Effect() protected updateAll;
-  @Effect() protected deleteById;
-  @Effect() protected updateAttributes;
-  @Effect() protected upsert;
-  @Effect() protected upsertWithWhere;
-  @Effect() protected replaceOrCreate;
-  @Effect() protected replaceById;
-  @Effect() protected patchOrCreate;
-  @Effect() protected patchAttributes;
+  @Effect() public create$;
+  @Effect() public createMany$;
+  @Effect() public findById$;
+  @Effect() public find$;
+  @Effect() public findOne$;
+  @Effect() public updateAll$;
+  @Effect() public deleteById$;
+  @Effect() public updateAttributes$;
+  @Effect() public upsert$;
+  @Effect() public upsertWithWhere$;
+  @Effect() public replaceOrCreate$;
+  @Effect() public replaceById$;
+  @Effect() public patchOrCreate$;
+  @Effect() public patchAttributes$;
 
   constructor(
     @Inject(Actions) public actions$: Actions,

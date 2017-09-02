@@ -1,9 +1,9 @@
 /* tslint:disable */
-import { Observable } from 'rxjs/Observable';
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
 import { BaseReducerFactory } from './base';
 import { Account } from '../models';
+import { LoopbackAction } from '../models/BaseModels';
 import { AccountActionTypes } from '../actions';
 
 export interface AccountsState {
@@ -25,7 +25,7 @@ const cases = BaseReducerFactory<AccountsState, Account>(AccountActionTypes);
  * @description
  * Provides with a LoopBack compatible Account reducer.
  */
-export function AccountsReducer(state = initialState, action: Action): AccountsState {
+export function AccountsReducer(state = initialState, action: LoopbackAction): AccountsState {
   if (cases[action.type]) {
     return cases[action.type](state, action);
   } else {

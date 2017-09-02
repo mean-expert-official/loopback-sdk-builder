@@ -73,7 +73,7 @@ Object.assign(BaseLoopbackActionTypesFactory('User'), {
   SIGNUP_FAIL: type('[User] Signup fail'),
 });
 export const UserActions =
-Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
+Object.assign(BaseLoopbackActionsFactory<User>(UserActionTypes), {
 
   /**
    * findByIdAccessTokens Action.
@@ -88,7 +88,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.FIND_BY_ID_ACCESSTOKENS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -134,7 +134,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.DESTROY_BY_ID_ACCESSTOKENS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -183,7 +183,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.UPDATE_BY_ID_ACCESSTOKENS;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -229,7 +229,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.GET_ACCESSTOKENS;
       public payload: {id: any, filter: LoopBackFilter};
 
-    constructor(id: any, filter: LoopBackFilter = {}, public meta?: any) {
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, filter};
     }
   },
@@ -277,7 +277,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CREATE_ACCESSTOKENS;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -368,7 +368,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.LOGIN;
       public payload: {credentials: any, include: any};
 
-    constructor(credentials: any, include: any = 'user', rememberMe: boolean = true, public meta?: any) {
+    constructor(credentials: any, include: any = 'user', rememberMe: boolean = true, customHeaders?: Function, public meta?: any) {
       this.payload = {credentials, include};
     }
   },
@@ -503,7 +503,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CONFIRM;
       public payload: {uid: any, token: any, redirect: any};
 
-    constructor(uid: any, token: any, redirect: any = {}, public meta?: any) {
+    constructor(uid: any, token: any, redirect: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {uid, token, redirect};
     }
   },
@@ -596,7 +596,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CHANGE_PASSWORD;
       public payload: {oldPassword: any, newPassword: any};
 
-    constructor(oldPassword: any, newPassword: any, public meta?: any) {
+    constructor(oldPassword: any, newPassword: any, customHeaders?: Function, public meta?: any) {
       this.payload = {oldPassword, newPassword};
     }
   },
@@ -688,7 +688,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CREATE_MANY_ACCESSTOKENS;
       public payload: {id: any, data: any[]};
 
-    constructor(id: any, data: any[] = [], public meta?: any) {
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },

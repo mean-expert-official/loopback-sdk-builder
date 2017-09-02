@@ -1,7 +1,6 @@
-import '@ngrx/core/add/operator/select';
 import { Observable } from 'rxjs/Observable';
 import { Action } from '@ngrx/store';
-import { LoopbackErrorActionTypes } from './sdk';
+import { LoopbackAction, LoopbackErrorActionTypes } from './sdk';
 
 export interface IAppState {
   error: string;
@@ -11,7 +10,7 @@ const initialState: IAppState = {
   error: null
 };
 
-export function reducer(state = initialState, action: Action): IAppState {
+export function reducer(state = initialState, action: LoopbackAction): IAppState {
   switch (action.type) {
     case LoopbackErrorActionTypes.ERROR: {
       return {
@@ -23,9 +22,4 @@ export function reducer(state = initialState, action: Action): IAppState {
       return state;
     }
   }
-}
-
-export function getAppState() {
-  return (state$: Observable<any>) => state$
-    .select((s) => s.app);
 }
