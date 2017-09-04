@@ -1,5 +1,3 @@
-<button *ngIf="connected" (click)="logout()">Disconnect</button>
-<button *ngIf="!connected" (click)="connect()">Connect</button>
 <!--h3>Update Email</h3>
 <form>
   <input name="email" type="email" [(ngModel)]="logged.email" placeholder="Edit Email" />
@@ -12,7 +10,7 @@
 </form>
 <h3>Rooms</h3>
 <ul>
-  <li *ngFor="let _room of rooms">
-    <button (click)="join(_room)">Join</button> {{ _room.name }}
+  <li *ngFor="let _room of rooms$ | async">
+    <button (click)="join(_room)">Join</button> {{ _room.name }} ({{ _room.messages?.length || 0 }}) ({{ _room.likes?.length || 0 }}) [<span *ngFor="let _cat of _room.categories">{{ _cat }}</span>]
   </li>
 </ul>

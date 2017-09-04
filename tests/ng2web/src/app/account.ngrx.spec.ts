@@ -1,14 +1,20 @@
 /* tslint:disable:no-unused-variable */
-
+import 'rxjs/add/operator/debounceTime';
 import { TestBed, async, inject } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { StoreModule, Store } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { AppComponent } from './app.component';
 import { AppEffects } from './shared/app.effects';
-import * as fromApp from './shared/app.reducer';
-import { SDKBrowserModule, LoopbackEffects, LoopbackReducer, LoopbackStateInterface } from './shared/sdk/index';
+import { SDKBrowserModule, LoopbackStateInterface } from './shared/sdk/index';
 import { Account, AccessToken } from './shared/sdk/models';
-import { getLoopbackAuthState, SDKToken } from './shared/sdk';
+import { getLoopbackAuthState, SDKToken, AccountActions } from './shared/sdk';
+import { IAppState, reducerToken, reducerProvider, effects, getApplicationState } from './shared/app.state';
+
+import * as fromApp from './shared/app.reducer';
+
+class RouterStub {
+    navigate(url: String) { return url; }
+}
 
 const Helpers: {
   create: Function
@@ -22,38 +28,49 @@ const Helpers: {
 };
 
 describe('Ngrx: Account', () => {
+  let store: Store<IAppState>;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         SDKBrowserModule.forRoot(),
-        StoreModule.provideStore(Object.assign({}, LoopbackReducer, {
-          app: fromApp.reducer
-        })),
-        ...LoopbackEffects,
-        EffectsModule.forRoot(AppEffects)
+        StoreModule.forRoot(reducerToken, {}),
+        EffectsModule.forRoot(effects)
+      ],
+      providers: [
+        { provide: Router, useClass: RouterStub },
+        reducerProvider
       ]
     });
+
+    store = TestBed.get(Store);
+
+    spyOn(store, 'dispatch').and.callThrough();
   });
 
-  it('should signup and login the user',
-    async(inject([Store], (store: Store<any>) => {
-      store.dispatch(new AccountActions.signup(Helpers.create()));
-      return store.select(getLoopbackAuthState)
-        .debounceTime(2000)
-        .subscribe((token: SDKToken) => {
-          expect(token.id).toBeTruthy();
-        });
-    })
-  ));
+  it('should contain authentication actions', () => {
+    expect(AccountActions).toBeTruthy();
+    expect(AccountActions.signup).toBeTruthy();
+    expect(AccountActions.login).toBeTruthy();
+    expect(AccountActions.logout).toBeTruthy();
+    expect(AccountActions.getAccessTokens).toBeTruthy();
+  });
 
-  it('should fail login the user',
-    async(inject([Store], (store: Store<any>) => {
-      store.dispatch(new AccountActions.login({ email: 'not@existing.com', password: 'duh' }));
-      return store.let(fromApp.getAppState())
-        .debounceTime(2000)
-        .subscribe((state: fromApp.IAppState) => {
-          expect(state.error.statusCode).toEqual(401);
-        });
-    })
-  ));
+  it('should signup and login the user', () => {
+    store.dispatch(new AccountActions.signup(Helpers.create()));
+    store.select(getLoopbackAuthState)
+      .debounceTime(2000)
+      .subscribe((token: SDKToken) => {
+        expect(token.id).toBeTruthy();
+      });
+  });
+
+  it('should fail login the user', () => {
+    store.dispatch(new AccountActions.login({ email: 'not@existing.com', password: 'duh' }));
+    store.select(getApplicationState)
+      .debounceTime(2000)
+      .subscribe((state: fromApp.IAppState) => {
+        expect((state.error as any).statusCode).toEqual(401);
+      });
+  });
 });

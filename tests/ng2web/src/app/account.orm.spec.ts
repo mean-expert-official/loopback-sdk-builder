@@ -1,15 +1,21 @@
 /* tslint:disable:no-unused-variable */
-
+import 'rxjs/add/operator/debounceTime';
 import { TestBed, async, inject } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { StoreModule, Store } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { AppComponent } from './app.component';
 import { AppEffects } from './shared/app.effects';
-import * as fromApp from './shared/app.reducer';
-import { SDKBrowserModule, LoopbackEffects, LoopbackReducer, LoopbackStateInterface } from './shared/sdk/index';
+import { SDKBrowserModule, LoopbackEffects, LoopbackStateInterface } from './shared/sdk/index';
 import { Account, AccessToken } from './shared/sdk/models';
 import { AccountActions, getLoopbackAuthState, SDKToken } from './shared/sdk';
-import { OrmModule } from './shared/sdk/orm';
+import { IAppState, reducerToken, reducerProvider, effects, getApplicationState } from './shared/app.state';
+import { OrmModule, Orm } from './shared/sdk/orm';
+
+import * as fromApp from './shared/app.reducer';
+
+class RouterStub {
+    navigate(url: String) { return url; }
+}
 
 const Helpers: {
   create: Function
@@ -22,40 +28,45 @@ const Helpers: {
   }
 };
 
-describe('Ngrx: Account', () => {
+describe('ORM: Account', () => {
+  let store: Store<IAppState>;
+  let orm: Orm;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         SDKBrowserModule.forRoot(),
-        StoreModule.provideStore(Object.assign({}, LoopbackReducer, {
-          app: fromApp.reducer
-        })),
-        ...LoopbackEffects,
-        EffectsModule.run(AppEffects),
+        StoreModule.forRoot(reducerToken, {}),
+        EffectsModule.forRoot(effects),
         OrmModule.forRoot()
+      ],
+      providers: [
+        { provide: Router, useClass: RouterStub },
+        reducerProvider
       ]
     });
+
+    store = TestBed.get(Store);
+    orm = TestBed.get(Orm);
+
+    spyOn(store, 'dispatch').and.callThrough();
   });
 
-  it('should signup and login the user',
-    async(inject([Store], (store: Store<any>) => {
-      store.dispatch(new AccountActions.signup(Helpers.create()));
-      return store.select(getLoopbackAuthState)
-        .debounceTime(2000)
-        .subscribe((token: SDKToken) => {
-          expect(token.id).toBeTruthy();
-        });
-    })
-  ));
+  it('should signup and login the user', () => {
+    orm.Account.signup(Helpers.create());
+    store.select(getLoopbackAuthState)
+      .debounceTime(2000)
+      .subscribe((token: SDKToken) => {
+        expect(token.id).toBeTruthy();
+      });
+  });
 
-  it('should fail login the user',
-    async(inject([Store], (store: Store<any>) => {
-      store.dispatch(new AccountActions.login({ email: 'not@existing.com', password: 'duh' }));
-      return store.let(fromApp.getAppState())
-        .debounceTime(2000)
-        .subscribe((state: fromApp.IAppState) => {
-          expect(state.error.statusCode).toEqual(401);
-        });
-    })
-  ));
+  it('should fail login the user', () => {
+    orm.Account.login({ email: 'not@existing.com', password: 'duh' });
+    store.select(getApplicationState)
+      .debounceTime(2000)
+      .subscribe((state: fromApp.IAppState) => {
+        expect((state.error as any).statusCode).toEqual(401);
+      });
+  });
 });

@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import 'rxjs/add/operator/auditTime';
+import { Component, OnInit } from '@angular/core';
 import { Room, Account, FireLoopRef } from '../shared/sdk/models';
 // import { AccountApi, RoomApi, LoggerService, RealTime } from '../shared/sdk/services';
 import { AccountApi, RoomApi, LoggerService, RealTime, SDKModels } from '../shared/sdk/services';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 import { LoopBackConfig } from '../shared/sdk/lb.config';
 LoopBackConfig.setBaseURL('http://localhost:3000');
 
@@ -18,15 +19,15 @@ const i = 0;
   templateUrl: './room-ngrx.list.component.html'
 })
 
-export class RoomNgrxListComponent implements OnInit, OnDestroy {
+export class RoomNgrxListComponent implements OnInit {
 
   private logged: Account;
   private accountRef: FireLoopRef<Account>;
   private roomRef: FireLoopRef<Room>;
   private room: Room = new Room();
+  private rooms$: Observable<Room[]>;
   private rooms: Room[];
-  private connected = false;
-  private subscriptions: Subscription[] = new Array<Subscription>();
+
   // private socket: any = io.connect(LoopBackConfig.getPath(), { secure: false });
 
   constructor(
@@ -43,60 +44,36 @@ export class RoomNgrxListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscriptions.push(this.realTime.onReady().subscribe((status: string) => {
-      console.log('CONNECT STATUS: ', status);
-      this.connected = true;
-      this.accountRef = this.realTime.FireLoop.ref<Account>(Account);
-      this.roomRef = this.realTime.FireLoop.ref<Room>(Room);
-      this.subscriptions.push(
-        this.roomRef.on('change').subscribe((rooms: Room[]) => this.rooms = rooms)
-      );
-      this.subscriptions.push(
-        this.roomRef.on('child_added').subscribe((child: Room) => {})
-      );
-    }));
-
     console.log(this.orm);
-    /*this.subscriptions.push(
-      this.orm.Room.find({
-        order: 'id DESC',
-        limit: 10
-      }).subscribe((data) => console.log(data))
-    );*/
 
-    this.subscriptions.push(
-      this.orm.Room.find({
+    this.rooms$ = this.orm.Room.find({
         where: {
           // name: 'Testando'
-          name: {like: 'Test'}
+          // name: {like: 'Test'}
         },
         order: 'id DESC',
-        limit: 10,
+        limit: 100,
         // include: 'messages'
         include: [
+          {
+            relation: 'categories'
+          },
           {
             relation: 'messages'
           },
           {
-            relation: 'likes',
-            scope: {
-              limit: 1
-            }
+            relation: 'likes'
           }
         ]
-      }, {io: true}).subscribe((data) => console.log(data))
-    );
+    }, {io: true})
+      .auditTime(20)
+      .do((a) => console.log(a));
 
+    // this.orm.Category.find({}).subscribe((a) => console.log(a));
   }
 
   logout(): void {
     this.orm.Account.logout();
-  }
-
-  ngOnDestroy() {
-    this.roomRef.dispose();
-    this.accountRef.dispose();
-    this.subscriptions.forEach((subscription: Subscription) => subscription.unsubscribe());
   }
 
   update(): void {

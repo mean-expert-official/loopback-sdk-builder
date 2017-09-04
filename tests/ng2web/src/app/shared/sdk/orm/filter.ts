@@ -2,7 +2,6 @@
 import 'rxjs/add/operator/publishReplay';
 import 'rxjs/add/operator/combineLatest';
 import 'rxjs/add/operator/withLatestFrom';
-import 'rxjs/add/operator/auditTime';
 import { Observable } from 'rxjs/Observable';
 import * as filterNodes from 'loopback-filters';
 
@@ -48,7 +47,7 @@ function include(state$: Observable<any>, filter: LoopBackFilter, store: any, mo
 
       for (var i = 0; i < data.length; ++i) {
         data[i] = Object.assign({}, data[i], {
-          [relationSchema.name]: null
+          [relationSchema.name]: relationSchema.type.indexOf('[]') !== -1 ? [] : null
         });
       }
     }
@@ -76,7 +75,7 @@ function include(state$: Observable<any>, filter: LoopBackFilter, store: any, mo
         applyFilter(
           store.select(relationSchema.model + 's')
             .map((state: any) => state.entities)
-            .withLatestFrom(stateWithEntities$, // not sure if should use combineLatest
+            .withLatestFrom(stateWithEntities$,
               (includeState: any, stateWithEntities: any) => ({includeState, stateWithEntities}))
             .map(({includeState, stateWithEntities}) => {
               let data: any | any[];
@@ -121,7 +120,6 @@ function include(state$: Observable<any>, filter: LoopBackFilter, store: any, mo
 
               return filterNodes(data, include.scope)
             })
-            .auditTime(10)
             .publishReplay(1).refCount()
         , include.scope || include, store, models[relationSchema.model])
       );
@@ -147,10 +145,6 @@ function include(state$: Observable<any>, filter: LoopBackFilter, store: any, mo
             if (relationSchema.relationType === 'hasOne') {
               stateWithEntities.entities[item[relationSchema.keyTo]][includeString] = item;
             } else {
-              if (!stateWithEntities.entities[item[relationSchema.keyTo]].hasOwnProperty(includeString) ||
-                !Array.isArray(stateWithEntities.entities[item[relationSchema.keyTo]][includeString])) {
-                stateWithEntities.entities[item[relationSchema.keyTo]][includeString] = [];
-              }
               stateWithEntities.entities[item[relationSchema.keyTo]][includeString].push(item);
             }
           }
@@ -160,7 +154,6 @@ function include(state$: Observable<any>, filter: LoopBackFilter, store: any, mo
 
     return stateWithEntities.data;
   })
-  .auditTime(20)
   .publishReplay(1).refCount();
 }
 
