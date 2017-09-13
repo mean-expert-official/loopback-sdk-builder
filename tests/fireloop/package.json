@@ -12,7 +12,7 @@
     "test": "NODE_ENV=testing npm run start",
     "build:sdk": "npm run build:sdk:ng2web",
     "build:sdk:ng2web": "./node_modules/.bin/lb-sdk server/server.js ../ng2web/src/app/shared/sdk -d ng2web -i enabled -w enabled -v disabled -f disabled",
-    "build:sdk:react": "./../../bin/lb-sdk server/server.js ../react-web/src/shared/sdk -i disabled -l react"
+    "build:sdk:react": "./../../bin/lb-sdk server/server.js ./../react-web/src/shared2/sdk -i disabled -l react -t false"
   },
   "dependencies": {
     "@mean-expert/boot-script": "^1.0.0",
