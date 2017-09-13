@@ -1,12 +1,5 @@
 import { BaseLoopBackApi } from '../core/base';
 import { LoopBackConfig } from '../../lb.config';
-import { LoopBackAuth } from '../core/auth';
-import { JSONSearchParams } from '../core/search.params';
-import { ErrorHandler } from '../core/error';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Rx';
-import { Core } from '../../models/Core';
-
 /**
  * Api services for the `Core` model.
  */

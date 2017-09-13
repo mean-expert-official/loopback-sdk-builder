@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
-import { RoomApi } from './shared/sdk/services/custom/Room';
+import React from 'react';
+import SDK, { Component } from './shared/sdk/';
 import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
-  RoomApi;
   constructor() {
-    super();
-    this.RoomApi = new RoomApi();
+    super({services: ['RoomApi']});
   }
   componentDidMount() {
     this.RoomApi.find().subscribe(data => {

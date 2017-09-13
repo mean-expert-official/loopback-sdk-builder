@@ -1,19 +1,19 @@
-import { SDKModels } from './SDKModels';
+
 import { BaseLoopBackApi } from '../core/base';
 import { LoopBackConfig } from '../../lb.config';
-import { LoopBackAuth } from '../core/auth';
-import { SDKToken, AccessToken } from '../../models/BaseModels';
-import { JSONSearchParams } from '../core/search.params';
-import { ErrorHandler } from '../core/error';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Rx';
-import { User } from '../../models/User';
-
 
 /**
  * Api services for the `User` model.
  */
+let instance = null;
 export class UserApi extends BaseLoopBackApi {
+  constructor() {
+    super();
+    if (!instance) {
+      instance = this;
+    }
+    return instance;
+  }
 
   /**
    * Find a related item by id for accessTokens.
@@ -324,7 +324,7 @@ export class UserApi extends BaseLoopBackApi {
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders)
       .map(
         (response) => {
-          response.ttl = parseInt(response.ttl);
+          response.ttl = parseInt(response.ttl, 10);
           response.rememberMe = rememberMe;
           this.auth.setToken(response);
           return response;
@@ -550,7 +550,7 @@ export class UserApi extends BaseLoopBackApi {
    */
    getCurrent(filter = {}) {
     let _method = "GET";
-    let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/Users" + "/:id";
+    let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/Users/:id";
     let id = this.auth.getCurrentUserId();
     if (id == null)
     id = '__anonymous__';
@@ -587,7 +587,7 @@ export class UserApi extends BaseLoopBackApi {
    * @returns {boolean} True if the current user is authenticated (logged in).
    */
    isAuthenticated() {
-    return !(this.getCurrentId() === '' || this.getCurrentId() == null || this.getCurrentId() == 'null');
+    return !(this.getCurrentId() === '' || this.getCurrentId() === null || this.getCurrentId() === 'null');
   }
 
   /**

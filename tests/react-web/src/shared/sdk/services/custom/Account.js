@@ -4,7 +4,15 @@ import { LoopBackConfig } from '../../lb.config';
 /**
  * Api services for the `Account` model.
  */
+let instance = null;
 export class AccountApi extends BaseLoopBackApi {
+  constructor() {
+    super();
+    if (!instance) {
+      instance = this;
+    }
+    return instance;
+  }
   /**
    * Find a related item by id for accessTokens.
    *
