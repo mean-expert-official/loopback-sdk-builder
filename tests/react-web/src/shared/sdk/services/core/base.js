@@ -1,21 +1,16 @@
-/* tslint:disable */
-import { Injectable, Inject, Optional } from '@angular/core';
-// import { Http, Headers, Request, RequestOptions } from '@angular/http';
 import axios from 'axios';
-
-import { NgModule, ModuleWithProviders } from '@angular/core';
 import { JSONSearchParams } from './search.params';
-import { ErrorHandler } from './error.service';
+import { ErrorHandler } from './error';
 import { LoopBackAuth } from './auth';
 import { LoopBackConfig } from '../../lb.config';
-import { AccessToken } from '../../models/BaseModels';
 import { SDKModels } from '../custom/SDKModels';
-import { Observable } from 'npm /Observable';
+import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+// import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import { SocketConnection } from '../../sockets/socket.connections';
+import 'rxjs/add/observable/fromPromise';
+
 // Making Sure EventSource Type is available to avoid compilation issues.
 /**
 * @module BaseLoopBackApi
@@ -29,12 +24,14 @@ import { SocketConnection } from '../../sockets/socket.connections';
 * WebSockets.
 **/
 export class BaseLoopBackApi {
-
  path;
  model;
-
+ models;
+ auth;
   constructor( ) {
+    this.models = new SDKModels();
     this.model = this.models.get(this.getModelName());
+    this.auth = new LoopBackAuth();
   }
   /**
    * @method request
@@ -59,7 +56,7 @@ export class BaseLoopBackApi {
   ) {
     // Transpile route variables to the actual request Values
     Object.keys(routeParams).forEach((key) => {
-      url = url.replace(new RegExp(":" + key + "(\/|$)", "g"), routeParams[key] + "$1")
+      url = url.replace(new RegExp(":" + key + "(/|$)", "g"), routeParams[key] + "$1")
     });
     if (pubsub) {
       if (url.match(/fk/)) {
@@ -109,20 +106,21 @@ export class BaseLoopBackApi {
       if (typeof customHeaders === 'function') {
         headers = customHeaders(headers);
       }
-      this.searchParams.setJSON(urlParams);
-      let request = new Request(
-        new RequestOptions({
+      let searchParams = new JSONSearchParams();
+      searchParams.setJSON(urlParams);
+      let request = new axios.request({
           headers ,
           method  : method,
           url     : `${url}${filter}`,
           search  : Object.keys(urlParams).length > 0
-                  ? this.searchParams.getURLSearchParams() : null,
+                  ? searchParams.getURLSearchParams() : null,
           body    : body ? JSON.stringify(body) : undefined
-        })
+        }
       );
-      return this.http.request(request)
-        .map((res) => (res.text() != "" ? res.json() : {}))
-        .catch((e) => this.errorHandler.handleError(e));
+      let errorHandler = new ErrorHandler();
+      return Observable.fromPromise(request)
+        .map((res) => res.data) //(res.text() !== "" ? res.json() : {}))
+        .catch((e) => errorHandler.handleError(e));
     }
   }
   /**
@@ -597,5 +595,7 @@ export class BaseLoopBackApi {
    * @description
    * Abstract getModelName method
    */
-  getModelName();
+  getModelName() {
+
+  };
 }

@@ -1,40 +1,11 @@
-/* tslint:disable */
-// import { Injectable, Inject, Optional } from '@angular/core';
-// import { Http, Response } from '@angular/http';
-import { SDKModels } from './SDKModels';
 import { BaseLoopBackApi } from '../core/base';
 import { LoopBackConfig } from '../../lb.config';
-import { LoopBackAuth } from '../core/auth';
-import { JSONSearchParams } from '../core/search.params';
-import { ErrorHandler } from '../core/error';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Rx';
 import { Room } from '../../models/Room';
-import { SocketConnection } from '../../sockets/socket.connections';
-import { Message } from '../../models/Message';
-import { Like } from '../../models/Like';
-import { Category } from '../../models/Category';
-import { RoomAccount } from '../../models/RoomAccount';
-import { Account } from '../../models/Account';
-import { RoomAdmin } from '../../models/RoomAdmin';
-
 
 /**
  * Api services for the `Room` model.
  */
 export class RoomApi extends BaseLoopBackApi {
-
-  // constructor(
-  //   @Inject(Http) protected http: Http,
-  //   @Inject(SocketConnection) protected connection: SocketConnection,
-  //   @Inject(SDKModels) protected models: SDKModels,
-  //   @Inject(LoopBackAuth) protected auth: LoopBackAuth,
-  //   @Inject(JSONSearchParams) protected searchParams: JSONSearchParams,
-  //   @Optional() @Inject(ErrorHandler) protected errorHandler: ErrorHandler
-  // ) {
-  //   super(http,  connection,  models, auth, searchParams, errorHandler);
-  // }
-
   /**
    * Find a related item by id for messages.
    *
@@ -1542,7 +1513,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-   findByRoom(room, customHeaders): Observable<Room> {
+   findByRoom(room, customHeaders) {
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/findByRoom";
@@ -1552,7 +1523,7 @@ export class RoomApi extends BaseLoopBackApi {
     };
     let _urlParams;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result.map((instance: Room) => new Room(instance));
+    return result.map((instance) => new Room(instance));
   }
 
   /**

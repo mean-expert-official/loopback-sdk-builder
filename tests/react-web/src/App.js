@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
+import { RoomApi } from './shared/sdk/services/custom/Room';
 import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  RoomApi;
+  constructor() {
+    super();
+    this.RoomApi = new RoomApi();
+  }
+  componentDidMount() {
+    this.RoomApi.find().subscribe(data => {
+      console.log(data);
+    })
+  }
   render() {
     return (
       <div className="App">

@@ -1,6 +1,3 @@
-/* tslint:disable */
-// import { Injectable, Inject, Optional } from '@angular/core';
-// import { Http, Response } from '@angular/http';
 import { SDKModels } from './SDKModels';
 import { BaseLoopBackApi } from '../core/base';
 import { LoopBackConfig } from '../../lb.config';
@@ -11,24 +8,12 @@ import { ErrorHandler } from '../core/error';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { User } from '../../models/User';
-import { SocketConnection } from '../../sockets/socket.connections';
 
 
 /**
  * Api services for the `User` model.
  */
 export class UserApi extends BaseLoopBackApi {
-
-  // constructor(
-  //   @Inject(Http) protected http: Http,
-  //   @Inject(SocketConnection) protected connection: SocketConnection,
-  //   @Inject(SDKModels) protected models: SDKModels,
-  //   @Inject(LoopBackAuth) protected auth: LoopBackAuth,
-  //   @Inject(JSONSearchParams) protected searchParams: JSONSearchParams,
-  //   @Optional() @Inject(ErrorHandler) protected errorHandler: ErrorHandler
-  // ) {
-  //   super(http,  connection,  models, auth, searchParams, errorHandler);
-  // }
 
   /**
    * Find a related item by id for accessTokens.

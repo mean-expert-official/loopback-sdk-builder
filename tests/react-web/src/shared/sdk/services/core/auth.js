@@ -1,4 +1,3 @@
-/* tslint:disable */
 import { InternalStorage } from '../../storage/storage.swaps';
 import { SDKToken } from '../../models/BaseModels';
 /**
@@ -26,6 +25,7 @@ export class LoopBackAuth {
    * The constructor will initialize the token loading data from storage
    **/
   constructor() {
+    this.storage = new InternalStorage();
     this.token.id = this.load('id');
     this.token.user = this.load('user');
     this.token.userId = this.load('userId');

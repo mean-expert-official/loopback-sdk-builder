@@ -1,38 +1,10 @@
-/* tslint:disable */
-import { Injectable, Inject, Optional } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { SDKModels } from './SDKModels';
 import { BaseLoopBackApi } from '../core/base';
 import { LoopBackConfig } from '../../lb.config';
-import { LoopBackAuth } from '../core/auth';
-import { LoopBackFilter, SDKToken, AccessToken } from '../../models/BaseModels';
-import { JSONSearchParams } from '../core/search.params';
-import { ErrorHandler } from '../core/error';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Rx';
-import { Account } from '../../models/Account';
-import { SocketConnection } from '../../sockets/socket.connections';
-import { RoomAccount } from '../../models/RoomAccount';
-import { Room } from '../../models/Room';
-import { RoomAdmin } from '../../models/RoomAdmin';
-
 
 /**
  * Api services for the `Account` model.
  */
 export class AccountApi extends BaseLoopBackApi {
-
-  // constructor(
-  //   @Inject(Http) protected http: Http,
-  //   @Inject(SocketConnection) protected connection: SocketConnection,
-  //   @Inject(SDKModels) protected models: SDKModels,
-  //   @Inject(LoopBackAuth) protected auth: LoopBackAuth,
-  //   @Inject(JSONSearchParams) protected searchParams: JSONSearchParams,
-  //   @Optional() @Inject(ErrorHandler) protected errorHandler: ErrorHandler
-  // ) {
-  //   super(http,  connection,  models, auth, searchParams, errorHandler);
-  // }
-
   /**
    * Find a related item by id for accessTokens.
    *
@@ -946,7 +918,7 @@ export class AccountApi extends BaseLoopBackApi {
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders)
       .map(
         (response) => {
-          response.ttl = parseInt(response.ttl);
+          response.ttl = parseInt(response.ttl, 10);
           response.rememberMe = rememberMe;
           this.auth.setToken(response);
           return response;
@@ -1297,7 +1269,7 @@ export class AccountApi extends BaseLoopBackApi {
    */
   getCurrent(filter = {}) {
     let _method = "GET";
-    let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/accounts" + "/:id";
+    let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/accounts/:id";
     let id = this.auth.getCurrentUserId();
     if (id == null)
     id = '__anonymous__';
@@ -1334,7 +1306,7 @@ export class AccountApi extends BaseLoopBackApi {
    * @returns {boolean} True if the current user is authenticated (logged in).
    */
   isAuthenticated() {
-    return !(this.getCurrentId() === '' || this.getCurrentId() == null || this.getCurrentId() == 'null');
+    return !(this.getCurrentId() === '' || this.getCurrentId() === null || this.getCurrentId() === 'null');
   }
 
   /**

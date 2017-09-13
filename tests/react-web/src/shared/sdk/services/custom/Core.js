@@ -1,7 +1,3 @@
-/* tslint:disable */
-// import { Injectable, Inject, Optional } from '@angular/core';
-// import { Http, Response } from '@angular/http';
-import { SDKModels } from './SDKModels';
 import { BaseLoopBackApi } from '../core/base';
 import { LoopBackConfig } from '../../lb.config';
 import { LoopBackAuth } from '../core/auth';
@@ -10,25 +6,11 @@ import { ErrorHandler } from '../core/error';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { Core } from '../../models/Core';
-import { SocketConnection } from '../../sockets/socket.connections';
-
 
 /**
  * Api services for the `Core` model.
  */
 export class CoreApi extends BaseLoopBackApi {
-
-  // constructor(
-  //   @Inject(Http) protected http: Http,
-  //   @Inject(SocketConnection) protected connection: SocketConnection,
-  //   @Inject(SDKModels) protected models: SDKModels,
-  //   @Inject(LoopBackAuth) protected auth: LoopBackAuth,
-  //   @Inject(JSONSearchParams) protected searchParams: JSONSearchParams,
-  //   @Optional() @Inject(ErrorHandler) protected errorHandler: ErrorHandler
-  // ) {
-  //   super(http,  connection,  models, auth, searchParams, errorHandler);
-  // }
-
   /**
    * <em>
          * (The remote method definition does not provide any description.)

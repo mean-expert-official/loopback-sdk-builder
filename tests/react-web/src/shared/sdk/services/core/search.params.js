@@ -1,4 +1,3 @@
-/* tslint:disable */
 /**
 * @author Jonathan Casarrubias <twitter:@johncasarrubias> <github:@mean-expert-official>
 * @module JSONSearchParams
@@ -9,9 +8,7 @@
 * an instance of the URLSearchParams component for later use in HTTP Calls
 **/
 export class JSONSearchParams {
-
     _usp;
-
     setJSON(obj) {
         this._usp = new URLSearchParams(this._JSON2URL(obj, false));
     }

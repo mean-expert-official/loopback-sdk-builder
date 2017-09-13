@@ -1,5 +1,3 @@
-/* tslint:disable */
-
 export class Core {
   "id";
   "createdAt";

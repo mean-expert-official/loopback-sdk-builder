@@ -1,8 +1,3 @@
-/* tslint:disable */
-import {
-  Room
-} from '../index';
-
 export class Account {
   "realm";
   "username";

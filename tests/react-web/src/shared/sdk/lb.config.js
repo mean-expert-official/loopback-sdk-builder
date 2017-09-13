@@ -1,4 +1,3 @@
-/* tslint:disable */
 /**
 * @module LoopBackConfig
 * @description

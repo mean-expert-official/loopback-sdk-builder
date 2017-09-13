@@ -1,11 +1,3 @@
-/* tslint:disable */
-import {
-  Message,
-  Like,
-  Category,
-  Account
-} from '../index';
-
 export class Room {
   "name";
   "id";

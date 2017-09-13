@@ -1,5 +1,3 @@
-/* tslint:disable */
-import { Injectable } from '@angular/core';
 import { LoopBackConfig } from '../../lb.config';
 /**
 * @author Jonathan Casarrubias <twitter:@johncasarrubias> <github:@johncasarrubias>
@@ -9,7 +7,8 @@ import { LoopBackConfig } from '../../lb.config';
 * Console Log wrapper that can be disabled in production mode
 **/
 export class LoggerService {
-
+  constructor() {}
+  
   log(...args) {
     if (LoopBackConfig.debuggable())
     console.log.apply(console, args);
