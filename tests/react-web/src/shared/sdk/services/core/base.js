@@ -23,6 +23,7 @@ import 'rxjs/add/observable/fromPromise';
 * It provides the core functionallity for every API call, either by HTTP Calls or by
 * WebSockets.
 **/
+let instance = null;
 export class BaseLoopBackApi {
  path;
  model;
@@ -32,6 +33,10 @@ export class BaseLoopBackApi {
     this.models = new SDKModels();
     this.model = this.models.get(this.getModelName());
     this.auth = new LoopBackAuth();
+    if (!instance) {
+      instance = this;
+    }
+    return instance;
   }
   /**
    * @method request

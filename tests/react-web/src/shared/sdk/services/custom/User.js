@@ -5,14 +5,9 @@ import { LoopBackConfig } from '../../lb.config';
 /**
  * Api services for the `User` model.
  */
-let instance = null;
 export class UserApi extends BaseLoopBackApi {
   constructor() {
     super();
-    if (!instance) {
-      instance = this;
-    }
-    return instance;
   }
 
   /**

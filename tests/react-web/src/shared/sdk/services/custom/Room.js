@@ -5,14 +5,9 @@ import { Room } from '../../models/Room';
 /**
  * Api services for the `Room` model.
  */
-let instance = null;
 export class RoomApi extends BaseLoopBackApi {
   constructor() {
     super();
-    if(!instance) {
-      instance = this;
-    }
-    return instance;
   }
   /**
    * Find a related item by id for messages.
