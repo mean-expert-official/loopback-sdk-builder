@@ -1,3 +1,4 @@
+
 /**
 * @author Jonathan Casarrubias <twitter:@johncasarrubias> <github:@mean-expert-official>
 * @module CookieBrowser
@@ -6,7 +7,9 @@
 * This module handle cookies, it will be provided using DI Swapping according the
 * SDK Socket Driver Available currently supporting Angular 2 for web and NativeScript 2.
 **/
+
 export class CookieBrowser {
+  
   /**
    * @type {CookieInterface}
    **/
@@ -72,4 +75,5 @@ export class CookieBrowser {
         return value;
     }
   }
+  
 }

@@ -1,3 +1,4 @@
+
 /**
 * @author Jonathan Casarrubias <twitter:@johncasarrubias> <github:@mean-expert-official>
 * @module JSONSearchParams
@@ -7,8 +8,11 @@
 * This module correctly encodes a json object into a query string and then creates
 * an instance of the URLSearchParams component for later use in HTTP Calls
 **/
+
 export class JSONSearchParams {
+
     _usp;
+
     setJSON(obj) {
         this._usp = new URLSearchParams(this._JSON2URL(obj, false));
     }
@@ -32,3 +36,4 @@ export class JSONSearchParams {
         return processedKey + '=' + value;
     }
 }
+

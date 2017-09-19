@@ -1,14 +1,35 @@
-import { BaseLoopBackApi } from '../core/base';
+/* tslint:disable */
+import { SDKModels } from './SDKModels';
+import { BaseLoopBackApi } from '../core/base.service';
 import { LoopBackConfig } from '../../lb.config';
+import { LoopBackFilter,  } from '../../models/BaseModels';
+import { JSONSearchParams } from '../core/search.params';
+import { ErrorHandler } from '../core/error.service';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Rx';
 import { Room } from '../../models/Room';
+import { Message } from '../../models/Message';
+import { Like } from '../../models/Like';
+import { Category } from '../../models/Category';
+import { RoomAccount } from '../../models/RoomAccount';
+import { Account } from '../../models/Account';
+import { RoomAdmin } from '../../models/RoomAdmin';
+
 
 /**
  * Api services for the `Room` model.
  */
+
 export class RoomApi extends BaseLoopBackApi {
-  constructor() {
+
+  constructor(
+     
+  ) {
+    
     super();
+    
   }
+
   /**
    * Find a related item by id for messages.
    *
@@ -26,6 +47,7 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    findByIdMessages(id, fk, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/messages/:fk";
@@ -33,8 +55,10 @@ export class RoomApi extends BaseLoopBackApi {
       id: id,
       fk: fk
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -53,6 +77,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This method returns no data.
    */
    destroyByIdMessages(id, fk, customHeaders) {
+    
     let _method = "DELETE";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/messages/:fk";
@@ -60,8 +85,10 @@ export class RoomApi extends BaseLoopBackApi {
       id: id,
       fk: fk
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -87,6 +114,7 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    updateByIdMessages(id, fk, data, customHeaders) {
+    
     let _method = "PUT";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/messages/:fk";
@@ -97,7 +125,9 @@ export class RoomApi extends BaseLoopBackApi {
     let _postBody = {
       data: data
     };
-    let _urlParams;
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -119,6 +149,7 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    findByIdLikes(id, fk, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/likes/:fk";
@@ -126,8 +157,10 @@ export class RoomApi extends BaseLoopBackApi {
       id: id,
       fk: fk
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -146,6 +179,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This method returns no data.
    */
    destroyByIdLikes(id, fk, customHeaders) {
+    
     let _method = "DELETE";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/likes/:fk";
@@ -153,8 +187,10 @@ export class RoomApi extends BaseLoopBackApi {
       id: id,
       fk: fk
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -180,6 +216,7 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    updateByIdLikes(id, fk, data, customHeaders) {
+    
     let _method = "PUT";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/likes/:fk";
@@ -190,7 +227,9 @@ export class RoomApi extends BaseLoopBackApi {
     let _postBody = {
       data: data
     };
-    let _urlParams;
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -212,6 +251,7 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    findByIdCategories(id, fk, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories/:fk";
@@ -219,8 +259,10 @@ export class RoomApi extends BaseLoopBackApi {
       id: id,
       fk: fk
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -239,6 +281,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This method returns no data.
    */
    destroyByIdCategories(id, fk, customHeaders) {
+    
     let _method = "DELETE";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories/:fk";
@@ -246,8 +289,10 @@ export class RoomApi extends BaseLoopBackApi {
       id: id,
       fk: fk
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -273,6 +318,7 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    updateByIdCategories(id, fk, data, customHeaders) {
+    
     let _method = "PUT";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories/:fk";
@@ -283,7 +329,9 @@ export class RoomApi extends BaseLoopBackApi {
     let _postBody = {
       data: data
     };
-    let _urlParams;
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -309,6 +357,7 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    linkCategories(id, fk, data, customHeaders) {
+    
     let _method = "PUT";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories/rel/:fk";
@@ -319,7 +368,9 @@ export class RoomApi extends BaseLoopBackApi {
     let _postBody = {
       data: data
     };
-    let _urlParams;
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -338,6 +389,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This method returns no data.
    */
    unlinkCategories(id, fk, customHeaders) {
+    
     let _method = "DELETE";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories/rel/:fk";
@@ -345,8 +397,10 @@ export class RoomApi extends BaseLoopBackApi {
       id: id,
       fk: fk
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -368,6 +422,7 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    existsCategories(id, fk, customHeaders) {
+    
     let _method = "HEAD";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories/rel/:fk";
@@ -375,8 +430,10 @@ export class RoomApi extends BaseLoopBackApi {
       id: id,
       fk: fk
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -398,6 +455,7 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    findByIdAccounts(id, fk, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts/:fk";
@@ -405,8 +463,10 @@ export class RoomApi extends BaseLoopBackApi {
       id: id,
       fk: fk
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -425,6 +485,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This method returns no data.
    */
    destroyByIdAccounts(id, fk, customHeaders) {
+    
     let _method = "DELETE";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts/:fk";
@@ -432,8 +493,10 @@ export class RoomApi extends BaseLoopBackApi {
       id: id,
       fk: fk
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -459,6 +522,7 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    updateByIdAccounts(id, fk, data, customHeaders) {
+    
     let _method = "PUT";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts/:fk";
@@ -469,7 +533,9 @@ export class RoomApi extends BaseLoopBackApi {
     let _postBody = {
       data: data
     };
-    let _urlParams;
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -495,6 +561,7 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    linkAccounts(id, fk, data, customHeaders) {
+    
     let _method = "PUT";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts/rel/:fk";
@@ -505,7 +572,9 @@ export class RoomApi extends BaseLoopBackApi {
     let _postBody = {
       data: data
     };
-    let _urlParams;
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -524,6 +593,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This method returns no data.
    */
    unlinkAccounts(id, fk, customHeaders) {
+    
     let _method = "DELETE";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts/rel/:fk";
@@ -531,8 +601,10 @@ export class RoomApi extends BaseLoopBackApi {
       id: id,
       fk: fk
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -554,6 +626,7 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    existsAccounts(id, fk, customHeaders) {
+    
     let _method = "HEAD";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts/rel/:fk";
@@ -561,8 +634,10 @@ export class RoomApi extends BaseLoopBackApi {
       id: id,
       fk: fk
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -584,6 +659,7 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    findByIdAdmins(id, fk, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins/:fk";
@@ -591,8 +667,10 @@ export class RoomApi extends BaseLoopBackApi {
       id: id,
       fk: fk
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -611,6 +689,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This method returns no data.
    */
    destroyByIdAdmins(id, fk, customHeaders) {
+    
     let _method = "DELETE";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins/:fk";
@@ -618,8 +697,10 @@ export class RoomApi extends BaseLoopBackApi {
       id: id,
       fk: fk
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -645,6 +726,7 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    updateByIdAdmins(id, fk, data, customHeaders) {
+    
     let _method = "PUT";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins/:fk";
@@ -655,7 +737,9 @@ export class RoomApi extends BaseLoopBackApi {
     let _postBody = {
       data: data
     };
-    let _urlParams;
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -681,6 +765,7 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    linkAdmins(id, fk, data, customHeaders) {
+    
     let _method = "PUT";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins/rel/:fk";
@@ -691,7 +776,9 @@ export class RoomApi extends BaseLoopBackApi {
     let _postBody = {
       data: data
     };
-    let _urlParams;
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -710,6 +797,7 @@ export class RoomApi extends BaseLoopBackApi {
    * This method returns no data.
    */
    unlinkAdmins(id, fk, customHeaders) {
+    
     let _method = "DELETE";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins/rel/:fk";
@@ -717,8 +805,10 @@ export class RoomApi extends BaseLoopBackApi {
       id: id,
       fk: fk
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -740,6 +830,7 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    existsAdmins(id, fk, customHeaders) {
+    
     let _method = "HEAD";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins/rel/:fk";
@@ -747,8 +838,10 @@ export class RoomApi extends BaseLoopBackApi {
       id: id,
       fk: fk
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -769,15 +862,18 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-   getMessages(id, filter = {}, customHeaders) {
+   getMessages(id, filter, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/messages";
     let _routeParams = {
       id: id
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     if (typeof filter !== 'undefined' && filter !== null) _urlParams.filter = filter;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
@@ -802,6 +898,7 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    createMessages(id, data, customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/messages";
@@ -811,7 +908,9 @@ export class RoomApi extends BaseLoopBackApi {
     let _postBody = {
       data: data
     };
-    let _urlParams;
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -828,14 +927,17 @@ export class RoomApi extends BaseLoopBackApi {
    * This method returns no data.
    */
    deleteMessages(id, customHeaders) {
+    
     let _method = "DELETE";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/messages";
     let _routeParams = {
       id: id
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -856,14 +958,17 @@ export class RoomApi extends BaseLoopBackApi {
    *  - `count` – `{number}` - 
    */
    countMessages(id, where, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/messages/count";
     let _routeParams = {
       id: id
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
@@ -885,15 +990,18 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-   getLikes(id, filter = {}, customHeaders) {
+   getLikes(id, filter, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/likes";
     let _routeParams = {
       id: id
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     if (typeof filter !== 'undefined' && filter !== null) _urlParams.filter = filter;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
@@ -918,6 +1026,7 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    createLikes(id, data, customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/likes";
@@ -927,7 +1036,9 @@ export class RoomApi extends BaseLoopBackApi {
     let _postBody = {
       data: data
     };
-    let _urlParams;
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -944,14 +1055,17 @@ export class RoomApi extends BaseLoopBackApi {
    * This method returns no data.
    */
    deleteLikes(id, customHeaders) {
+    
     let _method = "DELETE";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/likes";
     let _routeParams = {
       id: id
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -972,14 +1086,17 @@ export class RoomApi extends BaseLoopBackApi {
    *  - `count` – `{number}` - 
    */
    countLikes(id, where, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/likes/count";
     let _routeParams = {
       id: id
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
@@ -1001,15 +1118,18 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-   getCategories(id, filter = {}, customHeaders) {
+   getCategories(id, filter, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories";
     let _routeParams = {
       id: id
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     if (typeof filter !== 'undefined' && filter !== null) _urlParams.filter = filter;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
@@ -1034,6 +1154,7 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    createCategories(id, data, customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories";
@@ -1043,7 +1164,9 @@ export class RoomApi extends BaseLoopBackApi {
     let _postBody = {
       data: data
     };
-    let _urlParams;
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -1060,14 +1183,17 @@ export class RoomApi extends BaseLoopBackApi {
    * This method returns no data.
    */
    deleteCategories(id, customHeaders) {
+    
     let _method = "DELETE";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories";
     let _routeParams = {
       id: id
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -1088,14 +1214,17 @@ export class RoomApi extends BaseLoopBackApi {
    *  - `count` – `{number}` - 
    */
    countCategories(id, where, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories/count";
     let _routeParams = {
       id: id
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
@@ -1117,15 +1246,18 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-   getAccounts(id, filter = {}, customHeaders) {
+   getAccounts(id, filter, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts";
     let _routeParams = {
       id: id
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     if (typeof filter !== 'undefined' && filter !== null) _urlParams.filter = filter;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
@@ -1150,6 +1282,7 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    createAccounts(id, data, customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts";
@@ -1159,7 +1292,9 @@ export class RoomApi extends BaseLoopBackApi {
     let _postBody = {
       data: data
     };
-    let _urlParams;
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -1176,14 +1311,17 @@ export class RoomApi extends BaseLoopBackApi {
    * This method returns no data.
    */
    deleteAccounts(id, customHeaders) {
+    
     let _method = "DELETE";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts";
     let _routeParams = {
       id: id
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -1204,14 +1342,17 @@ export class RoomApi extends BaseLoopBackApi {
    *  - `count` – `{number}` - 
    */
    countAccounts(id, where, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts/count";
     let _routeParams = {
       id: id
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
@@ -1233,15 +1374,18 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-   getAdmins(id, filter = {}, customHeaders) {
+   getAdmins(id, filter, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins";
     let _routeParams = {
       id: id
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     if (typeof filter !== 'undefined' && filter !== null) _urlParams.filter = filter;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
@@ -1266,6 +1410,7 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    createAdmins(id, data, customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins";
@@ -1275,7 +1420,9 @@ export class RoomApi extends BaseLoopBackApi {
     let _postBody = {
       data: data
     };
-    let _urlParams;
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -1292,14 +1439,17 @@ export class RoomApi extends BaseLoopBackApi {
    * This method returns no data.
    */
    deleteAdmins(id, customHeaders) {
+    
     let _method = "DELETE";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins";
     let _routeParams = {
       id: id
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -1320,14 +1470,17 @@ export class RoomApi extends BaseLoopBackApi {
    *  - `count` – `{number}` - 
    */
    countAdmins(id, where, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins/count";
     let _routeParams = {
       id: id
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
@@ -1350,14 +1503,17 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    patchOrCreate(data, customHeaders) {
+    
     let _method = "PATCH";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms";
-    let _routeParams;
+    let _routeParams = {};
     let _postBody = {
       data: data
     };
-    let _urlParams;
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -1381,6 +1537,7 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    patchAttributes(id, data, customHeaders) {
+    
     let _method = "PATCH";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id";
@@ -1390,7 +1547,9 @@ export class RoomApi extends BaseLoopBackApi {
     let _postBody = {
       data: data
     };
-    let _urlParams;
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -1415,6 +1574,7 @@ export class RoomApi extends BaseLoopBackApi {
    *  - `greeting` – `{string}` - 
    */
    greetRoute(a, b, c, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/what/:a/:b/:c";
@@ -1423,8 +1583,10 @@ export class RoomApi extends BaseLoopBackApi {
       b: b,
       c: c
     };
-    let _postBody;
-    let _urlParams;
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -1449,12 +1611,15 @@ export class RoomApi extends BaseLoopBackApi {
    *  - `greeting` – `{string}` - 
    */
    greetGet(a, b, c, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/slimshady";
-    let _routeParams;
-    let _postBody;
-    let _urlParams;
+    let _routeParams = {};
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     if (typeof a !== 'undefined' && a !== null) _urlParams.a = a;
     if (typeof b !== 'undefined' && b !== null) _urlParams.b = b;
     if (typeof c !== 'undefined' && c !== null) _urlParams.c = c;
@@ -1484,16 +1649,19 @@ export class RoomApi extends BaseLoopBackApi {
    *  - `greeting` – `{object}` - 
    */
    greetPost(a, b, c, customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/who";
-    let _routeParams;
+    let _routeParams = {};
     let _postBody = {
       a: a,
       b: b,
       c: c
     };
-    let _urlParams;
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -1517,16 +1685,19 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    findByRoom(room, customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/findByRoom";
-    let _routeParams;
+    let _routeParams = {};
     let _postBody = {
       room: room
     };
-    let _urlParams;
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result.map((instance) => new Room(instance));
+    return result.map((instance: Room) => new Room(instance));
   }
 
   /**
@@ -1547,16 +1718,19 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-   findByRoomContext(room, customHeaders){
+   findByRoomContext(room, customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/findByRoomContext";
-    let _routeParams;
-    let _postBody;
-    let _urlParams;
+    let _routeParams = {};
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     if (typeof room !== 'undefined' && room !== null) _urlParams.room = room;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result.map((instance) => new Room(instance));
+    return result.map((instance: Room) => new Room(instance));
   }
 
   /**
@@ -1578,14 +1752,17 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    singleParamPost(param, customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/single-param-post";
-    let _routeParams;
+    let _routeParams = {};
     let _postBody = {
       param: param
     };
-    let _urlParams;
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -1606,13 +1783,16 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-   getPropertyValues(property, filter = {}, customHeaders) {
+   getPropertyValues(property, filter, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/propertyValues";
-    let _routeParams;
-    let _postBody;
-    let _urlParams;
+    let _routeParams = {};
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     if (typeof property !== 'undefined' && property !== null) _urlParams.property = property;
     if (typeof filter !== 'undefined' && filter !== null) _urlParams.filter = filter;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
@@ -1640,12 +1820,15 @@ export class RoomApi extends BaseLoopBackApi {
    * </em>
    */
    stats(range, custom, where, groupBy, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/stats";
-    let _routeParams;
-    let _postBody;
-    let _urlParams;
+    let _routeParams = {};
+    let _postBody = {};
+    let _urlParams = {};
+    
+    
     if (typeof range !== 'undefined' && range !== null) _urlParams.range = range;
     if (typeof custom !== 'undefined' && custom !== null) _urlParams.custom = custom;
     if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
@@ -1672,7 +1855,8 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-   createManyMessages(id, data = [], customHeaders) {
+   createManyMessages(id, data, customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/messages";
@@ -1682,7 +1866,9 @@ export class RoomApi extends BaseLoopBackApi {
     let _postBody = {
       data: data
     };
-    let _urlParams;
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -1705,7 +1891,8 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-   createManyLikes(id, data = [], customHeaders) {
+   createManyLikes(id, data, customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/likes";
@@ -1715,7 +1902,9 @@ export class RoomApi extends BaseLoopBackApi {
     let _postBody = {
       data: data
     };
-    let _urlParams;
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -1738,7 +1927,8 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-   createManyCategories(id, data = [], customHeaders) {
+   createManyCategories(id, data, customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/categories";
@@ -1748,7 +1938,9 @@ export class RoomApi extends BaseLoopBackApi {
     let _postBody = {
       data: data
     };
-    let _urlParams;
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -1771,7 +1963,8 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-   createManyAccounts(id, data = [], customHeaders) {
+   createManyAccounts(id, data, customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/accounts";
@@ -1781,7 +1974,9 @@ export class RoomApi extends BaseLoopBackApi {
     let _postBody = {
       data: data
     };
-    let _urlParams;
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -1804,7 +1999,8 @@ export class RoomApi extends BaseLoopBackApi {
    * This usually means the response is a `Room` object.)
    * </em>
    */
-   createManyAdmins(id, data = [], customHeaders) {
+   createManyAdmins(id, data, customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/rooms/:id/admins";
@@ -1814,16 +2010,21 @@ export class RoomApi extends BaseLoopBackApi {
     let _postBody = {
       data: data
     };
-    let _urlParams;
+    let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
+
+
 
   /**
    * The name of the model represented by this $resource,
    * i.e. `Room`.
    */
-   getModelName() {
+  getModelName() {
     return "Room";
   }
 }
+

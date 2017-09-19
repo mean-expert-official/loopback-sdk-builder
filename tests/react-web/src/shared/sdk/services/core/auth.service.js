@@ -1,3 +1,5 @@
+
+
 import { InternalStorage } from '../../storage/storage.swaps';
 import { SDKToken } from '../../models/BaseModels';
 /**
@@ -9,6 +11,7 @@ import { SDKToken } from '../../models/BaseModels';
 * connection, it will use the SDK Socket Driver Available currently supporting
 * Angular 2 for web, NativeScript 2 and Angular Universal.
 **/
+
 export class LoopBackAuth {
   /**
    * @type {SDKToken}
@@ -24,8 +27,8 @@ export class LoopBackAuth {
    * @description
    * The constructor will initialize the token loading data from storage
    **/
-  constructor() {
-    this.storage = new InternalStorage();
+  constructor() {        this.storage = new InternalStorage();
+    
     this.token.id = this.load('id');
     this.token.user = this.load('user');
     this.token.userId = this.load('userId');
@@ -159,4 +162,5 @@ export class LoopBackAuth {
       console.error('Cannot access local/session storage:', err);
     }
   }
+
 }

@@ -1,3 +1,5 @@
+
+
 export class AccessToken {
   "id";
   "ttl";
@@ -21,7 +23,7 @@ export class AccessToken {
   * @license MIT
   * This method creates an instance of AccessToken for dynamic purposes.
   **/
-  static factory(data){
+  static factory(data) {
     return new AccessToken(data);
   }  
   /**
@@ -81,3 +83,4 @@ export class SDKToken {
     Object.assign(this, data);
   }
 }
+

@@ -1,40 +1,39 @@
 
 import {
-  Message,
   Like,
-  Category,
-  Account
+  Room
 } from '../index';
 
 
-export class Room {
-  "name";
+export class Message {
+  "text";
   "id";
+  "parentId";
   "createdAt";
   "updatedAt";
-  messages;
+  "roomId";
   likes;
-  categories;
-  accounts;
-  admins;
+  replies;
+  parent;
+  room;
   constructor(data) {
     Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
-   * i.e. `Room`.
+   * i.e. `Message`.
    */
   static getModelName() {
-    return "Room";
+    return "Message";
   }
   /**
   * @method factory
   * @author Jonathan Casarrubias
   * @license MIT
-  * This method creates an instance of Room for dynamic purposes.
+  * This method creates an instance of Message for dynamic purposes.
   **/
   static factory(data) {
-    return new Room(data);
+    return new Message(data);
   }
   /**
   * @method getModelDefinition
@@ -45,17 +44,21 @@ export class Room {
   **/
   static getModelDefinition() {
     return {
-      name: 'Room',
-      plural: 'rooms',
-      path: 'rooms',
+      name: 'Message',
+      plural: 'messages',
+      path: 'messages',
       properties: {
-        "name": {
-          name: 'name',
+        "text": {
+          name: 'text',
           type: 'string',
           default: ''
         },
         "id": {
           name: 'id',
+          type: 'any'
+        },
+        "parentId": {
+          name: 'parentId',
           type: 'any'
         },
         "createdAt": {
@@ -66,32 +69,31 @@ export class Room {
           name: 'updatedAt',
           type: 'Date'
         },
+        "roomId": {
+          name: 'roomId',
+          type: 'any'
+        },
       },
       relations: {
-        messages: {
-          name: 'messages',
-          type: 'Message[]',
-          model: 'Message'
-        },
         likes: {
           name: 'likes',
           type: 'Like[]',
           model: 'Like'
         },
-        categories: {
-          name: 'categories',
-          type: 'Category[]',
-          model: 'Category'
+        replies: {
+          name: 'replies',
+          type: 'Message[]',
+          model: 'Message'
         },
-        accounts: {
-          name: 'accounts',
-          type: 'Account[]',
-          model: 'Account'
+        parent: {
+          name: 'parent',
+          type: 'Message',
+          model: 'Message'
         },
-        admins: {
-          name: 'admins',
-          type: 'Account[]',
-          model: 'Account'
+        room: {
+          name: 'room',
+          type: 'Room',
+          model: 'Room'
         },
       }
     }

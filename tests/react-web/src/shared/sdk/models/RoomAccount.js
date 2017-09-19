@@ -1,28 +1,36 @@
 
+import {
+  Account,
+  Room
+} from '../index';
 
 
-export class Core {
+export class RoomAccount {
   "id";
+  "accountId";
+  "roomId";
   "createdAt";
   "updatedAt";
+  account;
+  room;
   constructor(data) {
     Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
-   * i.e. `Core`.
+   * i.e. `RoomAccount`.
    */
   static getModelName() {
-    return "Core";
+    return "RoomAccount";
   }
   /**
   * @method factory
   * @author Jonathan Casarrubias
   * @license MIT
-  * This method creates an instance of Core for dynamic purposes.
+  * This method creates an instance of RoomAccount for dynamic purposes.
   **/
   static factory(data) {
-    return new Core(data);
+    return new RoomAccount(data);
   }
   /**
   * @method getModelDefinition
@@ -33,12 +41,20 @@ export class Core {
   **/
   static getModelDefinition() {
     return {
-      name: 'Core',
-      plural: 'cores',
-      path: 'cores',
+      name: 'RoomAccount',
+      plural: 'room-accounts',
+      path: 'room-accounts',
       properties: {
         "id": {
           name: 'id',
+          type: 'any'
+        },
+        "accountId": {
+          name: 'accountId',
+          type: 'any'
+        },
+        "roomId": {
+          name: 'roomId',
           type: 'any'
         },
         "createdAt": {
@@ -51,6 +67,16 @@ export class Core {
         },
       },
       relations: {
+        account: {
+          name: 'account',
+          type: 'Account',
+          model: 'Account'
+        },
+        room: {
+          name: 'room',
+          type: 'Room',
+          model: 'Room'
+        },
       }
     }
   }

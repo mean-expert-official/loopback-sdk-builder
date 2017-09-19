@@ -1,3 +1,9 @@
+
+import {
+  Room
+} from '../index';
+
+
 export class Account {
   "realm";
   "username";
@@ -26,7 +32,7 @@ export class Account {
   * @license MIT
   * This method creates an instance of Account for dynamic purposes.
   **/
-  static factory(data){
+  static factory(data) {
     return new Account(data);
   }
   /**

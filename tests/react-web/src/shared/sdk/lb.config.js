@@ -20,7 +20,7 @@
 **/
 export class LoopBackConfig {
   static path = '//0.0.0.0:3000';
-  static version = 'api';
+  static version  = 'api';
   static authPrefix = '';
   static debug = true;
   static filterOn = 'headers';

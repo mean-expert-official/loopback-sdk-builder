@@ -1,3 +1,4 @@
+
 /**
 * @author Jonathan Casarrubias <twitter:@johncasarrubias> <github:@mean-expert-official>
 * @module StorageBrowser
@@ -6,15 +7,17 @@
 * This module handle localStorage, it will be provided using DI Swapping according the
 * SDK Socket Driver Available currently supporting Angular 2 for web and NativeScript 2.
 **/
+
 export class StorageBrowser {
-  /**
+  
+    /**
    * @method get
    * @param {string} key Storage key name
    * @return {any}
    * @description
    * The getter will return any type of data persisted in localStorage.
    **/
-  get(key) {
+  get(key){
     let data = localStorage.getItem(key);
     return this.parse(data);
   }
@@ -61,4 +64,5 @@ export class StorageBrowser {
         return value;
     }
   }
+  
 }

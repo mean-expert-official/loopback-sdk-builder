@@ -1,14 +1,32 @@
-import { BaseLoopBackApi } from '../core/base';
+/* tslint:disable */
+import { SDKModels } from './SDKModels';
+import { BaseLoopBackApi } from '../core/base.service';
 import { LoopBackConfig } from '../../lb.config';
+import { LoopBackFilter, SDKToken, AccessToken } from '../../models/BaseModels';
+import { JSONSearchParams } from '../core/search.params';
+import { ErrorHandler } from '../core/error.service';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Rx';
+import { Account } from '../../models/Account';
+import { RoomAccount } from '../../models/RoomAccount';
+import { Room } from '../../models/Room';
+import { RoomAdmin } from '../../models/RoomAdmin';
+
 
 /**
  * Api services for the `Account` model.
  */
 
 export class AccountApi extends BaseLoopBackApi {
-  constructor() {
+
+  constructor(
+     
+  ) {
+    
     super();
+    
   }
+
   /**
    * Find a related item by id for accessTokens.
    *
@@ -25,7 +43,8 @@ export class AccountApi extends BaseLoopBackApi {
    * This usually means the response is a `Account` object.)
    * </em>
    */
-  findByIdAccessTokens(id, fk, customHeaders) {
+   findByIdAccessTokens(id, fk, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/accessTokens/:fk";
@@ -35,6 +54,8 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let _postBody = {};
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -52,7 +73,8 @@ export class AccountApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  destroyByIdAccessTokens(id, fk, customHeaders) {
+   destroyByIdAccessTokens(id, fk, customHeaders) {
+    
     let _method = "DELETE";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/accessTokens/:fk";
@@ -62,6 +84,8 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let _postBody = {};
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -86,7 +110,8 @@ export class AccountApi extends BaseLoopBackApi {
    * This usually means the response is a `Account` object.)
    * </em>
    */
-  updateByIdAccessTokens(id, fk, data = {}, customHeaders) {
+   updateByIdAccessTokens(id, fk, data, customHeaders) {
+    
     let _method = "PUT";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/accessTokens/:fk";
@@ -98,6 +123,8 @@ export class AccountApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -118,7 +145,8 @@ export class AccountApi extends BaseLoopBackApi {
    * This usually means the response is a `Account` object.)
    * </em>
    */
-  findByIdRooms(id, fk, customHeaders) {
+   findByIdRooms(id, fk, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/rooms/:fk";
@@ -128,6 +156,8 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let _postBody = {};
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -145,7 +175,8 @@ export class AccountApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  destroyByIdRooms(id, fk, customHeaders) {
+   destroyByIdRooms(id, fk, customHeaders) {
+    
     let _method = "DELETE";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/rooms/:fk";
@@ -155,6 +186,8 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let _postBody = {};
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -179,7 +212,8 @@ export class AccountApi extends BaseLoopBackApi {
    * This usually means the response is a `Account` object.)
    * </em>
    */
-  updateByIdRooms(id, fk, data = {}, customHeaders) {
+   updateByIdRooms(id, fk, data, customHeaders) {
+    
     let _method = "PUT";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/rooms/:fk";
@@ -191,6 +225,8 @@ export class AccountApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -215,7 +251,8 @@ export class AccountApi extends BaseLoopBackApi {
    * This usually means the response is a `Account` object.)
    * </em>
    */
-  linkRooms(id, fk, data = {}, customHeaders) {
+   linkRooms(id, fk, data, customHeaders) {
+    
     let _method = "PUT";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/rooms/rel/:fk";
@@ -227,6 +264,8 @@ export class AccountApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -244,7 +283,8 @@ export class AccountApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  unlinkRooms(id, fk, customHeaders) {
+   unlinkRooms(id, fk, customHeaders) {
+    
     let _method = "DELETE";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/rooms/rel/:fk";
@@ -254,6 +294,8 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let _postBody = {};
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -274,7 +316,8 @@ export class AccountApi extends BaseLoopBackApi {
    * This usually means the response is a `Account` object.)
    * </em>
    */
-  existsRooms(id, fk, customHeaders) {
+   existsRooms(id, fk, customHeaders) {
+    
     let _method = "HEAD";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/rooms/rel/:fk";
@@ -284,6 +327,8 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let _postBody = {};
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -304,7 +349,8 @@ export class AccountApi extends BaseLoopBackApi {
    * This usually means the response is a `Account` object.)
    * </em>
    */
-  findByIdAdministrations(id, fk, customHeaders) {
+   findByIdAdministrations(id, fk, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/administrations/:fk";
@@ -314,6 +360,8 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let _postBody = {};
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -331,7 +379,8 @@ export class AccountApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  destroyByIdAdministrations(id, fk, customHeaders) {
+   destroyByIdAdministrations(id, fk, customHeaders) {
+    
     let _method = "DELETE";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/administrations/:fk";
@@ -341,6 +390,8 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let _postBody = {};
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -365,7 +416,8 @@ export class AccountApi extends BaseLoopBackApi {
    * This usually means the response is a `Account` object.)
    * </em>
    */
-  updateByIdAdministrations(id, fk, data = {}, customHeaders) {
+   updateByIdAdministrations(id, fk, data, customHeaders) {
+    
     let _method = "PUT";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/administrations/:fk";
@@ -377,6 +429,8 @@ export class AccountApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -401,7 +455,8 @@ export class AccountApi extends BaseLoopBackApi {
    * This usually means the response is a `Account` object.)
    * </em>
    */
-  linkAdministrations(id, fk, data = {}, customHeaders) {
+   linkAdministrations(id, fk, data, customHeaders) {
+    
     let _method = "PUT";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/administrations/rel/:fk";
@@ -413,6 +468,8 @@ export class AccountApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -430,7 +487,8 @@ export class AccountApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  unlinkAdministrations(id, fk, customHeaders) {
+   unlinkAdministrations(id, fk, customHeaders) {
+    
     let _method = "DELETE";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/administrations/rel/:fk";
@@ -440,6 +498,8 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let _postBody = {};
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -460,7 +520,8 @@ export class AccountApi extends BaseLoopBackApi {
    * This usually means the response is a `Account` object.)
    * </em>
    */
-  existsAdministrations(id, fk, customHeaders) {
+   existsAdministrations(id, fk, customHeaders) {
+    
     let _method = "HEAD";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/administrations/rel/:fk";
@@ -470,6 +531,8 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let _postBody = {};
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -490,7 +553,8 @@ export class AccountApi extends BaseLoopBackApi {
    * This usually means the response is a `Account` object.)
    * </em>
    */
-  getAccessTokens(id, filter = {}, customHeaders) {
+   getAccessTokens(id, filter, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/accessTokens";
@@ -499,6 +563,8 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let _postBody = {};
     let _urlParams = {};
+    
+    
     if (typeof filter !== 'undefined' && filter !== null) _urlParams.filter = filter;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
@@ -522,7 +588,8 @@ export class AccountApi extends BaseLoopBackApi {
    * This usually means the response is a `Account` object.)
    * </em>
    */
-  createAccessTokens(id, data = {}, customHeaders) {
+   createAccessTokens(id, data, customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/accessTokens";
@@ -533,6 +600,8 @@ export class AccountApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -548,7 +617,8 @@ export class AccountApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  deleteAccessTokens(id, customHeaders) {
+   deleteAccessTokens(id, customHeaders) {
+    
     let _method = "DELETE";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/accessTokens";
@@ -557,6 +627,8 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let _postBody = {};
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -576,7 +648,8 @@ export class AccountApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  countAccessTokens(id, where = {}, customHeaders) {
+   countAccessTokens(id, where, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/accessTokens/count";
@@ -585,6 +658,8 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let _postBody = {};
     let _urlParams = {};
+    
+    
     if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
@@ -606,7 +681,8 @@ export class AccountApi extends BaseLoopBackApi {
    * This usually means the response is a `Account` object.)
    * </em>
    */
-  getRooms(id, filter = {}, customHeaders) {
+   getRooms(id, filter, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/rooms";
@@ -615,6 +691,8 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let _postBody = {};
     let _urlParams = {};
+    
+    
     if (typeof filter !== 'undefined' && filter !== null) _urlParams.filter = filter;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
@@ -638,7 +716,8 @@ export class AccountApi extends BaseLoopBackApi {
    * This usually means the response is a `Account` object.)
    * </em>
    */
-  createRooms(id, data = {}, customHeaders) {
+   createRooms(id, data, customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/rooms";
@@ -649,6 +728,8 @@ export class AccountApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -664,7 +745,8 @@ export class AccountApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  deleteRooms(id, customHeaders) {
+   deleteRooms(id, customHeaders) {
+    
     let _method = "DELETE";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/rooms";
@@ -673,6 +755,8 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let _postBody = {};
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -692,7 +776,8 @@ export class AccountApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  countRooms(id, where = {}, customHeaders) {
+   countRooms(id, where, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/rooms/count";
@@ -701,6 +786,8 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let _postBody = {};
     let _urlParams = {};
+    
+    
     if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
@@ -722,7 +809,8 @@ export class AccountApi extends BaseLoopBackApi {
    * This usually means the response is a `Account` object.)
    * </em>
    */
-  getAdministrations(id, filter = {}, customHeaders) {
+   getAdministrations(id, filter, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/administrations";
@@ -731,6 +819,8 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let _postBody = {};
     let _urlParams = {};
+    
+    
     if (typeof filter !== 'undefined' && filter !== null) _urlParams.filter = filter;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
@@ -754,7 +844,8 @@ export class AccountApi extends BaseLoopBackApi {
    * This usually means the response is a `Account` object.)
    * </em>
    */
-  createAdministrations(id, data = {}, customHeaders) {
+   createAdministrations(id, data, customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/administrations";
@@ -765,6 +856,8 @@ export class AccountApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -780,7 +873,8 @@ export class AccountApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  deleteAdministrations(id, customHeaders) {
+   deleteAdministrations(id, customHeaders) {
+    
     let _method = "DELETE";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/administrations";
@@ -789,6 +883,8 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let _postBody = {};
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -808,7 +904,8 @@ export class AccountApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  countAdministrations(id, where = {}, customHeaders) {
+   countAdministrations(id, where, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/administrations/count";
@@ -817,6 +914,8 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let _postBody = {};
     let _urlParams = {};
+    
+    
     if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
@@ -838,7 +937,8 @@ export class AccountApi extends BaseLoopBackApi {
    * This usually means the response is a `Account` object.)
    * </em>
    */
-  patchOrCreate(data = {}, customHeaders) {
+   patchOrCreate(data, customHeaders) {
+    
     let _method = "PATCH";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts";
@@ -847,6 +947,8 @@ export class AccountApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -869,7 +971,8 @@ export class AccountApi extends BaseLoopBackApi {
    * This usually means the response is a `Account` object.)
    * </em>
    */
-  patchAttributes(id, data = {}, customHeaders) {
+   patchAttributes(id, data, customHeaders) {
+    
     let _method = "PATCH";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id";
@@ -880,6 +983,8 @@ export class AccountApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -909,7 +1014,8 @@ export class AccountApi extends BaseLoopBackApi {
    * 
    *
    */
-  login(credentials, include = 'user', rememberMe = true, customHeaders) {
+   login(credentials, include, rememberMe = true, customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/login";
@@ -918,11 +1024,13 @@ export class AccountApi extends BaseLoopBackApi {
       credentials: credentials
     };
     let _urlParams = {};
+    
+    
     if (typeof include !== 'undefined' && include !== null) _urlParams.include = include;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders)
       .map(
         (response) => {
-          response.ttl = parseInt(response.ttl, 10);
+          response.ttl = parseInt(response.ttl);
           response.rememberMe = rememberMe;
           this.auth.setToken(response);
           return response;
@@ -945,13 +1053,16 @@ export class AccountApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  logout(customHeaders) {
+   logout(customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/logout";
     let _routeParams = {};
     let _postBody = {};
     let _urlParams = {};
+    
+    
        _urlParams.access_token = this.auth.getAccessTokenId();
     this.auth.clear(); 
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
@@ -973,7 +1084,8 @@ export class AccountApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  verify(id, customHeaders) {
+   verify(id, customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/verify";
@@ -982,6 +1094,8 @@ export class AccountApi extends BaseLoopBackApi {
     };
     let _postBody = {};
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -1001,13 +1115,16 @@ export class AccountApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  confirm(uid, token, redirect = {}, customHeaders) {
+   confirm(uid, token, redirect, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/confirm";
     let _routeParams = {};
     let _postBody = {};
     let _urlParams = {};
+    
+    
     if (typeof uid !== 'undefined' && uid !== null) _urlParams.uid = uid;
     if (typeof token !== 'undefined' && token !== null) _urlParams.token = token;
     if (typeof redirect !== 'undefined' && redirect !== null) _urlParams.redirect = redirect;
@@ -1028,7 +1145,8 @@ export class AccountApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  resetPassword(options, customHeaders) {
+   resetPassword(options, customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/reset";
@@ -1037,6 +1155,8 @@ export class AccountApi extends BaseLoopBackApi {
       options: options
     };
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -1056,7 +1176,8 @@ export class AccountApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  changePassword(oldPassword, newPassword, customHeaders) {
+   changePassword(oldPassword, newPassword, customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/change-password";
@@ -1068,6 +1189,8 @@ export class AccountApi extends BaseLoopBackApi {
       }
     };
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -1085,7 +1208,8 @@ export class AccountApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  setPassword(newPassword, customHeaders) {
+   setPassword(newPassword, customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/reset-password";
@@ -1096,6 +1220,8 @@ export class AccountApi extends BaseLoopBackApi {
       }
     };
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -1113,13 +1239,16 @@ export class AccountApi extends BaseLoopBackApi {
    *
    *  - `result` – `{any}` - 
    */
-  myRemote(customHeaders) {
+   myRemote(customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/my-remote";
     let _routeParams = {};
     let _postBody = {};
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -1144,13 +1273,16 @@ export class AccountApi extends BaseLoopBackApi {
    * This usually means the response is a `Account` object.)
    * </em>
    */
-  stats(range, custom = {}, where = {}, groupBy = {}, customHeaders) {
+   stats(range, custom, where, groupBy, customHeaders) {
+    
     let _method = "GET";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/stats";
     let _routeParams = {};
     let _postBody = {};
     let _urlParams = {};
+    
+    
     if (typeof range !== 'undefined' && range !== null) _urlParams.range = range;
     if (typeof custom !== 'undefined' && custom !== null) _urlParams.custom = custom;
     if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
@@ -1177,7 +1309,8 @@ export class AccountApi extends BaseLoopBackApi {
    * This usually means the response is a `Account` object.)
    * </em>
    */
-  createManyAccessTokens(id, data = [], customHeaders) {
+   createManyAccessTokens(id, data, customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/accessTokens";
@@ -1188,6 +1321,8 @@ export class AccountApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -1210,7 +1345,8 @@ export class AccountApi extends BaseLoopBackApi {
    * This usually means the response is a `Account` object.)
    * </em>
    */
-  createManyRooms(id, data = [], customHeaders) {
+   createManyRooms(id, data, customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/rooms";
@@ -1221,6 +1357,8 @@ export class AccountApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -1243,7 +1381,8 @@ export class AccountApi extends BaseLoopBackApi {
    * This usually means the response is a `Account` object.)
    * </em>
    */
-  createManyAdministrations(id, data = [], customHeaders) {
+   createManyAdministrations(id, data, customHeaders) {
+    
     let _method = "POST";
     let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/accounts/:id/administrations";
@@ -1254,9 +1393,13 @@ export class AccountApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams = {};
+    
+    
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
+
+
   /**
    * @ngdoc method
    * @name sdk.Account#getCurrent
@@ -1273,7 +1416,7 @@ export class AccountApi extends BaseLoopBackApi {
    */
   getCurrent(filter = {}) {
     let _method = "GET";
-    let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/accounts/:id";
+    let _url = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() + "/accounts" + "/:id";
     let id = this.auth.getCurrentUserId();
     if (id == null)
     id = '__anonymous__';
@@ -1310,7 +1453,7 @@ export class AccountApi extends BaseLoopBackApi {
    * @returns {boolean} True if the current user is authenticated (logged in).
    */
   isAuthenticated() {
-    return !(this.getCurrentId() === '' || this.getCurrentId() === null || this.getCurrentId() === 'null');
+    return !(this.getCurrentId() === '' || this.getCurrentId() == null || this.getCurrentId() == 'null');
   }
 
   /**
@@ -1330,3 +1473,4 @@ export class AccountApi extends BaseLoopBackApi {
     return "Account";
   }
 }
+

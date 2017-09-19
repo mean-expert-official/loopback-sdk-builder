@@ -1,7 +1,7 @@
 
 
 
-export class Core {
+export class Storage {
   "id";
   "createdAt";
   "updatedAt";
@@ -10,19 +10,19 @@ export class Core {
   }
   /**
    * The name of the model represented by this $resource,
-   * i.e. `Core`.
+   * i.e. `Storage`.
    */
   static getModelName() {
-    return "Core";
+    return "Storage";
   }
   /**
   * @method factory
   * @author Jonathan Casarrubias
   * @license MIT
-  * This method creates an instance of Core for dynamic purposes.
+  * This method creates an instance of Storage for dynamic purposes.
   **/
   static factory(data) {
-    return new Core(data);
+    return new Storage(data);
   }
   /**
   * @method getModelDefinition
@@ -33,13 +33,13 @@ export class Core {
   **/
   static getModelDefinition() {
     return {
-      name: 'Core',
-      plural: 'cores',
-      path: 'cores',
+      name: 'Storage',
+      plural: 'storages',
+      path: 'storages',
       properties: {
         "id": {
           name: 'id',
-          type: 'any'
+          type: 'number'
         },
         "createdAt": {
           name: 'createdAt',

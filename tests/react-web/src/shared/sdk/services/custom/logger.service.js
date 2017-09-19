@@ -1,3 +1,4 @@
+ 
 import { LoopBackConfig } from '../../lb.config';
 /**
 * @author Jonathan Casarrubias <twitter:@johncasarrubias> <github:@johncasarrubias>
@@ -6,7 +7,9 @@ import { LoopBackConfig } from '../../lb.config';
 * @description
 * Console Log wrapper that can be disabled in production mode
 **/
+
 export class LoggerService {
+
   log(...args) {
     if (LoopBackConfig.debuggable())
     console.log.apply(console, args);

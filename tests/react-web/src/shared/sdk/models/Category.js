@@ -1,28 +1,33 @@
 
+import {
+  Room
+} from '../index';
 
 
-export class Core {
+export class Category {
+  "name";
   "id";
   "createdAt";
   "updatedAt";
+  rooms;
   constructor(data) {
     Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
-   * i.e. `Core`.
+   * i.e. `Category`.
    */
   static getModelName() {
-    return "Core";
+    return "Category";
   }
   /**
   * @method factory
   * @author Jonathan Casarrubias
   * @license MIT
-  * This method creates an instance of Core for dynamic purposes.
+  * This method creates an instance of Category for dynamic purposes.
   **/
   static factory(data) {
-    return new Core(data);
+    return new Category(data);
   }
   /**
   * @method getModelDefinition
@@ -33,10 +38,15 @@ export class Core {
   **/
   static getModelDefinition() {
     return {
-      name: 'Core',
-      plural: 'cores',
-      path: 'cores',
+      name: 'Category',
+      plural: 'categories',
+      path: 'categories',
       properties: {
+        "name": {
+          name: 'name',
+          type: 'string',
+          default: 'test'
+        },
         "id": {
           name: 'id',
           type: 'any'
@@ -51,6 +61,11 @@ export class Core {
         },
       },
       relations: {
+        rooms: {
+          name: 'rooms',
+          type: 'Room[]',
+          model: 'Room'
+        },
       }
     }
   }

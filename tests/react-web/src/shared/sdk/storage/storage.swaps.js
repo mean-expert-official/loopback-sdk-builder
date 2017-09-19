@@ -33,6 +33,7 @@ export class BaseStorage {
    **/
   remove(key) {}
 }
+
 /**
  * @module InternalStorage
  * @author Jonathan Casarrubias <t: johncasarrubias, gh: mean-expert-official>
