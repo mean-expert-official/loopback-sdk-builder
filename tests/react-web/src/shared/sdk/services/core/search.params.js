@@ -14,7 +14,9 @@ export class JSONSearchParams {
     _usp;
 
     setJSON(obj) {
-        this._usp = new URLSearchParams(this._JSON2URL(obj, false));
+
+        this._usp = this._JSON2URL(obj, false);
+
     }
 
     getURLSearchParams() {

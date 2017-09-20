@@ -24,28 +24,29 @@ import 'rxjs/add/observable/fromPromise';
 * It provides the core functionallity for every API call, either by HTTP Calls or by
 * WebSockets.
 **/
-
-
 let instance = null;
-
 export class BaseLoopBackApi {
+
+  
+
   path;
   model;
-    models;
+  models;
   auth;
-  
+
   constructor(
     
   ) {
-        this.models = new SDKModels();
+    this.models = new SDKModels();
     this.model = this.models.get(this.getModelName());
     this.auth = new LoopBackAuth();
     if (!instance) {
       instance = this;
     }
+    
+
     return instance;
-    
-    
+
   }
   /**
    * @method request
@@ -113,8 +114,8 @@ export class BaseLoopBackApi {
       if (typeof customHeaders === 'function') {
         headers = customHeaders(headers);
       }
-      
-            let searchParams = new JSONSearchParams();
+
+      let searchParams = new JSONSearchParams();
       let errorHandler = new ErrorHandler();
       searchParams.setJSON(urlParams);
       let request = new axios.request({
@@ -129,7 +130,7 @@ export class BaseLoopBackApi {
       return Observable.fromPromise(request)
         .map((res) => res.data)
         .catch((e) => errorHandler.handleError(e));
-      
+
     }
   }
   /**
