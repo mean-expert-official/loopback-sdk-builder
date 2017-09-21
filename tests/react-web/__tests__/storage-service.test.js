@@ -1,4 +1,4 @@
-import { StorageApi, CategoryApi, MessageApi } from './shared/sdk/services';
+import { StorageApi, CategoryApi, MessageApi } from './../app/shared/sdk/services';
 let storageApi;
 let categoryApi;
 let messageApi;

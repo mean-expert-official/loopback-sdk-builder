@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import { RoomApi } from './shared/sdk/services/custom/Room';
+import App from './../app/App';
+import { RoomApi } from './../app/shared/sdk/services/custom/Room';
 
 it('renders without crashing', () => {
   setTimeout(()=> {

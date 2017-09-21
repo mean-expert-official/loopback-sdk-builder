@@ -1,6 +1,5 @@
-import { TestBed, async, inject } from '@angular/core/testing';
-import { Room, Category, Message, FireLoopRef } from './shared/sdk/models';
-import { RoomApi, CategoryApi, MessageApi, RealTime } from './shared/sdk/services';
+import { Room, Category, Message, FireLoopRef } from './../app/shared/sdk/models';
+import { RoomApi, CategoryApi, MessageApi, RealTime } from './../app/shared/sdk/services';
 let roomApi;
 describe('Service Service', () => {
   beforeEach(() => {

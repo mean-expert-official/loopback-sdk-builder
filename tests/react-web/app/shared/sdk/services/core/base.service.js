@@ -77,8 +77,9 @@ export class BaseLoopBackApi {
       console.info('SDK: PubSub functionality is disabled, generate SDK using -io enabled');
     } else {
       // Headers to be sent
-      let headers = new Headers();
-      headers.append('Content-Type', 'application/json');
+      let headers = {
+        'Content-Type': 'application/json'
+      };
       // Authenticate request
       this.authenticate(url, headers);
       // Body fix for built in remote methods using "data", "options" or "credentials
@@ -95,7 +96,7 @@ export class BaseLoopBackApi {
       // Separate filter object from url params and add to search query
       if (urlParams.filter) {
         if (LoopBackConfig.isHeadersFilteringSet()) {
-          headers.append('filter', JSON.stringify(urlParams.filter));
+          headers.filter = JSON.stringify(urlParams.filter);
         } else {
           filter = `?filter=${ encodeURI(JSON.stringify(urlParams.filter))}`;
         }
@@ -145,10 +146,8 @@ export class BaseLoopBackApi {
    */
   authenticate(url, headers) {
     if (this.auth.getAccessTokenId()) {
-      headers.append(
-        'Authorization',
+      headers.Authorization =
         LoopBackConfig.getAuthPrefix() + this.auth.getAccessTokenId()
-      );
     }
   }
   /**

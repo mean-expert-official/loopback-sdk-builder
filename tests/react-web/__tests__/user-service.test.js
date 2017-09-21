@@ -1,6 +1,6 @@
-import { LoopBackConfig } from './shared/sdk';
-import { User, AccessToken } from './shared/sdk/models';
-import { UserApi } from './shared/sdk/services';
+import { LoopBackConfig } from './../app/shared/sdk';
+import { User, AccessToken } from './../app/shared/sdk/models';
+import { UserApi } from './../app/shared/sdk/services';
 
 
 let Helpers = {
