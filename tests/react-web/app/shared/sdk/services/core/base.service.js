@@ -24,10 +24,11 @@ import 'rxjs/add/observable/fromPromise';
 * It provides the core functionallity for every API call, either by HTTP Calls or by
 * WebSockets.
 **/
-let instance = null;
-export class BaseLoopBackApi {
 
-  
+
+  let instance = null;
+
+export class BaseLoopBackApi {
 
   path;
   model;
@@ -40,12 +41,11 @@ export class BaseLoopBackApi {
     this.models = new SDKModels();
     this.model = this.models.get(this.getModelName());
     this.auth = new LoopBackAuth();
-    if (!instance) {
-      instance = this;
+    if (instance) {
+      return instance;
     }
-    
+    instance = this;
 
-    return instance;
 
   }
   /**
@@ -77,9 +77,12 @@ export class BaseLoopBackApi {
       console.info('SDK: PubSub functionality is disabled, generate SDK using -io enabled');
     } else {
       // Headers to be sent
-      let headers = {
+
+      
+let headers = {
         'Content-Type': 'application/json'
       };
+
       // Authenticate request
       this.authenticate(url, headers);
       // Body fix for built in remote methods using "data", "options" or "credentials
@@ -96,7 +99,9 @@ export class BaseLoopBackApi {
       // Separate filter object from url params and add to search query
       if (urlParams.filter) {
         if (LoopBackConfig.isHeadersFilteringSet()) {
+
           headers.filter = JSON.stringify(urlParams.filter);
+
         } else {
           filter = `?filter=${ encodeURI(JSON.stringify(urlParams.filter))}`;
         }
@@ -146,8 +151,9 @@ export class BaseLoopBackApi {
    */
   authenticate(url, headers) {
     if (this.auth.getAccessTokenId()) {
-      headers.Authorization =
-        LoopBackConfig.getAuthPrefix() + this.auth.getAccessTokenId()
+
+      headers.Authorization = LoopBackConfig.getAuthPrefix() + this.auth.getAccessTokenId();
+
     }
   }
   /**

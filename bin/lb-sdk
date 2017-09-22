@@ -24,7 +24,7 @@ var argv = optimist
   '\nUsage:' +
   '\n ./node_modules/.bin/lb-sdk server/server app/shared/sdk -d [ng2web | ng2native | ng2universal] -i [enabled | disabled] -v [enabled | strict | disabled]')
   .describe('l', 'Client\'s library (angular, react, vuejs <todo> ...)')
-  .describe('d', 'Platform specific drivers (ng2web, ng2native, ng2universal, reactweb, reactnatvice)')
+  .describe('d', 'Platform specific drivers (ng2web, ng2native, ng2universal, react-web)')
   .describe('i', 'Enable PubSub, IO and FireLoop functionality')
   .describe('w', 'Automatically wipe SDK Directory')
   .describe('v', 'Add default values in models')
