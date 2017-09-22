@@ -10,7 +10,7 @@
     "start": "node server/server.js",
     "posttest": "npm run lint && nsp check",
     "test": "NODE_ENV=testing npm run start",
-    "build:sdk": "npm run build:sdk:ng2web",
+    "build:sdk": "npm run build:sdk:ng2web && npm run build:sdk:react",
     "build:sdk:ng2web": "./node_modules/.bin/lb-sdk server/server.js ../ng2web/src/app/shared/sdk -d ng2web -i enabled -w enabled -v disabled -f disabled",
     "build:sdk:react": "./../../bin/lb-sdk server/server.js ./../react-web/app/shared/sdk -i disabled -l react -t false"
   },

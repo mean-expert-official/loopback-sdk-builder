@@ -6,6 +6,7 @@
   "scripts": {
     "watch": "webpack -w",
     "start": "live-server --port=8081",
+    "pretest": "npm install",
     "test": "./node_modules/.bin/jest --env=jsdom"
   },
   "keywords": [],
