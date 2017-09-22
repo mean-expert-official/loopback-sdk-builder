@@ -16,9 +16,8 @@
     "react": "15.3.2",
     "react-dom": "15.3.2",
     "rxjs": "^5.4.3",
-    "shortid": "2.2.6"
-  },
-  "devDependencies": {
+    "shortid": "2.2.6",
+
     "babel-core": "6.14.0",
     "babel-jest": "16.0.0",
     "babel-loader": "6.2.5",
@@ -28,10 +27,12 @@
     "babel-preset-stage-0": "^6.24.1",
     "enzyme": "2.4.1",
     "jest": "16.0.0",
-    "live-server": "1.1.0",
     "react-addons-test-utils": "15.3.2",
     "react-test-renderer": "15.3.2",
     "webpack": "1.13.2"
+  },
+  "devDependencies": {
+    "live-server": "1.1.0"
   },
   "babel": {
     "presets": [
