@@ -89,7 +89,6 @@ var appFile = path.resolve(argv._[0]);
  * Load and Boot LoopBack Application
  */
 var app = require(appFile);
-console.log(argv['t'], 'es typescript esta madre?')
 // Default Values
 var context = {
   app: app,
