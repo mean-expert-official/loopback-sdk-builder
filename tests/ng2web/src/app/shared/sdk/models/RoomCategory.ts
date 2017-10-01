@@ -7,14 +7,14 @@ import {
 declare var Object: any;
 export interface RoomCategoryInterface {
   "id"?: any;
-  "CategoryId": any;
-  "RoomId": any;
+  "categoryId": any;
+  "roomId": any;
 }
 
 export class RoomCategory implements RoomCategoryInterface {
-  "id": any;
-  "CategoryId": any;
-  "RoomId": any;
+  "id"?: any;
+  "categoryId": any;
+  "roomId": any;
   constructor(data?: RoomCategoryInterface) {
     Object.assign(this, data);
   }
@@ -50,12 +50,12 @@ export class RoomCategory implements RoomCategoryInterface {
           name: 'id',
           type: 'any'
         },
-        "CategoryId": {
-          name: 'CategoryId',
+        "categoryId": {
+          name: 'categoryId',
           type: 'any'
         },
-        "RoomId": {
-          name: 'RoomId',
+        "roomId": {
+          name: 'roomId',
           type: 'any'
         }
       }

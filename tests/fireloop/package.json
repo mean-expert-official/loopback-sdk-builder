@@ -34,6 +34,7 @@
     "loopback-connector-mongodb": "^3.2.1",
     "loopback-connector-rest": "^3.0.0",
     "loopback-ds-timestamp-mixin": "^3.4.1",
+    "loopback-include-through-mixin": "^1.0.5",
     "mocha": "^3.4.2",
     "serve-favicon": "^2.0.1",
     "socket.io-adapter-mongo": "^1.0.1",

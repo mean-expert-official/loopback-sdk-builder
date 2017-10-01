@@ -22,7 +22,13 @@
           "by": "index"
         }
       }
-    ]
+    ],
+    "IncludeThrough": {
+      "relations": [
+        "categories",
+        "likes"
+      ]
+    }
   },
   "properties": {
     "name": {
