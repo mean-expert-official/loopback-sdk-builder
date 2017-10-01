@@ -48,7 +48,7 @@ export class RoomNgrxListComponent implements OnInit {
 
     this.rooms$ = this.orm.Room.find({
         where: {
-          // name: 'Testando'
+          name: '1506504652342'
           // name: {like: 'Test'}
         },
         order: 'id DESC',
@@ -59,13 +59,16 @@ export class RoomNgrxListComponent implements OnInit {
             relation: 'categories'
           },
           {
+            relation: 'accounts'
+          },
+          {
             relation: 'messages'
           },
           {
             relation: 'likes'
           }
         ]
-    }, {io: true})
+    }/*, {io: true}*/)
       .auditTime(20)
       .do((a) => console.log(a));
 

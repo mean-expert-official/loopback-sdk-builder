@@ -50,6 +50,7 @@ export const LoopbackReducer = {
 	Storages: reducers.StoragesReducer,
 	UserCredentials: reducers.UserCredentialsReducer,
 	UserIdentitys: reducers.UserIdentitysReducer,
+	RoomCategorys: reducers.RoomCategorysReducer,
 };
 
 export const LoopbackEffects = [

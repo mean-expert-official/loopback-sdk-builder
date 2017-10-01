@@ -15,6 +15,7 @@ import { RoomAdminActionTypes, RoomAdminActions } from './RoomAdmin';
 import { StorageActionTypes, StorageActions } from './Storage';
 import { UserCredentialActionTypes, UserCredentialActions } from './UserCredential';
 import { UserIdentityActionTypes, UserIdentityActions } from './UserIdentity';
+import { RoomCategoryActionTypes, RoomCategoryActions } from './RoomCategory';
 
 export {
   LoopbackAuthActionTypes, LoopbackAuthActions,
@@ -32,4 +33,5 @@ export {
 	StorageActionTypes, StorageActions,
 	UserCredentialActionTypes, UserCredentialActions,
 	UserIdentityActionTypes, UserIdentityActions,
+	RoomCategoryActionTypes, RoomCategoryActions,
 };
