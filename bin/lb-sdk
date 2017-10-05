@@ -23,13 +23,14 @@ var argv = optimist
   '\nGenerate Client SDK for your LoopBack Application.' +
   '\nUsage:' +
   '\n ./node_modules/.bin/lb-sdk server/server app/shared/sdk -d [ng2web | ng2native | ng2universal] -i [enabled | disabled] -v [enabled | strict | disabled]')
-  .describe('l', 'Client\'s library (angular2, react <todo>, ...)')
-  .describe('d', 'Platform specific drivers (ng2web, ng2native, ng2universal)')
+  .describe('l', 'Client\'s library (angular, react, vuejs <todo> ...)')
+  .describe('d', 'Platform specific drivers (ng2web, ng2native, ng2universal, react-web)')
   .describe('i', 'Enable PubSub, IO and FireLoop functionality')
   .describe('w', 'Automatically wipe SDK Directory')
   .describe('v', 'Add default values in models')
   .describe('f', 'Generate only FireLoop SDK + Auth Services')
   .describe('q', 'quiet mode - no console output (forces -w)')
+  .describe('t', 'Enable Typescript default true ( React Only )')
   .default('l', 'angular2')
   .default('d', 'ng2web')
   .default('i', 'enabled')
@@ -37,7 +38,8 @@ var argv = optimist
   .default('v', 'disabled')
   .default('f', 'disabled')
   .default('q', false)
-  .alias({ u: 'url', m: 'module-name', l: 'library', i: 'io', d: 'driver', w: 'wipe', v: 'default-values', f: 'fireloop-only', q: 'quiet' })
+  .default('t', true)
+  .alias({ u: 'url', m: 'module-name', l: 'library', i: 'io', d: 'driver', w: 'wipe', v: 'default-values', f: 'fireloop-only', q: 'quiet', t: 'typescript' })
   .demand(1)
   .argv;
 /**
@@ -87,7 +89,6 @@ var appFile = path.resolve(argv._[0]);
  * Load and Boot LoopBack Application
  */
 var app = require(appFile);
-
 // Default Values
 var context = {
   app: app,
@@ -100,7 +101,8 @@ var context = {
   wipe: argv['w'] || 'disabled',
   defaultValue: argv['v'] || 'disabled',
   fireloopOnly: argv['f'] || 'disabled',
-  quiet: argv['q'] || false
+  quiet: argv['q'] || false,
+  isTyped: argv['t'] == 'false' ? false : true
 };
 
 if (context.quiet) {
