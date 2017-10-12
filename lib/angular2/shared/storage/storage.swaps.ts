@@ -23,7 +23,7 @@ export class BaseStorage {
    * @description
    * The setter will return any type of data persisted in localStorage.
    **/
-  set(key: string, value: any): void {}
+  set(key: string, value: any, expires?: Date): void {}
   /**
    * @method remove
    * @param {string} key Storage key name

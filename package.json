@@ -8,10 +8,11 @@
   "main": "index.js",
   "scripts": {
     "prepublish": "",
-    "test": "npm run load:api & npm run test:ng2web",
+    "test": "npm run load:api & npm run test:ng2web & npm run test:react-web",
     "pretest": "cd tests/fireloop && npm install && npm install ../../ && npm run build:sdk",
     "load:api": "cd tests/fireloop && NODE_ENV=ci node server/server",
-    "test:ng2web": "cd tests/ng2web && npm test"
+    "test:ng2web": "cd tests/ng2web && npm test",
+    "test:react-web": "cd tests/react-web && npm test"
   },
   "repository": {
     "type": "git",
@@ -100,7 +101,6 @@
     "url": "https://github.com/mean-expert-official/loopback-sdk-builder/issues"
   },
   "dependencies": {
-    "@mean-expert/loopback-component-realtime": "^1.0.0-beta.8",
     "chalk": "1.1.3",
     "ejs": "1.0",
     "extfs": "0.0.7",

@@ -10,6 +10,7 @@
 *.pid
 *.swp
 *.swo
+*package-lock.json
 node_modules
 bower_component
 checkstyle.xml
