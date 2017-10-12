@@ -17,7 +17,7 @@
   "dependencies": {
     "@mean-expert/boot-script": "^1.0.0",
     "@mean-expert/loopback-component-realtime": "^1.0.0-rc.9.3",
-    "@mean-expert/loopback-sdk-builder": "^2.1.0-rc.12.2",
+    "@mean-expert/loopback-sdk-builder": "file:../..",
     "@mean-expert/loopback-stats-mixin": "^1.2.1",
     "@mean-expert/model": "^1.0.9",
     "@types/mocha": "^2.2.41",

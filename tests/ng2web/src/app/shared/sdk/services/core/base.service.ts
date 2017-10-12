@@ -99,7 +99,7 @@ export abstract class BaseLoopBackApi {
         if (LoopBackConfig.isHeadersFilteringSet()) {
           headers.append('filter', JSON.stringify(urlParams.filter));
         } else {
-          filter = `?filter=${ encodeURI(JSON.stringify(urlParams.filter))}`;
+          filter = `?filter=${ encodeURIComponent(JSON.stringify(urlParams.filter))}`;
         }
         delete urlParams.filter;
       }
@@ -119,12 +119,12 @@ export abstract class BaseLoopBackApi {
       this.searchParams.setJSON(urlParams);
       let request: Request = new Request(
         new RequestOptions({
-          headers : headers,
-          method  : method,
-          url     : `${url}${filter}`,
-          search  : Object.keys(urlParams).length > 0
-                  ? this.searchParams.getURLSearchParams() : null,
-          body    : body ? JSON.stringify(body) : undefined
+          headers        : headers,
+          method         : method,
+          url            : `${url}${filter}`,
+          search         : Object.keys(urlParams).length > 0 ? this.searchParams.getURLSearchParams() : null,
+          body           : body ? JSON.stringify(body) : undefined,
+          withCredentials: LoopBackConfig.getRequestOptionsCredentials()
         })
       );
       return this.http.request(request)
