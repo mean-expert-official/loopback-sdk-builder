@@ -73,26 +73,39 @@ function include(state$: Observable<any>, filter: LoopBackFilter, store: any, mo
           applyFilter(
             store.select(relationSchema.model + 's')
               .map((state: any) => state.entities)
-              .combineLatest(store.select(relationSchema.modelThrough + 's'),
-                (includeState: any, thoughState: any) => ({includeState, thoughState: thoughState.entities}))
-              .withLatestFrom(stateEntities$,
-                ({includeState, thoughState}, stateEntities: any) => ({includeState, thoughState, stateEntities}))
+              .combineLatest(store.select(relationSchema.modelThrough + 's').map((s) => removeDuplicates(s, relationSchema)),
+                (includeState: any, throughState: any) => ({includeState, throughState}))
               .auditTime(0)
-              .map(({includeState, thoughState, stateEntities}) => {
-                let data: any[] = [];
+              .withLatestFrom(stateEntities$,
+                ({includeState, throughState}, stateEntities: any) => ({includeState, throughState, stateEntities}))
+              .map(({includeState, throughState, stateEntities}) => {
+                const entities: any = {};
+                const data: any[] = [];
 
                 for (const key in includeState) {
                   if (includeState.hasOwnProperty(key)) {
-                    for (const keyThrough in thoughState) {
-                       if (thoughState.hasOwnProperty(keyThrough)) {
-                         if (stateEntities.hasOwnProperty(thoughState[keyThrough][relationSchema.keyTo]) &&
-                           thoughState[keyThrough][relationSchema.keyThrough] === includeState[key][relationSchema.keyFrom]) {
-                           data.push(Object.assign({}, includeState[key], {
-                             _through: thoughState[keyThrough]
-                           }));
-                         }
-                       }
+                    for (const keyThrough in throughState) {
+                      if (throughState.hasOwnProperty(keyThrough)) {
+                        if (stateEntities.hasOwnProperty(throughState[keyThrough][relationSchema.keyTo]) &&
+                          throughState[keyThrough][relationSchema.keyThrough] === includeState[key][relationSchema.keyFrom]) {
+                          if (!entities.hasOwnProperty(includeState[key][relationSchema.keyFrom])) {
+                            entities[includeState[key][relationSchema.keyFrom]] = Object.assign({}, includeState[key], {
+                              _through: [ throughState[keyThrough] ]
+                            });
+                          } else {
+                            entities[includeState[key][relationSchema.keyFrom]] = Object.assign({}, includeState[key], {
+                              _through: [ ...entities[includeState[key][relationSchema.keyFrom]]._through, throughState[keyThrough] ]
+                            });
+                          }
+                        }
+                      }
                     }
+                  }
+                }
+
+                for (let key in entities) {
+                  if (entities.hasOwnProperty(key)) {
+                    data.push(entities[key]);
                   }
                 }
 
@@ -105,12 +118,12 @@ function include(state$: Observable<any>, filter: LoopBackFilter, store: any, mo
         includesArray.push(
           applyFilter(
             store.select(relationSchema.model + 's')
+              .auditTime(0)
               .map((state: any) => state.entities)
               .withLatestFrom(stateEntities$,
                 (includeState: any, stateEntities: any) => ({includeState, stateEntities}))
-              .auditTime(0)
               .map(({includeState, stateEntities}) => {
-                let data: any | any[];
+                let data: any[] = [];
 
                 if (!Object.keys(stateEntities).length) {
                   return data;
@@ -120,21 +133,19 @@ function include(state$: Observable<any>, filter: LoopBackFilter, store: any, mo
                   for (const key in stateEntities) {
                     if (stateEntities.hasOwnProperty(key) &&
                       includeState.hasOwnProperty(stateEntities[key][relationSchema.keyFrom])) {
-                      data = Object.assign({}, includeState[stateEntities[key][relationSchema.keyFrom]], {
+                      data.push(Object.assign({}, includeState[stateEntities[key][relationSchema.keyFrom]], {
                         relationParentId: key
-                      });
+                      }));
                     }
                   }
                 } else if (relationSchema.relationType === 'hasOne') {
                   for (const key in includeState) {
                     if (includeState.hasOwnProperty(key) &&
                       stateEntities.hasOwnProperty(includeState[key][relationSchema.keyTo])) {
-                      data = includeState[key];
+                      data.push(includeState[key]);
                     }
                   }
                 } else {
-                  data = [];
-
                   for (const key in includeState) {
                     if (includeState.hasOwnProperty(key) &&
                       stateEntities.hasOwnProperty(includeState[key][relationSchema.keyTo])) {
@@ -165,15 +176,17 @@ function include(state$: Observable<any>, filter: LoopBackFilter, store: any, mo
 
         for (const item of args[i]) {
           if (relationSchema.modelThrough) {
-            if (typeof stateEntities[item._through[relationSchema.keyTo]][includeString] === 'undefined') {
-              stateEntities[item._through[relationSchema.keyTo]][includeString] =
-                relationSchema.type.indexOf('[]') !== -1 ? [] : null
-            }
+            for (var z = 0; z < item._through.length; ++z) {
+              if (typeof stateEntities[item._through[z][relationSchema.keyTo]][includeString] === 'undefined') {
+                stateEntities[item._through[z][relationSchema.keyTo]][includeString] =
+                  relationSchema.type.indexOf('[]') !== -1 ? [] : null
+              }
 
-            stateEntities[item._through[relationSchema.keyTo]][includeString] = [
-              ...stateEntities[item._through[relationSchema.keyTo]][includeString],
-              item
-            ];
+              stateEntities[item._through[z][relationSchema.keyTo]][includeString] = [
+                ...stateEntities[item._through[z][relationSchema.keyTo]][includeString],
+                item
+              ];
+            }
           } else {
             if (relationSchema.relationType === 'belongsTo') {
               for (const key in stateEntities) {
@@ -250,6 +263,33 @@ export function toArray(state: any): any[] {
   for (let key in state.entities) {
     if (state.entities.hasOwnProperty(key)) {
       entities.push(state.entities[key]);
+    }
+  }
+
+  return entities;
+}
+
+export function removeDuplicates(state: any, relationSchema: any): any[] {
+  const entities = Object.assign({}, state.entities);
+  
+  for (const keyThrough in entities) {
+    if (entities.hasOwnProperty(keyThrough)) {
+      if (keyThrough.indexOf('-') !== -1) {
+        const firstPart = keyThrough.substr(0, keyThrough.indexOf('-'));
+        const secondPart = keyThrough.substr(keyThrough.indexOf('-') + 1, keyThrough.length - 1);
+        if (entities.hasOwnProperty(secondPart + '-' + firstPart)) {
+          delete entities[secondPart + '-' + firstPart];
+        }
+      } else {
+        for (const key in entities) {
+          if (key.indexOf('-') !== -1 && entities.hasOwnProperty(key) &&
+            entities[key][relationSchema.keyTo] === entities[keyThrough][relationSchema.keyTo] &&
+            entities[key][relationSchema.keyThrough] === entities[keyThrough][relationSchema.keyThrough]) {
+            delete entities[key];
+            break;
+          }
+        }
+      }
     }
   }
 
