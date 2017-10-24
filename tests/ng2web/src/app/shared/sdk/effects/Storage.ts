@@ -11,6 +11,7 @@ import { LoopbackAction } from '../models/BaseModels';
 import { BaseLoopbackEffects } from './base';
 import { resolver } from './resolver';
 
+import * as actions from '../actions';
 import { StorageActionTypes, StorageActions } from '../actions/Storage';
 import { LoopbackErrorActions } from '../actions/error';
 import { StorageApi } from '../services/index';

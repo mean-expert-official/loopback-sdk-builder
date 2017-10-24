@@ -34,7 +34,9 @@ export class OrmMessage extends OrmBase<Message> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.findByIdLikes(id, fk, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdLikes(id, fk, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.likes.model + 's')
         .map((state: any) => state.entities[fk]);
@@ -64,7 +66,9 @@ export class OrmMessage extends OrmBase<Message> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.findByIdReplies(id, fk, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdReplies(id, fk, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.replies.model + 's')
         .map((state: any) => state.entities[fk]);
@@ -94,7 +98,9 @@ export class OrmMessage extends OrmBase<Message> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.getParent(id, refresh, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getParent(id, refresh, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.parent.model + 's')
         .map((state: any) => state.entities[id]);
@@ -116,7 +122,9 @@ export class OrmMessage extends OrmBase<Message> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.getRoom(id, refresh, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getRoom(id, refresh, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.room.model + 's')
         .map((state: any) => state.entities[id]);
@@ -141,7 +149,9 @@ export class OrmMessage extends OrmBase<Message> {
           })
         , filter, this.store, models[this.model.getModelDefinition().relations.likes.model]);
     } else {
-      this.store.dispatch(new this.actions.getLikes(id, filter, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getLikes(id, filter, meta));
+      }
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.likes.model + 's')
@@ -177,7 +187,9 @@ export class OrmMessage extends OrmBase<Message> {
           })
         , filter, this.store, models[this.model.getModelDefinition().relations.replies.model]);
     } else {
-      this.store.dispatch(new this.actions.getReplies(id, filter, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getReplies(id, filter, meta));
+      }
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.replies.model + 's')

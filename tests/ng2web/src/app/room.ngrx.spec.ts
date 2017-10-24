@@ -1,5 +1,5 @@
 /* tslint:disable:no-unused-variable */
-import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/auditTime';
 import { TestBed, async, inject } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { StoreModule, Store } from '@ngrx/store';
@@ -37,24 +37,13 @@ describe('Ngrx: Room', () => {
     spyOn(store, 'dispatch').and.callThrough();
   });
 
-  xit('should contain actions', () => {
-    expect(RoomActions).toBeTruthy();
-    expect(RoomActions.create).toBeTruthy();
-    expect(RoomActions.exists).toBeTruthy();
-    expect(RoomActions.updateAll).toBeTruthy();
-    expect(RoomActions.updateAttributes).toBeTruthy();
-    expect(RoomActions.find).toBeTruthy();
-    expect(RoomActions.findById).toBeTruthy();
-    expect(RoomActions.findOne).toBeTruthy();
-  });
-
   it('should create a new room instance', () => {
     const room: Room = new Room();
     room.name = Date.now().toString();
 
     store.dispatch(new RoomActions.create(room));
     store.select(getRooms)
-      .debounceTime(2000)
+      .auditTime(2000)
       .subscribe((rooms: Room[]) => {
         expect(rooms).toContain(jasmine.objectContaining({name: room.name}));
       });
@@ -66,7 +55,7 @@ describe('Ngrx: Room', () => {
 
     store.dispatch(new RoomActions.create(room));
     store.select(getRooms)
-      .debounceTime(2000)
+      .auditTime(2000)
       .subscribe((rooms: Room[]) => {
         store.select(getRoomById(rooms.filter((r) => r.name === room.name)[0].id))
           .subscribe((foundRoom: Room) => {
@@ -81,14 +70,14 @@ describe('Ngrx: Room', () => {
 
     store.dispatch(new RoomActions.create(room));
     store.select(getRooms)
-      .debounceTime(2000)
+      .auditTime(2000)
       .subscribe((rooms: Room[]) => {
         const createdRoom = rooms.filter((r) => r.name === room.name)[0];
 
         store.dispatch(new RoomActions.updateAttributes(createdRoom.id, { name: 'updated!!!'}));
 
         store.select(getRoomById(createdRoom.id))
-          .debounceTime(2000)
+          .auditTime(2000)
           .subscribe((updatedRoom: Room) => {
             expect(updatedRoom.id).toBe(createdRoom.id);
             expect(updatedRoom.name).toBe('updated!!!');
@@ -102,14 +91,14 @@ describe('Ngrx: Room', () => {
 
     store.dispatch(new RoomActions.create(room));
     store.select(getRooms)
-      .debounceTime(2000)
+      .auditTime(2000)
       .subscribe((rooms: Room[]) => {
         const createdRoom = rooms.filter((r) => r.name === room.name)[0];
 
         store.dispatch(new RoomActions.patchAttributes(createdRoom.id, { name: 'patched!!!'}));
 
         store.select(getRoomById(createdRoom.id))
-          .debounceTime(2000)
+          .auditTime(2000)
           .subscribe((updatedRoom: Room) => {
             expect(updatedRoom.id).toBe(createdRoom.id);
             expect(updatedRoom.name).toBe('patched!!!');
@@ -123,14 +112,14 @@ describe('Ngrx: Room', () => {
 
     store.dispatch(new RoomActions.create(room));
     store.select(getRooms)
-      .debounceTime(2000)
+      .auditTime(2000)
       .subscribe((rooms: Room[]) => {
         const createdRoom = rooms.filter((r) => r.name === room.name)[0];
 
         store.dispatch(new RoomActions.createMessages(createdRoom.id, { text: 'HelloRoom'}));
 
         store.select(getMessages)
-          .debounceTime(2000)
+          .auditTime(2000)
           .subscribe((messages: Message[]) => {
             expect(messages).toContain(jasmine.objectContaining({roomId: createdRoom.id, text: 'HelloRoom'}));
           });

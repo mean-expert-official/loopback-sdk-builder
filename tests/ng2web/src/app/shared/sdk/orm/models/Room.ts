@@ -34,7 +34,9 @@ export class OrmRoom extends OrmBase<Room> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.findByIdMessages(id, fk, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdMessages(id, fk, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.messages.model + 's')
         .map((state: any) => state.entities[fk]);
@@ -64,7 +66,9 @@ export class OrmRoom extends OrmBase<Room> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.findByIdLikes(id, fk, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdLikes(id, fk, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.likes.model + 's')
         .map((state: any) => state.entities[fk]);
@@ -94,7 +98,9 @@ export class OrmRoom extends OrmBase<Room> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.findByIdCategories(id, fk, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdCategories(id, fk, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.categories.model + 's')
         .map((state: any) => state.entities[fk]);
@@ -132,7 +138,9 @@ export class OrmRoom extends OrmBase<Room> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.findByIdAccounts(id, fk, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdAccounts(id, fk, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.accounts.model + 's')
         .map((state: any) => state.entities[fk]);
@@ -170,7 +178,9 @@ export class OrmRoom extends OrmBase<Room> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.findByIdAdmins(id, fk, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdAdmins(id, fk, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.admins.model + 's')
         .map((state: any) => state.entities[fk]);
@@ -211,7 +221,9 @@ export class OrmRoom extends OrmBase<Room> {
           })
         , filter, this.store, models[this.model.getModelDefinition().relations.messages.model]);
     } else {
-      this.store.dispatch(new this.actions.getMessages(id, filter, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getMessages(id, filter, meta));
+      }
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.messages.model + 's')
@@ -247,7 +259,9 @@ export class OrmRoom extends OrmBase<Room> {
           })
         , filter, this.store, models[this.model.getModelDefinition().relations.likes.model]);
     } else {
-      this.store.dispatch(new this.actions.getLikes(id, filter, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getLikes(id, filter, meta));
+      }
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.likes.model + 's')
@@ -283,7 +297,9 @@ export class OrmRoom extends OrmBase<Room> {
           })
         , filter, this.store, models[this.model.getModelDefinition().relations.categories.model]);
     } else {
-      this.store.dispatch(new this.actions.getCategories(id, filter, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getCategories(id, filter, meta));
+      }
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.categories.model + 's')
@@ -319,7 +335,9 @@ export class OrmRoom extends OrmBase<Room> {
           })
         , filter, this.store, models[this.model.getModelDefinition().relations.accounts.model]);
     } else {
-      this.store.dispatch(new this.actions.getAccounts(id, filter, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getAccounts(id, filter, meta));
+      }
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.accounts.model + 's')
@@ -355,7 +373,9 @@ export class OrmRoom extends OrmBase<Room> {
           })
         , filter, this.store, models[this.model.getModelDefinition().relations.admins.model]);
     } else {
-      this.store.dispatch(new this.actions.getAdmins(id, filter, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getAdmins(id, filter, meta));
+      }
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.admins.model + 's')

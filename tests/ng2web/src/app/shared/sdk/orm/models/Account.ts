@@ -34,7 +34,9 @@ export class OrmAccount extends OrmBase<Account> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.findByIdAccessTokens(id, fk, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdAccessTokens(id, fk, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.accessTokens.model + 's')
         .map((state: any) => state.entities[fk]);
@@ -64,7 +66,9 @@ export class OrmAccount extends OrmBase<Account> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.findByIdRooms(id, fk, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdRooms(id, fk, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.rooms.model + 's')
         .map((state: any) => state.entities[fk]);
@@ -102,7 +106,9 @@ export class OrmAccount extends OrmBase<Account> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.findByIdAdministrations(id, fk, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdAdministrations(id, fk, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.administrations.model + 's')
         .map((state: any) => state.entities[fk]);
@@ -143,7 +149,9 @@ export class OrmAccount extends OrmBase<Account> {
           })
         , filter, this.store, models[this.model.getModelDefinition().relations.accessTokens.model]);
     } else {
-      this.store.dispatch(new this.actions.getAccessTokens(id, filter, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getAccessTokens(id, filter, meta));
+      }
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.accessTokens.model + 's')
@@ -179,7 +187,9 @@ export class OrmAccount extends OrmBase<Account> {
           })
         , filter, this.store, models[this.model.getModelDefinition().relations.rooms.model]);
     } else {
-      this.store.dispatch(new this.actions.getRooms(id, filter, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getRooms(id, filter, meta));
+      }
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.rooms.model + 's')
@@ -215,7 +225,9 @@ export class OrmAccount extends OrmBase<Account> {
           })
         , filter, this.store, models[this.model.getModelDefinition().relations.administrations.model]);
     } else {
-      this.store.dispatch(new this.actions.getAdministrations(id, filter, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getAdministrations(id, filter, meta));
+      }
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.administrations.model + 's')

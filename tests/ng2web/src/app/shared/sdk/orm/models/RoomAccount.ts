@@ -34,7 +34,9 @@ export class OrmRoomAccount extends OrmBase<RoomAccount> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.getAccount(id, refresh, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getAccount(id, refresh, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.account.model + 's')
         .map((state: any) => state.entities[id]);
@@ -56,7 +58,9 @@ export class OrmRoomAccount extends OrmBase<RoomAccount> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.getRoom(id, refresh, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getRoom(id, refresh, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.room.model + 's')
         .map((state: any) => state.entities[id]);

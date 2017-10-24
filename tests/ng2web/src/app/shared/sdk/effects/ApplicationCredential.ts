@@ -11,6 +11,7 @@ import { LoopbackAction } from '../models/BaseModels';
 import { BaseLoopbackEffects } from './base';
 import { resolver } from './resolver';
 
+import * as actions from '../actions';
 import { ApplicationCredentialActionTypes, ApplicationCredentialActions } from '../actions/ApplicationCredential';
 import { LoopbackErrorActions } from '../actions/error';
 import { ApplicationCredentialApi } from '../services/index';

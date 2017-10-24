@@ -24,7 +24,7 @@ export class Orm {
   public UserCredential: OrmModels.OrmUserCredential;
   public UserIdentity: OrmModels.OrmUserIdentity;
 
-  constructor(private store: Store<any>, protected realTime?: RealTime) {
+  constructor(public store: Store<any>, protected realTime?: RealTime) {
     this.User = new OrmModels.OrmUser(store, realTime);
     this.Account = new OrmModels.OrmAccount(store, realTime);
     this.ApplicationCredential = new OrmModels.OrmApplicationCredential(store, realTime);

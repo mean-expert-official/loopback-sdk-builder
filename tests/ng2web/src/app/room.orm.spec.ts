@@ -1,16 +1,18 @@
 /* tslint:disable:no-unused-variable */
-import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/auditTime';
 import { TestBed, async, inject } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { StoreModule, Store } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './shared/app.effects';
-import { SDKBrowserModule, LoopbackEffects, LoopbackStateInterface, RoomApi, CategoryApi } from './shared/sdk/index';
+import { SDKBrowserModule, LoopbackEffects, LoopbackStateInterface, RoomApi, CategoryApi, getRoomCategorysState } from './shared/sdk/index';
 import { Room, Message, Category } from './shared/sdk/models';
 import { IAppState, reducerToken, reducerProvider, effects, getApplicationState } from './shared/app.state';
 import { OrmModule, Orm } from './shared/sdk/orm';
 
 import * as fromApp from './shared/app.reducer';
+
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 
 class RouterStub {
     navigate(url: String) { return url; }
@@ -46,7 +48,7 @@ describe('ORM: Room', () => {
 
     orm.Room.create(room);
     orm.Room.find({ where: {name: room.name}})
-      .debounceTime(2000)
+      .auditTime(2000)
       .subscribe((rooms: Room[]) => {
         expect(rooms).toContain(jasmine.objectContaining({name: room.name}));
       });
@@ -58,10 +60,10 @@ describe('ORM: Room', () => {
 
     orm.Room.create(room);
     orm.Room.findOne({ where: {name: room.name}})
-      .debounceTime(2000)
+      .auditTime(2000)
       .subscribe((createdRoom: Room) => {
         orm.Room.findById(createdRoom.id)
-          .debounceTime(2000)
+          .auditTime(2000)
           .subscribe((foundRoom: Room) => {
             expect(foundRoom.name).toBe(room.name);
           });
@@ -74,12 +76,12 @@ describe('ORM: Room', () => {
 
     orm.Room.create(room);
     orm.Room.findOne({ where: {name: room.name}})
-      .debounceTime(2000)
+      .auditTime(2000)
       .subscribe((createdRoom: Room) => {
         orm.Room.updateAttributes(createdRoom.id, Object.assign({}, createdRoom, { name: 'updated!!!'}));
 
         orm.Room.findById(createdRoom.id)
-          .debounceTime(2000)
+          .auditTime(2000)
           .subscribe((updatedRoom: Room) => {
             expect(updatedRoom.id).toBe(createdRoom.id);
             expect(updatedRoom.name).toBe('updated!!!');
@@ -93,12 +95,12 @@ describe('ORM: Room', () => {
 
     orm.Room.create(room);
     orm.Room.findOne({ where: {name: room.name}})
-      .debounceTime(2000)
+      .auditTime(2000)
       .subscribe((createdRoom: Room) => {
         orm.Room.patchAttributes(createdRoom.id, Object.assign({}, createdRoom, { name: 'patched!!!'}));
 
         orm.Room.findById(createdRoom.id)
-          .debounceTime(2000)
+          .auditTime(2000)
           .subscribe((updatedRoom: Room) => {
             expect(updatedRoom.id).toBe(createdRoom.id);
             expect(updatedRoom.name).toBe('patched!!!');
@@ -112,13 +114,13 @@ describe('ORM: Room', () => {
 
     orm.Room.create(room);
     orm.Room.findOne({ where: {name: room.name}})
-      .debounceTime(2000)
+      .auditTime(2000)
       .subscribe((createdRoom: Room) => {
 
         orm.Room.createMessages(createdRoom.id, { text: 'HelloRoom'});
 
         orm.Room.findById(createdRoom.id, { include: 'messages' })
-          .debounceTime(2000)
+          .auditTime(2000)
           .subscribe((roomWithMessages: Room) => {
             expect(roomWithMessages.messages).toContain(jasmine.objectContaining({roomId: createdRoom.id, text: 'HelloRoom'}));
           });
@@ -131,7 +133,7 @@ describe('ORM: Room', () => {
     room.name = Date.now().toString();
 
     orm.Room.find({ limit: 5}, {io: true})
-      .debounceTime(3000)
+      .auditTime(3000)
       .subscribe((rooms: Room[]) => {
         expect(rooms).toContain(jasmine.objectContaining({name: room.name}));
       });
@@ -149,7 +151,7 @@ describe('ORM: Room', () => {
       include: ['messages'],
       limit: 5
     }, {io: true})
-      .debounceTime(3000)
+      .auditTime(3000)
       .subscribe((rooms: Room[]) => {
         const roomWithMessages = rooms.filter((r) => r.name === room.name)[0];
         expect(rooms).toContain(jasmine.objectContaining({name: room.name}));
@@ -158,35 +160,37 @@ describe('ORM: Room', () => {
 
     orm.Room.create(room);
     orm.Room.findOne({ where: {name: room.name}})
-      .debounceTime(1000)
+      .auditTime(1000)
       .subscribe((createdRoom: Room) => {
         orm.Room.createMessages(createdRoom.id, { text: 'HelloRoom'});
       });
   });
 
-  // TODO: ORM support "through" relations
-  xit('should include linked categories (hasAndBelongsToMany)',
+  it('should include linked categories (hasAndBelongsToMany)',
     async(inject([CategoryApi, RoomApi], (categoryApi: CategoryApi, roomApi: RoomApi) => {
       const category: Category = new Category();
       const room: Room = new Room();
       room.name = Date.now().toString();
       category.name = Date.now().toString();
 
-      roomApi.create(room)
+      return roomApi.create(room)
+        .take(1)
         .subscribe((roomInstance: Room) => categoryApi.create(category)
+        .take(1)
         .subscribe((categoryInstance: Category) => categoryApi.linkRooms(categoryInstance.id, roomInstance.id)
-        .subscribe((result: any) => {})))
-
-      return orm.Room.findOne({
-        where: {name: room.name},
-        include: ['categories']
-      })
-        .debounceTime(3000)
-        .subscribe((roomWithCategories: Room) => {
-          expect(roomWithCategories.name).toBe(room.name);
-          console.log(roomWithCategories);
-          expect(roomWithCategories.categories).toContain(jasmine.objectContaining({roomId: roomWithCategories.id, name: category.name}));
-        });
+        .take(1)
+        .subscribe((result: any) => {
+          orm.Room.findOne({
+            where: {name: room.name},
+            include: ['categories']
+          })
+            .auditTime(2000)
+            .subscribe((roomWithCategories: Room) => {
+              expect(roomWithCategories.name).toBe(room.name);
+              console.log(roomWithCategories);
+              expect(roomWithCategories.categories).toContain(jasmine.objectContaining({name: category.name}));
+            });
+        })))
     })
   ));
 });

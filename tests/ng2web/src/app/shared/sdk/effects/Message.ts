@@ -11,6 +11,7 @@ import { LoopbackAction } from '../models/BaseModels';
 import { BaseLoopbackEffects } from './base';
 import { resolver } from './resolver';
 
+import * as actions from '../actions';
 import { MessageActionTypes, MessageActions } from '../actions/Message';
 import { LoopbackErrorActions } from '../actions/error';
 import { MessageApi } from '../services/index';

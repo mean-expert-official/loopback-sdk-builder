@@ -11,6 +11,7 @@ import { LoopbackAction } from '../models/BaseModels';
 import { BaseLoopbackEffects } from './base';
 import { resolver } from './resolver';
 
+import * as actions from '../actions';
 import { RoomAccountActionTypes, RoomAccountActions } from '../actions/RoomAccount';
 import { LoopbackErrorActions } from '../actions/error';
 import { RoomAccountApi } from '../services/index';

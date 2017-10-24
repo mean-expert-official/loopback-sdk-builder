@@ -34,7 +34,9 @@ export class OrmCategory extends OrmBase<Category> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.findByIdRooms(id, fk, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdRooms(id, fk, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.rooms.model + 's')
         .map((state: any) => state.entities[fk]);
@@ -75,7 +77,9 @@ export class OrmCategory extends OrmBase<Category> {
           })
         , filter, this.store, models[this.model.getModelDefinition().relations.rooms.model]);
     } else {
-      this.store.dispatch(new this.actions.getRooms(id, filter, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getRooms(id, filter, meta));
+      }
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.rooms.model + 's')

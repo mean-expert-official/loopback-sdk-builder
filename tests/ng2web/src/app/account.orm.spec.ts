@@ -1,5 +1,5 @@
 /* tslint:disable:no-unused-variable */
-import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/auditTime';
 import { TestBed, async, inject } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { StoreModule, Store } from '@ngrx/store';
@@ -22,7 +22,7 @@ const Helpers: {
 } = {
   create : function() {
     const user: Account = new Account();
-    user.email = Date.now() + '@test.com';
+    user.email = Date.now() + '@account.orm';
     user.password = 'test';
     return user;
   }
@@ -55,7 +55,7 @@ describe('ORM: Account', () => {
   it('should signup and login the user', () => {
     orm.Account.signup(Helpers.create());
     store.select(getLoopbackAuthState)
-      .debounceTime(2000)
+      .auditTime(2000)
       .subscribe((token: SDKToken) => {
         expect(token.id).toBeTruthy();
       });
@@ -64,7 +64,7 @@ describe('ORM: Account', () => {
   it('should fail login the user', () => {
     orm.Account.login({ email: 'not@existing.com', password: 'duh' });
     store.select(getApplicationState)
-      .debounceTime(2000)
+      .auditTime(2000)
       .subscribe((state: fromApp.IAppState) => {
         expect((state.error as any).statusCode).toEqual(401);
       });

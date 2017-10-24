@@ -30,7 +30,9 @@ export class OrmBase<T> {
           })
         , filter, this.store, this.model);
     } else {
-      this.store.dispatch(new this.actions.find(filter, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.find(filter, meta));
+      }
 
       return applyFilter(
         this.store.select<any>(this.model.getModelName() + 's')
@@ -59,7 +61,9 @@ export class OrmBase<T> {
           return data[0];
         });
     } else {
-      this.store.dispatch(new this.actions.findById(id, filter, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findById(id, filter, meta));
+      }
 
       return applyFilter(
         this.store.select<any>(this.model.getModelName() + 's')
@@ -89,7 +93,9 @@ export class OrmBase<T> {
           return data[0];
         });
     } else {
-      this.store.dispatch(new this.actions.findOne(filter, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findOne(filter, meta));
+      }
 
       return applyFilter(
         this.store.select<any>(this.model.getModelName() + 's')

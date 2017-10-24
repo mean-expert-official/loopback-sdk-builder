@@ -11,6 +11,7 @@ import { LoopbackAction } from '../models/BaseModels';
 import { BaseLoopbackEffects } from './base';
 import { resolver } from './resolver';
 
+import * as actions from '../actions';
 import { CategoryActionTypes, CategoryActions } from '../actions/Category';
 import { LoopbackErrorActions } from '../actions/error';
 import { CategoryApi } from '../services/index';
@@ -67,7 +68,10 @@ export class CategoryEffects extends BaseLoopbackEffects {
     .ofType(CategoryActionTypes.LINK_ROOMS)
     .mergeMap((action: LoopbackAction) =>
       this.category.linkRooms(action.payload.id, action.payload.fk, action.payload.data)
-        .map((response: any) => new CategoryActions.linkRoomsSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response: any) => concat(
+          of(new actions['RoomCategoryActions'].createSuccess(response, action.meta)),
+          of(new CategoryActions.linkRoomsSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error: any) => concat(
           of(new CategoryActions.linkRoomsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -79,7 +83,10 @@ export class CategoryEffects extends BaseLoopbackEffects {
     .ofType(CategoryActionTypes.UNLINK_ROOMS)
     .mergeMap((action: LoopbackAction) =>
       this.category.unlinkRooms(action.payload.id, action.payload.fk)
-        .map((response: any) => new CategoryActions.unlinkRoomsSuccess(action.payload.id, action.payload.fk, action.meta))
+        .mergeMap((response: any) => concat(
+          of(new actions['RoomCategoryActions'].deleteByIdSuccess(response.id, action.meta)),
+          of(new CategoryActions.unlinkRoomsSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error: any) => concat(
           of(new CategoryActions.unlinkRoomsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))

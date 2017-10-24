@@ -2,6 +2,7 @@
 import 'rxjs/add/operator/publishReplay';
 import 'rxjs/add/operator/combineLatest';
 import 'rxjs/add/operator/withLatestFrom';
+import 'rxjs/add/operator/auditTime';
 import { Observable } from 'rxjs/Observable';
 import * as filterNodes from 'loopback-filters';
 
@@ -59,7 +60,7 @@ function include(state$: Observable<any>, filter: LoopBackFilter, store: any, mo
 
   const includesArray: any[] = [];
 
-  for (const include of normalizedInclude) {
+  for (let include of normalizedInclude) {
     let relationSchema: any;
     if (isPlainObject(include)) {
       relationSchema = model.getModelDefinition().relations[include.relation];
@@ -69,6 +70,14 @@ function include(state$: Observable<any>, filter: LoopBackFilter, store: any, mo
 
     if (!!relationSchema.model) {
       if (relationSchema.modelThrough) {
+        if (include.scope && include.scope.fields) {
+         include = Object.assign({}, include, {
+            scope: Object.assign({}, include.scope, {
+              fields: Array.isArray(include.scope.fields) ? [...include.scope.fields, '_through'] : [include.scope.fields, '_through']
+            })
+          })
+        }
+
         includesArray.push(
           applyFilter(
             store.select(relationSchema.model + 's')

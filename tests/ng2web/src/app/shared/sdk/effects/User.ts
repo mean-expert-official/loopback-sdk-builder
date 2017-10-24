@@ -11,6 +11,7 @@ import { LoopbackAction } from '../models/BaseModels';
 import { BaseLoopbackEffects } from './base';
 import { resolver } from './resolver';
 
+import * as actions from '../actions';
 import { UserActionTypes, UserActions } from '../actions/User';
 import { LoopbackErrorActions } from '../actions/error';
 import { UserApi } from '../services/index';

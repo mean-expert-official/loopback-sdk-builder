@@ -34,7 +34,9 @@ export class OrmUserIdentity extends OrmBase<UserIdentity> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.getUser(id, refresh, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getUser(id, refresh, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.user.model + 's')
         .map((state: any) => state.entities[id]);

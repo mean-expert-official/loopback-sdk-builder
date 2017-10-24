@@ -34,7 +34,9 @@ export class OrmUser extends OrmBase<User> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.findByIdAccessTokens(id, fk, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdAccessTokens(id, fk, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.accessTokens.model + 's')
         .map((state: any) => state.entities[fk]);
@@ -67,7 +69,9 @@ export class OrmUser extends OrmBase<User> {
           })
         , filter, this.store, models[this.model.getModelDefinition().relations.accessTokens.model]);
     } else {
-      this.store.dispatch(new this.actions.getAccessTokens(id, filter, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getAccessTokens(id, filter, meta));
+      }
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.accessTokens.model + 's')
