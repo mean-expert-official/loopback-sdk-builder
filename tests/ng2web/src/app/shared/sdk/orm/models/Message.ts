@@ -12,10 +12,10 @@ import { OrmBase } from '../base';
 import { applyFilter, toArray, filterById } from '../filter';
 
 import * as models from '../../models';
-import { Message, LoopBackFilter } from '../../models';
+import { Message, MessageInterface, LoopBackFilter } from '../../models';
 import { MessageActions } from '../../actions';
 
-export class OrmMessage extends OrmBase<Message> {
+export class OrmMessage extends OrmBase<Message | MessageInterface> {
   constructor(protected store: Store<Message>, protected realTime?: RealTime) {
     super(store, Message, MessageActions, realTime);
   }

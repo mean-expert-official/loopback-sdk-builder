@@ -1,22 +1,19 @@
 /* tslint:disable */
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
+import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { BaseReducerFactory } from './base';
-import { Storage } from '../models';
+import { Storage, StorageInterface } from '../models';
 import { LoopbackAction } from '../models/BaseModels';
 import { StorageActionTypes } from '../actions';
 
-export interface StoragesState {
-  ids: string[];
-  entities: { [id: string]: Storage };
-};
+export interface StoragesState extends EntityState<Storage | StorageInterface> {};
 
-const initialState: StoragesState = {
-  ids: [],
-  entities: {},
-};
+export const StorageAdapter: EntityAdapter<Storage | StorageInterface> = createEntityAdapter<Storage | StorageInterface>();
 
-const cases = BaseReducerFactory<StoragesState, Storage>(StorageActionTypes);
+const initialState: StoragesState = StorageAdapter.getInitialState({});
+
+const cases = BaseReducerFactory<StoragesState, Storage | StorageInterface>(StorageActionTypes, StorageAdapter);
 
 /**
  * @module StoragesReducer

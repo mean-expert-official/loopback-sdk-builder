@@ -12,10 +12,10 @@ import { OrmBase } from '../base';
 import { applyFilter, toArray, filterById } from '../filter';
 
 import * as models from '../../models';
-import { Account, LoopBackFilter } from '../../models';
+import { Account, AccountInterface, LoopBackFilter } from '../../models';
 import { AccountActions } from '../../actions';
 
-export class OrmAccount extends OrmBase<Account> {
+export class OrmAccount extends OrmBase<Account | AccountInterface> {
   constructor(protected store: Store<Account>, protected realTime?: RealTime) {
     super(store, Account, AccountActions, realTime);
   }
@@ -285,9 +285,9 @@ export class OrmAccount extends OrmBase<Account> {
 	public createManyAdministrations(id: any, data: any[] = [], customHeaders?: Function, meta?: any): void {
     this.store.dispatch(new this.actions.createManyAdministrations(id, data, meta));
   }
-    
+  
   public signup(credentials: any, meta?: any): void {
     this.store.dispatch(new this.actions.signup(credentials, meta));
   }
-    
+
 }

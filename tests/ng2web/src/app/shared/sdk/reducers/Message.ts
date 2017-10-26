@@ -1,22 +1,19 @@
 /* tslint:disable */
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
+import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { BaseReducerFactory } from './base';
-import { Message } from '../models';
+import { Message, MessageInterface } from '../models';
 import { LoopbackAction } from '../models/BaseModels';
 import { MessageActionTypes } from '../actions';
 
-export interface MessagesState {
-  ids: string[];
-  entities: { [id: string]: Message };
-};
+export interface MessagesState extends EntityState<Message | MessageInterface> {};
 
-const initialState: MessagesState = {
-  ids: [],
-  entities: {},
-};
+export const MessageAdapter: EntityAdapter<Message | MessageInterface> = createEntityAdapter<Message | MessageInterface>();
 
-const cases = BaseReducerFactory<MessagesState, Message>(MessageActionTypes);
+const initialState: MessagesState = MessageAdapter.getInitialState({});
+
+const cases = BaseReducerFactory<MessagesState, Message | MessageInterface>(MessageActionTypes, MessageAdapter);
 
 /**
  * @module MessagesReducer

@@ -21,7 +21,7 @@ import { OrmModule } from './shared/sdk/orm';
     SDKBrowserModule.forRoot(),
     StoreModule.forRoot(reducerToken, {}),
     StoreDevtoolsModule.instrument({
-      maxAge: 5
+      maxAge: 20
     }),
     EffectsModule.forRoot(effects),
     routing,

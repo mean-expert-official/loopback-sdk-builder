@@ -1,22 +1,19 @@
 /* tslint:disable */
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
+import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { BaseReducerFactory } from './base';
-import { RoomAdmin } from '../models';
+import { RoomAdmin, RoomAdminInterface } from '../models';
 import { LoopbackAction } from '../models/BaseModels';
 import { RoomAdminActionTypes } from '../actions';
 
-export interface RoomAdminsState {
-  ids: string[];
-  entities: { [id: string]: RoomAdmin };
-};
+export interface RoomAdminsState extends EntityState<RoomAdmin | RoomAdminInterface> {};
 
-const initialState: RoomAdminsState = {
-  ids: [],
-  entities: {},
-};
+export const RoomAdminAdapter: EntityAdapter<RoomAdmin | RoomAdminInterface> = createEntityAdapter<RoomAdmin | RoomAdminInterface>();
 
-const cases = BaseReducerFactory<RoomAdminsState, RoomAdmin>(RoomAdminActionTypes);
+const initialState: RoomAdminsState = RoomAdminAdapter.getInitialState({});
+
+const cases = BaseReducerFactory<RoomAdminsState, RoomAdmin | RoomAdminInterface>(RoomAdminActionTypes, RoomAdminAdapter);
 
 /**
  * @module RoomAdminsReducer

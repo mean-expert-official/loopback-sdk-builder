@@ -1,22 +1,19 @@
 /* tslint:disable */
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
+import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { BaseReducerFactory } from './base';
-import { RoomAccount } from '../models';
+import { RoomAccount, RoomAccountInterface } from '../models';
 import { LoopbackAction } from '../models/BaseModels';
 import { RoomAccountActionTypes } from '../actions';
 
-export interface RoomAccountsState {
-  ids: string[];
-  entities: { [id: string]: RoomAccount };
-};
+export interface RoomAccountsState extends EntityState<RoomAccount | RoomAccountInterface> {};
 
-const initialState: RoomAccountsState = {
-  ids: [],
-  entities: {},
-};
+export const RoomAccountAdapter: EntityAdapter<RoomAccount | RoomAccountInterface> = createEntityAdapter<RoomAccount | RoomAccountInterface>();
 
-const cases = BaseReducerFactory<RoomAccountsState, RoomAccount>(RoomAccountActionTypes);
+const initialState: RoomAccountsState = RoomAccountAdapter.getInitialState({});
+
+const cases = BaseReducerFactory<RoomAccountsState, RoomAccount | RoomAccountInterface>(RoomAccountActionTypes, RoomAccountAdapter);
 
 /**
  * @module RoomAccountsReducer

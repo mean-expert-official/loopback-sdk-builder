@@ -1,22 +1,19 @@
 /* tslint:disable */
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
+import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { BaseReducerFactory } from './base';
-import { ApplicationCredential } from '../models';
+import { ApplicationCredential, ApplicationCredentialInterface } from '../models';
 import { LoopbackAction } from '../models/BaseModels';
 import { ApplicationCredentialActionTypes } from '../actions';
 
-export interface ApplicationCredentialsState {
-  ids: string[];
-  entities: { [id: string]: ApplicationCredential };
-};
+export interface ApplicationCredentialsState extends EntityState<ApplicationCredential | ApplicationCredentialInterface> {};
 
-const initialState: ApplicationCredentialsState = {
-  ids: [],
-  entities: {},
-};
+export const ApplicationCredentialAdapter: EntityAdapter<ApplicationCredential | ApplicationCredentialInterface> = createEntityAdapter<ApplicationCredential | ApplicationCredentialInterface>();
 
-const cases = BaseReducerFactory<ApplicationCredentialsState, ApplicationCredential>(ApplicationCredentialActionTypes);
+const initialState: ApplicationCredentialsState = ApplicationCredentialAdapter.getInitialState({});
+
+const cases = BaseReducerFactory<ApplicationCredentialsState, ApplicationCredential | ApplicationCredentialInterface>(ApplicationCredentialActionTypes, ApplicationCredentialAdapter);
 
 /**
  * @module ApplicationCredentialsReducer

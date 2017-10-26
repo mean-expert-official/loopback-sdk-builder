@@ -1,22 +1,19 @@
 /* tslint:disable */
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
+import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { BaseReducerFactory } from './base';
-import { Like } from '../models';
+import { Like, LikeInterface } from '../models';
 import { LoopbackAction } from '../models/BaseModels';
 import { LikeActionTypes } from '../actions';
 
-export interface LikesState {
-  ids: string[];
-  entities: { [id: string]: Like };
-};
+export interface LikesState extends EntityState<Like | LikeInterface> {};
 
-const initialState: LikesState = {
-  ids: [],
-  entities: {},
-};
+export const LikeAdapter: EntityAdapter<Like | LikeInterface> = createEntityAdapter<Like | LikeInterface>();
 
-const cases = BaseReducerFactory<LikesState, Like>(LikeActionTypes);
+const initialState: LikesState = LikeAdapter.getInitialState({});
+
+const cases = BaseReducerFactory<LikesState, Like | LikeInterface>(LikeActionTypes, LikeAdapter);
 
 /**
  * @module LikesReducer

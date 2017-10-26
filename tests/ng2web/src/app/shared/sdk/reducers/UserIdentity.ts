@@ -1,22 +1,19 @@
 /* tslint:disable */
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
+import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { BaseReducerFactory } from './base';
-import { UserIdentity } from '../models';
+import { UserIdentity, UserIdentityInterface } from '../models';
 import { LoopbackAction } from '../models/BaseModels';
 import { UserIdentityActionTypes } from '../actions';
 
-export interface UserIdentitysState {
-  ids: string[];
-  entities: { [id: string]: UserIdentity };
-};
+export interface UserIdentitysState extends EntityState<UserIdentity | UserIdentityInterface> {};
 
-const initialState: UserIdentitysState = {
-  ids: [],
-  entities: {},
-};
+export const UserIdentityAdapter: EntityAdapter<UserIdentity | UserIdentityInterface> = createEntityAdapter<UserIdentity | UserIdentityInterface>();
 
-const cases = BaseReducerFactory<UserIdentitysState, UserIdentity>(UserIdentityActionTypes);
+const initialState: UserIdentitysState = UserIdentityAdapter.getInitialState({});
+
+const cases = BaseReducerFactory<UserIdentitysState, UserIdentity | UserIdentityInterface>(UserIdentityActionTypes, UserIdentityAdapter);
 
 /**
  * @module UserIdentitysReducer

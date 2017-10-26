@@ -186,6 +186,7 @@ function include(state$: Observable<any>, filter: LoopBackFilter, store: any, mo
         for (const item of args[i]) {
           if (relationSchema.modelThrough) {
             for (var z = 0; z < item._through.length; ++z) {
+              if (typeof stateEntities[item._through[z][relationSchema.keyTo]] === 'undefined') { continue; }
               if (typeof stateEntities[item._through[z][relationSchema.keyTo]][includeString] === 'undefined') {
                 stateEntities[item._through[z][relationSchema.keyTo]][includeString] =
                   relationSchema.type.indexOf('[]') !== -1 ? [] : null
@@ -267,20 +268,12 @@ function isPlainObject(obj: any): boolean {
 }
 
 export function toArray(state: any): any[] {
-  const entities = [];
-  
-  for (let key in state.entities) {
-    if (state.entities.hasOwnProperty(key)) {
-      entities.push(state.entities[key]);
-    }
-  }
-
-  return entities;
+  return state.ids.map((id: any) => (state.entities as any)[id]);
 }
 
 export function removeDuplicates(state: any, relationSchema: any): any[] {
   const entities = Object.assign({}, state.entities);
-  
+
   for (const keyThrough in entities) {
     if (entities.hasOwnProperty(keyThrough)) {
       if (keyThrough.indexOf('-') !== -1) {

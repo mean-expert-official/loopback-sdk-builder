@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/auditTime';
 import { Component, OnInit } from '@angular/core';
-import { Room, Account, FireLoopRef } from '../shared/sdk/models';
+import { Room, RoomInterface, Account, FireLoopRef } from '../shared/sdk/models';
 // import { AccountApi, RoomApi, LoggerService, RealTime } from '../shared/sdk/services';
 import { AccountApi, RoomApi, LoggerService, RealTime, SDKModels } from '../shared/sdk/services';
 import { Router } from '@angular/router';
@@ -25,7 +25,7 @@ export class RoomNgrxListComponent implements OnInit {
   private accountRef: FireLoopRef<Account>;
   private roomRef: FireLoopRef<Room>;
   private room: Room = new Room();
-  private rooms$: Observable<Room[]>;
+  private rooms$: Observable<RoomInterface[]>;
   private rooms: Room[];
 
   // private socket: any = io.connect(LoopBackConfig.getPath(), { secure: false });
@@ -44,8 +44,6 @@ export class RoomNgrxListComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.orm);
-
     this.rooms$ = this.orm.Room.find({
         where: {
           // name: '1506504652342'
@@ -71,6 +69,21 @@ export class RoomNgrxListComponent implements OnInit {
     }, {io: true})
       .auditTime(20)
       .do((a) => console.log(a));
+
+      // setTimeout(() => {
+      //   // this.orm.Room.updateAll({
+      //   //   name: 'test3'
+      //   // },
+      //   // {
+      //   //   name: 'test1'
+      //   // }, {resetStore: true})
+
+      //   // this.orm.Room.create({
+      //   //   name: 'test3'
+      //   // }, {resetStore: true})
+
+      //   // this.orm.Room.resetState()
+      // }, 4000);
 
     // this.orm.Category.find({}).subscribe((a) => console.log(a));
   }

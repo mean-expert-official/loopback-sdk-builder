@@ -12,10 +12,10 @@ import { OrmBase } from '../base';
 import { applyFilter, toArray, filterById } from '../filter';
 
 import * as models from '../../models';
-import { Storage, LoopBackFilter } from '../../models';
+import { Storage, StorageInterface, LoopBackFilter } from '../../models';
 import { StorageActions } from '../../actions';
 
-export class OrmStorage extends OrmBase<Storage> {
+export class OrmStorage extends OrmBase<Storage | StorageInterface> {
   constructor(protected store: Store<Storage>, protected realTime?: RealTime) {
     super(store, Storage, StorageActions, realTime);
   }

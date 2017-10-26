@@ -12,10 +12,10 @@ import { OrmBase } from '../base';
 import { applyFilter, toArray, filterById } from '../filter';
 
 import * as models from '../../models';
-import { Like, LoopBackFilter } from '../../models';
+import { Like, LikeInterface, LoopBackFilter } from '../../models';
 import { LikeActions } from '../../actions';
 
-export class OrmLike extends OrmBase<Like> {
+export class OrmLike extends OrmBase<Like | LikeInterface> {
   constructor(protected store: Store<Like>, protected realTime?: RealTime) {
     super(store, Like, LikeActions, realTime);
   }

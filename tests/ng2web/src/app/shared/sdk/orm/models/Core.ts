@@ -12,10 +12,10 @@ import { OrmBase } from '../base';
 import { applyFilter, toArray, filterById } from '../filter';
 
 import * as models from '../../models';
-import { Core, LoopBackFilter } from '../../models';
+import { Core, CoreInterface, LoopBackFilter } from '../../models';
 import { CoreActions } from '../../actions';
 
-export class OrmCore extends OrmBase<Core> {
+export class OrmCore extends OrmBase<Core | CoreInterface> {
   constructor(protected store: Store<Core>, protected realTime?: RealTime) {
     super(store, Core, CoreActions, realTime);
   }

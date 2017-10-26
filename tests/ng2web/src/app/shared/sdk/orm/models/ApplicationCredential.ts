@@ -12,10 +12,10 @@ import { OrmBase } from '../base';
 import { applyFilter, toArray, filterById } from '../filter';
 
 import * as models from '../../models';
-import { ApplicationCredential, LoopBackFilter } from '../../models';
+import { ApplicationCredential, ApplicationCredentialInterface, LoopBackFilter } from '../../models';
 import { ApplicationCredentialActions } from '../../actions';
 
-export class OrmApplicationCredential extends OrmBase<ApplicationCredential> {
+export class OrmApplicationCredential extends OrmBase<ApplicationCredential | ApplicationCredentialInterface> {
   constructor(protected store: Store<ApplicationCredential>, protected realTime?: RealTime) {
     super(store, ApplicationCredential, ApplicationCredentialActions, realTime);
   }

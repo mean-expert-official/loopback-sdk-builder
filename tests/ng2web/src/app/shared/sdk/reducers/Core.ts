@@ -1,22 +1,19 @@
 /* tslint:disable */
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
+import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { BaseReducerFactory } from './base';
-import { Core } from '../models';
+import { Core, CoreInterface } from '../models';
 import { LoopbackAction } from '../models/BaseModels';
 import { CoreActionTypes } from '../actions';
 
-export interface CoresState {
-  ids: string[];
-  entities: { [id: string]: Core };
-};
+export interface CoresState extends EntityState<Core | CoreInterface> {};
 
-const initialState: CoresState = {
-  ids: [],
-  entities: {},
-};
+export const CoreAdapter: EntityAdapter<Core | CoreInterface> = createEntityAdapter<Core | CoreInterface>();
 
-const cases = BaseReducerFactory<CoresState, Core>(CoreActionTypes);
+const initialState: CoresState = CoreAdapter.getInitialState({});
+
+const cases = BaseReducerFactory<CoresState, Core | CoreInterface>(CoreActionTypes, CoreAdapter);
 
 /**
  * @module CoresReducer

@@ -12,10 +12,10 @@ import { OrmBase } from '../base';
 import { applyFilter, toArray, filterById } from '../filter';
 
 import * as models from '../../models';
-import { RoomAccount, LoopBackFilter } from '../../models';
+import { RoomAccount, RoomAccountInterface, LoopBackFilter } from '../../models';
 import { RoomAccountActions } from '../../actions';
 
-export class OrmRoomAccount extends OrmBase<RoomAccount> {
+export class OrmRoomAccount extends OrmBase<RoomAccount | RoomAccountInterface> {
   constructor(protected store: Store<RoomAccount>, protected realTime?: RealTime) {
     super(store, RoomAccount, RoomAccountActions, realTime);
   }

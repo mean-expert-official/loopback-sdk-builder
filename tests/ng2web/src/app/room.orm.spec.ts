@@ -128,6 +128,25 @@ describe('ORM: Room', () => {
   });
 
   // TODO: Fix
+  xit('should reset room state', () => {
+    const room: Room = new Room();
+    room.name = Date.now().toString();
+
+    orm.Room.create(room);
+    orm.Room.find({ where: {name: room.name}})
+      .auditTime(2000)
+      .take(1)
+      .subscribe((rooms: Room[]) => {
+        expect(rooms).toContain(jasmine.objectContaining({name: room.name}));
+        orm.Room.resetState();
+        orm.Room.find({}, {justCache: true})
+          .auditTime(1000)
+          .subscribe((roomsFromCache: Room[]) => {
+            expect(roomsFromCache.length).toBe(0);
+          });
+      });
+  });
+  // TODO: Fix
   xit('should find and sync', () => {
     const room: Room = new Room();
     room.name = Date.now().toString();
@@ -184,7 +203,7 @@ describe('ORM: Room', () => {
             where: {name: room.name},
             include: ['categories']
           })
-            .auditTime(2000)
+            .auditTime(3000)
             .subscribe((roomWithCategories: Room) => {
               expect(roomWithCategories.name).toBe(room.name);
               console.log(roomWithCategories);

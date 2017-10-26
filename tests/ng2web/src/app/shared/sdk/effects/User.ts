@@ -202,7 +202,7 @@ export class UserEffects extends BaseLoopbackEffects {
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
-    
+
     /**
    * @author João Ribeiro <@JonnyBGod> <github:JonnyBGod>
    * @description
