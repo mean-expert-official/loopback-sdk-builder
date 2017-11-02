@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { SDKBrowserModule } from './shared/sdk/index';
 import { routing, appRoutingProviders } from './app.routing';
 
 @NgModule({
@@ -12,10 +11,11 @@ import { routing, appRoutingProviders } from './app.routing';
   imports: [
     BrowserModule,
     FormsModule,
-    SDKBrowserModule.forRoot(),
-    routing
+    routing,
   ],
-  providers       : [ appRoutingProviders ],
+  providers       : [
+    appRoutingProviders
+  ],
   entryComponents : [ AppComponent ],
   bootstrap       : [ AppComponent ]
 })

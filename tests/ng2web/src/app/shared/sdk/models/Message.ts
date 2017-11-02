@@ -60,6 +60,7 @@ export class Message implements MessageInterface {
       name: 'Message',
       plural: 'messages',
       path: 'messages',
+      idName: 'id',
       properties: {
         "text": {
           name: 'text',
@@ -91,22 +92,34 @@ export class Message implements MessageInterface {
         likes: {
           name: 'likes',
           type: 'Like[]',
-          model: 'Like'
+          model: 'Like',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'messageId'
         },
         replies: {
           name: 'replies',
           type: 'Message[]',
-          model: 'Message'
+          model: 'Message',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'parentId'
         },
         parent: {
           name: 'parent',
           type: 'Message',
-          model: 'Message'
+          model: 'Message',
+          relationType: 'belongsTo',
+                  keyFrom: 'parentId',
+          keyTo: 'id'
         },
         room: {
           name: 'room',
           type: 'Room',
-          model: 'Room'
+          model: 'Room',
+          relationType: 'belongsTo',
+                  keyFrom: 'roomId',
+          keyTo: 'id'
         },
       }
     }

@@ -49,6 +49,7 @@ export class Category implements CategoryInterface {
       name: 'Category',
       plural: 'categories',
       path: 'categories',
+      idName: 'id',
       properties: {
         "name": {
           name: 'name',
@@ -72,7 +73,12 @@ export class Category implements CategoryInterface {
         rooms: {
           name: 'rooms',
           type: 'Room[]',
-          model: 'Room'
+          model: 'Room',
+          relationType: 'hasMany',
+          modelThrough: 'RoomCategory',
+          keyThrough: 'roomId',
+          keyFrom: 'id',
+          keyTo: 'categoryId'
         },
       }
     }

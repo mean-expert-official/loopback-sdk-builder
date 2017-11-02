@@ -8,11 +8,14 @@
   "main": "index.js",
   "scripts": {
     "prepublish": "",
-    "test": "npm run load:api & npm run test:ng2web & npm run test:react-web",
+    "test": "npm run load:api & npm run test:all",
     "pretest": "cd tests/fireloop && npm install && npm install ../../ && npm run build:sdk",
+    "pretest:ng2webORM": "cd tests/fireloop && npm run build:sdk:ng2webORM",
     "load:api": "cd tests/fireloop && NODE_ENV=ci node server/server",
     "test:ng2web": "cd tests/ng2web && npm test",
-    "test:react-web": "cd tests/react-web && npm test"
+    "test:ng2webORM": "cd tests/ng2web && npm run test:orm",
+    "test:react-web": "cd tests/react-web && npm test",
+    "test:all": "npm run test:ng2web && npm run test:react-web && npm run test:ng2webORM"
   },
   "repository": {
     "type": "git",
@@ -106,8 +109,8 @@
     "extfs": "0.0.7",
     "mkdirp": "0.5.1",
     "optimist": "0.6.1",
-    "rimraf": "2.5.3",
-    "semver": "4.3.2",
+    "rimraf": "^2.6.1",
+    "semver": "^5.4.1",
     "underscore": "^1.8.3",
     "underscore.inflections": "^0.2.1"
   },

@@ -1,0 +1,8 @@
+<h1>Register or Log In an Account</h1>
+<form>
+  <input name="email" type="email" [(ngModel)]="account.email" placeholder="email" />
+  <input name="password" type="password" [(ngModel)]="account.password" placeholder="password" />
+  <label for="rememberMe">Remember Me:</label>
+  <input name="rememberMe" type="checkbox" [(ngModel)]="rememberMe"/>
+  <button (click)="register()">Register</button> or <button (click)="login()">Log In</button>
+</form>

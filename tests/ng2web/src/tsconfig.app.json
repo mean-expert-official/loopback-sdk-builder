@@ -8,6 +8,13 @@
   },
   "exclude": [
     "test.ts",
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "**/*.orm.ts",
+    "**/*.ngrx.ts",
+    "**/*.effects.ts",
+    "**/*.reducer.ts",
+    "**/*.state.ts",
+    "app/access-ngrx/**",
+    "app/room-ngrx/**"
   ]
 }

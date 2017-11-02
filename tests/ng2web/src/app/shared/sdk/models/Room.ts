@@ -60,6 +60,7 @@ export class Room implements RoomInterface {
       name: 'Room',
       plural: 'rooms',
       path: 'rooms',
+      idName: 'id',
       properties: {
         "name": {
           name: 'name',
@@ -83,27 +84,48 @@ export class Room implements RoomInterface {
         messages: {
           name: 'messages',
           type: 'Message[]',
-          model: 'Message'
+          model: 'Message',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'roomId'
         },
         likes: {
           name: 'likes',
           type: 'Like[]',
-          model: 'Like'
+          model: 'Like',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'roomId'
         },
         categories: {
           name: 'categories',
           type: 'Category[]',
-          model: 'Category'
+          model: 'Category',
+          relationType: 'hasMany',
+          modelThrough: 'RoomCategory',
+          keyThrough: 'categoryId',
+          keyFrom: 'id',
+          keyTo: 'roomId'
         },
         accounts: {
           name: 'accounts',
           type: 'Account[]',
-          model: 'Account'
+          model: 'Account',
+          relationType: 'hasMany',
+          modelThrough: 'RoomAccount',
+          keyThrough: 'accountId',
+          keyFrom: 'id',
+          keyTo: 'roomId'
         },
         admins: {
           name: 'admins',
           type: 'Account[]',
-          model: 'Account'
+          model: 'Account',
+          relationType: 'hasMany',
+          modelThrough: 'RoomAdmin',
+          keyThrough: 'accountId',
+          keyFrom: 'id',
+          keyTo: 'adminId'
         },
       }
     }
