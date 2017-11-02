@@ -1,6 +1,6 @@
 /* tslint:disable */
 
-import 'rxjs/add/operator/finally';
+import { map, finalize } from 'rxjs/operators'
 import { AsyncSubject } from 'rxjs/AsyncSubject';
 import { RealTime } from '../../services';
 import { createIO } from '../io';
@@ -28,18 +28,20 @@ export class OrmUser extends OrmBase<User | UserInterface> {
       createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
 
       return this.store.select<any>(this.model.getModelDefinition().relations.accessTokens.model + 's')
-        .map((state: any) => state.entities[fk])
-        .finally(() => {
-          destroyStream$.next(1);
-          destroyStream$.complete();
-        });
+        .pipe(
+          map((state: any) => state.entities[fk]),
+          finalize(() => {
+            destroyStream$.next(1);
+            destroyStream$.complete();
+          })
+        );
     } else {
       if (!meta || !meta.justCache) {
         this.store.dispatch(new this.actions.findByIdAccessTokens(id, fk, meta));
       }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.accessTokens.model + 's')
-        .map((state: any) => state.entities[fk]);
+        .pipe(map((state: any) => state.entities[fk]));
     }
     
   }
@@ -61,12 +63,14 @@ export class OrmUser extends OrmBase<User | UserInterface> {
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.accessTokens.model + 's')
-          .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'accessTokens', User))
-          .finally(() => {
-            destroyStream$.next(1);
-            destroyStream$.complete();
-          })
+          .pipe(
+            map(toArray),
+            map((state: any[]) => filterById(state, id, 'accessTokens', User)),
+            finalize(() => {
+              destroyStream$.next(1);
+              destroyStream$.complete();
+            })
+          )
         , filter, this.store, models[this.model.getModelDefinition().relations.accessTokens.model]);
     } else {
       if (!meta || !meta.justCache) {
@@ -75,8 +79,10 @@ export class OrmUser extends OrmBase<User | UserInterface> {
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.accessTokens.model + 's')
-          .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'accessTokens', User))
+          .pipe(
+            map(toArray),
+            map((state: any[]) => filterById(state, id, 'accessTokens', User))
+          )
         , filter, this.store, models[this.model.getModelDefinition().relations.accessTokens.model]);
     }
     

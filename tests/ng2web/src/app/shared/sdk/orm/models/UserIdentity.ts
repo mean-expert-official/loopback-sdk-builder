@@ -1,6 +1,6 @@
 /* tslint:disable */
 
-import 'rxjs/add/operator/finally';
+import { map, finalize } from 'rxjs/operators'
 import { AsyncSubject } from 'rxjs/AsyncSubject';
 import { RealTime } from '../../services';
 import { createIO } from '../io';
@@ -28,18 +28,20 @@ export class OrmUserIdentity extends OrmBase<UserIdentity | UserIdentityInterfac
       createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
 
       return this.store.select<any>(this.model.getModelDefinition().relations.user.model + 's')
-        .map((state: any) => state.entities[id])
-        .finally(() => {
-          destroyStream$.next(1);
-          destroyStream$.complete();
-        });
+        .pipe(
+          map((state: any) => state.entities[id]),
+          finalize(() => {
+            destroyStream$.next(1);
+            destroyStream$.complete();
+          })
+        );
     } else {
       if (!meta || !meta.justCache) {
         this.store.dispatch(new this.actions.getUser(id, refresh, meta));
       }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.user.model + 's')
-        .map((state: any) => state.entities[id]);
+        .pipe(map((state: any) => state.entities[id]));
     }
     
   }

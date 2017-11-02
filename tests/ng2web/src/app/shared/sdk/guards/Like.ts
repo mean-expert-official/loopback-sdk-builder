@@ -1,8 +1,5 @@
 /* tslint:disable */
-import 'rxjs/add/operator/take';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/catch';
+import { take, map, switchMap, catchError } from 'rxjs/operators'
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CanActivate, ActivatedRouteSnapshot } from '@angular/router';
@@ -25,28 +22,31 @@ export class LikeExistsGuard implements CanActivate {
   }
 
   protected hasEntityInStore(id: string): Observable<boolean> {
-    return this.store.select(getLikeById(id))
-      .map((entitie) => !!entitie)
-      .take(1);
+    return this.store.select(getLikeById(id)).pipe(
+      map((entitie) => !!entitie),
+      take(1)
+    );
   }
 
   protected hasEntityInApi(id: string): Observable<boolean> {
-    return this.Like.exists(id)
-      .map((response: any) => !!response.exists)
-      .catch(() => {
+    return this.Like.exists(id).pipe(
+      map((response: any) => !!response.exists),
+      catchError(() => {
         this.store.dispatch(new LikeActions.guardFail());
         return of(false);
-      });
+      })
+    );
   }
 
   protected hasEntity(id: string): Observable<boolean> {
-    return this.hasEntityInStore(id)
-      .switchMap((inStore) => {
+    return this.hasEntityInStore(id).pipe(
+      switchMap((inStore) => {
         if (inStore) {
           return of(inStore);
         }
 
         return this.hasEntityInApi(id);
-      });
+      })
+    );
   }
 }

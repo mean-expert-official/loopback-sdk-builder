@@ -1,8 +1,5 @@
 /* tslint:disable */
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/operator/mergeMap';
+import { map, catchError, startWith, mergeMap } from 'rxjs/operators'
 import { of } from 'rxjs/observable/of';
 import { concat } from 'rxjs/observable/concat';
 import { Injectable } from '@angular/core';
@@ -31,66 +28,78 @@ export class LoopbackAuthEffects {
   @Effect()
   public loadToken$ = this.actions$
     .ofType(LoopbackAuthActionTypes.LOAD_TOKEN)
-    .startWith(new LoopbackAuthActions.loadToken())
-    .map(() => new LoopbackAuthActions.loadTokenSuccess(this.auth.getToken()));
+    .pipe(
+      startWith(new LoopbackAuthActions.loadToken()),
+      map(() => new LoopbackAuthActions.loadTokenSuccess(this.auth.getToken()))
+    );
 
   @Effect()
   public setToken$ = this.actions$
     .ofType(LoopbackAuthActionTypes.SET_TOKEN)
-    .map((action: LoopbackAction) => {
-      this.auth.setToken(action.payload);
-      this.auth.setRememberMe(true);
-      this.auth.save();
+    .pipe(
+      map((action: LoopbackAction) => {
+        this.auth.setToken(action.payload);
+        this.auth.setRememberMe(true);
+        this.auth.save();
 
-      return new LoopbackAuthActions.setTokenSuccess(action.payload, action.meta);
-    });
+        return new LoopbackAuthActions.setTokenSuccess(action.payload, action.meta);
+      })
+    );
 
   @Effect()
   public setUser$ = this.actions$
     .ofType(LoopbackAuthActionTypes.SET_USER)
-    .map((action: LoopbackAction) => {
-      this.auth.setToken(Object.assign({}, this.auth.getToken(), {
-        userId: action.payload.id,
-        user: action.payload
-      }));
-      this.auth.setRememberMe(true);
-      this.auth.save();
+    .pipe(
+      map((action: LoopbackAction) => {
+        this.auth.setToken(Object.assign({}, this.auth.getToken(), {
+          userId: action.payload.id,
+          user: action.payload
+        }));
+        this.auth.setRememberMe(true);
+        this.auth.save();
 
-      return new LoopbackAuthActions.setUserSuccess(action.payload, action.meta);
-    });
+        return new LoopbackAuthActions.setUserSuccess(action.payload, action.meta);
+      })
+    );
 
   @Effect()
   public updateUserProperties$ = this.actions$
     .ofType(LoopbackAuthActionTypes.UPDATE_USER_PROPERTIES)
-    .mergeMap((action: LoopbackAction) => {
-      const token = this.auth.getToken();
-      return this.user.patchAttributes(token.userId, action.payload)
-        .map((response) => {
-          this.auth.setToken(Object.assign({}, this.auth.getToken(), {
-            userId: action.payload.id || this.auth.getCurrentUserId(),
-            user: Object.assign({}, this.auth.getCurrentUserData(), action.payload)
-          }));
-          this.auth.save();
-          return new LoopbackAuthActions.updateUserPropertiesSuccess(action.payload, action.meta);
-        })
-        .catch((error) => concat(
-          of(new LoopbackAuthActions.updateUserPropertiesFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ));
-    });
+    .pipe(
+      mergeMap((action: LoopbackAction) => {
+        const token = this.auth.getToken();
+        return this.user.patchAttributes(token.userId, action.payload)
+          .pipe(
+            map((response) => {
+              this.auth.setToken(Object.assign({}, this.auth.getToken(), {
+                userId: action.payload.id || this.auth.getCurrentUserId(),
+                user: Object.assign({}, this.auth.getCurrentUserData(), action.payload)
+              }));
+              this.auth.save();
+              return new LoopbackAuthActions.updateUserPropertiesSuccess(action.payload, action.meta);
+            }),
+            catchError((error) => concat(
+              of(new LoopbackAuthActions.updateUserPropertiesFail(error, action.meta)),
+              of(new LoopbackErrorActions.error(error, action.meta))
+            ))
+          );
+      })
+    );
 
   @Effect()
   public updateUserState$ = this.actions$
     .ofType(LoopbackAuthActionTypes.UPDATE_USER_STATE)
-    .map((action: LoopbackAction) => {
-      this.auth.setToken(Object.assign({}, this.auth.getToken(), {
-        userId: action.payload.id || this.auth.getCurrentUserId(),
-        user: Object.assign({}, this.auth.getCurrentUserData(), action.payload)
-      }));
-      this.auth.save();
+    .pipe(
+      map((action: LoopbackAction) => {
+        this.auth.setToken(Object.assign({}, this.auth.getToken(), {
+          userId: action.payload.id || this.auth.getCurrentUserId(),
+          user: Object.assign({}, this.auth.getCurrentUserData(), action.payload)
+        }));
+        this.auth.save();
 
-      return new LoopbackAuthActions.updateUserStateSuccess(action.payload, action.meta);
-    });
+        return new LoopbackAuthActions.updateUserStateSuccess(action.payload, action.meta);
+      })
+    );
 
   constructor(
     private actions$: Actions,

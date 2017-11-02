@@ -1,6 +1,6 @@
 /* tslint:disable */
 
-import 'rxjs/add/operator/finally';
+import { map, finalize } from 'rxjs/operators'
 import { AsyncSubject } from 'rxjs/AsyncSubject';
 import { RealTime } from '../../services';
 import { createIO } from '../io';

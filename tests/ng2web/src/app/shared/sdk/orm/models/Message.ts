@@ -1,6 +1,6 @@
 /* tslint:disable */
 
-import 'rxjs/add/operator/finally';
+import { map, finalize } from 'rxjs/operators'
 import { AsyncSubject } from 'rxjs/AsyncSubject';
 import { RealTime } from '../../services';
 import { createIO } from '../io';
@@ -28,18 +28,20 @@ export class OrmMessage extends OrmBase<Message | MessageInterface> {
       createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
 
       return this.store.select<any>(this.model.getModelDefinition().relations.likes.model + 's')
-        .map((state: any) => state.entities[fk])
-        .finally(() => {
-          destroyStream$.next(1);
-          destroyStream$.complete();
-        });
+        .pipe(
+          map((state: any) => state.entities[fk]),
+          finalize(() => {
+            destroyStream$.next(1);
+            destroyStream$.complete();
+          })
+        );
     } else {
       if (!meta || !meta.justCache) {
         this.store.dispatch(new this.actions.findByIdLikes(id, fk, meta));
       }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.likes.model + 's')
-        .map((state: any) => state.entities[fk]);
+        .pipe(map((state: any) => state.entities[fk]));
     }
     
   }
@@ -60,18 +62,20 @@ export class OrmMessage extends OrmBase<Message | MessageInterface> {
       createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
 
       return this.store.select<any>(this.model.getModelDefinition().relations.replies.model + 's')
-        .map((state: any) => state.entities[fk])
-        .finally(() => {
-          destroyStream$.next(1);
-          destroyStream$.complete();
-        });
+        .pipe(
+          map((state: any) => state.entities[fk]),
+          finalize(() => {
+            destroyStream$.next(1);
+            destroyStream$.complete();
+          })
+        );
     } else {
       if (!meta || !meta.justCache) {
         this.store.dispatch(new this.actions.findByIdReplies(id, fk, meta));
       }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.replies.model + 's')
-        .map((state: any) => state.entities[fk]);
+        .pipe(map((state: any) => state.entities[fk]));
     }
     
   }
@@ -92,18 +96,20 @@ export class OrmMessage extends OrmBase<Message | MessageInterface> {
       createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
 
       return this.store.select<any>(this.model.getModelDefinition().relations.parent.model + 's')
-        .map((state: any) => state.entities[id])
-        .finally(() => {
-          destroyStream$.next(1);
-          destroyStream$.complete();
-        });
+        .pipe(
+          map((state: any) => state.entities[id]),
+          finalize(() => {
+            destroyStream$.next(1);
+            destroyStream$.complete();
+          })
+        );
     } else {
       if (!meta || !meta.justCache) {
         this.store.dispatch(new this.actions.getParent(id, refresh, meta));
       }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.parent.model + 's')
-        .map((state: any) => state.entities[id]);
+        .pipe(map((state: any) => state.entities[id]));
     }
     
   }
@@ -116,18 +122,20 @@ export class OrmMessage extends OrmBase<Message | MessageInterface> {
       createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
 
       return this.store.select<any>(this.model.getModelDefinition().relations.room.model + 's')
-        .map((state: any) => state.entities[id])
-        .finally(() => {
-          destroyStream$.next(1);
-          destroyStream$.complete();
-        });
+        .pipe(
+          map((state: any) => state.entities[id]),
+          finalize(() => {
+            destroyStream$.next(1);
+            destroyStream$.complete();
+          })
+        );
     } else {
       if (!meta || !meta.justCache) {
         this.store.dispatch(new this.actions.getRoom(id, refresh, meta));
       }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.room.model + 's')
-        .map((state: any) => state.entities[id]);
+        .pipe(map((state: any) => state.entities[id]));
     }
     
   }
@@ -141,12 +149,14 @@ export class OrmMessage extends OrmBase<Message | MessageInterface> {
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.likes.model + 's')
-          .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'likes', Message))
-          .finally(() => {
-            destroyStream$.next(1);
-            destroyStream$.complete();
-          })
+          .pipe(
+            map(toArray),
+            map((state: any[]) => filterById(state, id, 'likes', Message)),
+            finalize(() => {
+              destroyStream$.next(1);
+              destroyStream$.complete();
+            })
+          )
         , filter, this.store, models[this.model.getModelDefinition().relations.likes.model]);
     } else {
       if (!meta || !meta.justCache) {
@@ -155,8 +165,10 @@ export class OrmMessage extends OrmBase<Message | MessageInterface> {
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.likes.model + 's')
-          .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'likes', Message))
+          .pipe(
+            map(toArray),
+            map((state: any[]) => filterById(state, id, 'likes', Message))
+          )
         , filter, this.store, models[this.model.getModelDefinition().relations.likes.model]);
     }
     
@@ -179,12 +191,14 @@ export class OrmMessage extends OrmBase<Message | MessageInterface> {
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.replies.model + 's')
-          .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'replies', Message))
-          .finally(() => {
-            destroyStream$.next(1);
-            destroyStream$.complete();
-          })
+          .pipe(
+            map(toArray),
+            map((state: any[]) => filterById(state, id, 'replies', Message)),
+            finalize(() => {
+              destroyStream$.next(1);
+              destroyStream$.complete();
+            })
+          )
         , filter, this.store, models[this.model.getModelDefinition().relations.replies.model]);
     } else {
       if (!meta || !meta.justCache) {
@@ -193,8 +207,10 @@ export class OrmMessage extends OrmBase<Message | MessageInterface> {
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.replies.model + 's')
-          .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'replies', Message))
+          .pipe(
+            map(toArray),
+            map((state: any[]) => filterById(state, id, 'replies', Message))
+          )
         , filter, this.store, models[this.model.getModelDefinition().relations.replies.model]);
     }
     
