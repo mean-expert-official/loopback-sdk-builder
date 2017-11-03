@@ -26,6 +26,7 @@ var argv = optimist
   .describe('l', 'Client\'s library (angular, react, vuejs <todo> ...)')
   .describe('d', 'Platform specific drivers (ng2web, ng2native, ng2universal, react-web)')
   .describe('i', 'Enable PubSub, IO and FireLoop functionality')
+  .describe('n', 'Enable NGRX functionality (enabled | orm) EXPERIMENTAL FEATURE')
   .describe('w', 'Automatically wipe SDK Directory')
   .describe('v', 'Add default values in models')
   .describe('f', 'Generate only FireLoop SDK + Auth Services')
@@ -39,7 +40,7 @@ var argv = optimist
   .default('f', 'disabled')
   .default('q', false)
   .default('t', true)
-  .alias({ u: 'url', m: 'module-name', l: 'library', i: 'io', d: 'driver', w: 'wipe', v: 'default-values', f: 'fireloop-only', q: 'quiet', t: 'typescript' })
+  .alias({ u: 'url', m: 'module-name', l: 'library', i: 'io', n: 'ngrx', d: 'driver', w: 'wipe', v: 'default-values', f: 'fireloop-only', q: 'quiet', t: 'typescript' })
   .demand(1)
   .argv;
 /**
@@ -97,6 +98,7 @@ var context = {
   apiUrl: argv['url'] || app.get('restApiRoot') || '/api',
   outputFolder: argv._[1],
   isIo: argv['i'] || 'disabled',
+  isNgrx: argv['n'] || 'disabled',
   driver: argv['d'] || 'ng2web',
   wipe: argv['w'] || 'disabled',
   defaultValue: argv['v'] || 'disabled',

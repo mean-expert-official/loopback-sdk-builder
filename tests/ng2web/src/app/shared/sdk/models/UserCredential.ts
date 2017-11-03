@@ -58,6 +58,7 @@ export class UserCredential implements UserCredentialInterface {
       name: 'UserCredential',
       plural: 'user-credentials',
       path: 'user-credentials',
+      idName: 'id',
       properties: {
         "provider": {
           name: 'provider',

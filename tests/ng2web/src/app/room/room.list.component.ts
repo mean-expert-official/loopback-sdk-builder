@@ -5,7 +5,7 @@ import { AccountApi, RoomApi, LoggerService, RealTime, SDKModels } from '../shar
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoopBackConfig } from '../shared/sdk/lb.config';
-LoopBackConfig.setBaseURL('http://127.0.0.1:3002');
+LoopBackConfig.setBaseURL('http://localhost:3000');
 
 import * as io from 'socket.io-client';
 

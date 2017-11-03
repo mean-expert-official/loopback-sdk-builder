@@ -12,5 +12,6 @@ export * from './RoomAdmin';
 export * from './Storage';
 export * from './UserCredential';
 export * from './UserIdentity';
+export * from './RoomCategory';
 export * from './BaseModels';
 export * from './FireLoopRef';

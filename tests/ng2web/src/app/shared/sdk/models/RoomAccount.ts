@@ -54,6 +54,7 @@ export class RoomAccount implements RoomAccountInterface {
       name: 'RoomAccount',
       plural: 'room-accounts',
       path: 'room-accounts',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',
@@ -80,12 +81,18 @@ export class RoomAccount implements RoomAccountInterface {
         account: {
           name: 'account',
           type: 'Account',
-          model: 'Account'
+          model: 'Account',
+          relationType: 'belongsTo',
+                  keyFrom: 'accountId',
+          keyTo: 'id'
         },
         room: {
           name: 'room',
           type: 'Room',
-          model: 'Room'
+          model: 'Room',
+          relationType: 'belongsTo',
+                  keyFrom: 'roomId',
+          keyTo: 'id'
         },
       }
     }

@@ -1,10 +1,12 @@
+/* tslint:disable */
+import 'rxjs/add/operator/share';
 import { Injectable, Inject } from '@angular/core';
 import { IO } from './io.service';
 import { LoopBackAuth } from './auth.service';
 import { FireLoop } from '../../models/FireLoop';
 import { SocketConnection } from '../../sockets/socket.connections';
 import { SDKModels } from '../custom/SDKModels';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 /**

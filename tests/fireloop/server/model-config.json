@@ -13,6 +13,7 @@
       "./mixins",
       "../node_modules/@mean-expert/loopback-stats-mixin/dist",
       "../node_modules/@mean-expert/loopback-component-realtime/dist/mixins",
+      "../node_modules/loopback-include-through-mixin",
       "../node_modules/loopback-ds-timestamp-mixin"
     ]
   },

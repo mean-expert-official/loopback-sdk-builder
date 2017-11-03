@@ -56,6 +56,7 @@ export class Like implements LikeInterface {
       name: 'Like',
       plural: 'likes',
       path: 'likes',
+      idName: 'id',
       properties: {
         "set": {
           name: 'set',
@@ -87,12 +88,18 @@ export class Like implements LikeInterface {
         message: {
           name: 'message',
           type: 'Message',
-          model: 'Message'
+          model: 'Message',
+          relationType: 'belongsTo',
+                  keyFrom: 'messageId',
+          keyTo: 'id'
         },
         room: {
           name: 'room',
           type: 'Room',
-          model: 'Room'
+          model: 'Room',
+          relationType: 'belongsTo',
+                  keyFrom: 'roomId',
+          keyTo: 'id'
         },
       }
     }

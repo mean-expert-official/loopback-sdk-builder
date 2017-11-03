@@ -42,6 +42,7 @@ export class Storage implements StorageInterface {
       name: 'Storage',
       plural: 'storages',
       path: 'storages',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',
