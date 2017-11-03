@@ -11,12 +11,11 @@
     ]
   },
   "files": [
-    "test.orm.ts"
+    "test.ngrx.ts"
   ],
   "include": [
     "**/*.spec.ts",
     "**/*.spec.ngrx.ts",
-    "**/*.spec.orm.ts",
     "**/*.d.ts"
   ]
 }
