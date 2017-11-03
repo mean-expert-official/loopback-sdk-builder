@@ -14,7 +14,7 @@ export class OrmModule {
   constructor(@Optional() @SkipSelf() parentModule: OrmModule) {
     if (parentModule) {
       throw new Error(
-        'OrmModule.forRoot() called twice. Lazy loaded modules should use OrmModule instead.',
+        'OrmModule.forRoot() called twice. Lazy loaded modules do not need to import OrmModule.',
       );
     }
   }
