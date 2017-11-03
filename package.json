@@ -11,11 +11,13 @@
     "test": "npm run load:api & npm run test:all",
     "pretest": "cd tests/fireloop && npm install && npm install ../../ && npm run build:sdk",
     "pretest:ng2webORM": "cd tests/fireloop && npm run build:sdk:ng2webORM",
+    "pretest:ng2webNGRX": "cd tests/fireloop && npm run build:sdk:ng2webNGRX",
     "load:api": "cd tests/fireloop && NODE_ENV=ci node server/server",
     "test:ng2web": "cd tests/ng2web && npm test",
+    "test:ng2webNGRX": "cd tests/ng2web && npm run test:ngrx",
     "test:ng2webORM": "cd tests/ng2web && npm run test:orm",
     "test:react-web": "cd tests/react-web && npm test",
-    "test:all": "npm run test:ng2web && npm run test:react-web && npm run test:ng2webORM"
+    "test:all": "npm run test:ng2web && npm run test:react-web && npm run test:ng2webNGRX && npm run test:ng2webORM"
   },
   "repository": {
     "type": "git",

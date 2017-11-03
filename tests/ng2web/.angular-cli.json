@@ -36,7 +36,31 @@
         "favicon.ico"
       ],
       "index": "index.html",
-      "main": "main.ts",
+      "main": "main.ngrx.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ngrx.ts",
+      "tsconfig": "tsconfig.app.ngrx.json",
+      "testTsconfig": "tsconfig.spec.ngrx.json",
+      "prefix": "app",
+      "styles": [
+        "styles.css"
+      ],
+      "scripts": [],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    },
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.orm.ts",
       "polyfills": "polyfills.ts",
       "test": "test.orm.ts",
       "tsconfig": "tsconfig.app.orm.json",
