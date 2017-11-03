@@ -2,6 +2,14 @@
 
 This file is created to keep history of the LoopBack SDK Builder, it does not consider or keeps any history of its parent module `loopback-sdk-angular`
 
+## Release 2.1.0
+Release 2.1.0
+
+Implemented Angular 2+ SDK
+Implemented ReactJS SDK
+Implemented NGRX / ORM
+Thanks a lot to all the contributors for making this possible, special tanks goes to @JonnyBGod and @kattsushi for React and NgRX Implementations.
+
 ## Release 2.1.0-rc.14
 
 - Milestone Details: https://github.com/mean-expert-official/loopback-sdk-builder/milestone/48?closed=1
