@@ -1,7 +1,5 @@
 /* tslint:disable */
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/mergeMap';
+import { map, catchError, mergeMap } from 'rxjs/operators'
 import { of } from 'rxjs/observable/of';
 import { concat } from 'rxjs/observable/concat';
 import { Injectable, Inject } from '@angular/core';

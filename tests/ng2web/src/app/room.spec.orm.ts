@@ -1,5 +1,6 @@
 /* tslint:disable:no-unused-variable */
 import 'rxjs/add/operator/auditTime';
+import 'rxjs/add/operator/take';
 import { TestBed, async, inject } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { StoreModule, Store } from '@ngrx/store';

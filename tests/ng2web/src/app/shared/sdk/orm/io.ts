@@ -1,5 +1,5 @@
 /* tslint:disable */
-import 'rxjs/add/operator/takeUntil';
+import { map, takeUntil, finalize } from 'rxjs/operators'
 import { AsyncSubject } from 'rxjs/AsyncSubject';
 import { Store } from '@ngrx/store';
 
@@ -23,35 +23,35 @@ export function createIO(
     }
   }, includeReferences(filter, 'root', model, realTime));
 
-  refs.root.ref.on('change', filter)
-    .map((data: any) => {
-      if (!Array.isArray(data)) {
-        data = [data];
-      }
+  refs.root.ref.on('change', filter).pipe(
+      map((data: any) => {
+        if (!Array.isArray(data)) {
+          data = [data];
+        }
 
-      const resolved = resolver({data, meta}, model.getModelName(), 'findSuccess');
-      for (const item of resolved) {
-        store.dispatch(item);
-      }
-      return data;
-    })
-    .finally(() => {
-      for (let key in refs) {
-        if (refs.hasOwnProperty(key)) {
-          if (refs[key].hasOwnProperty('on')) {
-            refs[key].on.unsubscribe();
-          }
+        const resolved = resolver({data, meta}, model.getModelName(), 'findSuccess');
+        for (const item of resolved) {
+          store.dispatch(item);
+        }
+        return data;
+      }),
+      finalize(() => {
+        for (let key in refs) {
+          if (refs.hasOwnProperty(key)) {
+            if (refs[key].hasOwnProperty('on')) {
+              refs[key].on.unsubscribe();
+            }
 
-          if (refs[key].hasOwnProperty('ref')) {
-            refs[key].ref.dispose();
+            if (refs[key].hasOwnProperty('ref')) {
+              refs[key].ref.dispose();
+            }
           }
         }
-      }
 
-      refs = null;
-    })
-    .takeUntil(destroyStream$)
-    .subscribe((data: any) => {
+        refs = null;
+      }),
+      takeUntil(destroyStream$)
+    ).subscribe((data: any) => {
       if (!filter.include) {
         return;
       }
@@ -131,19 +131,19 @@ function includeOns(
   relationSchema: any,
   meta?: any
 ) {
-  refs[refName].on = refs[refName].ref.on('change', filter)
-    .map((data: any) => {
-      if (!Array.isArray(data)) {
-        data = [data];
-      }
+  refs[refName].on = refs[refName].ref.on('change', filter).pipe(
+      map((data: any) => {
+        if (!Array.isArray(data)) {
+          data = [data];
+        }
 
-      const resolved = resolver({data, meta}, models[relationSchema.model].getModelName(), 'findSuccess');
-      for (const item of resolved) {
-        store.dispatch(item);
-      }
-      return data;
-    })
-    .subscribe((data: any) => {
+        const resolved = resolver({data, meta}, models[relationSchema.model].getModelName(), 'findSuccess');
+        for (const item of resolved) {
+          store.dispatch(item);
+        }
+        return data;
+      })
+    ).subscribe((data: any) => {
       // console.log(refName, data);
       if (!filter.include) {
         return;

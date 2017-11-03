@@ -1,7 +1,5 @@
 /* tslint:disable */
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/mergeMap';
+import { map, catchError, mergeMap } from 'rxjs/operators'
 import { of } from 'rxjs/observable/of';
 import { concat } from 'rxjs/observable/concat';
 import { Injectable, Inject } from '@angular/core';
@@ -20,32 +18,36 @@ import { RoomAdminApi } from '../services/index';
 export class RoomAdminEffects extends BaseLoopbackEffects {
   @Effect()
   public getAccount$ = this.actions$
-    .ofType(RoomAdminActionTypes.GET_ACCOUNT)
-    .mergeMap((action: LoopbackAction) =>
-      this.roomadmin.getAccount(action.payload.id, action.payload.refresh)
-        .mergeMap((response: any) => concat(
-          resolver({data: response, meta: action.meta}, 'Account', 'findSuccess'),
-          of(new RoomAdminActions.getAccountSuccess(action.payload.id, response, action.meta))
-        ))
-        .catch((error: any) => concat(
-          of(new RoomAdminActions.getAccountFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
+    .ofType(RoomAdminActionTypes.GET_ACCOUNT).pipe(
+      mergeMap((action: LoopbackAction) =>
+        this.roomadmin.getAccount(action.payload.id, action.payload.refresh).pipe(
+          mergeMap((response: any) => concat(
+            resolver({data: response, meta: action.meta}, 'Account', 'findSuccess'),
+            of(new RoomAdminActions.getAccountSuccess(action.payload.id, response, action.meta))
+          )),
+          catchError((error: any) => concat(
+            of(new RoomAdminActions.getAccountFail(error, action.meta)),
+            of(new LoopbackErrorActions.error(error, action.meta))
+          ))
+        )
+      )
     );
 
   @Effect()
   public getRoom$ = this.actions$
-    .ofType(RoomAdminActionTypes.GET_ROOM)
-    .mergeMap((action: LoopbackAction) =>
-      this.roomadmin.getRoom(action.payload.id, action.payload.refresh)
-        .mergeMap((response: any) => concat(
-          resolver({data: response, meta: action.meta}, 'Room', 'findSuccess'),
-          of(new RoomAdminActions.getRoomSuccess(action.payload.id, response, action.meta))
-        ))
-        .catch((error: any) => concat(
-          of(new RoomAdminActions.getRoomFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
+    .ofType(RoomAdminActionTypes.GET_ROOM).pipe(
+      mergeMap((action: LoopbackAction) =>
+        this.roomadmin.getRoom(action.payload.id, action.payload.refresh).pipe(
+          mergeMap((response: any) => concat(
+            resolver({data: response, meta: action.meta}, 'Room', 'findSuccess'),
+            of(new RoomAdminActions.getRoomSuccess(action.payload.id, response, action.meta))
+          )),
+          catchError((error: any) => concat(
+            of(new RoomAdminActions.getRoomFail(error, action.meta)),
+            of(new LoopbackErrorActions.error(error, action.meta))
+          ))
+        )
+      )
     );
 
     /**

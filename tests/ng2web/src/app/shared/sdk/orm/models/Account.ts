@@ -1,6 +1,6 @@
 /* tslint:disable */
 
-import 'rxjs/add/operator/finally';
+import { map, finalize } from 'rxjs/operators'
 import { AsyncSubject } from 'rxjs/AsyncSubject';
 import { RealTime } from '../../services';
 import { createIO } from '../io';
@@ -28,18 +28,20 @@ export class OrmAccount extends OrmBase<Account | AccountInterface> {
       createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
 
       return this.store.select<any>(this.model.getModelDefinition().relations.accessTokens.model + 's')
-        .map((state: any) => state.entities[fk])
-        .finally(() => {
-          destroyStream$.next(1);
-          destroyStream$.complete();
-        });
+        .pipe(
+          map((state: any) => state.entities[fk]),
+          finalize(() => {
+            destroyStream$.next(1);
+            destroyStream$.complete();
+          })
+        );
     } else {
       if (!meta || !meta.justCache) {
         this.store.dispatch(new this.actions.findByIdAccessTokens(id, fk, meta));
       }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.accessTokens.model + 's')
-        .map((state: any) => state.entities[fk]);
+        .pipe(map((state: any) => state.entities[fk]));
     }
     
   }
@@ -60,18 +62,20 @@ export class OrmAccount extends OrmBase<Account | AccountInterface> {
       createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
 
       return this.store.select<any>(this.model.getModelDefinition().relations.rooms.model + 's')
-        .map((state: any) => state.entities[fk])
-        .finally(() => {
-          destroyStream$.next(1);
-          destroyStream$.complete();
-        });
+        .pipe(
+          map((state: any) => state.entities[fk]),
+          finalize(() => {
+            destroyStream$.next(1);
+            destroyStream$.complete();
+          })
+        );
     } else {
       if (!meta || !meta.justCache) {
         this.store.dispatch(new this.actions.findByIdRooms(id, fk, meta));
       }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.rooms.model + 's')
-        .map((state: any) => state.entities[fk]);
+        .pipe(map((state: any) => state.entities[fk]));
     }
     
   }
@@ -100,18 +104,20 @@ export class OrmAccount extends OrmBase<Account | AccountInterface> {
       createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
 
       return this.store.select<any>(this.model.getModelDefinition().relations.administrations.model + 's')
-        .map((state: any) => state.entities[fk])
-        .finally(() => {
-          destroyStream$.next(1);
-          destroyStream$.complete();
-        });
+        .pipe(
+          map((state: any) => state.entities[fk]),
+          finalize(() => {
+            destroyStream$.next(1);
+            destroyStream$.complete();
+          })
+        );
     } else {
       if (!meta || !meta.justCache) {
         this.store.dispatch(new this.actions.findByIdAdministrations(id, fk, meta));
       }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.administrations.model + 's')
-        .map((state: any) => state.entities[fk]);
+        .pipe(map((state: any) => state.entities[fk]));
     }
     
   }
@@ -141,12 +147,14 @@ export class OrmAccount extends OrmBase<Account | AccountInterface> {
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.accessTokens.model + 's')
-          .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'accessTokens', Account))
-          .finally(() => {
-            destroyStream$.next(1);
-            destroyStream$.complete();
-          })
+          .pipe(
+            map(toArray),
+            map((state: any[]) => filterById(state, id, 'accessTokens', Account)),
+            finalize(() => {
+              destroyStream$.next(1);
+              destroyStream$.complete();
+            })
+          )
         , filter, this.store, models[this.model.getModelDefinition().relations.accessTokens.model]);
     } else {
       if (!meta || !meta.justCache) {
@@ -155,8 +163,10 @@ export class OrmAccount extends OrmBase<Account | AccountInterface> {
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.accessTokens.model + 's')
-          .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'accessTokens', Account))
+          .pipe(
+            map(toArray),
+            map((state: any[]) => filterById(state, id, 'accessTokens', Account))
+          )
         , filter, this.store, models[this.model.getModelDefinition().relations.accessTokens.model]);
     }
     
@@ -179,12 +189,14 @@ export class OrmAccount extends OrmBase<Account | AccountInterface> {
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.rooms.model + 's')
-          .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'rooms', Account))
-          .finally(() => {
-            destroyStream$.next(1);
-            destroyStream$.complete();
-          })
+          .pipe(
+            map(toArray),
+            map((state: any[]) => filterById(state, id, 'rooms', Account)),
+            finalize(() => {
+              destroyStream$.next(1);
+              destroyStream$.complete();
+            })
+          )
         , filter, this.store, models[this.model.getModelDefinition().relations.rooms.model]);
     } else {
       if (!meta || !meta.justCache) {
@@ -193,8 +205,10 @@ export class OrmAccount extends OrmBase<Account | AccountInterface> {
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.rooms.model + 's')
-          .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'rooms', Account))
+          .pipe(
+            map(toArray),
+            map((state: any[]) => filterById(state, id, 'rooms', Account))
+          )
         , filter, this.store, models[this.model.getModelDefinition().relations.rooms.model]);
     }
     
@@ -217,12 +231,14 @@ export class OrmAccount extends OrmBase<Account | AccountInterface> {
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.administrations.model + 's')
-          .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'administrations', Account))
-          .finally(() => {
-            destroyStream$.next(1);
-            destroyStream$.complete();
-          })
+          .pipe(
+            map(toArray),
+            map((state: any[]) => filterById(state, id, 'administrations', Account)),
+            finalize(() => {
+              destroyStream$.next(1);
+              destroyStream$.complete();
+            })
+          )
         , filter, this.store, models[this.model.getModelDefinition().relations.administrations.model]);
     } else {
       if (!meta || !meta.justCache) {
@@ -231,8 +247,10 @@ export class OrmAccount extends OrmBase<Account | AccountInterface> {
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.administrations.model + 's')
-          .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'administrations', Account))
+          .pipe(
+            map(toArray),
+            map((state: any[]) => filterById(state, id, 'administrations', Account))
+          )
         , filter, this.store, models[this.model.getModelDefinition().relations.administrations.model]);
     }
     

@@ -1,6 +1,6 @@
 /* tslint:disable */
 
-import 'rxjs/add/operator/finally';
+import { map, finalize } from 'rxjs/operators'
 import { AsyncSubject } from 'rxjs/AsyncSubject';
 import { RealTime } from '../../services';
 import { createIO } from '../io';
@@ -28,18 +28,20 @@ export class OrmRoom extends OrmBase<Room | RoomInterface> {
       createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
 
       return this.store.select<any>(this.model.getModelDefinition().relations.messages.model + 's')
-        .map((state: any) => state.entities[fk])
-        .finally(() => {
-          destroyStream$.next(1);
-          destroyStream$.complete();
-        });
+        .pipe(
+          map((state: any) => state.entities[fk]),
+          finalize(() => {
+            destroyStream$.next(1);
+            destroyStream$.complete();
+          })
+        );
     } else {
       if (!meta || !meta.justCache) {
         this.store.dispatch(new this.actions.findByIdMessages(id, fk, meta));
       }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.messages.model + 's')
-        .map((state: any) => state.entities[fk]);
+        .pipe(map((state: any) => state.entities[fk]));
     }
     
   }
@@ -60,18 +62,20 @@ export class OrmRoom extends OrmBase<Room | RoomInterface> {
       createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
 
       return this.store.select<any>(this.model.getModelDefinition().relations.likes.model + 's')
-        .map((state: any) => state.entities[fk])
-        .finally(() => {
-          destroyStream$.next(1);
-          destroyStream$.complete();
-        });
+        .pipe(
+          map((state: any) => state.entities[fk]),
+          finalize(() => {
+            destroyStream$.next(1);
+            destroyStream$.complete();
+          })
+        );
     } else {
       if (!meta || !meta.justCache) {
         this.store.dispatch(new this.actions.findByIdLikes(id, fk, meta));
       }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.likes.model + 's')
-        .map((state: any) => state.entities[fk]);
+        .pipe(map((state: any) => state.entities[fk]));
     }
     
   }
@@ -92,18 +96,20 @@ export class OrmRoom extends OrmBase<Room | RoomInterface> {
       createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
 
       return this.store.select<any>(this.model.getModelDefinition().relations.categories.model + 's')
-        .map((state: any) => state.entities[fk])
-        .finally(() => {
-          destroyStream$.next(1);
-          destroyStream$.complete();
-        });
+        .pipe(
+          map((state: any) => state.entities[fk]),
+          finalize(() => {
+            destroyStream$.next(1);
+            destroyStream$.complete();
+          })
+        );
     } else {
       if (!meta || !meta.justCache) {
         this.store.dispatch(new this.actions.findByIdCategories(id, fk, meta));
       }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.categories.model + 's')
-        .map((state: any) => state.entities[fk]);
+        .pipe(map((state: any) => state.entities[fk]));
     }
     
   }
@@ -132,18 +138,20 @@ export class OrmRoom extends OrmBase<Room | RoomInterface> {
       createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
 
       return this.store.select<any>(this.model.getModelDefinition().relations.accounts.model + 's')
-        .map((state: any) => state.entities[fk])
-        .finally(() => {
-          destroyStream$.next(1);
-          destroyStream$.complete();
-        });
+        .pipe(
+          map((state: any) => state.entities[fk]),
+          finalize(() => {
+            destroyStream$.next(1);
+            destroyStream$.complete();
+          })
+        );
     } else {
       if (!meta || !meta.justCache) {
         this.store.dispatch(new this.actions.findByIdAccounts(id, fk, meta));
       }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.accounts.model + 's')
-        .map((state: any) => state.entities[fk]);
+        .pipe(map((state: any) => state.entities[fk]));
     }
     
   }
@@ -172,18 +180,20 @@ export class OrmRoom extends OrmBase<Room | RoomInterface> {
       createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
 
       return this.store.select<any>(this.model.getModelDefinition().relations.admins.model + 's')
-        .map((state: any) => state.entities[fk])
-        .finally(() => {
-          destroyStream$.next(1);
-          destroyStream$.complete();
-        });
+        .pipe(
+          map((state: any) => state.entities[fk]),
+          finalize(() => {
+            destroyStream$.next(1);
+            destroyStream$.complete();
+          })
+        );
     } else {
       if (!meta || !meta.justCache) {
         this.store.dispatch(new this.actions.findByIdAdmins(id, fk, meta));
       }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.admins.model + 's')
-        .map((state: any) => state.entities[fk]);
+        .pipe(map((state: any) => state.entities[fk]));
     }
     
   }
@@ -213,12 +223,14 @@ export class OrmRoom extends OrmBase<Room | RoomInterface> {
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.messages.model + 's')
-          .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'messages', Room))
-          .finally(() => {
-            destroyStream$.next(1);
-            destroyStream$.complete();
-          })
+          .pipe(
+            map(toArray),
+            map((state: any[]) => filterById(state, id, 'messages', Room)),
+            finalize(() => {
+              destroyStream$.next(1);
+              destroyStream$.complete();
+            })
+          )
         , filter, this.store, models[this.model.getModelDefinition().relations.messages.model]);
     } else {
       if (!meta || !meta.justCache) {
@@ -227,8 +239,10 @@ export class OrmRoom extends OrmBase<Room | RoomInterface> {
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.messages.model + 's')
-          .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'messages', Room))
+          .pipe(
+            map(toArray),
+            map((state: any[]) => filterById(state, id, 'messages', Room))
+          )
         , filter, this.store, models[this.model.getModelDefinition().relations.messages.model]);
     }
     
@@ -251,12 +265,14 @@ export class OrmRoom extends OrmBase<Room | RoomInterface> {
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.likes.model + 's')
-          .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'likes', Room))
-          .finally(() => {
-            destroyStream$.next(1);
-            destroyStream$.complete();
-          })
+          .pipe(
+            map(toArray),
+            map((state: any[]) => filterById(state, id, 'likes', Room)),
+            finalize(() => {
+              destroyStream$.next(1);
+              destroyStream$.complete();
+            })
+          )
         , filter, this.store, models[this.model.getModelDefinition().relations.likes.model]);
     } else {
       if (!meta || !meta.justCache) {
@@ -265,8 +281,10 @@ export class OrmRoom extends OrmBase<Room | RoomInterface> {
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.likes.model + 's')
-          .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'likes', Room))
+          .pipe(
+            map(toArray),
+            map((state: any[]) => filterById(state, id, 'likes', Room))
+          )
         , filter, this.store, models[this.model.getModelDefinition().relations.likes.model]);
     }
     
@@ -289,12 +307,14 @@ export class OrmRoom extends OrmBase<Room | RoomInterface> {
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.categories.model + 's')
-          .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'categories', Room))
-          .finally(() => {
-            destroyStream$.next(1);
-            destroyStream$.complete();
-          })
+          .pipe(
+            map(toArray),
+            map((state: any[]) => filterById(state, id, 'categories', Room)),
+            finalize(() => {
+              destroyStream$.next(1);
+              destroyStream$.complete();
+            })
+          )
         , filter, this.store, models[this.model.getModelDefinition().relations.categories.model]);
     } else {
       if (!meta || !meta.justCache) {
@@ -303,8 +323,10 @@ export class OrmRoom extends OrmBase<Room | RoomInterface> {
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.categories.model + 's')
-          .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'categories', Room))
+          .pipe(
+            map(toArray),
+            map((state: any[]) => filterById(state, id, 'categories', Room))
+          )
         , filter, this.store, models[this.model.getModelDefinition().relations.categories.model]);
     }
     
@@ -327,12 +349,14 @@ export class OrmRoom extends OrmBase<Room | RoomInterface> {
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.accounts.model + 's')
-          .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'accounts', Room))
-          .finally(() => {
-            destroyStream$.next(1);
-            destroyStream$.complete();
-          })
+          .pipe(
+            map(toArray),
+            map((state: any[]) => filterById(state, id, 'accounts', Room)),
+            finalize(() => {
+              destroyStream$.next(1);
+              destroyStream$.complete();
+            })
+          )
         , filter, this.store, models[this.model.getModelDefinition().relations.accounts.model]);
     } else {
       if (!meta || !meta.justCache) {
@@ -341,8 +365,10 @@ export class OrmRoom extends OrmBase<Room | RoomInterface> {
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.accounts.model + 's')
-          .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'accounts', Room))
+          .pipe(
+            map(toArray),
+            map((state: any[]) => filterById(state, id, 'accounts', Room))
+          )
         , filter, this.store, models[this.model.getModelDefinition().relations.accounts.model]);
     }
     
@@ -365,12 +391,14 @@ export class OrmRoom extends OrmBase<Room | RoomInterface> {
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.admins.model + 's')
-          .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'admins', Room))
-          .finally(() => {
-            destroyStream$.next(1);
-            destroyStream$.complete();
-          })
+          .pipe(
+            map(toArray),
+            map((state: any[]) => filterById(state, id, 'admins', Room)),
+            finalize(() => {
+              destroyStream$.next(1);
+              destroyStream$.complete();
+            })
+          )
         , filter, this.store, models[this.model.getModelDefinition().relations.admins.model]);
     } else {
       if (!meta || !meta.justCache) {
@@ -379,8 +407,10 @@ export class OrmRoom extends OrmBase<Room | RoomInterface> {
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.admins.model + 's')
-          .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'admins', Room))
+          .pipe(
+            map(toArray),
+            map((state: any[]) => filterById(state, id, 'admins', Room))
+          )
         , filter, this.store, models[this.model.getModelDefinition().relations.admins.model]);
     }
     

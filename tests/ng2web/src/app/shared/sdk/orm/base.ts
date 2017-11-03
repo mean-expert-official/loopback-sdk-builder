@@ -1,7 +1,6 @@
 /* tslint:disable */
 
-import 'rxjs/add/operator/finally';
-import 'rxjs/add/operator/takeUntil';
+import { map, finalize } from 'rxjs/operators'
 import { AsyncSubject } from 'rxjs/AsyncSubject';
 import { RealTime } from '../services';
 import { createIO } from './io';
@@ -22,12 +21,13 @@ export class OrmBase<T> {
       createIO(filter, this.store, destroyStream$, this.model, this.realTime, meta);
 
       return applyFilter(
-        this.store.select<any>(this.model.getModelName() + 's')
-          .map(toArray)
-          .finally(() => {
+        this.store.select<any>(this.model.getModelName() + 's').pipe(
+          map(toArray),
+          finalize(() => {
             destroyStream$.next(1);
             destroyStream$.complete();
           })
+        )
         , filter, this.store, this.model);
     } else {
       if (!meta || !meta.justCache) {
@@ -35,8 +35,7 @@ export class OrmBase<T> {
       }
 
       return applyFilter(
-        this.store.select<any>(this.model.getModelName() + 's')
-          .map(toArray)
+        this.store.select<any>(this.model.getModelName() + 's').pipe(map(toArray))
         , filter, this.store, this.model);
     }
   }
@@ -51,26 +50,22 @@ export class OrmBase<T> {
       createIO(newFilter, this.store, destroyStream$, this.model, this.realTime, meta);
 
       return applyFilter(
-        this.store.select<any>(this.model.getModelName() + 's')
-          .map((state: any) => state.entities[id])
-          .finally(() => {
+        this.store.select<any>(this.model.getModelName() + 's').pipe(
+          map((state: any) => state.entities[id]),
+          finalize(() => {
             destroyStream$.next(1);
             destroyStream$.complete();
           })
-        , filter, this.store, this.model).map((data: any[]) => {
-          return data[0];
-        });
+        )
+        , filter, this.store, this.model).pipe(map((data: any[]) => data[0]));
     } else {
       if (!meta || !meta.justCache) {
         this.store.dispatch(new this.actions.findById(id, filter, meta));
       }
 
       return applyFilter(
-        this.store.select<any>(this.model.getModelName() + 's')
-          .map((state: any) => state.entities[id])
-        , filter, this.store, this.model).map((data: any[]) => {
-          return data[0];
-        });
+        this.store.select<any>(this.model.getModelName() + 's').pipe(map((state: any) => state.entities[id]))
+        , filter, this.store, this.model).pipe(map((data: any[]) => data[0]));
     }
   }
 
@@ -84,25 +79,22 @@ export class OrmBase<T> {
 
       return applyFilter(
         this.store.select<any>(this.model.getModelName() + 's')
-          .map(toArray)
-          .finally(() => {
-            destroyStream$.next(1);
-            destroyStream$.complete();
-          })
-        , newFilter, this.store, this.model).map((data: any[]) => {
-          return data[0];
-        });
+          .pipe(
+            map(toArray),
+            finalize(() => {
+              destroyStream$.next(1);
+              destroyStream$.complete();
+            })
+          )
+        , newFilter, this.store, this.model).pipe(map((data: any[]) => data[0]));
     } else {
       if (!meta || !meta.justCache) {
         this.store.dispatch(new this.actions.findOne(filter, meta));
       }
 
       return applyFilter(
-        this.store.select<any>(this.model.getModelName() + 's')
-          .map(toArray)
-        , newFilter, this.store, this.model).map((data: any[]) => {
-          return data[0];
-        });
+        this.store.select<any>(this.model.getModelName() + 's').pipe(map(toArray))
+        , newFilter, this.store, this.model).pipe(map((data: any[]) => data[0]));
     }
   }
 
