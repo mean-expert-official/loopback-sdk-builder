@@ -4,6 +4,7 @@ import { SocketDriver } from './socket.driver';
 import { AccessToken } from '../models';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/share';
 import { LoopBackConfig } from '../lb.config';
 /**
 * @author Jonathan Casarrubias <twitter:@johncasarrubias> <github:@mean-expert-official>

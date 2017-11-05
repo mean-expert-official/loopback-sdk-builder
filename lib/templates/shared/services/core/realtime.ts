@@ -4,7 +4,8 @@ import { LoopBackAuth } from './auth.service';
 import { FireLoop } from '../../models/FireLoop';
 import { SocketConnection } from '../../sockets/socket.connections';
 import { SDKModels } from '../custom/SDKModels';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/share';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 /**

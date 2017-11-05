@@ -9,7 +9,7 @@ import { LoopBackFilter,  } from '../../models/BaseModels';
 import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { UserIdentity } from '../../models/UserIdentity';
 import { SocketConnection } from '../../sockets/socket.connections';
 import { User } from '../../models/User';
