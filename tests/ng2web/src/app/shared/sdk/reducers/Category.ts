@@ -1,6 +1,5 @@
 /* tslint:disable */
-import { createSelector } from 'reselect';
-import { Action } from '@ngrx/store';
+import { Action, createSelector } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { BaseReducerFactory } from './base';
 import { Category, CategoryInterface } from '../models';
