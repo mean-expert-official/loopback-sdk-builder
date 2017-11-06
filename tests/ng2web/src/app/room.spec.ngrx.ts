@@ -10,8 +10,6 @@ import { Room, Message, AccessToken } from './shared/sdk/models';
 import { getLoopbackAuthState, SDKToken, RoomActions, getRooms, getMessages, getRoomById } from './shared/sdk';
 import { IAppState, reducerToken, reducerProvider, effects, getApplicationState } from './shared/app.state';
 
-import * as fromApp from './shared/app.reducer';
-
 class RouterStub {
     navigate(url: String) { return url; }
 }
