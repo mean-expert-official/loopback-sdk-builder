@@ -42,3 +42,7 @@ typings
 
 #System Files
 .DS_Store
+
+#Generated test code
+tests/ng2web/src/app/shared/sdk
+tests/react-web/app/shared/sdk
