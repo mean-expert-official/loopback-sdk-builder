@@ -2,6 +2,12 @@
 
 This file is created to keep history of the LoopBack SDK Builder, it does not consider or keeps any history of its parent module `loopback-sdk-angular`
 
+## Release 2.1.2
+
+NGRX HotFixes.
+Fixed Angular SDK / Remember Me feature
+Fixed Socket IO Type in NativeScript
+
 ## Release 2.1.1
 
 NGRX HotFixes.
