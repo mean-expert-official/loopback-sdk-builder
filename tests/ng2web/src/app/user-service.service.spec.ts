@@ -70,8 +70,8 @@ describe('Service: User Service', () => {
         .subscribe((token: AccessToken)   => {
           expect(token.id).toBeTruthy();
           expect(token.userId).toBe(instance.id);
-          userApi.logout().subscribe((res: boolean) => {
-            expect(res).toBeTruthy();
+          userApi.logout().subscribe((res) => {
+            expect(res).toBeNull();
           });
         }));
     })
