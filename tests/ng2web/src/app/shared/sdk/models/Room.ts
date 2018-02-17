@@ -9,7 +9,7 @@ import {
 declare var Object: any;
 export interface RoomInterface {
   "name": string;
-  "id"?: any;
+  "id"?: number;
   "createdAt"?: Date;
   "updatedAt"?: Date;
   messages?: Message[];
@@ -21,7 +21,7 @@ export interface RoomInterface {
 
 export class Room implements RoomInterface {
   "name": string;
-  "id": any;
+  "id": number;
   "createdAt": Date;
   "updatedAt": Date;
   messages: Message[];
@@ -69,7 +69,7 @@ export class Room implements RoomInterface {
         },
         "id": {
           name: 'id',
-          type: 'any'
+          type: 'number'
         },
         "createdAt": {
           name: 'createdAt',

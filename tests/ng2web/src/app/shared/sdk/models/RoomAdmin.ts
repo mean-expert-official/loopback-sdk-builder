@@ -8,7 +8,7 @@ declare var Object: any;
 export interface RoomAdminInterface {
   "id"?: any;
   "adminId"?: any;
-  "administrationId"?: any;
+  "administrationId"?: number;
   "createdAt": Date;
   "updatedAt": Date;
   account?: Account;
@@ -18,7 +18,7 @@ export interface RoomAdminInterface {
 export class RoomAdmin implements RoomAdminInterface {
   "id": any;
   "adminId": any;
-  "administrationId": any;
+  "administrationId": number;
   "createdAt": Date;
   "updatedAt": Date;
   account: Account;
@@ -66,7 +66,7 @@ export class RoomAdmin implements RoomAdminInterface {
         },
         "administrationId": {
           name: 'administrationId',
-          type: 'any'
+          type: 'number'
         },
         "createdAt": {
           name: 'createdAt',

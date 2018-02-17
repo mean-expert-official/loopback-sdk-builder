@@ -11,7 +11,7 @@ export interface LikeInterface {
   "createdAt": Date;
   "updatedAt": Date;
   "messageId"?: any;
-  "roomId"?: any;
+  "roomId"?: number;
   message?: Message;
   room?: Room;
 }
@@ -22,7 +22,7 @@ export class Like implements LikeInterface {
   "createdAt": Date;
   "updatedAt": Date;
   "messageId": any;
-  "roomId": any;
+  "roomId": number;
   message: Message;
   room: Room;
   constructor(data?: LikeInterface) {
@@ -81,7 +81,7 @@ export class Like implements LikeInterface {
         },
         "roomId": {
           name: 'roomId',
-          type: 'any'
+          type: 'number'
         },
       },
       relations: {

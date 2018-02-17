@@ -56,7 +56,7 @@ export class Room {
         },
         "id": {
           name: 'id',
-          type: 'any'
+          type: 'number'
         },
         "createdAt": {
           name: 'createdAt',

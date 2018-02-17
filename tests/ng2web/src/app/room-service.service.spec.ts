@@ -323,7 +323,7 @@ describe('Service: Room Service', () => {
     async(inject([RoomApi], (roomApi: RoomApi) => {
         let room = new Room({ id: 42, name: 'my awesome room' });
         return roomApi.findByRoomContext(room).subscribe( (instance: Room) => {
-            expect(room.id).toBe(Number.parseInt(instance.id));
+            expect(room.id).toBe(instance.id);
             // I append the host onto the instance name so it shouldn't match now
             expect(room.name).not.toBe(instance.name);
           });

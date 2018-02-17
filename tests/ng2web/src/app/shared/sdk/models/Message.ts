@@ -11,7 +11,7 @@ export interface MessageInterface {
   "parentId"?: any;
   "createdAt"?: Date;
   "updatedAt"?: Date;
-  "roomId"?: any;
+  "roomId"?: number;
   likes?: Like[];
   replies?: Message[];
   parent?: Message;
@@ -24,7 +24,7 @@ export class Message implements MessageInterface {
   "parentId": any;
   "createdAt": Date;
   "updatedAt": Date;
-  "roomId": any;
+  "roomId": number;
   likes: Like[];
   replies: Message[];
   parent: Message;
@@ -85,7 +85,7 @@ export class Message implements MessageInterface {
         },
         "roomId": {
           name: 'roomId',
-          type: 'any'
+          type: 'number'
         },
       },
       relations: {

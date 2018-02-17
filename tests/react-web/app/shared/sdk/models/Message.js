@@ -71,7 +71,7 @@ export class Message {
         },
         "roomId": {
           name: 'roomId',
-          type: 'any'
+          type: 'number'
         },
       },
       relations: {

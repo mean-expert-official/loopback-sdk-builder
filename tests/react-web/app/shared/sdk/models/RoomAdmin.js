@@ -55,7 +55,7 @@ export class RoomAdmin {
         },
         "administrationId": {
           name: 'administrationId',
-          type: 'any'
+          type: 'number'
         },
         "createdAt": {
           name: 'createdAt',

@@ -69,7 +69,7 @@ export class Like {
         },
         "roomId": {
           name: 'roomId',
-          type: 'any'
+          type: 'number'
         },
       },
       relations: {
