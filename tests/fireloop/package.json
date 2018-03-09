@@ -14,7 +14,7 @@
     "build:sdk:ng2web": "./node_modules/.bin/lb-sdk server/server.js ../ng2web/src/app/shared/sdk -d ng2web -i enabled -w enabled -v disabled -f disabled",
     "build:sdk:ng2webNGRX": "./node_modules/.bin/lb-sdk server/server.js ../ng2web/src/app/shared/sdk -d ng2web -i enabled -w enabled -n enabled -v disabled -f disabled",
     "build:sdk:ng2webORM": "./node_modules/.bin/lb-sdk server/server.js ../ng2web/src/app/shared/sdk -d ng2web -i enabled -w enabled -n orm -v disabled -f disabled",
-    "build:sdk:react": "./../../bin/lb-sdk server/server.js ./../react-web/app/shared/sdk -i disabled -w enabled -l react -t false"
+    "build:sdk:react": "./node_modules/.bin/lb-sdk server/server.js ./../react-web/app/shared/sdk -i disabled -w enabled -l react -t false"
   },
   "dependencies": {
     "@mean-expert/boot-script": "^1.0.0",
