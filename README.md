@@ -21,10 +21,10 @@ $ npm install --save-dev @mean-expert/loopback-sdk-builder
 
 As I communicated before I'm not longer personally supporting any module related to LoopBack, even though it took me months, the decision was made based in the following arguments:
 
-1.- They decided to build from scratch an incompatible version of LB, dictating the end of most of the modules I built.
-2.- While trying to maintain LB3<= modules and to create new LB4+ modules I found the LB Framework was getting more and more deeply unstable https://github.com/strongloop/loopback/issues/3487#issuecomment-349729724
-3.- After a while I felt they were focusing too much in a framework supposed to be released in 2019, while the original work was getting more and more unstable, I had several problems with my own customers, not having answers for simple questions I shouldn't bother to answer or even deal with.
-4.- After I personally requested the Senior guys to focus on fix the current problems, I was answered they expect the community not only to build the new modules, but to fix the old ones.
+- 1.- They decided to build from scratch an incompatible version of LB, dictating the end of most of the modules I built.
+- 2.- While trying to maintain LB3<= modules and to create new LB4+ modules I found the LB Framework was getting more and more unstable https://github.com/strongloop/loopback/issues/3487#issuecomment-349729724 (Just 1 Example)
+- 3.- After a while I felt they were focusing too much in a framework supposed to be released in 2019, while the original work was getting more and more unstable, I had several problems with my own customers, not having answers for simple questions I shouldn't bother to answer or even deal with.
+- 4.- After I personally requested the Senior guys to focus on fix the current problems, I was answered they expect the community not only to build the new modules, but to fix the old ones.
 
 Based on those arguments, though I was excited for LB4, I simply found it doesn't worth the cost, time and pain to keep using, extending or maintaining anything related to LoopBack.
 
