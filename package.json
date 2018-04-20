@@ -1,6 +1,6 @@
 {
   "name": "@mean-expert/loopback-sdk-builder",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "description": "Tool for auto-generating Software Development Kits (SDKs) for LoopBack",
   "bin": {
     "lb-sdk": "bin/lb-sdk"
@@ -112,6 +112,7 @@
     "mkdirp": "0.5.1",
     "optimist": "0.6.1",
     "rimraf": "^2.6.1",
+    "rxjs": "^5.5.9",
     "semver": "^5.4.1",
     "underscore": "^1.8.3",
     "underscore.inflections": "^0.2.1"

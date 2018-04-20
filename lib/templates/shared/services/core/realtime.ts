@@ -5,7 +5,7 @@ import { FireLoop } from '../../models/FireLoop';
 import { SocketConnection } from '../../sockets/socket.connections';
 import { SDKModels } from '../custom/SDKModels';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/share';
+import { share } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 /**
@@ -23,7 +23,7 @@ export class RealTime {
   public FireLoop: FireLoop;
   private connecting: boolean = false;
   private onReadySubject: Subject<string> = new Subject<string>();
-  private sharedOnReady: Observable<string> = this.onReadySubject.asObservable().share();
+  private sharedOnReady: Observable<string> = this.onReadySubject.asObservable().pipe(share());
   /**
   * @method constructor
   * @param {SocketConnection} connection WebSocket connection service

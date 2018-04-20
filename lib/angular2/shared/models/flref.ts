@@ -2,6 +2,7 @@
 import 'rxjs/add/observable/merge';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+import { catchError } from 'rxjs/operators';
 import 'rxjs/add/operator/merge';
 import { LoopBackFilter, StatFilter } from './index';
 import { SocketConnection } from '../sockets/socket.connections';
@@ -310,7 +311,7 @@ export class FireLoopRef<T> {
     }
     // This event listener will be wiped within socket.connections
     this.socket.sharedObservables.sharedOnDisconnect.subscribe(() => subject.complete());
-    return subject.asObservable().catch((error: any) => Observable.throw(error));
+    return subject.asObservable().pipe(catchError((error: any) => Observable.throw(error)));
   }
   /**
   * @method buildId
