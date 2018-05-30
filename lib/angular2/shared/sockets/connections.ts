@@ -2,8 +2,7 @@
 import { Injectable, Inject, NgZone } from '@angular/core';
 import { SocketDriver } from './socket.driver';
 import { AccessToken } from '../models';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
+import { Observable, Subject } from 'rxjs';
 import { share } from 'rxjs/operators';
 import { LoopBackConfig } from '../lb.config';
 /**
