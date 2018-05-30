@@ -1,10 +1,12 @@
 LoopBack SDK Builder 
 ==================
-> Disclaimer: This project is not longer extended or improved by the author Jonathan Casarrubias, though any PR improving or extending the SDK Builder will be accepted and integrated. Therefore, this module will continue to grow as long as the community keeps sending patches.
+> Disclaimer: This project is not longer directly extended or improved by the author Jonathan Casarrubias, though any PRs improving or extending the SDK Builder are continuously being accepted and integrated in a weekly basis. Therefore, this module keeps growing as long as the community keeps sending patches.
 
 The [@mean-expert/loopback-sdk-builder](https://www.npmjs.com/package/@mean-expert/loopback-sdk-builder) is a community driven module forked from the official `loopback-sdk-angular` and refactored to support [Angular 2+](http://angular.io).
 
 The [LoopBack SDK Builder](https://www.npmjs.com/package/@mean-expert/loopback-sdk-builder) will explore your [LoopBack Application](http://loopback.io) and will automatically build everything you need to start writing your [Angular 2 Applications](http://angular.io) right away. From Interfaces and Models to API Services and Real-time communications.
+
+`NOTE: This sdk builder is not compatible with LoopBack 4.`
 
 # Installation
 
@@ -17,24 +19,25 @@ $ npm install --save-dev @mean-expert/loopback-sdk-builder
 
 [LINK TO WIKI DOCUMENTATION](https://github.com/mean-expert-official/loopback-sdk-builder/wiki)
 
-# Official Communication
+# Contribute
+Most of the PRs fixing any reported issue or adding a new functionality are being accepted.
 
-As I communicated before I'm not longer personally supporting any module related to LoopBack, even though it took me months, the decision was made based in the following arguments:
+Use the development branch to create a new branch from. If adding new features a new unit test will be expected, though most of the patches nowadays are small fixes or tweaks that usually won't require a new test.
 
-- 1.- They decided to build from scratch an incompatible version of LB, dictating the end of most of the modules I built.
-- 2.- While trying to maintain LB3<= modules and to create new LB4+ modules I found the LB Framework was getting more and more unstable https://github.com/strongloop/loopback/issues/3487#issuecomment-349729724 (Just 1 Example)
-- 3.- After a while I felt they were focusing too much in a framework supposed to be released in 2019, while the original work was getting more and more unstable, I had several problems with my own customers, not having answers for simple questions I shouldn't bother to answer or even deal with.
-- 4.- After I personally requested the Senior guys to focus on fix the current problems, I was answered they expect the community not only to build the new modules, but to fix the old ones.
+# OIDC-SSO Service
+A new campaing to call developers to register as beta testers for the [OnixJS](https://onixjs.io) Single Sign-On Service is active now. This campaing will be running during the month of June 2018, allowing all of those registered users to have early access during closed beta.
 
-Based on those arguments, though I was excited for LB4, I simply found it doesn't worth the cost, time and pain to keep using, extending or maintaining anything related to LoopBack.
+- _Closed beta access will be active starting from July 2108._
 
-So, I had great time and great experience using LoopBack a while, before when it was stable and cool, for now I have decided not to flavourize any framework and started my own venture [OnixJS](http://onixjs.io) trying to fix all of those issues and more..... (I'm not even talking about Angular 2 shitty problems, they'll get their moment)
+Register now and get the chance to have an unlimited annual enterprise membership for free.
 
+[[REQUEST EARLY ACCESS HERE](https://onixjs.io)]
 
-Cheers
-Jon
+**Technology References:**
 
+- **OnixJS**: Enterprise Grade NodeJS Platform implementing Industry Standards & Patterns in order to provide the best Connectivity, Stability, High-Availability and High-Performance.
+- **Single Sign-On (SSO)**: Is a property of access control of multiple related, yet independent, software systems. With this property, a user logs in with a single ID and password to gain access to a connected system or systems without using different usernames or passwords, or in some configurations seamlessly sign on at each system.
+- **OpenID Connect (OIDC)**: OpenID Connect 1.0 is a simple identity layer on top of the OAuth 2.0 protocol. It allows Clients to verify the identity of the End-User based on the authentication performed by an Authorization Server, as well as to obtain basic profile information about the End-User in an interoperable and REST-like manner.
 
 # Contact
-
 Discuss features and ask questions on [@johncasarrubias at Twitter](https://twitter.com/johncasarrubias).
