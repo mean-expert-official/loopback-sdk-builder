@@ -1,5 +1,6 @@
 /* tslint:disable */
-import * as io from 'socket.io-client';
+import * as ioImported from 'socket.io-client';
+const io = ioImported;
 /**
 * @author Jonathan Casarrubias <twitter:@johncasarrubias> <github:@mean-expert-official>
 * @module SocketBrowser
