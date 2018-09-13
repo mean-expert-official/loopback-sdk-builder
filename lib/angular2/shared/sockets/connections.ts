@@ -2,8 +2,8 @@
 import { Injectable, Inject, NgZone } from '@angular/core';
 import { SocketDriver } from './socket.driver';
 import { AccessToken } from '../models';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
+import { Observable, Subject } from 'rxjs';
+import { share } from 'rxjs/operators';
 import { LoopBackConfig } from '../lb.config';
 /**
 * @author Jonathan Casarrubias <twitter:@johncasarrubias> <github:@mean-expert-official>
@@ -34,7 +34,7 @@ export class SocketConnection {
     sharedOnAuthenticated?: Observable<any>,
     sharedOnUnAuthorized?: Observable<any>
   } = {};
-  private unauthenticated: boolean = true;
+  public authenticated: boolean = false;
   /**
    * @method constructor
    * @param {SocketDriver} driver Socket IO Driver
@@ -49,10 +49,10 @@ export class SocketConnection {
     @Inject(NgZone) private zone: NgZone
   ) {
     this.sharedObservables = {
-      sharedOnConnect: this.subjects.onConnect.asObservable().share(),
-      sharedOnDisconnect: this.subjects.onDisconnect.asObservable().share(),
-      sharedOnAuthenticated: this.subjects.onAuthenticated.asObservable().share(),
-      sharedOnUnAuthorized: this.subjects.onUnAuthorized.asObservable().share()
+      sharedOnConnect: this.subjects.onConnect.asObservable().pipe(share()),
+      sharedOnDisconnect: this.subjects.onDisconnect.asObservable().pipe(share()),
+      sharedOnAuthenticated: this.subjects.onAuthenticated.asObservable().pipe(share()),
+      sharedOnUnAuthorized: this.subjects.onUnAuthorized.asObservable().pipe(share())
     };
     // This is needed to create the first channel, subsequents will share the connection
     // We are using Hot Observables to avoid duplicating connection status events.
@@ -75,9 +75,10 @@ export class SocketConnection {
       // Create new socket connection
       this.socket = this.driver.connect(LoopBackConfig.getPath(), {
         log: false,
-        secure: false,
+        secure: LoopBackConfig.isSecureWebSocketsSet(),
         forceNew: true,
-        forceWebsockets: true
+        forceWebsockets: true,
+        transports: ['websocket']
       });
       // Listen for connection
       this.on('connect', () => {
@@ -87,11 +88,13 @@ export class SocketConnection {
       });
       // Listen for authentication
       this.on('authenticated', () => {
+        this.authenticated = true;
         this.subjects.onAuthenticated.next();
         this.heartbeater();
       })
       // Listen for authentication
       this.on('unauthorized', (err: any) => {
+        this.authenticated = false;
         this.subjects.onUnAuthorized.next(err);
       })
       // Listen for disconnections
@@ -160,6 +163,21 @@ export class SocketConnection {
     }
   }
   /**
+   * @method removeAllListeners
+   * @param {string} event Event name
+   * @param {Function} handler Event listener handler
+   * @return {void}
+   * @description
+   * This method will wrap the original "on" method and run it within the Angular Zone
+   * Note: off is being used since the nativescript socket io client does not provide
+   * removeListener method, but only provides with off which is provided in any platform.
+   **/
+  public removeAllListeners(event: string): void {
+    if (typeof this.socket.removeAllListeners === 'function') {
+      this.socket.removeAllListeners(event);
+    }
+  }
+  /**
    * @method disconnect
    * @return {void}
    * @description
@@ -180,6 +198,7 @@ export class SocketConnection {
       if (this.isConnected()) {
         this.socket.emit('lb-ping');
       } else {
+        this.socket.removeAllListeners('lb-pong');
         clearInterval(heartbeater);
       }
     }, 15000);

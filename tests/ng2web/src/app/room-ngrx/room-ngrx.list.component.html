@@ -1,0 +1,16 @@
+<!--h3>Update Email</h3>
+<form>
+  <input name="email" type="email" [(ngModel)]="logged.email" placeholder="Edit Email" />
+  <button (click)="update()">Update</button>
+</form-->
+<h3>Room Name {{ room.name }}</h3>
+<form>
+  <input name="name" type="text" [(ngModel)]="room.name" placeholder="Room Name" />
+  <button (click)="create()">Create</button>
+</form>
+<h3>Rooms</h3>
+<ul>
+  <li *ngFor="let _room of rooms$ | async">
+    <button (click)="join(_room)">Join</button> {{ _room.name }} ({{ _room.messages?.length || 0 }}) ({{ _room.likes?.length || 0 }}) [<span *ngFor="let _cat of _room.categories">{{ _cat.name }}</span>]
+  </li>
+</ul>

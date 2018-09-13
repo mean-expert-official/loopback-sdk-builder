@@ -7,6 +7,7 @@
     "validateUpsert": true
   },
   "mixins": {
+    "FireLoop": true,
     "TimeStamp": {
       "required": false
     },
@@ -21,7 +22,13 @@
           "by": "index"
         }
       }
-    ]
+    ],
+    "IncludeThrough": {
+      "relations": [
+        "categories",
+        "likes"
+      ]
+    }
   },
   "properties": {
     "name": {

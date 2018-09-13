@@ -18,7 +18,7 @@ export class SocketNative {
    * @description
    * This method will return a valid socket connection.                    
    **/
-  connect(url: string, options: any): SocketIO.Socket {
+  connect(url: string, options: any): SocketIO.SocketIO {
     return SocketIO.connect(url, options);
   }
 }

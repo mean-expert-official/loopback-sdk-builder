@@ -13,62 +13,63 @@
       "./mixins",
       "../node_modules/@mean-expert/loopback-stats-mixin/dist",
       "../node_modules/@mean-expert/loopback-component-realtime/dist/mixins",
+      "../node_modules/loopback-include-through-mixin",
       "../node_modules/loopback-ds-timestamp-mixin"
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "mongodb"
   },
   "AccessToken": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": false
   },
   "ACL": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": false
   },
   "Role": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": false
   },
   "Account": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "ApplicationCredential": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "Category": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "Core": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "like": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "Message": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "Room": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "RoomAccount": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "RoomAdmin": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "Storage": {
@@ -76,11 +77,11 @@
     "public": true
   },
   "UserCredential": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "UserIdentity": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   }
 }

@@ -35,7 +35,7 @@ export class AccessComponent implements OnInit {
 
   login() {
     this.accountApi.login(this.account, 'user', this.rememberMe).subscribe((token: AccessToken) =>
-      this.router.navigate(['/'])
+      this.router.navigate(['/home'])
     );
   }
 }

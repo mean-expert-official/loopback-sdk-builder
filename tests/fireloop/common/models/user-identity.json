@@ -6,6 +6,21 @@
   "options": {
     "validateUpsert": true
   },
+  "mixins": {
+    "TimeStamp": true,
+    "Stats": [
+      {
+        "method": "stats",
+        "endpoint": "/stats",
+        "description": "Statistical information for UserIdentity registers.",
+        "type": "model",
+        "count": {
+          "on": "createdAt",
+          "by": "index"
+        }
+      }
+    ]
+  },
   "properties": {
     "provider": {
       "type": "string",
@@ -46,20 +61,5 @@
     }
   },
   "acls": [],
-  "methods": {},
-  "mixins": {
-    "TimeStamp": true,
-    "Stats": [
-      {
-        "method": "stats",
-        "endpoint": "/stats",
-        "description": "Statistical information for UserIdentity registers.",
-        "type": "model",
-        "count": {
-          "on": "createdAt",
-          "by": "index"
-        }
-      }
-    ]
-  }
+  "methods": {}
 }

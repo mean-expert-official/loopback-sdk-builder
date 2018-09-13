@@ -40,5 +40,10 @@
         }
       }
     ]
+  },
+  "mongodb": {
+    "url": "mongodb://lb-sdk-test:lb-sdk-test@ds153400.mlab.com:53400/heroku_pmkjxjwz",
+    "name": "mongodb",
+    "connector": "mongodb"
   }
 }

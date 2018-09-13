@@ -1,6 +1,6 @@
 import { Ng2webPage } from './app.po';
 
-describe('ng2web App', function() {
+describe('ng2web App', () => {
   let page: Ng2webPage;
 
   beforeEach(() => {
