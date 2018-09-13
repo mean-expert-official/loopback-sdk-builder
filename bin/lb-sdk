@@ -85,7 +85,15 @@ if (!argv['q']) {
 /**
  * Set Reference For Main Options
  */
-var appFile = path.resolve(argv._[0]);
+var appFile;
+
+// If this script is being called by electron.exe, we need to take the second argument.
+if (process.defaultApp) {
+  appFile = path.resolve(argv._[1]);
+} else {
+  appFile = path.resolve(argv._[0]);
+}
+
 /**
  * Load and Boot LoopBack Application
  */
