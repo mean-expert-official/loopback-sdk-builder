@@ -85,7 +85,28 @@ if (!argv['q']) {
 /**
  * Set Reference For Main Options
  */
-var appFile = path.resolve(argv._[0]);
+var appFile;
+var outFolder;
+
+for (var i = 0; i < argv._.length - 2; i++) {
+  if (argv._[i].match(/lb-sdk/)) {
+    appFile = argv._[i + 1];
+    outFolder = argv._[i + 2];
+    break;
+  }
+}
+
+if (!appFile) {
+  appFile = argv._[0];
+}
+
+if (!outFolder) {
+  outFolder = argv._[1];
+}
+
+appFile = path.resolve(appFile);
+
+
 /**
  * Load and Boot LoopBack Application
  */
@@ -96,7 +117,7 @@ var context = {
   framework: argv['l'] || 'angular2',
   moduleName: argv['module-name'] || 'sdk',
   apiUrl: argv['url'] || app.get('restApiRoot') || '/api',
-  outputFolder: argv._[1],
+  outputFolder: outFolder,
   isIo: argv['i'] || 'disabled',
   isNgrx: argv['n'] || 'disabled',
   driver: argv['d'] || 'ng2web',
