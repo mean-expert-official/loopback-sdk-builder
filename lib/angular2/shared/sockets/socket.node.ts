@@ -1,5 +1,8 @@
 /* tslint:disable */
-import * as io from 'socket.io-client';
+// add this to compilerOptions in tsconfig.json:
+//    "allowSyntheticDefaultImports": true,
+//    "esModuleInterop": true 
+import io from 'socket.io-client'; 
 /**
 * @author Jonathan Casarrubias <twitter:@johncasarrubias> <github:@mean-expert-official>
 * @module SocketNode

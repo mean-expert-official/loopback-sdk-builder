@@ -7,7 +7,11 @@ import { Subscription } from 'rxjs';
 import { LoopBackConfig } from '../shared/sdk/lb.config';
 LoopBackConfig.setBaseURL('http://localhost:3000');
 
-import * as io from 'socket.io-client';
+// add this to compilerOptions in tsconfig.json:
+//    "allowSyntheticDefaultImports": true,
+//    "esModuleInterop": true 
+import io from 'socket.io-client'; 
+
 
 var i = 0;
 
