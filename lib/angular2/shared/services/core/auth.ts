@@ -32,6 +32,7 @@ export class LoopBackAuth {
     this.token.id = this.load('id');
     this.token.user = this.load('user');
     this.token.userId = this.load('userId');
+    this.token.lvUsersId = this.load('lvUsersId');
     this.token.created = this.load('created');
     this.token.ttl = this.load('ttl');
     this.token.rememberMe = this.load('rememberMe');
@@ -118,6 +119,7 @@ export class LoopBackAuth {
       this.persist('id', this.token.id, expires);
       this.persist('user', this.token.user, expires);
       this.persist('userId', this.token.userId, expires);
+      this.persist('lvUsersId', this.token.lvUsersId, expires);
       this.persist('created', this.token.created, expires);
       this.persist('ttl', this.token.ttl, expires);
       this.persist('rememberMe', this.token.rememberMe, expires);
