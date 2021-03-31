@@ -114,7 +114,7 @@
     "rimraf": "^2.6.1",
     "rxjs": "^5.5.9",
     "semver": "^5.4.1",
-    "underscore": "^1.8.3",
+    "underscore": "^1.12.1",
     "underscore.inflections": "^0.2.1"
   },
   "devDependencies": {}
