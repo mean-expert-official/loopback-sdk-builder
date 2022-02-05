@@ -27,7 +27,7 @@ Use the development branch to create a new branch from. If adding new features a
 # OIDC-SSO Service
 A new campaing to call developers to register as beta testers for the [OnixJS](https://onixjs.io) Single Sign-On Service is active now. This campaing will be running during the month of June 2018, allowing all of those registered users to have early access during closed beta.
 
-- _Closed beta access will be active starting from July 2108._
+- _Closed beta access will be active starting from July 2018._
 
 Register now and get the chance to have an unlimited annual enterprise membership for free.
 
