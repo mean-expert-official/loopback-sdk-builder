@@ -35,6 +35,7 @@ export class LoopBackAuth {
     this.token.created = this.load('created');
     this.token.ttl = this.load('ttl');
     this.token.rememberMe = this.load('rememberMe');
+    this.token.principalType = this.load('principalType');
   }
   /**
    * @method setRememberMe
@@ -121,6 +122,7 @@ export class LoopBackAuth {
       this.persist('created', this.token.created, expires);
       this.persist('ttl', this.token.ttl, expires);
       this.persist('rememberMe', this.token.rememberMe, expires);
+      this.persist('principalType', this.token.principalType, expires);
       return true;
   };
   /**
